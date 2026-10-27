@@ -45,8 +45,12 @@
 //
 // `placement`'s denial is checked by evidence/backends.mjs `sandbox`, a
 // negative test that reads a hidden-suite path and the home from inside.
+// Windows has neither sandbox: there `placement` runs the command as it
+// is, the shell being Git for Windows' bash, and says so once (lib.mjs
+// `warnUnsandboxed`); the staged workdir and the transcript audit are what
+// keep a writer blind, and anthropic-api's file tools stay confined.
 
-import { spawn, spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import {
   appendFileSync,
@@ -61,7 +65,7 @@ import {
 } from "node:fs";
 import { createRequire } from "node:module";
 import { homedir, tmpdir } from "node:os";
-import { basename, dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, posix, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import {
   DEFAULT_MODEL,
@@ -78,14 +82,15 @@ import {
   log,
   sha256,
   takeSlot,
+  warnUnsandboxed,
 } from "./lib.mjs";
+import { GROUP, OS_SANDBOX, WINDOWS, gitBash, inside, pathKey, slash, spawnCommand, which } from "./platform.mjs";
 
 export const CODEX_VERSION = "0.164.0";
 export const SDK_VERSION = "0.137.0";
 /** Per session: CODEX_HOME, HOME, TMPDIR, the API backend's messages. */
 export const SESSIONS = join(WORK_ROOT, "sessions");
 
-const inside = (path, folder) => path === folder || path.startsWith(`${folder}/`);
 /** `path` made real as far as it exists (the sandboxes match real paths). */
 export function real(path) {
   let at = resolve(path);
@@ -110,7 +115,7 @@ export function installTool(name, spec, version) {
   mkdirSync(partial, { recursive: true });
   writeFileSync(join(partial, "package.json"), `${JSON.stringify({ private: true })}\n`);
   log(`installing ${spec}@${version} into ${dest} (npm@10.9.2, once)`);
-  const out = spawnSync("npx", ["-y", "npm@10.9.2", "install", "--no-audit", "--no-fund", "--save-exact", `${spec}@${version}`], {
+  const out = spawnCommand("npx", ["-y", "npm@10.9.2", "install", "--no-audit", "--no-fund", "--save-exact", `${spec}@${version}`], {
     cwd: partial,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
@@ -131,8 +136,8 @@ export function installTool(name, spec, version) {
 
 /** The install prefix of a binary (two folders above its real path), for the sandbox's read list. */
 function prefixOf(bin) {
-  const found = bin.includes("/") ? bin : spawnSync("sh", ["-c", `command -v ${bin}`], { encoding: "utf8" }).stdout.trim();
-  if (found === "" || !existsSync(found)) return null;
+  const found = which(bin);
+  if (found === null) return null;
   return dirname(dirname(realpathSync(found)));
 }
 
@@ -203,16 +208,28 @@ export function bwrapArgs({ deny, readable, writable }, network, cwd) {
   return out;
 }
 
-/** `bin argv` wrapped in the platform's sandbox: [bin, argv]. */
+/**
+ * The shell `placement` runs a command line in: /bin/sh and /bin/bash on
+ * macOS and Linux, Git for Windows' bash on Windows (what Claude Code's
+ * Bash tool runs there).
+ */
+export function shellBin(name) {
+  if (!WINDOWS) return `/bin/${name}`;
+  const bash = gitBash();
+  if (bash === null) throw new Error("No bash: install Git for Windows, or set CLAUDE_CODE_GIT_BASH_PATH to its bash.exe.");
+  return bash;
+}
+/** `bin argv` wrapped in the platform's sandbox: [bin, argv]. Windows has none: [bin, argv] as given. */
 export function placement(bin, argv, { cwd, state, read = [], network = true }) {
+  if (!OS_SANDBOX) {
+    warnUnsandboxed();
+    return [bin, argv];
+  }
   const paths = placementPaths({ cwd, state, read });
   if (process.platform === "darwin") return ["/usr/bin/sandbox-exec", ["-p", seatbeltProfile(paths, network), bin, ...argv]];
-  if (process.platform === "linux") {
-    const found = spawnSync("sh", ["-c", "command -v bwrap"], { encoding: "utf8" }).stdout.trim();
-    if (found === "") throw new Error("No bwrap on PATH: a non-Claude backend on Linux needs bubblewrap for its sandbox.");
-    return [found, [...bwrapArgs(paths, network, cwd), "--", bin, ...argv]];
-  }
-  throw new Error(`No sandbox for ${process.platform}: non-Claude backends run on macOS or Linux.`);
+  const found = which("bwrap");
+  if (found === null) throw new Error("No bwrap on PATH: a non-Claude backend on Linux needs bubblewrap for its sandbox.");
+  return [found, [...bwrapArgs(paths, network, cwd), "--", bin, ...argv]];
 }
 
 /** A session's state folder, kept across a resume of the same transcript and cleared on a fresh start. */
@@ -223,13 +240,25 @@ function stateOf(transcript, resume) {
   return dir;
 }
 
-/** The environment a placed process starts with: nothing of the caller's but the basics. */
+/**
+ * The environment a placed process starts with: nothing of the caller's
+ * but the basics, plus on Windows what any process there needs to start
+ * (SystemRoot, ComSpec, PATHEXT) and the state folder as its profile and
+ * temp folder too.
+ */
 function childEnv(state, extra = {}) {
-  const keep = ["PATH", "LANG", "LC_ALL", "LC_CTYPE", "TERM", "USER", "LOGNAME", "SHELL"];
+  const keep = ["LANG", "LC_ALL", "LC_CTYPE", "TERM", "USER", "LOGNAME", "SHELL"];
+  const windows = ["SystemRoot", "SystemDrive", "windir", "ComSpec", "PATHEXT", "USERNAME", "NUMBER_OF_PROCESSORS", "PROCESSOR_ARCHITECTURE"];
+  const home = join(state, "home");
+  const temp = join(state, "tmp");
   return {
-    ...Object.fromEntries(keep.filter((key) => process.env[key] !== undefined).map((key) => [key, process.env[key]])),
-    HOME: join(state, "home"),
-    TMPDIR: join(state, "tmp"),
+    [pathKey(process.env)]: process.env[pathKey(process.env)],
+    ...Object.fromEntries(
+      [...keep, ...(WINDOWS ? windows : [])].filter((key) => process.env[key] !== undefined).map((key) => [key, process.env[key]]),
+    ),
+    HOME: home,
+    TMPDIR: temp,
+    ...(WINDOWS ? { USERPROFILE: home, TEMP: temp, TMP: temp, APPDATA: join(home, "AppData", "Roaming"), LOCALAPPDATA: join(home, "AppData", "Local") } : {}),
     ...extra,
   };
 }
@@ -249,7 +278,7 @@ const LIMITED = /usage limit|rate.?limit|quota|too many requests|429|out of cred
 function runChild(bin, argv, { cwd, env, input, minutes, onLine }) {
   return new Promise((done) => {
     // A group leader, its group killed when it closes: nothing it started outlives the session.
-    const child = spawn(bin, argv, { cwd, env, stdio: ["pipe", "pipe", "pipe"], detached: true });
+    const child = spawn(bin, argv, { cwd, env, stdio: ["pipe", "pipe", "pipe"], ...GROUP });
     const reap = () => killGroup(child.pid);
     process.once("exit", reap);
     child.on("exit", reap);
@@ -437,7 +466,7 @@ async function execBackend({ cwd, text, transcript, kind, resume, chain, command
     return { ...base, ok: false, exitCode: null, timedOut: false, durationMs: 0, subtype: "error_during_execution", finalText, stderr: "" };
   }
   const state = stateOf(transcript, resume);
-  const [bin, argv] = placement("/bin/sh", ["-c", line], { cwd, state });
+  const [bin, argv] = placement(shellBin("sh"), ["-c", line], { cwd, state });
   const passed = (process.env.INDEPENDENT_TESTS_EXEC_ENV ?? "").split(",").filter((key) => key && process.env[key] !== undefined);
   const env = childEnv(state, Object.fromEntries(passed.map((key) => [key, process.env[key]])));
   write({ type: "system", subtype: "init", session_id: sessionId, model: null, cwd, backend: "exec", command: line });
@@ -559,7 +588,7 @@ function fileTools(root, runBash) {
     if (!inside(real(full), realRoot)) throw new Error(`${path} is outside the working directory ${root}`);
     return full;
   };
-  const shown = (full) => relative(root, full) || ".";
+  const shown = (full) => slash(relative(root, full)) || ".";
   return {
     Bash: (input) => runBash(String(input.command ?? ""), Math.min(Number(input.timeout ?? 120_000), 600_000)),
     Read: (input) => {
@@ -592,7 +621,7 @@ function fileTools(root, runBash) {
       const base = confined(input.path);
       const matches = globRegExp(String(input.pattern));
       const hits = listFiles(base).filter((path) => matches.test(path) || (!String(input.pattern).includes("/") && matches.test(basename(path))));
-      return hits.slice(0, 500).map((path) => join(shown(base) === "." ? "" : shown(base), path)).join("\n") || "no files";
+      return hits.slice(0, 500).map((path) => posix.join(shown(base) === "." ? "" : shown(base), path)).join("\n") || "no files";
     },
     Grep: (input) => {
       const base = confined(input.path);
@@ -601,7 +630,7 @@ function fileTools(root, runBash) {
       const out = [];
       const files = statSync(base).isDirectory() ? listFiles(base).map((path) => join(base, path)) : [base];
       for (const full of files) {
-        if (only !== null && !only.test(relative(base, full)) && !only.test(basename(full))) continue;
+        if (only !== null && !only.test(slash(relative(base, full))) && !only.test(basename(full))) continue;
         if (statSync(full).size > 1_000_000) continue;
         const lines = readFileSync(full, "utf8").split("\n");
         lines.forEach((line, at) => {
@@ -629,10 +658,11 @@ async function anthropicApi({ cwd, text, transcript, kind, resume, model, maxTur
   const started = Date.now();
   const deadline = started + minutes * 60_000;
   const runBash = (command, timeout) => {
-    const [bin, argv] = placement("/bin/bash", ["-c", command], { cwd, state, network: false });
+    const [bin, argv] = placement(shellBin("bash"), ["-c", command], { cwd, state, network: false });
     return new Promise((done) => {
       let output = "";
-      const child = spawn(bin, argv, { cwd, env: childEnv(state), stdio: ["ignore", "pipe", "pipe"] });
+      const child = spawn(bin, argv, { cwd, env: childEnv(state), stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
+
       const take = (chunk) => (output = (output + chunk).slice(-30_000));
       child.stdout.on("data", take);
       child.stderr.on("data", take);

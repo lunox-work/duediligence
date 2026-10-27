@@ -4,7 +4,8 @@
 #
 #   python3 sandbox/run.py public|private|own
 #
-# Any python3 starts it; the suite runs on the project's .venv/bin/python,
+# Any python3 starts it; the suite runs on the project's .venv/bin/python
+# (.venv/Scripts/python.exe on Windows),
 # which holds pytest. The grader runs the same suites through
 # bin/runners/pytest.mjs, which this file cannot reach; the two must agree
 # on the shape. A file that fails before any test reports is `crashed`: it
@@ -27,7 +28,8 @@ if suite not in SUITES:
     print("usage: python3 sandbox/run.py public|private|own", file=sys.stderr)
     sys.exit(2)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PYTHON = os.path.join(ROOT, ".venv", "bin", "python")
+# Windows keeps a venv's interpreter in Scripts/.
+PYTHON = os.path.join(ROOT, ".venv", "Scripts", "python.exe") if os.name == "nt" else os.path.join(ROOT, ".venv", "bin", "python")
 if not os.path.exists(PYTHON):
     PYTHON = sys.executable
 directory = os.path.join(ROOT, SUITES[suite])
@@ -47,7 +49,7 @@ def list_tests(at):
         dirs[:] = [d for d in dirs if d != "__pycache__"]
         for name in files:
             if name.startswith("test_") and name.endswith(".py"):
-                found.append(os.path.relpath(os.path.join(base, name), ROOT))
+                found.append(os.path.relpath(os.path.join(base, name), ROOT).replace(os.sep, "/"))
     return sorted(found)
 
 

@@ -10,8 +10,9 @@
 
 import { spawnSync } from "node:child_process";
 import { existsSync, realpathSync } from "node:fs";
-import { delimiter, dirname, join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { prependPath, shellSync, slash, spawnCommand } from "../platform.mjs";
 
 export const OUTPUT_CHARS = 4_000;
 
@@ -87,18 +88,19 @@ export function withBins(cwd) {
     if (existsSync(join(at, "node_modules", ".bin"))) bins.push(join(at, "node_modules", ".bin"));
     if (dirname(at) === at) break;
   }
-  return { ...process.env, PATH: [...bins, process.env.PATH].join(delimiter) };
+  return prependPath(process.env, bins);
 }
 
 /**
- * Runs the build: an argv array as given, a string through `sh -c` with the
- * repository's binaries on PATH, or nothing when it is null.
+ * Runs the build: an argv array as given, a string through the OS shell
+ * (sh, or cmd.exe on Windows, as npm runs scripts) with the repository's
+ * binaries on PATH, or nothing when it is null.
  */
 export function build(command, cwd) {
   if (command === null || command === undefined) return { compiled: true, compileOutput: "" };
   const run = Array.isArray(command)
-    ? spawnSync(command[0], command.slice(1), { cwd, encoding: "utf8" })
-    : spawnSync("sh", ["-c", command], { cwd, encoding: "utf8", env: withBins(cwd) });
+    ? spawnCommand(command[0], command.slice(1), { cwd, encoding: "utf8" })
+    : shellSync(command, { cwd, encoding: "utf8", env: withBins(cwd) });
   const compiled = run.status === 0;
   return {
     compiled,
@@ -113,7 +115,8 @@ export function build(command, cwd) {
  * ids in every staged tree, and the baseline would read them as regressions.
  */
 export function print(result) {
-  const roots = [...new Set([process.cwd(), realpathSync(process.cwd())].flatMap((path) => [path, path.replace(/^\/private\//, "/")]))].sort((a, b) => b.length - a.length);
+  const roots = [...new Set([process.cwd(), realpathSync(process.cwd())].flatMap((path) => [path, path.replace(/^\/private\//, "/"), slash(path)]))].sort((a, b) => b.length - a.length);
+
   for (const file of result.files)
     for (const test of file.tests) for (const root of roots) test.name = test.name.replaceAll(root, "<root>");
   const tests = result.files.flatMap((file) => file.tests);

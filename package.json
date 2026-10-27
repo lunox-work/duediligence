@@ -8,6 +8,8 @@
     "hidden-tests",
     "test-generation",
     "claude-code",
+    "codex",
+    "cursor",
     "evaluation",
     "acceptance-tests",
     "typescript",
@@ -46,11 +48,10 @@
     "RESULTS.md",
     "SKILL.md"
   ],
-  "engines": {
-    "node": ">=22.12.0"
+  "scripts": {
+    "test": "node test/smoke.mjs"
   },
-  "os": [
-    "darwin",
-    "linux"
-  ]
+  "engines": {
+    "node": "^20.19.0 || >=22.0.0"
+  }
 }

@@ -27,13 +27,14 @@ import { tmpdir } from "node:os";
 import { delimiter, dirname, isAbsolute, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { OUTPUT_CHARS, build, config, guardedSync, print } from "./shared.mjs";
+import { DEFAULT_PYTHON } from "../platform.mjs";
 
 export const REPORTER_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "template-python", "sandbox");
 
 const {
   suite,
   files,
-  python: pythonOption = "python3",
+  python: pythonOption = DEFAULT_PYTHON,
   build: command = null,
   args: extra = [],
   perFile = true,
@@ -43,7 +44,7 @@ const {
   pythonPath = [],
 } = config("node bin/runners/pytest.mjs '<json>'");
 const root = realpathSync(process.cwd());
-const python = pythonOption.includes("/") && !isAbsolute(pythonOption) ? join(root, pythonOption) : pythonOption;
+const python = /[\\/]/.test(pythonOption) && !isAbsolute(pythonOption) ? join(root, pythonOption) : pythonOption;
 const env = {
   ...process.env,
   PYTHONDONTWRITEBYTECODE: "1",

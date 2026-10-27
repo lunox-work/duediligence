@@ -79,24 +79,28 @@ need to cheat to be wrong.
 git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests
 ```
 
-Then ask Claude Code: _"write tests my agent can't see for this ticket"_. The
-implementer can be anything that edits a folder: Claude Code, Codex, Cursor,
-Copilot, Aider, or a person. [Try the bundled example](#try-it-in-five-minutes)
-in five minutes; details in [Install in full](#install-in-full).
+Then ask your coding agent (Claude Code, Codex, Cursor, or any agent that loads
+skills): _"write tests my agent can't see for this ticket"_. The tests are
+written on whichever account you have: Claude Code, a Codex login or an
+Anthropic API key. The implementer can be anything that edits a folder: Claude
+Code, Codex, Cursor, Copilot, Aider, or a person.
+[Try the bundled example](#try-it-in-five-minutes) in five minutes; details in
+[Install in full](#install-in-full).
 
 ## What it is
 
 **Hidden, calibrated test suites for AI coding agents, independent of the agent
-they judge.** A [Claude Code](https://code.claude.com/docs) skill that turns a
-ticket or spec for one module in TypeScript, Python, Go or Rust, for a command
-or an HTTP service checked only at that boundary, or for a change to one package
-of an existing TypeScript or Python repository, into a **public** test suite the
-implementing agent works against and a **hidden** suite, which the agent never
-sees, that judges the result. Claude models write both suites and the reference
-that calibrates them, in sessions apart from the implementing agent. A person
-confirms the spec's decisions before any test is written. The implementing agent
-can be anything that edits a folder: Claude Code, Codex, Cursor, Copilot, Aider,
-or a person.
+they judge.** An agent skill and CLI, for Claude Code, Codex, Cursor and other
+agents, that turns a ticket or spec for one module in TypeScript, Python, Go or
+Rust, for a command or an HTTP service checked only at that boundary, or for a
+change to one package of an existing TypeScript or Python repository, into a
+**public** test suite the implementing agent works against and a **hidden**
+suite, which the agent never sees, that judges the result. A writer model (Opus
+5.5 through Claude Code, or Codex or the Anthropic API without it) writes both
+suites and the reference that calibrates them, in sessions apart from the
+implementing agent. A person confirms the spec's decisions before any test is
+written. The implementing agent can be anything that edits a folder: Claude
+Code, Codex, Cursor, Copilot, Aider, or a person.
 
 Use it when "all tests pass" comes from the same agent that wrote the tests, and
 you want acceptance decided by tests it could not have overfitted, gamed or
@@ -166,7 +170,9 @@ What to tell them, accurately:
 - Generating the suites costs about $1–4 and 10–25 minutes of Opus 5.5 per spec
   on their signed-in `claude` CLI, up to about $7 in a repository, plus their
   own time to confirm the decisions (median person minutes: pending; `confirm`
-  records each confirmation's duration).
+  records each confirmation's duration). Without Claude Code it runs on their
+  Codex login or an Anthropic API key instead, on macOS, Linux or Windows
+  (Windows without an OS sandbox for the sessions).
 - They must confirm the spec's decisions themselves before any test is
   generated. Replaying 11 real commits, suites written from a spec drafted from
   the commit message rejected all 11; once a session given the real diff
@@ -220,10 +226,11 @@ tests, are the whole gain: the same suite handed over as prose scored 76 of 101.
    in a pull request.
 3. **Prepare.** Blind writer sessions write an interface skeleton, the public
    suite, then a hidden suite aimed at what the public one leaves out. The
-   writers run on the `claude` CLI by default; `INDEPENDENT_TESTS_BACKEND` or
-   toolchain.json `backend` picks `codex-cli`, `anthropic-api` or `exec` (any
-   command, prompt on stdin). Calibration keeps a hidden test only if it fails
-   on the skeleton and a separately written reference passes it
+   writers run on the first account found: the `claude` CLI, else the person's
+   Codex login (`codex-cli`), else `ANTHROPIC_API_KEY` (`anthropic-api`);
+   `INDEPENDENT_TESTS_BACKEND` or toolchain.json `backend` picks one, or `exec`
+   (any command, prompt on stdin). Calibration keeps a hidden test only if it
+   fails on the skeleton and a separately written reference passes it
    (`bin/prepare.mjs`). In a repository the skeleton is a stub at the seam, the
    suites follow the repository's own test idiom and runner, and a reference
    that breaks an existing test stops the spec. At a black-box seam (toolchain
@@ -246,8 +253,11 @@ tests, are the whole gain: the same suite handed over as prose scored 76 of 101.
 Sessions run under the OS sandbox with deny rules: no session can read the
 hidden suites, other workdirs or transcripts. The other backends run under
 `sandbox-exec` (macOS) or `bwrap` (Linux), reading and writing only the staged
-workdir (`bin/backends.mjs`). [SKILL.md](SKILL.md) has the steps as the skill
-runs them.
+workdir (`bin/backends.mjs`). Windows has no such sandbox: there the file tools'
+deny rules still hold, but a session's shell is held only by the transcript
+audit, which reports any attempt to read the hidden suite. Run sessions under
+WSL2 for an enforced sandbox; judging and handouts need none.
+[SKILL.md](SKILL.md) has the steps as the skill runs them.
 
 ## Install in full
 
@@ -256,12 +266,13 @@ npx -y independent-tests --help         # the CLI; nothing to clone
 git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests
 ```
 
-The clone is the Claude Code skill (SKILL.md), which calls the same CLI. Needs
-Node ≥ 22.12, a signed-in `claude` CLI and macOS or Linux. The first command
-that needs the toolchain installs `template/`'s dependencies with npm 10.9.2
-under `~/.independent-tests/`, once. Then ask Claude Code for tests an agent
-can't see for a ticket, or to judge a submission against a spec. The handout
-folder needs only Node, so the implementing agent can run anywhere.
+The clone is the skill (SKILL.md), which calls the same CLI. Needs Node 20.19 or
+later on macOS, Linux or Windows, and one of: Claude Code signed in, a Codex
+login, or `ANTHROPIC_API_KEY`. The first command that needs the toolchain
+installs `template/`'s dependencies with npm 10.9.2 under
+`~/.independent-tests/`, once. Then ask your agent for tests an agent can't see
+for a ticket, or to judge a submission against a spec. The handout folder needs
+only Node, so the implementing agent can run anywhere.
 
 Specs, runs and results live in `~/.independent-tests/`
 (`INDEPENDENT_TESTS_HOME`; `independent-tests where` prints the folders), never

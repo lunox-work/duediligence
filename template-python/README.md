@@ -12,7 +12,8 @@ part of a submission.
   one, present only where the grader stages it; `tests/own/` the agent's.
 - `python3 sandbox/run.py public` runs a suite and prints JSON;
   `python3 sandbox/compile_check.py` parses everything;
-  `.venv/bin/python -m pytest tests/own` runs pytest directly.
+  `.venv/bin/python -m pytest tests/own` (`.venv/Scripts/python` on
+  Windows) runs pytest directly.
 - `sandbox/independent_tests_reporter.py` is the pytest plugin both
   `sandbox/run.py` and `bin/runners/pytest.mjs` read results from. A test
   named `test_<kind>_<n>__...` is keyed to that spec scenario.

@@ -45,16 +45,19 @@ steps marked _Repository_ below are for that target.
   (UI through Playwright is out: its tests are too noisy to calibrate), nor yet
   a change inside a repository visible only through a running service: `fit`,
   `repo` and the judge take `--seam http`, but no brief writes its suites.
-- **Preconditions.** Node ≥ 22.12; `claude` signed in (`CLAUDE_BIN`, PATH or the
-  VS Code extension bundle); macOS or Linux for the OS sandbox. The first
-  command that needs the bundled toolchain installs it with npm 10.9.2 into the
-  home (network, once). Python: `python3` (pytest is installed into the home
-  once); Go and Rust: `go` or `cargo` on PATH. Another writer backend, if the
-  person asks for one: `INDEPENDENT_TESTS_BACKEND=codex-cli` (their Codex login;
-  Codex 0.164.0 installed into the home once), `anthropic-api`
-  (`ANTHROPIC_API_KEY`) or `exec` with `INDEPENDENT_TESTS_EXEC=<command>`; these
-  run under `sandbox-exec` or `bwrap` instead of Claude Code's deny rules.
-- **Cost.** Step 3 starts four blind `claude -p` sessions on Opus 5.5: about
+- **Preconditions.** Node 20.19 or later, on macOS, Linux or Windows. One
+  account for the sessions, taken in this order unless
+  `INDEPENDENT_TESTS_BACKEND` names one: `claude` signed in (`CLAUDE_BIN`, PATH
+  or the VS Code extension bundle), else their Codex login (`codex-cli`; Codex
+  0.164.0 installed into the home once), else `ANTHROPIC_API_KEY`
+  (`anthropic-api`); or `exec` with `INDEPENDENT_TESTS_EXEC=<command>`. claude
+  sessions are held by Claude Code's sandbox and deny rules, the others by
+  `sandbox-exec` or `bwrap`. On Windows there is no OS sandbox: say so before
+  step 3, and that WSL2 gives one. The first command that needs the bundled
+  toolchain installs it with npm 10.9.2 into the home (network, once). Python:
+  `python3` (`python` on Windows; pytest is installed into the home once); Go
+  and Rust: `go` or `cargo` on PATH.
+- **Cost.** Step 3 starts four blind sessions, on Opus 5.5 with `claude`: about
   $1–4 and 10–25 minutes per spec. An agent run is a few cents on Haiku 5.5,
   about $0.30 on Opus. Say so before step 3. Step 2 costs the person's time:
   `confirm` records it per spec (`minutes` in confirmed.json, from the first

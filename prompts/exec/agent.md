@@ -13,7 +13,7 @@ Implement the specification in `spec.md`: a command, `node src/cli.js`.
   each scenario in `spec.md`, add at least one case whose inputs differ from
   every public test and from every example the spec writes down: other
   values, other sizes, other orders, other combinations. After
-  `npm run build`, `node --env-file=sandbox.env --test "tests/own/**/*.test.js"`
+  `npm run build`, `node sandbox/test.mjs tests/own`
   runs them.
 - Everything else (`tests/public/`, `sandbox/`, `sandbox.env`,
   `package.json`, `tsconfig.json`, the lockfile) is harness, and a submission

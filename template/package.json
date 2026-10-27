@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.12.0"
+    "node": "^20.19.0 || >=22.0.0"
   },
   "packageManager": "npm@10.9.2",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "npm run build && node --env-file=sandbox.env --test \"tests/public/**/*.test.js\""
+    "test": "npm run build && node sandbox/test.mjs"
   },
   "devDependencies": {
     "typescript": "5.9.3"

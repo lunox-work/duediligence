@@ -16,7 +16,7 @@ Implement the specification in `spec.md`: an HTTP service.
   callback parameter you take from them). For each scenario in `spec.md`, add
   at least one case whose inputs differ from every public test and from every
   example the spec writes down: other values, other sizes, other orders,
-  other combinations. `node sandbox/boundary.mjs -- node --test "tests/own/**/*.test.js"`
+  other combinations. `node sandbox/boundary.mjs -- node sandbox/test.mjs tests/own`
   runs them.
 - Everything else (`tests/public/`, `sandbox/`, `sandbox.env`,
   `package.json`, `tsconfig.json`, the lockfile) is harness, and a submission

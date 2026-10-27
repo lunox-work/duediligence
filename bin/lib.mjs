@@ -34,9 +34,23 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { homedir, tmpdir } from "node:os";
-import { basename, dirname, join, relative, resolve, sep } from "node:path";
+import { freemem, homedir, tmpdir, totalmem } from "node:os";
+import { basename, dirname, join, posix, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  DEFAULT_PYTHON,
+  GROUP,
+  OS_SANDBOX,
+  VENV_BIN_DIR,
+  WINDOWS,
+  comparable,
+  inside,
+  killTree,
+  slash,
+  spawnCommand,
+  venvBin,
+  which,
+} from "./platform.mjs";
 import { withBins } from "./runners/shared.mjs";
 
 /**
@@ -76,12 +90,12 @@ export const TRANSCRIPTS = join(homedir(), ".claude", "projects");
 /** The bundled specs (ROOT/specs/: duration-parse, the README's example). */
 export const BUNDLED_SPECS = join(ROOT, "specs");
 
+// realpathSync.native: on Windows it also expands 8.3 short names (RUNNER~1) in TEMP.
+const realPath = WINDOWS ? realpathSync.native : realpathSync;
 const workBase =
-  process.env.INDEPENDENT_TESTS_WORK ?? join(realpathSync(tmpdir()), "independent-tests-work");
+  process.env.INDEPENDENT_TESTS_WORK ?? join(realPath(tmpdir()), "independent-tests-work");
 mkdirSync(workBase, { recursive: true });
-export const WORK_ROOT = realpathSync(workBase);
-
-const inside = (path, folder) => path === folder || path.startsWith(`${folder}/`);
+export const WORK_ROOT = realPath(workBase);
 /**
  * What no session may read: the package, the person's data and wherever
  * SPECS and RUNS were moved, folded so none is listed under another.
@@ -159,7 +173,7 @@ export function ensureTemplate() {
     filter: (from) => !relative(TEMPLATE_SOURCE, from).split(sep).includes("node_modules"),
   });
   log(`installing the toolchain into ${TEMPLATE} (npm@10.9.2 ci, once)`);
-  const out = spawnSync("npx", ["-y", "npm@10.9.2", "ci", "--no-audit", "--no-fund"], {
+  const out = spawnCommand("npx", ["-y", "npm@10.9.2", "ci", "--no-audit", "--no-fund"], {
     cwd: partial,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
@@ -178,12 +192,12 @@ export function ensureTemplate() {
 }
 /**
  * The interpreter the `python` toolchain and Python repositories run on:
- * INDEPENDENT_TESTS_PYTHON, default `python3` on PATH.
+ * INDEPENDENT_TESTS_PYTHON, default `python3` on PATH (`python` on Windows).
  */
-export const PYTHON = process.env.INDEPENDENT_TESTS_PYTHON ?? "python3";
+export const PYTHON = process.env.INDEPENDENT_TESTS_PYTHON ?? DEFAULT_PYTHON;
 const PYTHON_SOURCE = join(ROOT, "template-python");
 /** The tree's own interpreter, which holds the pinned pytest: relative to a staged Python tree. */
-export const VENV_PYTHON = join(".venv", "bin", "python");
+export const VENV_PYTHON = venvBin("python");
 const pythonTrees = new Map();
 /**
  * A toolchain tree with what its suites need installed, which `stage`
@@ -195,7 +209,7 @@ const pythonTrees = new Map();
  */
 function toolchainTree(name, source, version, install) {
   const files = listFiles(source, [".venv", "target", "node_modules"]).filter(
-    (path) => !path.split(sep).includes("__pycache__"),
+    (path) => !path.split("/").includes("__pycache__"),
   );
   const hash = sha256(
     JSON.stringify([version, ...files.map((path) => [path, sha256(readFileSync(join(source, path)))])]),
@@ -243,8 +257,8 @@ export function ensurePython() {
     step(VENV_PYTHON, [...pip, "install", "--no-deps", "--require-hashes", "-r", "requirements.txt"]);
     step(VENV_PYTHON, [...pip, "uninstall", "-y", "pip"]);
     // The activate scripts name the partial folder; nothing here sources them.
-    for (const name of readdirSync(join(partial, ".venv", "bin")))
-      if (/^(activate|pip)/i.test(name)) rmSync(join(partial, ".venv", "bin", name), { force: true });
+    for (const name of readdirSync(join(partial, ".venv", VENV_BIN_DIR)))
+      if (/^(activate|pip)/i.test(name)) rmSync(join(partial, ".venv", VENV_BIN_DIR, name), { force: true });
   });
   pythonTrees.set(PYTHON, dest);
   return dest;
@@ -315,7 +329,7 @@ export const TOOLCHAINS = {
           suite,
           files: listFiles(join(dir, "tests", suite))
             .filter((path) => /\.test\.tsx?$/.test(path))
-            .map((path) => join("tests", suite, path)),
+            .map((path) => posix.join("tests", suite, path)),
           build: [process.execPath, "node_modules/typescript/bin/tsc", "-p", "tsconfig.json"],
           envFile: "sandbox.env",
           reporter: "./sandbox/reporter.mjs",
@@ -334,12 +348,12 @@ export const TOOLCHAINS = {
     generated: (path) =>
       path.split("/").some((part) => part === "__pycache__" || part === ".pytest_cache") || path.endsWith(".pyc"),
     marker: "sandbox/run.py",
-    checkCommand: "python3 sandbox/compile_check.py",
+    checkCommand: `${DEFAULT_PYTHON} sandbox/compile_check.py`,
     check: (dir) => [join(dir, VENV_PYTHON), ["-I", "sandbox/compile_check.py"]],
     suite: (dir, suite) => {
       const files = listFiles(join(dir, "tests", suite))
         .filter((path) => /(^|\/)test_[^/]*\.py$/.test(path))
-        .map((path) => join("tests", suite, path));
+        .map((path) => posix.join("tests", suite, path));
       return [
         process.execPath,
         [
@@ -376,7 +390,7 @@ export const TOOLCHAINS = {
           suite,
           files: listFiles(join(dir, "tests", suite))
             .filter((path) => path.endsWith("_test.go"))
-            .map((path) => join("tests", suite, path)),
+            .map((path) => posix.join("tests", suite, path)),
         }),
       ],
     ],
@@ -402,7 +416,7 @@ export const TOOLCHAINS = {
           suite,
           files: listFiles(join(dir, "tests", suite))
             .filter((path) => path.endsWith(".rs"))
-            .map((path) => join("tests", suite, path)),
+            .map((path) => posix.join("tests", suite, path)),
         }),
       ],
     ],
@@ -419,18 +433,18 @@ export const TOOLCHAINS = {
     check: (dir, chain) => {
       if (chain.build === undefined) return [process.execPath, ["-e", ""]];
       const cwd = join(dir, chain.package);
-      return ["sh", ["-c", chain.build], { cwd, env: withBins(cwd) }];
+      return [chain.build, [], { cwd, env: withBins(cwd), shell: true, windowsHide: true }];
     },
     suite: (dir, suite, chain) => {
       const cwd = join(dir, chain.package);
-      const files = suiteFiles(dir, suite, chain).map((path) => relative(cwd, join(dir, path)));
+      const files = suiteFiles(dir, suite, chain).map((path) => slash(relative(cwd, join(dir, path))));
       const { build, rootDir, outDir, testTimeoutMs } = chain;
       // pytest runs on the base tree's .venv, every file in one process, with
       // the package's import root first on the path, so the tree's own source
       // shadows the installed copy of the package.
       const python =
         chain.runner === "pytest"
-          ? { python: relative(cwd, join(dir, VENV_PYTHON)), pythonPath: chain.pythonPath, perFile: false }
+          ? { python: slash(relative(cwd, join(dir, VENV_PYTHON))), pythonPath: chain.pythonPath, perFile: false }
           : {};
       return [
         process.execPath,
@@ -551,7 +565,7 @@ export function repoChain(config, slug) {
     chain.pythonPath ??= ["."];
   }
   // A build's output, where the repository's .gitignore does not hide it.
-  const outDir = chain.outDir === undefined ? null : `${join(chain.package, chain.outDir)}/`;
+  const outDir = chain.outDir === undefined ? null : `${posix.join(chain.package, chain.outDir)}/`;
   chain.generated = (path) =>
     (outDir !== null && path.startsWith(outDir)) ||
     (python && (path.split("/").some((part) => part === "__pycache__" || part === ".pytest_cache") || path.endsWith(".pyc")));
@@ -602,10 +616,10 @@ export function commandOf(chain, suite) {
     // Sessions run the suite under the tree's copy of boundary.mjs (`stage` writes it into .git/).
     const plain = commandOf({ ...chain, boundary: null }, suite);
     const cd = /^cd [^&]+ && /.exec(plain)?.[0] ?? "";
-    const up = chain.package === "." ? "" : `${relative(chain.package, ".")}/`;
+    const up = chain.package === "." ? "" : `${posix.relative(chain.package, ".")}/`;
     return `${cd}node ${up}.git/independent-tests/boundary.mjs -- sh -c '${plain.slice(cd.length).replace(/'/g, "'\\''")}'`;
   }
-  const inPackage = (path) => relative(chain.package, path) || ".";
+  const inPackage = (path) => posix.relative(chain.package, path) || ".";
   const folder = { public: chain.publicDir, own: chain.publicDir, private: chain.hiddenDir, existing: chain.testDir }[suite];
   const build = chain.build === undefined ? "" : `npx ${chain.build} && `;
   // From the tree's root: nothing to change into for a package at the root.
@@ -617,8 +631,10 @@ export function commandOf(chain, suite) {
       private: `${inPackage(folder)}/`,
       existing: inPackage(folder),
     }[suite];
-    const python = relative(chain.package, VENV_PYTHON) || VENV_PYTHON;
-    return `${cd}PYTHONPATH=${chain.pythonPath.join(":")} ${python} -m pytest -p no:cacheprovider ${target}`;
+    const python = posix.relative(chain.package, VENV_PYTHON) || VENV_PYTHON;
+    // Windows' Python splits PYTHONPATH on ";", quoted for Git Bash, which sessions run there.
+    const pythonPath = WINDOWS ? `'${chain.pythonPath.join(";")}'` : chain.pythonPath.join(":");
+    return `${cd}PYTHONPATH=${pythonPath} ${python} -m pytest -p no:cacheprovider ${target}`;
   }
   if (chain.runner === "jest") {
     // Jest takes regular expressions over test paths.
@@ -639,9 +655,10 @@ export function commandOf(chain, suite) {
     }[suite];
     return `${cd}npx vitest run ${filter}`.trimEnd();
   }
-  const compiled = join(chain.outDir ?? ".", relative(chain.rootDir ?? ".", inPackage(folder)));
-  const files = { public: `${chain.slug}.*.js`, own: `${chain.slug}-own.*.js` }[suite] ?? "**/*.test.js";
-  return `${cd}${build}node --test "${compiled}/${files}"`;
+  const compiled = posix.join(chain.outDir ?? ".", posix.relative(chain.rootDir ?? ".", inPackage(folder)));
+  // The files listed by the session's shell, not globbed by node --test, which Node 20 cannot do.
+  const files = { public: `${compiled}/${chain.slug}.*.js`, own: `${compiled}/${chain.slug}-own.*.js` }[suite] ?? `$(find ${compiled} -name '*.test.js')`;
+  return `${cd}${build}node --test ${files}`;
 }
 /** The command a writer is told checks its tree: the toolchain's own, or a repository's build. */
 export const checkCommand = (chain) =>
@@ -674,10 +691,10 @@ function suiteFiles(dir, suite, chain) {
   const under = (folder) =>
     listFiles(join(dir, folder))
       .filter((path) => matches.test(path.split("/").at(-1)))
-      .map((path) => join(folder, path));
+      .map((path) => posix.join(folder, path));
   // Directly in publicDir: a hidden file named after the spec is not public.
   const ownPublic = (path) =>
-    chain.slug !== null && dirname(path) === chain.publicDir && chain.isPublicName(path.split("/").at(-1));
+    chain.slug !== null && posix.dirname(path) === chain.publicDir && chain.isPublicName(path.split("/").at(-1));
   const hidden = (path) => chain.hiddenDir !== undefined && path.startsWith(`${chain.hiddenDir}/`);
   if (suite === "public") return under(chain.publicDir).filter(ownPublic);
   if (suite === "private") return under(chain.hiddenDir);
@@ -765,10 +782,10 @@ const codeList = (items) => items.map((item) => `\`${item}\``).join(", ");
  */
 function importOf(chain, from) {
   if (chain.runner === "pytest") {
-    const root = join(chain.package, chain.pythonPath[0]);
-    return relative(root, chain.seam[0]).replace(/(\/__init__)?\.py$/, "").split("/").join(".");
+    const root = posix.join(chain.package, chain.pythonPath[0]);
+    return posix.relative(root, chain.seam[0]).replace(/(\/__init__)?\.py$/, "").split("/").join(".");
   }
-  const path = relative(from, chain.seam[0]).replace(/\.[cm]?[jt]sx?$/, chain.runner === "node-test" ? ".js" : "");
+  const path = posix.relative(from, chain.seam[0]).replace(/\.[cm]?[jt]sx?$/, chain.runner === "node-test" ? ".js" : "");
   return path.startsWith(".") ? path : `./${path}`;
 }
 function render(text, chain, name) {
@@ -846,13 +863,13 @@ export async function pool(items, limit, fn) {
   return results;
 }
 
-/** Every file under `dir`, relative and sorted, skipping the named top-level entries. */
+/** Every file under `dir`, relative with "/" on every OS and sorted, skipping the named top-level entries. */
 export function listFiles(dir, skip = ["node_modules", ".git"]) {
   const out = [];
   const walk = (at) => {
     for (const entry of readdirSync(at, { withFileTypes: true })) {
       const path = join(at, entry.name);
-      const rel = relative(dir, path);
+      const rel = slash(relative(dir, path));
       if (skip.includes(rel)) continue;
       if (entry.isDirectory()) walk(path);
       else out.push(rel);
@@ -933,6 +950,7 @@ export function copy(from, to) {
  */
 function clone(from, to) {
   mkdirSync(to, { recursive: true });
+  // Windows has neither: a plain copy.
   const flags = { darwin: ["-Rc"], linux: ["-R", "--reflink=auto"] }[process.platform];
   if (flags !== undefined && spawnSync("cp", [...flags, `${from}/.`, to]).status === 0) return;
   copy(from, to);
@@ -967,16 +985,16 @@ const INSTALL = {
  */
 function pythonTool(name, version) {
   const dir = join(WORK_ROOT, "tools", `${name}-${version}`);
-  const bin = join(dir, "bin", name);
+  const bin = join(dir, venvBin(name, "."));
   if (existsSync(bin)) return bin;
   const partial = `${dir}.partial-${process.pid}`;
   rmSync(partial, { recursive: true, force: true });
   mkdirSync(dirname(partial), { recursive: true });
   for (const argv of [
     [PYTHON, "-m", "venv", partial],
-    [join(partial, "bin", "python"), "-m", "pip", "install", "-q", "--disable-pip-version-check", `${name}==${version}`],
+    [join(partial, venvBin("python", ".")), "-m", "pip", "install", "-q", "--disable-pip-version-check", `${name}==${version}`],
   ]) {
-    const out = spawnSync(argv[0], argv.slice(1), { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    const out = spawnSync(argv[0], argv.slice(1), { encoding: "utf8", maxBuffer: 64 * 1024 * 1024, windowsHide: true });
     if (out.status !== 0) {
       rmSync(partial, { recursive: true, force: true });
       throw new Error(`installing ${name} ${version} failed:\n${`${out.error ?? ""}${out.stdout}${out.stderr}`.slice(-4000)}`);
@@ -1037,7 +1055,7 @@ export function prepareBase(config) {
   const partial = mkdtempSync(`${dest}.partial-`);
   const started = Date.now();
   const step = (label, bin, argv, options = {}) => {
-    const out = spawnSync(bin, argv, { cwd: partial, encoding: "utf8", maxBuffer: 256 * 1024 * 1024, ...options });
+    const out = spawnCommand(bin, argv, { cwd: partial, encoding: "utf8", maxBuffer: 256 * 1024 * 1024, ...options });
     if (out.status === 0) return out;
     rmSync(partial, { recursive: true, force: true });
     throw new Error(`${label} failed:\n${`${out.error ?? ""}${out.stdout}${out.stderr}`.slice(-4000)}`);
@@ -1070,7 +1088,9 @@ export function prepareBase(config) {
     if (script === undefined) continue;
     log(`${basename(config.repo)} ${config.base.slice(0, 12)}: build ${folder}`);
     const cwd = join(partial, folder);
-    step(`build of ${folder}`, "sh", ["-c", script], { cwd, env: withBins(cwd) });
+    // Through the OS shell, as npm runs the package's own build script.
+    step(`build of ${folder}`, script, [], { cwd, env: withBins(cwd), shell: true, windowsHide: true });
+
   }
   // Build output is ignored by the repository's .gitignore, so a built base
   // keeps the plain base's commit.
@@ -1272,25 +1292,50 @@ export function verdict({ refused = [], publicCount, hiddenCount, regressions = 
   return hiddenCount.total > 0 && hiddenCount.passed === hiddenCount.total ? "passed" : "overfit";
 }
 
-export function claudeBin() {
+/**
+ * The claude CLI, or null: CLAUDE_BIN, claude on PATH, the newest VS Code
+ * extension's bundled binary. On Windows npm's `claude.cmd` shim is
+ * replaced by the package it starts (its native claude.exe, or cli.js on
+ * this Node), since a shim runs only through cmd.exe and a prompt does not
+ * survive its quoting.
+ */
+export function findClaude() {
   if (process.env.CLAUDE_BIN) return process.env.CLAUDE_BIN;
-  const onPath = spawnSync("sh", ["-c", "command -v claude"], { encoding: "utf8" });
-  if (onPath.status === 0 && onPath.stdout.trim() !== "") return onPath.stdout.trim();
+  const onPath = which("claude");
+  if (onPath !== null && !/\.(cmd|bat|ps1)$/i.test(onPath)) return onPath;
+  if (onPath !== null) {
+    const pkg = join(dirname(onPath), "node_modules", "@anthropic-ai", "claude-code");
+    const shipped = [join(pkg, "bin", "claude.exe"), join(pkg, "cli.js")].find((path) => existsSync(path));
+    if (shipped !== undefined) return shipped;
+  }
   const extensions = join(homedir(), ".vscode", "extensions");
   const bundled = existsSync(extensions)
     ? readdirSync(extensions)
         .filter((name) => name.startsWith("anthropic.claude-code-"))
-        .map((name) => join(extensions, name, "resources", "native-binary", "claude"))
+        .map((name) => join(extensions, name, "resources", "native-binary", WINDOWS ? "claude.exe" : "claude"))
         .filter((path) => existsSync(path))
         .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
     : [];
-  if (bundled.length === 0)
-    throw new Error("No claude CLI: set CLAUDE_BIN, put claude on PATH, or install the VS Code extension.");
-  return bundled.at(-1);
+  return bundled.at(-1) ?? null;
 }
+export function claudeBin() {
+  const found = findClaude();
+  if (found === null)
+    throw new Error("No claude CLI: set CLAUDE_BIN, put claude on PATH, or install the VS Code extension. Or pick another backend: INDEPENDENT_TESTS_BACKEND=codex-cli or anthropic-api.");
+  return found;
+}
+/** How to start `claude` with `argv`: [bin, argv]; a cli.js runs on this Node. */
+const claudeCommand = (argv) => {
+  const bin = claudeBin();
+  return /\.[cm]?js$/.test(bin) ? [process.execPath, [bin, ...argv]] : [bin, argv];
+};
 
-/** Absolute path as a permission rule takes it. */
-const rulePath = (path) => `/${path}/**`;
+/**
+ * Absolute path as a permission rule takes it: `//` and the path, which on
+ * Windows Claude Code matches in POSIX form (C:\Users\me as //c/Users/me).
+ */
+const posixForm = (path) => (WINDOWS ? `/${path[0].toLowerCase()}${slash(path.slice(2))}` : path);
+const rulePath = (path) => `/${posixForm(path)}/**`;
 
 /** The workdirs that exist now, other than `own` and the judge root. */
 const siblings = (own) =>
@@ -1305,6 +1350,11 @@ const resultsFile = () => (PRIVATE.some((folder) => inside(RESULTS, folder)) ? [
  * A spec whose boundary is a service (`boundaryOf`) needs its sessions to
  * listen on and connect to 127.0.0.1, so its sandbox allows local binding;
  * every other session's settings are unchanged, still with no network.
+ *
+ * On Windows Claude Code has no OS sandbox to require: the sandbox is asked
+ * for where it exists and not required, so Bash there is held by nothing
+ * but the transcript audit (`peeks`, `audit`), and `claudeCli` records
+ * `sandboxed: false` and says so once.
  */
 export function sessionSettings(cwd, chain) {
   const denied = [...PRIVATE, TRANSCRIPTS, JUDGE_ROOT, ...siblings(cwd)];
@@ -1312,7 +1362,7 @@ export function sessionSettings(cwd, chain) {
   return {
     sandbox: {
       enabled: true,
-      failIfUnavailable: true,
+      failIfUnavailable: OS_SANDBOX,
       allowUnsandboxedCommands: false,
       filesystem: {
         denyRead: [...PRIVATE, ...resultsFile(), TRANSCRIPTS, WORK_ROOT],
@@ -1325,7 +1375,7 @@ export function sessionSettings(cwd, chain) {
         "WebFetch",
         "WebSearch",
         ...denied.flatMap((path) => fileTools.map((tool) => `${tool}(${rulePath(path)})`)),
-        ...resultsFile().flatMap((path) => fileTools.map((tool) => `${tool}(/${path})`)),
+        ...resultsFile().flatMap((path) => fileTools.map((tool) => `${tool}(/${posixForm(path)})`)),
       ],
     },
   };
@@ -1334,14 +1384,16 @@ export function sessionSettings(cwd, chain) {
 /**
  * Every session of every script here takes a slot first: at most
  * INDEPENDENT_TESTS_MAX_SESSIONS at once (default 3), and none starts while
- * macOS reports less than INDEPENDENT_TESTS_MIN_FREE percent of memory free
- * (default 25). A slot is a file under WORK_ROOT/slots holding its owner's
- * pid; a dead owner's slot is taken back.
+ * less than INDEPENDENT_TESTS_MIN_FREE percent of memory is free (default
+ * 25): macOS's `memory_pressure`, elsewhere the OS's available memory. A
+ * slot is a file under WORK_ROOT/slots holding its owner's pid; a dead
+ * owner's slot is taken back.
  */
 const MAX_SESSIONS = Number(process.env.INDEPENDENT_TESTS_MAX_SESSIONS ?? 3);
 const MIN_FREE = Number(process.env.INDEPENDENT_TESTS_MIN_FREE ?? 25);
 const SLOTS = join(WORK_ROOT, "slots");
 export function freeMemoryPercent() {
+  if (process.platform !== "darwin") return Math.round((freemem() / totalmem()) * 100);
   const out = spawnSync("memory_pressure", [], { encoding: "utf8" }).stdout ?? "";
   const match = /free percentage:\s*(\d+)%/.exec(out);
   return match === null ? 100 : Number(match[1]);
@@ -1383,15 +1435,45 @@ export const BACKENDS = ["claude-cli", "anthropic-api", "codex-cli", "exec"];
 /**
  * A session's backend: `backend` when the caller names one (a run's
  * --backend, the referee's), else for the writers and the reference
- * INDEPENDENT_TESTS_BACKEND, then toolchain.json `backend`. The
- * implementing agent (`kind: "agent"`) stays on claude-cli unless its
- * caller names another: a spec's writer backend is not its implementer.
+ * INDEPENDENT_TESTS_BACKEND, then toolchain.json `backend`, then
+ * `defaultBackend`. The implementing agent (`kind: "agent"`) skips the
+ * writers' choice unless its caller names one: a spec's writer backend is
+ * not its implementer.
  */
 export function backendOf({ backend, kind, chain } = {}) {
   const chosen =
-    backend ?? (kind === "agent" ? undefined : (process.env.INDEPENDENT_TESTS_BACKEND || chain?.backend)) ?? "claude-cli";
+    backend ?? (kind === "agent" ? undefined : (process.env.INDEPENDENT_TESTS_BACKEND || chain?.backend)) ?? defaultBackend();
   if (!BACKENDS.includes(chosen)) throw new Error(`No backend ${chosen} (${BACKENDS.join(", ")})`);
   return chosen;
+}
+/** Whether the person has a Codex login (CODEX_HOME or ~/.codex) or an OpenAI key for it. */
+const codexSignedIn = () =>
+  existsSync(join(process.env.CODEX_HOME ?? join(homedir(), ".codex"), "auth.json")) ||
+  Boolean(process.env.OPENAI_API_KEY || process.env.CODEX_API_KEY);
+let defaultChosen;
+/**
+ * The backend a session runs on when nothing names one: whichever of the
+ * person's accounts is there, in this order. claude-cli when a claude CLI
+ * is found (`findClaude`), else codex-cli on their Codex login, else
+ * anthropic-api on ANTHROPIC_API_KEY. None of them is an error that names
+ * all three. Said once when it is not claude-cli.
+ */
+export function defaultBackend() {
+  if (defaultChosen !== undefined) return defaultChosen;
+  defaultChosen =
+    findClaude() !== null
+      ? "claude-cli"
+      : codexSignedIn()
+        ? "codex-cli"
+        : process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_AUTH_TOKEN
+          ? "anthropic-api"
+          : null;
+  if (defaultChosen === null)
+    throw new Error(
+      "No agent to run sessions on. Any one of: Claude Code signed in (`claude`, or CLAUDE_BIN), a Codex login (`codex login`, or OPENAI_API_KEY), or ANTHROPIC_API_KEY. INDEPENDENT_TESTS_BACKEND picks one when you have several.",
+    );
+  if (defaultChosen !== "claude-cli") log(`no claude CLI found: sessions run on ${defaultChosen} (INDEPENDENT_TESTS_BACKEND picks another)`);
+  return defaultChosen;
 }
 /**
  * One writer, reference, referee or agent session in `cwd` on its backend
@@ -1420,9 +1502,12 @@ export async function session(options) {
  * directories from `lsof -d cwd` on macOS, /proc on Linux; command lines
  * from `ps`. Never this process or its own group. The session's own
  * process group goes first (`claudeCli` and bin/backends.mjs start each
- * session as a group leader and kill that group when it closes).
+ * session as a group leader and kill that group when it closes). Windows
+ * has no process groups or readable working directories: there the
+ * session's process tree is all that is killed (`killTree`).
  */
 export function killStrays(cwd) {
+  if (WINDOWS) return [];
   let root;
   try {
     root = realpathSync(cwd);
@@ -1468,12 +1553,16 @@ export function killStrays(cwd) {
   if (strays.length > 0) log(`killed ${strays.length} process(es) the session left running in ${root}`);
   return strays;
 }
-/** SIGKILLs a session's process group (its leader `pid` was spawned detached); quiet when it is gone. */
-export function killGroup(pid) {
-  if (pid === undefined || pid === null) return;
-  try {
-    process.kill(-pid, "SIGKILL");
-  } catch {}
+/** Kills a session's process group, or its tree on Windows (its leader `pid` was spawned with `GROUP`); quiet when it is gone. */
+export const killGroup = killTree;
+/** Said once per process when a session runs without an OS sandbox. */
+let warnedUnsandboxed = false;
+export function warnUnsandboxed() {
+  if (warnedUnsandboxed) return;
+  warnedUnsandboxed = true;
+  log(
+    `${process.platform}: no OS sandbox for sessions here. File tools are held by deny rules; Bash is not, so a read of the hidden suite is caught by the transcript audit, not prevented. For an enforced sandbox, run under WSL2, macOS or Linux.`,
+  );
 }
 
 /**
@@ -1515,7 +1604,9 @@ export async function claudeCli({ cwd, text, transcript, kind, resume, model, ma
     const { ANTHROPIC_API_KEY, ANTHROPIC_AUTH_TOKEN, ...env } = process.env;
     // Its own process group, killed when it closes (and if this process exits first): a
     // server a session left in the background goes with it (`killStrays` catches the rest).
-    const child = spawn(claudeBin(), argv, { cwd, env, stdio: ["ignore", "pipe", "pipe"], detached: true });
+    if (!OS_SANDBOX) warnUnsandboxed();
+    const [bin, args] = claudeCommand(argv);
+    const child = spawn(bin, args, { cwd, env, stdio: ["ignore", "pipe", "pipe"], ...GROUP });
     const reap = () => killGroup(child.pid);
     process.once("exit", reap);
     // Once the CLI itself exits, anything left in its group is a leftover that may hold its pipes open.
@@ -1567,6 +1658,8 @@ export async function claudeCli({ cwd, text, transcript, kind, resume, model, ma
         apiError: result?.api_error ?? null,
         finalText: typeof result?.result === "string" ? result.result : "",
         stderr: stderr.slice(-2000),
+        /** False where no OS sandbox held the session's Bash (Windows). */
+        sandboxed: OS_SANDBOX,
       });
     });
   });
@@ -1603,7 +1696,7 @@ export function scopeOf(chain, changed, read) {
         : path.startsWith(`${chain.hiddenDir}/`)
           ? "the hidden suite's folder"
           : // Added is never an edit: a run without the public suite may name its own tests so.
-            dirname(path) === chain.publicDir && chain.isPublicName(name) && item.change !== "added"
+            posix.dirname(path) === chain.publicDir && chain.isPublicName(name) && item.change !== "added"
             ? "the public suite"
             : chain.isTest(path) && item.change !== "added"
               ? "an existing test"
@@ -1634,7 +1727,7 @@ function startOf(chain) {
   const stubbed = (path) =>
     chain.seam.includes(path) ? join(spec, "skeleton", path) : null;
   const publicFile = (path) =>
-    dirname(path) === chain.publicDir ? join(spec, "tests", "public", basename(path)) : null;
+    posix.dirname(path) === chain.publicDir ? join(spec, "tests", "public", posix.basename(path)) : null;
   return (path) => {
     for (const file of [stubbed(path), publicFile(path)])
       if (file !== null && existsSync(file)) return readFileSync(file);
@@ -1667,7 +1760,7 @@ export function checkoutChanges(chain, checkout, ref) {
         ...listed("ls-files", "-z", "--others", "--exclude-standard"),
       ]
     : listed("diff", "--name-only", "-z", "--no-renames", chain.base, ref);
-  const publicPaths = new Set(listFiles(join(specDir(chain.slug), "tests", "public")).map((name) => join(chain.publicDir, name)));
+  const publicPaths = new Set(listFiles(join(specDir(chain.slug), "tests", "public")).map((name) => posix.join(chain.publicDir, name)));
   const paths = [...new Set([...named, ...chain.seam, ...publicPaths])].sort();
   const start = startOf(chain);
   const now = (path) => {
@@ -1770,7 +1863,7 @@ export function audit(transcript, chain, since) {
     /(^|[\s/])(specs|runs)(\/|\s|$)/.test(reach({ name: "Bash", input }));
   const searchedOver = (input) =>
     typeof input.path === "string" &&
-    [ROOT, HOME, SPECS, join(SPECS, slug), RUNS].includes(input.path.replace(/\/$/, ""));
+    [ROOT, HOME, SPECS, join(SPECS, slug), RUNS].map(comparable).includes(comparable(input.path).replace(/\/$/, ""));
   const reach = (block) => {
     const input = block.input ?? {};
     if (block.name === "Bash") return (input.command ?? "").replace(/<<-?\s*(['"]?)(\w+)\1[\s\S]*?\n\2(?=\s|$)/g, "");
@@ -1779,8 +1872,8 @@ export function audit(transcript, chain, since) {
   };
   return scanTranscript(transcript, since, (block) => {
     const input = block.input ?? {};
-    const text = reach(block);
-    const hit = names.find((name) => text.includes(name));
+    const text = comparable(reach(block));
+    const hit = names.find((name) => text.includes(comparable(name)));
     if (hit !== undefined) return hit;
     if (block.name === "Bash" && sweep(input)) return "a recursive search over specs/ or runs/";
     if ((block.name === "Grep" || block.name === "Glob") && searchedOver(input)) return `a search over ${input.path}`;
@@ -1819,10 +1912,13 @@ function scanTranscript(transcript, since, match) {
  */
 export function peeks(transcript, own, names = []) {
   if (!existsSync(transcript)) return [];
-  const patterns = [...PRIVATE, TRANSCRIPTS, ".claude/projects", ...names];
+  // Compared as `comparable` has them: on Windows a path may come as C:\, C:/ or /c/.
+  const patterns = [...PRIVATE, TRANSCRIPTS, ".claude/projects", ...names].map(comparable);
+  const work = comparable(WORK_ROOT);
+  const mine = comparable(own);
   // The session's own project folder, where the CLI keeps a long tool
   // output and tells the session to read it back: its own, not a peek.
-  const ownProject = join(TRANSCRIPTS, own.replace(/[^a-zA-Z0-9]/g, "-"));
+  const ownProject = comparable(join(TRANSCRIPTS, own.replace(/[^a-zA-Z0-9]/g, "-")));
   const found = [];
   for (const line of readFileSync(transcript, "utf8").split("\n")) {
     if (!line.includes('"tool_use"')) continue;
@@ -1834,13 +1930,13 @@ export function peeks(transcript, own, names = []) {
     }
     for (const block of event.message?.content ?? []) {
       if (block.type !== "tool_use") continue;
-      const input = JSON.stringify(block.input ?? {}).replaceAll(`${ownProject}/`, "");
+      const input = comparable(JSON.stringify(block.input ?? {})).replaceAll(`${ownProject}/`, "");
       // A tail that does not start with "/" is a path beside WORK_ROOT, not
       // under it.
       const outside = input
-        .split(WORK_ROOT)
+        .split(work)
         .slice(1)
-        .some((tail) => tail.startsWith("/") && !`${WORK_ROOT}${tail}`.startsWith(own));
+        .some((tail) => tail.startsWith("/") && !`${work}${tail}`.startsWith(mine));
       const hit = patterns.find((pattern) => input.includes(pattern));
       if (hit !== undefined || outside)
         found.push({ tool: block.name, match: hit ?? "another workdir", input: input.slice(0, 300) });
@@ -1851,6 +1947,7 @@ export function peeks(transcript, own, names = []) {
 
 /** Removes a workdir, which lives under WORK_ROOT. */
 export function discard(dir) {
-  if (!dir.startsWith(`${WORK_ROOT}/`)) throw new Error(`Not a workdir: ${dir}`);
+  if (!dir.startsWith(`${WORK_ROOT}${sep}`)) throw new Error(`Not a workdir: ${dir}`);
+
   rmSync(dir, { recursive: true, force: true });
 }

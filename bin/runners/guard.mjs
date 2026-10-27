@@ -16,22 +16,24 @@
 // Input on stdin: { bin, argv, timeoutMs, maxRssMb }. Output: the child's
 // stdout and stderr, then one stderr line `@@guard {"reason", "peakMb"}`;
 // exit code the child's, or 137 when the guard killed it.
+//
+// On Windows the time limit kills the process tree (`taskkill /T`); there
+// is no resident-memory ceiling there, only the heap cap the callers set.
 
 import { spawn, spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
+import { GROUP, WINDOWS, commandOf, killTree } from "../platform.mjs";
 
 const { bin, argv, timeoutMs, maxRssMb = 1024 } = JSON.parse(readFileSync(0, "utf8"));
-const child = spawn(bin, argv, { stdio: ["ignore", "pipe", "pipe"], detached: true });
+const [file, args, options] = commandOf(bin, argv);
+const child = spawn(file, args, { stdio: ["ignore", "pipe", "pipe"], ...GROUP, ...options });
 child.stdout.pipe(process.stdout);
 child.stderr.pipe(process.stderr);
 let reason = null;
 let peakMb = 0;
-const killGroup = () => {
-  try {
-    process.kill(-child.pid, "SIGKILL");
-  } catch {}
-};
+const killGroup = () => killTree(child.pid);
 const groupRssMb = () => {
+  if (WINDOWS) return 0;
   const pids = (spawnSync("pgrep", ["-g", String(child.pid)], { encoding: "utf8" }).stdout ?? "").split("\n").filter(Boolean);
   if (pids.length === 0) return 0;
   const rss = (spawnSync("ps", ["-o", "rss=", "-p", pids.join(",")], { encoding: "utf8" }).stdout ?? "").split(/\s+/).filter(Boolean);

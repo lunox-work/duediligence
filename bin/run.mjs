@@ -28,6 +28,7 @@ import { existsSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   AGENT,
+  backendOf,
   DEFAULT_MODEL,
   RUNS,
   args,
@@ -61,11 +62,12 @@ const git = (dir, ...argv) =>
 
 const { options, rest } = args();
 const runs = Number(options.runs ?? 1);
-// --backend runs the agent on another backend (lib.mjs `backendOf`); its
-// variant is the backend's name unless --model names a model.
-const backend = typeof options.backend === "string" ? options.backend : undefined;
+// --backend runs the agent on another backend (lib.mjs `backendOf`, by
+// default whichever agent the person has); its variant is the backend's
+// name unless --model names a model.
+const backend = backendOf({ backend: typeof options.backend === "string" ? options.backend : undefined, kind: "agent" });
 const model =
-  typeof options.model === "string" ? options.model : (backend ?? "claude-cli") === "claude-cli" ? DEFAULT_MODEL : undefined;
+  typeof options.model === "string" ? options.model : backend === "claude-cli" ? DEFAULT_MODEL : undefined;
 const noPublic = options["no-public"] === true;
 // --brief red-team briefs the agent with prompts/agent-red-team.md (pass the
 // public suite with the least general code; bin/red-team-audit.mjs), and its

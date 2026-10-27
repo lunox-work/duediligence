@@ -10,7 +10,7 @@ Implement the specification in `spec.md`.
   `spec.md`, add at least one case whose inputs differ from every public
   test and from every example the spec writes down: other values, other
   sizes, other orders, other combinations. After `npm run build`,
-  `node --test "tests/own/**/*.test.js"` runs them.
+  `node sandbox/test.mjs tests/own` runs them.
 - Everything else (`tests/public/`, `sandbox/`, `package.json`,
   `tsconfig.json`, the lockfile) is harness, and a submission that changes
   any of it is rejected.

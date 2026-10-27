@@ -39,6 +39,10 @@
 // JSON); the service's output is kept in memory, never written into the
 // tree, and its tail goes to stderr only when it did not become ready.
 // Exit code: the suite command's.
+//
+// On Windows a shell string runs through cmd.exe, the group is the
+// tether's process tree (`taskkill /T`), and there is no resident-memory
+// ceiling, only the heap cap.
 
 import { spawn, spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
@@ -59,9 +63,16 @@ const HEAP_MB = Number(process.env.INDEPENDENT_TESTS_TEST_HEAP_MB ?? 512);
 const MAX_RSS_MB = Number(process.env.INDEPENDENT_TESTS_TEST_MAX_RSS_MB ?? 1024);
 const LIFETIME_MS = Number(process.env.INDEPENDENT_TESTS_SERVICE_MINUTES ?? 30) * 60_000;
 const OUTPUT_CHARS = 4_000;
+const WINDOWS = process.platform === "win32";
 
-/** An argv array as given, a string through `sh -c`. */
-const argvOf = (command) => (Array.isArray(command) ? command : ["sh", "-c", command]);
+/** An argv array as given, a string through `sh -c` (cmd.exe on Windows). */
+const argvOf = (command) =>
+  Array.isArray(command) ? command : WINDOWS ? [process.env.ComSpec || "cmd.exe", "/d", "/s", "/c", command] : ["sh", "-c", command];
+/** Kills `pid`'s group (its tree on Windows). */
+const killGroup = (pid) => {
+  if (WINDOWS) spawnSync("taskkill", ["/pid", String(pid), "/T", "/F"], { stdio: "ignore", windowsHide: true });
+  else process.kill(-pid, "SIGKILL");
+};
 
 // The tether: leader of its own group, the service a child in it. Its
 // argv[1] is the service's argv as JSON; its stdin is a pipe from this
@@ -71,19 +82,23 @@ const { spawn, spawnSync } = require("node:child_process");
 const [bin, ...argv] = JSON.parse(process.argv[1]);
 const maxMb = Number(process.argv[2]);
 const lifetime = Number(process.argv[3]);
+const windows = process.platform === "win32";
 const down = (why) => {
   if (why) process.stderr.write("\\n@@boundary " + why + "\\n");
-  try { process.kill(-process.pid, "SIGKILL"); } catch {}
+  try {
+    if (windows) spawnSync("taskkill", ["/pid", String(process.pid), "/T", "/F"], { stdio: "ignore", windowsHide: true });
+    else process.kill(-process.pid, "SIGKILL");
+  } catch {}
   process.exit(137);
 };
-const child = spawn(bin, argv, { stdio: ["ignore", "inherit", "inherit"] });
+const child = spawn(bin, argv, { stdio: ["ignore", "inherit", "inherit"], windowsHide: true });
 child.on("error", (error) => down("service did not start: " + error.message));
 child.on("exit", (code, signal) => down("service exited " + (signal ?? code)));
 process.stdin.on("end", () => down(null));
 process.stdin.on("close", () => down(null));
 process.stdin.resume();
 setTimeout(() => down("service killed after its time limit"), lifetime);
-setInterval(() => {
+if (!windows) setInterval(() => {
   const pids = (spawnSync("pgrep", ["-g", String(process.pid)], { encoding: "utf8" }).stdout || "").split("\\n").filter(Boolean);
   if (pids.length === 0) return;
   const rss = (spawnSync("ps", ["-o", "rss=", "-p", pids.join(",")], { encoding: "utf8" }).stdout || "").split(/\\s+/).filter(Boolean);
@@ -98,7 +113,7 @@ let inner = null;
 const takeDown = () => {
   if (tether === null) return;
   try {
-    process.kill(-tether.pid, "SIGKILL");
+    killGroup(tether.pid);
   } catch {}
   tether = null;
 };
@@ -162,7 +177,8 @@ if (config.service !== undefined) {
       NODE_OPTIONS: `${process.env.NODE_OPTIONS ?? ""} --max-old-space-size=${HEAP_MB}`.trim(),
     };
     tether = spawn(process.execPath, ["-e", TETHER, JSON.stringify(argvOf(start)), String(MAX_RSS_MB), String(LIFETIME_MS)], {
-      detached: true,
+      detached: !WINDOWS,
+      windowsHide: true,
       env: serviceEnv,
       stdio: ["pipe", "pipe", "pipe"],
     });
@@ -189,7 +205,10 @@ if (config.service !== undefined) {
   }
 }
 
-inner = spawn(bin, args, { env, stdio: ["ignore", "inherit", "inherit"] });
+// On Windows a bare name (npm, npx) is often a .cmd shim, which only cmd.exe runs.
+inner = WINDOWS && !/[\\/]|\.exe$/i.test(bin)
+  ? spawn([bin, ...args].map((arg) => (/^[\w@.:/\\=,+-]+$/.test(arg) ? arg : `"${arg.replaceAll('"', '""')}"`)).join(" "), { env, stdio: ["ignore", "inherit", "inherit"], shell: true, windowsHide: true })
+  : spawn(bin, args, { env, stdio: ["ignore", "inherit", "inherit"] });
 const code = await new Promise((resolve) => {
   inner.on("error", (error) => {
     console.error(`boundary: ${bin}: ${error.message}`);

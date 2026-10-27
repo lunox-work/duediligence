@@ -9,7 +9,7 @@
 
 import { spawnSync } from "node:child_process";
 import { existsSync, readdirSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, relative, sep } from "node:path";
 
 const SUITES = { public: "tests/public", private: "tests/private" };
 const FILE_TIMEOUT_MS = 120_000;
@@ -71,7 +71,8 @@ const compiled = compile.status === 0;
 const files = listTests(dir)
   .sort()
   .map((source) => {
-    const file = relative(root, source);
+    // "/" on every OS: test ids are `file :: name`.
+    const file = relative(root, source).split(sep).join("/");
     const runtime = file.replace(/\.tsx?$/, ".js");
     if (!compiled) return { file, crashed: true, timedOut: false, tests: [] };
     const run = spawnSync(

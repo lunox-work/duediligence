@@ -26,7 +26,7 @@
 import { spawnSync } from "node:child_process";
 import { commitment, recordCommitment } from "./commitment.mjs";
 import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { join, posix, resolve, sep } from "node:path";
 import {
   AGENT,
   PRIVATE,
@@ -58,7 +58,7 @@ if (options.repo !== undefined) {
   process.exit(0);
 }
 const dir = resolve(target);
-const beside = PRIVATE.find((folder) => dir === folder || dir.startsWith(`${folder}/`));
+const beside = PRIVATE.find((folder) => dir === folder || dir.startsWith(`${folder}${sep}`));
 if (beside !== undefined) {
   console.error(`${dir} is inside ${beside}, beside the hidden suites; pick a folder outside it.`);
   process.exit(1);
@@ -112,7 +112,7 @@ function repoHandout(checkoutPath, remove) {
   const files = [
     ...chain.seam.map((path) => ({ path, from: join(spec, "skeleton", path), seam: true })),
     ...listFiles(join(spec, "tests", "public")).map((name) => ({
-      path: join(chain.publicDir, name),
+      path: posix.join(chain.publicDir, name),
       from: join(spec, "tests", "public", name),
       seam: false,
     })),

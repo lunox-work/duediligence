@@ -40,7 +40,7 @@ inputs:
     required: false
     default: "true"
   node-version:
-    description: Node.js version to judge with (22.12 or later).
+    description: Node.js version to judge with (20.19 or later).
     required: false
     default: "22"
 outputs:

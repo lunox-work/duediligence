@@ -34,7 +34,9 @@ What to tell them, accurately:
 - Generating the suites costs about $1–4 and 10–25 minutes of Opus 5.5 per spec
   on their signed-in `claude` CLI, up to about $7 in a repository, plus their
   own time to confirm the decisions (median person minutes: pending; `confirm`
-  records each confirmation's duration).
+  records each confirmation's duration). Without Claude Code it runs on their
+  Codex login or an Anthropic API key instead, on macOS, Linux or Windows
+  (Windows without an OS sandbox for the sessions).
 - They must confirm the spec's decisions themselves before any test is
   generated. Replaying 11 real commits, suites written from a spec drafted from
   the commit message rejected all 11; once a session given the real diff

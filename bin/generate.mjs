@@ -29,7 +29,7 @@
 // uses the same model as every other session.
 
 import { existsSync, readFileSync, rmSync } from "node:fs";
-import { basename, dirname, join, relative } from "node:path";
+import { join, posix } from "node:path";
 import {
   RUNS,
   args,
@@ -74,7 +74,7 @@ function suitesOf(chain) {
       dir: "tests/public",
       folder: publicFolder,
       own: repo
-        ? (path) => dirname(path) === publicFolder && chain.isPublicName(basename(path)) && test(path)
+        ? (path) => posix.dirname(path) === publicFolder && chain.isPublicName(posix.basename(path)) && test(path)
         : (path) => path.startsWith(`${publicFolder}/`) && test(path),
       required: repo ? `${publicFolder}/${chain.publicName} (${chain.testPattern})` : `${publicFolder}/${chain.testPattern}`,
       prompt: "public-tests",
@@ -255,7 +255,7 @@ async function generate(slug, force, only = null) {
     if (record[suite.name].problem === null) {
       rmSync(join(out, target), { recursive: true, force: true });
       const files = Object.keys(manifestOf(dir, chain)).filter(inSuite);
-      for (const path of files) copy(join(dir, path), join(out, target, relative(suite.folder, path)));
+      for (const path of files) copy(join(dir, path), join(out, target, posix.relative(suite.folder, path)));
       record[suite.name].files = files;
       // A hidden suite written against an older public suite is stale.
       if (suite.name === "public")
