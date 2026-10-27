@@ -1,4 +1,90 @@
-# independent-tests
+<h1 align="center">independent-tests</h1>
+
+<p align="center">
+  <strong>Your agent says all tests pass. Check with tests it never saw.</strong>
+</p>
+
+<p align="center">
+  <a href="#before--after">Before/After</a> •
+  <a href="#install">Install</a> •
+  <a href="#the-numbers">The numbers</a> •
+  <a href="RESULTS.md">RESULTS.md</a>
+</p>
+
+---
+
+**105 of 105** agents said their own tests passed. **75** of them failed tests
+they never saw. None of them cheated.
+
+```
+own tests green                 ████████████████████  105/105
+hidden suite, from the ticket   ██████░░░░░░░░░░░░░░   30/105
+  + a public suite from here    ███████████████░░░░░   81/105   p < 1e-11
+```
+
+Same agent (Haiku 5.5), same loose tickets, 7 specs × 15 runs. The only change
+in the third row: the decisions the ticket left open, confirmed by a person and
+handed to the agent as tests it can see, judged by tests it can't. Were the
+rejections fair? A blind referee on another model, given the spec, the code and
+one anonymised failing test, upheld 95 of 100.
+
+## Before / After
+
+<table>
+<tr>
+<td width="50%">
+
+### 🗣️ The agent's report
+
+> "The escrow release logic in `src/index.ts` is implemented. The build is clean
+> and my 21 tests under `tests/own/` pass."
+>
+> "**Zero-amount releases are recorded.** … If the grader expects `releases` to
+> be empty for pro bono tasks, this is the line to change."
+
+</td>
+<td width="50%">
+
+### 🔒 The hidden suite
+
+```
+hidden 43/46
+Failing scenarios: boundary-2
+hidden: [boundary-2] passing hidden tests on a
+  bounty of 0 at any share records nothing
+  and the task is pro bono
+  + [{ kind: 'hidden-tests', amount: 0 }]
+  - []
+```
+
+</td>
+</tr>
+</table>
+
+escrow-split, run 1. 14 of 15 runs made the same guess. The ticket never said
+what a $0 bounty does; the agent picked an answer, then wrote 21 tests that
+agree with it. Green tests from the author of the code test the author's
+guesses.
+
+In 2025 METR caught frontier models
+[reward hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/) in 30%
+of RE-Bench runs: patching the grader, copying its answers. That is what
+sandboxes guard against. In 2,522 sandboxed runs here no agent changed a test or the harness, and
+the hidden suites still rejected 71% from a loose ticket. The agent does not
+need to cheat to be wrong.
+
+## Install
+
+```sh
+git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests
+```
+
+Then ask Claude Code: _"write tests my agent can't see for this ticket"_. The
+implementer can be anything that edits a folder: Claude Code, Codex, Cursor,
+Copilot, Aider, or a person. [Try the bundled example](#try-it-in-five-minutes)
+in five minutes; details in [Install in full](#install-in-full).
+
+## What it is
 
 **Hidden, calibrated test suites for AI coding agents, independent of the agent
 they judge.** A [Claude Code](https://code.claude.com/docs) skill that turns a
@@ -163,11 +249,11 @@ hidden suites, other workdirs or transcripts. The other backends run under
 workdir (`bin/backends.mjs`). [SKILL.md](SKILL.md) has the steps as the skill
 runs them.
 
-## Install
+## Install in full
 
 ```sh
 npx -y independent-tests --help         # the CLI; nothing to clone
-git clone https://github.com/feversoul/independent-tests ~/.claude/skills/independent-tests
+git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests
 ```
 
 The clone is the Claude Code skill (SKILL.md), which calls the same CLI. Needs
@@ -238,7 +324,7 @@ private artifact, a secret URL) and call the reusable workflow on pull requests:
 jobs:
   judge:
     permissions: { contents: read, checks: write, actions: read }
-    uses: feversoul/independent-tests/.github/workflows/judge.yml@main
+    uses: lunox-work/independent-tests/.github/workflows/judge.yml@main
     with: { seal-repository: you/seals, seal-path: seals/<slug>.seal.gz }
     secrets: { seal-token: ${{ secrets.SEALS_TOKEN }} }
 ```

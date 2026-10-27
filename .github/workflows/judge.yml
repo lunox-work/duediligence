@@ -13,7 +13,7 @@
 #   jobs:
 #     judge:
 #       permissions: { contents: read, checks: write, actions: read }
-#       uses: feversoul/independent-tests/.github/workflows/judge.yml@main
+#       uses: lunox-work/independent-tests/.github/workflows/judge.yml@main
 #       with: { seal-repository: you/seals, seal-path: seals/<slug>.seal.gz }
 #       secrets: { seal-token: ${{ secrets.SEALS_TOKEN }} }
 name: independent-tests judge
@@ -55,7 +55,7 @@ on:
       package-repository:
         description: Where independent-tests itself comes from.
         type: string
-        default: feversoul/independent-tests
+        default: lunox-work/independent-tests
       package-ref:
         description: Its branch, tag or SHA.
         type: string

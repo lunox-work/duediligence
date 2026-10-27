@@ -17,11 +17,16 @@
     "go",
     "rust"
   ],
-  "homepage": "https://github.com/feversoul/independent-tests#readme",
+  "homepage": "https://github.com/lunox-work/independent-tests#readme",
+  "bugs": {
+    "url": "https://github.com/lunox-work/independent-tests/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/feversoul/independent-tests.git"
+    "url": "git+https://github.com/lunox-work/independent-tests.git"
   },
+  "license": "MIT",
+  "author": "Charlie Angriawan",
   "type": "module",
   "bin": {
     "independent-tests": "bin/cli.mjs"
