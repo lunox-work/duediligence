@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-abc398_f",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc398_f",
+  "contest_id": "abc398",
+  "contest_date": "2025-03-22T00:00:00",
+  "difficulty": "hard",
+  "title": "ABCBA",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 3,
+  "privateCases": 40
+}

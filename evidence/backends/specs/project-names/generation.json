@@ -1,0 +1,64 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176db-bce0-70f2-9aea-1432737ecd73",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 74108,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "14 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/name-registry.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176dc-dfc2-7a20-80b7-580005b6ef67",
+        "model": "gpt-6.1-sol",
+        "ok": false,
+        "exitCode": 1,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 224618,
+        "subtype": "error_during_execution",
+        "apiError": "error",
+        "backend": "codex-cli"
+      },
+      {
+        "sessionId": "01a176dc-dfc2-7a20-80b7-580005b6ef67",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 7,
+        "durationMs": 213852,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added the private suite. TypeScript build validation passes, and all 34 tests fail against the throwing stub.\n\n34 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/collisions-and-isolation.test.ts",
+      "tests/private/digest-and-stability.test.ts",
+      "tests/private/empty-inputs.test.ts"
+    ],
+    "open": []
+  }
+}

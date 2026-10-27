@@ -1,0 +1,49 @@
+{
+  "slug": "he-144",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_simplify.py :: TestSimplify.test_example_one_fifth_times_five",
+    "tests/public/test_simplify.py :: TestSimplify.test_example_one_sixth_times_two",
+    "tests/public/test_simplify.py :: TestSimplify.test_example_seven_tenths_times_ten_halves",
+    "tests/public/test_simplify.py :: TestSimplify.test_multi_digit_parts_boundary_non_whole",
+    "tests/public/test_simplify.py :: TestSimplify.test_multi_digit_parts_boundary_reciprocals",
+    "tests/public/test_simplify.py :: TestSimplify.test_multi_digit_parts_typical",
+    "tests/public/test_simplify.py :: TestSimplify.test_non_whole_product_boundary_just_below_one",
+    "tests/public/test_simplify.py :: TestSimplify.test_non_whole_product_boundary_one_half_above_whole",
+    "tests/public/test_simplify.py :: TestSimplify.test_non_whole_product_typical",
+    "tests/public/test_simplify.py :: TestSimplify.test_whole_product_boundary_smallest_fractions",
+    "tests/public/test_simplify.py :: TestSimplify.test_whole_product_boundary_unreduced_inputs",
+    "tests/public/test_simplify.py :: TestSimplify.test_whole_product_typical"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 12
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 20,
+  "kept": [
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_both_denominators_one",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_cross_divisibility_shortcut",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_example_swapped_order",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_huge_non_whole",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_huge_reciprocals",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_identity_side",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_just_above_one_large_float_trap",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_just_below_one_pair",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_large_whole_product",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_mixed_cancellation_pair",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_multi_digit_second_argument",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_non_whole_above_one",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_non_whole_thirds",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_one_sixth_times_three_and_six",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_reciprocal_49_float_trap",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_seven_tenths_whole_variants",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_unreduced_both_sides",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_unreduced_non_whole",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_whole_product_larger_than_one",
+    "tests/private/test_simplify_private.py :: TestSimplifyPrivate.test_whole_via_mixed_cancellation"
+  ],
+  "dropped": [],
+  "reference": null
+}

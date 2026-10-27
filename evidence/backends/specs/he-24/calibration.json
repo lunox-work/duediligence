@@ -1,0 +1,54 @@
+{
+  "slug": "he-24",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_docstring_example",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_even_composite",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_odd_composite_with_multiple_proper_divisors",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_prime_excludes_the_number_itself",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_smallest_positive_number_with_a_proper_divisor",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_square_of_a_prime"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 24,
+  "kept": [
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_cube_of_seven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_cube_of_three",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_even_square",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_five_squared_times_seven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_four",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_fourth_power_of_three",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_large_odd_composite",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_next_even_number_with_an_odd_largest_divisor",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_odd_square_with_distinct_prime_factors",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_power_of_two",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_prime_ninety_seven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_prime_three",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_prime_two_hundred_fifty_seven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_product_of_five_and_seven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_product_of_seven_and_eleven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_product_of_seventeen_nineteen_and_twenty_three",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_product_of_three_distinct_odd_primes",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_seven_times_eleven_times_thirteen",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_six",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_square_of_eleven",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_square_of_five",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_square_of_thirty_one",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_square_of_three",
+    "tests/private/test_largest_divisor.py :: TestLargestDivisorPrivate.test_twice_an_odd_prime"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 6,
+      "total": 6
+    },
+    "hidden": {
+      "passed": 24,
+      "total": 24
+    }
+  }
+}

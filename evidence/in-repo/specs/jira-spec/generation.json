@@ -1,0 +1,82 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "32603b42-a814-4ac3-9be9-4c6f963ca174",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2429059,
+        "turns": 6,
+        "durationMs": 32235,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2429059,
+    "finalText": "I created `packages/jira/src/spec.ts` with the four exports exactly as the ticket gives them. `SPEC_FIELDS` is a real exported constant holding the four fields in order. Both functions are async and their bodies only throw \"not implemented\". The doc comment on `specHash` says it rejects with a `TypeError` naming the argument when either argument is not a string. I didn't add any new error classes or helpers. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (63 of 63).\n\n**Not done:** the spec also says `src/index.ts` should re-export `SPEC_FIELDS`, `specHash` and `toIssueSpec`, plus the type `JiraIssueSpec`. You told me to write only the seam file, so I didn't change `index.ts`. That re-export is left to whoever writes the implementation. Until it's added, the \"package index re-exports the new surface\" scenario will fail.\n\nAdded: JiraIssueSpec, SPEC_FIELDS, specHash, toIssueSpec",
+    "problem": null,
+    "sha256": "327587b2173bae706b93a6988545396de70fb77fc9986a3fe7efa5642ec57a3b"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "2b4e1267-ac25-4147-b4c1-626b566c9ef3",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8489943999999998,
+        "turns": 14,
+        "durationMs": 218663,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.8489943999999998,
+    "finalText": "I've written the test suite in two files:\n\n- `packages/jira/test/jira-spec.hash.test.ts`: `SPEC_FIELDS`, `ISSUE_FIELDS` and `specHash`, covering known hashes, empty input, digest shape, determinism, the summary/description boundary, whitespace, Unicode and line endings, `TypeError` rejections, and concurrent calls.\n- `packages/jira/test/jira-spec.issue.test.ts`: `toIssueSpec` and the re-exports from `index.ts`, covering the six result keys, key pass-through, not mutating the input, what goes into the hash, the default for each field, string and ADF descriptions, malformed ADF, 100,000-level nesting, empty or null fields, and concurrent calls.\n\n**Status:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the current stubs, 79 of 84 tests fail, as expected. The 5 that pass check things that already exist: `SPEC_FIELDS`, `ISSUE_FIELDS`, and `index.ts` still exporting `ISSUE_FIELDS`.\n- To check the expected values, I ran the compiled tests against a throwaway implementation of the spec in the scratchpad, and all 84 passed. I also recomputed every hash in the spec independently, and they all match. Nothing outside the two test files was changed.\n\n**Choices the developer should know about:**\n- Every test name starts with its scenario key (`[happy-11]`, `[boundary-10]`, `[unhappy-2]` and so on). Scenario outlines with many rows (ADF flattening, degenerate ADF, malformed ADF, empty fields block) use a table and a loop that creates one flat top-level test per row. Each of those tests has a unique name.\n- The result's six keys are compared without regard to order, because the spec lists the keys but doesn't say order matters.\n- The `index.ts` re-export test reads the exports by name at runtime, so it compiles before `index.ts` re-exports anything.\n\n84 tests, in 2 files.",
+    "problem": null,
+    "files": [
+      "packages/jira/test/jira-spec.hash.test.ts",
+      "packages/jira/test/jira-spec.issue.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "ecab30d3-7f55-4e9c-bfef-5d5d4dbbff1b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.8266270999999998,
+        "turns": 23,
+        "durationMs": 486280,
+        "subtype": "success",
+        "apiError": null
+      },
+      {
+        "sessionId": "ecab30d3-7f55-4e9c-bfef-5d5d4dbbff1b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.1216820999999997,
+        "turns": 6,
+        "durationMs": 56984,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 3.9483091999999997,
+    "finalText": "I deleted `helpers.ts` and copied the helpers each test file uses into that file. The folder now holds only `adf.test.ts`, `hash.test.ts` and `issue.test.ts`.\n\n**Results:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- All 71 tests fail against the current code, where every new function throws `not implemented`.\n- All 71 pass against the reference implementation in my scratch copy, which is outside the repo.\n- The test names and what they assert are unchanged.\n\nOne thing I didn't create: an empty `.claude/.cc-writes/` directory appeared in `packages/jira/test/hidden-jira-spec/` at the same moment I edited the files. It looks like Claude Code's own write tracking. I left it in place because removing it could interfere with the tool; it holds no files, so it can't match `*.test.ts`. You can safely delete it if the grader objects.\n\n71 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/jira/test/hidden-jira-spec/adf.test.ts",
+      "packages/jira/test/hidden-jira-spec/hash.test.ts",
+      "packages/jira/test/hidden-jira-spec/issue.test.ts"
+    ],
+    "open": []
+  }
+}

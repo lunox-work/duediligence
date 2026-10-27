@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "afa6ceae-ba37-46f3-9be3-7493631438fc",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4532696,
+        "turns": 6,
+        "durationMs": 128263,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.4532696,
+    "finalText": "I wrote the public suite in `tests/public/is-ignored.test.ts`. `npm run build` finishes with no errors.\n\n**How I keyed the tests.** The spec has no `@happy`/`@unhappy` tags. Its scenarios are ten numbered rules. So each test name starts with `[rule-N]`, where N is the rule's number, which is also its position in the spec. If your grader expects a different tag name, it's a simple find-and-replace on the prefix.\n\n**What's covered.** Every rule has at least one happy-path test and one boundary test, and most have more. Some examples of the boundary cases:\n- **Comments and blank lines:** a line that starts with a space and then `#` is a pattern, and a line of only spaces is blank.\n- **Trailing spaces:** an escaped trailing space is kept along with the spaces before it.\n- **Negation:** a negated pattern that nothing earlier excluded changes nothing.\n- **Ignored directories:** with `build/*` (which doesn't match `build` itself), a negated pattern can re-include a file inside.\n- **Anchoring:** `*/` and `logs/` are not anchored once their trailing slash is removed.\n- **`**`:** `abc/**` doesn't match `abc` itself, and `a**b` doesn't cross a slash.\n- **Directory names:** `foo` doesn't ignore `foobar/x`.\n\n**Check against real git.** I ran all 103 assertions through `git check-ignore --no-index` in a scratch repo. 100 matched. The other 3 are cases where the spec intentionally differs from git on this Mac, and the tests follow the spec:\n- **Unclosed `[`:** for `a[b`, the spec says it's a literal `[`. Git treats it as matching nothing.\n- **Case:** for `*.TXT` vs `a.txt` and `Foo` vs `foo`, the spec says matching is case-sensitive. Git on macOS ignores case by default.\n\nRunning the build also wrote the usual compiled `.js` files next to the sources, including `src/index.js`. Those files are in `.gitignore`.\n\n38 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/is-ignored.test.ts"
+    ]
+  }
+}

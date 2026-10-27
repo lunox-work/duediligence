@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17711-f1a0-77d2-b2d0-d4fc777b929f",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 65703,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "12 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_min_sub_array_sum.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17712-f532-7af2-957c-cd19839ee088",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 18,
+        "durationMs": 162179,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "28 tests in 1 file. Compile check passed.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_min_sub_array_sum_hidden.py"
+    ],
+    "open": []
+  }
+}

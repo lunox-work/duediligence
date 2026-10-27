@@ -1,0 +1,54 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176b8-f220-7c12-9a35-73340b524c9c",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 142700,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passes with `npm run build -- --noEmit`.\n\n14 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/boundaries.test.ts",
+      "tests/public/mapping.test.ts",
+      "tests/public/validation.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176bb-1db9-7651-8821-da8304da79cd",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 19,
+        "durationMs": 399763,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "38 tests in 4 files. Build type-check passes; all tests fail against the stub.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/boundaries-validation.test.ts",
+      "tests/private/code.test.ts",
+      "tests/private/consistency-roundtrip.test.ts",
+      "tests/private/env.test.ts"
+    ],
+    "open": []
+  }
+}

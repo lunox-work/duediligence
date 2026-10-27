@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "493c2c60-aae1-41d7-a48e-0b6758c8fb50",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3111439,
+        "turns": 8,
+        "durationMs": 80269,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.3111439,
+    "finalText": "The suite is in `tests/public/test_smooth_occlusion.py`. `python3 sandbox/compile_check.py` reports no errors. Through `sandbox/run.py public`, all 9 cases load and fail with the program's \"not implemented\" Runtime Error, as expected.\n\n**`spec.md` has no samples and no constraints.** It has a statement and an input format, nothing else. So there were no sample tests to write, and every expected value is derived. Here is how:\n\n- **Working out the answers:** shortening only ever lowers lengths. If every pair ends with total H, the cost is `sum(U_i + D_i) − N·H`, so each answer comes down to the largest H that can be reached. Each test has a comment with that reasoning. I also checked every case against a brute force (in my scratchpad, not in the tests) that tries every H and every choice of final upper lengths.\n- **Can a tooth reach length 0?** The statement doesn't say. I kept only cases whose answer is the same either way, and the brute force confirmed this for each one.\n- **Size limits:** since none are stated, I used what I believe this problem's original constraints are (it looks like AtCoder ABC395 F): N ≥ 2, lengths from 1 to 10⁹, X ≥ 1. On that basis there's no N=1 or X=0 case. The largest-value cases use 10⁹-length teeth, and their answers (1999999998 and 5999999994) don't fit in 32 bits. If those aren't the real limits, the 10⁹ cases are the ones to recheck.\n\nThe cases cover:\n- the smallest input (N=2, every tooth length 1)\n- inputs that already satisfy the conditions\n- uneven pair totals where X doesn't matter\n- two cases where the X limit forces a lower total\n- a mixed 4-pair case\n- three cases using the maximum length\n\n9 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_smooth_occlusion.py"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "ladder-lcb_arc195_d-l1",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_all_size_three_and_four_sequences",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_alternating_four",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_alternating_three",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_max_n_all_equal",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_max_n_all_max_value",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_max_n_permutation",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_max_t",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_mixed_small_cases_brute_force",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_smallest_n_descending",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_smallest_n_distinct",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_smallest_n_equal",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_smallest_n_max_value"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 12
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

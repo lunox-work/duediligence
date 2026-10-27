@@ -1,0 +1,47 @@
+{
+  "sha256": "a2ef403ad04d636f57ec7b56ad21d88f4834cdc1bbd3dae6e1db1149cf891791",
+  "by": "phase-2 agent (not a person)",
+  "at": "2026-10-26T02:49:48.270Z",
+  "startedAt": "2026-10-26T02:48:43.476Z",
+  "minutes": 1.1,
+  "decided": [
+    "Plain JSON values keep JSON.stringify's exact output, compact, so today's message for plain objects is unchanged.",
+    "`undefined` is shown, as a top-level value, an array element and an object property (`\"k\":undefined`).",
+    "BigInt displays as `12n`; NaN and the infinities by name.",
+    "Maps and Sets display as `Map {k => v, ...}` and `Set {v, ...}` in insertion order.",
+    "Class instances get their constructor's name in front; plain and null-prototype objects do not.",
+    "Functions are `[Function name]` or `[Function]`; Errors are `[Name: message]`; symbols are `Symbol(desc)`.",
+    "Objects with toJSON (Dates) display what toJSON returns.",
+    "A value inside itself is `[Circular]`; shared values are shown in full.",
+    "A getter that throws displays the error as a value; displayValue never throws.",
+    "The display is cut at 200 UTF-16 code units, then `…`.",
+    "Seam (the files the stub writes): src/errors.ts",
+    "Allowed paths (what the implementer may change): src/errors.ts"
+  ],
+  "drafted": [
+    "Plain JSON values keep JSON.stringify's exact output, compact, so today's message for plain objects is unchanged.",
+    "`undefined` is shown, as a top-level value, an array element and an object property (`\"k\":undefined`).",
+    "BigInt displays as `12n`; NaN and the infinities by name.",
+    "Maps and Sets display as `Map {k => v, ...}` and `Set {v, ...}` in insertion order.",
+    "Class instances get their constructor's name in front; plain and null-prototype objects do not.",
+    "Functions are `[Function name]` or `[Function]`; Errors are `[Name: message]`; symbols are `Symbol(desc)`.",
+    "Objects with toJSON (Dates) display what toJSON returns.",
+    "A value inside itself is `[Circular]`; shared values are shown in full.",
+    "A getter that throws displays the error as a value; displayValue never throws.",
+    "The display is cut at 200 UTF-16 code units, then `…`.",
+    "Seam (the files the stub writes): src/errors.ts",
+    "Allowed paths (what the implementer may change): src/errors.ts"
+  ],
+  "changes": {
+    "kept": 12,
+    "edited": [],
+    "added": [],
+    "removed": []
+  },
+  "seam": [
+    "src/errors.ts"
+  ],
+  "allowedPaths": [
+    "src/errors.ts"
+  ]
+}

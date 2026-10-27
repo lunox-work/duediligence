@@ -1,0 +1,92 @@
+{
+  "slug": "gherkin-parse",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects content before the first feature at that content's line",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] reports line one when a scenario appears before a feature",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects a second feature at its line",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects a second feature even before the first scenario",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects every step keyword before a background or scenario",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects unrecognized content inside a scenario at its line",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects unrecognized content immediately after a scenario header",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] reports the opening line of an unterminated doc string",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] reports the opener when an unterminated doc string starts at end of input",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects a scenario outline and says it is unsupported",
+    "tests/public/parse-errors.test.ts :: [unhappy-1] rejects an outline as the first scenario with CRLF and tab indentation",
+    "tests/public/valid-features.test.ts :: [happy-1] returns feature, scenarios and every step keyword in file order",
+    "tests/public/valid-features.test.ts :: [happy-1] handles CRLF, mixed leading whitespace and no final newline",
+    "tests/public/valid-features.test.ts :: [happy-2] skips descriptions, comments and blanks while assigning tags",
+    "tests/public/valid-features.test.ts :: [happy-2] accumulates tag lines for only the next scenario across comments and blanks",
+    "tests/public/valid-features.test.ts :: [happy-3] returns background steps separately from both scenarios",
+    "tests/public/valid-features.test.ts :: [happy-3] ends an indented background at an immediately following tagged scenario",
+    "tests/public/valid-features.test.ts :: [boundary-1] dedents doc strings and keeps keyword, comment and tag lines literal",
+    "tests/public/valid-features.test.ts :: [boundary-1] accepts an empty doc string with adjacent delimiters",
+    "tests/public/valid-features.test.ts :: [boundary-1] preserves blank doc string lines and removes tab indentation with CRLF",
+    "tests/public/valid-features.test.ts :: [boundary-1] attaches trimmed table rows to the preceding step only",
+    "tests/public/valid-features.test.ts :: [boundary-1] preserves empty table cells in a single CRLF row at end of input",
+    "tests/public/valid-features.test.ts :: [boundary-2] parses the feature-only input with no scenarios or background",
+    "tests/public/valid-features.test.ts :: [boundary-2] keeps a feature empty when surrounded by blanks, comments and description"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 40,
+  "kept": [
+    "tests/private/attachments.test.ts :: [boundary-1] treats every structural form inside a document as literal content",
+    "tests/private/attachments.test.ts :: [boundary-1] distinguishes empty documents from absent documents in several sections",
+    "tests/private/attachments.test.ts :: [boundary-1] removes a mixed tab and space quote prefix while preserving remaining whitespace",
+    "tests/private/attachments.test.ts :: [boundary-1] a zero-indent opener preserves leading spaces and tabs within its document",
+    "tests/private/attachments.test.ts :: [boundary-1] keeps a large seven-column table and trims cells without changing internal text",
+    "tests/private/attachments.test.ts :: [boundary-1] retains all-empty rows and empty cells at every column position",
+    "tests/private/attachments.test.ts :: [boundary-1] keeps background attachments separate from similarly shaped scenario attachments",
+    "tests/private/attachments.test.ts :: [boundary-1] reads a long document without treating embedded headers as real sections",
+    "tests/private/attachments.test.ts :: [boundary-1] alternates documents tables and plain steps without leaking attachments",
+    "tests/private/empty-features.test.ts :: [boundary-2] accepts different feature-only names and a final line ending",
+    "tests/private/empty-features.test.ts :: [boundary-2] skips a long description and many blank and comment lines through EOF",
+    "tests/private/empty-features.test.ts :: [boundary-2] parsing an empty feature after populated files does not reuse their state",
+    "tests/private/feature-order.test.ts :: [happy-1] preserves a longer file with repeated keywords in noncanonical order",
+    "tests/private/feature-order.test.ts :: [happy-1] keeps duplicate scenario names and identical steps as distinct entries",
+    "tests/private/feature-order.test.ts :: [happy-1] removes exactly one separator space for every keyword with CRLF",
+    "tests/private/feature-order.test.ts :: [happy-1] counts physical lines across alternating LF and CRLF endings",
+    "tests/private/feature-order.test.ts :: [happy-2] skips long descriptions and syntax-looking comments without losing positions",
+    "tests/private/feature-order.test.ts :: [happy-2] assigns many separate tag groups to successive scenarios and resets each group",
+    "tests/private/feature-order.test.ts :: [happy-3] returns every background keyword once and separates many local scenarios",
+    "tests/private/feature-order.test.ts :: [happy-3] ends background across multiple tag lines and never adds later steps to it",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects a tag before the feature after many leading comments and blanks",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects each other structural form when it is the first content in a file",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] reports an indented scenario after preamble comments as missing its feature",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects a second feature after a background and a populated scenario",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] ignores feature-like document lines and rejects the real duplicate after its close",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects a duplicate feature after a long description rather than treating it as prose",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects a second feature while still reading background steps",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects every orphan step after pending tags and comments with CRLF",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] does not recognize keyword prefixes or lowercase lookalikes as steps",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects step-like lines without the required space after the keyword",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects descriptions in a later scenario even when feature descriptions were valid",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] resumes validation after closing a document and after completing a table",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] reports the physical invalid line after a large valid prefix",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] reports the later unclosed document rather than the first closed document",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] an unclosed background document takes precedence over its literal outline text",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] reports an EOF opener after earlier tables and closed documents",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects a tagged outline after documents and tables at the actual header line",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] rejects an outline as the first scenario after background and pending tags",
+    "tests/private/parse-errors.test.ts :: [unhappy-1] reports the first invalid line when more errors follow it"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/parse-errors.test.ts :: [unhappy-1] the exported ParseError constructor retains its line and names it in the message",
+      "reason": "The reference cannot satisfy it: The expression evaluated to a falsy value:"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 24,
+      "total": 24
+    },
+    "hidden": {
+      "passed": 39,
+      "total": 39
+    }
+  }
+}

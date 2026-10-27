@@ -1,0 +1,110 @@
+{
+  "slug": "step-holds",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/step-holds.test.ts :: [happy-1] a price over an approved scope is not held",
+    "test/step-holds.test.ts :: [happy-1] a price over a scope approved at a large version is not held",
+    "test/step-holds.test.ts :: [unhappy-1] a price over a scope not approved at its version is held by the scope",
+    "test/step-holds.test.ts :: [unhappy-1] an approval at version 0 does not approve a scope at version 1",
+    "test/step-holds.test.ts :: [boundary-1] the price's hold does not read the proposal",
+    "test/step-holds.test.ts :: [boundary-1] the price's hold never touches the proposal's status",
+    "test/step-holds.test.ts :: [boundary-2] version 0 approved at version 0 is approved",
+    "test/step-holds.test.ts :: [boundary-2] version 0 approved at version 0 lets the sandbox wait only on the price",
+    "test/step-holds.test.ts :: [happy-2] a sandbox over an approved scope and an approved price is not held",
+    "test/step-holds.test.ts :: [happy-2] a sandbox over a scope approved at version 1 and an approved price is not held",
+    "test/step-holds.test.ts :: [unhappy-2] the earliest step not approved holds the sandbox",
+    "test/step-holds.test.ts :: [unhappy-2] a scope approved at a version ahead of its own holds the sandbox before an approved price",
+    "test/step-holds.test.ts :: [boundary-3] only the exact status \"approved\" approves the price",
+    "test/step-holds.test.ts :: [boundary-3] near spellings of \"approved\" leave the price unapproved",
+    "test/step-holds.test.ts :: [boundary-4] a price behind the scope does not hold the sandbox once both are approved",
+    "test/step-holds.test.ts :: [boundary-4] a price behind the scope is itself not held once the scope is approved",
+    "test/step-holds.test.ts :: [boundary-5] a whole bounty with extra fields is read for its version and approval only",
+    "test/step-holds.test.ts :: [boundary-5] a bounty's own proposal and sandbox fields do not stand in for the proposal passed",
+    "test/step-holds.test.ts :: [happy-3] the functions do not change their arguments",
+    "test/step-holds.test.ts :: [happy-3] frozen arguments are left as they were on every path, call after call",
+    "test/step-holds.test.ts :: [unhappy-3] a step outside \"price\" and \"sandbox\" is refused",
+    "test/step-holds.test.ts :: [unhappy-3] an unknown step is refused rather than reported held, whatever the approvals",
+    "test/step-holds.test.ts :: [happy-4] each hold has its own words",
+    "test/step-holds.test.ts :: [happy-4] every reason is one line with no surrounding whitespace",
+    "test/step-holds.test.ts :: [happy-5] every hold stepHeldBy returns has a reason",
+    "test/step-holds.test.ts :: [happy-5] every hold stepHeldBy can return, for either step, has its reason",
+    "test/step-holds.test.ts :: [unhappy-4] a hold that cannot happen is refused",
+    "test/step-holds.test.ts :: [unhappy-4] values outside the declared unions are refused",
+    "test/step-holds.test.ts :: [happy-6] scopeApproved and bountyStatus are unchanged",
+    "test/step-holds.test.ts :: [happy-6] scopeApproved still counts version 0 approved at version 0"
+  ],
+  "publicOnSkeleton": {
+    "passed": 2,
+    "total": 30
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 31,
+  "kept": [
+    "test/hidden-step-holds/step-held-by.test.ts :: [happy-1] a price over a scope approved at other versions is not held, whatever the proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-1] a price over a scope approved at any other version is held by the scope",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-1] a price over an unapproved scope is held by the scope even beside an approved proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-1] a scope at version NaN is never approved",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-1] the price's hold reaches into no part of the proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-1] the price is never held by the price, whatever the proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-2] version 0 approved at version 0 frees the price whatever the proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-2] version 0 approved at version 0 holds the sandbox on a price not approved",
+    "test/hidden-step-holds/step-held-by.test.ts :: [happy-2] a sandbox over an approved scope and an approved price is not held at other versions",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-2] the earliest step not approved holds the sandbox at another version",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-2] a sandbox with neither step approved is held by the scope, not the price",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-3] statuses that only resemble \"approved\" leave the price unapproved",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-3] the exact status \"approved\" approves the price however the string was made",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-4] drift on the price and on the sandbox leaves approved steps unheld",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-4] no drift does not stand in for an approval",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-5] extra fields claiming approval do not lift a hold",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-5] extra fields denying approval do not add a hold",
+    "test/hidden-step-holds/step-held-by.test.ts :: [boundary-5] the sandbox's own status and lapse do not change the hold",
+    "test/hidden-step-holds/step-held-by.test.ts :: [happy-3] no path writes to the bounty, its approval or the proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [happy-3] deeply frozen arguments with extra fields pass through every outcome",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-3] steps that are names objects inherit are refused",
+    "test/hidden-step-holds/step-held-by.test.ts :: [unhappy-3] other unknown steps are refused, whatever the bounty and proposal",
+    "test/hidden-step-holds/step-held-by.test.ts :: [happy-6] scopeApproved is unchanged and agrees with the price's hold",
+    "test/hidden-step-holds/step-held-by.test.ts :: [happy-6] bountyStatus is unchanged and its furthest step does not lift a hold",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [happy-4] each hold keeps its own words in any order of calls",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [happy-4] each reason is a single sentence ending in one full stop",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [happy-5] every hold over a wide grid is the one the rules give, and has its reason",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [happy-5] the price's hold by the scope has its reason",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [unhappy-4] the valid pairs reversed are refused",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [unhappy-4] pairs naming what objects inherit are refused",
+    "test/hidden-step-holds/step-held-reason.test.ts :: [unhappy-4] near spellings of valid pairs are refused"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 30,
+      "total": 30
+    },
+    "hidden": {
+      "passed": 31,
+      "total": 31
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 248,
+      "total": 248
+    },
+    "notes": "I've added `stepHeldBy` and `stepHeldReason` to `packages/core/src/stages.ts`, and every test passes: 30 in `step-holds.test.ts`, 31 in `hidden-step-holds/`, and 309 in the package's whole suite, which includes both. Prettier finds nothing to change in the file. No other file was touched, and the existing exports are unchanged.\n\n- **`stepHeldBy`** first rejects any step other than `\"price\"` or `\"sandbox\"` with a `RangeError` (`Unknown held step: \"<step>\"`). It then checks the scope with the existing `scopeApproved`. For `\"price\"` it stops there and never reads the proposal. For `\"sandbox\"` it then holds on the price unless the proposal's status is exactly `\"approved\"`. Drift and any extra fields on the arguments don't affect the result.\n- **`stepHeldReason`** accepts only the three pairs `stepHeldBy` can return and throws a `RangeError` (`No hold of \"<step>\" by \"<heldBy>\"`) for anything else. Both functions compare against string literals directly rather than looking steps up in an object, so names like `\"toString\"` or `\"__proto__\"` are refused correctly, as the hidden tests check.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "4d56dda5-d08e-41b7-82e2-ad192e5a0ffa",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.22203259999999997,
+        "turns": 8,
+        "durationMs": 43484,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.22203259999999997
+  }
+}

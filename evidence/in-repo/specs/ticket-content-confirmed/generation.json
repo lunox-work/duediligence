@@ -1,0 +1,75 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "2c194cdc-1814-45dc-8189-f73ad7149ef1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2348024,
+        "turns": 7,
+        "durationMs": 38551,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2348024,
+    "finalText": "I created the seam at `packages/core/src/ticket.ts`. It matches the export block in the spec exactly. The three constants (`TICKET_ORIGINS`, `TICKET_LIMITS` and `DEFAULT_ISSUE_TYPE`) and `TICKET_SPEC_HASH_VERSION` have real values. Every function body is just `throw new Error(\"not implemented\");`. I didn't change `index.ts`, as the spec requires.\n\n- **Checks:** `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (139 tests, 0 failures). Afterwards I deleted the `dist-test` build output, which wasn't there when I started. Git status shows only the new `ticket.ts` besides `spec.md`.\n- **Parameter names:** the project's TypeScript settings reject unused parameters, and the bodies can only contain the throw. So the parameters are named `_title`, `_description`, `_issueType`, `_value` and `_ticket`, with a leading underscore. Callers aren't affected: the types and argument order match the spec.\n- **Errors:** the spec says every function \"never throws\", so the doc comments say that and I added no error types.\n\nAdded: `TICKET_ORIGINS`, `TicketOrigin`, `TICKET_LIMITS`, `DEFAULT_ISSUE_TYPE`, `clampTicketTitle`, `TicketContent`, `TICKET_SPEC_HASH_VERSION`, `ticketSpecHash`, `normalizeSpecText`, `ticketKey`",
+    "problem": null,
+    "sha256": "97548418750b5c84d4a15f9d626268029c7fb918ddd08cfa3c43ae2dcb91486f"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "091290e8-7d03-4011-9616-48e8855438a8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6047314,
+        "turns": 12,
+        "durationMs": 151209,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.6047314,
+    "finalText": "I've written 51 tests across five files in `packages/core/test/`. They compile with `npx tsc -p tsconfig.test.json` without errors.\n\n**Against the stub:** 45 tests fail with `not implemented`, as expected. The 6 that already pass are the constants tests, because those values are already filled in, unchanged from the spec, in `ticket.ts`.\n\n**Against a reference implementation:** to check the tests themselves, I wrote a short implementation of the spec in the scratchpad and ran the compiled tests against it. All 51 pass. I also recomputed the four fingerprints in the spec independently, and they match.\n\n**Files and coverage:**\n- `ticket-content-confirmed.constants.test.ts`: happy-1 to happy-3\n- `ticket-content-confirmed.normalize.test.ts`: happy-4, boundary-1, boundary-2\n- `ticket-content-confirmed.hash.test.ts`: happy-5 to happy-8, boundary-3, boundary-4, unhappy-1, concurrency-1\n- `ticket-content-confirmed.clamp.test.ts`: happy-9, boundary-5 to boundary-10\n- `ticket-content-confirmed.key.test.ts`: happy-10, boundary-11 to boundary-13\n\nEach scenario has two tests: one runs the spec's own examples, and one tests an edge that follows from the spec's rules. Some examples of the edge tests:\n- A whitespace-only issue type hashes as empty, not as `\"Task\"`.\n- A title of 200 emoji is cut to 127 whole emoji (254 code units).\n- `ticketKey({ number: NaN })` returns `\"T-NaN\"`.\n- `TICKET_LIMITS` has no `components` key and isn't frozen.\n\nI left out one case on purpose: a title of exactly 255 code units that ends on an unpaired high surrogate. The spec says titles of 255 or fewer are returned unchanged, and also that a cut ending on a high surrogate drops that code unit. Those two rules disagree on this input.\n\nThe test run also created the build output folder `packages/core/dist-test/`; git status doesn't list it. Nothing else in the repo was changed.\n\n51 tests in 5 files.",
+    "problem": null,
+    "files": [
+      "packages/core/test/ticket-content-confirmed.clamp.test.ts",
+      "packages/core/test/ticket-content-confirmed.constants.test.ts",
+      "packages/core/test/ticket-content-confirmed.hash.test.ts",
+      "packages/core/test/ticket-content-confirmed.key.test.ts",
+      "packages/core/test/ticket-content-confirmed.normalize.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "d8595a29-49c6-43c3-8627-c72c5c3ff241",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1573711000000002,
+        "turns": 17,
+        "durationMs": 297455,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1573711000000002,
+    "finalText": "I wrote the hidden suite in `packages/core/test/hidden-ticket-content-confirmed/`, in five files: `constants`, `normalize`, `hash`, `clamp` and `key`. `npx tsc -p tsconfig.test.json` reports no errors, and nothing outside that folder changed.\n\n**One test does not fail against the interface as it stands.** `[happy-1] the origins are exactly manual then jira, and not jira then manual` passes, because the seam already defines `TICKET_ORIGINS` and no function uses it. So the rule that every test must fail can't be met for that scenario without dropping it. I kept it to cover the scenario; delete it if the rule matters more. The `[happy-2]` and `[happy-3]` tests do fail, because they check the constants through `ticketSpecHash` and `clampTicketTitle`.\n\n**Results:**\n- **Against the stub:** 49 of 50 fail with `not implemented`; the `[happy-1]` test is the one that passes.\n- **Against a reference implementation:** I wrote one in a scratch copy of the package, following the spec and the Jira `normalize`/`pricingSpecHash`. All 50 hidden tests and all 51 public tests pass. On the first run two hidden tests failed because of mistakes in the tests themselves (an input over the description limit, and an expected value I hadn't normalized); I fixed both.\n- **Against shortcuts:** I ran six that pass the public suite, and the hidden suite fails each one:\n  - a clamp that drops a trailing high surrogate even when the title isn't cut;\n  - `trimEnd` replaced by a space-and-tab regex;\n  - hashing Latin-1 bytes instead of UTF-8;\n  - a `ticketKey` that treats the strings `\"null\"` and `\"undefined\"` as a missing key;\n  - a clamp that also drops low surrogates (the public suite catches this too);\n  - `toLocaleString` for the number (the public suite catches this too).\n\nThe main things the hidden tests add beyond the public suite:\n- **Hash:** expected values come from `node:crypto` for tickets outside the known table, so a lookup table of the public hashes fails. Other cases are UTF-8 text, JSON escaping, Unicode whitespace, more ways to shift text between fields and separators, and calls that run 50 at a time or start with a large one.\n- **Clamp:** both ends of the high-surrogate range, the code units right next to that range, a lone high surrogate at the cut, and a short title that ends on a high surrogate.\n- **Normalize:** CRLF counted as one line break, every kind of whitespace `trimEnd` removes, and U+2028 kept inside a line.\n- **Key:** numbers formatted the way `String` formats them, and keys like `\"null\"` and `\"0\"` returned as given.\n\n50 tests, in 5 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-ticket-content-confirmed/clamp.test.ts",
+      "packages/core/test/hidden-ticket-content-confirmed/constants.test.ts",
+      "packages/core/test/hidden-ticket-content-confirmed/hash.test.ts",
+      "packages/core/test/hidden-ticket-content-confirmed/key.test.ts",
+      "packages/core/test/hidden-ticket-content-confirmed/normalize.test.ts"
+    ],
+    "open": []
+  }
+}

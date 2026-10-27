@@ -1,0 +1,15 @@
+{
+  "from": "lcb-leetcode-3801",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3801",
+  "contest_id": "weekly-contest-441",
+  "contest_date": "2025-03-15T19:30:00",
+  "difficulty": "hard",
+  "title": "count-beautiful-numbers",
+  "kind": "functional",
+  "fn_name": "beautifulNumbers",
+  "publicCases": 2,
+  "privateCases": 40
+}

@@ -1,0 +1,12 @@
+[07:51:12] 75 spec(s) in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/claude/specs for the claude arm
+[07:51:13] access-rules mutating
+[07:51:13] coalescing-cache mutating
+[07:51:13] csv-export mutating
+[07:52:32] csv-export public kills 29/39, hidden kills 1 of the 10 public survivors
+[07:52:32] env-names mutating
+[07:52:45] coalescing-cache public kills 28/32, hidden kills 0 of the 4 public survivors
+[07:52:45] escrow-ledger mutating
+[07:54:06] access-rules public kills 44/52, hidden kills 2 of the 8 public survivors
+[07:54:06] escrow-split mutating
+[07:54:34] env-names public kills 15/17, hidden kills 0 of the 2 public survivors
+[07:54:34] frame-codec mutating

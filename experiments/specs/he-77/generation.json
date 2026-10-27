@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "c69b149d-d061-4922-87dd-b5e42560904e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1559479,
+        "turns": 4,
+        "durationMs": 30029,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1559479,
+    "finalText": "I wrote the public suite in `tests/public/test_iscube.py`. `python3 sandbox/compile_check.py` reports no errors. Running the suite gives 0/16 passed, and every failure is the expected `NotImplementedError: not implemented`.\n\nWhat it covers:\n- **Docstring examples:** one test each for 1, 2, -1, 64, 0 and 180.\n- **A positive cube gives True:** 27 is the typical case and 1000000 (100³) is the boundary. At that size a floating-point cube root is no longer exact.\n- **A negative cube gives True:** -27 is the typical case and -1000000 is the boundary.\n- **A number that is not a cube gives False:**\n  - Positive: 100 is the typical case. The boundary cases sit right next to cubes: 63 and 65 on either side of 64, and 999999 just below 100³.\n  - Negative: -100 is the typical case and -26, right next to -27, is the boundary.\n\nFor every value not in the docstring, a comment shows how I got the answer by placing it between two consecutive integer cubes. The tests check the result with `assertIs(..., True/False)`, because the docstring says the function returns `True`.\n\n16 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_iscube.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "6f18d7e6-53b5-47f1-9ff5-4137ad5bd1de",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.27848809999999996,
+        "turns": 6,
+        "durationMs": 72206,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.27848809999999996,
+    "finalText": "The hidden suite is written in `tests/private/test_iscube_private.py`. The compile check reports no errors, and all 19 tests fail against the current stub that raises `not implemented`.\n\nTo check the tests, I ran them against three implementations in the scratchpad, not in the repo:\n\n- **Exact integer binary search (correct):** passes all 19 in 0.04s.\n- **The usual `round(abs(a) ** (1/3)) ** 3 == abs(a)`:** passes the public suite but fails 5 private tests. These are cubes too large for a float cube root, such as `(10**18+1)**3`, `(2**61-1)**3` and `(10**40+7)**3`, and their negatives.\n- **A float check with a tolerance:** fails 7 private tests. These are non-cubes one away from a large cube, such as `10**18 ± 1` and `(10**18+1)**3 ± 1`, which it wrongly calls cubes.\n\nWhat the suite covers:\n\n- **Every integer in [-2000, 2000]:** each result is compared to a set of all cubes of -13 to 13.\n- **Cubes and their neighbours:** all cubes k³ and −k³ for k from 1 to 3000, plus k³ ± 1 and −k³ ± 1. Those neighbours fall strictly between two cubes in a row, so none of them is a cube.\n- **Cubes whose float cube root comes out just under the true root:** 125, 1000, 15625 and others, which catch truncating with `int()`.\n- **Non-cubes that look like cubes:** squares and other powers that aren't cubes (4, 16, 25, 32, 128, 2³¹), with their negatives. Also 10, 26, 63 and 999, which have the remainders cubes have when divided by 9 but are not cubes.\n\nEach expected value is either built by cubing, or rests on a stated \"lies between two cubes in a row\" reason. Each test names the public test it extends in a comment.\n\n19 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_iscube_private.py"
+    ],
+    "open": []
+  }
+}

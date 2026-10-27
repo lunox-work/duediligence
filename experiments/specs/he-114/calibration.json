@@ -1,0 +1,50 @@
+{
+  "slug": "he-114",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_all_equal_positive",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_all_positive_gives_smallest_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_contiguous_not_subsequence",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_example_all_negative",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_example_all_positive",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_minimum_spans_positive_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_mixed_signs_typical",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_single_negative_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_single_positive_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_single_zero"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 10
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 23,
+  "kept": [
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_equal_negative",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_large_positive",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_negative_unordered",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_positive_min_first",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_positive_min_in_middle",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_positive_min_last",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_all_zeros",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_cross_positive_beneficial",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_huge_values_mixed",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_larger_alternating",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_long_runs_around_big_positive",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_long_runs_around_small_positive",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_min_is_first_element",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_min_is_last_element",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_mixed_length_three_middle",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_mixed_middle_run_crossing_positive",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_nonpositive_with_zeros",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_random_against_brute_force",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_separated_negatives_not_joined",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_single_large_negative",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_single_large_positive",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_ties_alternating",
+    "tests/private/test_min_sub_array_sum_private.py :: TestMinSubArraySumPrivate.test_zero_among_positives"
+  ],
+  "dropped": [],
+  "reference": null
+}

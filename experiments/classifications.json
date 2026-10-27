@@ -1,0 +1,122 @@
+{
+  "reverse-diff/double-blind-haiku/3": {
+    "class": "real",
+    "note": "HUNK_HEADER has two capture groups but the code reads m[2] and m[4]: the old count takes the new-side count and the new count is always 1, so a hunk ends early and its last lines go unmapped. Public diffs were short enough to hide it; all 7 hidden failures are this bug."
+  },
+  "money-format/self-tested-fable/1": {
+    "class": "real",
+    "note": "Gap suite only. The currency table is a plain object, so `MINOR_DIGITS[\"constructor\"]` finds Object.prototype.constructor and the unsupported-currency check is skipped; the later BigInt conversion throws a TypeError that does not name the currency. The spec says an unsupported currency is refused with a message naming it. (`toString` passed by accident: the TypeError text contains the word.)"
+  },
+  "question-limit/spec-only-haiku/3": {
+    "class": "real",
+    "note": "Gap suite only. Allowances are keyed on `${contributor}\\u0000${task}`, so contributor \"a\\u0000b\" on task \"c\" shares an allowance with contributor \"a\" on task \"b\\u0000c\". The spec says allowances are separate per task and per contributor and does not restrict id characters. Marginal: only ids containing NUL collide; the 15 other separators in the same test pass."
+  },
+  "reverse-diff/spec-only-haiku/3": {
+    "class": "spec-gap",
+    "note": "Gap suite only. The test's first hunk header declares 7 old / 8 new lines but is followed by one line, then two more `@@` headers. The submission tracks hunk line counts, so it treats those later headers as hunk body and leaves `Sheet` after the second `@@` unmapped. The spec does not say whether a hunk's declared counts are trusted or `@@` headers are recognised by pattern alone; the reference does the latter. Not in the writer's open list, so a suite defect, not a spec-tightening item."
+  },
+  "licence-scan/double-blind-haiku/14": {
+    "class": "real",
+    "note": "An expression with a dangling AND passed with no offenders; the spec says an expression that does not parse fails as unknown."
+  },
+  "tool-versions/double-blind-haiku/2": {
+    "class": "real",
+    "note": "Took a bare version from runtime.txt; the spec gives its format as python-<version>."
+  },
+  "tool-versions/spec-only-haiku/17": {
+    "class": "real",
+    "note": "Took a bare version from runtime.txt; the spec gives its format as python-<version>."
+  },
+  "tool-versions/double-blind-haiku/9": {
+    "class": "spec-gap",
+    "note": "No conflict reported between volta.node and engines.node in one package.json; the spec lists them as two sources but its conflict example is between files."
+  },
+  "tool-versions/double-blind-haiku/20": {
+    "class": "spec-gap",
+    "note": "Same as tool-versions/double-blind-haiku/9."
+  },
+  "tool-versions/spec-only-haiku/16": {
+    "class": "spec-gap",
+    "note": "Same as tool-versions/double-blind-haiku/9."
+  },
+  "patch-apply/double-blind-own-haiku/18": {
+    "class": "real",
+    "note": "The parser ends a hunk at any line starting \"--- \" or \"+++ \" before the header counts are met, so a removed line whose text is \"-- old\" is read as the next file header and the hunk is refused as short. The spec defines a hunk by its counts and only calls a hunk with fewer lines malformed; within the counts a line is a hunk line whatever it starts with. Unlike reverse-diff/spec-only-haiku/3, the test agrees with the counts. Marginal."
+  },
+  "tool-versions/double-blind-rule-haiku/18": {
+    "class": "spec-gap",
+    "note": "Same as tool-versions/double-blind-haiku/9."
+  },
+  "licence-scan/double-blind-rule-haiku/11": {
+    "class": "real",
+    "note": "Same as licence-scan/double-blind-haiku/14: a dangling AND passed with no offenders."
+  },
+  "lcb-atcoder-abc396_e/double-blind-haiku/1": {
+    "class": "judge-defect",
+    "note": "Min of Restricted Sum accepts any good sequence with the minimum sum; the benchmark compares output exactly. On the first private case the submission prints 0 0 23 22 against expected 22 23 0 0: both satisfy A3^A2=23 and A4^A1=22 and both sum to 45. Same in all three arms."
+  },
+  "lcb-atcoder-abc396_e/spec-only-haiku/1": {
+    "class": "judge-defect",
+    "note": "Min of Restricted Sum accepts any good sequence with the minimum sum; the benchmark compares output exactly. On the first private case the submission prints 0 0 23 22 against expected 22 23 0 0: both satisfy A3^A2=23 and A4^A1=22 and both sum to 45. Same in all three arms."
+  },
+  "lcb-atcoder-abc396_e/self-tested-haiku/1": {
+    "class": "judge-defect",
+    "note": "Min of Restricted Sum accepts any good sequence with the minimum sum; the benchmark compares output exactly. On the first private case the submission prints 0 0 23 22 against expected 22 23 0 0: both satisfy A3^A2=23 and A4^A1=22 and both sum to 45. Same in all three arms."
+  },
+  "lcb-atcoder-abc397_d/double-blind-haiku/1": {
+    "class": "judge-defect",
+    "note": "Cubes asks for positive x, y with x^3 - y^3 = N. The private case N=27 expects '3 0', but y=0 is not positive and no positive pair works (checked to 40), so -1 is the answer the statement defines. Same in all three arms; 38/40 otherwise."
+  },
+  "lcb-atcoder-abc397_d/spec-only-haiku/1": {
+    "class": "judge-defect",
+    "note": "Cubes asks for positive x, y with x^3 - y^3 = N. The private case N=27 expects '3 0', but y=0 is not positive and no positive pair works (checked to 40), so -1 is the answer the statement defines. Same in all three arms; 38/40 otherwise."
+  },
+  "lcb-atcoder-abc397_d/self-tested-haiku/1": {
+    "class": "judge-defect",
+    "note": "Cubes asks for positive x, y with x^3 - y^3 = N. The private case N=27 expects '3 0', but y=0 is not positive and no positive pair works (checked to 40), so -1 is the answer the statement defines. Same in all three arms; 38/40 otherwise."
+  },
+  "lcb-atcoder-arc195_c/double-blind-haiku/1": {
+    "class": "judge-defect",
+    "note": "Hamiltonian Pieces is constructive: any placement satisfying the conditions is accepted, the benchmark compares exactly. All three arms print a different placement from the expected one and fail every private case at the first differing line. The placements' validity was not checked independently."
+  },
+  "lcb-atcoder-arc195_c/spec-only-haiku/1": {
+    "class": "judge-defect",
+    "note": "Hamiltonian Pieces is constructive: any placement satisfying the conditions is accepted, the benchmark compares exactly. All three arms print a different placement from the expected one and fail every private case at the first differing line. The placements' validity was not checked independently."
+  },
+  "lcb-atcoder-arc195_c/self-tested-haiku/1": {
+    "class": "judge-defect",
+    "note": "Hamiltonian Pieces is constructive: any placement satisfying the conditions is accepted, the benchmark compares exactly. All three arms print a different placement from the expected one and fail every private case at the first differing line. The placements' validity was not checked independently."
+  },
+  "retention-sweep/double-blind-haiku/11": {
+    "class": "real",
+    "note": "Gap suite. policy.categories is a plain object and the lookup is `policy.categories[name]` (or `name in policy.categories`), so a category named \"constructor\", \"toString\" or \"__proto__\" finds an Object.prototype member and is treated as a policy instead of kept with reason \"no policy\". Same class as money-format/self-tested-fable/1."
+  },
+  "retention-sweep/double-blind-haiku/13": {
+    "class": "real",
+    "note": "Gap suite. policy.categories is a plain object and the lookup is `policy.categories[name]` (or `name in policy.categories`), so a category named \"constructor\", \"toString\" or \"__proto__\" finds an Object.prototype member and is treated as a policy instead of kept with reason \"no policy\". Same class as money-format/self-tested-fable/1."
+  },
+  "retention-sweep/double-blind-haiku/19": {
+    "class": "real",
+    "note": "Gap suite. policy.categories is a plain object and the lookup is `policy.categories[name]` (or `name in policy.categories`), so a category named \"constructor\", \"toString\" or \"__proto__\" finds an Object.prototype member and is treated as a policy instead of kept with reason \"no policy\". Same class as money-format/self-tested-fable/1."
+  },
+  "retention-sweep/spec-only-haiku/1": {
+    "class": "real",
+    "note": "Gap suite. policy.categories is a plain object and the lookup is `policy.categories[name]` (or `name in policy.categories`), so a category named \"constructor\", \"toString\" or \"__proto__\" finds an Object.prototype member and is treated as a policy instead of kept with reason \"no policy\". Same class as money-format/self-tested-fable/1."
+  },
+  "retention-sweep/spec-only-haiku/4": {
+    "class": "real",
+    "note": "Gap suite. policy.categories is a plain object and the lookup is `policy.categories[name]` (or `name in policy.categories`), so a category named \"constructor\", \"toString\" or \"__proto__\" finds an Object.prototype member and is treated as a policy instead of kept with reason \"no policy\". Same class as money-format/self-tested-fable/1."
+  },
+  "retention-sweep/double-blind-haiku/10": {
+    "class": "real",
+    "note": "Gap suite. policy.categories is a plain object and the lookup is `policy.categories[name]` (or `name in policy.categories`), so a category named \"constructor\", \"toString\" or \"__proto__\" finds an Object.prototype member and is treated as a policy instead of kept with reason \"no policy\". Same class as money-format/self-tested-fable/1. Also fails [happy-4]: a child of a parent kept because it is within its period follows its own age instead of being kept with reason \"parent:<id>\"; the spec keeps a child of any kept record and excepts only flagged or deleted parents."
+  },
+  "coalescing-cache/spec-only-haiku/5": {
+    "class": "real",
+    "note": "Gap suite. A stale read starts a background refresh; when the entry expires before that refresh settles, a get returns the expired value instead of waiting for the in-flight load. The spec says an expired value is never returned from then on and one load runs at a time per key."
+  },
+  "patch-apply/double-blind-rule-haiku/17": {
+    "class": "real",
+    "note": "Passed both suites; caught by the git oracle (bin/git-oracle). applyPatch skips any section without --- and +++ headers (`if (oldPath === undefined || newPath === undefined) continue;`), so git's form of a rename with no hunks, which has neither header, leaves the file at its old path. The spec says a rename with no hunks moves the text unchanged. The public suite writes every pure rename with both headers; the blind hidden suite had git's form, the gap suite does not, and this run was never graded by the blind suite."
+  }
+}

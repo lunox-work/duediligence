@@ -1,0 +1,84 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "81eca674-ab2a-4256-b07d-d4519b245907",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1930591,
+        "turns": 6,
+        "durationMs": 46238,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1930591,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors. The build also produced `src/index.js`, which I deleted so that `src/index.ts` is the only file I added.\n\nChoices I made that the spec doesn't decide:\n\n- **Redemption failures are returned, not thrown.** `redeem` returns `{ ok: true, taskId }` or `{ ok: false, reason }`, where `reason` is one of the spec's five reasons: `\"unknown\"`, `\"used\"`, `\"expired\"`, `\"revoked\"`, `\"already has access\"`. I did this because the spec says redeeming \"fails with reason\" and names no error type.\n- **Revoking a used code throws.** The spec only says a used code \"cannot be revoked\", so that's the only throw. It doesn't say what revoking an unknown code does, so the contract says nothing about it either.\n- **The clock, random source and store are passed in.** The clock is `() => Date`. The random source is `(bound) => integer from 0 up to, but not including, bound`. The store values are typed `unknown`, because only the registry reads what it writes.\n- **`InviteRegistry` is a class** because it holds state. Creating, redeeming and listing all use the clock's current time. `create` returns the new code in the same shape as a listed code, so a test can check \"unused, expires at …\" straight away.\n- **Access has two queries.** `hasAccess` covers \"c1 has access to t1\". `tasksFor` lists a contributor's tasks so a test can check \"and to no other task\".\n\nExports: Store, Clock, RandomInt, RegistryOptions, CodeState, InviteCode, RedeemFailureReason, RedeemResult, InviteRegistry",
+    "problem": null,
+    "sha256": "5b9c9ef935e46a0445175d4e6ecf63fa0eb654c11ad9cd4b0df6ef2b62266d12"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "f9b84f3f-64b0-494c-8cb9-54eb7a927d52",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6719998,
+        "turns": 12,
+        "durationMs": 187755,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.6719998,
+    "finalText": "I've written the public test suite in `tests/public/`. `npm run build` reports no errors. All 26 tests are found when run, and all fail with `not implemented` for now, as expected.\n\nEach test name starts with its scenario key, from `[happy-1]` through `[concurrency-1]`. Every scenario has a happy-path test and at least one boundary test:\n\n- **`create.test.ts`** (`[happy-1]`): a new code is unused and expires at exactly 2026-03-15T09:00:00Z. The code is 8 characters from the allowed alphabet and comes from the random source: two registries with the same random sequence produce the same code. If a new code would repeat one already in the registry (even one for another task), it is drawn again, and both codes still redeem to their own task.\n- **`redeem.test.ts`** covers six scenarios:\n  - **`[happy-2]`:** redeeming grants access to that one task, and the code records who used it and when.\n  - **`[boundary-1]`:** lowercase, spaces and `-` forms all count as the same code.\n  - **`[boundary-2]`:** a code can be redeemed at 08:59:59.999 and fails with `expired` at 09:00:00.\n  - **`[unhappy-1]`:** someone else gets `used`; the first contributor can redeem again and nothing changes.\n  - **`[unhappy-2]`:** `unknown`, `revoked`, and a used code can't be revoked.\n  - **`[boundary-3]`:** a second code for the same task fails with `already has access` and stays unused.\n- **`concurrency.test.ts`** (`[concurrency-1]`): the store makes every call wait a set number of event-loop turns before resolving, with no timers or real clock. One test uses equal waits and one uses uneven waits, so calls resolve out of order. In each, exactly one redemption wins, the other gets `used`, and only the winner has access.\n- **`list.test.ts`** (`[happy-3]`): a task's codes show the states unused, used, expired and revoked. A used code stays `used` after its expiry time. An unused code shows as `expired` at exactly the expiry instant. A task with no codes lists none.\n\nSome choices the developer should know about:\n- **No shared helper file.** Each file has its own in-memory store and fixed clock, because the rules require every file in `tests/public/` to end in `.test.ts`.\n- **Code generation is tested loosely.** The tests don't fix how random numbers map to characters, so any implementation that builds codes from the random source passes.\n- **Unspecified cases are left out.** No test checks what `revoke` does with an unknown code, or which reason wins when two failure conditions apply at once.\n- **Build output removed.** I deleted the `.js` files my build runs created (in `src/` and `tests/public/`), so I've written nothing outside `tests/public/`.\n\n26 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/concurrency.test.ts",
+      "tests/public/create.test.ts",
+      "tests/public/list.test.ts",
+      "tests/public/redeem.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "2440cd67-09d7-446d-b32d-918b6725b84a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.5348122000000002,
+        "turns": 19,
+        "durationMs": 397302,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.5348122000000002,
+    "finalText": "I wrote the hidden suite in `tests/private/`: four files mirroring the public ones, covering all nine scenarios. `npm run build` reports no errors.\n\n**Checks:**\n- **Stubs:** all 47 tests fail against the current interface, each with `not implemented`.\n- **Reference:** I wrote a correct implementation in a scratch copy, not in `src/`. It passes all 26 public tests and all 47 private ones.\n- **Shortcuts:** I wrote four broken variants (mutants) of that implementation. Each fails some private tests:\n  - **Lock keyed on the raw typed code, creates unlocked:** loses concurrent updates and lets two simultaneous creates produce the same code.\n  - **Normalisation that only trims and strips one space and one dash:** passes the public suite; the private suite catches it.\n  - **Redrawing a repeated code only once.**\n  - **A broken \"already has access\" check.**\n\n**What the tests target beyond the public cases:**\n- **Clock and random source:** other creation times with milliseconds, a year end and daylight-saving changes. A constant draw gives the same character in all 8 places, and the 30 constants together give the whole alphabet.\n- **Repeats:** a code is redrawn as many times as needed, including when it would repeat a used, revoked or expired code.\n- **Ids:** ids that prefix each other (`t1`/`t10`, `c1`/`c10`) stay separate.\n- **Typing:** near misses (one character off, one short, one long) are `unknown`; refusals stay correct however the code is typed.\n- **Slow store:** races between three to five contributors, each typing the code differently; one contributor redeeming two codes for the same task at once; and simultaneous redemptions and creates that must not lose each other's writes.\n\n**Three choices to review:**\n- **Same store, second registry:** one `[happy-2]` test makes a code with one registry and redeems it with a second registry over the same store. I read \"a registry over a store\" as meaning the codes live in the store; this test fails an implementation that ignores the store.\n- **Keys for slow-store tests:** two such tests are keyed to the scenario whose outcome they check: `[happy-1]` (simultaneous creates never repeat a code) and `[boundary-3]` (the second of two simultaneous codes for one task gets \"already has access\").\n- **Revoking a used code:** the spec gives no error message, so the test only checks that the call rejects with an `Error` and the code's state is unchanged.\n\n**Left untested because the spec doesn't say:**\n- which failure reason wins when two apply (for example, a code that is both revoked and expired);\n- the order of `list` and `tasksFor` results;\n- revoking an unknown code, or revoking twice;\n- exactly which character each random value maps to.\n\n47 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/concurrency.test.ts",
+      "tests/private/create.test.ts",
+      "tests/private/list.test.ts",
+      "tests/private/redeem.test.ts"
+    ],
+    "open": []
+  },
+  "notes": {
+    "sessionId": "a2c04768-060c-4f60-8784-4a268f76adc4",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.3040648,
+    "turns": 4,
+    "durationMs": 59802,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I wrote `notes.md`, with sections for creating, redeeming, revoking, the two access functions (`hasAccess` and `tasksFor`), listing, and two contributors redeeming the same code at once.\n\nTwo of the notes go slightly past the literal assertions, because the checks only pass if they hold:\n- **Eight random values per code:** each attempt to draw a code must take exactly eight values from the random source. The repeated-code check only works that way.\n- **Concurrent redemptions:** the registry has to handle a slow store whose calls finish out of order.\n\nSome things are left open: the order of `list` and `tasksFor` results, which contributor wins the race, the error a failed revoke throws, and how a random value maps to a character.\n\n32 bullets.",
+    "problem": null
+  }
+}

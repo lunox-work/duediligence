@@ -1,0 +1,47 @@
+{
+  "slug": "he-17",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_parse_music.py :: TestParseMusic.test_docstring_example",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_half_notes",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_mixed_notes_preserve_order",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_quarter_notes",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_single_half_note",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_single_quarter_note",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_single_whole_note",
+    "tests/public/test_parse_music.py :: TestParseMusic.test_whole_notes"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 15,
+  "kept": [
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_half_then_quarter",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_half_then_whole",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_long_sequence_with_unequal_runs",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_quarter_then_half",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_quarter_then_whole",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_reordered_balanced_sequence",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_reversed_docstring_sequence",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_single_half",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_single_quarter",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_single_whole",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_two_half_notes",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_two_quarter_notes",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_two_whole_notes",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_whole_then_half",
+    "tests/private/test_parse_music.py :: TestParseMusicPrivate.test_whole_then_quarter"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 8
+    },
+    "hidden": {
+      "passed": 15,
+      "total": 15
+    }
+  }
+}

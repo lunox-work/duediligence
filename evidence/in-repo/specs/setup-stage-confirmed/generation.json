@@ -1,0 +1,69 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "3eca04b7-8cbb-4a04-a28a-c4134f6b9dbb",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.22200309999999998,
+        "turns": 9,
+        "durationMs": 126351,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.22200309999999998,
+    "finalText": "I've created the seam at `apps/web/src/features/onboarding/setup.ts`. It has the exports the spec lists, with the signatures exactly as the ticket gives them. Each function body is `throw new Error(\"not implemented\");`, and each export has a one-line doc comment in the spec's words. The spec states no constants, so there are none. None of the functions throws for valid input, so no doc comment says they do. Nothing outside the seam was touched.\n\n- **Type check:** `npx tsc -p tsconfig.test.json --noEmit` reports no errors.\n- **Parameter name:** the config turns on `noUnusedParameters`, so the parameter is named `_facts` instead of the spec's `facts`. Since the bodies have to be exactly the `throw`, renaming it was the only way to pass the type check. The types are unchanged, and the implementation can rename it back to `facts` once it uses it.\n- **Test suite:** 811 tests pass and 2 fail, the same result as before I added the file (I checked with the file temporarily moved away). Both failures are in `test/dev-hosts.test.ts`, which fails with `listen EPERM: operation not permitted 127.0.0.1` because this sandbox blocks binding local ports. If you want that file to run here, you can turn on `sandbox.network.allowLocalBinding: true` in your settings.\n\nAdded: `SetupStage`, `SetupFacts`, `setupStage`, `SetupStepId`, `SetupStep`, `setupSteps`, `setupComplete`",
+    "problem": null,
+    "sha256": "3d8d0c0b1dbd7bf7bfb575402807a0150b0dfac6c2219adee7e171b00cc0cd35"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "57ed19aa-2293-4156-937e-4784d25d951d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5752771,
+        "turns": 7,
+        "durationMs": 142008,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5752771,
+    "finalText": "I wrote the test suite in `apps/web/test/setup-stage-confirmed.test.ts`. The type check passes with no errors. All 52 tests fail, as expected: each one either throws `not implemented` or reports that error from a `not.toThrow()` check. Nothing else in the repository changed; I also ran Prettier on the new file.\n\n- **Two tests per scenario:** the spec has 26 scenarios (6 `@happy`, 16 `@boundary`, 4 `@unhappy`). Each gets one test for its main path and one for a boundary case, keyed `[happy-1]` to `[happy-6]`, `[boundary-1]` to `[boundary-16]` and `[unhappy-1]` to `[unhappy-4]` in spec order.\n- **Examples tables:** where a scenario has a table, the typical rows are the main-path test and the edge rows are the boundary test. Every row in the spec's tables is checked.\n- **Boundary cases I added:** where a scenario has no table, the boundary test uses a case that follows directly from the spec's rules. Examples:\n  - a fractional proposal count of `0.5` counts as sized;\n  - one repository on a GitHub connection completes the checklist;\n  - a broken Jira site as the only undone step is current and leaves the checklist incomplete;\n  - frozen facts with `NaN` and negative counts are left unchanged.\n- **Setup:** a `facts()` helper builds the spec's base facts and changes only the fields a scenario names. The style follows `analysis-labels.test.ts`: plain `test` and `expect` from `vitest`, no `describe` blocks, no mocks, and no clock, randomness, network or file access.\n- **Order-independent checks:** a test that only checks whether steps are done reads them by id rather than by position. That way it doesn't break when GitHub-stage facts change the step order.\n- **Agreement checks:** the \"any SetupFacts value\" scenario can't use random input, so it runs over a fixed list of facts. That list is every 0/1 combination of the four counts, plus some odd counts and cases where a tool isn't offered.\n\n52 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/web/test/setup-stage-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "80fa3f3f-7dc2-4ddd-b063-e7e1f26a0dd7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1075642,
+        "turns": 13,
+        "durationMs": 273432,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1075642,
+    "finalText": "I wrote 55 hidden tests in three files under `apps/web/test/hidden-setup-stage-confirmed/`. All 55 fail against the stub as it stands, and `npx tsc -p tsconfig.test.json --noEmit` reports no errors.\n\n**Files:**\n- **`stage.test.ts`** (14 tests): `setupStage`.\n- **`steps.test.ts`** (29 tests): which steps `setupSteps` lists, their order, `done` and `current`.\n- **`complete.test.ts`** (12 tests): `setupComplete`, plus purity and the fresh array on each call.\n\n**Coverage:**\n- Every scenario key in the spec has hidden tests: happy-1 to happy-6, boundary-1 to boundary-16 and unhappy-1 to unhappy-4.\n- Each public test has at least one hidden test that extends it, named in a comment above it.\n- Several tests build every combination of facts and check each result against the spec's definitions. Counts take odd values (−∞, −1, −0, 0, the smallest positive number, 0.5, 1, 7, ∞, NaN), alongside each `available` setting and `canManage`.\n\n**Shortcuts it targets** (each would pass the public suite):\n- Testing `>= 1` or truthiness instead of `> 0`.\n- Taking broken sites away from healthy ones (`connected − broken`).\n- Choosing the GitHub-first order by whether the github step is listed, rather than by the stage. At the github stage with no GitHub App the list must be `size, jira`.\n- Picking the current step in the fixed jira, github, size order rather than the listed order.\n- Computing `setupComplete` separately from `setupSteps`, so that the two disagree.\n- Reusing a cached array, so a caller who changes one result changes the next.\n\n**Checks I ran:** I wrote a reference implementation of the spec in the scratchpad, outside the repo, and ran both suites against copies of the tests. All 107 tests passed (55 hidden, 52 public). Two shortcut implementations passed the whole public suite but failed hidden tests:\n- ordering by whether the GitHub App exists: 6 hidden tests failed;\n- `>= 1` with 0.5 special-cased: 3 hidden tests failed.\n\nI wrote nothing outside the hidden folder except those scratchpad files.\n\n55 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/web/test/hidden-setup-stage-confirmed/complete.test.ts",
+      "apps/web/test/hidden-setup-stage-confirmed/stage.test.ts",
+      "apps/web/test/hidden-setup-stage-confirmed/steps.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "ladder-lcb_arc196_b-l2",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_3x3_and_3x4_brute_force",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_2x2_grids_brute_force",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_2x3_grids_brute_force",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_3x2_grids_brute_force",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_a_odd_height_is_zero",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_a_odd_width_is_zero",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_even",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_odd_width",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_many_small_cases",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_all_a",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_all_b"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 12
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

@@ -1,0 +1,72 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "64e4d7d7-dba0-40ca-b7bd-e38eaf3357eb",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.29937740000000007,
+        "turns": 10,
+        "durationMs": 60578,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.29937740000000007,
+    "finalText": "I created the seam at `apps/api/src/jira/recent.ts`, and it compiles with no errors under `npx tsc -p tsconfig.test.json`.\n\n**What's in it:**\n- `RECENT_JIRA_READ_MS = 60000` and `RECENT_JIRA_READS_MAX = 1000` are exported with real values, so tests can import them.\n- `RecentReads<T>` is a plain interface with `get(key): T | undefined` and `set(key, value): void`.\n- `recentReads<T>(options = {})` takes optional `ttlMs`, `now` and `max`. The clock is the `now` option, so tests control the time. Its doc comment gives the defaults, says that passing `undefined` means the default, and states the two exact `RangeError` messages, including that the `ttlMs` error comes first.\n- `issueKey(organizationId, connectionId, issueId)` is documented as a newline join with no validation, the same way `sharedCredential` in `credential.ts` builds its key.\n- Both function bodies are just `throw new Error(\"not implemented\");`.\n\n**Parameter names:** the test config turns on `noUnusedParameters`, so stub parameters with plain names fail to compile. I renamed them `_options`, `_organizationId`, `_connectionId` and `_issueId`. Callers never see parameter names, so the contract doesn't change.\n\n**Existing suite:** 883 of 885 tests pass. The two failures are in `deepseek-caller.test.ts` (\"the default client posts to /chat/completions…\" and \"…maps a non-2xx status…\"). Both fail because this sandbox doesn't let them open a local port (`listen EPERM`). I took the new file out and re-ran the suite, and the same two tests failed the same way, so they have nothing to do with this change. You can make them pass by setting `sandbox.network.allowLocalBinding: true` in your settings. I didn't change that myself because it's your call.\n\nNo other files changed: `git status` shows only the new `recent.ts` and the `spec.md` that was already there.\n\nAdded exports: `RECENT_JIRA_READ_MS`, `RECENT_JIRA_READS_MAX`, `RecentReads`, `recentReads`, `issueKey`",
+    "problem": null,
+    "sha256": "740a6234d17bc639f7f0257b090a835029dfec8c325c046e424a757a761417fa"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "ad3f4b4e-2cdc-4995-9b75-8af3ce523677",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.67117,
+        "turns": 9,
+        "durationMs": 166344,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.67117,
+    "finalText": "I wrote the test suite in `apps/api/test/recent-reads.test.ts`. Each of the 29 scenarios in the spec gets two tests: its happy path as written, plus one extra edge case that follows directly from the spec. Examples include a write at time zero, a clock going backwards and then forwards past expiry, keys like `\"__proto__\"`, a `ttlMs` of `-0`, `NaN` and `-0` as stored values, and two colliding `issueKey` results sharing one store entry.\n\n**Results:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- The run command gives 58 tests: 1 passes and 57 fail with `not implemented`, as expected. The one that passes is `[happy-5] the exported constants are one minute and 1000 entries`, because the interface already defines both constants.\n- I wrote nothing outside the test file. The compiled output in `dist-test/` is gitignored.\n\n**Choices worth knowing:**\n- **Fake clock:** each test builds its own clock starting at `t = 1000000`, as in the spec's Background, so no test depends on another.\n- **Default clock:** the two `[happy-6]` tests check that the store uses `Date.now` when no options are given. To keep them deterministic, they fake `Date` with node:test's built-in mock timers (`t.mock.timers`). The nearby test files don't use this, but it's part of the same test library.\n- **Errors:** invalid options are checked with `assert.throws` against `{ name: \"RangeError\", message }`, using the spec's exact messages.\n\n58 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/api/test/recent-reads.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "93d0b835-8b00-4b15-a148-cafe81b51b6b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0134595,
+        "turns": 11,
+        "durationMs": 248331,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.0134595,
+    "finalText": "I wrote the hidden suite in `apps/api/test/hidden-recent-reads/`, in four files: `store.test.ts`, `eviction.test.ts`, `options.test.ts` and `issue-key.test.ts`.\n\n**Checks:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the current stub, all 52 tests fail with `not implemented`.\n- To confirm the tests are satisfiable, I also ran them against a minimal reference implementation kept outside the repo, in the scratchpad. All 52 passed.\n- Nothing outside the hidden-suite folder changed.\n\n**Coverage:**\n- Every scenario key in the spec has tests: `happy-1` to `happy-9`, `boundary-1` to `boundary-15`, `unhappy-1` to `unhappy-4`, and `concurrency-1`.\n- Each test has a comment above it naming the public test it extends.\n\n**Shortcuts the suite catches** (ones that would pass the public tests):\n- **Expiry:** a fixed 60000 instead of `ttlMs`; rounding a fractional `ttlMs` up or down (2.25 ms); measuring freshness as a distance either side of the write (clock moved back far past a short `ttlMs`).\n- **Eviction:** dropping the smallest key instead of the oldest write (keys written in reverse order, max 3 and the default 1000); a rewrite that keeps its old place in the order (middle key of three); reads that change the order.\n- **Shared settings:** `ttlMs`, `max` or the clock shared between stores; for example, a store built later with a smaller `max` must not change an earlier one.\n- **Validation:** numeric strings or `valueOf` objects that pass the global `isFinite` or `Number()`; checking `max` before `ttlMs` for every pairing of invalid values; errors that are only named `RangeError`, since the tests check `instanceof RangeError`.\n\n**One reading of the spec to be aware of:** the spec says only `undefined` takes an option's default. So I made `ttlMs: null` and `max: null` errors rather than defaults. An implementation using `??` will fail those two tests (one `unhappy-1`, one `unhappy-2`).\n\n**Left untested on purpose, because the spec doesn't say:** whether expired entries still count towards `max`, and whether re-writing an expired key counts as a new key when deciding what to evict. The public suite doesn't test either.\n\n52 tests, in 4 files.\n\nOpen in the spec:\n- `[happy-6] called with no options, the store expires entries one minute by Date.now`: it replaces `Date` with a mock and expects the store to use the mocked `Date.now`. That only works if the default clock looks up `Date.now` when the store is built or used, not when the module loads. The spec says `now` defaults to `Date.now` but not when that lookup happens. My `happy-6` and `boundary-7` tests only read back right away, so they pass either way.",
+    "problem": null,
+    "files": [
+      "apps/api/test/hidden-recent-reads/eviction.test.ts",
+      "apps/api/test/hidden-recent-reads/issue-key.test.ts",
+      "apps/api/test/hidden-recent-reads/options.test.ts",
+      "apps/api/test/hidden-recent-reads/store.test.ts"
+    ],
+    "open": [
+      "`[happy-6] called with no options, the store expires entries one minute by Date.now`: it replaces `Date` with a mock and expects the store to use the mocked `Date.now`. That only works if the default clock looks up `Date.now` when the store is built or used, not when the module loads. The spec says `now` defaults to `Date.now` but not when that lookup happens. My `happy-6` and `boundary-7` tests only read back right away, so they pass either way."
+    ]
+  }
+}

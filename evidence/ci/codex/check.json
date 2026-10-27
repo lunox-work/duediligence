@@ -1,0 +1,11 @@
+{
+  "name": "independent-tests (confirmed)",
+  "head_sha": "ffcc2b0a28afba7fc889f2fe12da21fe5498a880",
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-10-26T04:56:04.616Z",
+  "output": {
+    "title": "passed: public 54/54, hidden 46/46, existing 120/120",
+    "summary": "| verdict | public | hidden | existing |\n| --- | ---: | ---: | ---: |\n| **passed** | 54/54 | 46/46 | 120/120 |\n\nOwn tests (not judged): `apps/worker/test/limit-jobs-confirmed-own.test.ts`\n\nHidden suite sha256 `7a89b7f6f14d55f16993b034e0a2ba46a10daf460855561b88d002a0df32dc10`, sealed 2026-10-26T04:35:59.102Z. Commit `ffcc2b0a28afba7fc889f2fe12da21fe5498a880`."
+  }
+}

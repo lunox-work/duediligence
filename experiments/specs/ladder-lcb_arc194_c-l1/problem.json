@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "arc194_c",
+  "contest_id": "arc194",
+  "contest_date": "2025-03-09T00:00:00",
+  "difficulty": "hard",
+  "title": "Cost to Flip",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 3,
+  "privateCases": 40
+}

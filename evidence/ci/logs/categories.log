@@ -1,0 +1,54 @@
+categories: incomplete. Public 32/82, hidden 43/113, existing 24/24; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at 44935a3e5c7c1768f6af45195effea0306777fd2.
+Hidden suite sha256 3c221e000aaf90fe294bca75f104a6ec65501ee1f34b09be990950f35128c447, sealed 2026-10-26T04:36:00.232Z.
+Failing scenarios: boundary-11, boundary-13, boundary-14, boundary-15, boundary-16, boundary-17, boundary-18, boundary-19, boundary-2, boundary-20, boundary-21, boundary-22, boundary-3, boundary-4, boundary-6, boundary-8, boundary-9, happy-1, happy-10, happy-11, happy-12, happy-13, happy-14, happy-15, happy-16, happy-2, happy-3, happy-4, happy-6, happy-7, happy-8, happy-9, unhappy-1, unhappy-2, unhappy-3
+public: test/categories.facts.test.ts :: [boundary-2] daysSinceUpdate is 0 for a future update and falls back to ageDays when updated is missing or unparseable
+public: test/categories.facts.test.ts :: [unhappy-1] an invalid now is refused with a RangeError
+public: test/categories.facts.test.ts :: [unhappy-1] an invalid now is refused even when the issue has no dates to measure
+public: test/categories.facts.test.ts :: [boundary-3] a blank assignee name does not count as assigned
+public: test/categories.facts.test.ts :: [boundary-4] a closed current sprint does not count, in any letter case
+public: test/categories.facts.test.ts :: [happy-2] closed sprints are counted and carriedSince is the earliest one's startDate, verbatim
+public: test/categories.facts.test.ts :: [happy-2] carriedSince falls back to endDate, and is null when no closed sprint date parses
+public: test/categories.facts.test.ts :: [happy-3] duplicate links count either way, and only outward Blocks links to unfinished tickets count as blocking
+public: test/categories.facts.test.ts :: [happy-3] link type names are matched trimmed, and inward or done Blocks links never count
+public: test/categories.facts.test.ts :: [boundary-6] every known priority name is ranked through PRIORITY_RANKS
+public: test/categories.facts.test.ts :: [boundary-6] priority names are trimmed, blank becomes null, and unknown or inherited names rank none
+public: test/categories.facts.test.ts :: [boundary-8] dueInDays is 0 on the day, reads only the first ten characters, and is null when unparseable or missing
+public: test/categories.facts.test.ts :: [happy-4] release ties go to array order, overdue versions count, and undated or released versions are ignored
+public: test/categories.facts.test.ts :: [boundary-9] the lookup tables are frozen with exactly the specified contents
+public: test/categories.facts.test.ts :: [boundary-9] writing to a lookup table throws and changes nothing
+public: test/categories.registry.test.ts :: [happy-9] the registry ships six categories in a fixed order with their labels, whys and defaults
+public: test/categories.registry.test.ts :: [happy-9] the registry, every category and every defaults object are frozen
+public: test/categories.registry.test.ts :: [happy-10] with no config every category is enabled at its defaults, in registry order
+public: test/categories.registry.test.ts :: [happy-10] an empty config resolves the same as no config
+public: test/categories.registry.test.ts :: [happy-11] a threshold override replaces only that threshold
+public: test/categories.registry.test.ts :: [happy-11] overriding one of several thresholds keeps the rest at their defaults
+public: test/categories.registry.test.ts :: [boundary-16] finite non-negative overrides are taken, including 0 and fractions
+public: test/categories.registry.test.ts :: [boundary-16] a null, undefined, negative or non-finite override keeps the default
+public: test/categories.registry.test.ts :: [boundary-17] unknown thresholds are ignored
+public: test/categories.registry.test.ts :: [happy-12] enabled defaults to true when settings are missing, empty or say true
+public: test/categories.registry.test.ts :: [happy-12] enabled false switches a category off while it stays listed with its thresholds resolved
+public: test/categories.registry.test.ts :: [boundary-18] resolving with an override never changes the registry's defaults
+public: test/categories.registry.test.ts :: [unhappy-3] a category list with a duplicate id is refused
+public: test/categories.registry.test.ts :: [unhappy-3] a category list using the reserved id is refused
+public: test/categories.registry.test.ts :: [happy-13] each shipped category matches at its defaults with its reason
+public: test/categories.registry.test.ts :: [happy-13] a shipped category matches exactly at its default thresholds
+public: test/categories.registry.test.ts :: [happy-14] an issue can fit several categories, returned in registry order
+public: test/categories.registry.test.ts :: [happy-14] an issue at every threshold fits five categories at once, in registry order
+public: test/categories.registry.test.ts :: [boundary-19] an issue just short of every threshold gets an empty list, never UNCATEGORIZED
+public: test/categories.registry.test.ts :: [boundary-20] a silent clause lets a category match without appearing in the reason
+public: test/categories.registry.test.ts :: [boundary-20] a silent clause can break a deadline match that otherwise fits
+public: test/categories.registry.test.ts :: [happy-15] a threshold override makes a category match
+public: test/categories.registry.test.ts :: [happy-15] a zero threshold override matches while an invalid one keeps the default
+public: test/categories.registry.test.ts :: [boundary-21] a rule that matches with no clauses gives the category's why
+public: test/categories.registry.test.ts :: [boundary-21] a rule matched only by silent signals gives the why, and no match when the silent signal fails
+public: test/categories.rules.test.ts :: [happy-6] evaluate drops null and duplicate clauses
+public: test/categories.rules.test.ts :: [boundary-11] all stops at the first child that does not match
+public: test/categories.signals.test.ts :: [happy-8] factory signal ids carry their threshold
+public: test/categories.signals.test.ts :: [boundary-13] signals match their facts and describe them, plural for counts other than 1
+public: test/categories.signals.test.ts :: [boundary-13] signals fail below their threshold yet still describe, use the singular for 1, and describe null facts as null
+public: test/categories.signals.test.ts :: [boundary-14] deadlineWithin matches a due date or release inside the window and describes it
+public: test/categories.signals.test.ts :: [boundary-14] deadlineWithin includes the window's last day and today, excludes the day after, and prefers the due date on a tie
+public: test/categories.signals.test.ts :: [unhappy-2] signal factories refuse a negative or non-finite threshold with a RangeError
+public: test/categories.signals.test.ts :: [unhappy-2] a threshold just below zero is refused while the largest finite one is accepted
+public: test/categories.signals.test.ts :: [boundary-15] a fractional threshold is accepted, compared inclusively and kept in the id
+Check "independent-tests (drafted)": failure, incomplete: public 32/82, hidden 43/113, existing 24/24 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/categories.json); not posted (no token).

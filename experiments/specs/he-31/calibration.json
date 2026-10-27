@@ -1,0 +1,38 @@
+{
+  "slug": "he-31",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_is_prime.py :: TestIsPrime.test_composite_boundary_49",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_composite_typical_15",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_1",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_101",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_11",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_13441",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_4",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_6",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_61",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_prime_boundary_2",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_prime_typical_97"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 10,
+  "kept": [
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_boundary_0_1_2_3",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_composite_35",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_negative_composite_is_not_prime",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_negative_one_is_not_prime",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_neighbours_of_101",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_neighbours_of_13441",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_prime_3",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_prime_count_below_1000",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_repeated_calls_agree",
+    "tests/private/test_is_prime_private.py :: TestIsPrimePrivate.test_zero_is_not_prime"
+  ],
+  "dropped": [],
+  "reference": null
+}

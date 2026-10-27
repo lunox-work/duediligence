@@ -1,0 +1,66 @@
+{
+  "slug": "he-122",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_add_elements.py :: TestAddElements.test_docstring_example",
+    "tests/public/test_add_elements.py :: TestAddElements.test_ignores_qualifying_values_after_prefix",
+    "tests/public/test_add_elements.py :: TestAddElements.test_k_one_in_longer_array",
+    "tests/public/test_add_elements.py :: TestAddElements.test_large_values_still_take_up_prefix_positions",
+    "tests/public/test_add_elements.py :: TestAddElements.test_maximum_array_length_and_full_prefix",
+    "tests/public/test_add_elements.py :: TestAddElements.test_minimum_array_length",
+    "tests/public/test_add_elements.py :: TestAddElements.test_negative_values_and_digit_boundary",
+    "tests/public/test_add_elements.py :: TestAddElements.test_no_qualifying_elements",
+    "tests/public/test_add_elements.py :: TestAddElements.test_positive_digit_boundaries",
+    "tests/public/test_add_elements.py :: TestAddElements.test_signed_values_can_cancel",
+    "tests/public/test_add_elements.py :: TestAddElements.test_sums_one_and_two_digit_elements",
+    "tests/public/test_add_elements.py :: TestAddElements.test_zero"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 30,
+  "kept": [
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_all_prefix_positions_rejected_before_small_suffix",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_duplicate_positive_and_negative_values",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_k_one_keeps_negative_first_value",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_k_one_rejects_first_value",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_last_prefix_value_counts_but_next_value_does_not",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_maximum_length_last_position_is_included",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_maximum_length_mixed_pattern",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_maximum_length_prefix_ends_before_last_position",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_maximum_length_repeated_negative_boundary",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_maximum_length_repeated_positive_boundary",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_mixed_prefix_with_negative_term",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_mixed_sign_sum_is_negative",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_negative_boundary_neighbors",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_only_large_negative_values",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_positive_boundary_neighbors_reordered",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_positive_powers_of_ten_and_three_digit_values",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_qualifying_values_sum_above_ninety_nine",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_rejected_signed_values_consume_positions",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_reordered_mixed_prefix",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_signed_suffix_is_excluded",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_signed_values_cancel_to_zero",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_single_negative_ninety_nine",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_single_negative_one",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_single_negative_one_hundred",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_single_positive_ninety_nine",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_single_positive_one_hundred",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_small_values_between_very_large_integers",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_very_large_signed_integers_are_excluded",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_zero_at_only_included_position",
+    "tests/private/test_add_elements.py :: TestAddElementsPrivate.test_zeros_among_other_values"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 12,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 30,
+      "total": 30
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "repo",
+  "repo": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p2/repos/ts-pattern",
+  "base": "f11be73acb18e1d653d4f252e7d75981d873a2e6",
+  "package": ".",
+  "packageManager": "npm",
+  "buildFirst": [],
+  "runner": "jest",
+  "testDir": "tests",
+  "testPattern": "*.test.ts",
+  "build": "tsc -p tsconfig.json --noEmit",
+  "hiddenDir": "tests/hidden-ts-pattern-display",
+  "seam": [
+    "src/errors.ts"
+  ],
+  "allowedPaths": [
+    "src/errors.ts"
+  ],
+  "examples": [
+    "tests/exhaustive-match.test.ts",
+    "tests/is-matching.test.ts"
+  ]
+}

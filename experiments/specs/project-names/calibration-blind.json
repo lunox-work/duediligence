@@ -1,0 +1,83 @@
+{
+  "slug": "project-names",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/collisions.test.ts :: a collision within an organization gets a six-character suffix",
+    "tests/public/collisions.test.ts :: when six characters are also taken the suffix grows to eight",
+    "tests/public/collisions.test.ts :: the task named first keeps its name",
+    "tests/public/collisions.test.ts :: whichever colliding task is named first keeps the short name",
+    "tests/public/collisions.test.ts :: different organizations may hold the same name",
+    "tests/public/collisions.test.ts :: names taken in another organization never lengthen a suffix",
+    "tests/public/naming.test.ts :: a task's name is project- and the first four digest characters",
+    "tests/public/naming.test.ts :: leading zeros in the digest are kept in the name",
+    "tests/public/naming.test.ts :: the same task always gets the same name",
+    "tests/public/naming.test.ts :: a task that got a longer suffix keeps it when named again",
+    "tests/public/validation.test.ts :: a registry needs a key",
+    "tests/public/validation.test.ts :: a one-character key is enough to create a registry",
+    "tests/public/validation.test.ts :: a task needs an id",
+    "tests/public/validation.test.ts :: a one-character task id is named"
+  ],
+  "publicOnSkeleton": {
+    "passed": 1,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 27,
+  "kept": [
+    "tests/private/collisions.test.ts :: acme-key fixtures collide as the tests assume",
+    "tests/private/collisions.test.ts :: spec example: task-136 after task-81 under org-secret is named project-139a1f",
+    "tests/private/collisions.test.ts :: spec example: task-81 named first keeps project-139a after task-136 is named",
+    "tests/private/collisions.test.ts :: the task that got a longer name keeps it when named again",
+    "tests/private/collisions.test.ts :: reverse order under org-secret: task-136 first gets project-139a, task-81 gets project-139a12",
+    "tests/private/collisions.test.ts :: three tasks sharing four digest characters: the first gets four, the others six",
+    "tests/private/collisions.test.ts :: three colliding tasks in another order: whichever is named first gets the short name",
+    "tests/private/collisions.test.ts :: the suffix grows to eight characters when the four- and six-character names are taken",
+    "tests/private/collisions.test.ts :: the suffix stops at the first free length, not at the number of earlier collisions",
+    "tests/private/collisions.test.ts :: a six-character collision without the eight-character step when only two tasks are involved",
+    "tests/private/collisions.test.ts :: a non-colliding task named among colliding ones still gets four characters",
+    "tests/private/collisions.test.ts :: all names handed out by one registry are distinct",
+    "tests/private/collisions.test.ts :: spec example: two org-secret registries may both hold project-139a",
+    "tests/private/collisions.test.ts :: names taken in one registry do not affect another, even when calls interleave",
+    "tests/private/errors.test.ts :: spec example: creating a registry with an empty key fails, while a non-empty key works",
+    "tests/private/errors.test.ts :: a one-character key is accepted, the empty key is not",
+    "tests/private/errors.test.ts :: spec example: naming a task with an empty id fails",
+    "tests/private/errors.test.ts :: an empty id fails in a registry with another key that has already named tasks",
+    "tests/private/errors.test.ts :: a one-character task id is accepted",
+    "tests/private/naming.test.ts :: spec example: task-1 under org-secret is named project-63a9",
+    "tests/private/naming.test.ts :: name is project- and the first four HMAC-SHA256 hex characters for other keys and ids",
+    "tests/private/naming.test.ts :: a first name is project- followed by exactly four lowercase hex characters",
+    "tests/private/naming.test.ts :: the key determines the name: the same task under two keys follows each key's digest",
+    "tests/private/naming.test.ts :: many tasks whose first four digest characters differ each get a four-character name",
+    "tests/private/naming.test.ts :: spec example: task-1 named again under org-secret is still project-63a9",
+    "tests/private/naming.test.ts :: a task named repeatedly, with other tasks named in between, always gets its first name",
+    "tests/private/naming.test.ts :: two registries with the same key give a task the same name"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 27,
+      "total": 27
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented `NameRegistry` in `src/index.ts`, and every test passes: 14/14 in the public suite and 27/27 in the private one.\n\nHow it works:\n- **Errors:** creating a registry with an empty key throws, and so does naming a task with an empty id.\n- **Naming:** a task's digest is HMAC-SHA256 of its id under the key, as lowercase hex. Its name is `project-` plus the first 4 characters. If that name is already taken in the registry, the suffix grows to 6, 8 and so on characters until a free name turns up.\n- **Same name every time:** each registry remembers the name it gave each task. Naming a task again returns that name, so whichever task was named first keeps the short one.\n- **Separate organizations:** each registry keeps its own record of names in use, so two registries can hand out the same name.\n\nThe spec doesn't say what happens if every length up to the full 64-character digest is taken. That would need two tasks with identical digests, which in practice can't happen. I made it throw an error.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "5b9d11ac-d68c-48cb-8fcf-c562cd4e77f6",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.18776900000000002,
+        "turns": 7,
+        "durationMs": 39073,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.18776900000000002
+  }
+}

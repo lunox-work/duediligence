@@ -1,0 +1,100 @@
+{
+  "slug": "env-names",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/code-reads.test.ts :: code: dot and bracket reads of process.env are mapped, the comment is not",
+    "tests/public/code-reads.test.ts :: code: a string that is not a process.env read is kept, a read at the very end of the text is mapped",
+    "tests/public/consistency.test.ts :: consistency: each real name becomes the same public name in .env files and code alike",
+    "tests/public/consistency.test.ts :: consistency: an empty set of files maps to no files and no unmapped names",
+    "tests/public/duplicate-public.test.ts :: duplicate public name: mapping files to public fails with an error naming it",
+    "tests/public/duplicate-public.test.ts :: duplicate public name: mapping no files to real still fails with an error naming it",
+    "tests/public/env-files.test.ts :: .env file: names before = are mapped to public, comments and values kept",
+    "tests/public/env-files.test.ts :: .env file named exactly .env: a value or comment equal to a real name is left as it is",
+    "tests/public/round-trip.test.ts :: round trip: mapping to public and back to real restores every file exactly",
+    "tests/public/round-trip.test.ts :: round trip: empty text, CRLF line endings and names that prefix each other are restored exactly",
+    "tests/public/unmapped.test.ts :: unmapped: a name missing from the table is left as it is and reported",
+    "tests/public/unmapped.test.ts :: unmapped: a name found many times is listed once, sorted alphabetically with the others",
+    "tests/public/whole-names.test.ts :: whole names: a name that is the start of another table name is matched whole",
+    "tests/public/whole-names.test.ts :: whole names: a longer name missing from the table is not partly renamed through its prefix"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 44,
+  "kept": [
+    "tests/private/code-reads.test.ts :: code private: a string naming the variable on the same line as a read is kept",
+    "tests/private/code-reads.test.ts :: code private: many reads of several names on one line and across lines",
+    "tests/private/code-reads.test.ts :: code private: a text that is only a bracket read is mapped",
+    "tests/private/code-reads.test.ts :: code private: an assignment-like line in code is not renamed",
+    "tests/private/code-reads.test.ts :: code private: mapping code to real renames public reads and leaves other text",
+    "tests/private/code-reads.test.ts :: code private: mapping to real does not rename real names",
+    "tests/private/code-reads.test.ts :: code private: mapping to public does not rename public names",
+    "tests/private/code-reads.test.ts :: code private: names with digits and without a common prefix are mapped",
+    "tests/private/code-reads.test.ts :: code private: CRLF line endings are kept in code when mapping to public",
+    "tests/private/code-reads.test.ts :: code private: a read followed by a property access maps only the name",
+    "tests/private/consistency.test.ts :: consistency private: many names across many files of every kind map the same way everywhere",
+    "tests/private/consistency.test.ts :: consistency private: file order and paths are kept, one result per input file",
+    "tests/private/consistency.test.ts :: consistency private: an empty set of files mapped to real gives no files and no unmapped names",
+    "tests/private/duplicate-public.test.ts :: duplicate private: a shared public name among other entries, not adjacent, is named",
+    "tests/private/duplicate-public.test.ts :: duplicate private: mapping no files to public fails with an error naming the shared name",
+    "tests/private/duplicate-public.test.ts :: duplicate private: mapping files to real fails even when no file uses the shared name",
+    "tests/private/duplicate-public.test.ts :: duplicate private: three names sharing one public name are refused",
+    "tests/private/duplicate-public.test.ts :: duplicate private: the error names the shared name even when a unique name comes first",
+    "tests/private/env-files.test.ts :: env private: several names, export lines and comments in a nested .env.production",
+    "tests/private/env-files.test.ts :: env private: a commented-out assignment is a comment and is left as it is",
+    "tests/private/env-files.test.ts :: env private: a value that itself contains NAME= is left as it is",
+    "tests/private/env-files.test.ts :: env private: a value that looks like a process.env read is left as it is",
+    "tests/private/env-files.test.ts :: env private: an empty value and a quoted value are handled, only the name renamed",
+    "tests/private/env-files.test.ts :: env private: CRLF line endings are kept when mapping to public",
+    "tests/private/env-files.test.ts :: env private: files whose name only resembles .env are not .env files",
+    "tests/private/env-files.test.ts :: env private: a file named .env. counts as a .env file",
+    "tests/private/env-files.test.ts :: env private: a code file inside a .env.d directory gets code rules, not .env rules",
+    "tests/private/env-files.test.ts :: env private: mapping a .env file to real renames public names before =",
+    "tests/private/env-files.test.ts :: env private: table names need not share a prefix",
+    "tests/private/round-trip.test.ts :: round trip private: many names, files of every kind, comments, strings and unmapped names",
+    "tests/private/round-trip.test.ts :: round trip private: a table whose public names are other real names restores exactly",
+    "tests/private/round-trip.test.ts :: round trip private: mapping public files to real and back to public restores them exactly",
+    "tests/private/unmapped.test.ts :: unmapped private: export lines and both bracket forms are left as they are and reported",
+    "tests/private/unmapped.test.ts :: unmapped private: names found in reverse order across many files are listed once each, sorted",
+    "tests/private/unmapped.test.ts :: unmapped private: mapped names are not listed, and none are listed when all are in the table",
+    "tests/private/unmapped.test.ts :: unmapped private: an empty table leaves every file as it is and reports every name",
+    "tests/private/unmapped.test.ts :: unmapped private: a name missing from the table is reported when mapping to real",
+    "tests/private/whole-names.test.ts :: whole private: longer name listed first in the table, three nested prefixes, all read forms",
+    "tests/private/whole-names.test.ts :: whole private: prefix names in a .env file are matched whole",
+    "tests/private/whole-names.test.ts :: whole private: a longer name missing from the table is kept whole in bracket reads and .env files",
+    "tests/private/whole-names.test.ts :: whole private: a longer name without a separator after the prefix is kept whole",
+    "tests/private/whole-names.test.ts :: whole private: a shorter name missing from the table is not mapped through a longer table name",
+    "tests/private/whole-names.test.ts :: whole private: mapping to real matches public names whole",
+    "tests/private/whole-names.test.ts :: whole private: names are replaced at once, not one table entry after another"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 44,
+      "total": 44
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented `mapFiles` in `src/index.ts`, and every test passes: 14 of 14 public and 44 of 44 private. I didn't touch the tests or any config files.\n\nHow it works:\n- **.env files:** a file counts as one when its own name is `.env` or starts with `.env.`, so `app.env`, `.envrc` and files inside a `.env.d/` folder use the code rules instead. On each line, only the name before `=` is renamed, including after `export `. Comments, values and CRLF line endings stay as they were.\n- **Code files:** only reads of `process.env` are renamed, in the forms `process.env.NAME`, `process.env[\"NAME\"]` and `process.env['NAME']`. Comments, other strings and assignment-like lines are left alone.\n- **Whole names:** the full name is looked up, so a name is never partly renamed through a shorter one. Each name is looked up once, so a table where one entry's public name is another entry's real name maps correctly. Mapping back then restores the original text exactly.\n- **Duplicate check:** the table is checked before any file is read. If two different real names share a public name, it throws an error naming that public name, in either direction and even with no files.\n\n**Choices the spec didn't settle:**\n- **What counts as unmapped:** a name is reported only if it appears in neither column of the table. So a public name already in the text when mapping to public is left as it is and not reported, and the same goes the other way.\n- **Duplicate real names:** if the same real name is listed with two different public names, the first entry wins. The spec only forbids two names mapping to one, so I don't treat this as an error.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "fd1fe29e-dec2-4288-afd3-971e1d9d0604",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4117711,
+        "turns": 12,
+        "durationMs": 67746,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.4117711
+  }
+}

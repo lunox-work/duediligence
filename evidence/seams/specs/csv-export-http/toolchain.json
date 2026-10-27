@@ -1,0 +1,9 @@
+{
+  "name": "exec",
+  "boundary": {
+    "service": {
+      "start": ["node", "src/server.js"],
+      "healthcheck": "/"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "slug": "he-46",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_fib4.py :: TestFib4.test_docstring_example_five",
+    "tests/public/test_fib4.py :: TestFib4.test_docstring_example_seven",
+    "tests/public/test_fib4.py :: TestFib4.test_docstring_example_six",
+    "tests/public/test_fib4.py :: TestFib4.test_initial_value_one",
+    "tests/public/test_fib4.py :: TestFib4.test_initial_value_three",
+    "tests/public/test_fib4.py :: TestFib4.test_initial_value_two",
+    "tests/public/test_fib4.py :: TestFib4.test_initial_value_zero",
+    "tests/public/test_fib4.py :: TestFib4.test_recurrence_first_applicable_index",
+    "tests/public/test_fib4.py :: TestFib4.test_recurrence_later_index"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 15,
+  "kept": [
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_complete_unseen_prefix",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_eleventh_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_evaluation_does_not_recurse",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_hundredth_term_exactly",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_interleaved_duplicate_queries",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_ninth_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_one_between_repeated_queries",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_ten_thousandth_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_tenth_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_thirteenth_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_thousandth_term_exactly",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_three_between_later_terms",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_twelfth_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_two_after_forty_second_term",
+    "tests/private/test_fib4_hidden.py :: TestFib4Hidden.test_zero_after_fortieth_term"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 9,
+      "total": 9
+    },
+    "hidden": {
+      "passed": 15,
+      "total": 15
+    }
+  }
+}

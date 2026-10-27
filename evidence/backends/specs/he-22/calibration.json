@@ -1,0 +1,59 @@
+{
+  "slug": "he-22",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_docstring_example_mixed_scalars",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_docstring_example_with_containers",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_empty_list",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_integer_valued_floats_are_removed",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_preserves_integer_order",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_preserves_repeated_integers",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_removes_non_integer_types",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_retains_positive_negative_and_zero_integers",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_single_integer"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 26,
+  "kept": [
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_all_integer_signs_and_duplicates",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_arbitrary_precision_integers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_containers_before_between_and_after_integers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_deeply_nested_containers_are_removed",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_descending_sequence_with_noise",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_empty_containers_and_other_false_values",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_empty_input_after_nonempty_input",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_equal_float_and_integer_values_are_distinguished",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_integer_after_long_noninteger_prefix",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_integer_before_all_nonintegers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_integer_conversion_protocols_do_not_make_integers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_integer_keys_and_container_contents_are_not_extracted",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_integral_decimal_and_fraction_values_are_removed",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_longer_unsorted_integer_order",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_many_identical_integers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_mixed_scalars_with_negative_and_zero",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_nonfinite_floats_interleaved_with_integers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_numeric_text_and_byte_sequences_are_not_coerced",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_objects_callables_types_and_slices",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_ranges_frozen_sets_and_memory_views",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_repeated_pattern_with_equal_noninteger_numbers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_repeated_zero_and_negative_integers",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_signed_zero_and_large_integral_floats",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_single_large_integer",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_single_negative_integer",
+    "tests/private/test_filter_integers.py :: TestFilterIntegersPrivate.test_single_positive_integer"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 9,
+      "total": 9
+    },
+    "hidden": {
+      "passed": 26,
+      "total": 26
+    }
+  }
+}

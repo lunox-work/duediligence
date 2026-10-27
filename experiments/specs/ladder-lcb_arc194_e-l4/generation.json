@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "eb33c05b-d271-4aa8-8543-e523c1ce12d4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.22227969999999997,
+        "turns": 5,
+        "durationMs": 57161,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.22227969999999997,
+    "finalText": "I wrote a deliberately small suite, because `spec.md` is incomplete. It has only the title (\"Swap 0^X and 1^Y\"), the input format (`N X Y`, `S`, `T`) and the output format (Yes/No). It has no problem statement, no definition of the operation, no constraints and no samples.\n\n**What this means for the tests:**\n- **No sample tests.** The statement has no samples. I recognise this as AtCoder ARC194 E, but I didn't add its samples from memory, since that would assert things the spec doesn't say.\n- **Only certain cases.** Every expected answer holds under any reading of the title as \"swap a block of X zeros with a block of Y ones\" (X, Y ≥ 1). Two facts carry them:\n  - If S already equals T, the answer is Yes (no operations needed).\n  - A swap keeps the number of 0s and 1s, so if S and T have different counts, the answer is No. For N=1 it's also No because a string of length 1 can't fit a swap, which needs at least 2 characters.\n- **No real boundary tests.** Without constraints I couldn't test the largest N, X or Y. I used N=1, X=1, Y=1 as the smallest input, which assumes that is allowed.\n\nThe six cases in `tests/public/test_swap_blocks.py`:\n1. N=1, S=T=\"0\" → Yes\n2. N=1, S=T=\"1\" → Yes\n3. N=1, \"0\" → \"1\" → No\n4. N=1, \"1\" → \"0\" → No\n5. N=6, X=2, Y=3, S=T → Yes\n6. N=4, X=1, Y=1, S and T have different numbers of 1s → No\n\n`python3 sandbox/compile_check.py` reports no errors. `python3 sandbox/run.py public` shows 0/6 passing, all with a runtime error from the `not implemented` stub, as expected. I wrote nothing outside `tests/public/`.\n\nIf you can get the full statement (operation, constraints, samples), I can add the sample tests and the boundary and operation cases.\n\n6 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_swap_blocks.py"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176c6-99fc-73b0-b070-876fea374723",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 184209,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "22 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/cleaning.test.ts",
+      "tests/public/layout-and-validation.test.ts",
+      "tests/public/steps.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176c9-6b05-75c0-bf15-8b2896b73007",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 19,
+        "durationMs": 355053,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "39 tests in 3 files. Build passes; all tests fail against the stubs.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/cleaning.test.ts",
+      "tests/private/layout-and-validation.test.ts",
+      "tests/private/steps.test.ts"
+    ],
+    "open": []
+  }
+}

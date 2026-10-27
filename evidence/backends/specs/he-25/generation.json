@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b28-bf26-7183-8289-9f73fce9e235",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 96661,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "10 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_factorize.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b2a-3ac7-7ed1-8720-e554972d6c3c",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 17,
+        "durationMs": 143401,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "22 tests in 1 file. Compile check passed; all cases fail against the stub and pass against an independent oracle.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_factorize_hidden.py"
+    ],
+    "open": []
+  }
+}

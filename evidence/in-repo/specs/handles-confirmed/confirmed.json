@@ -1,0 +1,30 @@
+{
+  "sha256": "076af2bb1bac6b2c1eed9f3fc019cd40b7c97e0feddc39f5d7f8ea6ee78621a5",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T14:05:17.957Z",
+  "decided": [
+    "Module surface: the private pattern is not exported; `index.ts` re-exports all of `handle.ts`, and existing core exports are unchanged; `packages/db` is untouched.",
+    "Allowed characters: `a-z`, `0-9`, `-`, `_`, with no rule about leading or trailing `-`/`_` (same as `setUsername`).",
+    "`toHandleCase` uses `String.prototype.trim` then `toLowerCase`, and inner whitespace is kept.",
+    "`checkHandle` does no trimming or lowercasing, so uppercase or surrounding whitespace is a `charset` problem.",
+    "Length is counted in UTF-16 code units, and both limits are inclusive.",
+    "Length is checked before the character set, and only the first problem is reported.",
+    "Reason strings are fixed: `Must be between 3 and 30 characters.` and `Can use letters, numbers, hyphens and underscores only.`",
+    "`normalizeHandle`: `display` is the trimmed input with its typed casing; a rejection returns exactly the `checkHandle` result, with no `display`.",
+    "`isValidHandle` takes raw input and agrees with `normalizeHandle`, like `isValidTitle` does with `normalizeTitle`.",
+    "Stem derivation order: trim hyphens before truncating (keeps `toHandleBase` results), and do not trim again after truncating, so the cut can leave a trailing `-` (29 `x` then `.y` gives 29 `x` then `-`).",
+    "Short stems are padded with `-user` for both free text and email, and an empty stem becomes `-user` (keeps `toHandleBase` results).",
+    "`toHandleStem` treats `@` like any other disallowed character; only `handleStemFromEmail` splits on the first `@`, and with no `@` it uses the whole string.",
+    "Errors: no function throws for any string; invalid input is reported through `status: \"invalid\"`, never an exception.",
+    "Overlapping calls: all functions are pure and synchronous with no shared state, so there are no `@concurrency` scenarios.",
+    "Uniqueness suffixes (`dana2`, random fallback) stay out of scope because they need a store.",
+    "Seam (the files the stub writes): packages/core/src/handle.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/"
+  ],
+  "seam": [
+    "packages/core/src/handle.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/"
+  ]
+}

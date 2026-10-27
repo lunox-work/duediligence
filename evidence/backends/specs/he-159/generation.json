@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b20-050b-73e1-8ae2-0f66b488843c",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 66221,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "13 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_eat.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b21-0990-74b3-b4f3-30ee2160080b",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 135748,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "22 tests in 1 file. Compile check passed; all expected values verified.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_eat.py"
+    ],
+    "open": []
+  }
+}

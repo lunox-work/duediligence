@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176c5-8d5c-7b50-bf69-f474f68f6063",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 165912,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "24 tests in 2 files.",
+    "problem": null,
+    "files": [
+      "tests/public/parse-errors.test.ts",
+      "tests/public/valid-features.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176c8-1710-72a3-b960-20c2a066ec0a",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 22,
+        "durationMs": 506220,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "40 tests in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/attachments.test.ts",
+      "tests/private/empty-features.test.ts",
+      "tests/private/feature-order.test.ts",
+      "tests/private/parse-errors.test.ts"
+    ],
+    "open": []
+  }
+}

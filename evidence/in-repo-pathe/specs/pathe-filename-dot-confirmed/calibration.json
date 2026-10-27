@@ -1,0 +1,116 @@
+{
+  "slug": "pathe-filename-dot-confirmed",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/pathe-filename-dot-confirmed.spec.ts :: [happy-1] last segment without extension is returned whole when a directory has a period",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [happy-1] mixed separators and dotted directories do not affect an extensionless segment",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [happy-2] last segment with an extension loses only that extension",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [happy-2] extension is stripped when every earlier segment also has a period",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [happy-3] names with several periods keep everything before the last one",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [happy-3] bare name with two periods keeps the first one",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-1] dotfile with no further period is returned whole",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-1] bare dotfile with no directory is returned whole",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-2] dotfile with a further period loses only the final extension",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-2] shortest dotfile with a further period keeps its leading period",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-3] segments ending in a period lose that trailing period",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-3] segments made of periods keep the leading period",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-4] filename equals parse(path).name for ordinary paths",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-4] filename equals parse(path).name for segments with consecutive periods",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [unhappy-1] path ending in a separator gives undefined",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [unhappy-1] empty path and repeated trailing separators give undefined",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-5] a lone space and a bare drive are returned as written",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-6] repeated and interleaved calls return the same results",
+    "test/pathe-filename-dot-confirmed.spec.ts :: [boundary-6] a call after an undefined result is unaffected"
+  ],
+  "publicOnSkeleton": {
+    "passed": 12,
+    "total": 20
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 22,
+  "kept": [
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-1] extensionless name after .. segments and dotted directories",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-1] extensionless name after many dotted directories",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-1] extensionless name after mixed separators ending in a backslash",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-1] extensionless name keeps its case and non-ASCII characters",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-3] a trailing period after the first character starts an empty extension",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-3] segments made of periods lose only their last period",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-4] filename equals parse(path).name for paths with dotted directories and mixed separators",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-4] filename equals parse(path).name for dotfiles and runs of periods",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [unhappy-1] trailing separator after a dotted directory gives undefined",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [unhappy-1] repeated and mixed trailing separators give undefined",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-5] whitespace, case and non-ASCII characters are kept after dotted directories",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-5] drive letters get no special handling",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-6] many rounds of interleaved calls return the same results",
+    "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-6] results do not depend on the preceding call"
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-2] extensions of unusual length are removed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-2] extension is stripped after .. segments and mixed separators",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-3] only the last of many periods starts the extension",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [happy-3] two-period name inside a dotted directory keeps the first period",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-1] dotfiles under dotted directories and mixed separators are returned whole",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-1] bare one-character dotfile is returned whole",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-2] dotfile with several further periods loses only the final extension",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot-confirmed/filename.spec.ts :: [boundary-2] dotfile with one further period under dotted directories",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 20,
+      "total": 20
+    },
+    "hidden": {
+      "passed": 14,
+      "total": 14
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 330,
+      "total": 330
+    },
+    "notes": "I fixed `filename` by changing one line, the `FILENAME_RE` regex at `src/utils.ts:80`. The full suite now passes: 372 of 372 tests across all four test files, including both new suites.\n\n```ts\nconst FILENAME_RE = /(^|[/\\\\])([^/\\\\]+?)(?=(\\.[^./\\\\]*)?$)/;\n```\n\n`filename` already had a working body rather than one that threw `not implemented`, but it used the old regex with the bug the spec describes. I kept that regex approach and changed only what it allows after the name:\n- **Extension can't contain a separator.** Previously the extension part could run across `/` or `\\`, so `/Users/john.doe/foo/myFile` matched at `john`. Now the match can only fall within the last segment, so dotted folder names no longer affect the result.\n- **The extension can be empty.** This is why `foo.` gives `foo`, `..` gives `.` and `...` gives `..`.\n- **A leading period stays part of the name.** The name part must be at least one character, so a period in first position can't start the extension. That gives `.gitignore` → `.gitignore`, `.env.local` → `.env` and `..foo` → `.`.\n- **Paths ending in a separator, and empty paths, still return `undefined`.** The regex has no global flag, so it keeps no state between calls.\n\nThe other exports, `normalizeAliases` and `resolveAlias`, are unchanged. The signature changes already in the working tree were there before I started, and I left them as they were.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "3a4acb82-693e-424f-82eb-089f6d505b05",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.17392020000000002,
+        "turns": 3,
+        "durationMs": 23195,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.17392020000000002
+  }
+}

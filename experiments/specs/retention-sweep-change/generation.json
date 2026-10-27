@@ -1,0 +1,65 @@
+{
+  "from": "retention-sweep",
+  "change": {
+    "sessionId": "3e541197-0d1f-41ba-b4c6-a7784d7d6621",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.3816598,
+    "turns": 5,
+    "durationMs": 103803,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I wrote `change/ticket.md` and `change/spec.md`. Nothing in `src/` or `spec.md` was changed. I checked the example dates by computing the day differences, but I haven't run either new scenario against the code.\n\n**The change:** a region's minimum now always counts from the record's created date. Today it counts from the same start date as the category's period, which is the last access for access-based categories. The new expiry date is the later of two dates: the counting start plus the category's period, or the created date plus the region's minimum. This affects the \"largest period wins\" rule, the default start date for records that were never accessed, and where the grace period starts. That code is shared by every age-based decision. Creation-based categories and regions not in the list are decided exactly as before.\n\n**Choices the ticket leaves open, settled in the spec:**\n- **Grace period start:** it runs from the later of the two expiry dates. A record isn't flagged when only the period since last access has passed and the minimum since creation hasn't.\n- **Background section:** I left it word for word. The new rules sit in the scenarios.\n\nThe ticket is 10 lines. I left out blank lines between sections to stay within the 12-line limit.\n\nChanged:\n- Access-based categories count their period from the last access (rewritten; was \"Access-based categories count from the last access\")\n- A region's minimum counts from creation and can lengthen the period (rewritten; was \"A region's minimum lengthens the period\")\n- A recent access does not restart a region's minimum (added, @happy)\n- The grace period runs from the later expiry (added, @boundary)"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "a0493515-0bdd-4312-bdd3-8dad6450a87f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5143257999999999,
+        "turns": 7,
+        "durationMs": 146207,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5143257999999999,
+    "finalText": "I wrote the public test suite in `tests/public/`, split into three files that follow the spec's three rules:\n\n- **`age.test.ts`**: covers `[happy-1]`, `[happy-2]`, `[happy-3]` and `[boundary-1]` to `[boundary-4]`. It tests the first and last days of each period and grace window, records that were never accessed (with `lastAccessed` absent or `null`), regions that aren't in the list, region minimums shorter than the category's period, the later of the two expiry dates, and the leap day in 2024.\n- **`holds-and-policies.test.ts`**: covers `[happy-4]`, `[unhappy-1]` and `[unhappy-2]`. It tests that holds are sorted, that an empty hold list counts as no hold, that a category named `constructor` is treated as not in the policy, and the three kinds of impossible dates. It also checks that dates equal to the run date are accepted.\n- **`children.test.ts`**: covers `[happy-5]`, `[boundary-5]` and `[unhappy-3]`. It tests that a child of a flagged or deleted parent follows its own age, that keeping passes down several levels whatever order the records come in, that a held record whose parent is missing is still refused, and that a `null` or absent parent id means no parent.\n\n`npm run build` reports no errors. Against the real `src/`, every test fails because the bodies throw, as expected.\n\nTo check the tests themselves, I ran them against a quick implementation I wrote in a scratch copy outside the project, and all 39 passed. Nothing else in the project was changed, and I deleted the `.js` files the build produced.\n\nSome behaviour the spec leaves open, so no test depends on it:\n- whether a parent kept for \"within period\" or \"no policy\" also keeps its children;\n- which rule wins when a record is held and its category also has no policy.\n\n39 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/age.test.ts",
+      "tests/public/children.test.ts",
+      "tests/public/holds-and-policies.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "100d5823-c66c-4d3f-8685-0e90025de8a6",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.2827920000000002,
+        "turns": 15,
+        "durationMs": 359833,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.2827920000000002,
+    "finalText": "I wrote the hidden suite in `tests/private/`. `npm run build` reports no errors, and all 81 tests fail against the stub with `not implemented`.\n\n**Correctness check:** I wrote a reference implementation in the scratchpad, not in the project. It passes all 39 public tests and all 81 private ones. I also changed it seven times, each time to a shortcut that passes the visible cases. Four of those shortcuts pass the public suite completely, and the private suite catches all four:\n- taking the last hold instead of the first one when sorted;\n- using only the first region in the list;\n- checking access dates only when the category counts from last access;\n- skipping the date checks for held records.\n\nA fifth shortcut, where only holds are passed down to children, fails one public test but still fails three private ones (children of a parent kept \"within period\" or \"no policy\").\n\n**What the suite covers beyond the public tests:**\n- **Dates and periods:** other periods and grace lengths (0, 1, 10, 14, 365 days), a check of every day around the period and grace, year ends, month lengths, and leap rules (2000 is a leap year, 2100 isn't, and a 10-year period counts every leap day).\n- **Regions:**\n  - the record's region is found anywhere in the list;\n  - several regions are handled in one sweep;\n  - a minimum equal to the period changes nothing;\n  - the later expiry wins in both directions;\n  - a region's minimum counts from creation, not from last access;\n  - the grace period runs from whichever expiry is later.\n- **Holds:**\n  - more than two holds, a prefix name, and repeated names;\n  - a hold wins over \"within period\" and over \"flag\";\n  - property names like `__proto__` and `toString` don't count as categories.\n- **Impossible dates:** refused even for categories that ignore access, for held records, for records with no policy, and when the bad record is first or last among many.\n- **Children:**\n  - every order of a five-record mix of kept and unkept families;\n  - trees, a 5-level chain and a 300-level chain listed deepest first;\n  - a hold in the middle of a chain passes down but not up;\n  - a child with a missing parent is refused even when its own children are fine.\n\nA record kept only because of its parent is still refused if its own dates are impossible; that test is keyed `[unhappy-2]`.\n\n**Left untested because the spec doesn't decide them:**\n- the reason when a child of a kept parent has its own hold, or has no policy;\n- whether a held record with no policy gets \"hold\" or \"no policy\";\n- parent cycles;\n- which id the error names when several records are invalid;\n- how hold names in mixed case sort.\n\nI deleted the `.js` files the build creates next to the sources (in `src/`, `tests/public/` and `tests/private/`), so nothing is left outside the three new `.ts` files.\n\n81 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/age.test.ts",
+      "tests/private/children.test.ts",
+      "tests/private/holds-and-policies.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176e2-ce8d-7121-8a7a-151a01775835",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 136994,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "14 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/question-limiter.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176e4-e736-71f1-a761-48fcfb584490",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 17,
+        "durationMs": 322985,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "29 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/allowances.test.ts",
+      "tests/private/invalid-ids.test.ts",
+      "tests/private/utc-days.test.ts"
+    ],
+    "open": []
+  }
+}

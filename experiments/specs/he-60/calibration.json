@@ -1,0 +1,33 @@
+{
+  "slug": "he-60",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_boundary_n_2_smallest_with_two_terms",
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_example_1",
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_example_10",
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_example_100",
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_example_30",
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_example_5",
+    "tests/public/test_sum_to_n.py :: TestSumToN.test_typical_n_4"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 7
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 9,
+  "kept": [
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_100000_brute_force",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_1000_brute_force",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_10_pow_18_exact",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_11",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_1_returns_int",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_3",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_30_returns_int",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_6",
+    "tests/private/test_sum_to_n_private.py :: TestSumToNPrivate.test_n_9"
+  ],
+  "dropped": [],
+  "reference": null
+}

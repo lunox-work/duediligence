@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-abc395_f",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc395_f",
+  "contest_id": "abc395",
+  "contest_date": "2025-03-01T00:00:00",
+  "difficulty": "hard",
+  "title": "Smooth Occlusion",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 4,
+  "privateCases": 40
+}

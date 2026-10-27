@@ -1,0 +1,15 @@
+{
+  "from": "lcb-leetcode-3717",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3717",
+  "contest_id": "weekly-contest-443",
+  "contest_date": "2025-03-29T19:30:00",
+  "difficulty": "hard",
+  "title": "minimum-operations-to-make-elements-within-k-subarrays-equal",
+  "kind": "functional",
+  "fn_name": "minOperations",
+  "publicCases": 2,
+  "privateCases": 40
+}

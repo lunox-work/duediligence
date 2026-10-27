@@ -1,0 +1,139 @@
+[
+  {
+    "slug": "identicon",
+    "repo": "../sandbox-factory",
+    "commit": "c4decdfa2206d96d580bec4b8a0bb734ae467d16",
+    "package": "packages/shared",
+    "seam": [
+      "packages/shared/src/identicon.ts"
+    ],
+    "subject": "feat: generate identicon avatars for users and organizations (#39)",
+    "message": "## feat: generate default avatars from account ids\n\nEvery user and organization now has a face without anyone uploading one and\nwithout storing a byte: a 5x5 mirrored grid and a hue, both a pure function of\nthe account id.\n\n`identicon()` lives in packages/shared as a frozen contract rather than in the\nweb app, since its output decides what every existing account looks like and a\nchange cannot be migrated or rolled back. Golden vectors pin four seeds; a\nplain determinism test would pass for any refactor that silently changed every\nface.\n\nOrganizations gain an avatar for the first time \u2014 the list showed one lucide\nglyph for all of them, and member rows showed none despite the API already\nsending `image`. The personal row wears the viewer's own face, not one from\nthe organization's id, so it matches the rail rather than reading as a second\naccount. Member rows seed from `userId`, not the `member` row id, so one\nperson looks the same in every organization.\n\nMeasured rather than assumed:\n\n- hsl(hue 65% 45%) does not hold contrast. Lightness and chroma are now oklch\n  CSS tokens per theme, at the largest chroma in sRGB at every hue: 4.2-4.6:1\n  against `muted` in light, 6.3-7.1:1 in dark.\n- An unpadded viewBox leaves 14% of a corner cell inside the circular crop,\n  hence `-1 -1 7 7`.\n- Radix shows the fallback while an image loads, not only on failure, so a\n  grid flashed ahead of every photo; `delayMs` suppresses it. The test for\n  this needs a genuinely pending image \u2014 against one that has already settled\n  it passes with or without the delay.\n\n`initials()` is deleted. One `<path>` rather than 25 `<rect>`s, which avoids\nseams between cells at 3.43 device pixels and keeps member lists to one node\nper avatar.\n\n`organization.logo` stays unexposed: the Better Auth plugin accepts any string\nthere and our hooks pass it through, so rendering it would let any signed-in\nuser aim another account's browser \u2014 invitations included \u2014 at a URL they\nchose, with no CSP to stop it. docs/architecture.md records that."
+  },
+  {
+    "slug": "step-holds",
+    "repo": "../sandbox-factory",
+    "commit": "d7d924f9331aa1536107f71040cabb0ad2edccac",
+    "package": "packages/core",
+    "seam": [
+      "packages/core/src/stages.ts"
+    ],
+    "subject": "feat(bounties): edit a bounty's scope, hold steps for approval, and pin repository builds as context (#95)",
+    "message": "## feat(bounties): hold each step until the steps before it are approved\n\nA step can now be changed only once every step before it is approved.\nThe price waits on the scope, and the sandbox waits on both. The new\n`stepHeldBy` and `stepHeldReason` in core decide this, so the API and\nthe page refuse with the same words. Going back is never held:\nunapproving, removing and unpublishing still work.\n\n- API: pricing (start a run, approve, resize, rubric, respec, reprice)\n  and sandbox routes (create, link source, generate, add, change,\n  publish, rebuild versions) answer 409 `step_held` with `heldBy` while\n  an earlier step is not approved.\n- Web: a held step's tab shows a lock and gives the reason in its\n  tooltip, and its page opens with a \"Locked.\" banner that links to the\n  step holding it. Its actions (Price it, Re-analyze, resize, approve,\n  rubric, analyze spec, Create sandbox, Link repo, Publish) are disabled\n  and give the reason on hover. The sandbox's generation and publish\n  menu use the same reason in place of the old proposal-status checks."
+  },
+  {
+    "slug": "limit-jobs",
+    "repo": "../sandbox-factory",
+    "commit": "4d1491e40f80cac31812a93b7c08b9359866e3e6",
+    "package": "apps/worker",
+    "seam": [
+      "apps/worker/src/evaluation/limit.ts"
+    ],
+    "subject": "feat: faster flows, phases 0\u20134 (#104)",
+    "message": "- At most two evaluation jobs run at once on a worker (limitJobs).",
+    "allowed": [
+      "apps/worker/src/evaluation/limit.ts"
+    ]
+  },
+  {
+    "slug": "recent-reads",
+    "repo": "../sandbox-factory",
+    "commit": "4d1491e40f80cac31812a93b7c08b9359866e3e6",
+    "package": "apps/api",
+    "seam": [
+      "apps/api/src/jira/recent.ts"
+    ],
+    "subject": "feat: faster flows, phases 0\u20134 (#104)",
+    "message": "- A Jira site's field list is kept for an hour. A proposal's page and the\n  context's status read an issue at most once a minute; approvals still\n  read it live.",
+    "allowed": [
+      "apps/api/src/jira/recent.ts"
+    ]
+  },
+  {
+    "slug": "setup-stage",
+    "repo": "../sandbox-factory",
+    "commit": "d4bccefca102004149bf735533e742b3d6348208",
+    "package": "apps/web",
+    "seam": [
+      "apps/web/src/features/onboarding/setup.ts"
+    ],
+    "subject": "feat(onboarding): connecting Jira sizes nothing; home shows the free category scan (#84)",
+    "message": "## feat(web): home adapts to what a workspace has connected\n\nHome is one page that changes with the workspace, decided in\n`features/onboarding/setup.ts` from facts `useWorkspaceSetup` reads\nthrough the cache keys the pages it summarises already use:\n\n- Nothing connected: three ways in (Jira, GitHub, write a bounty) over a\n  showcase of the six categories, each with what it looks for.\n- Jira: the board, opening on its backlog scan. Tickets are sorted into\n  the categories for free, and the one in focus is shown as the bounty it\n  would become, with one button to size it. Sizing the whole board is\n  offered with its cost said first.\n- GitHub: the repository's x-ray, with the modules a first bounty is\n  easiest to cut from; writing one there opens the new-bounty page on that\n  repository and module (`?repo=&area=`, checked against the workspace's\n  own list).\n\nA getting-started checklist sits above every stage until it is done or\nhidden. The scan is also the board page's first view until the board has\nproposals, then folds to one line above them. Nothing on home makes a\nmodel call by itself.\n\n`useConnections` is gone; `useJira` reports a server without Jira as not\noffered rather than as a failure.",
+    "allowed": [
+      "apps/web/src/features/onboarding/setup.ts"
+    ]
+  },
+  {
+    "slug": "ticket-content",
+    "repo": "../sandbox-factory",
+    "commit": "b69b190dfd232596fdff8934e9dad558d4b9061e",
+    "package": "packages/core",
+    "seam": [
+      "packages/core/src/ticket.ts"
+    ],
+    "subject": "feat(tickets): support native tickets and repository complexity profiles (#76)",
+    "message": "## feat(tickets): write tickets here and propose them without Jira\n\n- pricingSpecHash is ticketSpecHash itself; the ticket limits, default\n  type, schema version, graph deadline and paging helpers have one\n  definition each.",
+    "allowed": [
+      "packages/core/src/ticket.ts"
+    ]
+  },
+  {
+    "slug": "analysis-params",
+    "repo": "../sandbox-factory",
+    "commit": "5e5ccf7bfce33788e0703c9ddf3cfac3b4ebfff2",
+    "package": "packages/core",
+    "seam": [
+      "packages/core/src/analysis.ts"
+    ],
+    "subject": "feat(analysis): analyze repository snapshots with a private Graphify worker (#68)",
+    "message": "## feat(analysis): analyze repository snapshots with a private Graphify worker"
+  },
+  {
+    "slug": "handles",
+    "repo": "../sandbox-factory",
+    "commit": "61e8e1116cfaac44b4e7f1f4cc315f6e14428372",
+    "package": "packages/core",
+    "seam": [
+      "packages/core/src/handle.ts"
+    ],
+    "subject": "feat(organizations): add organizations with handles, membership and roles (#24)",
+    "message": ""
+  },
+  {
+    "slug": "jira-spec",
+    "repo": "../sandbox-factory",
+    "commit": "a2c9d8e89512e6f62843537dc368baeaf14e073e",
+    "package": "packages/jira",
+    "seam": [
+      "packages/jira/src/spec.ts"
+    ],
+    "subject": "feat(jira): read a ticket's spec and fingerprint it (#27)",
+    "message": ""
+  },
+  {
+    "slug": "categories",
+    "repo": "../sandbox-factory",
+    "commit": "586f07984834493ef605f265d7d2d75561480945",
+    "package": "packages/core",
+    "seam": [
+      "packages/core/src/selection/index.ts",
+      "packages/core/src/selection/facts.ts",
+      "packages/core/src/selection/rules.ts",
+      "packages/core/src/selection/signals.ts",
+      "packages/core/src/selection/categories.ts"
+    ],
+    "subject": "feat(bounties): select tickets by category and browse proposals by category (#64)",
+    "message": "## feat(bounties): size every ticket that fits a category, with the reason\n\nA backlog run took the ten oldest tickets. It now reads the whole board and\nsizes every open ticket that fits at least one outsourcing category, and\nrecords why each was picked.\n\nCategories are one registry in packages/core/src/selection: Left behind,\nAlways next sprint, Quietly wanted, Holding others up, Paper cuts and\nDeadline exposed. Each is an id, a label, default thresholds and a rule\nbuilt from named signals, so a criterion or a category changes in one\nplace. The board settings schema is generated from the registry, and a\nboard can override any threshold or switch a category off.\n\n- Selection reads /board/{id}/issue for every board type, asking for\n  sprint history, votes, watchers, links and fix versions, and classifies\n  in code. The backlog endpoint hides tickets in a sprint, which are what\n  \"Always next sprint\" looks for. Still no description in a list read.\n- The reason is stored on the run's plan and shown on proposal rows, in\n  the sizing list, and in the peek under \"Why this ticket\".\n- maxTickets and excludeAssigned become ticketCap (optional, no default)\n  and unassignedOnly (default false). Renamed rather than re-defaulted:\n  registration stored the old defaults on existing boards, which would\n  have kept them capped at ten.\n- A run's deadline grows with its plan, and recorded outcomes are bounded\n  by the plan rather than a fixed 50.\n- Board settings merge category by category and threshold by threshold,\n  and a null in an update removes the setting instead of being stored.\n- The proposal list pages 50 at a time with \"Show more\", and title\n  streams are split into batches the route accepts."
+  },
+  {
+    "slug": "context-sources",
+    "repo": "../sandbox-factory",
+    "commit": "7f2274d76108365697732a01485b05d95c98359a",
+    "package": "packages/core",
+    "seam": [
+      "packages/core/src/sources.ts"
+    ],
+    "subject": "feat(bounties): sync Jira and repository context into bounties, versioned per source (#80)",
+    "message": "## feat(bounties): sync Jira and repository context into bounties, versioned per source\n\nA person can sync a bounty's sources into it as context: its Jira\nissue's fields beyond its text (type, status, priority, labels,\ncomponents, releases, story points, estimates, demand and links), and\nits repository's own documents (README, guides and docs, never code),\nread at the newest snapshot and cut to fixed caps\n(`packages/core/src/sources.ts`).\n\nEach sync that finds something new is the source's next version in\n`bounty_context`; one that finds the same content only moves the\nversion's revision and check time. The overview holds the latest\nversion from each source still linked. Sizing and spec drafting are\nshown it (`draft-v5`, `jira-size-v4`) and the proposal records the\nversions it used; a sandbox version freezes it into its approved task,\nwhich the starter agent is shown (`sandbox_starter@3`), and records the\nversions beside it.\n\n- `GET .../bounties/:id/context` says where each source stands:\n  unlinked, unsynced, current, ahead of its sync, or unavailable.\n- `POST .../bounties/:id/context/{jira,github}/sync` reads the source\n  now; a Jira sync takes the issue's text too.\n\nThe web bounty page shows each source's sync under its link, warns when\na source has moved past it, and marks the bounty and sandbox steps made\nwith older context than the overview holds.\n\nMigration 0056 adds `bounty_context` and the context version columns on\n`bounty_proposal` and `sandbox_version_source`."
+  }
+]

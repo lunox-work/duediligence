@@ -1,0 +1,52 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176e9-d69a-7db2-bf56-73b396722735",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 184128,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "16 tests in 1 file. Build passes with `--noEmit`.",
+    "problem": null,
+    "files": [
+      "tests/public/reverse-map.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176ec-a749-7662-86c8-4392c285c4c8",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 25,
+        "durationMs": 396931,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passed. All tests fail against the unimplemented interface, as required.\n\n41 tests in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/content.test.ts",
+      "tests/private/format-and-operations.test.ts",
+      "tests/private/paths.test.ts",
+      "tests/private/unmapped.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "he-58",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_common.py :: TestCommon.test_common_empty_input",
+    "tests/public/test_common.py :: TestCommon.test_common_none_shared",
+    "tests/public/test_common.py :: TestCommon.test_common_typical",
+    "tests/public/test_common.py :: TestCommon.test_docstring_example_1",
+    "tests/public/test_common.py :: TestCommon.test_docstring_example_2",
+    "tests/public/test_common.py :: TestCommon.test_sorted_negative_and_zero",
+    "tests/public/test_common.py :: TestCommon.test_sorted_typical",
+    "tests/public/test_common.py :: TestCommon.test_unique_duplicated_in_one_list_only",
+    "tests/public/test_common.py :: TestCommon.test_unique_duplicates_in_both"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 26,
+  "kept": [
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_both_empty",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_duplicates_absent_from_other_list",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_empty_second_list",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_first_is_subset",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_identical_lists",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_large_integers",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_large_known_answer",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_large_lists_against_brute_force",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_none_shared_interleaved_with_duplicates",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_none_shared_negatives_vs_positives",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_random_against_brute_force",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_second_is_subset",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_shorter_first_list",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_single_elements_different",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_single_elements_equal",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_single_negative_shared",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_sorted_all_negative",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_sorted_numeric_not_lexicographic",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_sorted_shuffled_inputs",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_sorted_signed_not_by_magnitude",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_strings",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_symmetric_in_arguments",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_unique_duplicated_in_second_only",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_unique_many_repeats",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_unique_single_value_many_times",
+    "tests/private/test_common_private.py :: TestCommonPrivate.test_zero_shared"
+  ],
+  "dropped": [],
+  "reference": null
+}

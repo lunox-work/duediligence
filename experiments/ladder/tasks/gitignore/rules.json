@@ -1,0 +1,20 @@
+{
+  "statuses": {
+    "full": "the rule, what happens otherwise, and worked examples",
+    "rule": "the rule and what happens otherwise, no examples",
+    "partial": "the rule named or described loosely, without its edge cases",
+    "absent": "not mentioned"
+  },
+  "rules": {
+    "R1": { "title": "blank lines, # comments, \\# and a leading space", "L0": "full", "L1": "rule", "L2": "partial", "L3": "partial", "L4": "absent" },
+    "R2": { "title": "trailing spaces dropped unless escaped", "L0": "full", "L1": "rule", "L2": "absent", "L3": "absent", "L4": "absent" },
+    "R3": { "title": "! negates; \\! is literal", "L0": "full", "L1": "rule", "L2": "partial", "L3": "partial", "L4": "absent" },
+    "R4": { "title": "no re-including a file whose parent directory is excluded", "L0": "full", "L1": "rule", "L2": "partial", "L3": "absent", "L4": "absent" },
+    "R5": { "title": "a trailing / matches directories only", "L0": "full", "L1": "rule", "L2": "rule", "L3": "partial", "L4": "absent" },
+    "R6": { "title": "a / at the start or middle anchors to the root; otherwise any depth", "L0": "full", "L1": "rule", "L2": "rule", "L3": "partial", "L4": "absent" },
+    "R7": { "title": "*, ?, [...], [!...] never match /; \\ escapes", "L0": "full", "L1": "rule", "L2": "partial", "L3": "partial", "L4": "absent" },
+    "R8": { "title": "**/ leading, /** trailing, /**/ inside; other ** is *", "L0": "full", "L1": "rule", "L2": "partial", "L3": "absent", "L4": "absent" },
+    "R9": { "title": "the last matching pattern decides", "L0": "full", "L1": "rule", "L2": "partial", "L3": "absent", "L4": "absent" },
+    "R10": { "title": "a pattern matching a directory ignores everything inside it", "L0": "full", "L1": "rule", "L2": "rule", "L3": "absent", "L4": "absent" }
+  }
+}

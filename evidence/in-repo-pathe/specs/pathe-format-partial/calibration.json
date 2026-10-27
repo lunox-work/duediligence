@@ -1,0 +1,228 @@
+{
+  "slug": "pathe-format-partial",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ name: \"file\" }) should be \"file\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ ext: \".txt\" }) should be \".txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ name: \"file\", ext: \".txt\" }) should be \"file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ name: \"file\", ext: \"\" }) should be \"file\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ dir: \"/home\", name: \"file\" }) should be \"/home/file\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ dir: \"/home\", ext: \".txt\" }) should be \"/home/.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ dir: \"a\", ext: \".txt\" }) should be \"a/.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ root: \"/\", name: \"file\" }) should be \"/file\"",
+    "test/pathe-format-partial.spec.ts :: [happy-1] format({ root: \"/\", ext: \".txt\" }) should be \"/.txt\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-1] format({}) should be the empty string",
+    "test/pathe-format-partial.spec.ts :: [boundary-2] format with fields explicitly undefined treats them as missing",
+    "test/pathe-format-partial.spec.ts :: [boundary-3] format with every field null should be the empty string",
+    "test/pathe-format-partial.spec.ts :: [happy-2] format({ name: \"file\", ext: \"txt\" }) should be \"file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-2] format({ ext: \"txt\" }) should be \".txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-2] format({ name: \"file\", ext: \"tar.gz\" }) should be \"file.tar.gz\"",
+    "test/pathe-format-partial.spec.ts :: [happy-2] format({ root: \"/\", name: \"file\", ext: \"txt\" }) should be \"/file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-2] format({ dir: \"/home\", ext: \"txt\" }) should be \"/home/.txt\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-4] format({ name: \"file\", ext: \".\" }) should be \"file.\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-4] format({ name: \"file\", ext: \"..txt\" }) should be \"file..txt\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-5] format({ name: \".env\" }) should be \".env\"",
+    "test/pathe-format-partial.spec.ts :: [happy-3] format({ name: \"file\", base: \"file.txt\" }) should be \"file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-3] format({ base: \"file.md\", ext: \"txt\" }) should be \"file.md\"",
+    "test/pathe-format-partial.spec.ts :: [happy-3] format({ root: \"/\", base: \"file.txt\", ext: \"ignored\" }) should be \"/file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-6] format({ base: \"\", name: \"file\", ext: \".txt\" }) should be the empty string",
+    "test/pathe-format-partial.spec.ts :: [boundary-7] format({ dir: \"/home/user\" }) should be \"/home/user\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-7] format({ dir: \"home\" }) should be \"home\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-7] format({ dir: \"/home/user/\" }) should be \"/home/user/\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-7] format({ root: \"/\" }) should be \"/\"",
+    "test/pathe-format-partial.spec.ts :: [boundary-7] format({ root: \"/\", dir: \"/\" }) should be \"/\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ root: \"/ignored\", dir: \"/home/user/dir\", base: \"file.txt\" }) should be \"/home/user/dir/file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ root: \"/\", dir: \"/a/b\", name: \"f\" }) should be \"/a/b/f\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ root: \"/\", name: \"file\", ext: \".txt\" }) should be \"/file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ dir: \"C:\\\\path\\\\dir\", base: \"file.txt\" }) should be \"C:/path/dir/file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ dir: \"C:\\\\a\", name: \"file\" }) should be \"C:/a/file\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ dir: \"C:\\\\a\\\\b\", ext: \"txt\" }) should be \"C:/a/b/.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-4] format({ root: \"C:\\\\\", name: \"file\", ext: \"txt\" }) should be \"C:/file.txt\"",
+    "test/pathe-format-partial.spec.ts :: [happy-5] posix.format and win32.format both give \"file.txt\" for { name: \"file\", ext: \"txt\" }",
+    "test/pathe-format-partial.spec.ts :: [unhappy-1] format(undefined) throws a TypeError"
+  ],
+  "publicOnSkeleton": {
+    "passed": 19,
+    "total": 38
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 65,
+  "kept": [
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ name: \"README\" }) has no \"undefined\" suffix",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ ext: \".json\" }) should be \".json\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"/a/b/c/d/e\", name: \"deep\" }) should be \"/a/b/c/d/e/deep\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"a/../b\", name: \"c\" }) keeps the dir unnormalised",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"/home/\", name: \"file\" }) joins with \"/\" without collapsing",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"/var/log\", ext: \".log\" }) should be \"/var/log/.log\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"x/y/z\", ext: \".md\" }) should be \"x/y/z/.md\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ root: \"/srv\", name: \"file\" }) should be \"/srv/file\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ root: \"/\", dir: \"/a\", ext: \".txt\" }) should be \"/a/.txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-2] explicit undefined name with ext \"txt\" gives \".txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-2] explicit undefined base and ext with a dir gives dir/name",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-3] null base falls back to name and ext: \"file.txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-3] null ext with a name gives just the name, never \"null\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-3] null name with ext \".txt\" gives \".txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-3] null root and dir with name and ext gives \"a.b\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-3] null root with a dir is joined, not resolved: \"rel/f\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ name: \"photo\", ext: \"jpeg\" }) should be \"photo.jpeg\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ ext: \"c\" }) should be \".c\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ name: \"file\", ext: \"txt.\" }) should be \"file.txt.\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ name: \"archive.tar\", ext: \"gz\" }) should be \"archive.tar.gz\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ name: \"bundle\", ext: \"min.js.map\" }) should be \"bundle.min.js.map\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ root: \"/\", dir: \"/etc\", name: \"hosts\", ext: \"bak\" }) should be \"/etc/hosts.bak\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ dir: \"a/b\", ext: \"md\" }) should be \"a/b/.md\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-2] format({ dir: \"/home\", name: \"notes\", ext: \"md\" }) should be \"/home/notes.md\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-4] format({ ext: \".\" }) should be \".\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-4] format({ ext: \"..txt\" }) should be \"..txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-5] format({ dir: \"/app\", name: \".gitignore\" }) should be \"/app/.gitignore\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-5] format({ root: \"/\", name: \".bashrc\" }) should be \"/.bashrc\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-5] format({ name: \"..env\" }) should be \"..env\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ root: \"/ignored\", dir: \"/a/b\", name: \"c\", ext: \"d\" }) should be \"/a/b/c.d\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ root: \"/\", dir: \"/a/../b\", name: \"f\" }) should be \"/b/f\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ root: \"/\", dir: \"rel\", name: \"f\" }) resolves dir against root: \"/rel/f\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ dir: \"c:\\\\x\\\\y\", name: \"z\", ext: \"txt\" }) upper-cases the drive: \"C:/x/y/z.txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ dir: \"D:\\\\one\\\\two\\\\three\", name: \"f\" }) should be \"D:/one/two/three/f\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ dir: \"C:\\\\a\\\\b\", ext: \".log\" }) should be \"C:/a/b/.log\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ name: \"a\\\\b\", ext: \"txt\" }) turns backslashes into \"/\": \"a/b.txt\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ root: \"C:\\\\\", dir: \"C:\\\\data\", name: \"f\", ext: \"csv\" }) should be \"C:/data/f.csv\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ root: \"C:\\\\\", ext: \"ini\" }) should be \"C:/.ini\"",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-5] posix, win32 and the default export give the same result for partial objects",
+    "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-5] the default export formats { name: \"file\", ext: \"txt\" } as \"file.txt\""
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"a/b\", name: \"index\", ext: \".d.ts\" }) should be \"a/b/index.d.ts\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-1] format({ dir: \"/srv\", name: \"app\", ext: \"\" }) should be \"/srv/app\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-1] format({}) through posix, win32 and the default export is the empty string",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-2] every field explicitly undefined gives the empty string",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-4] format({ dir: \"/a\", name: \"f\", ext: \".\" }) should be \"/a/f.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-4] format({ name: \"file\", ext: \"...\" }) should be \"file...\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-4] format({ root: \"/\", name: \"file\", ext: \"..\" }) should be \"/file..\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-5] format({ name: \".env\", ext: \"\" }) should be \".env\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-3] base wins over both name and ext: \"real.js\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-3] format({ base: \"Makefile\", ext: \"txt\" }) should be \"Makefile\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-3] format({ dir: \"/home/u\", base: \"a.txt\", name: \"b\", ext: \"md\" }) should be \"/home/u/a.txt\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-3] format({ root: \"/\", dir: \"/x\", base: \"y.z\", name: \"n\", ext: \".e\" }) should be \"/x/y.z\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-6] an empty base with a dir leaves only the dir: \"/home\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-6] an empty base with ext only gives the empty string",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-6] an empty base with root \"/\" gives \"/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ dir: \"/a/b/c/d\" }) should be \"/a/b/c/d\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ dir: \"a/b\" }) should be \"a/b\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ dir: \"rel/dir/\" }) keeps its trailing \"/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ dir: \"/\" }) should be \"/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ dir: \"/home/user\", name: \"\", ext: \"\" }) adds no separator",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ root: \"/srv\" }) should be \"/srv\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [boundary-7] format({ root: \"/\", dir: \"/home/user\" }) should be \"/home/user\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [happy-4] format({ root: \"/opt\", name: \"tool\", ext: \".sh\" }) should be \"/opt/tool.sh\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [unhappy-1] format(undefined) throws a TypeError while format({}) returns the empty string",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial/format-partial.spec.ts :: [unhappy-1] posix.format(undefined) and win32.format(undefined) throw a TypeError",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 38,
+      "total": 38
+    },
+    "hidden": {
+      "passed": 40,
+      "total": 40
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 375,
+      "total": 375
+    },
+    "notes": "I fixed `format` in `src/_path.ts` so that partial path objects no longer put `\"undefined\"` into the result. The whole suite now passes: 478 of 478 tests, including both format suites. Prettier, ESLint and `tsc` also report no problems.\n\nWhat changed in the `format` body:\n- **`ext`:** a missing or empty `ext` adds nothing. An `ext` without a leading dot gets one, so `\"txt\"` becomes `\".txt\"`. One that already starts with a dot, such as `\".\"` or `\"..txt\"`, is used as given.\n- **File part:** if `base` is given it is used, even when it is `\"\"`. Otherwise the file part is `name`, or `\"\"` if there is no name, followed by the extension.\n\n`null` fields act as if they were missing, and `format(undefined)` still throws a `TypeError`. The rest is unchanged: empty segments are dropped, `resolve` is used when `root` is set, and the result goes through `normalizeWindowsPath`. `posix.format`, `win32.format` and the default export are the same function, so they change too.\n\nThe task said `format` would throw `not implemented`, but it actually still had the old implementation, so I edited that body.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "ee062242-740c-4c40-83a5-278583823a15",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.13160960000000002,
+        "turns": 5,
+        "durationMs": 25830,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.13160960000000002
+  }
+}

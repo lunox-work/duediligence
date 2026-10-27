@@ -1,0 +1,35 @@
+[01:43:47] 1 haiku run(s) staged
+[01:43:47] csv-export-http haiku 1 agent started
+[01:46:30] csv-export-http haiku 1 agent done $0.04, 7 path(s) changed
+1 run(s) finished; next: node bin/grade.mjs csv-export-http
+[01:46:33] csv-export-http/haiku/1 overfit public 36/36, hidden 47/48 scenarios unhappy-2
+1 result(s) in results.jsonl
+[01:47:27] 1 haiku-retry-keyed run(s) staged
+[01:47:27] csv-export-http haiku-retry-keyed 1 retry started unhappy-2
+[01:48:46] csv-export-http haiku-retry-keyed 1 retry done $0.02
+1 retry finished; next: node bin/grade.mjs csv-export-http
+[01:48:46] 2 haiku run(s) staged
+[01:48:46] csv-export-http haiku 2 agent started
+[01:48:46] csv-export-http haiku 3 agent started
+[01:50:54] killed 1 process(es) the session left running in /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work/csv-export-http-haiku-2-S8odkn
+[01:50:54] csv-export-http haiku 2 agent done $0.03, 5 path(s) changed
+[01:50:54] csv-export-http haiku 3 agent ended with an error $0.00, 4 path(s) changed
+2 run(s) finished; next: node bin/grade.mjs csv-export-http
+[01:50:57] csv-export-http/haiku/2 overfit public 36/36, hidden 47/48 scenarios unhappy-2
+[01:51:00] csv-export-http/haiku/3 passed public 36/36, hidden 48/48 
+[01:51:03] csv-export-http/haiku-retry-keyed/1 passed public 36/36, hidden 48/48 
+4 result(s) in results.jsonl
+[01:51:06] {"at":"2026-10-27T01:51:06.178Z","slug":"csv-export-http","prepare":{"public":36,"hiddenWritten":48,"kept":48,"reference":{"public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48}},"costUsd":4.31},"stub":{"verdict":"incomplete","public":{"passed":0,"total":36},"hidden":{"passed":0,"total":48}},"runs":[{"variant":"haiku","run":1,"verdict":"overfit","public":{"passed":36,"total":36},"hidden":{"passed":47,"total":48},"costUsd":0.03698782,"refused":[]},{"variant":"haiku","run":2,"verdict":"overfit","public":{"passed":36,"total":36},"hidden":{"passed":47,"total":48},"costUsd":0.0287432,"refused":[]},{"variant":"haiku","run":3,"verdict":"passed","public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48},"costUsd":null,"refused":[]},{"variant":"haiku-retry-keyed","run":1,"verdict":"passed","public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48},"costUsd":0.01817795,"refused":[]}]}
+[01:53:49] 3 haiku run(s) staged
+[01:53:49] csv-export-http haiku 4 agent started
+[01:53:49] csv-export-http haiku 5 agent started
+[01:56:25] csv-export-http haiku 5 agent done $0.04, 6 path(s) changed
+[01:56:25] csv-export-http haiku 6 agent started
+[01:56:47] csv-export-http haiku 4 agent done $0.04, 5 path(s) changed
+[01:59:33] csv-export-http haiku 6 agent done $0.04, 8 path(s) changed
+3 run(s) finished; next: node bin/grade.mjs csv-export-http
+[01:59:36] csv-export-http/haiku/4 overfit public 36/36, hidden 47/48 scenarios unhappy-2
+[01:59:40] csv-export-http/haiku/5 passed public 36/36, hidden 48/48 
+[01:59:43] csv-export-http/haiku/6 passed public 36/36, hidden 48/48 
+7 result(s) in results.jsonl
+[01:59:47] {"at":"2026-10-27T01:59:47.298Z","slug":"csv-export-http","prepare":{"public":36,"hiddenWritten":48,"kept":48,"reference":{"public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48}},"costUsd":4.31},"stub":{"verdict":"incomplete","public":{"passed":0,"total":36},"hidden":{"passed":0,"total":48}},"runs":[{"variant":"haiku","run":1,"verdict":"overfit","public":{"passed":36,"total":36},"hidden":{"passed":47,"total":48},"costUsd":0.03698782,"refused":[]},{"variant":"haiku","run":2,"verdict":"overfit","public":{"passed":36,"total":36},"hidden":{"passed":47,"total":48},"costUsd":0.0287432,"refused":[]},{"variant":"haiku","run":3,"verdict":"passed","public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48},"costUsd":null,"refused":[]},{"variant":"haiku","run":4,"verdict":"overfit","public":{"passed":36,"total":36},"hidden":{"passed":47,"total":48},"costUsd":0.040417770000000006,"refused":[]},{"variant":"haiku","run":5,"verdict":"passed","public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48},"costUsd":0.03699543000000001,"refused":[]},{"variant":"haiku","run":6,"verdict":"passed","public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48},"costUsd":0.0401421,"refused":[]},{"variant":"haiku-retry-keyed","run":1,"verdict":"passed","public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48},"costUsd":0.01817795,"refused":[]}]}

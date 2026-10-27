@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a1770d-e36d-7f50-9b41-68b1fccabf9d",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 88186,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Compile check passed with no errors.\n\n12 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_make_palindrome.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a1770f-3647-7412-abc2-d6f4738cafd3",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 238772,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "30 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_make_palindrome.py"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "slug": "env-names",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/code-reads.test.ts :: code: dot and bracket reads of process.env are mapped, the comment is not",
+    "tests/public/code-reads.test.ts :: code: a string that is not a process.env read is kept, a read at the very end of the text is mapped",
+    "tests/public/consistency.test.ts :: consistency: each real name becomes the same public name in .env files and code alike",
+    "tests/public/consistency.test.ts :: consistency: an empty set of files maps to no files and no unmapped names",
+    "tests/public/duplicate-public.test.ts :: duplicate public name: mapping files to public fails with an error naming it",
+    "tests/public/duplicate-public.test.ts :: duplicate public name: mapping no files to real still fails with an error naming it",
+    "tests/public/env-files.test.ts :: .env file: names before = are mapped to public, comments and values kept",
+    "tests/public/env-files.test.ts :: .env file named exactly .env: a value or comment equal to a real name is left as it is",
+    "tests/public/round-trip.test.ts :: round trip: mapping to public and back to real restores every file exactly",
+    "tests/public/round-trip.test.ts :: round trip: empty text, CRLF line endings and names that prefix each other are restored exactly",
+    "tests/public/unmapped.test.ts :: unmapped: a name missing from the table is left as it is and reported",
+    "tests/public/unmapped.test.ts :: unmapped: a name found many times is listed once, sorted alphabetically with the others",
+    "tests/public/whole-names.test.ts :: whole names: a name that is the start of another table name is matched whole",
+    "tests/public/whole-names.test.ts :: whole names: a longer name missing from the table is not partly renamed through its prefix"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 29,
+  "kept": [
+    "tests/private/boundary-unmapped.test.ts :: prefix: the spec's NORTHWIND_SMTP and NORTHWIND_SMTP_HOST reads are matched whole",
+    "tests/private/boundary-unmapped.test.ts :: prefix: names that start other names are matched whole in either table order, in .env and code",
+    "tests/private/boundary-unmapped.test.ts :: prefix: mapping to real matches public names whole",
+    "tests/private/boundary-unmapped.test.ts :: prefix: a longer name missing from the table is not renamed by its mapped prefix",
+    "tests/private/boundary-unmapped.test.ts :: unmapped: the spec's NORTHWIND_API_KEY is left and reported once",
+    "tests/private/boundary-unmapped.test.ts :: unmapped: several missing names across files are listed once each, sorted",
+    "tests/private/boundary-unmapped.test.ts :: unmapped: names missing from the table are reported when mapping to real",
+    "tests/private/boundary-unmapped.test.ts :: unmapped: with an empty table every found name is left and reported",
+    "tests/private/code-reads.test.ts :: code: the spec's src/mail.ts reads are mapped and the comment is left",
+    "tests/private/code-reads.test.ts :: code: dot and bracket reads of other names are mapped in a .js file",
+    "tests/private/code-reads.test.ts :: code: mentions that are not reads of process.env are left as they are",
+    "tests/private/code-reads.test.ts :: code: mapping to real renames public names in process.env reads",
+    "tests/private/code-reads.test.ts :: code: files come back one per input, in the same order, with their paths",
+    "tests/private/code-reads.test.ts :: code: an empty set of files maps to an empty result",
+    "tests/private/conflict.test.ts :: conflict: the spec's NORTHWIND_A and NORTHWIND_B both mapped to SVC_X is refused",
+    "tests/private/conflict.test.ts :: conflict: a shared public name among other entries is refused in both directions",
+    "tests/private/conflict.test.ts :: conflict: the table is refused even when no file uses the shared name",
+    "tests/private/consistency-roundtrip.test.ts :: consistency: two real names become the same public names in every kind of file",
+    "tests/private/consistency-roundtrip.test.ts :: consistency: the result does not depend on the order of the table entries",
+    "tests/private/consistency-roundtrip.test.ts :: round trip: the spec's files map to public and back to exactly the originals",
+    "tests/private/consistency-roundtrip.test.ts :: round trip: mixed files with several names, unmapped names and comments come back exactly",
+    "tests/private/consistency-roundtrip.test.ts :: to real: public names are mapped back across .env and code files",
+    "tests/private/env-files.test.ts :: env file: the spec's .env.example is mapped to public",
+    "tests/private/env-files.test.ts :: env file: other names, values and a nested .env file are mapped to public",
+    "tests/private/env-files.test.ts :: env file: names in files named .env.<anything> are mapped",
+    "tests/private/env-files.test.ts :: env file: values and comments that mention a name are left as they are",
+    "tests/private/env-files.test.ts :: env file: mapping to real renames public names before '=' back to real ones",
+    "tests/private/env-files.test.ts :: env file: files whose name is not .env or .env.* are not treated as .env files",
+    "tests/private/env-files.test.ts :: env file: a file with no names in it is unchanged"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 29,
+      "total": 29
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented `mapFiles` in `src/index.ts`, and every test passes: 14 of 14 in the public suite and 29 of 29 in the private one, using `sandbox/run.mjs`.\n\nHow it works:\n- **Checking the table:** it fails with an error naming the shared public name when two real names map to it. This check runs before any file is looked at, even if no file is passed. I also made it fail when one real name maps to two different public names. The spec doesn't cover that case, but such a table couldn't be mapped back reliably.\n- **`.env` files:** a file counts as one when its name is `.env` or starts with `.env.`, in any folder. Only the name before `=` on each line is renamed, with or without a leading `export`. Comments and values stay as they are, and CRLF line endings come back unchanged.\n- **Code files:** only `process.env.NAME`, `process.env[\"NAME\"]` and `process.env['NAME']` are renamed. Each name is matched in full and looked up exactly, so a name that is the start of another is never partly renamed. Other mentions, such as comments, string labels and variables, are left alone.\n- **Unmapped names:** any name found in either kind of file that isn't in the table for the chosen direction is left as it is. It's listed once, and the list is sorted.\n\nTwo limitations:\n- Code reads are found by pattern matching, not by parsing. Text like `process.env.X` inside a comment or string would still be renamed.\n- Mapping to public and back can't restore a file exactly if the real file already uses a public name from the table. The spec says the round trip should always work, but no mapping can guarantee that case.\n\nnone",
+    "sessions": [
+      {
+        "sessionId": "8ed877c6-2afb-45bb-8305-04a8eaf742df",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3615150999999999,
+        "turns": 8,
+        "durationMs": 56151,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.3615150999999999
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "sha256": "814622c2621d3eeda55c8de6bb25fd746bb310647b0fec2d4b570ba684d8f0a7",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-26T13:42:23.819Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "Missing `name`, `ext` or both (and `{}`) contribute `\"\"` instead of `\"undefined\"`.",
+    "`ext` without a leading dot gets `\".\"` prepended; an `ext` already starting with `\".\"` (including `\".\"` and `\"..txt\"`) is used unchanged.",
+    "`null` fields are treated like missing fields.",
+    "An explicit `base: \"\"` still counts as given, so `name` and `ext` are ignored and the file part is empty (keeps the existing `??`).",
+    "A `dir` with no file part is returned without a trailing `/` (`{ dir: \"/home/user\" }` → `\"/home/user\"`), and an existing trailing `/` is kept as given.",
+    "`root` without `dir` is still joined via `resolve`, so `{ root: \"/\", ext: \"txt\" }` → `\"/.txt\"`.",
+    "`format(undefined)` keeps throwing a `TypeError`; only the object's fields are optional.",
+    "Seam (the files the stub writes): src/_path.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/_path.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

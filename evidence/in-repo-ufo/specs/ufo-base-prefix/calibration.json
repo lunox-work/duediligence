@@ -1,0 +1,582 @@
+{
+  "slug": "ufo-base-prefix",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/apiv2\", \"/api\") returns \"/api/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/apiv2\", \"/api/\") returns \"/api/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/apiv2/users\", \"/api/\") returns \"/api/apiv2/users\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/api-docs\", \"/api\") returns \"/api/api-docs\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/api.json\", \"/api\") returns \"/api/api.json\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/api;x\", \"/api\") returns \"/api/api;x\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/api%2F\", \"/api\") returns \"/api/api%2F\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-1] withBase(\"/foo/barbaz\", \"/foo/bar\") returns \"/foo/bar/foo/barbaz\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api\", \"/api\") returns \"/api\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api/\", \"/api\") returns \"/api/\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api/users\", \"/api\") returns \"/api/users\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api?x=1\", \"/api\") returns \"/api?x=1\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api?\", \"/api\") returns \"/api?\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api#top\", \"/api\") returns \"/api#top\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/api#\", \"/api\") returns \"/api#\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/foo/bar/baz\", \"/foo/bar\") returns \"/foo/bar/baz\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/base\", \"/base/\") returns \"/base\"",
+    "test/ufo-base-prefix.test.ts :: [happy-1] withBase(\"/base/a\", \"/base/\") returns \"/base/a\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/apiv2\", \"/api\") returns \"/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/apiv2\", \"/api/\") returns \"/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/apiv2/users\", \"/api/\") returns \"/apiv2/users\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/api-docs\", \"/api\") returns \"/api-docs\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/api.json\", \"/api\") returns \"/api.json\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/api;x\", \"/api\") returns \"/api;x\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/api%2F\", \"/api\") returns \"/api%2F\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"/foo/barbaz\", \"/foo/bar\") returns \"/foo/barbaz\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-2] withoutBase(\"https://test.com/apiv2\", \"https://test.com/api\") returns \"https://test.com/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api\", \"/api\") returns \"/\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api/\", \"/api\") returns \"/\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api/users\", \"/api\") returns \"/users\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api?x=1\", \"/api\") returns \"/?x=1\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api?\", \"/api\") returns \"/?\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api#top\", \"/api\") returns \"/#top\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/api#\", \"/api\") returns \"/#\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/foo/bar/baz\", \"/foo/bar\") returns \"/baz\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/base\", \"/base/\") returns \"/\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"/base/a\", \"/base/\") returns \"/a\"",
+    "test/ufo-base-prefix.test.ts :: [happy-2] withoutBase(\"https://test.com/api/x\", \"https://test.com/api\") returns \"/x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-1] withBase(\"/api/x\", \"/api//\") returns \"/api/x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-1] withBase(\"/api//x\", \"/api//\") returns \"/api//x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-1] withoutBase(\"/api/x\", \"/api//\") returns \"/x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-1] withoutBase(\"/api//x\", \"/api//\") returns \"/x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-2] withBase(\"/API/users\", \"/api\") returns \"/api/API/users\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-2] withoutBase(\"/API/users\", \"/api\") returns \"/API/users\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-2] withBase(\"/api%2Fx\", \"/api\") returns \"/api/api%2Fx\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-2] withoutBase(\"/api%2Fx\", \"/api\") returns \"/api%2Fx\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-3] withBase(\"/api\\\\x\", \"/api\") returns \"/api/api\\\\x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-3] withoutBase(\"/api\\\\x\", \"/api\") returns \"/api\\\\x\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-3] withBase(\"/a/api\", \"/api\") returns \"/api/a/api\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-3] withoutBase(\"/a/api\", \"/api\") returns \"/a/api\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-3] withBase(\"api/x\", \"/api\") returns \"/api/api/x\"",
+    "test/ufo-base-prefix.test.ts :: [unhappy-3] withoutBase(\"api/x\", \"/api\") returns \"api/x\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-4] withBase(\"/apiv2\", \"\") returns \"/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-4] withBase(\"/apiv2\", \"/\") returns \"/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-4] withoutBase(\"/apiv2\", \"\") returns \"/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-4] withoutBase(\"/apiv2\", \"/\") returns \"/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-4] withoutBase(\"/test/\", \"/\") returns \"/test/\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-4] withoutBase(\"/?test\", \"/\") returns \"/?test\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-5] withBase(\"https://test.com\", \"/base/\") returns \"https://test.com\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-5] withBase(\"https://test.com/apiv2\", \"https://test.com/api\") returns \"https://test.com/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-5] withBase(\"https://test.com/apiv2\", \"/api\") returns \"https://test.com/apiv2\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-6] withBase(\"\", \"/foo\") returns \"/foo\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-6] withBase(\"/\", \"/foo/\") returns \"/foo\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-6] withoutBase(\"\", \"/foo\") returns \"\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-6] withoutBase(\"/\", \"/foo\") returns \"/\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-6] withoutBase(\"/\", \"/foo/\") returns \"/\"",
+    "test/ufo-base-prefix.test.ts :: [boundary-6] withoutBase(\"/bar\", \"/foo\") returns \"/bar\""
+  ],
+  "publicOnSkeleton": {
+    "passed": 46,
+    "total": 67
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 165,
+  "kept": [
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withBase(\"/api%2fx\", \"/api\") returns \"/api/api%2fx\" (extends public withBase(\"/api%2Fx\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withoutBase(\"/api%2fx\", \"/api\") returns \"/api%2fx\" (extends public withoutBase(\"/api%2Fx\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-3] withBase(\"/a/b\\\\c\", \"/a/b\") returns \"/a/b/a/b\\\\c\" (extends public withBase(\"/api\\\\x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-3] withBase(\"/api\\\\\", \"/api\") returns \"/api/api\\\\\" (extends public withBase(\"/api\\\\x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-3] withoutBase(\"/a/b\\\\c\", \"/a/b\") returns \"/a/b\\\\c\" (extends public withoutBase(\"/api\\\\x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-3] withoutBase(\"/api\\\\\", \"/api\") returns \"/api\\\\\" (extends public withoutBase(\"/api\\\\x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-3] withoutBase(\"/api\\\\x\", \"/api/\") returns \"/api\\\\x\" (extends public withoutBase(\"/api\\\\x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/apiv10\", \"/api\") returns \"/api/apiv10\" (extends public withBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/application\", \"/app\") returns \"/app/application\" (extends public withBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/v1x\", \"/v1\") returns \"/v1/v1x\" (extends public withBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/apiapi\", \"/api\") returns \"/api/apiapi\" (extends public withBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/apix/y\", \"/api/\") returns \"/api/apix/y\" (extends public withBase(\"/apiv2\", \"/api/\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/assetsfoo\", \"/assets/\") returns \"/assets/assetsfoo\" (extends public withBase(\"/apiv2\", \"/api/\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/apiv2/users/42?x=1#h\", \"/api/\") returns \"/api/apiv2/users/42?x=1#h\" (extends public withBase(\"/apiv2/users\", \"/api/\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api_docs\", \"/api\") returns \"/api/api_docs\" (extends public withBase(\"/api-docs\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api~x\", \"/api\") returns \"/api/api~x\" (extends public withBase(\"/api-docs\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api+x\", \"/api\") returns \"/api/api+x\" (extends public withBase(\"/api-docs\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api:x\", \"/api\") returns \"/api/api:x\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api@x\", \"/api\") returns \"/api/api@x\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api!\", \"/api\") returns \"/api/api!\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api x\", \"/api\") returns \"/api/api x\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/apié\", \"/api\") returns \"/api/apié\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/apiX\", \"/api\") returns \"/api/apiX\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api0\", \"/api\") returns \"/api/api0\" (extends public withBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api,x\", \"/api\") returns \"/api/api,x\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api=x\", \"/api\") returns \"/api/api=x\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api&x\", \"/api\") returns \"/api/api&x\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api$x\", \"/api\") returns \"/api/api$x\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api(x)\", \"/api\") returns \"/api/api(x)\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api*\", \"/api\") returns \"/api/api*\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api'x\", \"/api\") returns \"/api/api'x\" (extends public withBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api%3Fx\", \"/api\") returns \"/api/api%3Fx\" (extends public withBase(\"/api%2F\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/api%23x\", \"/api\") returns \"/api/api%23x\" (extends public withBase(\"/api%2F\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/a/b/c/dd/e\", \"/a/b/c/d\") returns \"/a/b/c/d/a/b/c/dd/e\" (extends public withBase(\"/foo/barbaz\", \"/foo/bar\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/foo/bar-baz/qux\", \"/foo/bar\") returns \"/foo/bar/foo/bar-baz/qux\" (extends public withBase(\"/foo/barbaz\", \"/foo/bar\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/foo/bar.html\", \"/foo/bar/\") returns \"/foo/bar/foo/bar.html\" (extends public withBase(\"/foo/barbaz\", \"/foo/bar\"))",
+    "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"apix\", \"api\") returns \"api/apix\"",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/apiv10\", \"/api\") returns \"/apiv10\" (extends public withoutBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/application/x\", \"/app\") returns \"/application/x\" (extends public withoutBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/apiapi\", \"/api\") returns \"/apiapi\" (extends public withoutBase(\"/apiv2\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/assetsfoo\", \"/assets/\") returns \"/assetsfoo\" (extends public withoutBase(\"/apiv2\", \"/api/\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/apiv2/users/42?x=1#h\", \"/api/\") returns \"/apiv2/users/42?x=1#h\" (extends public withoutBase(\"/apiv2/users\", \"/api/\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api_docs\", \"/api\") returns \"/api_docs\" (extends public withoutBase(\"/api-docs\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api~x\", \"/api\") returns \"/api~x\" (extends public withoutBase(\"/api-docs\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api+x\", \"/api\") returns \"/api+x\" (extends public withoutBase(\"/api-docs\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api:x\", \"/api\") returns \"/api:x\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api@x\", \"/api\") returns \"/api@x\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api!\", \"/api\") returns \"/api!\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api x\", \"/api\") returns \"/api x\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/apié\", \"/api\") returns \"/apié\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/apiX\", \"/api\") returns \"/apiX\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api0\", \"/api\") returns \"/api0\" (extends public withoutBase(\"/api.json\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api,x\", \"/api\") returns \"/api,x\" (extends public withoutBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api=x\", \"/api\") returns \"/api=x\" (extends public withoutBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api&x\", \"/api\") returns \"/api&x\" (extends public withoutBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api$x\", \"/api\") returns \"/api$x\" (extends public withoutBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api(x)\", \"/api\") returns \"/api(x)\" (extends public withoutBase(\"/api;x\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api%3Fx\", \"/api\") returns \"/api%3Fx\" (extends public withoutBase(\"/api%2F\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/api%23x\", \"/api\") returns \"/api%23x\" (extends public withoutBase(\"/api%2F\", \"/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/a/b/c/dd/e\", \"/a/b/c/d\") returns \"/a/b/c/dd/e\" (extends public withoutBase(\"/foo/barbaz\", \"/foo/bar\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/foo/bar.html\", \"/foo/bar/\") returns \"/foo/bar.html\" (extends public withoutBase(\"/foo/barbaz\", \"/foo/bar\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"https://test.com/apiv2/x?y\", \"https://test.com/api/\") returns \"https://test.com/apiv2/x?y\" (extends public withoutBase(\"https://test.com/apiv2\", \"https://test.com/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"https://test.com:8080/x\", \"https://test.com\") returns \"https://test.com:8080/x\" (extends public withoutBase(\"https://test.com/apiv2\", \"https://test.com/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"https://test.com.evil.org/x\", \"https://test.com\") returns \"https://test.com.evil.org/x\" (extends public withoutBase(\"https://test.com/apiv2\", \"https://test.com/api\"))",
+    "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"apix\", \"api\") returns \"apix\""
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/api/xyz/1\", \"/api//\") returns \"/api/xyz/1\" (extends public withBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/api/\", \"/api//\") returns \"/api/\" (extends public withBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/a/b/cd\", \"/a/b//\") returns \"/a/b/cd\" (extends public withBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/api///x\", \"/api//\") returns \"/api///x\" (extends public withBase(\"/api//x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/a/b/cd\", \"/a/b//\") returns \"/cd\" (extends public withoutBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/api/\", \"/api//\") returns \"/\" (extends public withoutBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/api/?q\", \"/api//\") returns \"/?q\" (extends public withoutBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/api/#h\", \"/api//\") returns \"/#h\" (extends public withoutBase(\"/api/x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/api///x\", \"/api//\") returns \"//x\" (extends public withoutBase(\"/api//x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/api//x/y\", \"/api//\") returns \"/x/y\" (extends public withoutBase(\"/api//x\", \"/api//\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/api\", \"/api//\") returns \"/api/api\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/api\", \"/api//\") returns \"/api\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/apix\", \"/api//\") returns \"/api/apix\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/apix\", \"/api//\") returns \"/apix\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withoutBase(\"/apiv2\", \"//\") returns \"/apiv2\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-1] withBase(\"/apiv2\", \"//\") returns \"/apiv2\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withBase(\"/Api\", \"/api\") returns \"/api/Api\" (extends public withBase(\"/API/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withBase(\"/api/x\", \"/API\") returns \"/API/api/x\" (extends public withBase(\"/API/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withoutBase(\"/api/x\", \"/API\") returns \"/api/x\" (extends public withoutBase(\"/API/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withoutBase(\"/Api/x\", \"/api\") returns \"/Api/x\" (extends public withoutBase(\"/API/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withoutBase(\"/ÄPI/x\", \"/äpi\") returns \"/ÄPI/x\" (extends public withoutBase(\"/API/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withBase(\"/a b/x\", \"/a%20b\") returns \"/a%20b/a b/x\" (extends public withBase(\"/api%2Fx\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withoutBase(\"/a b/x\", \"/a%20b\") returns \"/a b/x\" (extends public withoutBase(\"/api%2Fx\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-2] withoutBase(\"/a%20b/x\", \"/a b\") returns \"/a%20b/x\" (extends public withoutBase(\"/api%2Fx\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withBase(\"/x/y/api/z\", \"/api\") returns \"/api/x/y/api/z\" (extends public withBase(\"/a/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withBase(\"//api/x\", \"/api\") returns \"/api//api/x\" (extends public withBase(\"/a/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withoutBase(\"/x/y/api/z\", \"/api\") returns \"/x/y/api/z\" (extends public withoutBase(\"/a/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withoutBase(\"//api/x\", \"/api\") returns \"//api/x\" (extends public withoutBase(\"/a/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withBase(\"api\", \"/api\") returns \"/api/api\" (extends public withBase(\"api/x\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withBase(\"v1/users\", \"/v1/\") returns \"/v1/v1/users\" (extends public withBase(\"api/x\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withoutBase(\"api\", \"/api\") returns \"api\" (extends public withoutBase(\"api/x\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [unhappy-3] withoutBase(\"v1/users\", \"/v1/\") returns \"v1/users\" (extends public withoutBase(\"api/x\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withBase(\"api\", \"\") returns \"api\" (extends public withBase(\"/apiv2\", \"\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withBase(\"\", \"\") returns \"\" (extends public withBase(\"/apiv2\", \"\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withBase(\"relative/path?x\", \"/\") returns \"relative/path?x\" (extends public withBase(\"/apiv2\", \"/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withBase(\"\", \"/\") returns \"\" (extends public withBase(\"/apiv2\", \"/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withoutBase(\"api/x\", \"\") returns \"api/x\" (extends public withoutBase(\"/apiv2\", \"\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withoutBase(\"\", \"\") returns \"\" (extends public withoutBase(\"/apiv2\", \"\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withoutBase(\"\", \"/\") returns \"\" (extends public withoutBase(\"/apiv2\", \"/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withoutBase(\"/a/b/\", \"/\") returns \"/a/b/\" (extends public withoutBase(\"/test/\", \"/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withoutBase(\"/#test\", \"/\") returns \"/#test\" (extends public withoutBase(\"/?test\", \"/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-4] withoutBase(\"https://x.com/y\", \"\") returns \"https://x.com/y\" (extends public withoutBase(\"/?test\", \"/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-5] withBase(\"http://other.org/x\", \"/base/\") returns \"http://other.org/x\" (extends public withBase(\"https://test.com\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-5] withBase(\"ftp://test.com/apiv2\", \"ftp://test.com/api\") returns \"ftp://test.com/apiv2\" (extends public withBase(\"https://test.com/apiv2\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-5] withBase(\"https://test.com:8080/x\", \"https://test.com\") returns \"https://test.com:8080/x\" (extends public withBase(\"https://test.com/apiv2\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-5] withBase(\"https://other.org/api/x\", \"https://test.com/api\") returns \"https://other.org/api/x\" (extends public withBase(\"https://test.com/apiv2\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-5] withBase(\"HTTPS://TEST.COM/apiv2\", \"/api\") returns \"HTTPS://TEST.COM/apiv2\" (extends public withBase(\"https://test.com/apiv2\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-5] withBase(\"http://test.com/api-docs\", \"/api/\") returns \"http://test.com/api-docs\" (extends public withBase(\"https://test.com/apiv2\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withBase(\"\", \"/a/b/\") returns \"/a/b\" (extends public withBase(\"\", \"/foo\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withBase(\"\", \"/a/b\") returns \"/a/b\" (extends public withBase(\"\", \"/foo\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withBase(\"/\", \"/a/b\") returns \"/a/b\" (extends public withBase(\"/\", \"/foo/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withoutBase(\"\", \"/a/b/\") returns \"\" (extends public withoutBase(\"\", \"/foo\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withoutBase(\"/\", \"/a/b\") returns \"/\" (extends public withoutBase(\"/\", \"/foo\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withoutBase(\"/\", \"/foo//\") returns \"/\" (extends public withoutBase(\"/\", \"/foo/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withoutBase(\"/bar/foo\", \"/foo\") returns \"/bar/foo\" (extends public withoutBase(\"/bar\", \"/foo\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/edges.test.ts :: [boundary-6] withoutBase(\"/fo\", \"/foo\") returns \"/fo\" (extends public withoutBase(\"/bar\", \"/foo\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [unhappy-1] withBase(\"/ap\", \"/api\") returns \"/api/ap\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/v2\", \"/v2\") returns \"/v2\" (extends public withBase(\"/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/a/b/c\", \"/a/b/c\") returns \"/a/b/c\" (extends public withBase(\"/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/app/\", \"/app\") returns \"/app/\" (extends public withBase(\"/api/\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/api/\", \"/api/\") returns \"/api/\" (extends public withBase(\"/api/\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/api/users/1/posts?x#y\", \"/api\") returns \"/api/users/1/posts?x#y\" (extends public withBase(\"/api/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/api//x\", \"/api\") returns \"/api//x\" (extends public withBase(\"/api/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/api/api\", \"/api\") returns \"/api/api\" (extends public withBase(\"/api/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/app?a=1&b=/c\", \"/app\") returns \"/app?a=1&b=/c\" (extends public withBase(\"/api?x=1\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/x/y?\", \"/x/y\") returns \"/x/y?\" (extends public withBase(\"/api?\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/app#/route\", \"/app\") returns \"/app#/route\" (extends public withBase(\"/api#top\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/x/y#\", \"/x/y\") returns \"/x/y#\" (extends public withBase(\"/api#\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/a/b/c/d/e\", \"/a/b/c\") returns \"/a/b/c/d/e\" (extends public withBase(\"/foo/bar/baz\", \"/foo/bar\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/x/y\", \"/x/y/\") returns \"/x/y\" (extends public withBase(\"/base\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/x/y?q\", \"/x/y/\") returns \"/x/y?q\" (extends public withBase(\"/base\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/x/y/z?q#f\", \"/x/y/\") returns \"/x/y/z?q#f\" (extends public withBase(\"/base/a\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"api/x\", \"api\") returns \"api/x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/café/x\", \"/café\") returns \"/café/x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/with-base.test.ts :: [happy-1] withBase(\"/a%20b/x\", \"/a%20b\") returns \"/a%20b/x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [unhappy-2] withoutBase(\"/ap\", \"/api\") returns \"/ap\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/a/b/c\", \"/a/b/c\") returns \"/\" (extends public withoutBase(\"/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/v2\", \"/v2\") returns \"/\" (extends public withoutBase(\"/api\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/a/b/\", \"/a/b\") returns \"/\" (extends public withoutBase(\"/api/\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/api/\", \"/api/\") returns \"/\" (extends public withoutBase(\"/api/\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/api/users/1/posts\", \"/api\") returns \"/users/1/posts\" (extends public withoutBase(\"/api/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/api/api/x\", \"/api\") returns \"/api/x\" (extends public withoutBase(\"/api/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/api//x\", \"/api\") returns \"//x\" (extends public withoutBase(\"/api/users\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/app?a=/b&c=d\", \"/app\") returns \"/?a=/b&c=d\" (extends public withoutBase(\"/api?x=1\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/x/y?\", \"/x/y\") returns \"/?\" (extends public withoutBase(\"/api?\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/app#/route/x\", \"/app\") returns \"/#/route/x\" (extends public withoutBase(\"/api#top\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/x/y#\", \"/x/y\") returns \"/#\" (extends public withoutBase(\"/api#\", \"/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/a/b/c/d/e\", \"/a/b/c\") returns \"/d/e\" (extends public withoutBase(\"/foo/bar/baz\", \"/foo/bar\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/x/y\", \"/x/y/\") returns \"/\" (extends public withoutBase(\"/base\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/x/y?q\", \"/x/y/\") returns \"/?q\" (extends public withoutBase(\"/base\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/x/y/z?q#f\", \"/x/y/\") returns \"/z?q#f\" (extends public withoutBase(\"/base/a\", \"/base/\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"https://test.com/api?x=1\", \"https://test.com/api\") returns \"/?x=1\" (extends public withoutBase(\"https://test.com/api/x\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"https://test.com/api#f\", \"https://test.com/api/\") returns \"/#f\" (extends public withoutBase(\"https://test.com/api/x\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"https://test.com\", \"https://test.com\") returns \"/\" (extends public withoutBase(\"https://test.com/api/x\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"https://test.com/a/b\", \"https://test.com\") returns \"/a/b\" (extends public withoutBase(\"https://test.com/api/x\", \"https://test.com/api\"))",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"api/x\", \"api\") returns \"/x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"api\", \"api\") returns \"/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"api?x\", \"api\") returns \"/?x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/café/x\", \"/café\") returns \"/x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-base-prefix/without-base.test.ts :: [happy-2] withoutBase(\"/a%20b/x\", \"/a%20b\") returns \"/x\"",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 67,
+      "total": 67
+    },
+    "hidden": {
+      "passed": 65,
+      "total": 65
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 477,
+      "total": 477
+    },
+    "notes": "`withBase` and `withoutBase` now count a base as present only when it ends on a path-segment boundary. So `/api` no longer matches `/apiv2`, `/api-docs` or `/api.json`. The whole suite passes: 709 tests in 17 files, including both new suites. ESLint and `tsc --noEmit` report nothing.\n\nNeither function actually threw `not implemented`. Both still had the old working code with a plain `input.startsWith(_base)` check, so I replaced that check rather than writing new bodies.\n\n**What changed:** the only edit is in `src/utils.ts`. I added a private helper, `_hasBase(input, _base)`, and both functions call it instead of `startsWith`. It is not exported, so nothing new reaches `src/index.ts`. The helper treats the base as present when `input` starts with it and one of these is true:\n- nothing comes after it;\n- the next character is `/`, `?` or `#`;\n- the base itself still ends with `/` after one trailing slash is removed, as with `\"/api//\"`.\n\nAny other next character, including `\\`, means the base isn't there. Matching is case-sensitive and doesn't decode `%` escapes. The early returns for an empty or `/` base, and for an input with a protocol in `withBase`, are unchanged.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "84cf7251-50a2-472a-b3a1-8798a4d59682",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.20832389999999998,
+        "turns": 4,
+        "durationMs": 25832,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.20832389999999998
+  }
+}

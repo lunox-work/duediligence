@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5606c7b8-fd81-442c-92cf-633185a4e123",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1444909,
+        "turns": 4,
+        "durationMs": 27108,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1444909,
+    "finalText": "The test suite is in `tests/public/test_eat.py`. `python3 sandbox/compile_check.py` reports no errors. All 11 tests fail with `NotImplementedError` for now, which is expected because the function isn't written yet.\n\n- **Docstring examples (4 tests):** one test per example, with the values copied exactly.\n- **Rule 1, enough carrots** (`need <= remaining`, result is `[number + need, remaining - need]`):\n  - typical case: `eat(3, 4, 10) -> [7, 6]`\n  - boundary `need == 0`: `eat(7, 0, 3) -> [7, 3]`\n  - boundary `need == remaining`: `eat(0, 5, 5) -> [5, 0]`\n- **Rule 2, not enough carrots** (eat everything left, still hungry; result is `[number + remaining, 0]`):\n  - typical case: `eat(10, 20, 6) -> [16, 0]`\n  - boundary where `need` is just one more than `remaining`: `eat(3, 6, 5) -> [8, 0]`\n  - boundary `remaining == 0`: `eat(4, 3, 0) -> [4, 0]`\n- **Upper limit:** `eat(1000, 1000, 1000) -> [2000, 0]`\n\nI worked out each of the non-example answers by hand, and a comment next to each one shows the arithmetic. Every input is within the stated `0..1000` limits.\n\nThe tests compare results to Python lists exactly, because the docstring says the function returns an array and its examples show lists. If the function returned a tuple instead, these tests would fail.\n\n11 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_eat.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "fe78ee4f-be00-4119-aa9a-641702652d85",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1955251,
+        "turns": 3,
+        "durationMs": 44104,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1955251,
+    "finalText": "I wrote 19 tests in `tests/private/test_eat_private.py`, one flat `unittest.TestCase`.\n\n**Checks run:**\n- `sandbox/compile_check.py` reports no errors.\n- Against the current stub, all 19 tests fail. The run shows `errors=2500` because each subtest in the two grid tests is counted separately.\n- I patched in a correct reference, `[n + min(d, r), r - min(d, r)]`, in a temporary script outside the repo. It passed all 19 in about 0.01s. Nothing in `src/` was changed.\n\n**What the tests cover:**\n- **Return shape:** the result must be a two-element `list`, as in the docstring's examples.\n- **Shortcut-catchers:** cases chosen to fail common wrong formulas:\n  - `number` larger than both `need` and `remaining`, which catches subtracting `number` from the stock or mixing up `number` and `need`;\n  - a short-stock case where `number + remaining` differs from both `need + remaining` and `number + need`;\n  - a leftover that must ignore `number`.\n- **Boundaries:** cases just either side of `need == remaining`, both at 1 and at 999/1000.\n- **Range ends:** all zeros; `need = 0` with full or empty stock; `remaining = 0` with the largest `need`; and several combinations at the upper bound.\n- **Extensions:** each public test has at least one test that extends it, named in a comment above it.\n- **Brute-force grids:** expected values come from a helper that eats one carrot at a time while hungry and while stock lasts. One grid covers every case with `number` 0–7, `need` 0–11 and `remaining` 0–11. The other uses 11 values across 0–1000 for each argument, both ends included.\n\n19 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_eat_private.py"
+    ],
+    "open": []
+  }
+}

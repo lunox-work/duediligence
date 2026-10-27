@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b45-eb2d-74f3-9f06-6828cdd60b4c",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 50603,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "14 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_iscube.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b46-b30a-70d2-b485-2b84e13c4ac9",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 122736,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "34 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_iscube.py"
+    ],
+    "open": []
+  }
+}

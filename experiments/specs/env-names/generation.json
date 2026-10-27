@@ -1,0 +1,76 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "6167f6cc-c8f7-45f0-b49e-5138d8e71d42",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1334467,
+        "turns": 5,
+        "durationMs": 29589,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1334467,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors.\n\nThe contract has a single function, `mapFiles(files, table, direction)`. It returns `{ files, unmapped }`:\n- **`files`**: each file's path and text after renaming.\n- **`unmapped`**: names found in the files that are missing from the table, each listed once, sorted alphabetically.\n\nIts doc comment says it throws an error naming the shared public name when the table maps two names to one. I didn't add an error class, because the spec doesn't name one. The two directions are the spec's own words, `\"to public\" | \"to real\"`.\n\nThree decisions the spec leaves open:\n- **Output order:** `files` returns one entry per input file, in the same order. Without this, the two test suites could disagree on how to match output to input.\n- **No table lookup functions:** the table is just a list of `{ real, public }` entries.\n- **Inputs are typed `readonly`:** this means the function doesn't change them, but no rule is stated about it.\n\nThe build also generated `src/index.js`, which I deleted so that `src/index.ts` is the only file written.\n\nExports: `NameEntry`, `NameTable`, `SourceFile`, `Direction`, `MapResult`, `mapFiles`",
+    "problem": null,
+    "sha256": "2830abc4ecb3b58eab5cfc2b50fa499bfdaed54e080157276513875f711b9565"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "eec13fce-8c54-4f81-be2f-2c08f74e05e0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.42331820000000003,
+        "turns": 5,
+        "durationMs": 111872,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.42331820000000003,
+    "finalText": "I wrote the public test suite in `tests/public/`. `npm run build` reports no errors. All 14 tests fail when run, which is expected because `mapFiles` still throws `not implemented`.\n\nEach of the spec's seven scenarios has its own file, with one happy-path test and one boundary test:\n\n| File | Happy path | Boundary |\n|---|---|---|\n| `env-files.test.ts` | The `.env.example` example from the spec, asserted exactly | A file named exactly `.env` inside a folder (`deploy/.env`), whose value and comment both contain the real name; only the name before `=` changes |\n| `code-reads.test.ts` | The `src/mail.ts` example: the dot read and both quoted bracket reads are renamed, the comment is left alone | A string literal holding the name is left alone, and a read at the very end of the text (no trailing newline) is renamed |\n| `consistency.test.ts` | Two names across two `.env` files, one `.ts` file and one `.js` file | An empty set of files returns no files and no unmapped names |\n| `round-trip.test.ts` | Mapping to public then back to real restores every file exactly | The same, with empty text, Windows-style (CRLF) line endings, and one table name that is the start of another |\n| `whole-names.test.ts` | `NORTHWIND_SMTP` and `NORTHWIND_SMTP_HOST` map to `SVC_A` and `SVC_A_HOST` | `NORTHWIND_SMTP_PORT`, which is not in the table, is not partly renamed to `SVC_A_PORT`; it is left alone and reported as unmapped |\n| `unmapped.test.ts` | A missing name is left alone in a `.env` file and in code, and reported | A missing name used many times is listed once, sorted with two other missing names |\n| `duplicate-public.test.ts` | Mapping to public fails with an error naming `SVC_X` | Mapping no files in the \"to real\" direction still fails with that error |\n\nA few choices the developer should know about, since the spec leaves them open:\n- **File names:** a `.env` file is judged by the last part of its path, so `deploy/.env` counts.\n- **Code files:** both `.ts` and `.js` files are treated as code.\n- **Unmapped names:** the tests check this list only when mapping to public. They never check it when mapping to real.\n- **Error check:** the duplicate-name tests only require an `Error` whose message contains `SVC_X`.\n\nRunning the build compiles each test to a `.js` file beside it. It also produces `src/index.js`, which is outside `tests/public/`. These compiled files are ignored by `.gitignore`, and I left them in place.\n\n14 tests, in 7 files.",
+    "problem": null,
+    "files": [
+      "tests/public/code-reads.test.ts",
+      "tests/public/consistency.test.ts",
+      "tests/public/duplicate-public.test.ts",
+      "tests/public/env-files.test.ts",
+      "tests/public/round-trip.test.ts",
+      "tests/public/unmapped.test.ts",
+      "tests/public/whole-names.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "7fb414d4-1340-4dcc-86f7-44800c578a6d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0566107999999999,
+        "turns": 11,
+        "durationMs": 284606,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.0566107999999999,
+    "finalText": "I wrote 44 private tests in 7 files under `tests/private/`, one file per public test file. `npm run build` reports no errors, and all 44 tests fail against the stub interface without crashing. To check that the tests are correct, I wrote a reference implementation in the scratchpad only, not in `src/`. All 44 private tests and all 14 public tests pass against it. Afterwards I deleted the compiled `.js` files the build left in `src/` and `tests/`. Nothing outside `tests/private/` was changed.\n\n**What the tests target, i.e. shortcuts that pass the public suite but break the spec:**\n- **Telling `.env` files apart:**\n  - Files that only look like `.env` (`app.env`, `.envrc`, `.environment`, `x.env.local`, `.env/settings`) are not treated as `.env` files.\n  - A file named `.env.` is a `.env` file.\n  - Code in a `.env.d/` folder follows the code rules.\n- **Inside `.env` files:**\n  - Commented-out assignments (`# NAME=…`, `#NAME=…`) are left alone.\n  - Values are left alone even when they contain `NAME=` or look like `process.env.NAME`.\n  - Empty and quoted values work, and CRLF line endings are kept.\n- **Code reads:**\n  - A string with the name on the same line as a read stays unchanged, and only the read is renamed.\n  - Several reads on one line and reads inside template strings are all renamed.\n  - A file that is nothing but a read works, as does a name followed by `.length`.\n  - Assignment-like lines in code are not renamed.\n  - Names with digits, and names without a `NORTHWIND_` prefix, are renamed.\n- **The \"to real\" direction:** it is tested on its own, not just through the round trip. Real names are not renamed in that direction, and public names are not renamed when mapping to public.\n- **Whole names:**\n  - The longer name can come first in the table, and three names can each be the start of the next.\n  - Matching works in bracket reads, in `.env` files and when mapping to real.\n  - A longer name with no separator after the prefix (`NORTHWIND_SMTPS`, `NORTHWIND_SMTP2`) is not renamed through its prefix.\n  - A shorter name that is not in the table is not renamed through a longer one.\n  - Tables where one entry's public name is another entry's real name are replaced in one pass, not one entry after another.\n- **Unmapped names:**\n  - Names found many times across many files, in reverse alphabetical order, are listed once each and sorted.\n  - With an empty table, every name found is reported.\n  - Names are also reported when mapping to real.\n- **Duplicate public names:** these are refused when the duplicates aren't next to each other, when three names share one public name, when a unique name comes first, when no file uses the shared name, and when there are no files, in both directions. Each check requires that the error message contains the shared name.\n- **Scale and round trips:**\n  - 40 names across 30 files of every kind, with the names in a different order in each file.\n  - Round trips with mixed content and with a swap table.\n  - A round trip from public to real and back.\n\n**Left untested because the spec doesn't decide them:**\n- Spaces around `=` in `.env` files.\n- Backtick, `?.` and destructured reads of `process.env`.\n- `process.env.X` inside a comment.\n- Names that appear only in comments or values: whether they count as \"unmapped\".\n- Whether a public name found while mapping to public (or a real name while mapping to real) counts as unmapped.\n- Sort order where `_` is compared against a letter, since a plain sort and a locale-aware sort put these in different orders.\n- Non-JS files such as Markdown or Dockerfiles.\n- The same real name appearing twice in the table.\n\n44 tests, in 7 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/code-reads.test.ts",
+      "tests/private/consistency.test.ts",
+      "tests/private/duplicate-public.test.ts",
+      "tests/private/env-files.test.ts",
+      "tests/private/round-trip.test.ts",
+      "tests/private/unmapped.test.ts",
+      "tests/private/whole-names.test.ts"
+    ],
+    "open": []
+  }
+}

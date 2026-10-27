@@ -1,0 +1,11 @@
+{
+  "name": "independent-tests (confirmed)",
+  "head_sha": "44935a3e5c7c1768f6af45195effea0306777fd2",
+  "status": "completed",
+  "conclusion": "failure",
+  "completed_at": "2026-10-26T04:39:53.915Z",
+  "output": {
+    "title": "overfit: public 54/54, hidden 69/71, existing 24/24",
+    "summary": "| verdict | public | hidden | existing |\n| --- | ---: | ---: | ---: |\n| **overfit** | 54/54 | 69/71 | 24/24 |\n\nFailing scenarios (keys from the spec; the hidden tests stay hidden): `boundary-17`, `boundary-6`\n\nHidden suite sha256 `6e03154d36a533276b846831cf658e154caec3f793860b250894c030b447862e`, sealed 2026-10-26T04:36:00.153Z. Commit `44935a3e5c7c1768f6af45195effea0306777fd2`."
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "slug": "he-13",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_both_inputs_negative",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_docstring_common_factor_example",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_docstring_coprime_example",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_equal_positive_inputs",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_first_input_divides_second",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_multiple_shared_prime_factors",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_negative_first_input",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_negative_second_input",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_one_as_an_input",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_second_input_divides_first",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_zero_first_input",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_zero_second_input"
+  ],
+  "publicFailingOnReference": [
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_both_inputs_negative",
+    "tests/public/test_greatest_common_divisor.py :: TestGreatestCommonDivisor.test_negative_second_input"
+  ],
+  "hiddenWritten": 26,
+  "kept": [
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_composite_common_divisor",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_consecutive_fibonacci_numbers",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_coprime_composites",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_equal_large_integers",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_equal_units",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_first_input_divides_square",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_first_input_is_negative_one",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_large_common_factor",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_large_consecutive_integers",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_large_powers_of_two",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_negative_first_has_larger_magnitude",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_second_input_divides_square",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_second_input_is_one",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_shared_eleven",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_three_shared_primes",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_unequal_prime_exponents",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_zero_then_large_positive",
+    "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_zero_then_one"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_both_negative_and_coprime",
+      "reason": "The reference cannot satisfy it: AssertionError: -1 != 1"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_both_negative_with_composite_gcd",
+      "reason": "The reference cannot satisfy it: AssertionError: -42 != 42"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_equal_negative_inputs",
+      "reason": "The reference cannot satisfy it: AssertionError: -97 != 97"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_negative_one_then_zero",
+      "reason": "The reference cannot satisfy it: AssertionError: -1 != 1"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_negative_second_has_larger_magnitude",
+      "reason": "The reference cannot satisfy it: AssertionError: -35 != 35"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_negative_then_zero",
+      "reason": "The reference cannot satisfy it: AssertionError: -81 != 81"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_second_input_is_negative_one",
+      "reason": "The reference cannot satisfy it: AssertionError: -1 != 1"
+    },
+    {
+      "id": "tests/private/test_greatest_common_divisor.py :: TestGreatestCommonDivisorHidden.test_zero_then_negative",
+      "reason": "The reference cannot satisfy it: AssertionError: -81 != 81"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 10,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 18,
+      "total": 18
+    }
+  }
+}

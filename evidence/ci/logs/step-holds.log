@@ -1,0 +1,11 @@
+step-holds: incomplete. Public 23/30, hidden 22/31, existing 248/248; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at 6cbb45388bcff1576f84de23a11d065bf6b8997e.
+Hidden suite sha256 3763a31471a4338f7c2db309577a584a671dbfea304fa7ded9f1f0cb4ede3e2f, sealed 2026-10-26T04:35:59.030Z.
+Failing scenarios: happy-4, happy-5, unhappy-3, unhappy-4
+public: test/step-holds.test.ts :: [unhappy-3] a step outside "price" and "sandbox" is refused
+public: test/step-holds.test.ts :: [unhappy-3] an unknown step is refused rather than reported held, whatever the approvals
+public: test/step-holds.test.ts :: [happy-4] each hold has its own words
+public: test/step-holds.test.ts :: [happy-5] every hold stepHeldBy returns has a reason
+public: test/step-holds.test.ts :: [happy-5] every hold stepHeldBy can return, for either step, has its reason
+public: test/step-holds.test.ts :: [unhappy-4] a hold that cannot happen is refused
+public: test/step-holds.test.ts :: [unhappy-4] values outside the declared unions are refused
+Check "independent-tests (drafted)": failure, incomplete: public 23/30, hidden 22/31, existing 248/248 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/step-holds.json); not posted (no token).

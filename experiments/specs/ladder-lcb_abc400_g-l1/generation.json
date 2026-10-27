@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "ac1c3070-83ca-4109-82b0-9b5353e73039",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.25844069999999997,
+        "turns": 5,
+        "durationMs": 66162,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.25844069999999997,
+    "finalText": "I wrote the public suite in `tests/public/test_patisserie.py`.\n\n**`spec.md` has no samples.** It contains the statement, input format and constraints, but no sample inputs or outputs, so there are no sample tests. I worked out every expected value myself, as described below.\n\n- **Hand-derived small cases (8):** the work is written in a comment on each test. They cover:\n  - the smallest input (N=2, K=1), once with all zeros and once with every value at 10^9, which gives 2·10^9 and needs more than 32 bits;\n  - that the price is the largest of the three sums, not each cake's own largest value added together (`5 0 0` + `0 5 0` → 5);\n  - each of beauty, tastiness and popularity being the largest sum in turn;\n  - a three-cake case where the best pair has to be chosen;\n  - two four-cake cases (K=2 and K=1) where the best pairing is not the obvious one;\n  - an odd N where one cake is left out.\n- **Brute-force cases (4):** each input holds 30–40 random test cases with N ≤ 8 and a fixed seed. The test works out the answers by trying every set of K non-overlapping pairs. Values are drawn from {0,1}, 0–5, 0–10 and 0–10^9. I checked the brute force against the hand-derived answers and it matches (12, 40, 20, 14).\n- **Large cases (4) whose answers follow directly:**\n  - N=10^5 with every value at 10^9: the answer is 10^14.\n  - N=10^5 with only beauty non-zero (1 to 10^5) and everyone paired: the answer is the sum, 5000050000.\n  - N=10^5 with only popularity non-zero and K=1: the answer is the two largest values added, 199999.\n  - T=1000 test cases with N=2 each.\n\n`python3 sandbox/compile_check.py` reports no errors. All 16 tests currently fail with a Runtime Error because `src/main.py` raises `not implemented`, which is expected. I made no changes outside `tests/public/`.\n\n16 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_patisserie.py"
+    ]
+  }
+}

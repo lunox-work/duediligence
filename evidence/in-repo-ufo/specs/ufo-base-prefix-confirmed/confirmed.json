@@ -1,0 +1,38 @@
+{
+  "sha256": "e357854a3b454da46b5aaabec589324f2ece2134b0cff519660550fa99463d7f",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T13:20:12.072Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The characters after the base that count as a boundary are end of input, `/` and `?`. `#` and a backslash do not count, so `withBase(\"/api#top\", \"/api\")` returns `\"/api/api#top\"` and `withoutBase(\"/api#top\", \"/api\")` returns `\"/api#top\"`.",
+    "Ticket: \"fix(withBase, withoutBase): prevent false prefix matches (#313)\"",
+    "Instead: also accept `#`, so `withoutBase(\"/api#top\", \"/api\")` would return `\"/#top\"`.",
+    "A normalized base that still ends with `/` (for example from `\"/api//\"`) gets no special treatment: the character after it must still be end of input, `/` or `?`, so `withoutBase(\"/api/x\", \"/api//\")` returns `\"/api/x\"` and `withBase(\"/api/x\", \"/api//\")` returns `\"/api/api/x\"`.",
+    "Ticket: silent.",
+    "Instead: treat such a base as already ending on a boundary, so `withoutBase(\"/api/x\", \"/api//\")` would return `\"/x\"`.",
+    "Matching stays case-sensitive and works on raw, undecoded characters.",
+    "Ticket: silent.",
+    "Instead: decode percent-escapes or compare without case before checking the prefix.",
+    "When there is no base match, `withBase` joins the base in front with `joinURL`, so `\"/apiv2\"` becomes `\"/api/apiv2\"`.",
+    "Ticket: \"fix(withBase, withoutBase): prevent false prefix matches (#313)\"",
+    "Instead: return `input` unchanged whenever it starts with the base string, which keeps the old `withBase` result.",
+    "When there is no base match, `withoutBase` returns `input` unchanged and does not throw.",
+    "Ticket: \"fix(withBase, withoutBase): prevent false prefix matches (#313)\"",
+    "Instead: throw, or report that the base was not found.",
+    "The boundary rule also applies when `base` has a protocol (for example `https://test.com/api`), and `withBase` still returns any input with a protocol unchanged.",
+    "Ticket: silent.",
+    "Instead: parse both values and compare only the pathname segments.",
+    "The boundary check is a module-private helper and nothing new is exported.",
+    "Ticket: \"The change keeps the exports' names and signatures.\"",
+    "Instead: export a public `hasBase(input, base)` helper.",
+    "Seam (the files the stub writes): src/utils.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

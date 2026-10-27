@@ -1,0 +1,26 @@
+{
+  "sha256": "cb9eae2f5af8e4772775986b7e4dbf6498b1dfe23eb881f68370b89a5e6c189e",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T13:12:51.964Z",
+  "decided": [
+    "Which connections count: only `connected` (healthy) ones; `broken` never makes a tool connected or a step done.",
+    "Whether `available: false` with a positive count counts as connected: it does not; the tool is treated as absent.",
+    "Whether boards or repositories affect the stage or steps: they do not; only connections do.",
+    "Odd counts (negative, `NaN`, fractional): read as positive only when `> 0`; nothing is rejected and nothing throws.",
+    "What \"size\" being done means: `proposals > 0` or `bounties > 0` (a hand-written bounty counts).",
+    "Which steps are listed: a tool's step needs the tool available and either connected or `canManage`; `size` is always listed.",
+    "Step order: fixed `jira`, `github`, `size`, whatever is done.",
+    "Which step is current: the first listed undone one; none when all are done; done-out-of-order steps don't move it.",
+    "What `setupComplete` means: every step `setupSteps` lists is done (so it can't be true with an empty list, since `size` is always listed).",
+    "Whether `canManage` affects the stage: it does not; it only affects which steps are listed.",
+    "Purity: the input isn't mutated, and each `setupSteps` call returns a new array; no concurrency rules, because the functions are synchronous.",
+    "Seam (the files the stub writes): apps/web/src/features/onboarding/setup.ts",
+    "Allowed paths (what the implementer may change): apps/web/src/features/onboarding/setup.ts"
+  ],
+  "seam": [
+    "apps/web/src/features/onboarding/setup.ts"
+  ],
+  "allowedPaths": [
+    "apps/web/src/features/onboarding/setup.ts"
+  ]
+}

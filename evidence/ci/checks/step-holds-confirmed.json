@@ -1,0 +1,11 @@
+{
+  "name": "independent-tests (confirmed)",
+  "head_sha": "6cbb45388bcff1576f84de23a11d065bf6b8997e",
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-10-26T04:37:39.878Z",
+  "output": {
+    "title": "passed: public 30/30, hidden 34/34, existing 248/248",
+    "summary": "| verdict | public | hidden | existing |\n| --- | ---: | ---: | ---: |\n| **passed** | 30/30 | 34/34 | 248/248 |\n\nHidden suite sha256 `0c2c450d81f8aa63329361b661126af8c2dbdb3c82b4e7292c93f897e1890b9e`, sealed 2026-10-26T04:35:58.957Z. Commit `6cbb45388bcff1576f84de23a11d065bf6b8997e`."
+  }
+}

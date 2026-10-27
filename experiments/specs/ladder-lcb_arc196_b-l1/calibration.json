@@ -1,0 +1,41 @@
+{
+  "slug": "ladder-lcb_arc196_b-l1",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x2_all_a",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x2_all_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x2_column_mix",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x2_diagonal_mix",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x2_row_of_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x2_single_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x3_all_a",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x3_column_of_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x4_all_a",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x4_mixed",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_2x4_mixed_zero",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_3x2_row_of_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_3x3_mixed_two",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_3x3_mixed_zero",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_3x4_mixed",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_odd_width",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_square",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_wide",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_b_square",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_b_tall",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_b_wide",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_max_t",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_multiple_cases"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 23
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

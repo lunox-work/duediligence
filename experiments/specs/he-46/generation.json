@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "30c2087f-9d81-457e-be52-0d357f2998ab",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1632951,
+        "turns": 5,
+        "durationMs": 37973,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1632951,
+    "finalText": "I wrote the test suite in `tests/public/test_fib4.py`. `python3 sandbox/compile_check.py` reports no errors. Running `python3 sandbox/run.py public` gives 0/11 passed, and every failure is the expected `NotImplementedError: not implemented`.\n\nWhat it covers:\n- **Docstring examples:** `fib4(5) == 4`, `fib4(6) == 8` and `fib4(7) == 14`, one test each.\n- **Starting values (rule 1):** all four, `fib4(0)` through `fib4(3)`. `n=0` is the boundary case and `fib4(2) == 2`, the only non-zero one, is the typical case.\n- **Recurrence (rule 2):** `fib4(4) == 2` is the boundary, since it's the first `n` the recurrence applies to. The typical cases are `fib4(8) == 28` and `fib4(10) == 104`. I worked these values out by hand from the definition, and the comments in the test file show the sums.\n- **Efficient, no recursion (rule 3):** this test runs `fib4(1000)` and checks that it equals the sum of the four values before it. The docstring doesn't give `fib4(1000)` itself, so the test doesn't hard-code a number it can't back up. The test catches an implementation that recurses without caching, because it would effectively never finish. It also catches a cached recursive one, because that would hit Python's recursion depth limit and raise an error.\n\nOne thing to know: `python3 -m unittest discover -s tests/public` fails with \"Start directory is not importable\", because `tests/public/` has no `__init__.py`. Use `python3 sandbox/run.py public` or `python3 -m unittest tests/public/test_fib4.py` instead. I didn't add the `__init__.py`.\n\n11 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_fib4.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "ab39907b-9874-40e2-a2d3-d99e75e75ddb",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.20849910000000002,
+        "turns": 4,
+        "durationMs": 50111,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.20849910000000002,
+    "finalText": "I wrote the hidden suite in `tests/private/test_fib4_private.py`. `sandbox/compile_check.py` reports no errors. Against the stub that raises `not implemented`, all 15 tests fail. Against a correct iterative reference I wrote in the scratchpad (not in the project), all 15 pass in about 0.04 seconds.\n\nExpected values come from two places. The ones for n=9 and n=11 to 15 are worked out by hand in a comment. The rest are checked against a small helper in the test that starts from the four base values and appends the sum of the previous four.\n\nWhat the suite covers:\n- **Hard-coded answers:** all values from n=0 to 40, n=100 and n=1000 are checked exactly. This catches the main shortcut that passes the public suite: a lookup table for 0..10 that returns 0 for larger n. The public test only checks that fib4(1000) equals the sum of the four values before it, and all zeros satisfy that. This shortcut fails tests here.\n- **The rule itself:** the \"sum of the previous four\" rule is checked at every n from 4 to 200.\n- **No recursion, and efficient:** fib4(20000) must be exact. A recursive version with caching (`lru_cache`) fails this test by hitting Python's recursion limit. Plain recursion without caching would be far too slow.\n- **Whole numbers:** results must be `int`, because the docstring examples print 4, 8 and 14. Exact large values also catch rounding errors from float maths.\n- **Call order:** calling for n from 10 down to 0 must give the same results, so nothing carries over between calls.\n\nNegative n is not tested, because the docstring doesn't allow it.\n\n15 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_fib4_private.py"
+    ],
+    "open": []
+  }
+}

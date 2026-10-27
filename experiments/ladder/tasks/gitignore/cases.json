@@ -1,0 +1,4631 @@
+{
+  "task": "gitignore",
+  "seed": 1,
+  "fn": "isIgnored",
+  "oracle": "git version 2.54.0 (Apple Git-157)",
+  "builtAt": "2026-10-24T13:37:40.732Z",
+  "perRule": {
+    "R1": {
+      "cases": 80,
+      "positive": 40
+    },
+    "R2": {
+      "cases": 60,
+      "positive": 40
+    },
+    "R3": {
+      "cases": 70,
+      "positive": 58
+    },
+    "R4": {
+      "cases": 33,
+      "positive": 18
+    },
+    "R5": {
+      "cases": 40,
+      "positive": 30
+    },
+    "R6": {
+      "cases": 33,
+      "positive": 16
+    },
+    "R7": {
+      "cases": 37,
+      "positive": 20
+    },
+    "R8": {
+      "cases": 32,
+      "positive": 21
+    },
+    "R9": {
+      "cases": 23,
+      "positive": 12
+    },
+    "R10": {
+      "cases": 50,
+      "positive": 30
+    }
+  },
+  "cases": [
+    {
+      "id": "c0001",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "#data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0002",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0003",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0004",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "pkg/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0005",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "#readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0006",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0007",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        " #data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0008",
+      "rule": "R1",
+      "set": 0,
+      "args": [
+        "#data.json\n\nmain.c\n\\#readme.md\n #data.json\n   \n",
+        "pkg/#data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0009",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "#error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0010",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0011",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0012",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "logs/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0013",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "#data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0014",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0015",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        " #error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0016",
+      "rule": "R1",
+      "set": 1,
+      "args": [
+        "#error.log\n\napp.log\n\\#data.json\n #error.log\n   \n",
+        "logs/#error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0017",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "#keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0018",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0019",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0020",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "out/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0021",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "#debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0022",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0023",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        " #keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0024",
+      "rule": "R1",
+      "set": 2,
+      "args": [
+        "#keep.txt\n\nerror.log\n\\#debug.log\n #keep.txt\n   \n",
+        "out/#keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0025",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "#util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0026",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0027",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0028",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "lib/keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0029",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "#app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0030",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0031",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        " #util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0032",
+      "rule": "R1",
+      "set": 3,
+      "args": [
+        "#util.js\n\nkeep.txt\n\\#app.log\n #util.js\n   \n",
+        "lib/#util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0033",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "#keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0034",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0035",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0036",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "cache/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0037",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "#debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0038",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0039",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        " #keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0040",
+      "rule": "R1",
+      "set": 4,
+      "args": [
+        "#keep.txt\n\nmain.c\n\\#debug.log\n #keep.txt\n   \n",
+        "cache/#keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0041",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "#app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0042",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0043",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0044",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "out/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0045",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "#main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0046",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0047",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        " #app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0048",
+      "rule": "R1",
+      "set": 5,
+      "args": [
+        "#app.log\n\nnotes.txt\n\\#main.c\n #app.log\n   \n",
+        "out/#app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0049",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "#data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0050",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0051",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0052",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "app/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0053",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "#notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0054",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0055",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        " #data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0056",
+      "rule": "R1",
+      "set": 6,
+      "args": [
+        "#data.json\n\nx.tmp\n\\#notes.txt\n #data.json\n   \n",
+        "app/#data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0057",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "#data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0058",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0059",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0060",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "app/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0061",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "#x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0062",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0063",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        " #data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0064",
+      "rule": "R1",
+      "set": 7,
+      "args": [
+        "#data.json\n\nreadme.md\n\\#x.tmp\n #data.json\n   \n",
+        "app/#data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0065",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "#a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0066",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0067",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0068",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "pkg/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0069",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "#x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0070",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0071",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        " #a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0072",
+      "rule": "R1",
+      "set": 8,
+      "args": [
+        "#a.out\n\ndebug.log\n\\#x.tmp\n #a.out\n   \n",
+        "pkg/#a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0073",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "#notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0074",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0075",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0076",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "build/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0077",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "#util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0078",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0079",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        " #notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0080",
+      "rule": "R1",
+      "set": 9,
+      "args": [
+        "#notes.txt\n\nx.tmp\n\\#util.js\n #notes.txt\n   \n",
+        "build/#notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0081",
+      "rule": "R2",
+      "set": 10,
+      "args": [
+        "debug.log   \nnotes.txt\\ \n",
+        "debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0082",
+      "rule": "R2",
+      "set": 10,
+      "args": [
+        "debug.log   \nnotes.txt\\ \n",
+        "debug.log "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0083",
+      "rule": "R2",
+      "set": 10,
+      "args": [
+        "debug.log   \nnotes.txt\\ \n",
+        "lib/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0084",
+      "rule": "R2",
+      "set": 10,
+      "args": [
+        "debug.log   \nnotes.txt\\ \n",
+        "notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0085",
+      "rule": "R2",
+      "set": 10,
+      "args": [
+        "debug.log   \nnotes.txt\\ \n",
+        "notes.txt "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0086",
+      "rule": "R2",
+      "set": 10,
+      "args": [
+        "debug.log   \nnotes.txt\\ \n",
+        "lib/notes.txt "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0087",
+      "rule": "R2",
+      "set": 11,
+      "args": [
+        "a.out   \nreadme.md\\ \n",
+        "a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0088",
+      "rule": "R2",
+      "set": 11,
+      "args": [
+        "a.out   \nreadme.md\\ \n",
+        "a.out "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0089",
+      "rule": "R2",
+      "set": 11,
+      "args": [
+        "a.out   \nreadme.md\\ \n",
+        "lib/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0090",
+      "rule": "R2",
+      "set": 11,
+      "args": [
+        "a.out   \nreadme.md\\ \n",
+        "readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0091",
+      "rule": "R2",
+      "set": 11,
+      "args": [
+        "a.out   \nreadme.md\\ \n",
+        "readme.md "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0092",
+      "rule": "R2",
+      "set": 11,
+      "args": [
+        "a.out   \nreadme.md\\ \n",
+        "lib/readme.md "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0093",
+      "rule": "R2",
+      "set": 12,
+      "args": [
+        "app.log   \nmain.c\\ \n",
+        "app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0094",
+      "rule": "R2",
+      "set": 12,
+      "args": [
+        "app.log   \nmain.c\\ \n",
+        "app.log "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0095",
+      "rule": "R2",
+      "set": 12,
+      "args": [
+        "app.log   \nmain.c\\ \n",
+        "vendor/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0096",
+      "rule": "R2",
+      "set": 12,
+      "args": [
+        "app.log   \nmain.c\\ \n",
+        "main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0097",
+      "rule": "R2",
+      "set": 12,
+      "args": [
+        "app.log   \nmain.c\\ \n",
+        "main.c "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0098",
+      "rule": "R2",
+      "set": 12,
+      "args": [
+        "app.log   \nmain.c\\ \n",
+        "vendor/main.c "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0099",
+      "rule": "R2",
+      "set": 13,
+      "args": [
+        "index.ts   \nnotes.txt\\ \n",
+        "index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0100",
+      "rule": "R2",
+      "set": 13,
+      "args": [
+        "index.ts   \nnotes.txt\\ \n",
+        "index.ts "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0101",
+      "rule": "R2",
+      "set": 13,
+      "args": [
+        "index.ts   \nnotes.txt\\ \n",
+        "pkg/index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0102",
+      "rule": "R2",
+      "set": 13,
+      "args": [
+        "index.ts   \nnotes.txt\\ \n",
+        "notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0103",
+      "rule": "R2",
+      "set": 13,
+      "args": [
+        "index.ts   \nnotes.txt\\ \n",
+        "notes.txt "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0104",
+      "rule": "R2",
+      "set": 13,
+      "args": [
+        "index.ts   \nnotes.txt\\ \n",
+        "pkg/notes.txt "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0105",
+      "rule": "R2",
+      "set": 14,
+      "args": [
+        "a.out   \ndebug.log\\ \n",
+        "a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0106",
+      "rule": "R2",
+      "set": 14,
+      "args": [
+        "a.out   \ndebug.log\\ \n",
+        "a.out "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0107",
+      "rule": "R2",
+      "set": 14,
+      "args": [
+        "a.out   \ndebug.log\\ \n",
+        "build/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0108",
+      "rule": "R2",
+      "set": 14,
+      "args": [
+        "a.out   \ndebug.log\\ \n",
+        "debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0109",
+      "rule": "R2",
+      "set": 14,
+      "args": [
+        "a.out   \ndebug.log\\ \n",
+        "debug.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0110",
+      "rule": "R2",
+      "set": 14,
+      "args": [
+        "a.out   \ndebug.log\\ \n",
+        "build/debug.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0111",
+      "rule": "R2",
+      "set": 15,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0112",
+      "rule": "R2",
+      "set": 15,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "a.out "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0113",
+      "rule": "R2",
+      "set": 15,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "pkg/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0114",
+      "rule": "R2",
+      "set": 15,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0115",
+      "rule": "R2",
+      "set": 15,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "error.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0116",
+      "rule": "R2",
+      "set": 15,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "pkg/error.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0117",
+      "rule": "R2",
+      "set": 16,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0118",
+      "rule": "R2",
+      "set": 16,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "a.out "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0119",
+      "rule": "R2",
+      "set": 16,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "dist/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0120",
+      "rule": "R2",
+      "set": 16,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0121",
+      "rule": "R2",
+      "set": 16,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "error.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0122",
+      "rule": "R2",
+      "set": 16,
+      "args": [
+        "a.out   \nerror.log\\ \n",
+        "dist/error.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0123",
+      "rule": "R2",
+      "set": 17,
+      "args": [
+        "error.log   \nutil.js\\ \n",
+        "error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0124",
+      "rule": "R2",
+      "set": 17,
+      "args": [
+        "error.log   \nutil.js\\ \n",
+        "error.log "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0125",
+      "rule": "R2",
+      "set": 17,
+      "args": [
+        "error.log   \nutil.js\\ \n",
+        "src/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0126",
+      "rule": "R2",
+      "set": 17,
+      "args": [
+        "error.log   \nutil.js\\ \n",
+        "util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0127",
+      "rule": "R2",
+      "set": 17,
+      "args": [
+        "error.log   \nutil.js\\ \n",
+        "util.js "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0128",
+      "rule": "R2",
+      "set": 17,
+      "args": [
+        "error.log   \nutil.js\\ \n",
+        "src/util.js "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0129",
+      "rule": "R2",
+      "set": 18,
+      "args": [
+        "index.ts   \napp.log\\ \n",
+        "index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0130",
+      "rule": "R2",
+      "set": 18,
+      "args": [
+        "index.ts   \napp.log\\ \n",
+        "index.ts "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0131",
+      "rule": "R2",
+      "set": 18,
+      "args": [
+        "index.ts   \napp.log\\ \n",
+        "dist/index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0132",
+      "rule": "R2",
+      "set": 18,
+      "args": [
+        "index.ts   \napp.log\\ \n",
+        "app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0133",
+      "rule": "R2",
+      "set": 18,
+      "args": [
+        "index.ts   \napp.log\\ \n",
+        "app.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0134",
+      "rule": "R2",
+      "set": 18,
+      "args": [
+        "index.ts   \napp.log\\ \n",
+        "dist/app.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0135",
+      "rule": "R2",
+      "set": 19,
+      "args": [
+        "readme.md   \nerror.log\\ \n",
+        "readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0136",
+      "rule": "R2",
+      "set": 19,
+      "args": [
+        "readme.md   \nerror.log\\ \n",
+        "readme.md "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0137",
+      "rule": "R2",
+      "set": 19,
+      "args": [
+        "readme.md   \nerror.log\\ \n",
+        "logs/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0138",
+      "rule": "R2",
+      "set": 19,
+      "args": [
+        "readme.md   \nerror.log\\ \n",
+        "error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0139",
+      "rule": "R2",
+      "set": 19,
+      "args": [
+        "readme.md   \nerror.log\\ \n",
+        "error.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0140",
+      "rule": "R2",
+      "set": 19,
+      "args": [
+        "readme.md   \nerror.log\\ \n",
+        "logs/error.log "
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0141",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "fig.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0142",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "main.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0143",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "pkg/fig.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0144",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "pkg/main.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0145",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "!alpha.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0146",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "alpha.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0147",
+      "rule": "R3",
+      "set": 20,
+      "args": [
+        "*.log\n!fig.log\n\\!alpha.log\n",
+        "pkg/!alpha.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0148",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "alpha.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0149",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "data.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0150",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "vendor/alpha.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0151",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "vendor/data.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0152",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "!core.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0153",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "core.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0154",
+      "rule": "R3",
+      "set": 21,
+      "args": [
+        "!alpha.js\n*.js\n\\!core.js\n",
+        "vendor/!core.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0155",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "alpha.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0156",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "gold.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0157",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "build/alpha.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0158",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "build/gold.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0159",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "!main.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0160",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "main.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0161",
+      "rule": "R3",
+      "set": 22,
+      "args": [
+        "*.tmp\n!alpha.tmp\n\\!main.tmp\n",
+        "build/!main.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0162",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "main.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0163",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "core.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0164",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "vendor/main.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0165",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "vendor/core.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0166",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "!alpha.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0167",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "alpha.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0168",
+      "rule": "R3",
+      "set": 23,
+      "args": [
+        "!main.txt\n*.txt\n\\!alpha.txt\n",
+        "vendor/!alpha.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0169",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "alpha.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0170",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "beta.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0171",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "build/alpha.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0172",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "build/beta.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0173",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "!core.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0174",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "core.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0175",
+      "rule": "R3",
+      "set": 24,
+      "args": [
+        "!alpha.txt\n*.txt\n\\!core.txt\n",
+        "build/!core.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0176",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "alpha.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0177",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "east.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0178",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "app/alpha.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0179",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "app/east.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0180",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "!fig.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0181",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "fig.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0182",
+      "rule": "R3",
+      "set": 25,
+      "args": [
+        "!alpha.tmp\n*.tmp\n\\!fig.tmp\n",
+        "app/!fig.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0183",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "main.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0184",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "gold.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0185",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "src/main.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0186",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "src/gold.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0187",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "!fig.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0188",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "fig.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0189",
+      "rule": "R3",
+      "set": 26,
+      "args": [
+        "*.txt\n!main.txt\n\\!fig.txt\n",
+        "src/!fig.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0190",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "main.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0191",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "core.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0192",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "dist/main.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0193",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "dist/core.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0194",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "!fig.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0195",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "fig.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0196",
+      "rule": "R3",
+      "set": 27,
+      "args": [
+        "*.log\n!main.log\n\\!fig.log\n",
+        "dist/!fig.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0197",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "gold.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0198",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "fig.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0199",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "app/gold.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0200",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "app/fig.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0201",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "!east.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0202",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "east.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0203",
+      "rule": "R3",
+      "set": 28,
+      "args": [
+        "*.txt\n!gold.txt\n\\!east.txt\n",
+        "app/!east.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0204",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "data.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0205",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "east.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0206",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "dist/data.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0207",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "dist/east.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0208",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "!beta.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0209",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "beta.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0210",
+      "rule": "R3",
+      "set": 29,
+      "args": [
+        "*.log\n!data.log\n\\!beta.log\n",
+        "dist/!beta.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0211",
+      "rule": "R4",
+      "set": 30,
+      "args": [
+        "dist/*\n!dist/data.json\n",
+        "dist/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0212",
+      "rule": "R4",
+      "set": 30,
+      "args": [
+        "dist/*\n!dist/data.json\n",
+        "dist/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0213",
+      "rule": "R4",
+      "set": 30,
+      "args": [
+        "dist/*\n!dist/data.json\n",
+        "cache/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0214",
+      "rule": "R4",
+      "set": 31,
+      "args": [
+        "docs/\n!docs/\ndocs/build/\n!docs/build/notes.txt\n",
+        "docs/notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0215",
+      "rule": "R4",
+      "set": 31,
+      "args": [
+        "docs/\n!docs/\ndocs/build/\n!docs/build/notes.txt\n",
+        "docs/build/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0216",
+      "rule": "R4",
+      "set": 31,
+      "args": [
+        "docs/\n!docs/\ndocs/build/\n!docs/build/notes.txt\n",
+        "docs/build/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0217",
+      "rule": "R4",
+      "set": 32,
+      "args": [
+        "pkg/\n!pkg/app.log\n",
+        "pkg/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0218",
+      "rule": "R4",
+      "set": 32,
+      "args": [
+        "pkg/\n!pkg/app.log\n",
+        "pkg/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0219",
+      "rule": "R4",
+      "set": 32,
+      "args": [
+        "pkg/\n!pkg/app.log\n",
+        "lib/app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0220",
+      "rule": "R4",
+      "set": 33,
+      "args": [
+        "cache/\n!cache/\ncache/docs/\n!cache/docs/notes.txt\n",
+        "cache/notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0221",
+      "rule": "R4",
+      "set": 33,
+      "args": [
+        "cache/\n!cache/\ncache/docs/\n!cache/docs/notes.txt\n",
+        "cache/docs/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0222",
+      "rule": "R4",
+      "set": 33,
+      "args": [
+        "cache/\n!cache/\ncache/docs/\n!cache/docs/notes.txt\n",
+        "cache/docs/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0223",
+      "rule": "R4",
+      "set": 34,
+      "args": [
+        "/build/*\n!/build/dist/\n/build/dist/*\n!/build/dist/readme.md\n",
+        "build/dist/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0224",
+      "rule": "R4",
+      "set": 34,
+      "args": [
+        "/build/*\n!/build/dist/\n/build/dist/*\n!/build/dist/readme.md\n",
+        "build/dist/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0225",
+      "rule": "R4",
+      "set": 34,
+      "args": [
+        "/build/*\n!/build/dist/\n/build/dist/*\n!/build/dist/readme.md\n",
+        "build/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0226",
+      "rule": "R4",
+      "set": 34,
+      "args": [
+        "/build/*\n!/build/dist/\n/build/dist/*\n!/build/dist/readme.md\n",
+        "dist/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0227",
+      "rule": "R4",
+      "set": 35,
+      "args": [
+        "/docs/*\n!/docs/app/\n/docs/app/*\n!/docs/app/readme.md\n",
+        "docs/app/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0228",
+      "rule": "R4",
+      "set": 35,
+      "args": [
+        "/docs/*\n!/docs/app/\n/docs/app/*\n!/docs/app/readme.md\n",
+        "docs/app/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0229",
+      "rule": "R4",
+      "set": 35,
+      "args": [
+        "/docs/*\n!/docs/app/\n/docs/app/*\n!/docs/app/readme.md\n",
+        "docs/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0230",
+      "rule": "R4",
+      "set": 35,
+      "args": [
+        "/docs/*\n!/docs/app/\n/docs/app/*\n!/docs/app/readme.md\n",
+        "app/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0231",
+      "rule": "R4",
+      "set": 36,
+      "args": [
+        "src/\n!src/data.json\n",
+        "src/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0232",
+      "rule": "R4",
+      "set": 36,
+      "args": [
+        "src/\n!src/data.json\n",
+        "src/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0233",
+      "rule": "R4",
+      "set": 36,
+      "args": [
+        "src/\n!src/data.json\n",
+        "build/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0234",
+      "rule": "R4",
+      "set": 37,
+      "args": [
+        "build/*\n!build/index.ts\n",
+        "build/index.ts"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0235",
+      "rule": "R4",
+      "set": 37,
+      "args": [
+        "build/*\n!build/index.ts\n",
+        "build/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0236",
+      "rule": "R4",
+      "set": 37,
+      "args": [
+        "build/*\n!build/index.ts\n",
+        "out/index.ts"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0237",
+      "rule": "R4",
+      "set": 38,
+      "args": [
+        "docs\n!docs/main.c\n!main.c\n",
+        "docs/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0238",
+      "rule": "R4",
+      "set": 38,
+      "args": [
+        "docs\n!docs/main.c\n!main.c\n",
+        "docs/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0239",
+      "rule": "R4",
+      "set": 38,
+      "args": [
+        "docs\n!docs/main.c\n!main.c\n",
+        "main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0240",
+      "rule": "R4",
+      "set": 38,
+      "args": [
+        "docs\n!docs/main.c\n!main.c\n",
+        "vendor/main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0241",
+      "rule": "R4",
+      "set": 39,
+      "args": [
+        "tmp/\n!tmp/\ntmp/logs/\n!tmp/logs/util.js\n",
+        "tmp/util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0242",
+      "rule": "R4",
+      "set": 39,
+      "args": [
+        "tmp/\n!tmp/\ntmp/logs/\n!tmp/logs/util.js\n",
+        "tmp/logs/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0243",
+      "rule": "R4",
+      "set": 39,
+      "args": [
+        "tmp/\n!tmp/\ntmp/logs/\n!tmp/logs/util.js\n",
+        "tmp/logs/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0244",
+      "rule": "R5",
+      "set": 40,
+      "args": [
+        "lib/\n",
+        "lib2/app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0245",
+      "rule": "R5",
+      "set": 40,
+      "args": [
+        "lib/\n",
+        "lib/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0246",
+      "rule": "R5",
+      "set": 40,
+      "args": [
+        "lib/\n",
+        "logs/lib/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0247",
+      "rule": "R5",
+      "set": 40,
+      "args": [
+        "lib/\n",
+        "logs/lib/logs/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0248",
+      "rule": "R5",
+      "set": 41,
+      "args": [
+        "vendor/\n",
+        "vendor2/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0249",
+      "rule": "R5",
+      "set": 41,
+      "args": [
+        "vendor/\n",
+        "vendor/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0250",
+      "rule": "R5",
+      "set": 41,
+      "args": [
+        "vendor/\n",
+        "build/vendor/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0251",
+      "rule": "R5",
+      "set": 41,
+      "args": [
+        "vendor/\n",
+        "build/vendor/build/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0252",
+      "rule": "R5",
+      "set": 42,
+      "args": [
+        "pkg/\n",
+        "pkg2/util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0253",
+      "rule": "R5",
+      "set": 42,
+      "args": [
+        "pkg/\n",
+        "pkg/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0254",
+      "rule": "R5",
+      "set": 42,
+      "args": [
+        "pkg/\n",
+        "src/pkg/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0255",
+      "rule": "R5",
+      "set": 42,
+      "args": [
+        "pkg/\n",
+        "src/pkg/src/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0256",
+      "rule": "R5",
+      "set": 43,
+      "args": [
+        "app/\n",
+        "app2/main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0257",
+      "rule": "R5",
+      "set": 43,
+      "args": [
+        "app/\n",
+        "app/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0258",
+      "rule": "R5",
+      "set": 43,
+      "args": [
+        "app/\n",
+        "logs/app/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0259",
+      "rule": "R5",
+      "set": 43,
+      "args": [
+        "app/\n",
+        "logs/app/logs/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0260",
+      "rule": "R5",
+      "set": 44,
+      "args": [
+        "tmp/\n",
+        "tmp2/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0261",
+      "rule": "R5",
+      "set": 44,
+      "args": [
+        "tmp/\n",
+        "tmp/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0262",
+      "rule": "R5",
+      "set": 44,
+      "args": [
+        "tmp/\n",
+        "docs/tmp/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0263",
+      "rule": "R5",
+      "set": 44,
+      "args": [
+        "tmp/\n",
+        "docs/tmp/docs/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0264",
+      "rule": "R5",
+      "set": 45,
+      "args": [
+        "build/\n",
+        "build2/error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0265",
+      "rule": "R5",
+      "set": 45,
+      "args": [
+        "build/\n",
+        "build/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0266",
+      "rule": "R5",
+      "set": 45,
+      "args": [
+        "build/\n",
+        "src/build/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0267",
+      "rule": "R5",
+      "set": 45,
+      "args": [
+        "build/\n",
+        "src/build/src/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0268",
+      "rule": "R5",
+      "set": 46,
+      "args": [
+        "pkg/\n",
+        "pkg2/index.ts"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0269",
+      "rule": "R5",
+      "set": 46,
+      "args": [
+        "pkg/\n",
+        "pkg/index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0270",
+      "rule": "R5",
+      "set": 46,
+      "args": [
+        "pkg/\n",
+        "src/pkg/index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0271",
+      "rule": "R5",
+      "set": 46,
+      "args": [
+        "pkg/\n",
+        "src/pkg/src/index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0272",
+      "rule": "R5",
+      "set": 47,
+      "args": [
+        "lib/\n",
+        "lib2/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0273",
+      "rule": "R5",
+      "set": 47,
+      "args": [
+        "lib/\n",
+        "lib/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0274",
+      "rule": "R5",
+      "set": 47,
+      "args": [
+        "lib/\n",
+        "out/lib/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0275",
+      "rule": "R5",
+      "set": 47,
+      "args": [
+        "lib/\n",
+        "out/lib/out/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0276",
+      "rule": "R5",
+      "set": 48,
+      "args": [
+        "tmp/\n",
+        "tmp2/a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0277",
+      "rule": "R5",
+      "set": 48,
+      "args": [
+        "tmp/\n",
+        "tmp/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0278",
+      "rule": "R5",
+      "set": 48,
+      "args": [
+        "tmp/\n",
+        "docs/tmp/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0279",
+      "rule": "R5",
+      "set": 48,
+      "args": [
+        "tmp/\n",
+        "docs/tmp/docs/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0280",
+      "rule": "R5",
+      "set": 49,
+      "args": [
+        "lib/\n",
+        "lib2/error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0281",
+      "rule": "R5",
+      "set": 49,
+      "args": [
+        "lib/\n",
+        "lib/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0282",
+      "rule": "R5",
+      "set": 49,
+      "args": [
+        "lib/\n",
+        "docs/lib/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0283",
+      "rule": "R5",
+      "set": 49,
+      "args": [
+        "lib/\n",
+        "docs/lib/docs/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0284",
+      "rule": "R6",
+      "set": 50,
+      "args": [
+        "/vendor/\n",
+        "vendor/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0285",
+      "rule": "R6",
+      "set": 50,
+      "args": [
+        "/vendor/\n",
+        "out/vendor/main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0286",
+      "rule": "R6",
+      "set": 50,
+      "args": [
+        "/vendor/\n",
+        "vendor/out/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0287",
+      "rule": "R6",
+      "set": 51,
+      "args": [
+        "/data.json\n",
+        "data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0288",
+      "rule": "R6",
+      "set": 51,
+      "args": [
+        "/data.json\n",
+        "app/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0289",
+      "rule": "R6",
+      "set": 51,
+      "args": [
+        "/data.json\n",
+        "lib/app/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0290",
+      "rule": "R6",
+      "set": 52,
+      "args": [
+        "/src/\n",
+        "src/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0291",
+      "rule": "R6",
+      "set": 52,
+      "args": [
+        "/src/\n",
+        "lib/src/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0292",
+      "rule": "R6",
+      "set": 52,
+      "args": [
+        "/src/\n",
+        "src/lib/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0293",
+      "rule": "R6",
+      "set": 53,
+      "args": [
+        "/a.out\n",
+        "a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0294",
+      "rule": "R6",
+      "set": 53,
+      "args": [
+        "/a.out\n",
+        "cache/a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0295",
+      "rule": "R6",
+      "set": 53,
+      "args": [
+        "/a.out\n",
+        "vendor/cache/a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0296",
+      "rule": "R6",
+      "set": 54,
+      "args": [
+        "main.c\n",
+        "main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0297",
+      "rule": "R6",
+      "set": 54,
+      "args": [
+        "main.c\n",
+        "dist/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0298",
+      "rule": "R6",
+      "set": 54,
+      "args": [
+        "main.c\n",
+        "pkg/dist/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0299",
+      "rule": "R6",
+      "set": 54,
+      "args": [
+        "main.c\n",
+        "index.ts"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0300",
+      "rule": "R6",
+      "set": 55,
+      "args": [
+        "/tmp/\n",
+        "tmp/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0301",
+      "rule": "R6",
+      "set": 55,
+      "args": [
+        "/tmp/\n",
+        "docs/tmp/util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0302",
+      "rule": "R6",
+      "set": 55,
+      "args": [
+        "/tmp/\n",
+        "tmp/docs/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0303",
+      "rule": "R6",
+      "set": 56,
+      "args": [
+        "/docs/\n",
+        "docs/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0304",
+      "rule": "R6",
+      "set": 56,
+      "args": [
+        "/docs/\n",
+        "src/docs/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0305",
+      "rule": "R6",
+      "set": 56,
+      "args": [
+        "/docs/\n",
+        "docs/src/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0306",
+      "rule": "R6",
+      "set": 57,
+      "args": [
+        "dist/x.tmp\n",
+        "dist/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0307",
+      "rule": "R6",
+      "set": 57,
+      "args": [
+        "dist/x.tmp\n",
+        "out/dist/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0308",
+      "rule": "R6",
+      "set": 57,
+      "args": [
+        "dist/x.tmp\n",
+        "x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0309",
+      "rule": "R6",
+      "set": 57,
+      "args": [
+        "dist/x.tmp\n",
+        "dist/out/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0310",
+      "rule": "R6",
+      "set": 58,
+      "args": [
+        "/index.ts\n",
+        "index.ts"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0311",
+      "rule": "R6",
+      "set": 58,
+      "args": [
+        "/index.ts\n",
+        "logs/index.ts"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0312",
+      "rule": "R6",
+      "set": 58,
+      "args": [
+        "/index.ts\n",
+        "app/logs/index.ts"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0313",
+      "rule": "R6",
+      "set": 59,
+      "args": [
+        "app/logs/\n",
+        "app/logs/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0314",
+      "rule": "R6",
+      "set": 59,
+      "args": [
+        "app/logs/\n",
+        "x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0315",
+      "rule": "R6",
+      "set": 59,
+      "args": [
+        "app/logs/\n",
+        "logs/main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0316",
+      "rule": "R6",
+      "set": 59,
+      "args": [
+        "app/logs/\n",
+        "logs/app/logs/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0317",
+      "rule": "R7",
+      "set": 60,
+      "args": [
+        "main[0-3]\n",
+        "main0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0318",
+      "rule": "R7",
+      "set": 60,
+      "args": [
+        "main[0-3]\n",
+        "main3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0319",
+      "rule": "R7",
+      "set": 60,
+      "args": [
+        "main[0-3]\n",
+        "main4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0320",
+      "rule": "R7",
+      "set": 60,
+      "args": [
+        "main[0-3]\n",
+        "main"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0321",
+      "rule": "R7",
+      "set": 61,
+      "args": [
+        "vendor*\n",
+        "vendorx/data"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0322",
+      "rule": "R7",
+      "set": 61,
+      "args": [
+        "vendor*\n",
+        "vendor/data"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0323",
+      "rule": "R7",
+      "set": 61,
+      "args": [
+        "vendor*\n",
+        "xvendor"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0324",
+      "rule": "R7",
+      "set": 61,
+      "args": [
+        "vendor*\n",
+        "vendor.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0325",
+      "rule": "R7",
+      "set": 62,
+      "args": [
+        "vendor/*.tmp\n",
+        "vendor/alpha.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0326",
+      "rule": "R7",
+      "set": 62,
+      "args": [
+        "vendor/*.tmp\n",
+        "vendor/fig/alpha.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0327",
+      "rule": "R7",
+      "set": 62,
+      "args": [
+        "vendor/*.tmp\n",
+        "alpha.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0328",
+      "rule": "R7",
+      "set": 63,
+      "args": [
+        "main[0-3]\n",
+        "main0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0329",
+      "rule": "R7",
+      "set": 63,
+      "args": [
+        "main[0-3]\n",
+        "main3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0330",
+      "rule": "R7",
+      "set": 63,
+      "args": [
+        "main[0-3]\n",
+        "main4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0331",
+      "rule": "R7",
+      "set": 63,
+      "args": [
+        "main[0-3]\n",
+        "main"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0332",
+      "rule": "R7",
+      "set": 64,
+      "args": [
+        "*.js\n",
+        "main.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0333",
+      "rule": "R7",
+      "set": 64,
+      "args": [
+        "*.js\n",
+        "build/east.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0334",
+      "rule": "R7",
+      "set": 64,
+      "args": [
+        "*.js\n",
+        "main.js.bak"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0335",
+      "rule": "R7",
+      "set": 64,
+      "args": [
+        "*.js\n",
+        "mainjs"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0336",
+      "rule": "R7",
+      "set": 65,
+      "args": [
+        "vendor/*.json\n",
+        "vendor/alpha.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0337",
+      "rule": "R7",
+      "set": 65,
+      "args": [
+        "vendor/*.json\n",
+        "vendor/gold/alpha.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0338",
+      "rule": "R7",
+      "set": 65,
+      "args": [
+        "vendor/*.json\n",
+        "alpha.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0339",
+      "rule": "R7",
+      "set": 66,
+      "args": [
+        "main[0-3]\n",
+        "main0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0340",
+      "rule": "R7",
+      "set": 66,
+      "args": [
+        "main[0-3]\n",
+        "main3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0341",
+      "rule": "R7",
+      "set": 66,
+      "args": [
+        "main[0-3]\n",
+        "main4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0342",
+      "rule": "R7",
+      "set": 66,
+      "args": [
+        "main[0-3]\n",
+        "main"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0343",
+      "rule": "R7",
+      "set": 67,
+      "args": [
+        "[ab]*\n",
+        "apple"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0344",
+      "rule": "R7",
+      "set": 67,
+      "args": [
+        "[ab]*\n",
+        "berry"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0345",
+      "rule": "R7",
+      "set": 67,
+      "args": [
+        "[ab]*\n",
+        "cherry"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0346",
+      "rule": "R7",
+      "set": 67,
+      "args": [
+        "[ab]*\n",
+        "vendor/able"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0347",
+      "rule": "R7",
+      "set": 68,
+      "args": [
+        "cache?fig\n",
+        "cache/fig"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0348",
+      "rule": "R7",
+      "set": 68,
+      "args": [
+        "cache?fig\n",
+        "cache_fig"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0349",
+      "rule": "R7",
+      "set": 68,
+      "args": [
+        "cache?fig\n",
+        "cache-fig"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0350",
+      "rule": "R7",
+      "set": 69,
+      "args": [
+        "main[0-3]\n",
+        "main0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0351",
+      "rule": "R7",
+      "set": 69,
+      "args": [
+        "main[0-3]\n",
+        "main3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0352",
+      "rule": "R7",
+      "set": 69,
+      "args": [
+        "main[0-3]\n",
+        "main4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0353",
+      "rule": "R7",
+      "set": 69,
+      "args": [
+        "main[0-3]\n",
+        "main"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0354",
+      "rule": "R8",
+      "set": 70,
+      "args": [
+        "**/x.tmp\n",
+        "x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0355",
+      "rule": "R8",
+      "set": 70,
+      "args": [
+        "**/x.tmp\n",
+        "lib/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0356",
+      "rule": "R8",
+      "set": 70,
+      "args": [
+        "**/x.tmp\n",
+        "lib/cache/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0357",
+      "rule": "R8",
+      "set": 71,
+      "args": [
+        "**/app.log\n",
+        "app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0358",
+      "rule": "R8",
+      "set": 71,
+      "args": [
+        "**/app.log\n",
+        "cache/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0359",
+      "rule": "R8",
+      "set": 71,
+      "args": [
+        "**/app.log\n",
+        "cache/logs/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0360",
+      "rule": "R8",
+      "set": 72,
+      "args": [
+        "app/**/error.log\n",
+        "app/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0361",
+      "rule": "R8",
+      "set": 72,
+      "args": [
+        "app/**/error.log\n",
+        "app/src/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0362",
+      "rule": "R8",
+      "set": 72,
+      "args": [
+        "app/**/error.log\n",
+        "app/src/out/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0363",
+      "rule": "R8",
+      "set": 72,
+      "args": [
+        "app/**/error.log\n",
+        "out/app/error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0364",
+      "rule": "R8",
+      "set": 73,
+      "args": [
+        "logs/**/x.tmp\n",
+        "logs/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0365",
+      "rule": "R8",
+      "set": 73,
+      "args": [
+        "logs/**/x.tmp\n",
+        "logs/lib/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0366",
+      "rule": "R8",
+      "set": 73,
+      "args": [
+        "logs/**/x.tmp\n",
+        "logs/lib/vendor/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0367",
+      "rule": "R8",
+      "set": 73,
+      "args": [
+        "logs/**/x.tmp\n",
+        "vendor/logs/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0368",
+      "rule": "R8",
+      "set": 74,
+      "args": [
+        "lib/**/\n",
+        "lib/keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0369",
+      "rule": "R8",
+      "set": 74,
+      "args": [
+        "lib/**/\n",
+        "lib/out/keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0370",
+      "rule": "R8",
+      "set": 74,
+      "args": [
+        "lib/**/\n",
+        "pkg/keep.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0371",
+      "rule": "R8",
+      "set": 75,
+      "args": [
+        "vendor/**/\n",
+        "vendor/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0372",
+      "rule": "R8",
+      "set": 75,
+      "args": [
+        "vendor/**/\n",
+        "vendor/app/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0373",
+      "rule": "R8",
+      "set": 75,
+      "args": [
+        "vendor/**/\n",
+        "logs/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0374",
+      "rule": "R8",
+      "set": 76,
+      "args": [
+        "**/keep.txt\n",
+        "keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0375",
+      "rule": "R8",
+      "set": 76,
+      "args": [
+        "**/keep.txt\n",
+        "docs/keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0376",
+      "rule": "R8",
+      "set": 76,
+      "args": [
+        "**/keep.txt\n",
+        "docs/pkg/keep.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0377",
+      "rule": "R8",
+      "set": 77,
+      "args": [
+        "tmp/**/\n",
+        "tmp/app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0378",
+      "rule": "R8",
+      "set": 77,
+      "args": [
+        "tmp/**/\n",
+        "tmp/out/app.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0379",
+      "rule": "R8",
+      "set": 77,
+      "args": [
+        "tmp/**/\n",
+        "cache/app.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0380",
+      "rule": "R8",
+      "set": 78,
+      "args": [
+        "out/**/\n",
+        "out/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0381",
+      "rule": "R8",
+      "set": 78,
+      "args": [
+        "out/**/\n",
+        "out/app/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0382",
+      "rule": "R8",
+      "set": 78,
+      "args": [
+        "out/**/\n",
+        "vendor/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0383",
+      "rule": "R8",
+      "set": 79,
+      "args": [
+        "**/vendor/main.c\n",
+        "vendor/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0384",
+      "rule": "R8",
+      "set": 79,
+      "args": [
+        "**/vendor/main.c\n",
+        "docs/vendor/main.c"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0385",
+      "rule": "R8",
+      "set": 79,
+      "args": [
+        "**/vendor/main.c\n",
+        "vendor/docs/main.c"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0386",
+      "rule": "R9",
+      "set": 80,
+      "args": [
+        "!readme.md\nreadme.md\n",
+        "readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0387",
+      "rule": "R9",
+      "set": 80,
+      "args": [
+        "!readme.md\nreadme.md\n",
+        "docs/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0388",
+      "rule": "R9",
+      "set": 81,
+      "args": [
+        "build\n!build\n",
+        "build/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0389",
+      "rule": "R9",
+      "set": 81,
+      "args": [
+        "build\n!build\n",
+        "buildx"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0390",
+      "rule": "R9",
+      "set": 82,
+      "args": [
+        "!readme.md\nreadme.md\n",
+        "readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0391",
+      "rule": "R9",
+      "set": 82,
+      "args": [
+        "!readme.md\nreadme.md\n",
+        "cache/readme.md"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0392",
+      "rule": "R9",
+      "set": 83,
+      "args": [
+        "data.json\n!/data.json\n",
+        "data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0393",
+      "rule": "R9",
+      "set": 83,
+      "args": [
+        "data.json\n!/data.json\n",
+        "docs/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0394",
+      "rule": "R9",
+      "set": 84,
+      "args": [
+        "*.js\n!east*.js\neast1*.js\n",
+        "east1.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0395",
+      "rule": "R9",
+      "set": 84,
+      "args": [
+        "*.js\n!east*.js\neast1*.js\n",
+        "east2.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0396",
+      "rule": "R9",
+      "set": 84,
+      "args": [
+        "*.js\n!east*.js\neast1*.js\n",
+        "data.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0397",
+      "rule": "R9",
+      "set": 85,
+      "args": [
+        "*.tmp\n!fig*.tmp\nfig1*.tmp\n",
+        "fig1.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0398",
+      "rule": "R9",
+      "set": 85,
+      "args": [
+        "*.tmp\n!fig*.tmp\nfig1*.tmp\n",
+        "fig2.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0399",
+      "rule": "R9",
+      "set": 85,
+      "args": [
+        "*.tmp\n!fig*.tmp\nfig1*.tmp\n",
+        "data.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0400",
+      "rule": "R9",
+      "set": 86,
+      "args": [
+        "out\n!out\n",
+        "out/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0401",
+      "rule": "R9",
+      "set": 86,
+      "args": [
+        "out\n!out\n",
+        "outx"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0402",
+      "rule": "R9",
+      "set": 87,
+      "args": [
+        "debug.log\n!/debug.log\n",
+        "debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0403",
+      "rule": "R9",
+      "set": 87,
+      "args": [
+        "debug.log\n!/debug.log\n",
+        "src/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0404",
+      "rule": "R9",
+      "set": 88,
+      "args": [
+        "*.json\n!data*.json\ndata1*.json\n",
+        "data1.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0405",
+      "rule": "R9",
+      "set": 88,
+      "args": [
+        "*.json\n!data*.json\ndata1*.json\n",
+        "data2.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0406",
+      "rule": "R9",
+      "set": 88,
+      "args": [
+        "*.json\n!data*.json\ndata1*.json\n",
+        "gold.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0407",
+      "rule": "R9",
+      "set": 89,
+      "args": [
+        "out\n!out\n",
+        "out/readme.md"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0408",
+      "rule": "R9",
+      "set": 89,
+      "args": [
+        "out\n!out\n",
+        "outx"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0409",
+      "rule": "R10",
+      "set": 90,
+      "args": [
+        "build\n",
+        "build/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0410",
+      "rule": "R10",
+      "set": 90,
+      "args": [
+        "build\n",
+        "vendor/build/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0411",
+      "rule": "R10",
+      "set": 90,
+      "args": [
+        "build\n",
+        "vendor/cache/build/cache/x.tmp"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0412",
+      "rule": "R10",
+      "set": 90,
+      "args": [
+        "build\n",
+        "vendor/buildx/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0413",
+      "rule": "R10",
+      "set": 90,
+      "args": [
+        "build\n",
+        "vendor/cache/x.tmp"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0414",
+      "rule": "R10",
+      "set": 91,
+      "args": [
+        "lib\n",
+        "lib/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0415",
+      "rule": "R10",
+      "set": 91,
+      "args": [
+        "lib\n",
+        "dist/lib/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0416",
+      "rule": "R10",
+      "set": 91,
+      "args": [
+        "lib\n",
+        "dist/tmp/lib/tmp/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0417",
+      "rule": "R10",
+      "set": 91,
+      "args": [
+        "lib\n",
+        "dist/libx/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0418",
+      "rule": "R10",
+      "set": 91,
+      "args": [
+        "lib\n",
+        "dist/tmp/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0419",
+      "rule": "R10",
+      "set": 92,
+      "args": [
+        "dist\n",
+        "dist/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0420",
+      "rule": "R10",
+      "set": 92,
+      "args": [
+        "dist\n",
+        "out/dist/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0421",
+      "rule": "R10",
+      "set": 92,
+      "args": [
+        "dist\n",
+        "out/build/dist/build/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0422",
+      "rule": "R10",
+      "set": 92,
+      "args": [
+        "dist\n",
+        "out/distx/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0423",
+      "rule": "R10",
+      "set": 92,
+      "args": [
+        "dist\n",
+        "out/build/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0424",
+      "rule": "R10",
+      "set": 93,
+      "args": [
+        "cache\n",
+        "cache/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0425",
+      "rule": "R10",
+      "set": 93,
+      "args": [
+        "cache\n",
+        "tmp/cache/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0426",
+      "rule": "R10",
+      "set": 93,
+      "args": [
+        "cache\n",
+        "tmp/dist/cache/dist/notes.txt"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0427",
+      "rule": "R10",
+      "set": 93,
+      "args": [
+        "cache\n",
+        "tmp/cachex/notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0428",
+      "rule": "R10",
+      "set": 93,
+      "args": [
+        "cache\n",
+        "tmp/dist/notes.txt"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0429",
+      "rule": "R10",
+      "set": 94,
+      "args": [
+        "dist\n",
+        "dist/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0430",
+      "rule": "R10",
+      "set": 94,
+      "args": [
+        "dist\n",
+        "docs/dist/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0431",
+      "rule": "R10",
+      "set": 94,
+      "args": [
+        "dist\n",
+        "docs/logs/dist/logs/util.js"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0432",
+      "rule": "R10",
+      "set": 94,
+      "args": [
+        "dist\n",
+        "docs/distx/util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0433",
+      "rule": "R10",
+      "set": 94,
+      "args": [
+        "dist\n",
+        "docs/logs/util.js"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0434",
+      "rule": "R10",
+      "set": 95,
+      "args": [
+        "build\n",
+        "build/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0435",
+      "rule": "R10",
+      "set": 95,
+      "args": [
+        "build\n",
+        "docs/build/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0436",
+      "rule": "R10",
+      "set": 95,
+      "args": [
+        "build\n",
+        "docs/logs/build/logs/debug.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0437",
+      "rule": "R10",
+      "set": 95,
+      "args": [
+        "build\n",
+        "docs/buildx/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0438",
+      "rule": "R10",
+      "set": 95,
+      "args": [
+        "build\n",
+        "docs/logs/debug.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0439",
+      "rule": "R10",
+      "set": 96,
+      "args": [
+        "tmp\n",
+        "tmp/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0440",
+      "rule": "R10",
+      "set": 96,
+      "args": [
+        "tmp\n",
+        "out/tmp/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0441",
+      "rule": "R10",
+      "set": 96,
+      "args": [
+        "tmp\n",
+        "out/build/tmp/build/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0442",
+      "rule": "R10",
+      "set": 96,
+      "args": [
+        "tmp\n",
+        "out/tmpx/a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0443",
+      "rule": "R10",
+      "set": 96,
+      "args": [
+        "tmp\n",
+        "out/build/a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0444",
+      "rule": "R10",
+      "set": 97,
+      "args": [
+        "logs\n",
+        "logs/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0445",
+      "rule": "R10",
+      "set": 97,
+      "args": [
+        "logs\n",
+        "pkg/logs/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0446",
+      "rule": "R10",
+      "set": 97,
+      "args": [
+        "logs\n",
+        "pkg/src/logs/src/error.log"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0447",
+      "rule": "R10",
+      "set": 97,
+      "args": [
+        "logs\n",
+        "pkg/logsx/error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0448",
+      "rule": "R10",
+      "set": 97,
+      "args": [
+        "logs\n",
+        "pkg/src/error.log"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0449",
+      "rule": "R10",
+      "set": 98,
+      "args": [
+        "build\n",
+        "build/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0450",
+      "rule": "R10",
+      "set": 98,
+      "args": [
+        "build\n",
+        "lib/build/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0451",
+      "rule": "R10",
+      "set": 98,
+      "args": [
+        "build\n",
+        "lib/out/build/out/data.json"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0452",
+      "rule": "R10",
+      "set": 98,
+      "args": [
+        "build\n",
+        "lib/buildx/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0453",
+      "rule": "R10",
+      "set": 98,
+      "args": [
+        "build\n",
+        "lib/out/data.json"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0454",
+      "rule": "R10",
+      "set": 99,
+      "args": [
+        "docs\n",
+        "docs/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0455",
+      "rule": "R10",
+      "set": 99,
+      "args": [
+        "docs\n",
+        "tmp/docs/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0456",
+      "rule": "R10",
+      "set": 99,
+      "args": [
+        "docs\n",
+        "tmp/build/docs/build/a.out"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0457",
+      "rule": "R10",
+      "set": 99,
+      "args": [
+        "docs\n",
+        "tmp/docsx/a.out"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0458",
+      "rule": "R10",
+      "set": 99,
+      "args": [
+        "docs\n",
+        "tmp/build/a.out"
+      ],
+      "expected": false
+    }
+  ]
+}

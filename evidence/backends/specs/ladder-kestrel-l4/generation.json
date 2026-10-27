@@ -1,0 +1,38 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a1770a-9280-7882-8469-97452181fa44",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 8,
+        "durationMs": 130228,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      },
+      {
+        "sessionId": "01a1770a-9280-7882-8469-97452181fa44",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 8,
+        "durationMs": 78088,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added interface-contract checks; build passes. Both tests pass against the stub because the spec defines no matching rules or tagged scenarios.\n\n2 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/satisfies.test.ts"
+    ]
+  }
+}

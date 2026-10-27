@@ -1,0 +1,34 @@
+{
+  "at": "2026-10-26T04:39:53.910Z",
+  "slug": "categories-confirmed",
+  "verdict": "overfit",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "44935a3e5c7c1768f6af45195effea0306777fd2",
+  "public": {
+    "passed": 54,
+    "total": 54
+  },
+  "hidden": {
+    "passed": 69,
+    "total": 71
+  },
+  "existing": {
+    "passed": 24,
+    "total": 24
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [
+    "boundary-17",
+    "boundary-6"
+  ],
+  "hiddenSha256": "6e03154d36a533276b846831cf658e154caec3f793860b250894c030b447862e",
+  "sealedAt": "2026-10-26T04:36:00.153Z",
+  "committedAt": null
+}

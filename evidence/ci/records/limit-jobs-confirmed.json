@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-26T04:38:06.782Z",
+  "slug": "limit-jobs-confirmed",
+  "verdict": "passed",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "7b02bd50879f0d3ec2fe1de39144957dbd265146",
+  "public": {
+    "passed": 54,
+    "total": 54
+  },
+  "hidden": {
+    "passed": 46,
+    "total": 46
+  },
+  "existing": {
+    "passed": 120,
+    "total": 120
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [],
+  "hiddenSha256": "7a89b7f6f14d55f16993b034e0a2ba46a10daf460855561b88d002a0df32dc10",
+  "sealedAt": "2026-10-26T04:35:59.102Z",
+  "committedAt": null
+}

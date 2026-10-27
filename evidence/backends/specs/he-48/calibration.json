@@ -1,0 +1,61 @@
+{
+  "slug": "he-48",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_even_length_palindrome",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_example_aba",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_example_empty_string",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_example_repeated_character",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_example_zbcd",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_matching_endpoints_with_inner_mismatch",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_single_character",
+    "tests/public/test_is_palindrome.py :: TestIsPalindrome.test_two_distinct_characters"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 29,
+  "kept": [
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_balanced_counts_wrong_order",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_deep_even_middle_mismatch",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_deep_odd_inner_mismatch",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_digit_string_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_empty_boundary",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_equal_runs_around_distinct_center",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_even_word_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_five_letter_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_greek_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_long_sparse_middle_mismatch",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_long_uniform_even_string",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_long_uniform_odd_string",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_long_varied_even_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_long_varied_odd_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_longer_distinct_letters",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_mixed_case_symmetric_string",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_nine_letter_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_odd_inner_mismatch",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_palindrome_with_extra_suffix",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_repeated_nonpalindromic_block",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_single_greek_letter",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_single_other_letter",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_six_letter_even_palindrome",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_symmetric_punctuation",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_symmetric_tabs_and_newlines",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_two_equal_characters",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_two_greek_letters",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_two_letters_descending",
+    "tests/private/test_is_palindrome_hidden.py :: TestIsPalindromeHidden.test_unequal_runs_around_distinct_character"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 8
+    },
+    "hidden": {
+      "passed": 29,
+      "total": 29
+    }
+  }
+}

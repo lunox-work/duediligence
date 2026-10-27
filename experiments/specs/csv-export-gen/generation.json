@@ -1,0 +1,44 @@
+{
+  "from": "csv-export",
+  "spec": {
+    "sessionId": "8431efbd-d8f5-4383-a196-f46e7be6143a",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.523339,
+    "turns": 3,
+    "durationMs": 125238,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I wrote `spec.md` and changed nothing else. `src/index.ts` is untouched.\n\nThe spec is a title, a context paragraph and a notation key, then one gherkin block. The key explains `<BOM>`, how a CRLF row ending is shown, and markers like `<absent>`, `<null>` and `<invalid>` for missing or bad inputs. The block has a `Feature:` and a `Background:` holding the header row and the four valid statuses, then 13 `Rule:`s. Every scenario is tagged and uses the interface's names. Each one gives exact output strings or exact error messages, with tables where several cases share a rule. The `Decided:` list at the end names 22 open questions, one line each.\n\nThe decisions most likely to need a second look:\n\n- **Formula-injection guard:** an id or title that starts with `=`, `+`, `-`, `@`, a tab or a CR gets a `'` put in front of it. This is the usual safeguard for spreadsheet downloads, but it changes the data. For example, a title like `-Cook` comes out as `'-Cook`.\n- **Exact error messages:** every failure throws a plain `Error` with a fixed message, such as `Requisition req-7: unknown status \"closed\"`. Validation checks requisitions in input order, before sorting. Within one requisition the checks run in a fixed order: status, openings, filled, filled > openings, creation time.\n- **Limits on counts:** openings and filled must be non-negative safe integers (at most 9007199254740991) of type number. Strings such as `\"3\"` and `null` are rejected rather than converted.\n- **Sorting:** rows are ordered oldest first by creation time, then by id in plain character-code order, so `B` comes before `b` and `req-10` before `req-2`. Requisitions with the same time and the same id stay in input order. Duplicate ids are allowed.\n- **No `@concurrency` scenarios:** the function is synchronous and pure, so calls can't overlap. The spec says this in the `Decided:` list."
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "9ec2ea4c-c8f1-40f5-b8aa-884504e1a7bb",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.9833824000000001,
+        "turns": 19,
+        "durationMs": 263542,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.9833824000000001,
+    "finalText": "I wrote the public test suite in `tests/public/`. `npm run build` reports no errors. I also ran the compiled tests: all 119 fail, each one only because the bodies throw `not implemented`, which is expected.\n\n**Coverage:** each of the 32 scenarios in the spec (7 `@happy`, 14 `@boundary`, 11 `@unhappy`) has at least two tests:\n- **The scenario as written.** For scenario outlines, there is one test per example row, each with a unique name.\n- **One extra edge case,** named `[key] boundary: ...`. Examples: an offset that crosses midnight, emoji vs. high-BMP ids sorted by UTF-16 code unit, a date just before the Unix epoch, a `Date` one millisecond past the maximum, a Date-like object that isn't a `Date`, an id that needs both the `'` prefix and quoting, and `filled` one past the largest safe integer.\n\n**Files:**\n- `output.test.ts`: the BOM, the header and the line endings\n- `fields.test.ts`: field formats, `-0`, the largest safe integer, missing title, text written as given, empty id\n- `quoting.test.ts`: title and id quoting\n- `formula.test.ts`: the formula `'` prefix\n- `ordering.test.ts`: sort order and tie-breaks\n- `purity.test.ts`: input left unchanged, same result on repeat calls\n- `validation.test.ts`: status, count and creation-time errors, plus the order checks run in\n\n**Choices you might question:**\n- Errors are checked with `instanceof Error` plus the exact message, so a subclass like `TypeError` would also pass.\n- `new Number(3)` counts as invalid openings, because the spec requires a value of type `number`.\n- In two places I picked an extra case to avoid relying on something the spec doesn't state. I tested a single-space title rather than an explicit `title: undefined`. I tested zero openings against the largest safe `filled` rather than `-0`, because the spec doesn't say how `-0` appears in an error message.\n\nThe build creates `.js` files next to the sources, including `src/index.js`. I deleted those after the run, so the only change in the tree is the new `.ts` files in `tests/public/`.\n\n119 tests, in 7 files.",
+    "problem": null,
+    "files": [
+      "tests/public/fields.test.ts",
+      "tests/public/formula.test.ts",
+      "tests/public/ordering.test.ts",
+      "tests/public/output.test.ts",
+      "tests/public/purity.test.ts",
+      "tests/public/quoting.test.ts",
+      "tests/public/validation.test.ts"
+    ]
+  }
+}

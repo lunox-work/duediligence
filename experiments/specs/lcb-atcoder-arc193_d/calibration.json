@@ -1,0 +1,28 @@
+{
+  "slug": "lcb-atcoder-arc193_d",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_magnets.py :: TestMagnets.test_all_tiny_cases_against_brute_force",
+    "tests/public/test_magnets.py :: TestMagnets.test_already_matching",
+    "tests/public/test_magnets.py :: TestMagnets.test_max_n_all_ones_unchanged",
+    "tests/public/test_magnets.py :: TestMagnets.test_max_n_single_piece_across",
+    "tests/public/test_magnets.py :: TestMagnets.test_max_t",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_two_pieces",
+    "tests/public/test_magnets.py :: TestMagnets.test_pieces_cannot_split",
+    "tests/public/test_magnets.py :: TestMagnets.test_sample_1",
+    "tests/public/test_magnets.py :: TestMagnets.test_single_piece_far_move",
+    "tests/public/test_magnets.py :: TestMagnets.test_smallest_input"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 10
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

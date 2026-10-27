@@ -1,0 +1,45 @@
+{
+  "slug": "he-122",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_add_elements.py :: TestAddElements.test_docstring_example",
+    "tests/public/test_add_elements.py :: TestAddElements.test_first_k_rule_boundary_k_equals_len",
+    "tests/public/test_add_elements.py :: TestAddElements.test_first_k_rule_boundary_k_one",
+    "tests/public/test_add_elements.py :: TestAddElements.test_first_k_rule_typical",
+    "tests/public/test_add_elements.py :: TestAddElements.test_two_digit_rule_boundary_99_vs_100",
+    "tests/public/test_add_elements.py :: TestAddElements.test_two_digit_rule_boundary_none_qualify",
+    "tests/public/test_add_elements.py :: TestAddElements.test_two_digit_rule_typical"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 7
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 21,
+  "kept": [
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_boundary_100_then_99_outside_k",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_boundary_9_and_10_both_count",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_brute_force_all_k_mixed",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_docstring_array_every_k",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_docstring_values_reordered",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_duplicates_each_counted",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_first_k_excludes_next_element",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_first_k_includes_first_element",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_k_equals_len_mixed_last_counts",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_k_one_two_digit_first",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_max_length_alternating_partial_k",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_max_length_k_equals_len",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_negative_many_digits_excluded",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_negative_single_digit",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_negative_two_digit_counts",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_none_qualify_in_prefix_but_later_do",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_single_element_not_qualifying",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_single_element_qualifying",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_three_digit_numbers_excluded",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_very_large_numbers_excluded",
+    "tests/private/test_add_elements_private.py :: TestAddElementsPrivate.test_zero_counts"
+  ],
+  "dropped": [],
+  "reference": null
+}

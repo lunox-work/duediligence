@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "aa9422b1-3ca4-4841-9139-514a7ef2d0d8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.31878239999999997,
+        "turns": 5,
+        "durationMs": 84730,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.31878239999999997,
+    "finalText": "I wrote 23 tests in `tests/public/satisfies.test.ts`, but they can't be keyed as you asked. `spec.md` has no tagged scenarios (`@happy`, `@unhappy` or any other kind), only seven unlabelled bullet rules. So I treated each bullet as one scenario and named its tests `[rule-N]`, with N the bullet's position in the spec. If your grader expects other keys, say which and I'll rename them.\n\n`npm run build` finishes with no errors. The build also writes compiled `.js` files, and I deleted them afterwards, including `src/index.js`, so the only thing written is the test file.\n\nWhat each rule covers, as main case then edge case:\n- **Rule 1 (versions and tags):** a plain version and a tagged one each match ranges that name them exactly. A tagged version comes before its release, tested in both directions.\n- **Rule 2 (comparators):** each comparator works for a version on its side. At the compared version itself, only `>=` and `<=` match. A bare version doesn't match the versions just above or below it.\n- **Rule 3 (`~` and `^`):** each matches a later version in its allowed span. The edge cases check that V itself matches, that the next minor (`~`) or next major (`^`) doesn't, and that anything below V doesn't. One more test checks that `^0.2.3` matches `0.9.0`, because the spec says \"same major\" with no exception for major 0.\n- **Rule 4 (wildcards):** `*`, `2.x` and `2.4.x` match versions inside them, and versions just outside don't match.\n- **Rule 5 (`,` and `|`):** one failing comparator in a `,` list fails the whole group. A version between two `|` alternatives matches neither, and `,` groups tighter than `|`.\n- **Rule 6 (tagged versions):** a tagged version matches a range that mentions a tag. It matches no tag-free range, even ones its position would satisfy (`*`, `>=2.0.0`, `<2.4.1`, `2.4.x`).\n- **Rule 7 (invalid input):** an invalid version or range throws an `Error`, and an empty version still throws against `*`.\n\nThe spec leaves several things open, so no test depends on them:\n- how tags compare with each other\n- whether spaces are allowed\n- an empty range\n- versions with fewer or more than three numbers\n- combining wildcards or `~`/`^` with comparators\n- whether \"mentions a tag\" applies to the whole range or to each `|` group\n\nThe three rule-7 tests pass already, because the unfinished function throws an `Error` on every call.\n\n23 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/satisfies.test.ts"
+    ]
+  }
+}

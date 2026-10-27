@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "fac7b508-a7b7-4daf-9a98-9d10edbf9cd0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1345875,
+        "turns": 5,
+        "durationMs": 24831,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1345875,
+    "finalText": "I wrote the public tests for `fib` in `tests/public/test_fib.py`. `python3 sandbox/compile_check.py` reports no errors. Running `python3 sandbox/run.py public` shows 0/5 passing, and every failure is the `NotImplementedError`, as expected.\n\n- **Docstring examples, one test each:** `fib(10) == 55`, `fib(1) == 1`, `fib(8) == 21`.\n- **The one rule, \"return the n-th Fibonacci number\":**\n  - **Typical case:** `fib(12) == 144`, worked out by hand from the docstring's `fib(10) = 55` (fib(9) = 34, fib(11) = 89, fib(12) = 144).\n  - **Boundary case:** `fib(2) == 1`. The examples only work if the sequence starts fib(1) = 1, fib(2) = 1 (the sequence 1, 1, 2, 3, 5, 8, 13, 21 gives `fib(8) = 21`).\n\nI left out `n = 0` and negative `n` on purpose. The docstring doesn't say what they should return, and a comment in the file explains why they're missing.\n\n5 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_fib.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "f7ac0586-610d-452e-83dd-83decc9f5a2e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1761497,
+        "turns": 4,
+        "durationMs": 40804,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1761497,
+    "finalText": "I wrote the hidden suite in `tests/private/test_fib_private.py`. All 12 tests fail against the current stub, and all pass against a correct iterative `fib` I ran from a scratch copy. `sandbox/compile_check.py` reports no errors.\n\nWhat it covers:\n- **Public-test extensions:** each public test has at least one test that goes further, with a comment naming it. These cover the values between and just past the docstring examples (fib(3) to fib(7), fib(9), fib(11), fib(13) to fib(15)), plus fib(20) = 6765 and fib(25) = 75025.\n- **Lookup-table shortcut:** every n from 1 to 25 is checked against a short iterative reference. The recurrence fib(n) = fib(n−1) + fib(n−2) is also checked for n from 3 to 22.\n- **Return type:** the result must be an `int` (not a float or bool), because the docstring examples show `55`, not `55.0`.\n- **Float-formula shortcut:** fib(70) to fib(90) and fib(100) = 354224848179261915075 must be exact. I checked that rounding the float Binet formula is already wrong at n = 71, 72 and 73, so these tests catch that shortcut.\n- **Not tested:** n = 0 and negative n, since the docstring doesn't say what happens there.\n\nOne judgement call: the docstring sets no speed requirement, but a plain recursive `fib` (correct, just exponential) will time out on the n = 70–100 tests. I kept them because they're the only cases that catch the float-formula shortcut. Drop `test_fib_70_to_90_exact` and `test_fib_100_exact` if slow but correct code should pass.\n\n12 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_fib_private.py"
+    ],
+    "open": []
+  }
+}

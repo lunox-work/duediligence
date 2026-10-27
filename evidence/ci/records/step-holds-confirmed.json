@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-26T04:37:39.873Z",
+  "slug": "step-holds-confirmed",
+  "verdict": "passed",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "6cbb45388bcff1576f84de23a11d065bf6b8997e",
+  "public": {
+    "passed": 30,
+    "total": 30
+  },
+  "hidden": {
+    "passed": 34,
+    "total": 34
+  },
+  "existing": {
+    "passed": 248,
+    "total": 248
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [],
+  "hiddenSha256": "0c2c450d81f8aa63329361b661126af8c2dbdb3c82b4e7292c93f897e1890b9e",
+  "sealedAt": "2026-10-26T04:35:58.957Z",
+  "committedAt": null
+}

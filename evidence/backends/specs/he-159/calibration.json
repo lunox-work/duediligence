@@ -1,0 +1,59 @@
+{
+  "slug": "he-159",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_eat.py :: TestEat.test_all_inputs_at_maximum",
+    "tests/public/test_eat.py :: TestEat.test_all_inputs_zero",
+    "tests/public/test_eat.py :: TestEat.test_example_exactly_enough_stock",
+    "tests/public/test_eat.py :: TestEat.test_example_five_six_ten",
+    "tests/public/test_eat.py :: TestEat.test_example_four_eight_nine",
+    "tests/public/test_eat.py :: TestEat.test_example_insufficient_stock",
+    "tests/public/test_eat.py :: TestEat.test_maximum_need_with_insufficient_stock",
+    "tests/public/test_eat.py :: TestEat.test_maximum_previously_eaten_with_surplus_stock",
+    "tests/public/test_eat.py :: TestEat.test_maximum_stock_with_surplus",
+    "tests/public/test_eat.py :: TestEat.test_no_additional_carrots_needed",
+    "tests/public/test_eat.py :: TestEat.test_no_carrots_previously_eaten",
+    "tests/public/test_eat.py :: TestEat.test_no_stock_with_positive_need",
+    "tests/public/test_eat.py :: TestEat.test_stock_one_less_than_need"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 22,
+  "kept": [
+    "tests/private/test_eat.py :: TestEatPrivate.test_all_inputs_one_below_maximum",
+    "tests/private/test_eat.py :: TestEatPrivate.test_exact_stock_with_previous_total_above_need",
+    "tests/private/test_eat.py :: TestEatPrivate.test_interior_stock_one_above_need",
+    "tests/private/test_eat.py :: TestEatPrivate.test_large_shortfall_with_large_previous_total",
+    "tests/private/test_eat.py :: TestEatPrivate.test_large_stock_one_below_need",
+    "tests/private/test_eat.py :: TestEatPrivate.test_maximum_exact_meal_from_zero",
+    "tests/private/test_eat.py :: TestEatPrivate.test_maximum_need_with_single_carrot",
+    "tests/private/test_eat.py :: TestEatPrivate.test_maximum_previous_total_with_no_need_or_stock",
+    "tests/private/test_eat.py :: TestEatPrivate.test_maximum_previous_total_with_one_carrot_left",
+    "tests/private/test_eat.py :: TestEatPrivate.test_maximum_stock_with_large_meal",
+    "tests/private/test_eat.py :: TestEatPrivate.test_need_smaller_than_previous_total",
+    "tests/private/test_eat.py :: TestEatPrivate.test_no_stock_with_maximum_total_and_need",
+    "tests/private/test_eat.py :: TestEatPrivate.test_one_carrot_exact_meal_from_zero",
+    "tests/private/test_eat.py :: TestEatPrivate.test_single_carrot_meal_with_one_left",
+    "tests/private/test_eat.py :: TestEatPrivate.test_single_carrot_stock_with_need_of_two",
+    "tests/private/test_eat.py :: TestEatPrivate.test_surplus_with_large_distinct_inputs",
+    "tests/private/test_eat.py :: TestEatPrivate.test_zero_need_preserves_single_carrot_stock",
+    "tests/private/test_eat.py :: TestEatPrivate.test_zero_need_with_maximum_total_and_stock",
+    "tests/private/test_eat.py :: TestEatPrivate.test_zero_number_and_need_with_maximum_stock",
+    "tests/private/test_eat.py :: TestEatPrivate.test_zero_previous_total_and_stock_with_maximum_need",
+    "tests/private/test_eat.py :: TestEatPrivate.test_zero_previous_total_with_one_carrot_left",
+    "tests/private/test_eat.py :: TestEatPrivate.test_zero_previous_total_with_shortfall"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 13,
+      "total": 13
+    },
+    "hidden": {
+      "passed": 22,
+      "total": 22
+    }
+  }
+}

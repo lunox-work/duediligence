@@ -1,0 +1,40 @@
+{
+  "slug": "he-44",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_change_base.py :: TestChangeBase.test_base_9_largest_allowed",
+    "tests/public/test_change_base.py :: TestChangeBase.test_base_below_10_typical",
+    "tests/public/test_change_base.py :: TestChangeBase.test_conversion_typical",
+    "tests/public/test_change_base.py :: TestChangeBase.test_conversion_x_equals_base",
+    "tests/public/test_change_base.py :: TestChangeBase.test_example_7_base_2",
+    "tests/public/test_change_base.py :: TestChangeBase.test_example_8_base_2",
+    "tests/public/test_change_base.py :: TestChangeBase.test_example_8_base_3",
+    "tests/public/test_change_base.py :: TestChangeBase.test_returns_string_single_digit",
+    "tests/public/test_change_base.py :: TestChangeBase.test_returns_string_typical"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 14,
+  "kept": [
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_2_non_palindrome_digit_order",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_2_power_boundaries",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_2_ten",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_3_non_palindrome_digit_order",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_5_trailing_zeros",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_6_typical",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_7_typical",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_9_other_values",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_base_9_powers",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_digits_123_in_other_bases",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_exhaustive_small_all_bases",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_large_exact_powers",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_large_value_base_9",
+    "tests/private/test_change_base_private.py :: TestChangeBasePrivate.test_returns_string_large"
+  ],
+  "dropped": [],
+  "reference": null
+}

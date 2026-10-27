@@ -1,0 +1,32 @@
+{
+  "slug": "ladder-lcb_arc193_d-l1",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_magnets.py :: TestMagnets.test_already_equal",
+    "tests/public/test_magnets.py :: TestMagnets.test_brute_all_pairs_up_to_n4",
+    "tests/public/test_magnets.py :: TestMagnets.test_brute_n5_spread_to_edge",
+    "tests/public/test_magnets.py :: TestMagnets.test_brute_n6_mixed",
+    "tests/public/test_magnets.py :: TestMagnets.test_brute_n6_shift_block",
+    "tests/public/test_magnets.py :: TestMagnets.test_cannot_split",
+    "tests/public/test_magnets.py :: TestMagnets.test_max_n_all_ones_equal",
+    "tests/public/test_magnets.py :: TestMagnets.test_max_n_single_piece_across",
+    "tests/public/test_magnets.py :: TestMagnets.test_max_t",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_from_both_sides",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_two_pieces",
+    "tests/public/test_magnets.py :: TestMagnets.test_multiple_cases_in_order",
+    "tests/public/test_magnets.py :: TestMagnets.test_single_step_right",
+    "tests/public/test_magnets.py :: TestMagnets.test_smallest_input"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

@@ -1,0 +1,30 @@
+{
+  "slug": "lcb-atcoder-arc195_c",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_no_cases.py :: TestNoCases.test_largest_total_all_blue_odd",
+    "tests/public/test_no_cases.py :: TestNoCases.test_largest_total_all_red_odd",
+    "tests/public/test_no_cases.py :: TestNoCases.test_largest_total_one_red",
+    "tests/public/test_no_cases.py :: TestNoCases.test_max_number_of_test_cases",
+    "tests/public/test_no_cases.py :: TestNoCases.test_one_red_two_blue",
+    "tests/public/test_no_cases.py :: TestNoCases.test_sample1_second_case_one_red_one_blue",
+    "tests/public/test_no_cases.py :: TestNoCases.test_several_no_cases_in_one_input",
+    "tests/public/test_no_cases.py :: TestNoCases.test_three_red_no_blue",
+    "tests/public/test_no_cases.py :: TestNoCases.test_zero_red_three_blue"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

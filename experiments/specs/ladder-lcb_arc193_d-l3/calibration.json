@@ -1,0 +1,29 @@
+{
+  "slug": "ladder-lcb_arc193_d-l3",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_magnets.py :: TestMagnets.test_already_at_target",
+    "tests/public/test_magnets.py :: TestMagnets.test_exhaustive_up_to_four_squares",
+    "tests/public/test_magnets.py :: TestMagnets.test_gap_cannot_widen",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_two_adjacent_left",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_two_adjacent_right",
+    "tests/public/test_magnets.py :: TestMagnets.test_more_target_pieces_than_start",
+    "tests/public/test_magnets.py :: TestMagnets.test_original_sample",
+    "tests/public/test_magnets.py :: TestMagnets.test_several_cases_in_one_input",
+    "tests/public/test_magnets.py :: TestMagnets.test_shrink_gap_by_one",
+    "tests/public/test_magnets.py :: TestMagnets.test_single_piece_across_row",
+    "tests/public/test_magnets.py :: TestMagnets.test_smallest_input"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

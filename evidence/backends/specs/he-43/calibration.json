@@ -1,0 +1,72 @@
+{
+  "slug": "he-43",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_all_negative_numbers",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_empty_list",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_example_all_positive",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_example_contains_opposite_fives",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_example_positive_numbers_with_zero",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_example_repeated_one_without_opposite",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_example_single_positive",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_mixed_signs_with_opposite_pair",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_repeated_values_with_opposite",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_repeated_values_without_opposite",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_single_zero_cannot_pair_with_itself",
+    "tests/public/test_pairs_sum_to_zero.py :: TestPairsSumToZero.test_two_elements_that_sum_to_zero"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 36,
+  "kept": [
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_duplicates_of_both_signs",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_empty_input_has_no_pair",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_huge_near_opposites_with_distractors",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_interior_pair_with_unmatched_extrema",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_large_integers_that_only_approximately_cancel",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_lone_zero_has_no_distinct_partner",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_long_negative_list_with_duplicates",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_long_positive_list",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_long_separated_pair",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_many_mixed_signs_without_matching_magnitudes",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_many_repetitions_with_unmatched_signs",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_many_zeros",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_negative_duplicates_without_positive_opposite",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_nonadjacent_pair_in_odd_length_list",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_one_zero_among_negative_numbers",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_only_pair_in_first_two_positions",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_only_pair_in_last_two_positions",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_pair_after_many_unmatched_elements",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_pair_at_opposite_ends",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_pair_far_beyond_fixed_width_integer_range",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_positive_before_its_opposite",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_positive_duplicates_with_negative_opposite",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_positive_negative_two_element_pair",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_separated_zero_occurrences",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_several_opposite_pairs",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_single_large_positive",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_single_negative",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_single_zero_among_repeated_nonzero_values",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_single_zero_does_not_hide_nonzero_pair",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_two_equal_negative_elements",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_two_equal_positive_elements",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_two_opposite_signs_without_zero_sum",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_two_zero_occurrences",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_zero_and_one_nonzero_element",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_zero_before_only_positive_numbers",
+    "tests/private/test_pairs_sum_to_zero.py :: TestPairsSumToZeroHidden.test_zero_total_without_any_zero_sum_pair"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 12,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 36,
+      "total": 36
+    }
+  }
+}

@@ -1,0 +1,50 @@
+context-sources: incomplete. Public 25/71, hidden 32/92, existing 228/228; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at d3016bce6cd4eea76e653c6df162053285dbbb92.
+Hidden suite sha256 c36efdd98825d037274e35a7d62a0b32ce099d4d5b9876db570e4fed2ddc7a8a, sealed 2026-10-26T04:36:00.389Z.
+Failing scenarios: boundary-1, boundary-10, boundary-11, boundary-12, boundary-13, boundary-14, boundary-15, boundary-16, boundary-17, boundary-18, boundary-2, boundary-3, boundary-4, boundary-5, boundary-6, boundary-7, boundary-9, happy-1, happy-10, happy-2, happy-3, happy-4, happy-5, happy-6, happy-7, happy-8, happy-9, unhappy-1, unhappy-3
+public: test/context-sources.test.ts :: [happy-1] the sources and caps have their declared values
+public: test/context-sources.test.ts :: [happy-1] the byte cap is exactly 128 KiB
+public: test/context-sources.test.ts :: [happy-2] NO_CONTEXT names no version of either source and is frozen
+public: test/context-sources.test.ts :: [happy-2] NO_CONTEXT refuses a write and keeps its nulls
+public: test/context-sources.test.ts :: [happy-3] titles become keywords
+public: test/context-sources.test.ts :: [happy-3] keywords are not capped and words mixing letters and digits are kept
+public: test/context-sources.test.ts :: [boundary-1] short words, numbers, stopwords and repeats are dropped
+public: test/context-sources.test.ts :: [boundary-1] every listed stopword is dropped, whatever its case
+public: test/context-sources.test.ts :: [happy-4] which files count as documents
+public: test/context-sources.test.ts :: [happy-4] every document extension and docs directory counts, a README at any depth
+public: test/context-sources.test.ts :: [unhappy-1] code, other text and excluded files are not documents
+public: test/context-sources.test.ts :: [unhappy-1] excluded bases, skipped directories and non-README txt never count, even under docs
+public: test/context-sources.test.ts :: [boundary-2] the size limit
+public: test/context-sources.test.ts :: [boundary-5] a path listed twice is one document
+public: test/context-sources.test.ts :: [boundary-5] the first entry of a duplicated path wins
+public: test/context-sources.test.ts :: [happy-5] without keywords the root README leads, then shallower paths
+public: test/context-sources.test.ts :: [happy-6] paths matching more keywords come right after the root README
+public: test/context-sources.test.ts :: [happy-6] a keyword repeated in the list counts once against a deeper match
+public: test/context-sources.test.ts :: [boundary-6] a keyword match does not move a document ahead of the root README
+public: test/context-sources.test.ts :: [boundary-6] only a README at the root leads, not one deeper
+public: test/context-sources.test.ts :: [happy-7] a short document is kept as it is
+public: test/context-sources.test.ts :: [happy-7] uncut text keeps its whitespace, and path and bytes pass through
+public: test/context-sources.test.ts :: [boundary-10] a cut never ends halfway through a surrogate pair
+public: test/context-sources.test.ts :: [boundary-11] a cut that would leave only half a character omits the document
+public: test/context-sources.test.ts :: [boundary-11] once the room is used up, later documents are omitted
+public: test/context-sources.test.ts :: [boundary-12] more than CONTEXT_DOCUMENTS_MAX documents
+public: test/context-sources.test.ts :: [unhappy-3] blank documents are dropped without being counted
+public: test/context-sources.test.ts :: [unhappy-3] blank documents neither take a place under the count cap nor count past it
+public: test/context-sources.test.ts :: [unhappy-4] only blank documents keep nothing and omit nothing
+public: test/context-sources.test.ts :: [happy-8] a filled-in issue
+public: test/context-sources.test.ts :: [happy-8] links are not capped and keep their order
+public: test/context-sources.test.ts :: [boundary-13] an issue with nothing beyond its key still says how many subtasks it has
+public: test/context-sources.test.ts :: [boundary-14] blank strings are left out, zero is kept, a link without a key keeps its null
+public: test/context-sources.test.ts :: [boundary-14] every zero number is kept and strings are kept as given
+public: test/context-sources.test.ts :: [boundary-15] the result does not share arrays with the context
+public: test/context-sources.test.ts :: [boundary-15] the result does not share links with the context
+public: test/context-sources.test.ts :: [happy-9] both sources
+public: test/context-sources.test.ts :: [happy-9] only the repository renders without a leading blank line, text uncapped
+public: test/context-sources.test.ts :: [happy-10] only Jira
+public: test/context-sources.test.ts :: [happy-10] a Jira issue with nothing beyond its key renders its subtask count
+public: test/context-sources.test.ts :: [boundary-17] a repository with no documents
+public: test/context-sources.test.ts :: [boundary-17] one document left out uses the singular after documents
+public: test/context-sources.test.ts :: [boundary-18] a truncated document whose text is blank renders only its heading and marker
+public: test/context-sources.test.ts :: [boundary-18] an untruncated blank document renders only its heading
+public: test/context-sources.test.ts :: [boundary-19] a step against NO_CONTEXT is never behind
+public: test/context-sources.test.ts :: [boundary-20] a step that used no context is behind every source the overview holds
+Check "independent-tests (drafted)": failure, incomplete: public 25/71, hidden 32/92, existing 228/228 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/context-sources.json); not posted (no token).

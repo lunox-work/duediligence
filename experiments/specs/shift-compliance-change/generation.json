@@ -1,0 +1,66 @@
+{
+  "from": "shift-compliance",
+  "change": {
+    "sessionId": "5402e23c-3ccd-4a18-8a20-d81b4fbeb579",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.36055740000000003,
+    "turns": 5,
+    "durationMs": 95036,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written both files. The change: a shift that runs past midnight now counts toward every calendar day it works on, and toward each week it has hours in. Until now it counted only toward the day it starts. Two rules that every other check relies on depend on this: which day and which week a shift belongs to. So both the days-in-a-row run and the weekly hours limit change, and so does the order of violations when one shift ends up in two weekly violations.\n\n- **`change/ticket.md`** (10 lines): title, then Context, Change, Acceptance criteria and Scope, in a product owner's words. It leaves four things open: how the break is split, which offset to read the dates in, a shift that ends exactly at midnight, and which shifts a violation lists.\n- **`change/spec.md`** settles those as stated rules:\n  - Days and weeks are read in the offset of the shift's start, including its end.\n  - The break is shared between the weeks in proportion to the time worked in each.\n  - A shift that ends exactly at 00:00 does not work on the day that begins then.\n  - A run of days lists every shift that works on any day of it.\n  - When two violations have the same first index and the same code, the one for the earlier week comes first.\n\n  Shift length, break, rest and overlap still measure the whole shift.\n\n  I also rewrote the Background line about a shift's day and added one about weeks, since every rule that counts days or weeks depends on them. All other scenarios and lines are copied word for word. `src/` and `spec.md` are unchanged.\n\nChanged:\n- Background: a shift's day/week line (rewritten into two lines: a shift's days; weeks and how hours split)\n- A shift across midnight works on both days (rewritten, was \"A shift across midnight belongs to the day it starts\")\n- Weeks follow the offset of the shift's start (rewritten, was \"Weeks follow the shift's own offset\")\n- Too many days in a row (rewritten)\n- A night shift into Monday is split between the weeks (added, @boundary)\n- Night shifts make a run of days (added, @happy)"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "4b49794d-2279-46b4-9dd7-61d2456c62d1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.651199,
+        "turns": 8,
+        "durationMs": 186788,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.651199,
+    "finalText": "I've written the public test suite. `npm run build` reports no errors. When run, all 31 tests fail, as expected, because `checkRoster` still throws `not implemented`. I didn't change anything outside `tests/public/`, and I deleted the `.js` files the build produced, including `src/index.js`.\n\n**Coverage:** all 13 scenarios have a happy-path test and a boundary test. Five have an extra test for a separate claim in the spec:\n- **`[happy-2]`:** the break rule measures the shift before the break is taken off.\n- **`[boundary-1]`:** a 32-hour shift works on three days and is still measured whole for shift hours.\n- **`[happy-3]`:** rest is measured in start order even when the shifts are given out of order.\n- **`[unhappy-1]`:** overlapping shifts still count toward the other rules.\n- **`[happy-5]`:** a gap day ends a run, and two shifts on one day count as one day.\n\n**How the tests are built:**\n- Each test starts from a policy loose enough that nothing is breached, then tightens only the rule it checks. It compares the full list of violations for that code, so a stray result under another code can't make it fail.\n- In the week-splitting tests, the weekly limit is set below the hours expected in each week, so the reported values show exactly how the shift was split.\n- The ordering test adds a second shift to the following week, so the two `week-hours` violations differ and \"earlier week first\" can actually be checked.\n- The four error tests put the bad shift at index 3, after three valid ones. They check that the error message contains `3` as a number on its own; the spec says the error names the index but doesn't give the wording.\n\n31 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/between-shifts.test.ts",
+      "tests/public/one-shift.test.ts",
+      "tests/public/refused.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "0565bc48-404c-45fa-b70f-227f57f55400",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.4484337,
+        "turns": 11,
+        "durationMs": 396504,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.4484337,
+    "finalText": "I've written 59 tests in `tests/private/`. All 59 fail against the current stub. `npm run build` reports no errors.\n\nTo check my expected values, I ran the suite against a quick reference implementation of the spec, kept in a scratch copy outside the project. It passed all 31 public tests and all 59 private ones. That shows my expectations agree with each other and with the public suite; it doesn't prove the reference itself is right.\n\n**Files:**\n- **`one-shift.test.ts`** (`[happy-1]`, `[happy-2]`, `[boundary-1]`):\n  - shift hours are measured after the break, and the break threshold before it;\n  - a break of exactly the minimum, and a short break on a short shift, are not violations;\n  - a shift's days are counted in the offset its start is written in, including an end at 00:00 written in a different offset;\n  - a shift across midnight or a week boundary is still measured whole for shift hours, the break rule, rest and overlap.\n- **`between-shifts.test.ts`** (`[happy-3]` to `[happy-6]`, `[boundary-2]` to `[boundary-4]`, `[unhappy-1]`):\n  - rest is measured only between neighbouring shifts, sorted by the moment they start rather than by how the start is written;\n  - overlap: one shift inside another, one shift overlapping two others, and overlapping shifts still counted in full for weekly hours and days in a row;\n  - several weeks and several runs of days, given out of order, are reported by first index;\n  - a break split unevenly between two weeks, a half-hour offset, and a negative offset;\n  - runs of days across the end of a month, a leap year and the end of a year; night shifts every other night; one long run reported once.\n- **`refused.test.ts`** (`[unhappy-2]`, `[unhappy-3]`): errors must name the shift's position in the input, including index 0 and two-digit indexes. A bad end or break hidden by mixed offsets must be refused. A shift ending one minute after it starts, or with a break exactly its length, must not be.\n- **`ordering.test.ts`** (`[happy-3]`): the full violation list is ordered by first index, then by code, with the shifts given out of start order. A roster within every limit returns nothing.\n\n**Left untested because the spec doesn't settle them:**\n- what the rest is between overlapping shifts;\n- which bad shift the error names when there are several;\n- whether weeks or days from shifts written in different offsets count as the same week or day;\n- the order of a rest or overlap pair's indexes when the earlier-starting shift has the higher index. \"Earlier first\" and \"in the order given\" disagree there.\n\n59 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/between-shifts.test.ts",
+      "tests/private/one-shift.test.ts",
+      "tests/private/ordering.test.ts",
+      "tests/private/refused.test.ts"
+    ],
+    "open": []
+  }
+}

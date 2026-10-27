@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3789",
+  "contest_id": "weekly-contest-440",
+  "contest_date": "2025-03-08T18:30:00",
+  "difficulty": "hard",
+  "title": "maximize-subarrays-after-removing-one-conflicting-pair",
+  "kind": "functional",
+  "fn_name": "maxSubarrays",
+  "publicCases": 2,
+  "privateCases": 40
+}

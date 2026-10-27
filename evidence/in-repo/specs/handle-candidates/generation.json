@@ -1,0 +1,67 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "539cb01b-4023-4efb-a793-1352f5b2d260",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.207253,
+        "turns": 6,
+        "durationMs": 26618,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.207253,
+    "finalText": "I added `handleCandidates(_stem: string, _count: number): string[]` to the end of `packages/core/src/handle.ts`. The existing exports are unchanged. The body only throws `not implemented`, and `index.ts` already re-exports everything from `handle.js`, so callers can import it from the package root.\n\n- **Doc comment:** it describes the sequence the spec gives: the stem, then `stem2`, `stem3` and so on, with the stem cut so each variant fits in `HANDLE_MAX_LENGTH`. It also says the function throws an `Error` mentioning \"stem\" for a stem that fails `checkHandle`, and a `RangeError` mentioning \"count\" for a count that isn't a whole number from 1 to 100.\n- **Parameter names:** the repo's base tsconfig turns on `noUnusedParameters` and says to prefix a parameter that has to stay with `_`. That's why the names are `_stem` and `_count`. Callers pass them by position, so this doesn't affect them.\n- **Checks:** `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes (333 of 333). The only tracked file changed is `handle.ts`.\n\nAdded: handleCandidates",
+    "problem": null,
+    "sha256": "e9ea6a107547e7f75a351e5ff77aba6c4ee635a720a66d6f6d2d5ca8ec9cfc81"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "c1d4dcc1-47f9-49a4-b978-2aafb74c1e6c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4209782,
+        "turns": 6,
+        "durationMs": 96799,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.4209782,
+    "finalText": "I wrote the test suite in `packages/core/test/handle-candidates.test.ts`: 18 tests, two for each of the 9 scenarios in `spec.md`, one for the happy path and one for a boundary case.\n\n**Status:** `npx tsc -p tsconfig.test.json` reports no errors. Running the suite, every test fails with `not implemented`, as expected. To check my expected values, I also ran the suite against a throwaway implementation of the spec in the scratchpad, outside the repo. All 18 passed. I didn't change anything else in the repository.\n\n**Style:** I followed `handle.test.ts`: `node:test`'s `test`, `node:assert/strict`, and imports from `../src/handle.js`. The tests are flat, with no `describe`.\n\n**The boundary cases:**\n- **[happy-1]** A 29-character stem fits every one-digit number with nothing cut off.\n- **[happy-2]** A 30-character stem with count 1 comes back whole.\n- **[boundary-1]** All eight one-digit variants of a 30-character stem are cut to 29 characters plus the digit.\n- **[boundary-2]** A 29-character stem is first cut when the number reaches 10.\n- **[boundary-3]** A cut that ends on an underscore keeps it (the rule covers underscores as well as hyphens).\n- **[boundary-4]** A variant that repeats an earlier *variant*, not the stem, is also skipped. With the stem `…ab1c`, numbers 12–19 rebuild variants 2–9, so they're skipped and the twelfth candidate is number 20. This follows from \"equal to a candidate already in the list\" and \"skipped numbers are not reused\".\n- **[unhappy-1]** A stem with surrounding spaces is refused rather than trimmed.\n- **[unhappy-2]** Counts just outside the whole numbers 1 to 100 are refused: 0.5, 1.5, 99.5, 100.5 and -Infinity.\n- **[boundary-5]** Count 100 on a 30-character stem: the last candidate is `…a100`, with the stem cut to 27. All 100 are distinct and pass `checkHandle`.\n\nThe error tests check only what the spec states: the error type, and that the message contains \"stem\" or \"count\".\n\n18 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/handle-candidates.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "15d76709-1320-4ecd-b61c-093894a81f65",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8920921,
+        "turns": 8,
+        "durationMs": 235097,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.8920921,
+    "finalText": "I wrote the hidden suite in `packages/core/test/hidden-handle-candidates/handle-candidates.test.ts`. `npx tsc -p tsconfig.test.json` compiles it with no errors.\n\n**Checks run:**\n- **Against the current stub:** all 32 tests fail with `not implemented`.\n- **Against a correct implementation:** I compiled a scratch reference implementation of the spec outside the repo. My 32 tests and the 18 public ones all pass against it.\n- **Against shortcut implementations:** each passes more of the public suite than of this one. One always cuts the stem to 29 characters. One only skips a variant equal to the stem. One strips hyphens and underscores left at the end of a cut. All three also skip stem validation when `count` is 1. Each fails between 5 and 13 of the hidden tests.\n\n**What the suite covers beyond the public tests:**\n- **Stems used as given:** valid stems that cleaning would change (`-ada`, `ada-`, `007`, `___`) must come back unchanged.\n- **Cut points:** 27-, 28- and 29-character stems check that the cut starts exactly where the number stops fitting, through one, two and three digits.\n- **Kept hyphens and underscores:** cuts that end on a hyphen at one digit, on an underscore at two digits, and on a run of hyphens.\n- **Repeated variants:** stems with many repeats (`\"1\".repeat(30)`, `…0123` at count 100) reach number 109 without reusing skipped numbers.\n- **Consistency across calls:** a smaller count gives the start of a larger count's list, and earlier calls don't change later results.\n- **Invalid stems:** they are refused even when `count` is 1 or 100. That includes uppercase, Kelvin-sign and fullwidth stems, and stems of 31 or more characters.\n- **Invalid counts:** counts far above 100, `-0`, values a hair from a whole number, and the same bad counts with other stems.\n\n32 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-handle-candidates/handle-candidates.test.ts"
+    ],
+    "open": []
+  }
+}

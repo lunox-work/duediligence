@@ -1,0 +1,21 @@
+{
+  "sha256": "712a63caf88b6e08e4bb6601a84387f509ac4e91a5a09b4126ed0f60c0a575f0",
+  "by": "Charlie Angriawan",
+  "at": "2026-10-25T09:15:28.505Z",
+  "decided": [
+    "Units are 1024-based and named KB, MB, GB, TB (not KiB), as `ComplexityProfile` names them today; there is no PB.",
+    "Below 10 in a unit the value has exactly one decimal, `.0` included (`1.0 KB`); from 10 it is whole.",
+    "Halves round up, at one decimal and at whole numbers.",
+    "A value that rounds to 1024 is shown in the next unit (`1.0 MB`, never `1,024 KB`), except in TB.",
+    "Whole numbers of 1000 or more get a comma between thousands, bytes included (`1,023 B`), whatever the browser's locale.",
+    "Negative, fractional, non-finite and unsafe integers throw a RangeError that says \"bytes\"; nothing is clamped.",
+    "Seam (the files the stub writes): apps/web/src/lib/format.ts",
+    "Allowed paths (what the implementer may change): apps/web/src/lib/format.ts"
+  ],
+  "seam": [
+    "apps/web/src/lib/format.ts"
+  ],
+  "allowedPaths": [
+    "apps/web/src/lib/format.ts"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "01a176a6-9c2e-76d2-b0e0-c584d26fd119",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 7,
+        "durationMs": 28398,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "parseDuration, formatDuration",
+    "problem": null,
+    "sha256": "b10fbd5bc8e43bbaeed63ff7315d2e2fb3097516e1cd884328fd6e638655087a"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176a7-038b-7242-bb1e-4acc69bac42c",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 91363,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "80 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/duration.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176a8-6a78-7433-8365-67c1969ffa6d",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 20,
+        "durationMs": 391839,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "90 tests in 5 files. Build passes; all 90 fail against the current stubs.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/format-invalid.test.ts",
+      "tests/private/format-valid.test.ts",
+      "tests/private/parse-invalid.test.ts",
+      "tests/private/parse-valid.test.ts",
+      "tests/private/safe-limits.test.ts"
+    ],
+    "open": []
+  }
+}

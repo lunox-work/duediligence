@@ -1,0 +1,47 @@
+{
+  "slug": "he-4",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_absolute_value_symmetric_pair",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_absolute_value_with_negatives",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_all_equal_is_zero",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_average_divides_by_count",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_centerpoint_is_mean_skewed_data",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_docstring_example",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_single_element_is_zero"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 7
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 23,
+  "kept": [
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_all_equal_large_count",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_all_equal_negative_many",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_all_negative",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_asymmetric_pair",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_centerpoint_is_mean_not_median",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_divides_by_count_five",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_divides_by_count_three",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_docstring_values_unordered",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_duplicates_with_outlier",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_fractional_values",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_irregular_data_matches_brute_force",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_large_offset_pair",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_large_range",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_larger_irregular_matches_brute_force",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_negative_outlier",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_odd_length_duplicates_skewed",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_one_to_five",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_order_independent_and_float",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_single_large_is_zero",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_single_negative_is_zero",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_single_zero_is_zero",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_skewed_unsorted",
+    "tests/private/test_mean_absolute_deviation_private.py :: TestMeanAbsoluteDeviationPrivate.test_symmetric_fractional_pair"
+  ],
+  "dropped": [],
+  "reference": null
+}

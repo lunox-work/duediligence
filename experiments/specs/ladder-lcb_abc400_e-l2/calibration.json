@@ -1,0 +1,33 @@
+{
+  "slug": "ladder-lcb_abc400_e-l2",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_public.py :: TestPublic.test_brute_force_sanity",
+    "tests/public/test_public.py :: TestPublic.test_descending_a_from_5000",
+    "tests/public/test_public.py :: TestPublic.test_every_a_from_36_to_1000",
+    "tests/public/test_public.py :: TestPublic.test_just_below_second_400_number",
+    "tests/public/test_public.py :: TestPublic.test_moderate_a_brute_force",
+    "tests/public/test_public.py :: TestPublic.test_second_400_number_exact",
+    "tests/public/test_public.py :: TestPublic.test_several_queries_in_order",
+    "tests/public/test_public.py :: TestPublic.test_skips_odd_exponent",
+    "tests/public/test_public.py :: TestPublic.test_skips_single_prime_power",
+    "tests/public/test_public.py :: TestPublic.test_skips_three_distinct_primes",
+    "tests/public/test_public.py :: TestPublic.test_smallest_a_is_36",
+    "tests/public/test_public.py :: TestPublic.test_title_value_404"
+  ],
+  "publicOnSkeleton": {
+    "passed": 1,
+    "total": 12
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

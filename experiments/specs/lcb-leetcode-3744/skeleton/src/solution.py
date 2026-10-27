@@ -1,0 +1,6 @@
+from typing import *
+
+
+class Solution:
+    def minOperations(self, queries: List[List[int]]) -> int:
+        raise NotImplementedError("not implemented")

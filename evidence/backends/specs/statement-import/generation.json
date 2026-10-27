@@ -1,0 +1,52 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176ef-06b2-7600-8a78-ff33bb6b33f1",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 183979,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added coverage for all 14 scenarios. Build passes with `npm run build -- --noEmit`.\n\n41 tests in 2 files.",
+    "problem": null,
+    "files": [
+      "tests/public/structure.test.ts",
+      "tests/public/validation.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176f1-d6a3-74c3-b7b1-bddefe08d677",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 19,
+        "durationMs": 436375,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passes with `npm run build -- --noEmit`. All tests fail on the current stub as required.\n\n55 tests in 3 files.\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/limits.test.ts",
+      "tests/private/structure.test.ts",
+      "tests/private/validation.test.ts"
+    ],
+    "open": []
+  }
+}

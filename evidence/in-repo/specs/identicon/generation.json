@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "3eb662f4-2f89-44ee-acd3-dbc1856788c4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.24759060000000002,
+        "turns": 12,
+        "durationMs": 42535,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.24759060000000002,
+    "finalText": "I created `packages/shared/src/identicon.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (85 of 85).\n\n**Contents of the file:**\n- The `Identicon` interface, exactly as the spec gives it.\n- `identicon(seed: string): Identicon`, whose body is only `throw new Error(\"not implemented\");`. Its doc comment says it throws a `TypeError` with the message `identicon: seed must be a string` when the seed isn't a string, including a `String` object.\n- Nothing else. The spec says the module exports only these two, and it names no constants.\n- It imports nothing and uses the repo's two-space indentation, not the four spaces in the spec's snippet.\n\n**Two things to know:**\n- **Parameter name:** the parameter is written `_seed`. The package's compiler settings reject an unused parameter, and the codebase marks unused ones with a leading underscore (e.g. `_userId` in `apps/api/test/routes.test.ts`). Callers aren't affected because the type is still `string`. The implementer should rename it back to `seed`.\n- **`index.ts` not changed:** the spec also asks for `export * from \"./identicon.js\";` in `packages/shared/src/index.ts`. I left that file alone because you asked me to write only the seam file. Until the implementer adds that line, the last scenario will fail (\"The package entry point re-exports identicon alongside the existing exports\").\n\nExported names added: `Identicon`, `identicon`",
+    "problem": null,
+    "sha256": "0ed809d3a6d16a12ea9a204312be400a6e777b1ca44e99dc4766774299766c3f"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "972b2a38-a6b2-4d9c-9f42-6e778986c906",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6726295999999999,
+        "turns": 14,
+        "durationMs": 156384,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.6726295999999999,
+    "finalText": "I wrote the suite in `packages/shared/test/identicon.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors. Against the real seam, 37 of the 38 tests fail, as expected. The one that passes is `[unhappy-1] … [\"a\"] throws rather than being coerced`: the stub's `not implemented` error doesn't satisfy the check, so it passes by accident.\n\nTo check the tests themselves, I copied the compiled output into the scratchpad and swapped in a reference implementation written straight from the spec. I also added the `index.ts` re-export there. All 38 tests passed. I recomputed every pinned value in the spec (grids, hues and the `h` column) independently, and they all match.\n\nEach scenario has a main-path test and a boundary test:\n\n| Key | Main path | Boundary |\n|---|---|---|\n| happy-1 | `a`, `user-1`, `user-2` golden faces | the 31-character seed (hue 346, a fully set row) |\n| happy-2 | `\"a\"` deep-equals the literal | spot checks by index that cells are row-major from the top left |\n| happy-3 | shape for the 4 golden seeds | shape for `\"\"` and a lone surrogate |\n| happy-4 | repeated `user-1` calls agree, in new objects | same for `\"\"` (no cache even for zero bytes) |\n| happy-5 | result and `cells` are frozen; assigning throws `TypeError` | `cells.push` throws and the length stays 25 |\n| happy-6 | `index.js` re-exports the same `identicon` | `formatVersion`, `buildInfoSchema` and `handleSchema` behave as before |\n| concurrency-1 | earlier calls with `\"user-2\"`, `\"a\"` and `\"\"` don't change `user-1` | a rejected call in between doesn't either |\n| concurrency-2 | 100 `Promise.all` tasks match sequential calls | tasks resume in a scrambled order, checked against the pinned faces |\n| boundary-1 | `a` / `A` / ` a` | NFC vs NFD `café` |\n| boundary-2 | `\\uD800` gives the same face as U+FFFD | `\\uDC00` (a lone low surrogate) does too |\n| boundary-3 | `\"\"` is accepted and gives its pinned face | its all-clear and all-set rows aren't adjusted |\n| boundary-4 | `\"x\"` × 10000 | `\"x\"` × 9999 gives a different pinned face |\n| unhappy-1 | `undefined`, `null`, `42`, `{}` throw | `[\"a\"]` throws instead of being coerced |\n| unhappy-2 | `new String(\"a\")` throws | `new String(\"\")` throws |\n\nThe implementer should know that the `[happy-6]` re-export test only passes once `index.ts` adds `export * from \"./identicon.js\"`, as the spec requires. That test loads `index.js` with a dynamic import, so it compiles before that line exists.\n\n38 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/identicon.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "a799a9fa-b7e9-40e7-a837-612b3fe99ac5",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.441711,
+        "turns": 25,
+        "durationMs": 363923,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.441711,
+    "finalText": "I wrote the hidden suite in four files under `packages/shared/test/hidden-identicon/`. `npx tsc -p tsconfig.test.json` reports no errors. Against the current stub, all 80 tests fail. Against a correct implementation in a scratch copy of the build, all 80 pass, and so does the public suite.\n\n**What the files cover:**\n- **`faces.test.ts`** (happy-1, happy-2, happy-3, boundary-1 to boundary-4):\n  - **Model of the algorithm.** It includes the spec's algorithm written independently, using Node's `Buffer` for the UTF-8 bytes. The model reproduces every golden vector and `h` value in the spec. It is run over 1,000 `user-N` seeds, 300 generated seeds mixing every UTF-8 length plus lone surrogates, and seeds of \"x\" just below, at and above each power of two up to 2^16.\n  - **Pinned seeds.** Extra fixed vectors include seeds with hue 0 and hue 359, and seeds whose grid is all clear or all set.\n  - **Byte-level edges.** Code points at each UTF-8 length edge, emoji, and trailing whitespace and `\\0`. Compatibility characters ﬁ and the Kelvin sign are checked as not normalized.\n  - **Surrogates.** The other lone surrogates, surrogates inside a string, and a reversed pair.\n  - **Long seeds.** Lengths of 65,537 and 100,000, long multi-byte seeds, and seeds differing by one character at the start, middle or end.\n- **`results.test.ts`** (happy-4, happy-5, concurrency-1, concurrency-2):\n  - Repeated calls return new objects for more seeds.\n  - 14 different ways of writing to a frozen result are tried, and each throws a `TypeError`.\n  - Other call orders, a short seed right after a 100,000-character one, and 600 overlapping async tasks over six seeds.\n- **`rejection.test.ts`** (unhappy-1, unhappy-2):\n  - Booleans, `NaN`, `1n` and a Symbol are rejected.\n  - Objects that would coerce to a string through `toString`, `valueOf` or `Symbol.toPrimitive` are rejected; an object whose `toString` throws is checked to be rejected before any coercion.\n  - Byte arrays, `Object(\"a\")` and a `String` subclass are rejected.\n- **`entry.test.ts`** (happy-6): the entry point's `identicon` gives the pinned faces, `identicon.ts` exports nothing but `identicon`, and every existing export reaches the entry point unchanged.\n\n**Shortcuts it catches.** I wrote five shortcut implementations that all pass the public suite. Each one fails at least one hidden test:\n\n| Shortcut | Fails |\n|---|---|\n| Hand-rolled encoder that turns emoji into 6 bytes instead of 4 | boundary-1, boundary-4 |\n| Encoder that pairs a high surrogate with whatever follows it | boundary-2 |\n| Hashing only the first 30,000 bytes | boundary-4 |\n| Type check that only rejects `null`/`undefined`, numbers and objects | unhappy-1 |\n| Lookup-table override for one seed | happy-1 |\n\n80 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-identicon/entry.test.ts",
+      "packages/shared/test/hidden-identicon/faces.test.ts",
+      "packages/shared/test/hidden-identicon/rejection.test.ts",
+      "packages/shared/test/hidden-identicon/results.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "e875bedc-f5dd-427d-8f07-322c94267503",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1883569,
+        "turns": 4,
+        "durationMs": 52689,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1883569,
+    "finalText": "I wrote 10 tests in `tests/public/test_public.py`. `python3 sandbox/compile_check.py` reports no errors, and all 10 tests fail for now because `src/main.py` raises `not implemented`, as expected.\n\n- **Sample:** the statement's one sample, all five queries, checked exactly as written.\n- **Smallest input:** A = 36, which is itself a 400 number (36 = 2²·3²).\n- **Largest value:** A = 10¹², which is itself a 400 number (2¹²·5¹²).\n- **Just below the largest value:** A = 10¹²−1, where the answer is 999997² = 999994000009. A 400 number is exactly the square of a number with exactly 2 distinct primes. The test confirms by trial division that 999999 and 999998 each have more than 2 prime factors, while 999997 = 757·1321.\n- **Around 100:** A = 99 gives 36, and A = 100 gives 100.\n- **Squares that don't count:** A = 64 gives 36, because 64 = 2⁶ has only one prime. A = 900 gives 784, because 900 = 2²·3²·5² has three primes.\n- **Small-range brute force:** every A from 36 to 1500 in one input. The expected answers come from checking the statement's definition literally, counting down from A.\n- **Speed:** the maximum Q of 2×10⁵ queries, each A = 10¹², each answer 10¹².\n\nWherever an answer isn't given by the statement, a comment in the test says how it was worked out, and the brute-force answers are checked inside the tests themselves.\n\n10 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_public.py"
+    ]
+  }
+}

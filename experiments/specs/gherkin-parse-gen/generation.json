@@ -1,0 +1,44 @@
+{
+  "from": "gherkin-parse",
+  "spec": {
+    "sessionId": "537c855a-c59a-4bc0-9280-ca9f10c169eb",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 1.4027783,
+    "turns": 14,
+    "durationMs": 454981,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `spec.md`. It has a title and context paragraph, one `gherkin` block with 13 `Rule:` sections and 31 scenarios, and a `Decided:` list at the end. Nothing else was changed. Every scenario has a `@happy`, `@boundary` or `@unhappy` tag. There's no `@concurrency` scenario because `parseFeature` is synchronous, so calls can't overlap. Instead, one scenario checks that two calls return independent results.\n\nI checked by grep that every scenario has a tag and that no description line in the spec would read as a step, tag or keyword under its own rules. Nothing has been built or run against it yet, since the bodies still throw `not implemented`.\n\n**How scenarios are written.** Most inputs are doc strings. Tricky inputs (`\\r\\n`, tabs, the byte order mark, trailing spaces) are given as JavaScript string literals in `text` columns. Expected results are exact JSON, or tables of name/line/tags and keyword/text/line. Each error case gives the exact `line` and `message`.\n\n**Decisions a reviewer might push back on:**\n- **Error messages:** the `ParseError` constructor builds the message as `line <n>: <reason>`. That guarantees the \"line <n>\" the interface promises, and the spec fixes every reason string exactly.\n- **Accepted beyond the ticket:** `Rule:` sections are accepted and their scenarios are merged into `scenarios` in file order, so the parser can read spec files written in this same format. `Example:` is accepted as another name for `Scenario:`.\n- **Rejected:** `Scenario Template:` is rejected like `Scenario Outline:`. Free text inside a Background or Scenario fails with `unexpected line \"<text>\"`, which follows the interface's \"none of the recognised forms\" rule. Tag lines before `Feature:` are also rejected.\n- **Tags:** tags must be followed by `Scenario:` or `Rule:`, otherwise the parse fails. Tags before a `Rule:` are dropped, and scenarios don't inherit tags.\n- **Tables and doc strings:** these follow standard Gherkin conventions (escapes, both `\"\"\"` and ``` delimiters, matching cell counts, indentation removed relative to the opening delimiter). A step can have a table or a doc string, but not both.\n- **Errors beyond the interface comment:** the interface lists six error cases; the spec adds a few more (misplaced or second Background, dangling or invalid tags, malformed table rows, misplaced doc strings). Passing a non-string throws `TypeError`."
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "4fad581c-c815-401b-868f-ac858102c559",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1206717999999998,
+        "turns": 18,
+        "durationMs": 293996,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1206717999999998,
+    "finalText": "The test suite is written in `tests/public/` and `npm run build` reports no errors. When I ran it, all 62 tests failed, as expected while the function bodies throw `not implemented`.\n\n**Coverage.** The spec has 31 scenarios: 12 `@happy`, 7 `@boundary` and 12 `@unhappy`. Each scenario has exactly two tests, both starting with its key:\n- **Happy path:** the scenario as written. For scenarios with an example table, every row is checked in one test.\n- **Boundary case:** a variation that follows directly from the scenario's rule. Examples: a nameless `Feature:` line with no final newline, a lone `\\r` inside a step's text, tags on the last line with no newline, a delimiter line with extra text not closing a doc string, and an unclosed doc string being reported before a `Feature:` line inside it.\n\n**Files:**\n- `structure.test.ts`: overall shape, `Example:`, `Rule:` sections, descriptions, independent results between calls\n- `lines.test.ts`: line endings, byte order mark, line numbering\n- `steps.test.ts`: step form, lines that are not steps, steps in the wrong place, prose\n- `tags.test.ts`\n- `tables.test.ts`\n- `docstrings.test.ts`\n- `errors.test.ts`: `Feature:` and `Background:` errors, outlines, the `ParseError` constructor, which error is reported first, non-string input\n\n**One reading of the spec.** For the \"table row must end with\" errors, I took the expected message to be `table row must end with \"|\"`. The spec's reading rules say `\\|` in a table cell stands for `|`, and the message column is a table cell. The rule's own text writes it as `\"\\|\"`, so if that was meant literally, those three expected messages would need a backslash.\n\n**Build output.** Building also writes compiled `.js` files next to the sources, including `src/index.js`. To keep everything outside `tests/public/` unchanged, I deleted those after my run. Running `npm test` will create them again; they're gitignored.\n\n62 tests, in 7 files.",
+    "problem": null,
+    "files": [
+      "tests/public/docstrings.test.ts",
+      "tests/public/errors.test.ts",
+      "tests/public/lines.test.ts",
+      "tests/public/steps.test.ts",
+      "tests/public/structure.test.ts",
+      "tests/public/tables.test.ts",
+      "tests/public/tags.test.ts"
+    ]
+  }
+}

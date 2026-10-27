@@ -1,0 +1,23 @@
+{
+  "name": "repo",
+  "repo": "evidence/in-repo-ufo/checkout/ufo",
+  "base": "387d01aa02d58384bb59efbd47bc8f2d6320c247",
+  "package": ".",
+  "packageManager": "pnpm@9.0.5",
+  "buildFirst": [],
+  "runner": "vitest",
+  "testDir": "test",
+  "testPattern": "*.test.ts",
+  "build": "tsc -p tsconfig.json --noEmit",
+  "hiddenDir": "test/hidden-ufo-drive-letters-confirmed",
+  "seam": [
+    "src/parse.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ],
+  "examples": [
+    "test/parse.test.ts",
+    "test/punycode.test.ts"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "slug": "he-11",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_string_xor.py :: TestStringXor.test_complementary_inputs_give_all_ones",
+    "tests/public/test_string_xor.py :: TestStringXor.test_docstring_example",
+    "tests/public/test_string_xor.py :: TestStringXor.test_long_complementary_inputs",
+    "tests/public/test_string_xor.py :: TestStringXor.test_returns_str",
+    "tests/public/test_string_xor.py :: TestStringXor.test_returns_str_single_bit",
+    "tests/public/test_string_xor.py :: TestStringXor.test_single_bits_one_one",
+    "tests/public/test_string_xor.py :: TestStringXor.test_single_bits_one_zero",
+    "tests/public/test_string_xor.py :: TestStringXor.test_single_bits_zero_one",
+    "tests/public/test_string_xor.py :: TestStringXor.test_single_bits_zero_zero",
+    "tests/public/test_string_xor.py :: TestStringXor.test_swapping_arguments",
+    "tests/public/test_string_xor.py :: TestStringXor.test_xor_mixed_bits"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 18,
+  "kept": [
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_agreeing_ones_give_zero",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_agreeing_zeros_give_zero",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_all_ones_a",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_complementary_non_alternating",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_differ_only_in_first_column",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_exhaustive_short_inputs",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_input_with_leading_zero",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_long_mostly_agreeing",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_long_period_three",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_long_random",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_mixed_bits_five",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_non_palindromic_result",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_returns_str_long",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_returns_str_single_equal_bits",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_single_equal_bits_both",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_swapping_arguments_longer",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_three_bits_other_values",
+    "tests/private/test_string_xor_private.py :: TestStringXorPrivate.test_xor_with_zeros_is_identity"
+  ],
+  "dropped": [],
+  "reference": null
+}

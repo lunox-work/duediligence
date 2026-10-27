@@ -1,0 +1,28 @@
+{
+  "sha256": "a06ccba88078b20a56e66b1d4cc7894f00b0ba6fd30c67c17e17c9f263f1b55b",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T13:01:25.738Z",
+  "decided": [
+    "Hash algorithm: plain FNV-1a 32-bit over UTF-8 bytes, with no finalizer. It is synchronous and needs no dependency (`crypto.subtle` is async, and `node:crypto` cannot be bundled for the browser).",
+    "Bit layout: bit `row*3 + k` sets row `row`, source column `k` in `0..2`; cols 3 and 4 mirror cols 1 and 0.",
+    "`cells` order: row-major, 25 entries, top-left first.",
+    "Hue: integer `(h >>> 15) % 360` in `0..359`, with no rounding and bits disjoint from the grid.",
+    "Golden seeds: `a`, `user-1`, `user-2`, `Zb8f2Kq9Lm3Nx7Rt5Vw1Yc6Hd4Jp0Gs`.",
+    "Text handling: the seed is not trimmed, case-folded or Unicode-normalized; lone surrogates become U+FFFD via `TextEncoder`.",
+    "Empty seed: accepted, and gives the zero-byte hash's face.",
+    "Length limit: none; the whole seed is hashed.",
+    "Degenerate grids: a hash with bits 0–14 all zero gets only the centre cell (index 12) set, pinned by `user-46623`; an all-on grid is returned as computed, pinned by `user-46705`; the hash is never re-rolled.",
+    "Non-string input: not validated at runtime and outside the contract; the `string` signature is the only guard, so tests do not pin it.",
+    "Result objects: a new plain object and a new `cells` array per call, not frozen; no cache or module state.",
+    "Overlapping calls: none can conflict, because the function is synchronous and stateless; results do not depend on call order.",
+    "Package surface: `index.ts` re-exports `identicon.ts`; all existing exports are unchanged.",
+    "Seam (the files the stub writes): packages/shared/src/identicon.ts",
+    "Allowed paths (what the implementer may change): packages/shared/src/"
+  ],
+  "seam": [
+    "packages/shared/src/identicon.ts"
+  ],
+  "allowedPaths": [
+    "packages/shared/src/"
+  ]
+}

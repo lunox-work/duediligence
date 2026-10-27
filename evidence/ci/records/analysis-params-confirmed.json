@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-26T04:39:19.197Z",
+  "slug": "analysis-params-confirmed",
+  "verdict": "passed",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "fef669251030a4d4c76ece610ec6419967ad07e0",
+  "public": {
+    "passed": 44,
+    "total": 44
+  },
+  "hidden": {
+    "passed": 42,
+    "total": 42
+  },
+  "existing": {
+    "passed": 105,
+    "total": 105
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [],
+  "hiddenSha256": "3e5ca93d544bac1e3454c8f93db74d06dec69fe2852d7d670373873fcb6ceaa9",
+  "sealedAt": "2026-10-26T04:35:59.704Z",
+  "committedAt": null
+}

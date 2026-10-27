@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "95f9898a-0117-4690-a93d-0cee08c1a799",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.15475730000000001,
+        "turns": 5,
+        "durationMs": 42893,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.15475730000000001,
+    "finalText": "I wrote `src/index.ts` and `npm run build` finished with no errors. The build also produced `src/index.js`, which `.gitignore` already covers. Nothing else was changed.\n\nThe contract is a single stateless function, `applyPatch(files, diff)`. Its doc comment says it throws when the diff is malformed (a hunk shorter than its header counts, or a hunk before any file header). It returns either:\n- **`Applied`** (`ok: true`): the new files, plus each hunk's `{ path, hunk, offset }`.\n- **`Rejected`** (`ok: false`): the original files unchanged, plus each failed hunk's `{ path, hunk, reason }`. The reason is `\"no match\"`, `\"missing\"` or `\"exists\"`.\n\nThree decisions the spec doesn't spell out:\n- **File set shape:** files are passed and returned as an object keyed by path, so tests can compare whole results directly.\n- **Rejections include the files:** the spec says \"no file in the result differs from the input\", so a rejection returns the original files as well as the failed hunks.\n- **Which path a hunk reports:** for renames and deletions the spec doesn't say. I used the `+++` path, or the `---` path for a deleted file, and wrote this in the doc comments so both test suites and the implementation agree.\n\nExports: `Files`, `RejectReason`, `AppliedHunk`, `RejectedHunk`, `Applied`, `Rejected`, `ApplyResult`, `applyPatch`",
+    "problem": null,
+    "sha256": "31d4c664bdf0f0de7aa8f5baae68b42f31f799c478defeec027edb40eb35a2a0"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "7821b497-28a1-4c7e-9f77-1a230ce250a0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8204692000000001,
+        "turns": 13,
+        "durationMs": 218955,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.8204692000000001,
+    "finalText": "The test suite is written in `tests/public/`. The build passes with no type errors, and all 30 tests currently fail, as expected, because the bodies still throw `not implemented`. To build and run them without writing compiled `.js` into `src/`, I used a copy in the scratchpad, so nothing outside `tests/public/` was touched.\n\n| File | Scenarios |\n|---|---|\n| `hunks.test.ts` | applies at its stated line; nearest match; several hunks in one file |\n| `files.test.ts` | create; delete; rename |\n| `line-endings.test.ts` | line endings kept; missing final newline |\n| `whole-or-nothing.test.ts` | every failing hunk reported; missing file; malformed diff |\n\nEvery scenario has its happy path and at least one boundary case. A few have extras: \"nearest, not first in the file\" and \"no fuzz\" for the nearest-match scenario, and a short hunk followed by another file's header for the malformed-diff scenario.\n\nThings the developer should know:\n- **No ordering assumed:** the spec doesn't say what order hunks or rejections are listed in, so the tests sort or search those lists before comparing.\n- **Offsets checked only where certain:** I check offsets only where any reading of the spec gives the same number. That leaves out the offset of a second hunk after an earlier hunk changed the line count, and the offset of a new file's hunk.\n- **Rename format:** the rename tests put `---`/`+++` headers after the `rename` lines, as the spec's format describes. Real git output leaves those headers out for a rename with no hunks, and adds a `similarity index` line.\n- **Malformed diffs:** these tests also reject an error whose message is `not implemented`, so the stub can't pass them by accident.\n\n30 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/files.test.ts",
+      "tests/public/hunks.test.ts",
+      "tests/public/line-endings.test.ts",
+      "tests/public/whole-or-nothing.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "b48b817c-a5bd-4780-9914-5140970567b1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.0692724,
+        "turns": 16,
+        "durationMs": 551245,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 2.0692724,
+    "finalText": "I've written 79 tests in `tests/private/`. `npm run build` reports no errors, and all 79 fail against the current stub.\n\nTo check the tests themselves, I wrote a reference implementation in a scratch copy of the project, outside the project tree. It passes all 30 public tests and all 79 private ones. I then broke it in six common ways. Each broken version fails at least one private test, and these three still pass the whole public suite:\n- ignoring the \"\\ No newline at end of file\" marker when matching;\n- checking for an existing file with a truthiness test, so an existing empty file doesn't count;\n- treating hunk lines that begin `--- ` or `+++ ` as file headers.\n\nThe other three each fail one public test too: stopping at a file's first failing hunk, letting a later hunk land before the end of the one before it, and searching forward before backward. The private tests add other cases for each of those.\n\nThe four files mirror the public suite: `hunks`, `files`, `line-endings` and `whole-or-nothing`. Every test carries its scenario key and has a comment above it naming the public test it extends.\n\n**Left out on purpose:** the spec leaves these open, so no test asserts them either way:\n- **Offsets after a hunk that adds or removes lines:** it's unclear whether the offset counts from the header's old start line or from that line shifted by the earlier hunks. I only assert the offset of a later hunk when the hunks before it leave the line count unchanged.\n- **Error messages for a malformed diff:** the spec names none, so those tests only check that the error is not the stub's \"not implemented\".\n- **Unordered lists:** the spec doesn't order `rejected` or `hunks`, so the tests sort them before comparing.\n\nI also deleted the `.js` files the build generated in `src/` and `tests/`, so the project holds only the new `.ts` files.\n\n79 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/files.test.ts",
+      "tests/private/hunks.test.ts",
+      "tests/private/line-endings.test.ts",
+      "tests/private/whole-or-nothing.test.ts"
+    ],
+    "open": []
+  }
+}

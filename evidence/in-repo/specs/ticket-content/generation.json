@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "0736a1a0-9c29-4f44-a7d8-4c9409fadd1d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2757618,
+        "turns": 7,
+        "durationMs": 48556,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2757618,
+    "finalText": "I've written the contract as a new file, `packages/core/src/ticket.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes: 139 tests, 0 failures. No other file was touched.\n\n- **What's in it:** every export from the spec's code block, with its exact signature and the constant values the spec gives. `TICKET_LIMITS` is built with `Object.freeze`, as the spec requires. Each new function body is only `throw new Error(\"not implemented\");`. The doc comment on `ticketKey` says it throws a `RangeError` with the spec's exact message.\n- **Underscored parameter names:** the repo's shared compiler settings flag parameters that are never used, and a body that only throws never uses them. That broke the compile. Adding a leading `_` (`_title`, `_value`, `_ticket`, …) is the standard way to tell TypeScript a parameter is unused on purpose. It doesn't change the types callers see.\n- **`packages/core/src/index.ts` is unchanged:** the spec says it gains `export * from \"./ticket.js\";`, but I was asked to write only the seam file. So for now the new names can only be imported from `src/ticket.js`, not from the package's main entry point. That one-line re-export is left for the implementation.\n\nAdded: TICKET_ORIGINS, TicketOrigin, TICKET_LIMITS, DEFAULT_ISSUE_TYPE, clampTicketTitle, TicketContent, TICKET_SPEC_HASH_VERSION, ticketSpecHash, normalizeSpecText, ticketKey",
+    "problem": null,
+    "sha256": "1ccfb1b9720f0837b127118f9cabaa390104f257d58a42e3ac92b30b651d20c9"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "a43f6f5d-840f-4325-ba43-f3b981e29f43",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5687922000000001,
+        "turns": 10,
+        "durationMs": 121947,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5687922000000001,
+    "finalText": "I wrote the suite in `packages/core/test/ticket-content.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors. Run against the current stubs, 44 of the 52 tests fail with `not implemented`, as expected. The other 8 already pass because the constants (`TICKET_ORIGINS`, `TICKET_LIMITS`, `DEFAULT_ISSUE_TYPE`, `TICKET_SPEC_HASH_VERSION`) are defined in the interface file itself.\n\nTo check that the tests themselves are correct, I ran the compiled file against a small implementation of the spec that I wrote in the scratchpad, outside the repo. All 52 passed. I also recomputed the four SHA-256 fingerprints in the spec independently, and they match.\n\n- **Layout:** each of the 27 scenarios gets two tests: its main example, then one boundary case. For outline scenarios, I split the example rows between the two. Every test is flat, keyed by scenario (`[happy-1]`…`[happy-10]`, `[unhappy-1]`…`[unhappy-3]`, `[boundary-1]`…`[boundary-12]`, `[concurrency-1]`), and uses `node:test` and `node:assert/strict` like the existing tests.\n- **Extra boundary cases:** some boundary tests use inputs the spec doesn't list, but the expected results follow directly from its rules:\n  - a single space at the title cut is dropped before the \"…\";\n  - an emoji that ends just before the cut is kept whole;\n  - a bad number behind a blank `jiraKey` still throws the `RangeError`;\n  - a `NaN` number is ignored when a padded `jiraKey` is present;\n  - the frozen limits also refuse new keys and deletions.\n- **Clean tree:** I wrote nothing else in the repo; `git status` shows only the new test file besides the files that were already there.\n\n52 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/ticket-content.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "71c09d09-0682-4da6-a0c8-abf787dec310",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1274151000000001,
+        "turns": 12,
+        "durationMs": 291708,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1274151000000001,
+    "finalText": "I've written the hidden suite in `packages/core/test/hidden-ticket-content/`, in five files: limits, normalize, hash, clamp and key. `tsc -p tsconfig.test.json` reports no errors. Against the stub, every hidden test fails with `not implemented`.\n\nTo check the tests themselves, I ran them against a reference implementation written from the spec, using a copy of the build in the scratchpad. That implementation passes all 99 tests, public and hidden. I also ran it with one shortcut at a time. Each shortcut passes the public suite but fails at least one hidden test:\n- **Counting code points instead of code units:** fails the emoji tests in `[boundary-5]` and `[boundary-8]`.\n- **Trimming each line at both ends:** fails `[happy-4]`, which keeps the indentation of later lines.\n- **Trimming only spaces and tabs:** fails `[happy-4]` on Unicode whitespace.\n- **Joining fields with `\\u0000`, the old `specHash` style:** fails `[happy-5]`, `[unhappy-2]` and `[concurrency-1]`.\n- **Removing trailing whitespace before dropping a high surrogate:** fails `[boundary-8]`.\n- **Hard-coding the four known hashes:** caught because the hash tests compute expected values with `node:crypto` for inputs outside the known table.\n\n**Scenarios with no hidden test:** `[happy-1]` (origins), `[happy-2]` (`DEFAULT_ISSUE_TYPE` and `TICKET_SPEC_HASH_VERSION`) and `[happy-3]` (the limits table). These constants are already defined in the interface you fixed, so a test that only reads them would pass against the stub, which your rule forbids. The public suite already asserts them exactly. I did cover `[unhappy-1]`: after the refused assignment, deletion or redefinition, the test checks that `clampTicketTitle` still cuts at 255.\n\n47 tests, in 5 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-ticket-content/clamp.test.ts",
+      "packages/core/test/hidden-ticket-content/hash.test.ts",
+      "packages/core/test/hidden-ticket-content/key.test.ts",
+      "packages/core/test/hidden-ticket-content/limits.test.ts",
+      "packages/core/test/hidden-ticket-content/normalize.test.ts"
+    ],
+    "open": []
+  }
+}

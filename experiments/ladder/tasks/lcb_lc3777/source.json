@@ -1,0 +1,15 @@
+{
+  "from": "lcb-leetcode-3777",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3777",
+  "contest_id": "weekly-contest-444",
+  "contest_date": "2025-04-05T19:30:00",
+  "difficulty": "hard",
+  "title": "maximum-product-of-subsequences-with-an-alternating-sum-equal-to-k",
+  "kind": "functional",
+  "fn_name": "maxProduct",
+  "publicCases": 3,
+  "privateCases": 40
+}

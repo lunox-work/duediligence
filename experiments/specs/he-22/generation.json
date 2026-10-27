@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "d14ca09f-167f-4bf6-9733-81bee7538957",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1286641,
+        "turns": 4,
+        "durationMs": 25789,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1286641,
+    "finalText": "I wrote the suite in `tests/public/test_filter_integers.py`. `python3 sandbox/compile_check.py` reports no errors. All 7 tests currently fail with `NotImplementedError`, which is expected.\n\n**What's covered:**\n- **Docstring examples:** one test for each of the two.\n- **The one rule, keep only the integers:**\n  - Typical cases: a mixed list keeps its integers (including negatives and zero) in their original order, and repeated integers are all kept.\n  - Boundary cases: an empty list gives `[]`, a list with no integers gives `[]`, and a list of only integers comes back unchanged.\n\nEach expected value the docstring doesn't give directly has a comment saying how I worked it out.\n\n**Left out on purpose:** `True`/`False` and whole-number floats like `5.0`. The docstring doesn't say whether these count as integers, so any expected value I picked would be a guess.\n\n7 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_filter_integers.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "36f4c39b-51b5-4f9e-b405-7485c229d38a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1773101,
+        "turns": 4,
+        "durationMs": 40688,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1773101,
+    "finalText": "I wrote the hidden suite in `tests/private/test_filter_integers_private.py`. `sandbox/compile_check.py` reports no errors. Against the current stub, all 13 tests fail with `not implemented`. I also ran them against a throwaway reference implementation, a type check that keeps ints and drops bools, and all 13 passed. That run used a script in `$TMPDIR` and left the project untouched.\n\nWhat the suite adds beyond the public tests:\n- **Wrong position:** the only int comes first, which catches a \"keep the last element\" shortcut.\n- **Whole-number floats:** `5.0`, `4.0` and `-2.0` must be dropped. The result type is `List[int]`, and these are floats.\n- **Ints inside containers:** lists, dicts, sets and tuples that hold ints contribute nothing, so the function must not flatten its input.\n- **Order:** the ints arrive unsorted and must come back in input order, which catches a sorting shortcut.\n- **Duplicates:** repeats are spread out and mixed with `1.0`, and they must all be kept, which catches de-duplication through a set.\n- **Size:** a mixed list of 12,000 values, whose expected result is built with an obviously correct loop, and an all-int list of 2,000 values in descending order.\n- **Single element:** one list holding just an int, and one holding just a non-int.\n- **More non-int types:** strings of digits, complex numbers, bytes, `inf`, and empty tuples and sets.\n- **Very large ints:** values beyond 64 bits, both positive and negative.\n\nI left booleans untested. In Python `True` counts as an int, and the docstring doesn't say whether it should be kept. No public test checks it either.\n\n13 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_filter_integers_private.py"
+    ],
+    "open": []
+  }
+}

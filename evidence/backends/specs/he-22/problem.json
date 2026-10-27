@@ -1,0 +1,9 @@
+{
+  "source": "HumanEval+ v0.1.10 (evalplus/humanevalplus_release)",
+  "task_id": "HumanEval/22",
+  "entry_point": "filter_integers",
+  "picked": "top",
+  "solutions": 31,
+  "basePassPlusFail": 27,
+  "plusPass": 0
+}

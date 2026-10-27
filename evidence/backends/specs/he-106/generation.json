@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a1770d-e36d-70e1-b2fc-c6cfec184839",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 10,
+        "durationMs": 82154,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "7 tests in 1 file; compile check passed.",
+    "problem": null,
+    "files": [
+      "tests/public/test_solution.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a1770f-1f70-7d52-a718-b51f4bf3e3ea",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 146034,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "11 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_factorial_sum.py"
+    ],
+    "open": []
+  }
+}

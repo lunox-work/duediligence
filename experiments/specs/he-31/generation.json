@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "453bb687-48b8-4c44-be2e-53337f642c2b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1621647,
+        "turns": 5,
+        "durationMs": 33825,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1621647,
+    "finalText": "I wrote the public suite in `tests/public/test_is_prime.py`. `python3 sandbox/compile_check.py` reports no errors. All 11 tests currently fail with `NotImplementedError`, which is expected.\n\n**What's covered:**\n- **Docstring examples, one test each:** 6, 101, 11, 13441, 61, 4 and 1.\n- **Rule: a prime returns `True`.** The typical case is 97 (no prime up to √97 ≈ 9.8 divides it). The boundary case is 2, the smallest prime and the only even one.\n- **Rule: a non-prime returns `False`.** The typical case is 15 (3 × 5). The boundary case is 49 (7 × 7). Its only factor besides 1 and itself is exactly its square root, so an implementation that stops checking just below √n would wrongly call it prime.\n\n**Choices I made:**\n- **Exact `True`/`False`:** I used `assertIs(..., True/False)`. The docstring examples print `True` and `False`, so a result of `1` or `0` would fail its own doctest.\n- **Inputs left out:** I didn't test 0 or negative numbers. The docstring only says \"a given number\" and none of its examples is below 1, so those cases are uncertain.\n- **Expected values:** For the cases I added, the comments say how I worked each answer out by hand. I also checked all 11 against a simple trial-division function in a throwaway command; I didn't save that check anywhere.\n\n11 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_is_prime.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "c6023475-d674-4a00-b774-2cf38341af6b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2645167,
+        "turns": 6,
+        "durationMs": 73467,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2645167,
+    "finalText": "I've written 18 tests in `tests/private/test_is_prime_private.py`. All 18 fail against the current stub, `python3 sandbox/compile_check.py` reports no errors, and I checked them against two implementations of my own, kept outside the project: a square-root trial-division version and a slow version that tries every divisor below n. Both pass everything, the slow one in about 0.13s in total.\n\nWhat the tests cover:\n\n- **Numbers below 2:** 0, -1, -4, and the switch from not prime to prime at 0, 1, 2, 3. I left out negative primes like -7, because whether they count as prime depends on the definition.\n- **Shortcuts the public suite lets through:**\n  - Searching for divisors only up to, not including, √n: squares of primes such as 9, 121, 7921 and 994009.\n  - Checking only 2, 3, 5 and 7: composites like 143, 13439 (89·151), 988027 (991·997) and 1000001.\n  - Using a Fermat test: Carmichael numbers 561, 1105, 1729 and 2465.\n  - Hard-coding the visible answers: a full comparison of 0..1500 against a brute-force check, plus a count of the 168 primes below 1000.\n- **Extending the public tests** (each named in a comment):\n  - Even composites and powers of 2, and the composite 35.\n  - The primes 3, 5–29 and 103–113, and the neighbours of 101.\n  - Odd numbers near 13441, prime and composite.\n  - Larger primes: 7919, 65537, 104729, 999983 and 1000003.\n- **Expected values:** each is either factored by hand in a comment or checked inside the test against a brute force that tries every divisor from 2 to n−1.\n\nI used `assertIs(..., True/False)`, like the public suite. The docstring's examples print `True` and `False`, so the function has to return actual booleans.\n\n18 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_is_prime_private.py"
+    ],
+    "open": []
+  }
+}

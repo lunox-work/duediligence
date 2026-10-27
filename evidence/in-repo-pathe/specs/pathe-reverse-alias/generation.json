@@ -1,0 +1,79 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "26556f78-5422-42ae-94ca-e30b549d10b4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.15545979999999998,
+        "turns": 4,
+        "durationMs": 18560,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.15545979999999998,
+    "finalText": "I added `reverseResolveAlias(path: string, aliases: Record<string, string>): string[]` to `src/utils.ts`, placed after `resolveAlias`. Its body is just `throw new Error(\"not implemented\");`, and its doc comment uses the spec's wording.\n\n- **Existing code:** `normalizeAliases`, `resolveAlias`, `filename` and the internal helpers are unchanged.\n- **No other new exports:** the spec says there are no new types or constants, so I added none. `src/index.ts` doesn't re-export the new function, as the spec requires.\n- **No error documented:** the spec says the function never throws for string inputs, so the doc comment doesn't say it throws.\n- **No test-controlled inputs:** the spec has no time, randomness or secrets for tests to control, so the signature only has `path` and `aliases`.\n\nChecks: `npx tsc -p tsconfig.json --noEmit` reports no errors, and `npx vitest run` passes as before (2 files, 362 tests). `src/utils.ts` is the only file I changed.\n\nExported names added: `reverseResolveAlias`",
+    "problem": null,
+    "sha256": "f2b5bdf11db4d756a11f6cac7ffb0f054db96d3e20beb3b85c04fb6d6d5d3058"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5fda51b0-e8f6-4235-be49-4fdc4cdbd073",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5082172,
+        "turns": 6,
+        "durationMs": 120532,
+        "subtype": "success",
+        "apiError": null
+      },
+      {
+        "sessionId": "5fda51b0-e8f6-4235-be49-4fdc4cdbd073",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5806928,
+        "turns": 2,
+        "durationMs": 12239,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.08891,
+    "finalText": "The test file is now `test/pathe-reverse-alias.spec.ts`, the `.spec.ts` extension the instructions asked for. Before, I had named it `.test.ts`. Only the name changed; the tests are the same.\n\n- **Type check:** `npx tsc -p tsconfig.json --noEmit` reports no errors.\n- **Tests:** `npx vitest run test/pathe-reverse-alias.` finds the file and runs it. 46 tests fail because `reverseResolveAlias` still throws `not implemented`, which is expected. The other 2 are the `[happy-11]` tests for the existing `resolveAlias`, and they pass.\n- **Changes:** nothing else in the repository was touched.\n\n48 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "test/pathe-reverse-alias.spec.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "2e72fcfb-1a58-4474-9177-fbf546d9b167",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8979967,
+        "turns": 10,
+        "durationMs": 220951,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.8979967,
+    "finalText": "The hidden suite is in `test/hidden-pathe-reverse-alias/reverse-resolve-alias.spec.ts`. It covers every scenario key in the spec: `happy-1`–`11`, `boundary-1`–`8` and `unhappy-1`–`5`.\n\n**Checks run:**\n- **Against the current stub:** all 50 tests fail.\n- **Typecheck:** `npx tsc -p tsconfig.json --noEmit` reports no errors.\n- **Against a reference implementation:** I wrote a throwaway version of the spec's algorithm in the scratchpad. All 50 hidden tests and all 48 public tests pass against it.\n- **Against shortcut implementations:** I tried five shortcuts. Four pass the public suite but fail this one: going through the aliases in the raw map order instead of `normalizeAliases` order, skipping the empty-path check, not skipping empty targets, and treating any punctuation after a target as a segment boundary. The fifth sorts by how specific the target is instead of by result length; both suites catch it.\n\n**What the suite adds beyond the public tests:**\n- **Empty path:** the public empty-path tests pass even without the \"empty path gives `[]`\" rule. Here `\"\"` is checked against targets `\".\"` and `\"./\"`.\n- **Empty target:** an empty target must not match `.` or `./`.\n- **Tie order:** results of equal length follow `normalizeAliases` order, which differs from the raw map order. For example, `{ a, \"z/\" }` gives `z/q` before `a/q`.\n- **Sorting:** results are sorted by their own length. This is checked against both string order and target specificity.\n- **Duplicates:** they are removed after `join` (`\"./a\"` and `\"a\"` give one result), including when the duplicates aren't next to each other.\n- **Segment boundaries:** `.`, `-` and `_` after a target are not a boundary.\n- **Targets that become `/`:** for example `\"\\\\\"` and `\"/q/..\"`; also drive-root targets like `C:/`.\n- **Normalisation:** lower-case drive letters in targets, alias chains three levels deep, and trailing slashes on Windows paths.\n- **Purity:** the alias map is not mutated (no reordered keys, no added symbol), and changing a returned array doesn't affect the next call.\n\nI left one case untested: whether target `/` matches a drive path such as `C:/x`. The scenario title says `/` matches \"every absolute path\", but the algorithm's `/`-prefix check rules that out. Neither the spec's examples nor the public suite use this case.\n\n50 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "test/hidden-pathe-reverse-alias/reverse-resolve-alias.spec.ts"
+    ],
+    "open": []
+  }
+}

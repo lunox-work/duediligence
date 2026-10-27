@@ -1,0 +1,2 @@
+[01:46:35] {"at":"2026-10-27T01:46:35.872Z","slug":"csv-export-http","prepare":{"public":36,"hiddenWritten":48,"kept":48,"reference":{"public":{"passed":36,"total":36},"hidden":{"passed":48,"total":48}},"costUsd":4.31},"stub":{"verdict":"incomplete","public":{"passed":0,"total":36},"hidden":{"passed":0,"total":48}},"runs":[{"variant":"haiku","run":1,"verdict":"overfit","public":{"passed":36,"total":36},"hidden":{"passed":47,"total":48},"costUsd":0.03698782,"refused":[]}]}
+exit 0

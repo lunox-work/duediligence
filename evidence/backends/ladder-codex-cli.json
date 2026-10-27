@@ -1,0 +1,279 @@
+{
+  "agreement": [
+    {
+      "slug": "ladder-kestrel-l0",
+      "level": 0,
+      "compiled": true,
+      "passed": 37,
+      "total": 37,
+      "failing": []
+    },
+    {
+      "slug": "ladder-kestrel-l1",
+      "level": 1,
+      "compiled": true,
+      "passed": 45,
+      "total": 45,
+      "failing": []
+    },
+    {
+      "slug": "ladder-kestrel-l2",
+      "level": 2,
+      "compiled": true,
+      "passed": 25,
+      "total": 27,
+      "failing": [
+        "tests/public/satisfies.test.ts :: [happy-3] caret bounds use the same major even when that major is zero",
+        "tests/public/satisfies.test.ts :: [unhappy-1] empty and incomplete versions throw an Error"
+      ]
+    },
+    {
+      "slug": "ladder-kestrel-l3",
+      "level": 3,
+      "compiled": true,
+      "passed": 16,
+      "total": 16,
+      "failing": []
+    },
+    {
+      "slug": "ladder-kestrel-l4",
+      "level": 4,
+      "compiled": true,
+      "passed": 2,
+      "total": 2,
+      "failing": []
+    }
+  ],
+  "rescored": {
+    "runs": 20,
+    "differingFromArchive": 0,
+    "means": {
+      "b/own-brief/L1": 100,
+      "b/own-brief/L2": 100,
+      "b/own-brief/L3": 100,
+      "b/own-brief/L4": 100
+    },
+    "rows": [
+      {
+        "key": "ladder-kestrel-l1-b/haiku/1",
+        "level": 1,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l1-b/haiku/2",
+        "level": 1,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l1-b/haiku/3",
+        "level": 1,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l1-b/haiku/4",
+        "level": 1,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l1-b/haiku/5",
+        "level": 1,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l2-b/haiku/1",
+        "level": 2,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l2-b/haiku/2",
+        "level": 2,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l2-b/haiku/3",
+        "level": 2,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l2-b/haiku/4",
+        "level": 2,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l2-b/haiku/5",
+        "level": 2,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l3-b/haiku/1",
+        "level": 3,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l3-b/haiku/2",
+        "level": 3,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l3-b/haiku/3",
+        "level": 3,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l3-b/haiku/4",
+        "level": 3,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l3-b/haiku/5",
+        "level": 3,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l4-b/haiku/1",
+        "level": 4,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l4-b/haiku/2",
+        "level": 4,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l4-b/haiku/3",
+        "level": 4,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l4-b/haiku/4",
+        "level": 4,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      },
+      {
+        "key": "ladder-kestrel-l4-b/haiku/5",
+        "level": 4,
+        "condition": "b",
+        "arm": "own-brief",
+        "macro": 1,
+        "public": {
+          "passed": 37,
+          "total": 37
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "sha256": "3ff15f3270ca5eae4d174e450f91bc69df48c84101c336331e6710987ca76e0b",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T14:33:30.061Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "**How the last segment is chosen:** it is everything after the final `/` or `\\`, and periods in earlier segments are ignored.",
+    "Ticket: \"fix(utils/filename): handle files beginning with a period or without ext (#185)\"",
+    "Instead: normalise the path first with `normalizeWindowsPath` and split on `/` only. The result would be the same, but that ties the behaviour to the normaliser.",
+    "**Which periods start an extension:** the last `.` in the segment starts the extension whenever it is not the segment's first character, even when nothing follows it. So `\"foo.\"`→`\"foo\"`, `\"a.b.\"`→`\"a.b\"`, `\".\"`→`\".\"`, `\"..\"`→`\".\"`, `\"...\"`→`\"..\"`, `\"..foo\"`→`\".\"`, `\"a..b\"`→`\"a.\"`. This matches `parse(p).name` except when the segment ends in a period after its first character.",
+    "Ticket: silent.",
+    "Instead: follow this repository's `extname`, which needs non-period characters after the `.` (`\"foo.\"`→`\"foo.\"`, `\"..\"`→`\"..\"`, `\"...\"`→`\"...\"`), or Node's `path.parse().name` (`\"..\"`→`\"..\"`).",
+    "**Dotfiles:** a leading period is part of the name. `\".gitignore\"`→`\".gitignore\"`, and `\".env.local\"`→`\".env\"` (only the last extension is removed).",
+    "Ticket: \"handle files beginning with a period\"",
+    "Instead: treat a dotfile's whole name as the stem (`\".env.local\"`→`\".env.local\"`), or return `undefined` or `\"\"` for a bare dotfile.",
+    "**Several periods:** only the final extension is removed (`\"foo.bar.baz.js\"`→`\"foo.bar.baz\"`).",
+    "Ticket: silent.",
+    "Instead: strip everything from the first period (`\"foo\"`).",
+    "**Trailing separators:** the result is `undefined`, as the existing `\"C:\\\\temp\\\\\"` test requires, including for repeated separators.",
+    "Ticket: silent.",
+    "Instead: skip trailing separators the way `basename` does (`\"/foo/bar/\"`→`\"bar\"`).",
+    "**Empty input and root-only paths:** `\"\"`, `\"/\"`, `\"\\\\\"`, `\"./\"` and `\"C:\\\\\"` give `undefined`.",
+    "Ticket: silent.",
+    "Instead: return `\"\"`, as `basename(\"\")` does.",
+    "**Rejected inputs:** no string is rejected. `filename` never throws and signals \"no name\" only with `undefined`. Non-string arguments fall outside the `path: string` signature and are not specified.",
+    "Ticket: silent.",
+    "Instead: throw a `TypeError` for empty or non-string input, as Node's `path` functions do.",
+    "**No normalisation of the result:** whitespace is not trimmed, case is kept, `.`/`..` segments are not resolved (`\"foo/bar/..\"`→`\".\"`, the `..` segment with its last period stripped), and drive letters get no special handling (`\"C:\"`→`\"C:\"`).",
+    "Ticket: silent.",
+    "Instead: resolve the path with `normalize` first (`\"foo/bar/..\"`→`\"foo\"`), or treat a bare drive such as `\"C:\"` as having no filename.",
+    "**Return type and other exports:** `filename` stays `(path: string) => string | undefined`, and `normalizeAliases` and `resolveAlias` are unchanged.",
+    "Ticket: \"The change keeps the exports' names and signatures.\"",
+    "Instead: change the return type to always be `string`, using `\"\"` for no name.",
+    "**Statelessness and overlapping calls:** `filename` is synchronous and keeps no state between calls, for example no global-flag regex `lastIndex`. Calls cannot overlap, so there are no `@concurrency` scenarios.",
+    "Ticket: silent.",
+    "Instead: cache results per path.",
+    "Seam (the files the stub writes): src/utils.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

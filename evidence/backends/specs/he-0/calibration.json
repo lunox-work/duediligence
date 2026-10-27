@@ -1,0 +1,71 @@
+{
+  "slug": "he-0",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_close_negative_values",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_close_pair_is_nonadjacent_in_unsorted_list",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_distance_equal_to_threshold",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_docstring_example_false",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_docstring_example_true",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_duplicate_values_with_positive_threshold",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_empty_list",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_single_element",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_two_elements_outside_threshold",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_two_elements_within_threshold",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_values_on_opposite_sides_of_zero",
+    "tests/public/test_has_close_elements.py :: TestHasCloseElements.test_zero_threshold_with_duplicates"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 35,
+  "kept": [
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_all_negative_values_distant",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_close_negative_fractions",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_close_pair_crossing_zero",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_descending_close_pair",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_descending_distant_pair",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_descending_widely_spaced_values",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_distance_just_above_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_distance_just_below_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_empty_negative_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_empty_zero_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_equal_magnitudes_opposite_signs",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_large_magnitude_close_pair",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_large_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_many_equal_minimum_distances",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_many_identical_negative_values",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_many_values_with_one_close_pair",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_many_values_without_close_pair",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_negative_threshold_distinct_pair",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_negative_threshold_with_duplicates",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_only_final_pair_is_close",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_only_first_and_last_entries_are_close",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_only_interior_nonadjacent_pair_is_close",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_opposite_signs_equal_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_separated_duplicates",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_signed_zero_duplicate",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_single_negative_value",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_single_zero_enormous_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_small_value_without_close_neighbor",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_subnormal_distance",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_tied_minimum_distances_below_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_tiny_distance_equal_threshold",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_tiny_positive_distance",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_very_large_opposite_values",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_zero_threshold_distinct_values",
+    "tests/private/test_has_close_elements_hidden.py :: TestHasCloseElementsHidden.test_zero_threshold_multiple_duplicate_groups"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 12,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 35,
+      "total": 35
+    }
+  }
+}

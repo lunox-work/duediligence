@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-26T04:42:45.062Z",
+  "slug": "categories",
+  "verdict": "incomplete",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "44935a3e5c7c1768f6af45195effea0306777fd2",
+  "public": {
+    "passed": 32,
+    "total": 82
+  },
+  "hidden": {
+    "passed": 43,
+    "total": 113
+  },
+  "existing": {
+    "passed": 24,
+    "total": 24
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [
+    "boundary-11",
+    "boundary-13",
+    "boundary-14",
+    "boundary-15",
+    "boundary-16",
+    "boundary-17",
+    "boundary-18",
+    "boundary-19",
+    "boundary-2",
+    "boundary-20",
+    "boundary-21",
+    "boundary-22",
+    "boundary-3",
+    "boundary-4",
+    "boundary-6",
+    "boundary-8",
+    "boundary-9",
+    "happy-1",
+    "happy-10",
+    "happy-11",
+    "happy-12",
+    "happy-13",
+    "happy-14",
+    "happy-15",
+    "happy-16",
+    "happy-2",
+    "happy-3",
+    "happy-4",
+    "happy-6",
+    "happy-7",
+    "happy-8",
+    "happy-9",
+    "unhappy-1",
+    "unhappy-2",
+    "unhappy-3"
+  ],
+  "hiddenSha256": "3c221e000aaf90fe294bca75f104a6ec65501ee1f34b09be990950f35128c447",
+  "sealedAt": "2026-10-26T04:36:00.232Z",
+  "committedAt": null
+}

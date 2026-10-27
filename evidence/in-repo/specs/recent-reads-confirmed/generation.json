@@ -1,0 +1,72 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "56313c5b-1fd0-418c-8f2a-326a610e0f7f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.25150540000000005,
+        "turns": 11,
+        "durationMs": 51028,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.25150540000000005,
+    "finalText": "I created `apps/api/src/jira/recent.ts`. The type-check (`npx tsc -p tsconfig.test.json`) passes with no errors. The existing suite ran 885 tests: 883 passed and 2 failed. Both failures are in `test/deepseek-caller.test.ts` (\"the default client posts to /chat/completions…\" and \"…maps a non-2xx status…\"). Those tests open a local server on 127.0.0.1, and this sandbox blocks that with `listen EPERM`. No test imports the new module, so the failures come from the sandbox, not this change. I didn't run the suite without the file to confirm they also failed before. To run those two, allow `sandbox.network.allowLocalBinding: true` in your settings.\n\nAbout the contract:\n- **Types and defaults:** `RECENT_JIRA_READ_MS = 60000` is a real exported constant. The options object type is written out exactly as in the spec, defaulting to `= {}`. There is no constant for the default `max` of 1000, as the spec says.\n- **Time comes in as `now`:** the clock is the `now` option, so tests can control it. Nothing is read from the environment.\n- **Errors:** the spec says neither function fails, so there are no `throws` notes and no error types.\n- **Parameter names:** the package's tsconfig rejects unused parameters, which every `throw new Error(\"not implemented\")` body would trip. I named them `_options`, `_organizationId`, `_connectionId` and `_issueId`, the same leading-underscore style the existing tests use. Callers see the same signatures; the implementer should drop the underscores once the parameters are used.\n\nAdded: `RECENT_JIRA_READ_MS`, `RecentReads`, `recentReads`, `issueKey`",
+    "problem": null,
+    "sha256": "ee4a95e8eceb85f242c7b51e06ea73feebb06dfc19eea93ecd204806cc7bbb93"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "38a54992-28d6-4d9b-970c-cbd35be52201",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7003321,
+        "turns": 7,
+        "durationMs": 171090,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.7003321,
+    "finalText": "I wrote the test suite in `apps/api/test/recent-reads-confirmed.test.ts`. It type-checks with no errors under `npx tsc -p tsconfig.test.json`. Run against the real seam, every test fails with `not implemented`, as expected.\n\nTo check the tests themselves are right, I ran the compiled file against a throwaway implementation of the spec in the scratchpad. All 58 passed, and I deleted it afterwards. The only new file in the repo is the test file.\n\n- **Coverage:** the spec has 29 scenarios (9 `@happy`, 15 `@boundary`, 4 `@unhappy`, 1 `@concurrency`). Each gets two tests: one for its happy path and one for a boundary case. Each test name starts with the scenario's key, e.g. `[boundary-3]`.\n- **Style:** it follows the nearby tests, using `node:test` `test` and `node:assert/strict`, with flat top-level tests and no `describe`.\n- **Clock:** every test makes its own fake clock (`t` starts at 1000000), so no test shares state with another. Scenario outlines run each example in its own store, inside a single test.\n- **No-options store (`[happy-6]`):** this scenario has no clock to pass in, so these tests replace `Date.now` with `t.mock.method` (undone automatically after each test) instead of using the real clock. One consequence: an implementation that saves `Date.now` once when the module loads would fail the expiry test. One that reads `Date.now` when `recentReads()` is called, or on every call, passes.\n- **Boundary cases:** each one follows from the spec's rules and its \"Decided\" list. Examples: a write at time 0, `NaN` and `-0` as stored values, keys that differ only in Unicode form, rewriting at the last fresh millisecond, two writes at the same instant, and `issueKey` collisions that end up at the same store entry.\n\n58 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/api/test/recent-reads-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "6db3be4b-5a16-490d-bb69-7566ffecfcec",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.3225353,
+        "turns": 20,
+        "durationMs": 306764,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.3225353,
+    "finalText": "I wrote 67 hidden tests. All 67 fail against the current stub with `not implemented`. All of them, plus the 57 public tests, pass against a correct reference implementation I built in the scratchpad (not in the repo).\n\nThe reference also passes in a second form that deletes expired entries when they are read. So no test depends on whether expired entries are kept or removed.\n\n`npx tsc -p tsconfig.test.json` reports no errors. Nothing outside `apps/api/test/hidden-recent-reads-confirmed/` was changed, apart from the `dist-test` build output that command produces.\n\nEvery scenario key from the spec is covered: happy-1 to 9, boundary-1 to 15, unhappy-1 to 4 and concurrency-1. Each public test has at least one test that extends it, named in a comment above it. The shortcuts these tests are written to catch:\n\n- **Wrong time base:** the ttl is hard-coded to one minute, or measured from when the store was created rather than from each write.\n- **Clock running backwards:** a key rewritten after the clock went back is timed from the earlier reading.\n- **Falsy values:** checking truthiness instead of `undefined` treats them as misses. Also covered: falsy values still expire, and they count toward eviction.\n- **Plain-object store:** keys named like built-in properties, and a `\"__proto__\"` key that has to expire and be evicted like any other. I checked that a store that counts entries with `Object.keys` fails this test.\n- **Eviction order:** sorting keys alphabetically instead of by write order, rewrites in the middle of a full store, eviction past the default 1000, and stores that share a size limit.\n- **Defaults merged by spreading options:** passing `now`, `ttlMs` or `max` as `undefined` overwrites the default with `undefined`.\n- **Fractional ttl values:** a ttl of 2.5, and a ttl of 1.5 measured from a fractional write time.\n- **Concurrency:** three overlapping callers, and colliding writes into a full store that must not evict anything else.\n- **`issueKey`:** unicode, separator-like characters, long parts, and other ways newlines in parts can make keys collide.\n\n`RECENT_JIRA_READ_MS` is already defined in the stub, so the `[happy-5]` test also builds a store with it. That makes it fail against the stub too.\n\n67 tests, in 4 files.\n\nOpen in the spec:\n- `[happy-6] called with no options, the store expires on Date.now after one minute`: the spec says `now` defaults to `Date.now` and only requires a value to read back immediately. It doesn't say whether the default looks up `Date.now` each time (so a mocked `Date.now` is used) or keeps the function it found when the module loaded. This test also asserts expiry on the default clock, which the scenario doesn't state.",
+    "problem": null,
+    "files": [
+      "apps/api/test/hidden-recent-reads-confirmed/eviction.test.ts",
+      "apps/api/test/hidden-recent-reads-confirmed/freshness.test.ts",
+      "apps/api/test/hidden-recent-reads-confirmed/issue-key.test.ts",
+      "apps/api/test/hidden-recent-reads-confirmed/options.test.ts"
+    ],
+    "open": [
+      "`[happy-6] called with no options, the store expires on Date.now after one minute`: the spec says `now` defaults to `Date.now` and only requires a value to read back immediately. It doesn't say whether the default looks up `Date.now` each time (so a mocked `Date.now` is used) or keeps the function it found when the module loaded. This test also asserts expiry on the default clock, which the scenario doesn't state."
+    ]
+  }
+}

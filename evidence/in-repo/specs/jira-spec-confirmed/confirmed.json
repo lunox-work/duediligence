@@ -1,0 +1,32 @@
+{
+  "sha256": "d1498422fa1eba11cb30ad6362663e61217545a8c84db96faf09bb78363ef3dd",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T14:22:01.814Z",
+  "decided": [
+    "Hash algorithm and format: SHA-256 through `crypto.subtle`, written as 64 lowercase hex characters with no prefix.",
+    "Hash input encoding: UTF-8 of `canon(summary) + \"\\u0000\" + canon(descriptionText)`; the NUL separator keeps text moved between the two fields from colliding.",
+    "Hash scope: only the summary and the description text count. Key, issue type and `updated` do not change it.",
+    "Hash normalisation: line endings (`\\r\\n`, `\\r`, `\\n`) are unified, trailing whitespace on each line and whitespace at both ends are ignored. Whitespace inside a line, blank lines between text, and Unicode form (no NFC/NFD normalisation) are significant.",
+    "`specHash` with a non-string argument rejects with a `TypeError`; the message is not specified.",
+    "Missing or non-string `summary` becomes `\"\"`, not `toIssueDto`'s `\"(no summary)\"` placeholder, so placeholder text never lands in the spec or the hash. A string summary is kept verbatim in `summary`, even though the hash ignores its surrounding whitespace.",
+    "Missing or non-string `issuetype.name` becomes `\"Task\"`, matching `toIssueDto`. An empty string is kept.",
+    "Non-string `updated` becomes `null`. Strings pass through unvalidated.",
+    "`key` is passed through verbatim, with no validation.",
+    "`fields` of `null` or `undefined` rejects with a `TypeError`; `{}` gives the all-defaults spec.",
+    "Description: a string has every run of non-newline whitespace (including `\\r` and tabs) collapsed to one space and is trimmed at both ends; an object is read as ADF; anything else becomes `\"\"`.",
+    "Description length: more than 20,000 characters is cut to 20,000 followed by `\"\\n[truncated]\"`, for string and ADF descriptions alike.",
+    "ADF flattening: the block and inline tables above. Blocks are joined with `\"\\n\\n\"`, trailing whitespace is removed from each block, and empty blocks are dropped. Headings, lists, task items, code blocks, blockquotes and tables keep Markdown-like markers. Unknown inline nodes add only their children's text. Non-node `content` items are skipped. A `mention` with no string `attrs.text` is `\"@unknown\"`; `emoji` uses `attrs.shortName` only.",
+    "ADF nesting: content more than 50 levels below the root is dropped, and 100,000 levels resolve without a stack overflow.",
+    "The result has exactly six own keys, and the input `fields` object is not mutated.",
+    "Concurrent calls share no state, and each resolves to the result of its own input.",
+    "`ISSUE_FIELDS` is unchanged. `index.ts` re-exports the new values, `adfToText`, `stripTrailingSlashes` and the type. `JiraClient` gains `issueSpec(keyOrId)`.",
+    "Seam (the files the stub writes): packages/jira/src/spec.ts",
+    "Allowed paths (what the implementer may change): packages/jira/src/"
+  ],
+  "seam": [
+    "packages/jira/src/spec.ts"
+  ],
+  "allowedPaths": [
+    "packages/jira/src/"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "f8db615c-b70f-42db-9ca1-7504a8a81a7e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.29673249999999995,
+        "turns": 6,
+        "durationMs": 74350,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.29673249999999995,
+    "finalText": "I wrote the test suite, but `spec.md` has no scenario kind tags, so the test names start with a key format I made up. It's a list of six rules under `# Ignored paths`, with no `@happy`/`@unhappy` tags. To keep the `[kind-N]` format, I treated each rule as one scenario, numbered 1–6 in spec order, and used `rule` as the kind: `[rule-1]` … `[rule-6]`. If your grader expects a different tag, it's a find-and-replace on the prefixes.\n\nEach rule gets a happy-path test and a boundary test in `tests/public/is-ignored.test.ts`:\n\n| Key | Happy path | Boundary |\n|---|---|---|\n| rule-1 comments/blanks | `# …`, blank lines skipped; `*.log` still applies | `#secret.txt` is a comment, so a file named `#secret.txt` isn't ignored |\n| rule-2 negation | `*.log` then `!keep.log` re-includes `keep.log` | `!keep.log` *before* `*.log` doesn't protect it |\n| rule-3 trailing `/` | `build/` ignores `build/app.js` | `build/` doesn't match a *file* named `build` |\n| rule-4 anchoring | `/todo.txt` matches only at the root; `debug.log` matches at any level | `doc/frotz` doesn't match `a/doc/frotz` |\n| rule-5 wildcards | `*`, `?`, `[ab]`, `**` each match | `doc/*.txt` doesn't reach `doc/sub/notes.txt`; `doc/**/*.txt` does |\n| rule-6 directory contents | `logs` ignores `logs/2024/10/app.txt` and `a/b/logs/app.txt` | `logs` doesn't match `catalogs/`, `logs2/` or `app.logs.txt` |\n\nI left out behaviour the spec doesn't state, such as whether `!` can re-include a file inside an excluded directory, or whether `**` can match zero directories.\n\n`tsc` builds with no errors. When run, all 12 tests fail on `not implemented`, as expected. I deleted the `.js` files the build produced, so the only new file is the `.ts` test file.\n\n12 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/is-ignored.test.ts"
+    ]
+  }
+}

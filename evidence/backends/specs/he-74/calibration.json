@@ -1,0 +1,64 @@
+{
+  "slug": "he-74",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_total_match.py :: TestTotalMatch.test_empty_strings_contribute_zero",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_equal_positive_totals_return_first",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_equal_zero_totals_return_first",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_example_both_empty",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_example_digit_strings",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_example_more_strings_but_fewer_characters",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_example_shorter_first_list",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_example_shorter_second_list",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_first_empty_second_nonempty",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_first_shorter_despite_having_more_strings",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_second_empty_first_nonempty",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_second_shorter_despite_having_more_strings",
+    "tests/public/test_total_match.py :: TestTotalMatch.test_spaces_and_punctuation_count_as_characters"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 27,
+  "kept": [
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_digit_strings_choose_shorter_second",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_duplicate_long_strings_can_make_first_lose",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_duplicate_strings_can_make_second_lose",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_eleven_strings_beat_three_strings",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_embedded_space_and_punctuation_are_counted",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_empty_first_beats_padded_nonempty_second",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_empty_first_ties_multiple_empty_strings",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_empty_second_beats_content_after_empty_string",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_empty_strings_in_both_lists_choose_second",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_equal_item_counts_shorter_second_after_long_tail",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_equal_long_prefixes_with_different_final_lengths",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_first_winner_preserves_unsorted_repeated_contents",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_larger_maximum_length_can_still_win",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_long_strings_differ_by_one_in_total",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_many_empty_strings_and_short_content_win_first",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_negative_looking_string_is_counted_as_text",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_nine_short_strings_beat_one_long_string",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_non_ascii_letters_count_as_characters",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_positive_tie_first_has_fewer_items",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_positive_tie_with_empty_strings_and_different_item_counts",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_second_winner_preserves_unsorted_repeated_contents",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_single_long_string_beats_two_medium_strings",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_singletons_shorter_first_despite_lexical_order",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_singletons_shorter_second_despite_lexical_order",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_smallest_individual_string_can_belong_to_loser",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_tabs_newlines_and_carriage_returns_are_counted",
+    "tests/private/test_total_match.py :: TestTotalMatchHidden.test_zero_tie_first_has_more_empty_strings"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 13,
+      "total": 13
+    },
+    "hidden": {
+      "passed": 27,
+      "total": 27
+    }
+  }
+}

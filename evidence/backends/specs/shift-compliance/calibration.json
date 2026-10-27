@@ -1,0 +1,130 @@
+{
+  "slug": "shift-compliance",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/calendar-rules.test.ts :: [boundary-1] all hours of a Sunday overnight shift belong to its starting week and day",
+    "tests/public/calendar-rules.test.ts :: [boundary-1] overnight shifts starting Sunday and Monday count as two days in separate weeks",
+    "tests/public/calendar-rules.test.ts :: [happy-4] six eight-hour shifts from Monday to Saturday exceed a forty-four-hour week",
+    "tests/public/calendar-rules.test.ts :: [happy-4] Sunday joins the preceding six shifts while the following Monday starts a new week",
+    "tests/public/calendar-rules.test.ts :: [happy-4] exactly forty-four weekly hours is permitted",
+    "tests/public/calendar-rules.test.ts :: [happy-4] weekly hours subtract every shift's break",
+    "tests/public/calendar-rules.test.ts :: [boundary-2] Sunday at minus five and Monday at plus eight belong to separate weeks",
+    "tests/public/calendar-rules.test.ts :: [boundary-2] each offset-defined week gathers its own shifts using original input indexes",
+    "tests/public/calendar-rules.test.ts :: [happy-5] seven consecutive dates breach a six-day maximum even with unordered input",
+    "tests/public/calendar-rules.test.ts :: [happy-5] six dates with a second shift on one date stay within the six-day limit",
+    "tests/public/calendar-rules.test.ts :: [happy-5] an overlong run includes every shift while counting repeated dates only once",
+    "tests/public/calendar-rules.test.ts :: [happy-5] an empty day resets the consecutive-day count",
+    "tests/public/calendar-rules.test.ts :: [boundary-3] a nine-day run crossing a Monday boundary is reported once with every shift",
+    "tests/public/calendar-rules.test.ts :: [boundary-3] one empty day separates two overlong runs into two reports",
+    "tests/public/invalid-shifts.test.ts :: [unhappy-2] an end before its start is rejected with the original shift index",
+    "tests/public/invalid-shifts.test.ts :: [unhappy-2] equal start and end instants in different offsets are rejected",
+    "tests/public/invalid-shifts.test.ts :: [unhappy-3] a three-hundred-minute break in a four-hour shift is rejected with its index",
+    "tests/public/invalid-shifts.test.ts :: [unhappy-3] a break just below zero is rejected with its index",
+    "tests/public/invalid-shifts.test.ts :: [unhappy-3] a break equal to the whole shift duration is valid and leaves zero working hours",
+    "tests/public/related-shifts.test.ts :: [happy-3] nine hours of rest breaches eleven hours even when the later shift is input first",
+    "tests/public/related-shifts.test.ts :: [happy-3] exactly eleven hours of rest measured across different offsets is permitted",
+    "tests/public/related-shifts.test.ts :: [happy-3] rest uses only neighboring starts and reports violations by first input index",
+    "tests/public/related-shifts.test.ts :: [unhappy-1] overlapping shifts retain their other breaches and violations sort by index then code",
+    "tests/public/related-shifts.test.ts :: [unhappy-1] touching shifts do not overlap and have zero hours of rest",
+    "tests/public/shift-rules.test.ts :: [happy-1] an eleven-hour shift with a half-hour break measures 10.5 hours",
+    "tests/public/shift-rules.test.ts :: [happy-1] exactly ten working hours after subtracting the break is permitted",
+    "tests/public/shift-rules.test.ts :: [happy-2] an eight-hour shift with a twenty-minute break breaches the break minimum",
+    "tests/public/shift-rules.test.ts :: [happy-2] exactly six elapsed hours needs no break",
+    "tests/public/shift-rules.test.ts :: [happy-2] break eligibility uses elapsed hours even when net hours equal six",
+    "tests/public/shift-rules.test.ts :: [happy-2] a break exactly meeting the minimum is permitted on a long shift"
+  ],
+  "publicFailingOnReference": [
+    "tests/public/related-shifts.test.ts :: [happy-3] nine hours of rest breaches eleven hours even when the later shift is input first",
+    "tests/public/related-shifts.test.ts :: [happy-3] rest uses only neighboring starts and reports violations by first input index"
+  ],
+  "hiddenWritten": 57,
+  "kept": [
+    "tests/private/calendar.test.ts :: [boundary-1] a month-ending Sunday overnight shift keeps net hours in its start week and creates no Monday",
+    "tests/private/calendar.test.ts :: [boundary-1] overnight shifts across the first Monday of a year occupy two start days and weeks",
+    "tests/private/calendar.test.ts :: [boundary-1] a shift spanning several midnights contributes only its single start day and week",
+    "tests/private/calendar.test.ts :: [happy-4] eight shifts on four dates aggregate at a fractional weekly maximum",
+    "tests/private/calendar.test.ts :: [happy-4] an unordered Sunday in January joins its December Monday but the following Monday does not",
+    "tests/private/calendar.test.ts :: [happy-4] fractional weekly equality is allowed separately in two weeks",
+    "tests/private/calendar.test.ts :: [happy-4] unequal breaks and a wholly break-filled shift all participate in weekly aggregation",
+    "tests/private/calendar.test.ts :: [happy-4] separate overfull weeks sort by their first input index and an exact-limit week is omitted",
+    "tests/private/calendar.test.ts :: [boundary-2] Sunday and Monday at extreme opposite offsets stay in separate weeks across a year",
+    "tests/private/calendar.test.ts :: [boundary-2] weeks crossing a year gather mixed-offset dates without changing input indexes",
+    "tests/private/calendar.test.ts :: [boundary-2] different offsets do not split shifts whose written start dates belong to the same week",
+    "tests/private/calendar.test.ts :: [happy-5] five unordered dates across a month exceed a changed three-day maximum",
+    "tests/private/calendar.test.ts :: [happy-5] several repeated dates across a month remain at the changed day limit",
+    "tests/private/calendar.test.ts :: [happy-5] a run with multiple duplicate dates reports all indexes and only distinct start days",
+    "tests/private/calendar.test.ts :: [happy-5] unordered short runs each at their limit restart after single missing dates",
+    "tests/private/calendar.test.ts :: [boundary-3] a scrambled forty-day run crosses a year and many weeks but produces just one full report",
+    "tests/private/calendar.test.ts :: [boundary-3] three interleaved overlong runs report separately and sort by first input index",
+    "tests/private/calendar.test.ts :: [happy-5] the same written start date counts once even when its instants fall on different UTC days",
+    "tests/private/calendar.test.ts :: [happy-5] consecutive written dates count as two days even when both starts share a UTC date",
+    "tests/private/calendar.test.ts :: [boundary-1] an overnight shift with a changed end offset still belongs to its written start date",
+    "tests/private/calendar.test.ts :: [happy-5] zero net working hours do not remove the shift start days from a run",
+    "tests/private/calendar.test.ts :: [boundary-3] leap day connects February and March into one full run",
+    "tests/private/invalid.test.ts :: [unhappy-2] absolute end before start is rejected at a two-digit original index despite later wall time",
+    "tests/private/invalid.test.ts :: [unhappy-2] identical date-times are rejected at a nonchronological original index",
+    "tests/private/invalid.test.ts :: [unhappy-2] offset changes can reverse apparently increasing times by more than two hours",
+    "tests/private/invalid.test.ts :: [unhappy-3] a break one second longer than its short shift names a two-digit original index",
+    "tests/private/invalid.test.ts :: [unhappy-3] a fractional negative break is invalid at an index other than two",
+    "tests/private/invalid.test.ts :: [unhappy-3] whole-duration breaks across different offsets leave both shift and weekly hours at zero",
+    "tests/private/invalid.test.ts :: [unhappy-3] break validation compares with absolute elapsed time rather than written clock duration",
+    "tests/private/invalid.test.ts :: [unhappy-2] a positive one-second shift is valid at matching fractional hour limits",
+    "tests/private/invalid.test.ts :: [unhappy-3] a large negative break is rejected at index zero",
+    "tests/private/invalid.test.ts :: [unhappy-2] a final invalid duration throws even when earlier shifts already breach the policy",
+    "tests/private/invalid.test.ts :: [unhappy-3] a final excessive break throws even when earlier shifts already breach the policy",
+    "tests/private/relations.test.ts :: [happy-3] exactly seven and a half hours of rest is allowed across nonintegral offsets",
+    "tests/private/relations.test.ts :: [happy-3] a rest gap one second short is not rounded up to the policy",
+    "tests/private/relations.test.ts :: [unhappy-1] a fractional overlap coexists with every other rule and output ordering",
+    "tests/private/relations.test.ts :: [unhappy-1] touching shifts also satisfy a zero minimum rest policy",
+    "tests/private/relations.test.ts :: [unhappy-1] fractional overlap measures elapsed intersection without subtracting either break",
+    "tests/private/relations.test.ts :: [unhappy-1] two separated overlap pairs both report using input indexes rather than sorted positions",
+    "tests/private/relations.test.ts :: [happy-3] even a break filling a shift does not add to the rest after its end",
+    "tests/private/relations.test.ts :: [unhappy-1] a contained shift overlaps only for its own duration while both shifts add weekly hours",
+    "tests/private/relations.test.ts :: [unhappy-1] overlap is based on absolute instants even when written clock times have the opposite order",
+    "tests/private/shift-boundaries.test.ts :: [happy-1] fractional shift limits apply to every original index and elapsed time uses both offsets",
+    "tests/private/shift-boundaries.test.ts :: [happy-1] fractional maximum permits equality with different breaks and shorter shifts",
+    "tests/private/shift-boundaries.test.ts :: [happy-1] a single second above the working-hours maximum is reported without rounding",
+    "tests/private/shift-boundaries.test.ts :: [happy-2] a changed break policy reports both missing and just-insufficient breaks at their indexes",
+    "tests/private/shift-boundaries.test.ts :: [happy-2] no break is required at or below a fractional elapsed-hours threshold",
+    "tests/private/shift-boundaries.test.ts :: [happy-2] a break remains due when the existing break puts net hours below the threshold",
+    "tests/private/shift-boundaries.test.ts :: [happy-2] both an exact changed break minimum and a larger break satisfy long shifts",
+    "tests/private/shift-boundaries.test.ts :: [happy-2] one second above break eligibility requires the entire minimum break",
+    "tests/private/shift-boundaries.test.ts :: [happy-1] all per-shift breaches are returned with alphabetic code ordering",
+    "tests/private/shift-boundaries.test.ts :: [happy-1] an empty roster has no working-time violations"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/calendar.test.ts :: [happy-4] weekly totals one second above the limit are not rounded down",
+      "reason": "The reference cannot satisfy it: Expected values to be strictly deep-equal:"
+    },
+    {
+      "id": "tests/private/relations.test.ts :: [happy-3] several unordered shifts retain fractional rest values and a changed minutes limit",
+      "reason": "The reference cannot satisfy it: Expected values to be strictly deep-equal:"
+    },
+    {
+      "id": "tests/private/relations.test.ts :: [happy-3] five scrambled shifts report only consecutive starts even when distant pairs would fail",
+      "reason": "The reference cannot satisfy it: Expected values to be strictly deep-equal:"
+    },
+    {
+      "id": "tests/private/relations.test.ts :: [unhappy-1] touching instants across offsets give zero rest with chronological reversed indexes",
+      "reason": "The reference cannot satisfy it: Expected values to be strictly deep-equal:"
+    },
+    {
+      "id": "tests/private/relations.test.ts :: [happy-3] rest sorts alphabetically with per-shift breaches after earlier-index weekly results",
+      "reason": "The reference cannot satisfy it: Expected values to be strictly deep-equal:"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 28,
+      "total": 30
+    },
+    "hidden": {
+      "passed": 52,
+      "total": 52
+    }
+  }
+}

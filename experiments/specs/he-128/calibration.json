@@ -1,0 +1,49 @@
+{
+  "slug": "he-128",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_even_number_of_negatives",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_example_contains_zero",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_example_empty",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_example_mixed_signs",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_odd_number_of_negatives",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_single_negative_element",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_single_positive_element_is_not_none",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_single_zero",
+    "tests/public/test_prod_signs.py :: TestProdSigns.test_zero_among_nonzero"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 23,
+  "kept": [
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_all_positive_many",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_all_zeros",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_big_integers_exact",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_big_integers_with_zero",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_empty_is_none_but_zero_list_is_not",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_even_negatives_mixed_with_positive",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_four_equal_negatives",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_generated_input_matches_brute_force",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_many_negatives_even_count",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_many_negatives_odd_count",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_multiple_zeros_with_large_values",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_negative_first_then_positive",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_permutation_of_example",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_single_large_negative",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_single_large_positive",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_single_negative_minus_one",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_small_mixed_cases",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_symmetric_range_plus_one_negative",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_symmetric_range_with_zero",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_symmetric_range_without_zero",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_three_equal_negatives",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_zero_last_after_negative",
+    "tests/private/test_prod_signs_private.py :: TestProdSignsPrivate.test_zero_last_after_odd_negatives"
+  ],
+  "dropped": [],
+  "reference": null
+}

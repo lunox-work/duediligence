@@ -1,0 +1,262 @@
+[
+  {
+    "slug": "access-rules",
+    "written": 60,
+    "kept": 60,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 60,
+      "kept": 60
+    }
+  },
+  {
+    "slug": "coalescing-cache",
+    "written": 36,
+    "kept": 36,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 36,
+      "kept": 36
+    }
+  },
+  {
+    "slug": "csv-export",
+    "written": 47,
+    "kept": 47,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 47,
+      "kept": 47
+    }
+  },
+  {
+    "slug": "env-names",
+    "written": 44,
+    "kept": 44,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 44,
+      "kept": 44
+    }
+  },
+  {
+    "slug": "escrow-ledger",
+    "written": 57,
+    "kept": 57,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 57,
+      "kept": 57
+    }
+  },
+  {
+    "slug": "escrow-split",
+    "written": 46,
+    "kept": 46,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 46,
+      "kept": 46
+    }
+  },
+  {
+    "slug": "frame-codec",
+    "written": 62,
+    "kept": 62,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 62,
+      "kept": 62
+    }
+  },
+  {
+    "slug": "gherkin-parse",
+    "written": 47,
+    "kept": 47,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 47,
+      "kept": 47
+    }
+  },
+  {
+    "slug": "gherkin-spec",
+    "written": 40,
+    "kept": 40,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 40,
+      "kept": 40
+    }
+  },
+  {
+    "slug": "invite-codes",
+    "written": 47,
+    "kept": 47,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 47,
+      "kept": 47
+    }
+  },
+  {
+    "slug": "keyed-queue",
+    "written": 52,
+    "kept": 52,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 52,
+      "kept": 52
+    }
+  },
+  {
+    "slug": "licence-scan",
+    "written": 61,
+    "kept": 61,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 61,
+      "kept": 61
+    }
+  },
+  {
+    "slug": "money-format",
+    "written": 53,
+    "kept": 53,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 53,
+      "kept": 53
+    }
+  },
+  {
+    "slug": "name-scan",
+    "written": 42,
+    "kept": 42,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 42,
+      "kept": 42
+    }
+  },
+  {
+    "slug": "patch-apply",
+    "written": 79,
+    "kept": 79,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 79,
+      "kept": 79
+    }
+  },
+  {
+    "slug": "project-names",
+    "written": 31,
+    "kept": 31,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 31,
+      "kept": 31
+    }
+  },
+  {
+    "slug": "promo-stack",
+    "written": 57,
+    "kept": 57,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 57,
+      "kept": 57
+    }
+  },
+  {
+    "slug": "question-limit",
+    "written": 47,
+    "kept": 47,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 47,
+      "kept": 47
+    }
+  },
+  {
+    "slug": "retention-sweep",
+    "written": 60,
+    "kept": 60,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 60,
+      "kept": 60
+    }
+  },
+  {
+    "slug": "reverse-diff",
+    "written": 42,
+    "kept": 42,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 42,
+      "kept": 42
+    }
+  },
+  {
+    "slug": "shift-compliance",
+    "written": 56,
+    "kept": 56,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 56,
+      "kept": 56
+    }
+  },
+  {
+    "slug": "statement-import",
+    "written": 60,
+    "kept": 60,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 60,
+      "kept": 60
+    }
+  },
+  {
+    "slug": "status-normalize",
+    "written": 25,
+    "kept": 25,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 25,
+      "kept": 25
+    }
+  },
+  {
+    "slug": "tool-versions",
+    "written": 77,
+    "kept": 77,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 77,
+      "kept": 77
+    }
+  },
+  {
+    "slug": "usage-counter",
+    "written": 50,
+    "kept": 50,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 50,
+      "kept": 50
+    }
+  },
+  {
+    "slug": "weekly-digest",
+    "written": 83,
+    "kept": 83,
+    "publicFailingOnReference": 0,
+    "recorded": {
+      "written": 83,
+      "kept": 83
+    }
+  }
+]

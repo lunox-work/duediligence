@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "44bdc2f0-eb4c-43da-81a8-f4419699c676",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.18721490000000002,
+        "turns": 6,
+        "durationMs": 36160,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.18721490000000002,
+    "finalText": "I've created the seam at `packages/shared/src/identicon.ts`. It compiles cleanly with `npx tsc -p tsconfig.test.json`, and the existing suite still passes (85 of 85). Nothing else in the repo changed.\n\n- **Exports:** it has exactly the two exports the spec gives: the `Identicon` interface and `identicon(seed): Identicon`. The function body is `throw new Error(\"not implemented\");`. The doc comments only restate the spec.\n- **Code style:** I used the repo's 2-space formatting rather than the spec's 4 spaces.\n- **Parameter name:** it's `_seed`, not `seed`. The repo's base tsconfig turns on `noUnusedParameters`, and its comment says to prefix a parameter that must stay in a signature with `_`. The call signature for callers is the same.\n- **No constants or error types:** the spec names no exported constants (the FNV values are private), and the call never fails.\n- **`index.ts` is not updated yet:** the spec needs `export * from \"./identicon.js\";` in `packages/shared/src/index.ts`, and one scenario tests it. You told me to write only the seam file, so I left it out. Whoever writes the implementation has to add that line, or that scenario will fail.\n\nAdded: `Identicon`, `identicon`",
+    "problem": null,
+    "sha256": "d8df43854e3021ac590cea4d797bff0c585a36e37383d299a3da15f2bbd7fbe9"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5f206f57-7350-441d-89e4-d20363161023",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6348843,
+        "turns": 13,
+        "durationMs": 148758,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.6348843,
+    "finalText": "The test suite is written: `packages/shared/test/identicon-confirmed.test.ts`. It compiles with no errors under `npx tsc -p tsconfig.test.json`. Against the stubbed seam, 23 of its 25 tests fail, as expected. The 2 that pass don't call `identicon`: one checks that the existing entry-point exports still behave as before, and the other checks that the module exports only `identicon`.\n\nTo check the tests themselves, I copied the compiled output to the scratchpad. There I put in a reference implementation of the spec's algorithm and added the `index.js` re-export, and all 25 tests passed. I also confirmed separately that every vector in the spec matches that algorithm. Nothing in the repo changed apart from the new test file.\n\n**Coverage:** each of the 12 scenarios has one happy-path test and one boundary test, keyed `[happy-1..5]`, `[concurrency-1..2]` and `[boundary-1..5]`. The boundary cases are:\n- **Golden seeds (`happy-1`):** the 31-character seed.\n- **Literal face for \"a\" (`happy-2`):** the result is a plain object with a plain array, and neither is frozen.\n- **Shape (`happy-3`):** the shape still holds for the empty seed, a lone surrogate, the 10000-character seed and the degenerate seeds.\n- **Repeated calls (`happy-4`):** changing a returned face doesn't affect the next call.\n- **Earlier calls (`concurrency-1`):** `user-2`, whose centre row is empty, comes out right after the seeds that trigger the centre fix-up.\n- **Async tasks (`concurrency-2`):** tasks finish in a different order from the one they started in, and each still gets its pinned face.\n- **Differing seeds (`boundary-1`):** the NFC and NFD spellings of \"café\" give different faces.\n- **Lone surrogate (`boundary-2`):** a lone low surrogate also hashes as U+FFFD.\n- **Empty seed (`boundary-3`):** a single NUL character doesn't give the same face as the empty seed.\n- **Long seed (`boundary-4`):** 10000 x's give a different face from 9999.\n- **Degenerate hashes (`boundary-5`):** the all-on grid is kept as is.\n- **Package entry point (`happy-5`):** `formatVersion`, `buildInfoSchema` and `handleSchema` behave as before.\n\n**Things the developer should know:**\n- **Re-export test:** `index.ts` doesn't re-export `identicon` yet, so the file reads it through the `../src/index.js` namespace rather than a named import. That keeps it compiling now. The test fails until the `export * from \"./identicon.js\"` line is added.\n- **Extra test:** the spec says the module exports nothing else, so I added a test that its only export is `identicon`.\n- **Formatting:** the literal cells array has a `// prettier-ignore` so it stays in its 5×5 layout.\n\n25 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/identicon-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "794caccc-faa7-41e1-90b3-072905a04170",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1852626000000002,
+        "turns": 18,
+        "durationMs": 281581,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1852626000000002,
+    "finalText": "I wrote the hidden suite in five files under `packages/shared/test/hidden-identicon-confirmed/`. `npx tsc -p tsconfig.test.json` reports no errors, and all 40 tests fail against the current stub.\n\n**Checks against working code:** I copied the package to a scratch folder and added a correct implementation there. All 40 hidden tests and the 25 public tests passed. I then tried eight broken versions, and each one failed hidden tests:\n- **No centre fix-up:** caught.\n- **Fix-up only when `h === 0`:** caught.\n- **Fix-up checking 16 bits instead of 15:** caught, by the `org-276054` seed.\n- **Hashing UTF-16 code units instead of UTF-8:** caught.\n- **NFC normalization:** caught.\n- **`trimEnd`:** caught.\n- **Cutting the seed at 10000 characters:** caught.\n- **A results cache:** caught.\n\nThe repository and the seam were not changed.\n\n**What each file covers:**\n- **`faces.test.ts` (happy-1 to happy-3):**\n  - The golden seeds in reverse order and called again.\n  - New seeds with pinned faces, such as `user-3`, `org-1` and `日本語`.\n  - 1000 more seeds compared with an independent copy of the spec's algorithm. This catches an implementation that just looks up the public seeds.\n  - Seeds whose hue is exactly 0 or 359.\n  - Exact result literals for `user-2` and `\"\"`.\n  - Plain, unfrozen, writable results for edge seeds.\n  - The result's shape across many seeds and every kind of code unit.\n- **`text.test.ts` (boundary-1 to boundary-4):**\n  - Trailing spaces, tabs, newlines and upper case are hashed as written.\n  - Different spellings of Å, 가 and é, plus ß/SS and ﬁ/fi, each keep their own face.\n  - Every code point up to U+07FF and a spread of longer ones.\n  - Lone surrogates in the middle of a seed, a reversed surrogate pair, a valid pair, and a high surrogate at the end.\n  - The empty seed after other calls, and one versus two NUL characters.\n  - 100000-character seeds, including two that differ only in their last or first character, and long seeds with multi-byte characters.\n- **`degenerate.test.ts` (boundary-5):**\n  - Six more seeds whose hash leaves the grid empty, two of them with bit 15 set.\n  - Four more seeds that fill every cell, one with bit 15 clear.\n  - Seeds with a single cell bit (bit 0 or bit 14), whose centre must stay off.\n  - Seeds whose only cell bit is the centre's.\n  - The fix-up keeps the original hue.\n- **`calls.test.ts` (happy-4, concurrency-1, concurrency-2):**\n  - Five calls per seed, each returning a new object and array.\n  - Changing a returned result, in either direction, doesn't affect other results.\n  - Every pinned seed called after every other one.\n  - A single-bit seed right after an empty-grid seed.\n  - 1000 earlier calls.\n  - 400 overlapping async tasks, and 160 tasks resuming in a scrambled order.\n- **`entry.test.ts` (happy-5):**\n  - `identicon` called through `index.js` gives the pinned faces.\n  - Every `build-info` and `jira` export is still on the entry point with the same value.\n  - More existing behaviour, from `build-info` and from the entry point's own schemas.\n  - The entry point gains `identicon` and nothing named like a hash or bit-layout helper. That last check matches export names against a pattern, so it's a heuristic.\n\n40 tests, in 5 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-identicon-confirmed/calls.test.ts",
+      "packages/shared/test/hidden-identicon-confirmed/degenerate.test.ts",
+      "packages/shared/test/hidden-identicon-confirmed/entry.test.ts",
+      "packages/shared/test/hidden-identicon-confirmed/faces.test.ts",
+      "packages/shared/test/hidden-identicon-confirmed/text.test.ts"
+    ],
+    "open": []
+  }
+}

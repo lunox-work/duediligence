@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b2f-a0d6-7501-aa8b-c0e2f1ea7a8b",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 62711,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "8 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_mean_absolute_deviation.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b30-97ff-7dd2-9c11-e767a9890ff7",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 152582,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "22 tests in 1 file. Compilation passed; all fail against the stub and pass an exact-arithmetic oracle.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_mean_absolute_deviation.py"
+    ],
+    "open": []
+  }
+}

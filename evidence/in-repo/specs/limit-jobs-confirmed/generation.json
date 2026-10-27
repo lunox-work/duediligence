@@ -1,0 +1,67 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "92a4a070-ea67-4101-95f3-82920a692cf5",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.20820629999999998,
+        "turns": 8,
+        "durationMs": 47755,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.20820629999999998,
+    "finalText": "I created `apps/worker/src/evaluation/limit.ts` with the two exports the spec lists, and nothing else. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (120 tests, 0 failures). It's the only new file besides the `spec.md` that was already there.\n\n- **`EVALUATION_JOBS_MAX`** is exported with the value `2`, not declared, so tests can import it.\n- **`limitJobs(provider, max): EvaluationProvider`** reuses the existing `EvaluationProvider` type from `sandbox-factory`, so the limited job is the existing `EvaluationJob` with no new type. Its body is just `throw new Error(\"not implemented\");`. The doc comment uses the spec's wording and adds what the spec says about failures:\n  - `limitJobs` never throws for any `max`.\n  - `create` rejects with the inner `create`'s error, or with `signal.reason` if the signal aborts before the call is admitted.\n  - A limited job's `destroy` rejects with the inner `destroy`'s error.\n- **Parameter names:** the compiler rejected `provider` and `max` as unused parameters, so they're named `_provider` and `_max`. Callers pass arguments by position, so this doesn't change the contract, but the doc comment still says `max`.\n\nExported names added: `EVALUATION_JOBS_MAX`, `limitJobs`",
+    "problem": null,
+    "sha256": "c014ff26a8dbe376f2706447f9a9b56911e2794c98226fa8743d446e8df23c66"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "c2451265-684f-49eb-ad4b-86727145e03b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.4160095,
+        "turns": 1,
+        "durationMs": 974291,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.4160095,
+    "finalText": "The background check that just got stopped was my first round of broken-implementation runs, the one that hung. It's out of date and doesn't need restarting. That hang is what made me change the tests to settle first and then check state. After the change, the full round ran in the foreground with nothing hanging: the reference implementation passed every test and all seven broken versions were caught, as reported above.\n\nThe result hasn't changed: 54 tests, in 1 file (`apps/worker/test/limit-jobs-confirmed.test.ts`).",
+    "problem": null,
+    "files": [
+      "apps/worker/test/limit-jobs-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "14768b01-8deb-4e8f-9090-53cebbf26404",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.6741479000000004,
+        "turns": 19,
+        "durationMs": 381366,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.6741479000000004,
+    "finalText": "I wrote the hidden suite in `apps/worker/test/hidden-limit-jobs-confirmed/limit-jobs.test.ts`. It type-checks cleanly with `npx tsc -p tsconfig.test.json`, and all 46 tests fail against the current interface with `Error: not implemented`.\n\n**Coverage.** Every scenario in the spec (happy 1–5, boundary 1–7, unhappy 1–6, concurrency 1–9) has at least one extra test. Each test starts with its scenario key and has a comment above it naming the public test it extends. The helpers are the public suite's own fake provider, fake job, `track`/`settle` and `open`/`close`, plus a `closeRejecting` helper. All tests are flat `node:test` tests using `assert/strict`. The shortcuts these tests target, which the public suite lets through:\n- **Max values:** returning the provider itself when `max` is `Infinity`; names and maxes other than the visible ones; a looser wrap around a `max 0` provider.\n- **Job forwarding:** `id`/`environment` values other than the fixture's; several calls in flight resolved out of order; two jobs that must each forward to their own inner job.\n- **Admission and slots:**\n  - an already-aborted create taking the *last* free slot and then holding it;\n  - a create admitted from the queue being rejected when its signal aborts later;\n  - abort listeners left on the signal after admission or rejection;\n  - destroying a job three times, or once more after its slot was handed on, or rejecting then resolving;\n  - with overlapping destroys, the slot is freed when the *second* inner destroy settles first.\n- **Failure paths:**\n  - repeated inner create rejections, and synchronous throws of non-Error values, leaving the count too high or too low;\n  - the default `AbortError` reason, compared by identity;\n  - an already-aborted create queued behind an existing waiter.\n- **Queue order:** strict first-in-first-out across six waiters, with slots freed by a destroy, by a rejecting create and by a rejecting destroy; creates called right after a destroy that rejected.\n- **Separate and nested limiters:** three limited providers with caps 1, 2 and 0 over one inner provider; using the outer and inner wraps of a double wrap side by side.\n\n**Checks.** I wrote a reference implementation in the scratchpad, outside the repo, and ran the compiled tests against it: 100/100 pass, public and hidden together. I also tried a few shortcut implementations that pass the public suite but break the spec. Each one failed at least one hidden test:\n- keeping the abort listener after admission;\n- freeing the slot only when the first `destroy` call settles;\n- returning the provider unchanged when `max` is `Infinity`;\n- miscounting after a synchronous throw;\n- ignoring an abort when `max` is 0.\n\n**Not tested, because the spec leaves them open:**\n- what `max` values of `1.5`, `NaN` or `-1` admit (only \"does not throw\" is checked);\n- whether the spec object passed to the inner `create` is the same object;\n- what `this` the inner job's functions are called with.\n\n46 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/worker/test/hidden-limit-jobs-confirmed/limit-jobs.test.ts"
+    ],
+    "open": []
+  }
+}

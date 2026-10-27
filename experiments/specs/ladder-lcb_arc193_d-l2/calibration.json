@@ -1,0 +1,33 @@
+{
+  "slug": "ladder-lcb_arc193_d-l2",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_magnets.py :: TestMagnets.test_all_pairs_n3_brute_force",
+    "tests/public/test_magnets.py :: TestMagnets.test_already_equal",
+    "tests/public/test_magnets.py :: TestMagnets.test_already_equal_with_gap",
+    "tests/public/test_magnets.py :: TestMagnets.test_cannot_split_pieces",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_from_both_sides",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_three_into_end",
+    "tests/public/test_magnets.py :: TestMagnets.test_merge_three_into_middle",
+    "tests/public/test_magnets.py :: TestMagnets.test_move_across_left_to_right",
+    "tests/public/test_magnets.py :: TestMagnets.test_move_across_right_to_left",
+    "tests/public/test_magnets.py :: TestMagnets.test_multiple_cases_hand_derived",
+    "tests/public/test_magnets.py :: TestMagnets.test_piece_at_chosen_square_stays",
+    "tests/public/test_magnets.py :: TestMagnets.test_pull_both_ends_inward",
+    "tests/public/test_magnets.py :: TestMagnets.test_random_small_brute_force",
+    "tests/public/test_magnets.py :: TestMagnets.test_single_shift_right",
+    "tests/public/test_magnets.py :: TestMagnets.test_smallest_input"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 15
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

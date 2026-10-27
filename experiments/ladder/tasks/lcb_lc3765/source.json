@@ -1,0 +1,15 @@
+{
+  "from": "lcb-leetcode-3765",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3765",
+  "contest_id": "biweekly-contest-153",
+  "contest_date": "2025-03-29T07:30:00",
+  "difficulty": "hard",
+  "title": "minimum-cost-to-divide-array-into-subarrays",
+  "kind": "functional",
+  "fn_name": "minimumCost",
+  "publicCases": 2,
+  "privateCases": 40
+}

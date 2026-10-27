@@ -1,0 +1,23 @@
+{
+  "name": "repo",
+  "repo": "evidence/in-repo-pathe/checkout/pathe",
+  "base": "c885fe6adf89b7e54b445a219d54f7602ca92e84",
+  "package": ".",
+  "packageManager": "pnpm@9.15.2",
+  "buildFirst": [],
+  "runner": "vitest",
+  "testDir": "test",
+  "testPattern": "*.spec.ts",
+  "build": "tsc -p tsconfig.json --noEmit",
+  "hiddenDir": "test/hidden-pathe-basename-trailing",
+  "seam": [
+    "src/path.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ],
+  "examples": [
+    "test/index.spec.ts",
+    "test/utils.spec.ts"
+  ]
+}

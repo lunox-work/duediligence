@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "400ff05a-c503-472a-9c83-9cc3cec07943",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3289131,
+        "turns": 9,
+        "durationMs": 75355,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.3289131,
+    "finalText": "I wrote the public suite in `tests/public/test_maximize_distance.py`, one `unittest` class with one method per case.\n\n**No samples:** `spec.md` contains no Sample Input/Output blocks, so there were no statement samples to turn into tests. I worked out every expected answer by hand instead, and the comments say how.\n\n**Checking:** For each small case (at most 4 edges), an exhaustive brute force in the scratchpad tried every choice of K edges and agreed with my answer. That brute force is not part of the suite.\n\n**Cases:**\n- **Smallest input:** N=2 with one edge 1→2 and K=1, answer 1.\n- **Exactly K edges:** these show the K weights can't simply be left off. With two parallel edges 1→2 and K=1 the answer is 0; with K=2 it is 1. A graph with three edges where two don't lie on any 1→N path also has answer 1, because the rest of K can go on edges that don't matter.\n- **Small structures:** a 2-edge path (K=1 and 2), a triangle with a shortcut 1→3 (K=1, 2, 3), and two separate 2-edge paths from 1 to 4 (K=2, 3, 4).\n- **Largest sizes:**\n  - N=30 with a single edge 1→30.\n  - 100 parallel edges 1→30, with K=99 (answer 0) and K=100 (answer 1).\n  - A 30-vertex chain of 29 forward edges plus 71 backward edges, so M=100, with K=28, 29 and 100 (answers 28, 29, 29). Every route from 1 to 30 has to use all 29 forward edges, so the answer is the number of forward edges that get weight 1. The comments spell this out, and I checked that each chain input stays within the constraints.\n\n**Results:** `python3 sandbox/compile_check.py` reports no errors. `python3 sandbox/run.py public` shows 0/18 passing; each test fails with a Runtime Error because `src/main.py` still raises, which is expected. I deleted the `__pycache__` folders my own checks had created, so the only file I added is the test file.\n\n18 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_maximize_distance.py"
+    ]
+  }
+}

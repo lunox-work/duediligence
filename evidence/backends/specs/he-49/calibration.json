@@ -1,0 +1,67 @@
+{
+  "slug": "he-49",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_modp.py :: TestModp.test_even_composite_modulus",
+    "tests/public/test_modp.py :: TestModp.test_example_exponent_one_hundred",
+    "tests/public/test_modp.py :: TestModp.test_example_large_exponent",
+    "tests/public/test_modp.py :: TestModp.test_example_power_below_modulus",
+    "tests/public/test_modp.py :: TestModp.test_example_three_modulo_five",
+    "tests/public/test_modp.py :: TestModp.test_example_zero_exponent",
+    "tests/public/test_modp.py :: TestModp.test_large_even_exponent",
+    "tests/public/test_modp.py :: TestModp.test_large_power_requires_exact_remainder",
+    "tests/public/test_modp.py :: TestModp.test_modulus_one",
+    "tests/public/test_modp.py :: TestModp.test_power_equal_to_modulus",
+    "tests/public/test_modp.py :: TestModp.test_smallest_positive_exponent",
+    "tests/public/test_modp.py :: TestModp.test_typical_remainder",
+    "tests/public/test_modp.py :: TestModp.test_zero_exponent_with_modulus_one"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 30,
+  "kept": [
+    "tests/private/test_modp.py :: TestModpPrivate.test_even_composite_exponent_equal_to_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_even_composite_with_repeated_prime_factor",
+    "tests/private/test_modp.py :: TestModpPrivate.test_exponent_equal_to_odd_composite",
+    "tests/private/test_modp.py :: TestModpPrivate.test_exponent_equal_to_odd_prime",
+    "tests/private/test_modp.py :: TestModpPrivate.test_four_modulo_five",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_even_exponent_modulo_five",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_even_exponent_modulo_nine",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_exponent_modulo_one",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_exponent_other_prime",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_exponent_preceding_example",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_odd_exponent_modulo_three",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_power_below_large_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_large_power_odd_composite",
+    "tests/private/test_modp.py :: TestModpPrivate.test_larger_power_equal_to_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_modulus_one_above_large_power",
+    "tests/private/test_modp.py :: TestModpPrivate.test_one_hundred_other_prime",
+    "tests/private/test_modp.py :: TestModpPrivate.test_one_modulo_one",
+    "tests/private/test_modp.py :: TestModpPrivate.test_one_modulo_two",
+    "tests/private/test_modp.py :: TestModpPrivate.test_one_with_large_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_power_above_power_of_two_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_power_below_power_of_two_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_power_far_beyond_float_range",
+    "tests/private/test_modp.py :: TestModpPrivate.test_power_one_below_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_three_modulo_seven",
+    "tests/private/test_modp.py :: TestModpPrivate.test_two_modulo_one",
+    "tests/private/test_modp.py :: TestModpPrivate.test_typical_remainder_larger_inputs",
+    "tests/private/test_modp.py :: TestModpPrivate.test_zero_exponent_even_composite",
+    "tests/private/test_modp.py :: TestModpPrivate.test_zero_exponent_large_modulus",
+    "tests/private/test_modp.py :: TestModpPrivate.test_zero_exponent_modulo_two",
+    "tests/private/test_modp.py :: TestModpPrivate.test_zero_exponent_power_of_two_modulus"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 13,
+      "total": 13
+    },
+    "hidden": {
+      "passed": 30,
+      "total": 30
+    }
+  }
+}

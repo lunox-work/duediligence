@@ -1,0 +1,51 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176f2-b724-71f1-9581-8fd712999c77",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 97635,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added `tests/public/status.test.ts`, covering all six scenarios and their boundaries. Build passes with `npm run build -- --noEmit`.\n\n13 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/status.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176f4-3659-7402-906e-2940b1105e92",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 17,
+        "durationMs": 387546,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "36 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/read-status.test.ts",
+      "tests/private/read-statuses.test.ts",
+      "tests/private/write-status.test.ts"
+    ],
+    "open": []
+  }
+}

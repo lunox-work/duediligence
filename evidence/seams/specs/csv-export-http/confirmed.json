@@ -1,0 +1,31 @@
+{
+  "sha256": "6b4432449d378576d47d22e2e94307fd3f23e5c524971c40d99c05728a0edf6a",
+  "by": "phase-6 agent (not a person)",
+  "at": "2026-10-26T16:41:30.524Z",
+  "startedAt": "2026-10-26T16:41:27.845Z",
+  "minutes": 0,
+  "decided": [
+    "The CSV is served at `POST /requisitions.csv` with the requisitions as a JSON array body; the answer is 200 with `text/csv; charset=utf-8` and `Content-Disposition: attachment; filename=\"requisitions.csv\"`.",
+    "`createdAt` is an ISO 8601 time with seconds and `Z` or an offset; anything else, or a time that does not exist, is invalid; the date written is the UTC date.",
+    "Rows are ordered by creation time, then by id compared as strings.",
+    "A bad requisition is a 422 with a JSON body naming the first bad requisition's id in request order; nothing of the CSV is sent.",
+    "A body that is not an array of objects with a string `id` is a 400 with a JSON `error`.",
+    "Other methods on the path are 405 with `Allow: POST`; other paths 404.",
+    "The quoting rule applies to every field, the id included; the formula rule to the title only."
+  ],
+  "drafted": [
+    "The CSV is served at `POST /requisitions.csv` with the requisitions as a JSON array body; the answer is 200 with `text/csv; charset=utf-8` and `Content-Disposition: attachment; filename=\"requisitions.csv\"`.",
+    "`createdAt` is an ISO 8601 time with seconds and `Z` or an offset; anything else, or a time that does not exist, is invalid; the date written is the UTC date.",
+    "Rows are ordered by creation time, then by id compared as strings.",
+    "A bad requisition is a 422 with a JSON body naming the first bad requisition's id in request order; nothing of the CSV is sent.",
+    "A body that is not an array of objects with a string `id` is a 400 with a JSON `error`.",
+    "Other methods on the path are 405 with `Allow: POST`; other paths 404.",
+    "The quoting rule applies to every field, the id included; the formula rule to the title only."
+  ],
+  "changes": {
+    "kept": 7,
+    "edited": [],
+    "added": [],
+    "removed": []
+  }
+}

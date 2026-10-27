@@ -1,0 +1,31 @@
+{
+  "slug": "lcb-atcoder-abc400_e",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_public.py :: TestPublic.test_exactly_100",
+    "tests/public/test_public.py :: TestPublic.test_just_below_100",
+    "tests/public/test_public.py :: TestPublic.test_just_below_largest_a",
+    "tests/public/test_public.py :: TestPublic.test_largest_a",
+    "tests/public/test_public.py :: TestPublic.test_max_q_max_a",
+    "tests/public/test_public.py :: TestPublic.test_prime_power_square_skipped",
+    "tests/public/test_public.py :: TestPublic.test_sample_1",
+    "tests/public/test_public.py :: TestPublic.test_small_range_brute_force",
+    "tests/public/test_public.py :: TestPublic.test_smallest_a",
+    "tests/public/test_public.py :: TestPublic.test_three_primes_square_skipped"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 10
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

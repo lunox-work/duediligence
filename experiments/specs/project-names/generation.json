@@ -1,0 +1,68 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "f0d8325d-8d04-4e04-ae20-27352350fd2e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.10472859999999999,
+        "turns": 4,
+        "durationMs": 20512,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.10472859999999999,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors.\n\nThe spec describes each organization's registry as something that holds state, so the contract is one class:\n\n- **`new NameRegistry(key: string)`** creates a registry with its secret key. Its doc comment says it throws if the key is empty.\n- **`registry.name(taskId: string): string`** returns the task's name. The doc comment covers what the spec says: the name is \"project-\" plus the first four digest characters, the same task always gets the same name, the task named first keeps its name, and on a clash the suffix grows two characters at a time until the name is free. It throws if the task id is empty.\n\nThe key is passed to the constructor and nothing is read from the environment. I didn't export a separate digest function, because none of the scenarios need one to be run.\n\nRunning the build also created `src/index.js` as compiler output. `.gitignore` already excludes it, and I didn't change anything else.\n\nExports: `NameRegistry`",
+    "problem": null,
+    "sha256": "b831e79b0873967c65dd8c076d3e8434242586dc12edc2b85da5f79ef091fa81"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "93d3c397-9506-44c5-bbae-6e22017ad30f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.275225,
+        "turns": 7,
+        "durationMs": 70833,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.275225,
+    "finalText": "I wrote 14 tests in `tests/public/`, two for each of the spec's seven scenarios. `npm run build` reports no errors. When run against the stubs, 13 fail on `not implemented`, as expected.\n\nOne test already passes: \"a registry needs a key\" checks only that `new NameRegistry(\"\")` throws, and the stub constructor throws on every call. The spec says only \"fails with an error,\" so the test can't check for anything more specific. It will keep passing once the constructor is implemented, so it only becomes meaningful then.\n\nI checked every expected name against Node's own HMAC-SHA256, including the three names the spec gives (`project-63a9`, `project-139a`, `project-139a1f`). The tests don't depend on `crypto`: the expected values are written into them as fixed strings.\n\n| Scenario | Happy path | Boundary case |\n|---|---|---|\n| Name is `project-` + 4 digest characters | `task-1` → `project-63a9` | Leading zeros are kept: `task-32` → `project-0022` |\n| Same task, same name | `task-1` named twice | `task-136` keeps its longer name `project-139a1f` when named again |\n| Collision gets a longer suffix | `task-81`, then `task-136` → `project-139a1f` | Suffix goes from 6 to 8 characters, never 7: `task-35411` → `project-674e`, `task-1803` → `project-674ea8`, `task-9602` → `project-674ea80c` |\n| First-named task keeps its name | `task-81` stays `project-139a` | Reversed order: `task-136` keeps `project-139a` and `task-81` gets `project-139a12` |\n| Organizations are independent | Both registries can hold `project-139a` | Names taken in one registry never lengthen a suffix in the other |\n| A registry needs a key | `\"\"` throws | The one-character key `\"k\"` works: `task-1` → `project-1380` |\n| A task needs an id | `\"\"` throws | The one-character id `\"x\"` → `project-dd25` |\n\nThe tests are split into `naming.test.ts`, `collisions.test.ts` and `validation.test.ts`. The build compiled `.js` files into `src/` and `tests/public/`, and I deleted them afterwards, so nothing outside `tests/public/` was changed.\n\n14 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/collisions.test.ts",
+      "tests/public/naming.test.ts",
+      "tests/public/validation.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "c1e733f4-2c56-4fcf-a2a0-2be08f6bc842",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6071312000000001,
+        "turns": 11,
+        "durationMs": 179877,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.6071312000000001,
+    "finalText": "I've written the hidden suite in `tests/private/`: `naming.test.ts`, `collisions.test.ts` and `validation.test.ts`. `npm run build` reports no errors. Against the stub interface, all 31 tests fail. To check the tests themselves, I ran them in a scratch copy against a simple implementation of the spec, and all 31 private tests plus the 14 public ones passed. `src/` and `tests/public/` are unchanged; I deleted the `.js` files my build check produced.\n\n**Collision data.** The spec's examples stop at eight-character names. I searched for task ids under `\"org-secret\"` whose digests all start with `16d4`, branching further at the sixth and eighth characters. That gives a chain that reaches a ten-character name, `project-16d458e76f`.\n\n**Shortcuts the suite catches** (each passes the public suite but gets the spec wrong):\n- **Suffix capped at eight characters, or a hard-coded number of steps:** the chain has to reach ten characters.\n- **Suffix length worked out from how many earlier tasks share the first four characters:** four tasks share `16d4` but differ by the sixth character, so each should get six characters, not 6, 8, 10…\n- **Checking other tasks' digests instead of the names they actually hold:** a second task whose digest shares six characters with an earlier task's should still get the six-character name, because the earlier task only holds four.\n- **Hard-coded names or a fixed key:** other keys (`\"k\"`, `\"acme-key\"`, a 100-character key, a single space) and 150 task ids computed with `node:crypto`. Under key `\"k\"`, the pair that collides under `\"org-secret\"` does not collide.\n- **Assuming a fixed order:** collision groups named in reverse order and named again; three registries sharing one key; registries with different keys.\n- **Errors leaving the registry in a bad state:** each failure test also checks the registry still works afterwards and that the failed call took no name. That is also why these tests fail against the stub, since the spec gives no error message to check.\n\nOne judgement call: I treat a key or task id of a single space as not empty, so it must be accepted and named. The spec only rules out empty values, but an implementation that trims whitespace would fail these two tests.\n\n31 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/collisions.test.ts",
+      "tests/private/naming.test.ts",
+      "tests/private/validation.test.ts"
+    ],
+    "open": []
+  }
+}

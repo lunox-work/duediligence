@@ -1,0 +1,41 @@
+{
+  "from": "invite-codes",
+  "spec": {
+    "sessionId": "400774ad-aa8d-4712-a65a-1a787f167350",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.635401,
+    "turns": 5,
+    "durationMs": 164509,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `spec.md`. It has 42 scenarios across 12 rules, each tagged with its kind, and ends with the `Decided:` list (21 entries). It uses only the names in `src/index.ts`, which I left unchanged. Every check was done by reading it through; there are no tests or implementation yet to run it against.\n\nThe decisions that most shape the implementation:\n\n- **Codes:** 8 characters from `ABCDEFGHJKLMNPQRSTUVWXYZ23456789`, returned as plain uppercase like `ABCD2345`. Each character is one `randomInt(32)` call, taken left to right, so scenarios can give exact inputs and exact codes.\n- **Duplicate codes:** a code must be unique across every task and state. A clash is redrawn, up to 10 attempts, after which `create` fails with \"could not generate a unique code\".\n- **Expiry:** a code expires exactly 14 × 24 hours after creation. At the exact `expiresAt` instant it already counts as expired.\n- **Typing a code:** `redeem` and `revoke` strip whitespace and `-` and uppercase the rest. Anything that still doesn't match a code returns reason `\"unknown\"` rather than throwing.\n- **Failure reasons:** checked in the order unknown, used, revoked, expired, already has access. An \"already has access\" failure leaves the code unused, so someone else can still redeem it.\n- **State in `list`:** used, then revoked, then expired, then unused. A used code stays \"used\" after it expires, and access is never taken away.\n- **Overlapping calls:** each registry runs its calls one at a time in the order they were made. So when two people redeem the same code at once, whoever called first wins, and a failed call doesn't hold up the ones behind it.\n- **Store:** the registry keeps everything in the store, so a new registry over the same store sees earlier codes and access. If a store call fails, the operation fails with that same error and nothing changes. Using two registries on one store at the same time is explicitly unsupported.\n- **Errors:** methods never throw directly; bad arguments give a rejected promise with a `TypeError` and an exact message, checked before the clock, `randomInt` or store is touched.\n\nOne small deviation from your format: scenarios that share a rule use a plain `Scenario:` with an `Examples:` table rather than `Scenario Outline:`. Current Gherkin accepts that."
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "6716cd1b-fe46-4b17-9bed-f6da58623aa9",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.867129,
+        "turns": 16,
+        "durationMs": 520655,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.867129,
+    "finalText": "I've written the public test suite: 84 tests in four files under `tests/public/`, two for each of the spec's 42 scenarios. `npm run build` reports no errors, and against the current stub all 84 fail with `Error: not implemented`, as expected.\n\n**Files:**\n- `codes.test.ts`: code format, redraws on repeats, the 14-day expiry, and invalid clock values (20 tests).\n- `redeem-revoke.test.ts`: how typed codes are read, redemption, failure reasons and their order, and revoke (28 tests).\n- `access-list-arguments.test.ts`: `hasAccess`/`tasksFor`, `list`, argument checks and the constructor (18 tests).\n- `store-concurrency.test.ts`: state kept only in the store, store failures, and overlapping calls (18 tests).\n\n**Structure:** For each scenario there's one test that follows it as written (outlines run all their examples), plus one named `[key] boundary: …` that tests an edge, such as a time 1 ms before or exactly at expiry, a bad value on the 8th draw, or sorting by UTF-16 code units.\n\n**Test doubles:** each test builds its own in-memory store, settable clock and queued `randomInt`.\n- **Store:** delays are counted in `setImmediate` ticks, not timers. One mode makes later calls finish before earlier ones, to expose calls that aren't run one at a time.\n- **Store values:** the store hands back exactly the object it was given. An implementation that changes that object in place before a failed `set` will fail the \"store failure changes nothing\" tests.\n- **Shared helpers:** the setup code is copied at the top of each file, because a separate helper file would also need to end in `.test.ts`.\n\n**How I checked the tests:**\n- **Reference implementation:** I wrote a throwaway one in the scratchpad, not in `src/`. All 84 tests passed against it.\n- **Missing queue:** with its call queue removed, 7 concurrency tests failed, so they do catch that bug.\n- **Cleanup:** running the build creates `src/index.js` and `.js` files next to the tests. I deleted them, so `src/` holds only `index.ts`. `npm test` rebuilds them.\n\n84 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/access-list-arguments.test.ts",
+      "tests/public/codes.test.ts",
+      "tests/public/redeem-revoke.test.ts",
+      "tests/public/store-concurrency.test.ts"
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "d7bce31e-0034-437f-a870-5137559f88dc",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.21302480000000001,
+        "turns": 5,
+        "durationMs": 56716,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.21302480000000001,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finishes with no errors. The build also produces `src/index.js`, which I deleted so that `src/index.ts` is the only file written.\n\nHow the contract is shaped:\n- **Handler:** `createEscrowHandler(task, store)` returns an object with `handle(event)`, which resolves to the task's escrow state after handling. I used a factory function rather than a class.\n- **Store:** it holds one task's record, with `get(): Promise<EscrowState | undefined>` and `set(state): Promise<void>`. It resolves to `undefined` when nothing has been saved yet. Tests can see what was recorded by looking at what was passed to `set`, or at what `handle` returns.\n- **Task:** `EscrowTask` is `{ bounty, hiddenTestShareBps? }`. The default of 7500 is only stated in a doc comment and is left for the implementation to apply.\n- **Releases:** `EscrowState` is `{ status, releases }`. Each `Release` is `{ kind: \"hidden-tests\" | \"uat\", amount }`. Amounts are `number`, and the doc comment requires them to be exact up to `Number.MAX_SAFE_INTEGER`.\n- **Rounding:** `splitBounty(bounty, hiddenTestShareBps)` lets a test check the rounding scenario (999 splits into 749 and 250) without sending events.\n- **Errors:** `handle`'s doc comment says it rejects in two cases. One is `\"uat-approved\"` arriving before the hidden-test share was released, with an error saying the hidden tests have not passed. The other is the store rejecting, in which case it rejects with the store's own error. I didn't add any error classes.\n\nTwo choices to know about:\n- **Event ids:** the stored state does not include handled event ids. Every repeat case in the spec (\"money moves once\") can be decided from the recorded releases. An implementation that wants to remember ids has to do it outside the state type.\n- **Behaviour the spec doesn't define:** these are left undefined in the contract too, so the test writers and the implementer may disagree on them:\n  - a second `\"uat-approved\"` after the task is fully released\n  - `\"uat-approved\"` on a pro bono task\n  - bounty or share values out of range\n\nExports: `EscrowEventKind, EscrowEvent, EscrowTask, EscrowStatus, ReleaseKind, Release, EscrowState, EscrowStore, BountySplit, EscrowHandler, splitBounty, createEscrowHandler`",
+    "problem": null,
+    "sha256": "bb1cd295150a7f913243a5ab623a9b126c35c3f026e1c7ac06ca8da7aaf8ea34"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "a1d92812-0357-44a5-98d9-b7e4922fd3e7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6243614000000001,
+        "turns": 9,
+        "durationMs": 179865,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.6243614000000001,
+    "finalText": "I've written the public test suite in `tests/public/`. Every one of the 9 scenarios has a happy-path test and at least one boundary test, keyed `[happy-1]` through `[recovery-1]` in spec order. The type-check reports no errors. I ran it with `tsc --noEmit` rather than `npm run build`, because the build writes `.js` files next to the sources, including `src/index.js`, which is outside `tests/public/`. I didn't touch `src/`, `package.json`, `tsconfig.json` or `sandbox/`.\n\nTo check the tests themselves, I ran them against a throwaway implementation in a copy of the project in the scratchpad. All 22 pass against a correct one. Against one with no locking, only the 3 tests for two deliveries at the same moment fail, as they should.\n\n- **`split.test.ts`** (boundary-1): 999 at 7500 bps splits into 749 and 250. A bounty of `Number.MAX_SAFE_INTEGER` splits exactly at 7500, 3333 and 9999 bps (expected values computed with BigInt). Shares of 0 and 10000 bps give everything to one side. The handler releases 749 and then 250 for a bounty of 999.\n- **`release.test.ts`** (happy-1, happy-2, unhappy-1, unhappy-2, boundary-2): the share release, including a 1 bps share. UAT releasing the rest, including from a new handler over the same store with an odd balance. A failed run recording nothing, including after the share was released. UAT before the hidden tests pass being refused, including after a failed run. A bounty of 0 never recording a release.\n- **`once.test.ts`** (concurrency-1, concurrency-2, recovery-1): repeated events, the same or a different id, after a partial or full release. Two deliveries at the same moment with the same or different ids, for both kinds of event, over a store that waits a few ticks before resolving. A save that fails, whether it carried the share or the UAT release, followed by a retry that succeeds.\n\nDecisions the developer should know about:\n\n- **Counting saves:** with only the final stored state, a version with no locking still passes, because both racing saves write the same state. So the three tests for two deliveries at the same moment also require exactly one `set` call to carry the release. An implementation that saves the same state again on a repeat would fail these, though the spec doesn't strictly forbid that.\n- **Ambiguous cases avoided:**\n  - Tests don't say whether a repeated event resolves or rejects; they only check what gets recorded.\n  - No test depends on whether a release of 0 gets recorded, or on what status a 0-bounty task has after a failed run.\n  - The refusal message is matched loosely: `/hidden[ -]tests? ha(ve|s) not passed/i`.\n\n22 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/once.test.ts",
+      "tests/public/release.test.ts",
+      "tests/public/split.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "d05206e1-a3ae-48ca-96cf-bcdce1af2f04",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.6324084,
+        "turns": 16,
+        "durationMs": 464591,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.6324084,
+    "finalText": "I wrote 46 tests in 4 files under `tests/private/`. `npm run build` reports no errors, and all 46 fail against the current stubs with `not implemented`.\n\nTo check that the tests reject shortcuts and not correct code, I worked in a scratchpad copy. Nothing in `src/` was changed. A correct reference implementation passed all 22 public and all 46 private tests. Then I tried shortcut implementations that each pass the full public suite, and each one fails at least one private test:\n\n- **Explicit share of 0:** `hiddenTestShareBps || 7500` treats a share of 0 as the default.\n- **Rounding:** rounding to the nearest unit instead of down.\n- **Floating-point share:** computing the amount as `bounty * (bps / 10000)`, which gets 28 instead of 29 for 2900 bps of 100.\n- **UAT amount:** working out the UAT release from the remaining share instead of `bounty − hidden`.\n- **Bounty of 0:** reporting a bounty-0 task as \"locked\" after a failed run.\n- **Failed run:** a lock that only covers the same event kind, while a failed run also saves. A failed run handled at the same time as a pass or a UAT approval then wipes out the release.\n- **Stale memory:** a handler that keeps the escrow state in memory and releases the rest again after another handler over the same store already did.\n- **Rejected save:** changing the object the store hands out, so a rejected save still changes what is stored.\n\nThe build writes `.js` files next to every `.ts` file. I deleted them, so the tree holds only the source files plus the four new test files.\n\nSome assertions go beyond the scenario text, so the grader may want to check them:\n- **Rejected read:** a rejected `get` is treated like a rejected `set`. This comes from the `handle` doc comment in `src/index.ts`, not from the spec's scenario.\n- **Shared store object:** one recovery test uses a store whose `get` returns the stored object itself rather than a copy.\n- **Save counts:** like the public suite, the concurrency tests count every save that carries a release as recording it.\n- **Repeated events:** a repeated event may resolve or reject. If it resolves, its value is checked as the escrow afterwards.\n\n46 tests, in 4 files.\n\nOpen in the spec:\n- `[unhappy-2] UAT approval on a locked task is refused and records nothing`: the spec only says the error \"says the hidden tests have not passed\". This test requires the message to match `/hidden[ -]tests? ha(ve|s) not passed/i`, which rejects wording such as \"have not yet passed\".\n- `[unhappy-2] UAT approval after a failed hidden-test run is still refused`: it uses the same check, so the same question about the exact wording applies.",
+    "problem": null,
+    "files": [
+      "tests/private/once.test.ts",
+      "tests/private/recovery.test.ts",
+      "tests/private/release.test.ts",
+      "tests/private/split.test.ts"
+    ],
+    "open": [
+      "`[unhappy-2] UAT approval on a locked task is refused and records nothing`: the spec only says the error \"says the hidden tests have not passed\". This test requires the message to match `/hidden[ -]tests? ha(ve|s) not passed/i`, which rejects wording such as \"have not yet passed\".",
+      "`[unhappy-2] UAT approval after a failed hidden-test run is still refused`: it uses the same check, so the same question about the exact wording applies."
+    ]
+  },
+  "notes": {
+    "sessionId": "0b6717ce-b7ea-4051-b3b9-0e57b6c768fb",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.25282190000000004,
+    "turns": 3,
+    "durationMs": 46926,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `notes.md` with rules and examples for `splitBounty` and for how the handler deals with each event type, a zero bounty, repeated events, events arriving at the same time, and store failures.\n\nA few details the tests pin down that the ticket doesn't make obvious:\n- **Saved state:** the state written to the store can only hold `status` and `releases`. So the handler can't store event ids to spot duplicates, and a new handler over the same store has to pick up where the last one left off.\n- **Concurrent duplicates:** when the same event arrives twice at once, the second call must not save anything, not even an unchanged state.\n- **Large bounties:** `splitBounty` must be exact up to `Number.MAX_SAFE_INTEGER`, so ordinary floating-point maths won't do.\n- **Store errors:** when a save fails, `handle` must reject with the store's own error object, and retrying the same event must then work.\n\n29 bullets.",
+    "problem": null
+  }
+}

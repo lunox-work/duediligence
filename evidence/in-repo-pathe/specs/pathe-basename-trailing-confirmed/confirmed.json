@@ -1,0 +1,50 @@
+{
+  "sha256": "fbb112304ea3ed6dea2423c13d98beafcf20f0a7eb576e25d312e73b68e3fd38",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T15:10:09.335Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "A run of several trailing separators is skipped as a whole, not just the last one.",
+    "Ticket: \"fix(basename): ignore trailing seperator (#180)\"",
+    "Instead: strip exactly one trailing separator, the way `dirname` does (`.replace(/\\/$/, \"\")`).",
+    "`\\` counts as a separator for this rule, because `normalizeWindowsPath` runs first.",
+    "Ticket: silent.",
+    "Instead: treat only `/` as a trailing separator (POSIX `path.posix.basename`).",
+    "Empty segments in the middle of the path are ignored. The result is always the last non-empty segment.",
+    "Ticket: silent.",
+    "Instead: skip only the trailing empty segments and keep the rest of the split as it is. This gives the same result, but tests would then have to spell it out separately.",
+    "A path with no non-empty segment (`\"\"`, `/`, `//`, `\\`) returns `\"\"`, and does not throw.",
+    "Ticket: silent.",
+    "Instead: return `\"/\"` for root-only paths, or throw.",
+    "Drive-only paths (`C:\\`, `C:/`) return `C:`, the same as the current result for `C:`.",
+    "Ticket: silent.",
+    "Instead: return `\"\"` for drive roots, like Node's `path.win32.basename`.",
+    "`.` and `..` segments are returned as they are, with no normalisation.",
+    "Ticket: silent.",
+    "Instead: resolve the path with `normalize` first, so `foo/bar/..` would give `foo`.",
+    "The extension is matched against the segment after trailing separators are skipped, so `/temp/myfile.html/` with `.html` gives `myfile`, and an extension containing `/` never matches.",
+    "Ticket: silent.",
+    "Instead: match the extension against the raw input, including its trailing separators.",
+    "An extension equal to the whole segment still leaves `\"\"` (the current pathe behaviour, which this change keeps).",
+    "Ticket: silent.",
+    "Instead: return the segment unchanged when the extension equals it, like Node.js (`basename(\"/a/bbb\", \"bbb\") === \"bbb\"`).",
+    "`parse` gets the fix through `basename` for `base`/`ext`/`name`, while `dir` still comes from the unchanged `dirname` (so `/a/b//` gives `dir` `/a/b`).",
+    "Ticket: silent.",
+    "Instead: also make `dirname` skip all trailing separators, so that `parse(\"/a/b//\").dir` would be `/a`, like Node.js.",
+    "`extname` and `dirname` are not changed (for example, `extname(\"/temp/myfile.html/\")` stays `\"\"`).",
+    "Ticket: \"The change keeps the exports' names and signatures.\"",
+    "Instead: make `extname` ignore trailing separators too (Node gives `.html`).",
+    "Behaviour for non-string arguments is left unspecified, and no input validation is added.",
+    "Ticket: silent.",
+    "Instead: throw a `TypeError` for non-string arguments, as Node.js does.",
+    "Seam (the files the stub writes): src/path.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/path.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

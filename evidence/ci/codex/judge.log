@@ -1,0 +1,4 @@
+limit-jobs-confirmed: passed. Public 54/54, hidden 46/46, existing 120/120; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/codex/repo at HEAD.
+Hidden suite sha256 7a89b7f6f14d55f16993b034e0a2ba46a10daf460855561b88d002a0df32dc10, sealed 2026-10-26T04:35:59.102Z.
+Own tests (not judged): apps/worker/test/limit-jobs-confirmed-own.test.ts
+Check "independent-tests (confirmed)": success, passed: public 54/54, hidden 46/46, existing 120/120 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/codex/check.json); not posted (no token).

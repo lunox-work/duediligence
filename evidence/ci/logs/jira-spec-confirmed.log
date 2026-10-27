@@ -1,0 +1,8 @@
+jira-spec-confirmed: incomplete. Public 123/124, hidden 147/150, existing 63/63; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at e57785e3eef1541ef717513e5d9d259409312002.
+Hidden suite sha256 f8c95794c88f93911719e14020fda7b427a738e49255b10b9ee5f5690b7ac129, sealed 2026-10-26T04:36:00.001Z.
+Failing scenarios: unhappy-1, unhappy-2
+public: test/jira-spec-confirmed.hash.test.ts :: [unhappy-1] a String object is not a string and rejects with a TypeError
+[04:39:19] sandbox-factory 1e0efe482611: npx -y npm@10.9.2 ci --no-audit --no-fund
+[04:39:26] sandbox-factory 1e0efe482611: build packages/core
+[04:39:26] sandbox-factory 1e0efe482611: build packages/shared
+Check "independent-tests (confirmed)": failure, incomplete: public 123/124, hidden 147/150, existing 63/63 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/jira-spec-confirmed.json); not posted (no token).

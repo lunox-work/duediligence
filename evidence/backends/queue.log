@@ -1,0 +1,930 @@
+[2026-10-26T05:23:27Z] node evidence/backends.mjs import codex-cli
+[05:23:27] access-rules: imported (60 hidden tests kept, 28 public; not held out)
+[05:23:27] coalescing-cache: imported (36 hidden tests kept, 22 public; not held out)
+[05:23:27] csv-export: imported (47 hidden tests kept, 12 public; not held out)
+[05:23:27] env-names: imported (44 hidden tests kept, 14 public; not held out)
+[05:23:27] escrow-ledger: imported (57 hidden tests kept, 30 public; not held out)
+[05:23:27] escrow-split: imported (46 hidden tests kept, 22 public; not held out)
+[05:23:27] frame-codec: imported (62 hidden tests kept, 29 public; not held out)
+[05:23:27] gherkin-parse: imported (47 hidden tests kept, 18 public; not held out)
+[05:23:27] gherkin-spec: imported (40 hidden tests kept, 18 public; not held out)
+[05:23:27] invite-codes: imported (47 hidden tests kept, 26 public; not held out)
+[05:23:27] keyed-queue: imported (52 hidden tests kept, 22 public; not held out)
+[05:23:27] licence-scan: imported (61 hidden tests kept, 29 public; not held out)
+[05:23:27] money-format: imported (53 hidden tests kept, 18 public; not held out)
+[05:23:27] name-scan: imported (42 hidden tests kept, 25 public; not held out)
+[05:23:27] patch-apply: imported (79 hidden tests kept, 30 public; not held out)
+[05:23:27] project-names: imported (31 hidden tests kept, 14 public; not held out)
+[05:23:27] promo-stack: imported (57 hidden tests kept, 31 public; not held out)
+[05:23:27] question-limit: imported (47 hidden tests kept, 14 public; not held out)
+[05:23:27] retention-sweep: imported (60 hidden tests kept, 29 public; not held out)
+[05:23:27] reverse-diff: imported (42 hidden tests kept, 16 public; not held out)
+[05:23:27] shift-compliance: imported (56 hidden tests kept, 26 public; not held out)
+[05:23:27] statement-import: imported (60 hidden tests kept, 43 public; not held out)
+[05:23:27] status-normalize: imported (25 hidden tests kept, 15 public; not held out)
+[05:23:27] tool-versions: imported (77 hidden tests kept, 43 public; not held out)
+[05:23:27] usage-counter: imported (50 hidden tests kept, 27 public; not held out)
+[05:23:27] weekly-digest: imported (83 hidden tests kept, 28 public; not held out)
+[05:23:27] he-0: imported (30 hidden tests kept, 10 public; not held out)
+[05:23:27] he-4: imported (23 hidden tests kept, 7 public; not held out)
+[05:23:27] he-10: imported (20 hidden tests kept, 9 public; not held out)
+[05:23:27] he-11: imported (18 hidden tests kept, 11 public; not held out)
+[05:23:27] he-13: imported (33 hidden tests kept, 10 public; not held out)
+[05:23:27] he-17: imported (19 hidden tests kept, 10 public; not held out)
+[05:23:27] he-19: imported (15 hidden tests kept, 9 public; not held out)
+[05:23:27] he-22: imported (13 hidden tests kept, 7 public; not held out)
+[05:23:27] he-24: imported (22 hidden tests kept, 7 public; not held out)
+[05:23:27] he-25: imported (27 hidden tests kept, 9 public; not held out)
+[05:23:27] he-31: imported (10 hidden tests kept, 11 public; not held out)
+[05:23:27] he-32: imported (30 hidden tests kept, 10 public; not held out)
+[05:23:27] he-34: imported (21 hidden tests kept, 7 public; not held out)
+[05:23:27] he-39: imported (9 hidden tests kept, 8 public; not held out)
+[05:23:27] he-43: imported (26 hidden tests kept, 16 public; not held out)
+[05:23:27] he-44: imported (14 hidden tests kept, 9 public; not held out)
+[05:23:27] he-46: imported (13 hidden tests kept, 11 public; not held out)
+[05:23:27] he-48: imported (30 hidden tests kept, 8 public; not held out)
+[05:23:27] he-49: imported (34 hidden tests kept, 12 public; not held out)
+[05:23:27] he-53: imported (18 hidden tests kept, 5 public; not held out)
+[05:23:27] he-55: imported (8 hidden tests kept, 5 public; not held out)
+[05:23:27] he-57: imported (37 hidden tests kept, 11 public; not held out)
+[05:23:27] he-58: imported (26 hidden tests kept, 9 public; not held out)
+[05:23:27] he-60: imported (9 hidden tests kept, 7 public; not held out)
+[05:23:27] he-63: imported (16 hidden tests kept, 11 public; not held out)
+[05:23:27] he-74: imported (29 hidden tests kept, 15 public; not held out)
+[05:23:27] he-76: imported (30 hidden tests kept, 14 public; not held out)
+[05:23:27] he-77: imported (12 hidden tests kept, 16 public; not held out)
+[05:23:27] he-83: imported (9 hidden tests kept, 5 public; not held out)
+[05:23:27] he-97: imported (20 hidden tests kept, 11 public; not held out)
+[05:23:27] he-106: imported (16 hidden tests kept, 9 public; not held out)
+[05:23:27] he-114: imported (23 hidden tests kept, 10 public; not held out)
+[05:23:27] he-118: imported (25 hidden tests kept, 14 public; not held out)
+[05:23:27] he-122: imported (21 hidden tests kept, 7 public; not held out)
+[05:23:27] he-124: imported (55 hidden tests kept, 24 public; not held out)
+[05:23:27] he-128: imported (23 hidden tests kept, 9 public; not held out)
+[05:23:27] he-144: imported (20 hidden tests kept, 12 public; not held out)
+[05:23:27] he-151: imported (23 hidden tests kept, 13 public; not held out)
+[05:23:27] he-154: imported (24 hidden tests kept, 14 public; not held out)
+[05:23:28] he-159: imported (17 hidden tests kept, 11 public; not held out)
+[05:23:28] ladder-kestrel-l0: imported (396 hidden tests kept, 74 public; not held out)
+[05:23:28] ladder-kestrel-l1: imported (396 hidden tests kept, 32 public; not held out)
+[05:23:28] ladder-kestrel-l2: imported (396 hidden tests kept, 23 public; not held out)
+[05:23:28] ladder-kestrel-l3: imported (396 hidden tests kept, 14 public; not held out)
+[05:23:28] ladder-kestrel-l4: imported (396 hidden tests kept, 1 public; not held out)
+71 spec(s) imported into /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/specs.
+Imported specs are not held out: use them to check the pipeline, never to grade a party that could have seen the archive.
+[05:23:29] 71 spec(s) in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/specs for the codex-cli arm
+[2026-10-26T05:23:29Z] exit 0
+[2026-10-26T05:23:29Z] node bin/referee.mjs --cases ../double-blind-experiment/referee.jsonl --kinds suite --backend codex-cli --out evidence/backends/referee-codex-cli.jsonl --concurrency 3
+[05:23:29] 57 case(s), 57 to referee on codex-cli; out /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/referee-codex-cli.jsonl
+[05:23:34] waiting for a session slot (3 max, 25% memory free)
+[05:23:41] suite csv-export yes adversarial a whole number of 10^21 is written as plain digits, not in exponent fo
+[05:23:50] suite money-format yes adversarial currency named after an object property constructor is refused
+[05:23:57] suite escrow-split yes edge a failed run on a bounty of 0 leaves the task pro bono
+[05:24:04] suite escrow-split yes edge a UAT approval first on a bounty of 0 records nothing, and nor does a 
+[05:24:19] suite escrow-split open edge the same hidden-tests-passed event delivered five times at once record
+[05:24:27] suite escrow-split open edge four hidden-tests-passed events at once over a store of uneven latency
+[05:24:37] suite escrow-split open edge uat-approved delivered four times at once, mixed ids, records one UAT 
+[05:24:45] suite escrow-split open typical passes at once then approvals at once record one release of each
+[05:25:08] suite escrow-split open typical two hidden-tests-passed events with different ids at once record one r
+[05:25:08] suite escrow-split open edge a rejected save during a concurrent second delivery never records the 
+[05:25:31] suite escrow-split open typical the same hidden-tests-passed event delivered twice at once records one
+[05:25:43] suite frame-codec open edge two framing errors in a row are both reported, and the frame after the
+[05:25:53] suite escrow-split open typical uat-approved delivered twice at once, same id or not, records one UAT 
+[05:25:58] suite gherkin-parse yes edge only one space after each keyword is dropped from the step's text
+[05:26:14] suite gherkin-parse yes edge a step's text is what follows the keyword and exactly one space
+[05:26:16] suite frame-codec open edge an escape byte in place of the end byte is a framing error and does no
+[05:26:33] suite gherkin-parse yes edge a step with any keyword after a tag line and before any Scenario: fail
+[05:26:43] suite gherkin-parse yes edge a step before any Background: or Scenario: fails at that line
+[05:26:53] suite gherkin-parse yes edge a step on line 10 after tags and comments, before the Background:, fai
+[05:27:01] suite invite-codes yes typical a contributor who redeems codes for several tasks has access to exactl
+[05:27:12] suite invite-codes yes edge a contributor redeeming codes for several tasks at once gains access t
+[05:27:17] suite invite-codes yes typical access to some tasks blocks a second code only for those tasks
+[05:27:29] suite invite-codes yes typical a contributor with access to one task can still redeem a code for anot
+[05:27:37] suite licence-scan yes edge other unparseable expressions fail as unknown
+[05:27:44] suite name-scan yes edge non-ASCII lowercase and uppercase letters split words too
+[05:27:57] suite name-scan yes typical a term written as an identifier is split into words like the text
+[05:28:01] suite patch-apply yes typical deleting a file whose lines differ from the removed lines is rejected 
+[05:28:16] suite patch-apply yes edge deleting a file shorter than the hunk's removed lines is rejected with
+[05:28:27] suite patch-apply open edge context lines inside a hunk keep their own endings while added lines t
+[05:28:35] waiting for a session slot (3 max, 25% memory free)
+[05:28:35] suite patch-apply yes edge hunk lines whose text starts with ---, +++ or @@ are part of the hunk
+[05:28:47] suite patch-apply yes edge a marker after a removed line does not match a last line that has a ne
+[05:28:50] suite patch-apply yes edge a marker after a context line does not match a last line that has a ne
+[05:29:08] suite patch-apply yes edge a short hunk throws even when another hunk in the diff does not match
+[05:29:11] suite patch-apply yes typical a hunk with fewer lines than its header counts throws
+[05:29:24] suite patch-apply yes edge a marked removed line passes over a copy with a newline and matches th
+[05:29:27] suite coalescing-cache yes edge a get after expiry while the background refresh is unsettled waits for
+[05:29:42] suite patch-apply yes typical a file at a nested path is deleted and its hunk is reported under that
+[05:29:43] suite patch-apply yes edge a marker after a removed line that is not the file's last line does no
+[05:29:50] suite patch-apply yes typical a diff to /dev/null removing the file's whole text removes the file
+[05:29:56] suite promo-stack yes edge a line with quantity 0 is allowed, totals 0 and reports no promotion
+[05:29:59] suite promo-stack yes edge a line with quantity 0 reports none of several matching promotions and
+[05:30:12] suite question-limit yes adversarial ids containing common separators do not collide with other pairs
+[05:30:12] suite retention-sweep yes adversarial category names that are built-in object properties are not in the poli
+[05:30:19] suite retention-sweep yes edge a child of a parent kept within its period is kept for its parent
+[05:30:25] suite reverse-diff yes edge a long hunk is mapped on every line that holds the name
+[05:30:29] suite reverse-diff yes typical several identifiers are mapped in every hunk of every file
+[05:30:40] suite reverse-diff yes edge CRLF endings, no-newline markers and a missing final CRLF are all kept
+[05:30:45] suite statement-import yes edge errors in a \r\n statement carry no \r in field or line text
+[05:30:52] suite reverse-diff open adversarial hunk ranges are unchanged and only the text after the second @@ is map
+[05:30:59] suite statement-import yes typical the repeat of an id whose first line has another error is still a dupl
+[05:31:04] suite statement-import yes edge a failing statement gives the same errors with \r\n endings and a byte
+[05:31:13] suite status-normalize yes adversarial names inherited by plain objects read as null
+[05:31:18] suite statement-import yes typical errors across many lines are listed in line order
+[05:31:18] suite status-normalize yes adversarial values named like plain-object members read as no status and are liste
+[05:31:36] suite tool-versions yes edge volta.node wins over engines.node and the disagreement is reported
+[05:31:38] suite tool-versions yes edge runtime.txt without the python- prefix is not a version
+[05:31:38] suite usage-counter yes adversarial whole counts larger than 2^53 are added exactly
+| cases | n | spec requires the test | open | test wrong | typical / edge / adversarial |
+| --- | ---: | ---: | ---: | ---: | --- |
+| suite test fails a run, any arm | 57 | 45 | 12 | 0 | 15 / 34 / 8 |
+| … hidden tests only | 46 | 38 | 8 | 0 | 9 / 29 / 8 |
+| suite test fails a run whose own tests pass | 24 | 16 | 8 | 0 | 6 / 15 / 3 |
+| own test fails the reference | 0 | 0 | 0 | 0 | 0 / 0 / 0 |
+
+runs rejected: 100; failing a test the spec requires: 95
+
+own-green runs rejected: 26; failing a test the spec requires: 24
+[2026-10-26T05:31:38Z] exit 0
+[2026-10-26T05:31:38Z] node bin/generate.mjs access-rules coalescing-cache csv-export env-names escrow-ledger escrow-split frame-codec gherkin-parse gherkin-spec invite-codes keyed-queue licence-scan money-format name-scan patch-apply project-names promo-stack question-limit retention-sweep reverse-diff shift-compliance statement-import status-normalize tool-versions usage-counter weekly-digest --concurrency 3
+[05:31:38] access-rules public started
+[05:31:38] coalescing-cache public started
+[05:31:38] csv-export public started
+[05:34:05] csv-export public done $0.00
+[05:34:05] csv-export private started
+[05:34:27] access-rules public done $0.00
+[05:34:28] access-rules private started
+[05:34:44] coalescing-cache public done $0.00
+[05:34:45] coalescing-cache private started
+[05:39:53] access-rules private done $0.00
+[05:39:53] env-names public started
+[05:41:40] csv-export private done $0.00
+[05:41:40] escrow-ledger public started
+[05:42:16] env-names public done $0.00
+[05:42:16] env-names private started
+[05:44:07] coalescing-cache private done $0.00
+[05:44:07] escrow-split public started
+[05:45:10] escrow-ledger public done $0.00
+[05:45:11] escrow-ledger private started
+[05:46:58] escrow-split public done $0.00
+[05:46:58] escrow-split private started
+[05:48:57] env-names private done $0.00
+[05:48:57] frame-codec public started
+[05:49:02] waiting for a session slot (3 max, 25% memory free)
+[05:53:22] frame-codec public done $0.00
+[05:53:22] frame-codec private started
+[05:53:40] escrow-ledger private done $0.00
+[05:53:40] gherkin-parse public started
+[05:54:49] escrow-split private done $0.00
+[05:54:49] gherkin-spec public started
+[05:56:26] gherkin-parse public done $0.00
+[05:56:26] gherkin-parse private started
+[05:57:53] gherkin-spec public done $0.00
+[05:57:53] gherkin-spec private started
+[06:01:16] frame-codec private done $0.00
+[06:01:16] invite-codes public started
+[06:03:49] gherkin-spec private done $0.00
+[06:03:49] keyed-queue public started
+[06:03:51] invite-codes public done $0.00
+[06:03:51] invite-codes private started
+[06:04:53] gherkin-parse private done $0.00
+[06:04:53] licence-scan public started
+[06:07:35] keyed-queue public done $0.00
+[06:07:35] keyed-queue private started
+[06:07:52] licence-scan public done $0.00
+[06:07:52] licence-scan private started
+[06:09:56] invite-codes private done $0.00
+[06:09:56] money-format public started
+[06:10:58] money-format public done $0.00
+[06:10:58] money-format private started
+[06:14:19] money-format private done $0.00
+[06:14:19] name-scan public started
+[06:15:09] keyed-queue private done $0.00
+[06:15:09] patch-apply public started
+[06:17:54] licence-scan private done $0.00
+[06:17:54] project-names public started
+[06:18:13] name-scan public done $0.00
+[06:18:13] name-scan private started
+[06:19:08] project-names public done $0.00
+[06:19:09] project-names private started
+[06:19:52] patch-apply public done $0.00
+[06:19:52] patch-apply private started
+[06:22:53] project-names private fix turn: No test files at tests/private/*.test.ts.
+[06:25:20] name-scan private done $0.00
+[06:25:20] promo-stack public started
+[06:25:37] patch-apply private done $0.00
+[06:25:37] question-limit public started
+[06:26:27] project-names private done $0.00
+[06:26:28] retention-sweep public started
+[06:27:55] question-limit public done $0.00
+[06:27:55] question-limit private started
+[06:28:11] retention-sweep public fix turn: No test files at tests/public/*.test.ts.
+[06:29:41] retention-sweep public done $0.00
+[06:29:41] retention-sweep private started
+[06:30:22] promo-stack public done $0.00
+[06:30:22] promo-stack private started
+[06:33:18] question-limit private done $0.00
+[06:33:18] reverse-diff public started
+[06:35:48] retention-sweep private done $0.00
+[06:35:48] shift-compliance public started
+[06:36:23] reverse-diff public done $0.00
+[06:36:23] reverse-diff private started
+[06:38:58] promo-stack private done $0.00
+[06:38:58] statement-import public started
+[06:39:45] shift-compliance public done $0.00
+[06:39:45] shift-compliance private started
+[06:42:02] statement-import public done $0.00
+[06:42:02] statement-import private started
+[06:43:00] reverse-diff private done $0.00
+[06:43:00] status-normalize public started
+[06:44:38] status-normalize public done $0.00
+[06:44:38] status-normalize private started
+[06:49:19] statement-import private done $0.00
+[06:49:19] tool-versions public started
+[06:50:33] shift-compliance private done $0.00
+[06:50:33] usage-counter public started
+[06:51:06] status-normalize private done $0.00
+[06:51:06] weekly-digest public started
+[06:52:21] tool-versions public done $0.00
+[06:52:21] tool-versions private started
+[06:54:03] weekly-digest public done $0.00
+[06:54:03] weekly-digest private started
+[06:54:45] usage-counter public done $0.00
+[06:54:45] usage-counter private started
+[06:59:11] tool-versions private done $0.00
+[06:59:31] weekly-digest private done $0.00
+[07:02:25] usage-counter private done $0.00
+generated access-rules, coalescing-cache, csv-export, env-names, escrow-ledger, escrow-split, frame-codec, gherkin-parse, gherkin-spec, invite-codes, keyed-queue, licence-scan, money-format, name-scan, patch-apply, project-names, promo-stack, question-limit, retention-sweep, reverse-diff, shift-compliance, statement-import, status-normalize, tool-versions, usage-counter, weekly-digest
+[2026-10-26T07:02:25Z] exit 0
+[2026-10-26T07:02:25Z] node evidence/backends.mjs calibrate access-rules coalescing-cache csv-export env-names escrow-ledger escrow-split frame-codec gherkin-parse gherkin-spec invite-codes keyed-queue licence-scan money-format name-scan patch-apply project-names promo-stack question-limit retention-sweep reverse-diff shift-compliance statement-import status-normalize tool-versions usage-counter weekly-digest
+[07:02:27] access-rules kept 53/53 hidden, public failing on the reference 0
+[07:02:28] coalescing-cache kept 37/37 hidden, public failing on the reference 0
+[07:02:30] csv-export kept 69/69 hidden, public failing on the reference 0
+[07:02:31] env-names kept 37/38 hidden, public failing on the reference 0
+[07:02:33] escrow-ledger kept 37/37 hidden, public failing on the reference 0
+[07:02:34] escrow-split kept 46/46 hidden, public failing on the reference 0
+[07:02:36] frame-codec kept 46/46 hidden, public failing on the reference 0
+[07:02:38] gherkin-parse kept 39/40 hidden, public failing on the reference 0
+[07:02:39] gherkin-spec kept 39/39 hidden, public failing on the reference 0
+[07:02:41] invite-codes kept 31/31 hidden, public failing on the reference 0
+[07:02:42] keyed-queue kept 34/34 hidden, public failing on the reference 0
+[07:02:44] licence-scan kept 50/50 hidden, public failing on the reference 0
+[07:02:45] money-format kept 34/34 hidden, public failing on the reference 0
+[07:02:47] name-scan kept 49/49 hidden, public failing on the reference 0
+[07:02:48] patch-apply kept 67/67 hidden, public failing on the reference 0
+[07:02:50] project-names kept 34/34 hidden, public failing on the reference 0
+[07:02:51] promo-stack kept 50/50 hidden, public failing on the reference 0
+[07:02:53] question-limit kept 29/29 hidden, public failing on the reference 0
+[07:02:54] retention-sweep kept 44/44 hidden, public failing on the reference 0
+[07:02:56] reverse-diff kept 41/41 hidden, public failing on the reference 0
+[07:02:58] shift-compliance kept 52/57 hidden, public failing on the reference 2
+[07:02:59] statement-import kept 55/55 hidden, public failing on the reference 0
+[07:03:01] status-normalize kept 36/36 hidden, public failing on the reference 0
+[07:03:03] tool-versions kept 48/48 hidden, public failing on the reference 0
+[07:03:04] usage-counter kept 37/37 hidden, public failing on the reference 0
+[07:03:05] weekly-digest kept 32/32 hidden, public failing on the reference 0
+[2026-10-26T07:03:05Z] exit 0
+[2026-10-26T07:03:05Z] node evidence/mutation.mjs access-rules coalescing-cache csv-export env-names escrow-ledger escrow-split frame-codec gherkin-parse gherkin-spec invite-codes keyed-queue licence-scan money-format name-scan patch-apply project-names promo-stack question-limit retention-sweep reverse-diff shift-compliance statement-import status-normalize tool-versions usage-counter weekly-digest --concurrency 4
+[07:03:05] access-rules mutating
+[07:03:05] coalescing-cache mutating
+[07:03:05] csv-export mutating
+[07:03:05] env-names mutating
+[07:03:39] env-names public kills 15/17, hidden kills 0 of the 2 public survivors
+[07:03:39] escrow-ledger mutating
+[07:03:47] coalescing-cache public kills 28/32, hidden kills 0 of the 4 public survivors
+[07:03:47] escrow-split mutating
+[07:04:14] csv-export public kills 30/39, hidden kills 0 of the 9 public survivors
+[07:04:14] frame-codec mutating
+[07:04:25] escrow-split public kills 26/34, hidden kills 0 of the 8 public survivors
+[07:04:25] gherkin-parse mutating
+[07:04:30] access-rules public kills 45/52, hidden kills 1 of the 7 public survivors
+[07:04:30] gherkin-spec mutating
+[07:05:11] gherkin-spec public kills 23/24, hidden kills 0 of the 1 public survivors
+[07:05:11] invite-codes mutating
+[2026-10-26T07:06:10Z] mutation (split from queue.sh)
+[2026-10-27T02:00:28Z] node evidence/backends.mjs import codex-cli
+[02:00:28] 71 spec(s) in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/specs for the codex-cli arm
+[2026-10-27T02:00:28Z] exit 0
+[2026-10-27T02:00:28Z] node bin/referee.mjs --cases ../double-blind-experiment/referee.jsonl --kinds suite --backend codex-cli --out evidence/backends/referee-codex-cli.jsonl --concurrency 2
+[02:00:28] 57 case(s), 0 to referee on codex-cli; out /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/referee-codex-cli.jsonl
+| cases | n | spec requires the test | open | test wrong | typical / edge / adversarial |
+| --- | ---: | ---: | ---: | ---: | --- |
+| suite test fails a run, any arm | 57 | 45 | 12 | 0 | 15 / 34 / 8 |
+| … hidden tests only | 46 | 38 | 8 | 0 | 9 / 29 / 8 |
+| suite test fails a run whose own tests pass | 24 | 16 | 8 | 0 | 6 / 15 / 3 |
+| own test fails the reference | 0 | 0 | 0 | 0 | 0 / 0 / 0 |
+
+runs rejected: 100; failing a test the spec requires: 95
+
+own-green runs rejected: 26; failing a test the spec requires: 24
+[2026-10-27T02:00:28Z] exit 0
+[2026-10-27T02:00:28Z] node bin/generate.mjs access-rules coalescing-cache csv-export env-names escrow-ledger escrow-split frame-codec gherkin-parse gherkin-spec invite-codes keyed-queue licence-scan money-format name-scan patch-apply project-names promo-stack question-limit retention-sweep reverse-diff shift-compliance statement-import status-normalize tool-versions usage-counter weekly-digest --concurrency 2
+generated access-rules, coalescing-cache, csv-export, env-names, escrow-ledger, escrow-split, frame-codec, gherkin-parse, gherkin-spec, invite-codes, keyed-queue, licence-scan, money-format, name-scan, patch-apply, project-names, promo-stack, question-limit, retention-sweep, reverse-diff, shift-compliance, statement-import, status-normalize, tool-versions, usage-counter, weekly-digest
+[2026-10-27T02:00:28Z] exit 0
+[2026-10-27T02:00:28Z] node evidence/backends.mjs calibrate access-rules coalescing-cache csv-export env-names escrow-ledger escrow-split frame-codec gherkin-parse gherkin-spec invite-codes keyed-queue licence-scan money-format name-scan patch-apply project-names promo-stack question-limit retention-sweep reverse-diff shift-compliance statement-import status-normalize tool-versions usage-counter weekly-digest
+[2026-10-27T02:00:28Z] exit 0
+[2026-10-27T02:00:28Z] node evidence/mutation.mjs access-rules coalescing-cache csv-export env-names escrow-ledger escrow-split frame-codec gherkin-parse gherkin-spec invite-codes keyed-queue licence-scan money-format name-scan patch-apply project-names promo-stack question-limit retention-sweep reverse-diff shift-compliance statement-import status-normalize tool-versions usage-counter weekly-digest --concurrency 1 --max-from ../double-blind-experiment/runs/_mutation
+26 spec(s): judged 1543, public killed 1204, public + hidden 1247
+[2026-10-27T02:00:28Z] exit 0
+[2026-10-27T02:00:28Z] node bin/generate.mjs ladder-kestrel-l0 ladder-kestrel-l1 ladder-kestrel-l2 ladder-kestrel-l3 ladder-kestrel-l4 --only public --concurrency 2
+generated ladder-kestrel-l0, ladder-kestrel-l1, ladder-kestrel-l2, ladder-kestrel-l3, ladder-kestrel-l4
+[2026-10-27T02:00:28Z] exit 0
+[2026-10-27T02:00:28Z] node evidence/backends.mjs ladder --json evidence/backends/ladder-codex-cli.json
+ladder-kestrel-l0: the oracle passes 37/37 public tests
+ladder-kestrel-l1: the oracle passes 45/45 public tests
+ladder-kestrel-l2: the oracle passes 25/27 public tests
+ladder-kestrel-l3: the oracle passes 16/16 public tests
+ladder-kestrel-l4: the oracle passes 2/2 public tests
+[2026-10-27T02:00:31Z] exit 0
+[2026-10-27T02:00:31Z] node bin/generate.mjs he-0 he-10 he-106 he-11 he-114 he-118 he-122 he-124 he-128 he-13 he-144 he-151 he-154 he-159 he-17 he-19 he-22 he-24 he-25 he-31 he-32 he-34 he-39 he-4 he-43 he-44 he-46 he-48 he-49 he-53 he-55 he-57 he-58 he-60 he-63 he-74 he-76 he-77 he-83 he-97 --concurrency 2
+[02:00:31] he-11 private started
+[02:00:31] he-118 private started
+[02:03:45] he-118 private done $0.00
+[02:03:46] he-128 public started
+[02:04:10] he-11 private done $0.00
+[02:04:11] he-13 public started
+[02:04:53] he-128 public done $0.00
+[02:04:53] he-128 private started
+[02:05:05] he-13 public done $0.00
+[02:05:05] he-13 private started
+[02:07:05] he-13 private done $0.00
+[02:07:06] he-144 public started
+[02:07:07] he-128 private done $0.00
+[02:07:07] he-151 public started
+[02:08:01] he-144 public done $0.00
+[02:08:01] he-144 private started
+[02:08:18] he-151 public done $0.00
+[02:08:18] he-151 private started
+[02:10:48] he-144 private done $0.00
+[02:10:49] he-154 public started
+[02:10:58] he-151 private done $0.00
+[02:10:58] he-159 public started
+[02:11:46] he-154 public done $0.00
+[02:11:47] he-154 private started
+[02:12:04] he-159 public done $0.00
+[02:12:05] he-159 private started
+[02:14:21] he-159 private done $0.00
+[02:14:21] he-17 public started
+[02:15:06] he-154 private done $0.00
+[02:15:06] he-19 public started
+[02:15:11] he-17 public done $0.00
+[02:15:11] he-17 private started
+[02:15:55] he-19 public done $0.00
+[02:15:55] he-19 private started
+[02:17:07] he-17 private done $0.00
+[02:17:08] he-22 public started
+[02:18:05] he-22 public done $0.00
+[02:18:06] he-22 private started
+[02:18:09] he-19 private done $0.00
+[02:18:09] he-24 public started
+[02:18:59] he-24 public done $0.00
+[02:18:59] he-24 private started
+[02:20:29] he-22 private done $0.00
+[02:20:30] he-25 public started
+[02:20:31] he-24 private done $0.00
+[02:20:31] he-31 public started
+[02:21:27] he-31 public done $0.00
+[02:21:27] he-31 private started
+[02:22:07] he-25 public done $0.00
+[02:22:07] he-25 private started
+[02:23:36] he-31 private done $0.00
+[02:23:36] he-32 public started
+[02:24:31] he-25 private done $0.00
+[02:24:31] he-34 public started
+[02:24:39] he-32 public done $0.00
+[02:24:39] he-32 private started
+[02:25:29] he-34 public done $0.00
+[02:25:29] he-34 private started
+[02:27:11] he-34 private done $0.00
+[02:27:12] he-39 public started
+[02:28:00] he-32 private done $0.00
+[02:28:01] he-4 public started
+[02:28:12] he-39 public done $0.00
+[02:28:12] he-39 private started
+[02:29:04] he-4 public done $0.00
+[02:29:04] he-4 private started
+[02:30:12] he-39 private done $0.00
+[02:30:12] he-43 public started
+[02:31:26] he-43 public done $0.00
+[02:31:27] he-43 private started
+[02:31:37] he-4 private done $0.00
+[02:31:37] he-44 public started
+[02:32:38] he-44 public done $0.00
+[02:32:38] he-44 private started
+[02:34:01] he-43 private done $0.00
+[02:34:02] he-46 public started
+[02:34:54] he-46 public done $0.00
+[02:34:54] he-46 private started
+[02:35:16] he-44 private done $0.00
+[02:35:16] he-48 public started
+[02:35:59] he-48 public done $0.00
+[02:36:00] he-48 private started
+[02:38:27] he-46 private done $0.00
+[02:38:27] he-49 public started
+[02:39:14] he-48 private done $0.00
+[02:39:14] he-53 public started
+[02:39:29] he-49 public done $0.00
+[02:39:30] he-49 private started
+[02:40:04] he-53 public done $0.00
+[02:40:05] he-53 private started
+[02:41:33] he-49 private done $0.00
+[02:41:33] he-55 public started
+[02:41:59] he-53 private done $0.00
+[02:41:59] he-57 public started
+[02:42:09] he-55 public done $0.00
+[02:42:09] he-55 private started
+[02:43:10] he-57 public done $0.00
+[02:43:10] he-57 private started
+[02:43:51] he-55 private done $0.00
+[02:43:52] he-58 public started
+[02:44:39] he-58 public done $0.00
+[02:44:39] he-58 private started
+[02:46:03] he-57 private done $0.00
+[02:46:03] he-60 public started
+[02:46:57] he-60 public done $0.00
+[02:46:58] he-60 private started
+[02:47:35] he-58 private done $0.00
+[02:47:35] he-63 public started
+[02:48:29] he-63 public done $0.00
+[02:48:30] he-63 private started
+[02:48:42] he-60 private done $0.00
+[02:48:42] he-74 public started
+[02:49:32] he-74 public done $0.00
+[02:49:32] he-74 private started
+[02:50:42] he-63 private done $0.00
+[02:50:42] he-76 public started
+[02:51:43] he-76 public done $0.00
+[02:51:43] he-76 private started
+[02:52:21] he-74 private done $0.00
+[02:52:22] he-77 public started
+[02:53:12] he-77 public done $0.00
+[02:53:13] he-77 private started
+[02:54:23] he-76 private done $0.00
+[02:54:23] he-83 public started
+[02:55:08] he-83 public done $0.00
+[02:55:09] he-83 private started
+[02:55:16] he-77 private done $0.00
+[02:55:16] he-97 public started
+[02:56:06] he-97 public done $0.00
+[02:56:06] he-97 private started
+[02:56:55] he-83 private done $0.00
+[02:58:19] he-97 private done $0.00
+generated he-0, he-10, he-106, he-11, he-114, he-118, he-122, he-124, he-128, he-13, he-144, he-151, he-154, he-159, he-17, he-19, he-22, he-24, he-25, he-31, he-32, he-34, he-39, he-4, he-43, he-44, he-46, he-48, he-49, he-53, he-55, he-57, he-58, he-60, he-63, he-74, he-76, he-77, he-83, he-97
+[2026-10-27T02:58:19Z] exit 0
+[2026-10-27T02:58:19Z] node evidence/backends.mjs calibrate he-0 he-10 he-106 he-11 he-114 he-118 he-122 he-124 he-128 he-13 he-144 he-151 he-154 he-159 he-17 he-19 he-22 he-24 he-25 he-31 he-32 he-34 he-39 he-4 he-43 he-44 he-46 he-48 he-49 he-53 he-55 he-57 he-58 he-60 he-63 he-74 he-76 he-77 he-83 he-97
+[02:58:21] he-11 kept 17/17 hidden, public failing on the reference 0
+[02:58:22] he-118 kept 41/41 hidden, public failing on the reference 0
+[02:58:24] he-128 kept 25/25 hidden, public failing on the reference 0
+[02:58:25] he-13 kept 18/26 hidden, public failing on the reference 2
+[02:58:27] he-144 kept 29/29 hidden, public failing on the reference 0
+[02:58:28] he-151 kept 22/22 hidden, public failing on the reference 0
+[02:58:29] he-154 kept 36/36 hidden, public failing on the reference 0
+[02:58:31] he-159 kept 22/22 hidden, public failing on the reference 0
+[02:58:32] he-17 kept 15/15 hidden, public failing on the reference 0
+[02:58:34] he-19 kept 20/20 hidden, public failing on the reference 0
+[02:58:35] he-22 kept 26/26 hidden, public failing on the reference 0
+[02:58:36] he-24 kept 24/24 hidden, public failing on the reference 0
+[02:58:38] he-25 kept 22/22 hidden, public failing on the reference 0
+[02:58:39] he-31 kept 29/29 hidden, public failing on the reference 0
+[02:58:41] he-32 kept 22/36 hidden, public failing on the reference 2
+[02:58:42] he-34 kept 18/20 hidden, public failing on the reference 0
+[02:58:44] he-39 kept 7/7 hidden, public failing on the reference 0
+[02:58:45] he-4 kept 22/22 hidden, public failing on the reference 0
+[02:58:46] he-43 kept 36/36 hidden, public failing on the reference 0
+[02:58:48] he-44 kept 40/40 hidden, public failing on the reference 0
+[02:58:49] he-46 kept 15/15 hidden, public failing on the reference 0
+[02:58:51] he-48 kept 29/29 hidden, public failing on the reference 0
+[02:58:52] he-49 kept 30/30 hidden, public failing on the reference 0
+[02:58:54] he-53 kept 20/20 hidden, public failing on the reference 0
+[02:58:55] he-55 kept 13/13 hidden, public failing on the reference 0
+[02:58:57] he-57 kept 34/34 hidden, public failing on the reference 0
+[02:58:58] he-58 kept 23/26 hidden, public failing on the reference 0
+[02:58:59] he-60 kept 17/17 hidden, public failing on the reference 0
+[02:59:01] he-63 kept 16/16 hidden, public failing on the reference 0
+[02:59:02] he-74 kept 27/27 hidden, public failing on the reference 0
+[03:01:03] he-76 kept 0/44 hidden, public failing on the reference 0
+[03:01:05] he-77 kept 28/34 hidden, public failing on the reference 0
+[03:01:07] he-83 kept 11/11 hidden, public failing on the reference 0
+[03:01:08] he-97 kept 27/30 hidden, public failing on the reference 0
+[2026-10-27T03:01:08Z] exit 0
+[2026-10-27T03:01:08Z] node evidence/evalplus.mjs --out evidence/backends/evalplus-codex-cli.json --concurrency 2
+[03:01:08] he-11 scoring
+[03:01:08] he-118 scoring
+[03:01:41] he-118 scored
+[03:01:41] he-128 scoring
+[03:01:41] he-11 scored
+[03:01:41] he-13 scoring
+[03:06:13] he-128 scored
+[03:06:13] he-144 scoring
+[03:06:45] he-144 scored
+[03:06:45] he-151 scoring
+[03:07:16] he-151 scored
+[03:07:16] he-154 scoring
+[03:07:49] he-154 scored
+[03:07:49] he-159 scoring
+[03:08:18] he-159 scored
+[03:08:18] he-17 scoring
+[03:08:50] he-17 scored
+[03:08:50] he-19 scoring
+[03:09:23] he-19 scored
+[03:09:23] he-22 scoring
+[03:09:55] he-22 scored
+[03:09:55] he-24 scoring
+[03:10:17] he-13 scored
+[03:10:17] he-25 scoring
+[03:10:28] he-24 scored
+[03:10:28] he-31 scoring
+[03:10:57] he-25 scored
+[03:10:57] he-32 scoring
+[03:11:01] he-31 scored
+[03:11:01] he-34 scoring
+[03:11:34] he-34 scored
+[03:11:34] he-39 scoring
+[03:12:03] he-39 scored
+[03:12:03] he-4 scoring
+[03:12:36] he-4 scored
+[03:12:36] he-43 scoring
+[03:13:10] he-43 scored
+[03:13:10] he-44 scoring
+[03:13:40] he-44 scored
+[03:13:40] he-46 scoring
+[03:23:29] he-32 scored
+[03:23:29] he-48 scoring
+[03:24:03] he-48 scored
+[03:24:03] he-49 scoring
+[03:26:38] he-49 scored
+[03:26:38] he-53 scoring
+[03:27:10] he-53 scored
+[03:27:10] he-55 scoring
+[03:50:25] he-46 scored
+[03:50:25] he-57 scoring
+[03:50:59] he-57 scored
+[03:50:59] he-58 scoring
+[03:51:34] he-58 scored
+[03:51:34] he-60 scoring
+[03:52:07] he-60 scored
+[03:52:07] he-63 scoring
+[04:13:44] he-55 scored
+[04:13:44] he-74 scoring
+[04:14:16] he-74 scored
+[04:14:16] he-76 scoring
+[04:42:56] he-76 scored
+[04:42:56] he-77 scoring
+[04:51:26] he-77 scored
+[04:51:26] he-83 scoring
+[04:55:57] he-83 scored
+[04:55:57] he-97 scoring
+[05:00:29] he-97 scored
+[05:26:37] he-63 scored
+{
+  "scoredAt": "2026-10-27T05:26:37.444Z",
+  "runner": "bin/runners/pytest.mjs (pytest 8.4.2)",
+  "python": "Python 3.14.8",
+  "all": {
+    "tasks": 40,
+    "solutions": 1240,
+    "wrong": 926,
+    "wrongAcceptedByBase": {
+      "count": 162,
+      "percent": 17.5
+    },
+    "wrongAcceptedByGenerated": {
+      "count": 63,
+      "percent": 6.8
+    },
+    "rightRejectedByGenerated": {
+      "count": 5,
+      "of": 314
+    }
+  },
+  "without22and60": {
+    "tasks": 38,
+    "solutions": 1178,
+    "wrong": 889,
+    "wrongAcceptedByBase": {
+      "count": 133,
+      "percent": 15
+    },
+    "wrongAcceptedByGenerated": {
+      "count": 34,
+      "percent": 3.8
+    },
+    "rightRejectedByGenerated": {
+      "count": 5,
+      "of": 289
+    }
+  },
+  "rowsComparedWithArchive": 1240,
+  "rowsDifferingFromArchive": 113,
+  "differences": [
+    {
+      "slug": "he-11",
+      "at": 27,
+      "set": "starcoderbase-3b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 14,
+      "set": "gpt-4-1106-preview_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 14,
+      "set": "gpt-4-1106-preview_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-13",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-13",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 15,
+      "set": "gpt-4_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-17",
+      "at": 19,
+      "set": "incoder-6b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-25",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 5,
+      "set": "codegen-2b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    }
+  ]
+}
+[2026-10-27T05:26:37Z] exit 0
+[2026-10-27T05:26:37Z] node evidence/backends.mjs ladder-b
+[05:26:38] ladder-kestrel-l1-b public suite from ladder-kestrel-l0: 37 tests
+[05:26:38] ladder-kestrel-l2-b public suite from ladder-kestrel-l0: 37 tests
+[05:26:39] ladder-kestrel-l3-b public suite from ladder-kestrel-l0: 37 tests
+[05:26:40] ladder-kestrel-l4-b public suite from ladder-kestrel-l0: 37 tests
+[2026-10-27T05:26:40Z] exit 0
+[2026-10-27T05:26:40Z] node bin/run.mjs ladder-kestrel-l1-b ladder-kestrel-l2-b ladder-kestrel-l3-b ladder-kestrel-l4-b --model haiku --runs 5 --concurrency 2
+[05:26:40] 0 haiku run(s) staged
+0 run(s) finished
+[2026-10-27T05:26:40Z] exit 0
+[2026-10-27T05:26:40Z] node evidence/backends.mjs ladder --runs evidence/backends/runs --json evidence/backends/ladder-codex-cli.json
+[05:26:44] ladder-kestrel-l1-b/haiku/1 macro 100.0%
+[05:26:45] ladder-kestrel-l1-b/haiku/2 macro 100.0%
+[05:26:46] ladder-kestrel-l1-b/haiku/3 macro 100.0%
+[05:26:47] ladder-kestrel-l1-b/haiku/4 macro 100.0%
+[05:26:48] ladder-kestrel-l1-b/haiku/5 macro 100.0%
+[05:26:49] ladder-kestrel-l2-b/haiku/1 macro 100.0%
+[05:26:50] ladder-kestrel-l2-b/haiku/2 macro 100.0%
+[05:26:52] ladder-kestrel-l2-b/haiku/3 macro 100.0%
+[05:26:53] ladder-kestrel-l2-b/haiku/4 macro 100.0%
+[05:26:54] ladder-kestrel-l2-b/haiku/5 macro 100.0%
+[05:26:55] ladder-kestrel-l3-b/haiku/1 macro 100.0%
+[05:26:56] ladder-kestrel-l3-b/haiku/2 macro 100.0%
+[05:26:58] ladder-kestrel-l3-b/haiku/3 macro 100.0%
+[05:26:59] ladder-kestrel-l3-b/haiku/4 macro 100.0%
+[05:27:00] ladder-kestrel-l3-b/haiku/5 macro 100.0%
+[05:27:01] ladder-kestrel-l4-b/haiku/1 macro 100.0%
+[05:27:02] ladder-kestrel-l4-b/haiku/2 macro 100.0%
+[05:27:03] ladder-kestrel-l4-b/haiku/3 macro 100.0%
+[05:27:04] ladder-kestrel-l4-b/haiku/4 macro 100.0%
+[05:27:06] ladder-kestrel-l4-b/haiku/5 macro 100.0%
+ladder-kestrel-l0: the oracle passes 37/37 public tests
+ladder-kestrel-l1: the oracle passes 45/45 public tests
+ladder-kestrel-l2: the oracle passes 25/27 public tests
+ladder-kestrel-l3: the oracle passes 16/16 public tests
+ladder-kestrel-l4: the oracle passes 2/2 public tests
+{
+  "runs": 20,
+  "differingFromArchive": 0,
+  "means": {
+    "b/own-brief/L1": 100,
+    "b/own-brief/L2": 100,
+    "b/own-brief/L3": 100,
+    "b/own-brief/L4": 100
+  }
+}
+[2026-10-27T05:27:06Z] exit 0
+[2026-10-27T05:27:06Z] queue done

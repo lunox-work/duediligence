@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "b3fa914f-5437-4f06-a71c-8b39b4a8ffb8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2535927,
+        "turns": 6,
+        "durationMs": 68796,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2535927,
+    "finalText": "The test suite is in `tests/public/test_max_product.py`. `python3 sandbox/compile_check.py` reports no errors. All 22 tests fail for now with a Runtime Error, because `maxProduct` still raises \"not implemented\".\n\n**No samples in `spec.md`.** The statement has no examples, so there were none to copy. In their place I used the three examples from the original LeetCode problem (3509). I checked each one by hand against the definition, and the brute force below agrees with all three.\n\n**What the cases cover:**\n- **Smallest input:** a single element, testing a match, a product over `limit`, a sum that doesn't equal `k`, and `[0]`. A product of 0 is allowed.\n- **Largest values:** elements of 12, the smallest `limit` (1), and negative `k`.\n- **`k` at ±10^5:** the answer is -1, because no alternating sum of 150 values between 0 and 12 can get past ±900.\n- **Longest arrays (150 elements):** all 12s with `k=12` gives 1728 (12³; 12⁵ is over 5000). All 12s with `k=0` gives 144. All 1s gives 1, and all 0s gives 0.\n- **Four small mixed cases:** the expected answer is computed inside the test by a brute force that tries every subsequence. A comment above the `brute` function explains how it works.\n\n22 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_max_product.py"
+    ]
+  }
+}

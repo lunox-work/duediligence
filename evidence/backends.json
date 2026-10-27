@@ -1,0 +1,3516 @@
+{
+  "at": "2026-10-26T11:09:44.330Z",
+  "backend": "codex-cli",
+  "claude": {
+    "calibrated": 26,
+    "hidden": {
+      "written": 1361,
+      "kept": 1361,
+      "percent": 100
+    },
+    "public": {
+      "tests": 629,
+      "failingOnReference": 0
+    },
+    "mutation": {
+      "access-rules": {
+        "spec": "access-rules",
+        "mutants": 65,
+        "invalid": 13,
+        "judged": 52,
+        "publicKilled": 44,
+        "hiddenKilled": 46,
+        "eitherKilled": 46,
+        "publicSurvivors": 8,
+        "publicSurvivorsHiddenKilled": 2,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:31:10.862Z"
+      },
+      "coalescing-cache": {
+        "spec": "coalescing-cache",
+        "mutants": 39,
+        "invalid": 7,
+        "judged": 32,
+        "publicKilled": 28,
+        "hiddenKilled": 28,
+        "eitherKilled": 28,
+        "publicSurvivors": 4,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:30:47.054Z"
+      },
+      "csv-export": {
+        "spec": "csv-export",
+        "mutants": 46,
+        "invalid": 7,
+        "judged": 39,
+        "publicKilled": 29,
+        "hiddenKilled": 30,
+        "eitherKilled": 30,
+        "publicSurvivors": 10,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:30:13.473Z"
+      },
+      "env-names": {
+        "spec": "env-names",
+        "mutants": 27,
+        "invalid": 10,
+        "judged": 17,
+        "publicKilled": 15,
+        "hiddenKilled": 15,
+        "eitherKilled": 15,
+        "publicSurvivors": 2,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:29:51.626Z"
+      },
+      "escrow-ledger": {
+        "spec": "escrow-ledger",
+        "mutants": 88,
+        "invalid": 19,
+        "judged": 69,
+        "publicKilled": 63,
+        "hiddenKilled": 63,
+        "eitherKilled": 64,
+        "publicSurvivors": 6,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 1,
+        "gradedAt": "2026-10-24T03:32:59.385Z"
+      },
+      "escrow-split": {
+        "spec": "escrow-split",
+        "mutants": 37,
+        "invalid": 3,
+        "judged": 34,
+        "publicKilled": 27,
+        "hiddenKilled": 28,
+        "eitherKilled": 28,
+        "publicSurvivors": 7,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:30:12.637Z"
+      },
+      "frame-codec": {
+        "spec": "frame-codec",
+        "mutants": 118,
+        "invalid": 17,
+        "harnessErrors": 4,
+        "judged": 97,
+        "publicKilled": 77,
+        "hiddenKilled": 78,
+        "eitherKilled": 80,
+        "publicSurvivors": 20,
+        "publicSurvivorsHiddenKilled": 3,
+        "publicKilledHiddenMissed": 2,
+        "gradedAt": "2026-10-24T07:09:34.435Z"
+      },
+      "gherkin-parse": {
+        "spec": "gherkin-parse",
+        "mutants": 109,
+        "invalid": 28,
+        "judged": 81,
+        "publicKilled": 52,
+        "hiddenKilled": 52,
+        "eitherKilled": 52,
+        "publicSurvivors": 29,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:35:35.275Z"
+      },
+      "gherkin-spec": {
+        "spec": "gherkin-spec",
+        "mutants": 28,
+        "invalid": 4,
+        "judged": 24,
+        "publicKilled": 23,
+        "hiddenKilled": 23,
+        "eitherKilled": 23,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:31:25.851Z"
+      },
+      "invite-codes": {
+        "spec": "invite-codes",
+        "mutants": 50,
+        "invalid": 20,
+        "judged": 30,
+        "publicKilled": 29,
+        "hiddenKilled": 29,
+        "eitherKilled": 29,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:50:39.253Z"
+      },
+      "keyed-queue": {
+        "spec": "keyed-queue",
+        "mutants": 53,
+        "invalid": 2,
+        "judged": 51,
+        "publicKilled": 44,
+        "hiddenKilled": 45,
+        "eitherKilled": 45,
+        "publicSurvivors": 7,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T05:51:54.576Z"
+      },
+      "licence-scan": {
+        "spec": "licence-scan",
+        "mutants": 129,
+        "invalid": 48,
+        "judged": 81,
+        "publicKilled": 68,
+        "hiddenKilled": 73,
+        "eitherKilled": 73,
+        "publicSurvivors": 13,
+        "publicSurvivorsHiddenKilled": 5,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:36:55.736Z"
+      },
+      "money-format": {
+        "spec": "money-format",
+        "mutants": 13,
+        "invalid": 3,
+        "judged": 10,
+        "publicKilled": 10,
+        "hiddenKilled": 10,
+        "eitherKilled": 10,
+        "publicSurvivors": 0,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:33:42.071Z"
+      },
+      "name-scan": {
+        "spec": "name-scan",
+        "mutants": 107,
+        "invalid": 2,
+        "judged": 105,
+        "publicKilled": 85,
+        "hiddenKilled": 89,
+        "eitherKilled": 89,
+        "publicSurvivors": 20,
+        "publicSurvivorsHiddenKilled": 4,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:38:03.973Z"
+      },
+      "patch-apply": {
+        "spec": "patch-apply",
+        "mutants": 311,
+        "invalid": 61,
+        "judged": 250,
+        "publicKilled": 137,
+        "hiddenKilled": 138,
+        "eitherKilled": 138,
+        "publicSurvivors": 113,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T04:41:20.021Z"
+      },
+      "project-names": {
+        "spec": "project-names",
+        "mutants": 21,
+        "invalid": 7,
+        "judged": 14,
+        "publicKilled": 13,
+        "hiddenKilled": 13,
+        "eitherKilled": 13,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:37:25.851Z"
+      },
+      "promo-stack": {
+        "spec": "promo-stack",
+        "mutants": 58,
+        "invalid": 2,
+        "judged": 56,
+        "publicKilled": 44,
+        "hiddenKilled": 47,
+        "eitherKilled": 47,
+        "publicSurvivors": 12,
+        "publicSurvivorsHiddenKilled": 3,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:39:24.984Z"
+      },
+      "question-limit": {
+        "spec": "question-limit",
+        "mutants": 32,
+        "invalid": 6,
+        "judged": 26,
+        "publicKilled": 26,
+        "hiddenKilled": 26,
+        "eitherKilled": 26,
+        "publicSurvivors": 0,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:38:44.075Z"
+      },
+      "retention-sweep": {
+        "spec": "retention-sweep",
+        "mutants": 44,
+        "invalid": 11,
+        "judged": 33,
+        "publicKilled": 29,
+        "hiddenKilled": 29,
+        "eitherKilled": 29,
+        "publicSurvivors": 4,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:39:52.118Z"
+      },
+      "reverse-diff": {
+        "spec": "reverse-diff",
+        "mutants": 127,
+        "invalid": 21,
+        "judged": 106,
+        "publicKilled": 63,
+        "hiddenKilled": 67,
+        "eitherKilled": 67,
+        "publicSurvivors": 43,
+        "publicSurvivorsHiddenKilled": 4,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T04:11:54.639Z"
+      },
+      "shift-compliance": {
+        "spec": "shift-compliance",
+        "mutants": 103,
+        "invalid": 10,
+        "judged": 93,
+        "publicKilled": 73,
+        "hiddenKilled": 81,
+        "eitherKilled": 81,
+        "publicSurvivors": 20,
+        "publicSurvivorsHiddenKilled": 8,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:43:52.793Z"
+      },
+      "statement-import": {
+        "spec": "statement-import",
+        "mutants": 136,
+        "invalid": 16,
+        "judged": 120,
+        "publicKilled": 89,
+        "hiddenKilled": 107,
+        "eitherKilled": 107,
+        "publicSurvivors": 31,
+        "publicSurvivorsHiddenKilled": 18,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:53:21.205Z"
+      },
+      "status-normalize": {
+        "spec": "status-normalize",
+        "mutants": 7,
+        "invalid": 1,
+        "judged": 6,
+        "publicKilled": 5,
+        "hiddenKilled": 5,
+        "eitherKilled": 5,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:51:02.254Z"
+      },
+      "tool-versions": {
+        "spec": "tool-versions",
+        "mutants": 60,
+        "invalid": 16,
+        "judged": 44,
+        "publicKilled": 39,
+        "hiddenKilled": 40,
+        "eitherKilled": 40,
+        "publicSurvivors": 5,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:54:16.966Z"
+      },
+      "usage-counter": {
+        "spec": "usage-counter",
+        "mutants": 59,
+        "invalid": 26,
+        "judged": 33,
+        "publicKilled": 25,
+        "hiddenKilled": 27,
+        "eitherKilled": 27,
+        "publicSurvivors": 8,
+        "publicSurvivorsHiddenKilled": 2,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T04:00:30.022Z"
+      },
+      "weekly-digest": {
+        "spec": "weekly-digest",
+        "mutants": 36,
+        "invalid": 0,
+        "judged": 36,
+        "publicKilled": 30,
+        "hiddenKilled": 30,
+        "eitherKilled": 30,
+        "publicSurvivors": 6,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "gradedAt": "2026-10-24T03:56:17.379Z"
+      }
+    },
+    "evalplus": {
+      "scoredAt": "2026-10-26T04:14:06.858Z",
+      "runner": "bin/runners/pytest.mjs (pytest 8.4.2)",
+      "python": "Python 3.14.8",
+      "all": {
+        "tasks": 40,
+        "solutions": 1240,
+        "wrong": 926,
+        "wrongAcceptedByBase": {
+          "count": 162,
+          "percent": 17.5
+        },
+        "wrongAcceptedByGenerated": {
+          "count": 71,
+          "percent": 7.7
+        },
+        "rightRejectedByGenerated": {
+          "count": 23,
+          "of": 314
+        }
+      },
+      "without22and60": {
+        "tasks": 38,
+        "solutions": 1178,
+        "wrong": 889,
+        "wrongAcceptedByBase": {
+          "count": 133,
+          "percent": 15
+        },
+        "wrongAcceptedByGenerated": {
+          "count": 43,
+          "percent": 4.8
+        },
+        "rightRejectedByGenerated": {
+          "count": 3,
+          "of": 289
+        }
+      },
+      "rowsComparedWithArchive": 1240,
+      "rowsDifferingFromArchive": 0,
+      "differences": []
+    },
+    "ladder": {
+      "agreement": [
+        {
+          "slug": "ladder-kestrel-l0",
+          "level": 0,
+          "compiled": true,
+          "passed": 73,
+          "total": 74,
+          "failing": [
+            "tests/public/tagged.test.ts :: [happy-8] boundary: a tagged comparator of the same minor is not enough when it does not hold"
+          ]
+        },
+        {
+          "slug": "ladder-kestrel-l1",
+          "level": 1,
+          "compiled": true,
+          "passed": 31,
+          "total": 32,
+          "failing": [
+            "tests/public/rule-8-tagged.test.ts :: [rule-8] a tagged version needs every comparator to hold as well"
+          ]
+        },
+        {
+          "slug": "ladder-kestrel-l2",
+          "level": 2,
+          "compiled": true,
+          "passed": 22,
+          "total": 23,
+          "failing": [
+            "tests/public/satisfies.test.ts :: [rule-3] ^V with major 0 still spans the whole major"
+          ]
+        },
+        {
+          "slug": "ladder-kestrel-l3",
+          "level": 3,
+          "compiled": true,
+          "passed": 14,
+          "total": 14,
+          "failing": []
+        },
+        {
+          "slug": "ladder-kestrel-l4",
+          "level": 4,
+          "compiled": true,
+          "passed": 1,
+          "total": 1,
+          "failing": []
+        }
+      ],
+      "rescored": {
+        "runs": 140,
+        "differingFromArchive": 0,
+        "means": {
+          "a/double-blind/L0": 100,
+          "a/double-blind-own/L0": 100,
+          "a/self-tested/L0": 100,
+          "a/spec-only/L0": 100,
+          "a/double-blind/L1": 100,
+          "a/double-blind-own/L1": 100,
+          "a/self-tested/L1": 100,
+          "a/spec-only/L1": 100,
+          "a/double-blind/L2": 52.3,
+          "a/double-blind-own/L2": 52.1,
+          "a/self-tested/L2": 56.8,
+          "a/spec-only/L2": 56.3,
+          "a/double-blind/L3": 42.7,
+          "a/double-blind-own/L3": 47.7,
+          "a/self-tested/L3": 59,
+          "a/spec-only/L3": 59.2,
+          "a/double-blind/L4": 37.3,
+          "a/double-blind-own/L4": 37.2,
+          "a/self-tested/L4": 47.2,
+          "a/spec-only/L4": 45.8,
+          "b/double-blind/L1": 100,
+          "b/double-blind-own/L1": 100,
+          "b/double-blind/L2": 100,
+          "b/double-blind-own/L2": 100,
+          "b/double-blind/L3": 100,
+          "b/double-blind-own/L3": 100,
+          "b/double-blind/L4": 100,
+          "b/double-blind-own/L4": 100
+        },
+        "rows": [
+          {
+            "key": "ladder-kestrel-l0/double-blind-haiku/1",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-haiku/2",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-haiku/3",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-haiku/4",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-haiku/5",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-own-haiku/1",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-own-haiku/2",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-own-haiku/3",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-own-haiku/4",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/double-blind-own-haiku/5",
+            "level": 0,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/self-tested-haiku/1",
+            "level": 0,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/self-tested-haiku/2",
+            "level": 0,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/self-tested-haiku/3",
+            "level": 0,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/self-tested-haiku/4",
+            "level": 0,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/self-tested-haiku/5",
+            "level": 0,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/spec-only-haiku/1",
+            "level": 0,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/spec-only-haiku/2",
+            "level": 0,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/spec-only-haiku/3",
+            "level": 0,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/spec-only-haiku/4",
+            "level": 0,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l0/spec-only-haiku/5",
+            "level": 0,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-haiku/1",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-haiku/2",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-haiku/3",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-haiku/4",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-haiku/5",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-own-haiku/1",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-own-haiku/2",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-own-haiku/3",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-own-haiku/4",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/double-blind-own-haiku/5",
+            "level": 1,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/self-tested-haiku/1",
+            "level": 1,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/self-tested-haiku/2",
+            "level": 1,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/self-tested-haiku/3",
+            "level": 1,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/self-tested-haiku/4",
+            "level": 1,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/self-tested-haiku/5",
+            "level": 1,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/spec-only-haiku/1",
+            "level": 1,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/spec-only-haiku/2",
+            "level": 1,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/spec-only-haiku/3",
+            "level": 1,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/spec-only-haiku/4",
+            "level": 1,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1/spec-only-haiku/5",
+            "level": 1,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 1,
+            "public": {
+              "passed": 31,
+              "total": 32
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-haiku/1",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-haiku/2",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.553030303030303,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.553030303030303
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-haiku/3",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-haiku/4",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-haiku/5",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-own-haiku/1",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5454545454545454,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5454545454545454
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-own-haiku/2",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-own-haiku/3",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-own-haiku/4",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/double-blind-own-haiku/5",
+            "level": 2,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5151515151515151,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5151515151515151
+          },
+          {
+            "key": "ladder-kestrel-l2/self-tested-haiku/1",
+            "level": 2,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.5833333333333334,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5833333333333334
+          },
+          {
+            "key": "ladder-kestrel-l2/self-tested-haiku/2",
+            "level": 2,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.5454545454545454,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5454545454545454
+          },
+          {
+            "key": "ladder-kestrel-l2/self-tested-haiku/3",
+            "level": 2,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.5833333333333334,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5833333333333334
+          },
+          {
+            "key": "ladder-kestrel-l2/self-tested-haiku/4",
+            "level": 2,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.5833333333333334,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5833333333333334
+          },
+          {
+            "key": "ladder-kestrel-l2/self-tested-haiku/5",
+            "level": 2,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.5454545454545454,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5454545454545454
+          },
+          {
+            "key": "ladder-kestrel-l2/spec-only-haiku/1",
+            "level": 2,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5808080808080808,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5808080808080808
+          },
+          {
+            "key": "ladder-kestrel-l2/spec-only-haiku/2",
+            "level": 2,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5959595959595959,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5959595959595959
+          },
+          {
+            "key": "ladder-kestrel-l2/spec-only-haiku/3",
+            "level": 2,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5454545454545454,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5454545454545454
+          },
+          {
+            "key": "ladder-kestrel-l2/spec-only-haiku/4",
+            "level": 2,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5454545454545454,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5454545454545454
+          },
+          {
+            "key": "ladder-kestrel-l2/spec-only-haiku/5",
+            "level": 2,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5454545454545454,
+            "public": {
+              "passed": 23,
+              "total": 23
+            },
+            "archiveMacro": 0.5454545454545454
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-haiku/1",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.3181818181818182,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.3181818181818182
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-haiku/2",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.44696969696969696,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.44696969696969696
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-haiku/3",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.4419191919191918,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.4419191919191918
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-haiku/4",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.46464646464646464,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.46464646464646464
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-haiku/5",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.46464646464646464,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.46464646464646464
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-own-haiku/1",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5025252525252525,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.5025252525252525
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-own-haiku/2",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.45454545454545453,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.45454545454545453
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-own-haiku/3",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.44696969696969696,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.44696969696969696
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-own-haiku/4",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.46464646464646464,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.46464646464646464
+          },
+          {
+            "key": "ladder-kestrel-l3/double-blind-own-haiku/5",
+            "level": 3,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.5176767676767677,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.5176767676767677
+          },
+          {
+            "key": "ladder-kestrel-l3/self-tested-haiku/1",
+            "level": 3,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.46464646464646464,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.46464646464646464
+          },
+          {
+            "key": "ladder-kestrel-l3/self-tested-haiku/2",
+            "level": 3,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.6868686868686869,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.6868686868686869
+          },
+          {
+            "key": "ladder-kestrel-l3/self-tested-haiku/3",
+            "level": 3,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.6868686868686869,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.6868686868686869
+          },
+          {
+            "key": "ladder-kestrel-l3/self-tested-haiku/4",
+            "level": 3,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.46464646464646464,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.46464646464646464
+          },
+          {
+            "key": "ladder-kestrel-l3/self-tested-haiku/5",
+            "level": 3,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.6464646464646464,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.6464646464646464
+          },
+          {
+            "key": "ladder-kestrel-l3/spec-only-haiku/1",
+            "level": 3,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5378787878787878,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.5378787878787878
+          },
+          {
+            "key": "ladder-kestrel-l3/spec-only-haiku/2",
+            "level": 3,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.6919191919191918,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.6919191919191918
+          },
+          {
+            "key": "ladder-kestrel-l3/spec-only-haiku/3",
+            "level": 3,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5328282828282828,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.5328282828282828
+          },
+          {
+            "key": "ladder-kestrel-l3/spec-only-haiku/4",
+            "level": 3,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.6868686868686869,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.6868686868686869
+          },
+          {
+            "key": "ladder-kestrel-l3/spec-only-haiku/5",
+            "level": 3,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.5126262626262625,
+            "public": {
+              "passed": 14,
+              "total": 14
+            },
+            "archiveMacro": 0.5126262626262625
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-haiku/1",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-haiku/2",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-haiku/3",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.40404040404040403,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.40404040404040403
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-haiku/4",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.5126262626262625,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.5126262626262625
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-haiku/5",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-own-haiku/1",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-own-haiku/2",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-own-haiku/3",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.43686868686868685,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.43686868686868685
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-own-haiku/4",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/double-blind-own-haiku/5",
+            "level": 4,
+            "condition": "a",
+            "arm": "double-blind-own",
+            "macro": 0.4722222222222222,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4722222222222222
+          },
+          {
+            "key": "ladder-kestrel-l4/self-tested-haiku/1",
+            "level": 4,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/self-tested-haiku/2",
+            "level": 4,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/self-tested-haiku/3",
+            "level": 4,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.46212121212121215,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.46212121212121215
+          },
+          {
+            "key": "ladder-kestrel-l4/self-tested-haiku/4",
+            "level": 4,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.4722222222222222,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4722222222222222
+          },
+          {
+            "key": "ladder-kestrel-l4/self-tested-haiku/5",
+            "level": 4,
+            "condition": "a",
+            "arm": "self-tested",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/spec-only-haiku/1",
+            "level": 4,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/spec-only-haiku/2",
+            "level": 4,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.4722222222222222,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4722222222222222
+          },
+          {
+            "key": "ladder-kestrel-l4/spec-only-haiku/3",
+            "level": 4,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.46212121212121215,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.46212121212121215
+          },
+          {
+            "key": "ladder-kestrel-l4/spec-only-haiku/4",
+            "level": 4,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.4747474747474747,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4747474747474747
+          },
+          {
+            "key": "ladder-kestrel-l4/spec-only-haiku/5",
+            "level": 4,
+            "condition": "a",
+            "arm": "spec-only",
+            "macro": 0.4065656565656565,
+            "public": {
+              "passed": 1,
+              "total": 1
+            },
+            "archiveMacro": 0.4065656565656565
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-haiku/1",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-haiku/2",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-haiku/3",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-haiku/4",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-haiku/5",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-own-haiku/1",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-own-haiku/2",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-own-haiku/3",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-own-haiku/4",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l1-b/double-blind-own-haiku/5",
+            "level": 1,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-haiku/1",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-haiku/2",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-haiku/3",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-haiku/4",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-haiku/5",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-own-haiku/1",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-own-haiku/2",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-own-haiku/3",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-own-haiku/4",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l2-b/double-blind-own-haiku/5",
+            "level": 2,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-haiku/1",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-haiku/2",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-haiku/3",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-haiku/4",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-haiku/5",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-own-haiku/1",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-own-haiku/2",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-own-haiku/3",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-own-haiku/4",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l3-b/double-blind-own-haiku/5",
+            "level": 3,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-haiku/1",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-haiku/2",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-haiku/3",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-haiku/4",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-haiku/5",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-own-haiku/1",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-own-haiku/2",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-own-haiku/3",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 74,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-own-haiku/4",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          },
+          {
+            "key": "ladder-kestrel-l4-b/double-blind-own-haiku/5",
+            "level": 4,
+            "condition": "b",
+            "arm": "double-blind-own",
+            "macro": 1,
+            "public": {
+              "passed": 73,
+              "total": 74
+            },
+            "archiveMacro": 1
+          }
+        ]
+      }
+    },
+    "referee": {
+      "cases": 57,
+      "answered": 57,
+      "requires": {
+        "yes": 46,
+        "open": 11,
+        "no": 0
+      },
+      "runsRejected": 100,
+      "runsUpheld": 95
+    },
+    "mutationTotals": {
+      "specs": 25,
+      "judged": 1442,
+      "publicKilled": 1090,
+      "eitherKilled": 1142,
+      "publicPercent": 75.6,
+      "eitherPercent": 79.2
+    }
+  },
+  "other": {
+    "calibrated": 26,
+    "hidden": {
+      "written": 1133,
+      "kept": 1126,
+      "percent": 99.4
+    },
+    "public": {
+      "tests": 676,
+      "failingOnReference": 2
+    },
+    "mutation": {
+      "access-rules": {
+        "spec": "access-rules",
+        "mutants": 65,
+        "invalid": 13,
+        "harnessErrors": 0,
+        "judged": 52,
+        "publicKilled": 45,
+        "hiddenKilled": 46,
+        "eitherKilled": 46,
+        "publicSurvivors": 7,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 36,
+          "publicFailingOnReference": 0,
+          "hidden": 53,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.857Z"
+      },
+      "coalescing-cache": {
+        "spec": "coalescing-cache",
+        "mutants": 39,
+        "invalid": 7,
+        "harnessErrors": 0,
+        "judged": 32,
+        "publicKilled": 28,
+        "hiddenKilled": 28,
+        "eitherKilled": 28,
+        "publicSurvivors": 4,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 24,
+          "publicFailingOnReference": 0,
+          "hidden": 37,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.857Z"
+      },
+      "csv-export": {
+        "spec": "csv-export",
+        "mutants": 46,
+        "invalid": 7,
+        "harnessErrors": 0,
+        "judged": 39,
+        "publicKilled": 30,
+        "hiddenKilled": 30,
+        "eitherKilled": 30,
+        "publicSurvivors": 9,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 53,
+          "publicFailingOnReference": 0,
+          "hidden": 69,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.858Z"
+      },
+      "env-names": {
+        "spec": "env-names",
+        "mutants": 27,
+        "invalid": 10,
+        "harnessErrors": 0,
+        "judged": 17,
+        "publicKilled": 15,
+        "hiddenKilled": 15,
+        "eitherKilled": 15,
+        "publicSurvivors": 2,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 14,
+          "publicFailingOnReference": 0,
+          "hidden": 37,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.858Z"
+      },
+      "escrow-ledger": {
+        "spec": "escrow-ledger",
+        "mutants": 88,
+        "invalid": 19,
+        "harnessErrors": 0,
+        "judged": 69,
+        "publicKilled": 64,
+        "hiddenKilled": 63,
+        "eitherKilled": 64,
+        "publicSurvivors": 5,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 1,
+        "baseline": {
+          "public": 28,
+          "publicFailingOnReference": 0,
+          "hidden": 37,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.858Z"
+      },
+      "escrow-split": {
+        "spec": "escrow-split",
+        "mutants": 37,
+        "invalid": 3,
+        "harnessErrors": 0,
+        "judged": 34,
+        "publicKilled": 26,
+        "hiddenKilled": 26,
+        "eitherKilled": 26,
+        "publicSurvivors": 8,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 22,
+          "publicFailingOnReference": 0,
+          "hidden": 46,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.858Z"
+      },
+      "frame-codec": {
+        "spec": "frame-codec",
+        "mutants": 118,
+        "invalid": 17,
+        "harnessErrors": 0,
+        "judged": 101,
+        "publicKilled": 85,
+        "hiddenKilled": 83,
+        "eitherKilled": 85,
+        "publicSurvivors": 16,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 2,
+        "baseline": {
+          "public": 38,
+          "publicFailingOnReference": 0,
+          "hidden": 46,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.859Z"
+      },
+      "gherkin-parse": {
+        "spec": "gherkin-parse",
+        "mutants": 109,
+        "invalid": 28,
+        "harnessErrors": 0,
+        "judged": 81,
+        "publicKilled": 53,
+        "hiddenKilled": 52,
+        "eitherKilled": 53,
+        "publicSurvivors": 28,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 1,
+        "baseline": {
+          "public": 24,
+          "publicFailingOnReference": 0,
+          "hidden": 39,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.859Z"
+      },
+      "gherkin-spec": {
+        "spec": "gherkin-spec",
+        "mutants": 28,
+        "invalid": 4,
+        "harnessErrors": 0,
+        "judged": 24,
+        "publicKilled": 23,
+        "hiddenKilled": 23,
+        "eitherKilled": 23,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 22,
+          "publicFailingOnReference": 0,
+          "hidden": 39,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.859Z"
+      },
+      "invite-codes": {
+        "spec": "invite-codes",
+        "mutants": 50,
+        "invalid": 20,
+        "harnessErrors": 0,
+        "judged": 30,
+        "publicKilled": 29,
+        "hiddenKilled": 29,
+        "eitherKilled": 29,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 19,
+          "publicFailingOnReference": 0,
+          "hidden": 31,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.860Z"
+      },
+      "keyed-queue": {
+        "spec": "keyed-queue",
+        "mutants": 53,
+        "invalid": 2,
+        "harnessErrors": 0,
+        "judged": 51,
+        "publicKilled": 45,
+        "hiddenKilled": 45,
+        "eitherKilled": 45,
+        "publicSurvivors": 6,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 22,
+          "publicFailingOnReference": 0,
+          "hidden": 34,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.860Z"
+      },
+      "licence-scan": {
+        "spec": "licence-scan",
+        "mutants": 129,
+        "invalid": 48,
+        "harnessErrors": 0,
+        "judged": 81,
+        "publicKilled": 69,
+        "hiddenKilled": 74,
+        "eitherKilled": 74,
+        "publicSurvivors": 12,
+        "publicSurvivorsHiddenKilled": 5,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 30,
+          "publicFailingOnReference": 0,
+          "hidden": 50,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.860Z"
+      },
+      "money-format": {
+        "spec": "money-format",
+        "mutants": 13,
+        "invalid": 3,
+        "harnessErrors": 0,
+        "judged": 10,
+        "publicKilled": 10,
+        "hiddenKilled": 10,
+        "eitherKilled": 10,
+        "publicSurvivors": 0,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 18,
+          "publicFailingOnReference": 0,
+          "hidden": 34,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.860Z"
+      },
+      "name-scan": {
+        "spec": "name-scan",
+        "mutants": 107,
+        "invalid": 2,
+        "harnessErrors": 0,
+        "judged": 105,
+        "publicKilled": 84,
+        "hiddenKilled": 89,
+        "eitherKilled": 89,
+        "publicSurvivors": 21,
+        "publicSurvivorsHiddenKilled": 5,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 25,
+          "publicFailingOnReference": 0,
+          "hidden": 49,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.861Z"
+      },
+      "patch-apply": {
+        "spec": "patch-apply",
+        "mutants": 311,
+        "invalid": 61,
+        "harnessErrors": 0,
+        "judged": 250,
+        "publicKilled": 141,
+        "hiddenKilled": 146,
+        "eitherKilled": 146,
+        "publicSurvivors": 109,
+        "publicSurvivorsHiddenKilled": 5,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 38,
+          "publicFailingOnReference": 0,
+          "hidden": 67,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.861Z"
+      },
+      "project-names": {
+        "spec": "project-names",
+        "mutants": 21,
+        "invalid": 7,
+        "harnessErrors": 0,
+        "judged": 14,
+        "publicKilled": 13,
+        "hiddenKilled": 13,
+        "eitherKilled": 13,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 14,
+          "publicFailingOnReference": 0,
+          "hidden": 34,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.861Z"
+      },
+      "promo-stack": {
+        "spec": "promo-stack",
+        "mutants": 58,
+        "invalid": 2,
+        "harnessErrors": 0,
+        "judged": 56,
+        "publicKilled": 46,
+        "hiddenKilled": 47,
+        "eitherKilled": 47,
+        "publicSurvivors": 10,
+        "publicSurvivorsHiddenKilled": 1,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 31,
+          "publicFailingOnReference": 0,
+          "hidden": 50,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.861Z"
+      },
+      "question-limit": {
+        "spec": "question-limit",
+        "mutants": 32,
+        "invalid": 6,
+        "harnessErrors": 0,
+        "judged": 26,
+        "publicKilled": 26,
+        "hiddenKilled": 26,
+        "eitherKilled": 26,
+        "publicSurvivors": 0,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 14,
+          "publicFailingOnReference": 0,
+          "hidden": 29,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.862Z"
+      },
+      "retention-sweep": {
+        "spec": "retention-sweep",
+        "mutants": 44,
+        "invalid": 11,
+        "harnessErrors": 0,
+        "judged": 33,
+        "publicKilled": 29,
+        "hiddenKilled": 29,
+        "eitherKilled": 29,
+        "publicSurvivors": 4,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 28,
+          "publicFailingOnReference": 0,
+          "hidden": 44,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.862Z"
+      },
+      "reverse-diff": {
+        "spec": "reverse-diff",
+        "mutants": 127,
+        "invalid": 21,
+        "harnessErrors": 0,
+        "judged": 106,
+        "publicKilled": 66,
+        "hiddenKilled": 79,
+        "eitherKilled": 79,
+        "publicSurvivors": 40,
+        "publicSurvivorsHiddenKilled": 13,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 16,
+          "publicFailingOnReference": 0,
+          "hidden": 41,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.862Z"
+      },
+      "shift-compliance": {
+        "spec": "shift-compliance",
+        "mutants": 103,
+        "invalid": 10,
+        "harnessErrors": 0,
+        "judged": 93,
+        "publicKilled": 78,
+        "hiddenKilled": 84,
+        "eitherKilled": 84,
+        "publicSurvivors": 15,
+        "publicSurvivorsHiddenKilled": 6,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 28,
+          "publicFailingOnReference": 2,
+          "hidden": 52,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.862Z"
+      },
+      "statement-import": {
+        "spec": "statement-import",
+        "mutants": 136,
+        "invalid": 16,
+        "harnessErrors": 0,
+        "judged": 120,
+        "publicKilled": 99,
+        "hiddenKilled": 105,
+        "eitherKilled": 106,
+        "publicSurvivors": 21,
+        "publicSurvivorsHiddenKilled": 7,
+        "publicKilledHiddenMissed": 1,
+        "baseline": {
+          "public": 41,
+          "publicFailingOnReference": 0,
+          "hidden": 55,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.863Z"
+      },
+      "status-normalize": {
+        "spec": "status-normalize",
+        "mutants": 7,
+        "invalid": 1,
+        "harnessErrors": 0,
+        "judged": 6,
+        "publicKilled": 5,
+        "hiddenKilled": 5,
+        "eitherKilled": 5,
+        "publicSurvivors": 1,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 13,
+          "publicFailingOnReference": 0,
+          "hidden": 36,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.863Z"
+      },
+      "tool-versions": {
+        "spec": "tool-versions",
+        "mutants": 60,
+        "invalid": 16,
+        "harnessErrors": 0,
+        "judged": 44,
+        "publicKilled": 40,
+        "hiddenKilled": 40,
+        "eitherKilled": 40,
+        "publicSurvivors": 4,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 35,
+          "publicFailingOnReference": 0,
+          "hidden": 48,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.864Z"
+      },
+      "usage-counter": {
+        "spec": "usage-counter",
+        "mutants": 59,
+        "invalid": 26,
+        "harnessErrors": 0,
+        "judged": 33,
+        "publicKilled": 25,
+        "hiddenKilled": 25,
+        "eitherKilled": 25,
+        "publicSurvivors": 8,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 21,
+          "publicFailingOnReference": 0,
+          "hidden": 37,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.864Z"
+      },
+      "weekly-digest": {
+        "spec": "weekly-digest",
+        "mutants": 36,
+        "invalid": 0,
+        "harnessErrors": 0,
+        "judged": 36,
+        "publicKilled": 30,
+        "hiddenKilled": 30,
+        "eitherKilled": 30,
+        "publicSurvivors": 6,
+        "publicSurvivorsHiddenKilled": 0,
+        "publicKilledHiddenMissed": 0,
+        "baseline": {
+          "public": 20,
+          "publicFailingOnReference": 0,
+          "hidden": 32,
+          "hiddenFailingOnReference": 0
+        },
+        "gradedAt": "2026-10-26T11:09:00.864Z"
+      }
+    },
+    "evalplus": {
+      "scoredAt": "2026-10-26T08:07:41.358Z",
+      "runner": "bin/runners/pytest.mjs (pytest 8.4.2)",
+      "python": "Python 3.14.8",
+      "all": {
+        "tasks": 6,
+        "solutions": 186,
+        "wrong": 159,
+        "wrongAcceptedByBase": {
+          "count": 14,
+          "percent": 8.8
+        },
+        "wrongAcceptedByGenerated": {
+          "count": 0,
+          "percent": 0
+        },
+        "rightRejectedByGenerated": {
+          "count": 0,
+          "of": 27
+        }
+      },
+      "without22and60": {
+        "tasks": 6,
+        "solutions": 186,
+        "wrong": 159,
+        "wrongAcceptedByBase": {
+          "count": 14,
+          "percent": 8.8
+        },
+        "wrongAcceptedByGenerated": {
+          "count": 0,
+          "percent": 0
+        },
+        "rightRejectedByGenerated": {
+          "count": 0,
+          "of": 27
+        }
+      },
+      "rowsComparedWithArchive": 186,
+      "rowsDifferingFromArchive": 9,
+      "differences": [
+        {
+          "slug": "he-122",
+          "at": 2,
+          "set": "code-llama-34b_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-122",
+          "at": 3,
+          "set": "code-llama-7b_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-122",
+          "at": 4,
+          "set": "codegen-16b_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-122",
+          "at": 14,
+          "set": "gpt-4-1106-preview_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-122",
+          "at": 21,
+          "set": "phind-code-llama-34b-v2_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-124",
+          "at": 4,
+          "set": "codegen-16b_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": true
+          },
+          "now": {
+            "public": true,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-124",
+          "at": 14,
+          "set": "gpt-4-1106-preview_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": true
+          },
+          "now": {
+            "public": true,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-124",
+          "at": 21,
+          "set": "phind-code-llama-34b-v2_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        },
+        {
+          "slug": "he-124",
+          "at": 25,
+          "set": "starcoder_temp_0.0",
+          "archive": {
+            "public": true,
+            "hidden": false
+          },
+          "now": {
+            "public": false,
+            "hidden": false
+          }
+        }
+      ]
+    },
+    "ladder": {
+      "agreement": [
+        {
+          "slug": "ladder-kestrel-l0",
+          "level": 0,
+          "compiled": true,
+          "passed": 37,
+          "total": 37,
+          "failing": []
+        },
+        {
+          "slug": "ladder-kestrel-l1",
+          "level": 1,
+          "compiled": true,
+          "passed": 45,
+          "total": 45,
+          "failing": []
+        },
+        {
+          "slug": "ladder-kestrel-l2",
+          "level": 2,
+          "compiled": true,
+          "passed": 25,
+          "total": 27,
+          "failing": [
+            "tests/public/satisfies.test.ts :: [happy-3] caret bounds use the same major even when that major is zero",
+            "tests/public/satisfies.test.ts :: [unhappy-1] empty and incomplete versions throw an Error"
+          ]
+        },
+        {
+          "slug": "ladder-kestrel-l3",
+          "level": 3,
+          "compiled": true,
+          "passed": 16,
+          "total": 16,
+          "failing": []
+        },
+        {
+          "slug": "ladder-kestrel-l4",
+          "level": 4,
+          "compiled": true,
+          "passed": 2,
+          "total": 2,
+          "failing": []
+        }
+      ],
+      "rescored": {
+        "runs": 20,
+        "differingFromArchive": 0,
+        "means": {
+          "b/own-brief/L1": 100,
+          "b/own-brief/L2": 100,
+          "b/own-brief/L3": 100,
+          "b/own-brief/L4": 100
+        },
+        "rows": [
+          {
+            "key": "ladder-kestrel-l1-b/haiku/1",
+            "level": 1,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l1-b/haiku/2",
+            "level": 1,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l1-b/haiku/3",
+            "level": 1,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l1-b/haiku/4",
+            "level": 1,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l1-b/haiku/5",
+            "level": 1,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l2-b/haiku/1",
+            "level": 2,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l2-b/haiku/2",
+            "level": 2,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l2-b/haiku/3",
+            "level": 2,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l2-b/haiku/4",
+            "level": 2,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l2-b/haiku/5",
+            "level": 2,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l3-b/haiku/1",
+            "level": 3,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l3-b/haiku/2",
+            "level": 3,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l3-b/haiku/3",
+            "level": 3,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l3-b/haiku/4",
+            "level": 3,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l3-b/haiku/5",
+            "level": 3,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l4-b/haiku/1",
+            "level": 4,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l4-b/haiku/2",
+            "level": 4,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l4-b/haiku/3",
+            "level": 4,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l4-b/haiku/4",
+            "level": 4,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          },
+          {
+            "key": "ladder-kestrel-l4-b/haiku/5",
+            "level": 4,
+            "condition": "b",
+            "arm": "own-brief",
+            "macro": 1,
+            "public": {
+              "passed": 37,
+              "total": 37
+            }
+          }
+        ]
+      }
+    },
+    "referee": {
+      "cases": 57,
+      "answered": 57,
+      "requires": {
+        "yes": 45,
+        "open": 12,
+        "no": 0
+      },
+      "runsRejected": 100,
+      "runsUpheld": 95
+    },
+    "mutationTotals": {
+      "specs": 25,
+      "judged": 1442,
+      "publicKilled": 1119,
+      "eitherKilled": 1162,
+      "publicPercent": 77.6,
+      "eitherPercent": 80.6
+    }
+  },
+  "evalplusSubset": {
+    "tasks": [
+      "he-0",
+      "he-10",
+      "he-106",
+      "he-114",
+      "he-122",
+      "he-124"
+    ],
+    "claude": {
+      "tasks": 6,
+      "solutions": 186,
+      "wrong": 159,
+      "wrongAcceptedByBase": {
+        "count": 14,
+        "percent": 8.8
+      },
+      "wrongAcceptedByGenerated": {
+        "count": 2,
+        "percent": 1.3
+      },
+      "rightRejectedByGenerated": {
+        "count": 0,
+        "of": 27
+      }
+    },
+    "other": {
+      "tasks": 6,
+      "solutions": 186,
+      "wrong": 159,
+      "wrongAcceptedByBase": {
+        "count": 14,
+        "percent": 8.8
+      },
+      "wrongAcceptedByGenerated": {
+        "count": 0,
+        "percent": 0
+      },
+      "rightRejectedByGenerated": {
+        "count": 0,
+        "of": 27
+      }
+    }
+  },
+  "e2e": {
+    "calibration": {
+      "slug": "duration-parse",
+      "status": "ok",
+      "reason": null,
+      "publicIds": [
+        "tests/public/duration.test.ts :: [happy-1] parses milliseconds",
+        "tests/public/duration.test.ts :: [happy-1] parses seconds",
+        "tests/public/duration.test.ts :: [happy-1] adds hours and minutes",
+        "tests/public/duration.test.ts :: [happy-1] parses days",
+        "tests/public/duration.test.ts :: [happy-1] allows a single zero count",
+        "tests/public/duration.test.ts :: [happy-1] accepts zero components after days",
+        "tests/public/duration.test.ts :: [happy-1] parses the smallest positive duration",
+        "tests/public/duration.test.ts :: [happy-1] adds all five units",
+        "tests/public/duration.test.ts :: [happy-1] distinguishes minutes from milliseconds",
+        "tests/public/duration.test.ts :: [happy-1] allows all components to be zero",
+        "tests/public/duration.test.ts :: [boundary-1] trims spaces and a trailing newline",
+        "tests/public/duration.test.ts :: [boundary-1] trims tabs and line breaks around zero",
+        "tests/public/duration.test.ts :: [boundary-1] accepts input without surrounding whitespace",
+        "tests/public/duration.test.ts :: [happy-2] allows ninety minutes",
+        "tests/public/duration.test.ts :: [happy-2] allows seconds at the minute threshold",
+        "tests/public/duration.test.ts :: [happy-2] allows minutes at the hour threshold",
+        "tests/public/duration.test.ts :: [happy-2] allows hours at the day threshold",
+        "tests/public/duration.test.ts :: [happy-2] allows milliseconds at the second threshold",
+        "tests/public/duration.test.ts :: [happy-2] adds oversized counts in descending unit order",
+        "tests/public/duration.test.ts :: [boundary-2] parses the largest safe total across components",
+        "tests/public/duration.test.ts :: [boundary-2] parses the largest safe count of milliseconds",
+        "tests/public/duration.test.ts :: [boundary-2] parses one millisecond below the safe limit",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects the empty string",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects a bare number",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects fractional counts",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects a leading zero",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects a negative sign",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects a positive sign",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects spaces between components",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects comma separators",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects weeks",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects uppercase seconds",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects whitespace between count and unit",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects a unit without a count",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects input that becomes empty after trimming",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects multiple zero digits",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects uppercase milliseconds",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects mixed case milliseconds",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects an internal newline",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects trailing non-duration text",
+        "tests/public/duration.test.ts :: [unhappy-1] rejects exponent notation",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects minutes followed by hours",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects repeated hours",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects seconds repeated after milliseconds",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects milliseconds followed by seconds",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects out-of-order zero components",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects repeated zero components",
+        "tests/public/duration.test.ts :: [unhappy-2] rejects repeated days separated by another unit",
+        "tests/public/duration.test.ts :: [unhappy-3] rejects a total one millisecond above the safe limit",
+        "tests/public/duration.test.ts :: [unhappy-3] rejects a single millisecond count above the safe limit",
+        "tests/public/duration.test.ts :: [unhappy-3] rejects an unsafe sum of individually safe components",
+        "tests/public/duration.test.ts :: [unhappy-3] rejects a day count whose conversion overflows",
+        "tests/public/duration.test.ts :: [unhappy-3] rejects a count far beyond the safe limit",
+        "tests/public/duration.test.ts :: [happy-3] formats zero as milliseconds",
+        "tests/public/duration.test.ts :: [happy-3] formats milliseconds",
+        "tests/public/duration.test.ts :: [happy-3] formats seconds using minutes and seconds",
+        "tests/public/duration.test.ts :: [happy-3] formats hours and minutes while omitting zero units",
+        "tests/public/duration.test.ts :: [happy-3] formats an exact day",
+        "tests/public/duration.test.ts :: [happy-3] formats all five nonzero components",
+        "tests/public/duration.test.ts :: [happy-3] formats the smallest positive value",
+        "tests/public/duration.test.ts :: [happy-3] formats just below a second",
+        "tests/public/duration.test.ts :: [happy-3] formats an exact second",
+        "tests/public/duration.test.ts :: [happy-3] formats just above a second",
+        "tests/public/duration.test.ts :: [happy-3] formats just below a minute",
+        "tests/public/duration.test.ts :: [happy-3] formats an exact minute",
+        "tests/public/duration.test.ts :: [happy-3] formats an exact hour",
+        "tests/public/duration.test.ts :: [happy-3] omits zero units between nonzero components",
+        "tests/public/duration.test.ts :: [boundary-3] formats the largest safe integer",
+        "tests/public/duration.test.ts :: [boundary-3] formats one millisecond below the safe limit",
+        "tests/public/duration.test.ts :: [boundary-4] round trips the specified mixed duration",
+        "tests/public/duration.test.ts :: [boundary-4] round trips zero",
+        "tests/public/duration.test.ts :: [boundary-4] round trips the smallest positive duration",
+        "tests/public/duration.test.ts :: [boundary-4] round trips the largest safe integer",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects a negative millisecond count",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects fractional milliseconds",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects NaN",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects positive infinity",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects the first unsafe integer",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects a positive fraction below one millisecond",
+        "tests/public/duration.test.ts :: [unhappy-4] rejects negative infinity"
+      ],
+      "publicOnSkeleton": {
+        "passed": 0,
+        "total": 80
+      },
+      "publicFailingOnReference": [],
+      "hiddenWritten": 90,
+      "kept": [
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects negative integers at small and large magnitudes",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects fractional remainders in otherwise ordinary durations",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects NaN repeatedly across valid formatting calls",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] infinity cannot be formatted or poison subsequent calls",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects unsafe integers beyond the immediate limit",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects nonzero submillisecond values without rounding or underflow",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects negative infinity alongside other negative extremes",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] rejects fractional values arbitrarily close to an integer",
+        "tests/private/format-invalid.test.ts :: [unhappy-4] invalid values stay invalid in alternating call order",
+        "tests/private/format-valid.test.ts :: [happy-3] formats zero identically before and after nonzero calls",
+        "tests/private/format-valid.test.ts :: [happy-3] formats multiple digit subsecond values without leading zeros",
+        "tests/private/format-valid.test.ts :: [happy-3] decomposes varied minute and second counts",
+        "tests/private/format-valid.test.ts :: [happy-3] omits zero seconds and milliseconds across hour values",
+        "tests/private/format-valid.test.ts :: [happy-3] formats exact multiple days without artificial larger units",
+        "tests/private/format-valid.test.ts :: [happy-3] formats five distinct multi digit component counts",
+        "tests/private/format-valid.test.ts :: [happy-3] formats one millisecond remainders at several larger scales",
+        "tests/private/format-valid.test.ts :: [happy-3] formats just below multiple second boundaries",
+        "tests/private/format-valid.test.ts :: [happy-3] formats varied exact second multiples",
+        "tests/private/format-valid.test.ts :: [happy-3] preserves small remainders without padding",
+        "tests/private/format-valid.test.ts :: [happy-3] formats one millisecond below hour and day transitions",
+        "tests/private/format-valid.test.ts :: [happy-3] formats exact minute multiples without second components",
+        "tests/private/format-valid.test.ts :: [happy-3] carries exact hours into days",
+        "tests/private/format-valid.test.ts :: [happy-3] omits every possible combination of zero unit positions",
+        "tests/private/format-valid.test.ts :: [happy-3] uses largest units even when another spelling has fewer characters",
+        "tests/private/format-valid.test.ts :: [happy-3] formats values above 32 bit limits without truncation",
+        "tests/private/format-valid.test.ts :: [boundary-4] round trips varied deterministic mixed durations",
+        "tests/private/format-valid.test.ts :: [boundary-4] zero components collapse to the canonical zero and round trip",
+        "tests/private/format-valid.test.ts :: [boundary-4] round trips both sides of all unit boundaries",
+        "tests/private/format-valid.test.ts :: [boundary-4] round trips safe high precision values and powers of two",
+        "tests/private/format-valid.test.ts :: [boundary-4] normalizes oversized counts then preserves their exact sum",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] trimming cannot supply a missing component",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects bare zero and digits after a complete component",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects decimals even when their numeric value is integral",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] validates leading digits of every component",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects negative zero and negative interior components",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects explicit plus on zero and later components",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects every ordinary internal whitespace character",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects punctuation separators and digit grouping",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects other units even after a valid prefix",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects every uppercase single letter unit",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] requires adjacent digits and the entire unit token",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] requires a count for every unit including later components",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects whitespace only inputs of different lengths",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects multiple zero digits in each unit and interior position",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects uppercase millisecond units after valid components",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects both mixed case spellings in interior and final units",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] trimming outer line breaks does not erase internal ones",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] consumes the entire input including its prefix and suffix",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] accepts only decimal integer spellings of counts",
+        "tests/private/parse-invalid.test.ts :: [unhappy-1] rejects malformed later components after a long valid count",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] rejects every pair of ascending distinct units",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] rejects adjacent duplicates of every unit",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] rejects a return to any earlier unit after intervening units",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] milliseconds cannot be followed by any larger unit",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] zero counts do not exempt any pair from unit ordering",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] duplicates remain invalid when either or both counts are zero",
+        "tests/private/parse-invalid.test.ts :: [unhappy-2] detects repeats late in an otherwise descending five unit string",
+        "tests/private/parse-valid.test.ts :: [happy-1] parses varied millisecond counts without truncating",
+        "tests/private/parse-valid.test.ts :: [happy-1] scales seconds beyond small and signed 32 bit counts",
+        "tests/private/parse-valid.test.ts :: [happy-1] adds different hour and minute counts",
+        "tests/private/parse-valid.test.ts :: [happy-1] scales multiple digits of days",
+        "tests/private/parse-valid.test.ts :: [happy-1] accepts zero alone in every unit",
+        "tests/private/parse-valid.test.ts :: [happy-1] retains positive lower units after intervening zeros",
+        "tests/private/parse-valid.test.ts :: [happy-1] retains one millisecond after much larger components",
+        "tests/private/parse-valid.test.ts :: [happy-1] adds five distinct multi digit component counts",
+        "tests/private/parse-valid.test.ts :: [happy-1] distinguishes the shared m prefix at several counts",
+        "tests/private/parse-valid.test.ts :: [happy-1] accepts every nonempty subset of zero components",
+        "tests/private/parse-valid.test.ts :: [happy-1] accepts every descending subset of nonzero components",
+        "tests/private/parse-valid.test.ts :: [boundary-1] trims each ordinary whitespace character on either side",
+        "tests/private/parse-valid.test.ts :: [boundary-1] trims long mixed whitespace around zero and a nonzero value",
+        "tests/private/parse-valid.test.ts :: [boundary-1] trims without losing edge digits of a compact input",
+        "tests/private/parse-valid.test.ts :: [happy-2] accepts very large minute counts",
+        "tests/private/parse-valid.test.ts :: [happy-2] accepts seconds across several minute and hour thresholds",
+        "tests/private/parse-valid.test.ts :: [happy-2] accepts minutes spanning hours and days",
+        "tests/private/parse-valid.test.ts :: [happy-2] accepts hours on both sides of day multiples",
+        "tests/private/parse-valid.test.ts :: [happy-2] accepts millisecond counts spanning all larger units",
+        "tests/private/parse-valid.test.ts :: [happy-2] adds simultaneous oversized counts in all five units",
+        "tests/private/parse-valid.test.ts :: [happy-2] oversized lower counts still add to higher nonzero units",
+        "tests/private/safe-limits.test.ts :: [boundary-2] accepts equivalent noncanonical decompositions of the safe limit",
+        "tests/private/safe-limits.test.ts :: [boundary-2] safe millisecond counts retain their low bits at large magnitudes",
+        "tests/private/safe-limits.test.ts :: [boundary-2] accepts near limit totals split after each possible large unit",
+        "tests/private/safe-limits.test.ts :: [boundary-2] accepts the largest safe single count for each larger unit",
+        "tests/private/safe-limits.test.ts :: [unhappy-3] rejects near limit overflow in different decompositions",
+        "tests/private/safe-limits.test.ts :: [unhappy-3] rejects unsafe integers of several magnitudes without rounding down",
+        "tests/private/safe-limits.test.ts :: [unhappy-3] sums every component before applying the safe total limit",
+        "tests/private/safe-limits.test.ts :: [unhappy-3] rejects the first unsafe scaled count in every large unit",
+        "tests/private/safe-limits.test.ts :: [unhappy-3] rejects thousands of digits in every count position",
+        "tests/private/safe-limits.test.ts :: [unhappy-3] trailing zero components cannot reset an overflowing sum",
+        "tests/private/safe-limits.test.ts :: [boundary-3] formats safe limit neighbors when lower components disappear",
+        "tests/private/safe-limits.test.ts :: [boundary-3] preserves exact remainders throughout the top millisecond range"
+      ],
+      "dropped": [],
+      "reference": {
+        "public": {
+          "passed": 80,
+          "total": 80
+        },
+        "hidden": {
+          "passed": 90,
+          "total": 90
+        },
+        "touchedOutsideSrc": [],
+        "notes": "Implemented `src/index.ts` per the spec. Both suites pass: 80/80 public and 90/90 private tests.\n\nnone",
+        "sessions": [
+          {
+            "sessionId": "01a176ae-6d78-72f0-8123-e87bf932d602",
+            "model": "gpt-6.1-sol",
+            "ok": true,
+            "exitCode": 0,
+            "timedOut": false,
+            "costUsd": null,
+            "turns": 12,
+            "durationMs": 40671,
+            "subtype": "success",
+            "apiError": null,
+            "backend": "codex-cli"
+          }
+        ],
+        "costUsd": 0
+      }
+    },
+    "generation": {
+      "skeleton": {
+        "sessions": [
+          {
+            "sessionId": "01a176a6-9c2e-76d2-b0e0-c584d26fd119",
+            "model": "gpt-6.1-sol",
+            "ok": true,
+            "exitCode": 0,
+            "timedOut": false,
+            "costUsd": null,
+            "turns": 7,
+            "durationMs": 28398,
+            "subtype": "success",
+            "apiError": null,
+            "backend": "codex-cli"
+          }
+        ],
+        "costUsd": 0,
+        "finalText": "parseDuration, formatDuration",
+        "problem": null,
+        "sha256": "b10fbd5bc8e43bbaeed63ff7315d2e2fb3097516e1cd884328fd6e638655087a"
+      },
+      "public": {
+        "sessions": [
+          {
+            "sessionId": "01a176a7-038b-7242-bb1e-4acc69bac42c",
+            "model": "gpt-6.1-sol",
+            "ok": true,
+            "exitCode": 0,
+            "timedOut": false,
+            "costUsd": null,
+            "turns": 15,
+            "durationMs": 91363,
+            "subtype": "success",
+            "apiError": null,
+            "backend": "codex-cli"
+          }
+        ],
+        "costUsd": 0,
+        "finalText": "80 tests in 1 file.",
+        "problem": null,
+        "files": [
+          "tests/public/duration.test.ts"
+        ]
+      },
+      "private": {
+        "sessions": [
+          {
+            "sessionId": "01a176a8-6a78-7433-8365-67c1969ffa6d",
+            "model": "gpt-6.1-sol",
+            "ok": true,
+            "exitCode": 0,
+            "timedOut": false,
+            "costUsd": null,
+            "turns": 20,
+            "durationMs": 391839,
+            "subtype": "success",
+            "apiError": null,
+            "backend": "codex-cli"
+          }
+        ],
+        "costUsd": 0,
+        "finalText": "90 tests in 5 files. Build passes; all 90 fail against the current stubs.\n\nOpen in the spec: none",
+        "problem": null,
+        "files": [
+          "tests/private/format-invalid.test.ts",
+          "tests/private/format-valid.test.ts",
+          "tests/private/parse-invalid.test.ts",
+          "tests/private/parse-valid.test.ts",
+          "tests/private/safe-limits.test.ts"
+        ],
+        "open": []
+      }
+    },
+    "prepared": {
+      "specSha256": "d6e93e36af28952e34b01811cbd751142e7a53ba2105c5d8c80e56fe8bcb7330",
+      "at": "2026-10-26T05:19:44.781Z",
+      "hiddenSha256": "8f17f295c0b2a4cb98400bc6825de4482243391ee92b8b529295737d02c234ba",
+      "hiddenAt": "2026-10-26T05:29:07.323Z"
+    }
+  }
+}

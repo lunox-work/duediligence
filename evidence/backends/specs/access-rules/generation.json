@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176b1-6196-7223-afd4-1c7c11c80c34",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 168401,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "36 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/conditions.test.ts",
+      "tests/public/decisions.test.ts",
+      "tests/public/matching.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176b3-f964-7c23-b591-6fff3683f887",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 22,
+        "durationMs": 324474,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "53 tests in 3 files. Build passes; all 53 fail against the stub.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/conditions.test.ts",
+      "tests/private/decisions.test.ts",
+      "tests/private/matching.test.ts"
+    ],
+    "open": []
+  }
+}

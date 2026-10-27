@@ -1,0 +1,80 @@
+{
+  "slug": "env-names",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/boundaries.test.ts :: [boundary-1] maps a shorter name and its longer counterpart as whole dot-read names",
+    "tests/public/boundaries.test.ts :: [boundary-1] quoted reads match whole names and leave an unlisted longer name intact",
+    "tests/public/boundaries.test.ts :: [boundary-2] leaves missing names unchanged and reports them once in alphabetical order",
+    "tests/public/boundaries.test.ts :: [boundary-2] an empty table reports names only from assignments and process.env reads",
+    "tests/public/mapping.test.ts :: [happy-1] maps assignments and exported assignments in .env.example",
+    "tests/public/mapping.test.ts :: [happy-1] recognizes .env basenames and dotted variants while preserving comments and values",
+    "tests/public/mapping.test.ts :: [happy-2] maps dot reads and both quoted bracket reads in code",
+    "tests/public/mapping.test.ts :: [happy-2] leaves ordinary occurrences beside a process.env read unchanged",
+    "tests/public/mapping.test.ts :: [happy-3] uses the same two mappings across env files and code files",
+    "tests/public/mapping.test.ts :: [happy-3] preserves empty files and input order between files using both names",
+    "tests/public/mapping.test.ts :: [happy-4] mapping to public and back restores exact text in every file",
+    "tests/public/mapping.test.ts :: [happy-4] an empty file set survives mapping in both directions",
+    "tests/public/validation.test.ts :: [unhappy-1] rejects two real names sharing a public name and names the collision",
+    "tests/public/validation.test.ts :: [unhappy-1] rejects a duplicate public name even for empty input mapped to real"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 38,
+  "kept": [
+    "tests/private/boundaries-validation.test.ts :: [boundary-1] maps four prefix-related names regardless of table or occurrence order",
+    "tests/private/boundaries-validation.test.ts :: [boundary-1] quoted names with digit and underscore suffixes are never partly replaced",
+    "tests/private/boundaries-validation.test.ts :: [boundary-1] whole-name matching also applies to reverse dot and quoted reads",
+    "tests/private/boundaries-validation.test.ts :: [boundary-1] prefix-related assignment names are matched whole before equals",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] deduplicates eight missing names globally across many files and read styles",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] an empty reverse table reports only actual names and preserves their text",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] reverse mapping reports missing public names once across env and code",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] a missing name seen only in code is reported without any env files",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] a missing name seen only in env assignments is reported without code files",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] absent names appearing only in comments or values are not reported",
+    "tests/private/boundaries-validation.test.ts :: [boundary-2] inherited JavaScript property names are missing unless explicitly in the table",
+    "tests/private/boundaries-validation.test.ts :: [unhappy-1] rejects a nonadjacent arbitrary collision even when no colliding name occurs",
+    "tests/private/boundaries-validation.test.ts :: [unhappy-1] rejects a collision late in a large reverse table with empty input",
+    "tests/private/boundaries-validation.test.ts :: [unhappy-1] validates a conflicting table before mapping empty input to public",
+    "tests/private/boundaries-validation.test.ts :: [unhappy-1] rejects three names sharing one public name when reversing populated files",
+    "tests/private/code.test.ts :: [happy-2] maps every repeated read of three arbitrary names on the same line",
+    "tests/private/code.test.ts :: [happy-2] maps both bracket quote styles and dot reads directly to real names",
+    "tests/private/code.test.ts :: [happy-2] ordinary identifiers object keys and other environment objects remain unchanged",
+    "tests/private/code.test.ts :: [happy-2] reads in multiple JavaScript and TypeScript file kinds use the same table",
+    "tests/private/code.test.ts :: [happy-2] cyclic code mappings replace each original read exactly once",
+    "tests/private/code.test.ts :: [happy-2] treats names shared with JavaScript object properties as ordinary table keys",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-3] applies a large reversed table consistently across many files and read styles",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-3] retains all files in order including repeated paths and several empty files",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-3] reverses three mappings consistently across env and code in a different order",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-3] separate calls use their own tables for the same input names",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-4] a large round trip preserves CRLF Unicode values quotes and unknown reads",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-4] empty tables and multiple empty files survive both directions",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-4] a name chain round trips without cascading in either direction",
+    "tests/private/consistency-roundtrip.test.ts :: [happy-4] swapping two names round trips in assignments and all read styles",
+    "tests/private/env.test.ts :: [happy-1] maps repeated exported and plain assignments with unrelated names",
+    "tests/private/env.test.ts :: [happy-1] uses the complete basename even in env-named directories",
+    "tests/private/env.test.ts :: [happy-1] leaves all text after the assignment equals sign and in comments intact",
+    "tests/private/env.test.ts :: [happy-1] preserves CRLF blank lines and an unterminated last assignment",
+    "tests/private/env.test.ts :: [happy-1] maps public assignment names to real names without changing public text in values",
+    "tests/private/env.test.ts :: [happy-1] assignment replacements do not cascade into another table entry",
+    "tests/private/env.test.ts :: [happy-1] an entry with identical real and public names is a mapped assignment",
+    "tests/private/env.test.ts :: [happy-1] maps valid single-letter lowercase and mixed-case assignment names"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/code.test.ts :: [happy-2] read-shaped text in strings and comments is preserved beside actual reads",
+      "reason": "The reference cannot satisfy it: Expected values to be strictly deep-equal:"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 37,
+      "total": 37
+    }
+  }
+}

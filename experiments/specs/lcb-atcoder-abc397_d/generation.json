@@ -1,0 +1,23 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "47a565da-d1d5-4550-979b-9f0088ad0f95",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.19110300000000002,
+        "turns": 8,
+        "durationMs": 58653,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.19110300000000002,
+    "finalText": "I wrote the suite in `tests/public/test_cubes.py`. `python3 sandbox/compile_check.py` reports no errors. All 11 tests fail with a Runtime Error, which is expected because `src/main.py` still raises `NotImplementedError`.\n\nThe statement accepts any valid pair, but `run_case` compares the output exactly. So every test I included has either no solution (`-1`) or exactly one pair, which means a correct program can't fail just by printing a different valid answer. That includes the three samples. I checked uniqueness for every non-sample expected value with a script. Because x − y = d gives x³ − y³ > d³, it tries every d with d³ < N, keeps those that divide N, and solves the remaining quadratic for y. I checked that script against a direct search for every N under 200.\n\nThe cases:\n- **Samples 1–3:** `397` → `12 11`, `1` → `-1`, `39977273855577088` → `342756 66212`.\n- **Smallest values:** `6` → `-1`, because the smallest difference of positive cubes is 2³ − 1³ = 7. `7` → `2 1`.\n- **y must be positive:** `8` and `10^18` are both perfect cubes and have no other solution, so both give `-1`.\n- **A pair whose cubes aren't consecutive:** `26` → `3 1`.\n- **Largest values:**\n  - 10¹⁸ − 1 → `1000000 1`.\n  - `999999997611066277` → `577350269 577350268`. This is the largest gap between consecutive cubes that is still within 10¹⁸.\n  - `2999997000001` → `1000000 999999`.\n\nTo run them, use `python3 -m unittest tests/public/test_cubes.py`. `unittest discover` doesn't work on that folder because it has no `__init__.py`, and I only added `test_*.py` files.\n\n11 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_cubes.py"
+    ]
+  }
+}

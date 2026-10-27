@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "3f36309e-f6a7-42dd-823b-a74dc3b39a8e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.14501009999999998,
+        "turns": 5,
+        "durationMs": 30442,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.14501009999999998,
+    "finalText": "I wrote the public suite in `tests/public/test_mean_absolute_deviation.py`. `python3 sandbox/compile_check.py` reports no errors. When I ran `python3 sandbox/run.py public`, the harness picked up every test and each one failed with `NotImplementedError: not implemented`, which is expected for now.\n\nWhat it covers:\n- **Docstring example:** `[1.0, 2.0, 3.0, 4.0]` gives `1.0`.\n- **Centred on the mean:**\n  - Typical: `[1, 2, 3, 10]` gives `3.0`. I picked skewed data so that measuring from the median instead (which would give `2.5`) fails.\n  - Boundary: a single element gives `0.0`.\n- **Average divides by the count n:**\n  - Typical: `[1, 3]` gives `1.0`. Dividing by n−1 instead would give `2.0`.\n  - Boundary: all elements equal gives `0.0`.\n- **Absolute value of each difference:**\n  - Typical: `[-2, -1, 0, 7]` gives `3.0`.\n  - Boundary: `[-4, 4]` gives `4.0`. Without the absolute value, both cases would come out as `0`.\n\nI worked out every expected value except the docstring's by hand, and each test has a comment showing the arithmetic. All results are whole or exactly representable numbers, compared with `assertAlmostEqual`. I left out the empty list: its mean is undefined, so the docstring implicitly requires a non-empty input.\n\n7 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_mean_absolute_deviation.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "82a93f69-dfb3-4b7a-add7-103cdc22ad70",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.23010609999999998,
+        "turns": 3,
+        "durationMs": 54869,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.23010609999999998,
+    "finalText": "I wrote the hidden suite in `tests/private/test_mean_absolute_deviation_private.py`. `sandbox/compile_check.py` reports no errors. Against the current stub, all 23 tests fail with `not implemented`. Against a throwaway reference implementation I patched in only while the tests ran, all 23 pass; nothing in `src/` was changed.\n\nWhat the suite covers:\n- **Each public test is extended** with other orders, odd lengths, negative or large single values, many equal values, all-negative lists, pairs not centred on zero, and large sizes (`range(1000)` gives exactly 250.0). A comment above each test names the public test it extends.\n- **Shortcuts it catches:**\n  - centring on the median rather than the mean (`[0,0,0,12]` gives 4.5, not 3.0);\n  - dividing by n−1 rather than n (`[0,0,6]` gives 8/3, not 4.0);\n  - centring on the midrange;\n  - hard-coding the visible answers;\n  - depending on input order;\n  - rounding results that don't come out whole (2/3, 8/3, 0.2/3).\n- **Whole-formula checks:** irregular data with fractions, negatives and duplicates is compared with a brute force that copies the docstring formula directly.\n\nI left the empty list untested because the docstring doesn't say what happens: the mean of no numbers is undefined.\n\n23 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_mean_absolute_deviation_private.py"
+    ],
+    "open": []
+  }
+}

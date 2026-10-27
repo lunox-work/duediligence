@@ -1,0 +1,4 @@
+analysis-params-confirmed: passed. Public 44/44, hidden 42/42, existing 105/105; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at fef669251030a4d4c76ece610ec6419967ad07e0.
+Hidden suite sha256 3e5ca93d544bac1e3454c8f93db74d06dec69fe2852d7d670373873fcb6ceaa9, sealed 2026-10-26T04:35:59.704Z.
+[04:38:56] sandbox-factory 6d46efe80b3b: npx -y npm@10.9.2 ci --no-audit --no-fund
+Check "independent-tests (confirmed)": success, passed: public 44/44, hidden 42/42, existing 105/105 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/analysis-params-confirmed.json); not posted (no token).

@@ -1,0 +1,79 @@
+{
+  "slug": "he-97",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_multiply.py :: TestMultiply.test_both_inputs_are_negative",
+    "tests/public/test_multiply.py :: TestMultiply.test_both_inputs_are_zero",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_148_and_412",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_14_and_negative_15",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_19_and_28",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_2020_and_1851",
+    "tests/public/test_multiply.py :: TestMultiply.test_first_input_is_negative",
+    "tests/public/test_multiply.py :: TestMultiply.test_first_input_is_zero",
+    "tests/public/test_multiply.py :: TestMultiply.test_higher_digits_do_not_affect_product",
+    "tests/public/test_multiply.py :: TestMultiply.test_largest_unit_digit_product",
+    "tests/public/test_multiply.py :: TestMultiply.test_negative_multiple_of_ten",
+    "tests/public/test_multiply.py :: TestMultiply.test_negative_single_digit_inputs",
+    "tests/public/test_multiply.py :: TestMultiply.test_second_input_ends_in_zero",
+    "tests/public/test_multiply.py :: TestMultiply.test_second_input_is_zero",
+    "tests/public/test_multiply.py :: TestMultiply.test_single_digit_inputs"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 30,
+  "kept": [
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_both_negative_with_product_thirty",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_both_negative_with_second_multiple_of_ten",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_different_lengths_and_unit_digits",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_different_operands_with_equal_unit_digits",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_first_digits_and_last_digits_give_different_products",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_large_product_of_two_unit_digits",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_maximum_product_from_multidigit_operands",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_first_operand_ending_in_eight",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_first_operand_ending_in_zero",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_multidigit_first_and_zero_second",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_nonzero_second_operand_ending_in_zero",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_second_operand_ending_in_four",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_single_digit_and_zero",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_single_digit_first_positive_second",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_single_digit_four_and_seven",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_operands_beyond_exact_binary_float_integer_range",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_opposite_sides_of_large_power_of_ten",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_positive_single_digit_first_negative_second",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_repeated_multidigit_operand",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_repeated_negative_multidigit_operand",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_repeated_negative_one",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_reversed_eight_and_nine_unit_digits",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_single_digit_eight_and_four",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_two_nonzero_multiples_of_ten",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_unit_digit_one",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_zero_and_negative_single_digit",
+    "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_zero_first_and_negative_multidigit_second"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_huge_negative_multiple_of_ten",
+      "reason": "The reference cannot satisfy it: ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit"
+    },
+    {
+      "id": "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_negative_operand_with_thousands_of_digits",
+      "reason": "The reference cannot satisfy it: ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit"
+    },
+    {
+      "id": "tests/private/test_multiply_hidden.py :: TestMultiplyHidden.test_thousands_of_digits_in_both_operands",
+      "reason": "The reference cannot satisfy it: ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 15,
+      "total": 15
+    },
+    "hidden": {
+      "passed": 27,
+      "total": 27
+    }
+  }
+}

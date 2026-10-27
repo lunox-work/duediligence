@@ -1,0 +1,473 @@
+{
+  "slug": "pathe-filename-dot",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"/Users/john.doe/foo/myFile\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"C:\\\\Users\\\\john.doe\\\\foo\\\\myFile\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"./v1.2/bin/run\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"a.b/c.d/e\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"C:\\\\dir.v2/file\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"./.hidden/myFile\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-1] last segment without an extension is returned whole: \"myfile\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"test.html\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"/temp/myfile.html\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"./myfile.html\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"C:\\\\temp\\\\myfile.html\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"\\\\temp\\\\myfile.html\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \".\\\\myfile.html\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"/Users/john.doe/foo/myFile.js\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"C:\\\\Users\\\\john.doe\\\\foo\\\\myFile.js\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"./.hidden/myFile.ts\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \".\\\\.hidden\\\\myFile.ts\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-2] last segment with an extension loses only that extension: \"a.b/c.d/e.f\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-3] names with several periods keep everything before the last one: \"./foo.bar.baz.js\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-3] names with several periods keep everything before the last one: \".\\\\foo.bar.baz.js\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-3] names with several periods keep everything before the last one: \"/src/app.config.ts\"",
+    "test/pathe-filename-dot.spec.ts :: [happy-3] names with several periods keep everything before the last one: \"archive.tar.gz\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-1] dotfile with no further period is returned whole: \".gitignore\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-1] dotfile with no further period is returned whole: \"/temp/.gitignore\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-1] dotfile with no further period is returned whole: \"foo\\\\.gitignore\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-1] dotfile with no further period is returned whole: \"/Users/john.doe/.config\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-1] dotfile with no further period is returned whole: \"C:\\\\Users\\\\john.doe\\\\.npmrc\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-1] dotfile with no further period is returned whole: \"./.hidden\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-2] dotfile with a further period loses only the final extension: \"/temp/.env.local\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-2] dotfile with a further period loses only the final extension: \".a.b\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-2] dotfile with a further period loses only the final extension: \"./.eslintrc.json\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"foo.\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"/a/foo.\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \".\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"..\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"...\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"foo/..\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"..foo\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-3] segments made of or ending in periods follow the extname rule: \"a..b\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-4] filename equals parse(path).name: \"/Users/john.doe/foo/myFile\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-4] filename equals parse(path).name: \"/temp/.env.local\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-4] filename equals parse(path).name: \"./foo.bar.baz.js\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-4] filename equals parse(path).name: \"..foo\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-4] filename equals parse(path).name: \"a..b\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-4] filename equals parse(path).name: \"foo.\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"/\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"\\\\\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"./\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"C:\\\\temp\\\\\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"C:\\\\\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"/foo/bar/\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"/foo/bar//\"",
+    "test/pathe-filename-dot.spec.ts :: [unhappy-1] empty path or path ending in a separator gives undefined: \"foo.d/\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly: \" \"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly: \"/tmp/ my file .txt\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly: \"/tmp/MyFile.TXT\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly: \"c:\\\\temp\\\\Report.pdf\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly: \"C:\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-5] characters other than separators and the extension are kept exactly: \"/tmp/résumé.doc\"",
+    "test/pathe-filename-dot.spec.ts :: [boundary-6] repeated and interleaved calls return the same results"
+  ],
+  "publicOnSkeleton": {
+    "passed": 53,
+    "total": 61
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 125,
+  "kept": [
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"../\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"a.b/\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"a.b\\\\\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"/x.y/z.w\\\\\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"\\\\\\\\srv.x\\\\share\\\\\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name for a long dotted path",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"../\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"..\\\\\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \".../\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"a./\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"x.d\\\\\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"/x.y/z/\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"a.b/c.d/\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"/temp/.env.local/\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"file.txt\\\\\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"//server.x/share/\"",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, 100 dotted directories ending in a separator give undefined",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-6] extends public boundary-6, many interleaved calls in several orders",
+    "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-6] extends public boundary-6, a short path after a long one",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"../run\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"..\\\\run\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"../../bin/run\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"x./y\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"x.\\\\y\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"/x.y/z\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"/a.b/c\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"a/b.c\\\\d\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"a.b\\\\c.d/e.f\\\\Makefile\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"/a.b/c.d/e.f/g\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"/a//b.c//d\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"./.hidden.d/run\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"/home/user.name/.config.d/nvim/init\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"C:/Program Files (x86)/app.v1.2/bin\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"\\\\\\\\server.corp\\\\share\\\\README\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"node_modules/@scope/pkg.js/LICENSE\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"/x.y/verylongname_without_any_extension_at_all\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, 200 dotted directories with / before an extensionless name",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, 200 dotted directories with \\ before an extensionless name",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/a.b/ my file \"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/x.y/ \"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/x.y/\\tTab\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/x.y/a b\\nc\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"C:\\\\x.y\\\\MiXeD\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"x.y/C:\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/x.y/日本語\"",
+    "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/a.b/😀\""
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"./\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"C:\\\\\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [boundary-4] extends public boundary-4, filename equals parse(path).name after prefix \"c:/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"C:/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"c:\\\\\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"\\\\\\\\\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"//\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"/\\\\\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"\\\\/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"foo/bar\\\\\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \"foo\\\\bar/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \".gitignore/\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, path ending in a separator gives undefined: \" /\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-parse-undefined-state.spec.ts :: [unhappy-1] extends public unhappy-1, 1000 separators give undefined",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-1] extends public happy-1, last segment without an extension is returned whole: \"foo/bar\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"/x.y/z.js\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"f.x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"../index.d\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"../../dist/index.mjs\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"..\\\\..\\\\file.min\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"C:/temp/myfile.html\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"a\\\\b/c.txt\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"a/b\\\\c.txt\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"/a.b/c.d/e.longextension\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"\\\\\\\\server\\\\share\\\\doc.pdf\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, last segment with an extension loses only that extension: \"x./y.z\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-2] extends public happy-2, 200 dotted directories before name.ext",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"foo.bar.baz\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"a.b.c\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"/x.y/a.b.c.d.e\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"C:\\\\x\\\\jquery.min.js\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"a.b.c/d.e.f\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"../v1.2.3/release.v1.2.3.tar.gz\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, several periods keep everything before the last one: \"x\\\\y.z/w.v.u\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [happy-3] extends public happy-3, a name with 100 periods keeps all but the last extension",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \".npmrc\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \".a\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \"/x/.a\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \"\\\\.env\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \".\\\\.hidden\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \"../.prettierrc\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \"C:/x.y/.bashrc\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \"a.b\\\\c.d/.editorconfig\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-1] extends public boundary-1, dotfile with no further period is returned whole: \"/x.y/z.w/.gitkeep\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \".env.local\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \".env.production.local\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \".x.y.z\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \"/a.b/.c.d\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \"C:\\\\x\\\\.eslintrc.cjs\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \"../.config.d/.babelrc.js\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-2] extends public boundary-2, dotfile with a further period loses only the final extension: \"a\\\\b/.c.d.e\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"....\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"a..\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \".a.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \".foo.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"foo.bar.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"a.b..\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"...foo\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"a...b\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"..foo.bar\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"x.y/..\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"C:\\\\x\\\\..\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"\\\\..\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"/a.b/.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"./.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"a\\\\...\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-3] extends public boundary-3, segments made of or ending in periods follow the extname rule: \"C:\\\\x.y\\\\foo.\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"   \"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"\\t\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/tmp/name with spaces.tar .gz\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/tmp/UPPER.Ext\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"c:\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"D:\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"C:foo.txt\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/tmp/日本語.md\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/tmp/😀.png\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-filename-dot/filename-segments.spec.ts :: [boundary-5] extends public boundary-5, characters other than separators and the extension are kept exactly: \"/a%2Eb/c%2Ed\"",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 61,
+      "total": 61
+    },
+    "hidden": {
+      "passed": 46,
+      "total": 46
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 330,
+      "total": 330
+    },
+    "notes": "I fixed `filename` by changing its regex in `src/utils.ts`. The full suite now passes: 516 tests across all 5 files, including both new suites and the existing `test/utils.spec.ts`.\n\n**The bug:** in the old regex, the part that matched an \"extension\" could include `/` or `\\`. So when the last segment had no extension, the match landed on an earlier directory with a period in it (`john.doe`).\n\n**The fix:**\n```ts\nconst FILENAME_RE = /(?:^|[/\\\\])([^/\\\\]+?)(?:\\.[^./\\\\]+)?$/;\n```\n- The name group can no longer contain a separator, so only the last segment can match. A path that is empty or ends in a separator doesn't match, and `filename` returns `undefined`.\n- An extension is now treated the way this repository's `extname` treats one:\n  - **Only the final one is removed:** `.env.local` → `.env`, `archive.tar.gz` → `archive.tar`.\n  - **A leading period stays in the name:** `.gitignore` → `.gitignore`, `..foo` → `.`.\n  - **A trailing period is not an extension:** `foo.` → `foo.`, `...` → `...`.\n\n  This keeps `filename(p)` equal to `parse(p).name` for paths that aren't empty and don't end in a separator.\n- `filename` now returns capture group 1 instead of 2. The regex has no global flag, so nothing carries over between calls.\n\n`FILENAME_RE` is still a private constant. No exports or signatures changed, and I only edited `src/`.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "60603e72-855c-41ef-9196-3fdc9dbfc8b0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.24516349999999998,
+        "turns": 4,
+        "durationMs": 34900,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.24516349999999998
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "ladder-lcb_arc195_d-l4",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_alternating_small",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_exhaustive_n_5",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_exhaustive_n_up_to_4",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_largest_all_distinct",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_largest_all_equal",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_many_small_cases",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_max_value_equals_n",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_sample_cases",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_smallest_distinct_pair",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_smallest_equal_pair"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 10
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

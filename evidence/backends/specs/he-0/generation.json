@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a1770d-e36d-7ea1-ac43-72d39c6badaa",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 87636,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Compile check passed. All tests raise `NotImplementedError`, as expected.\n\n12 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_has_close_elements.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a1770f-33df-7fd2-8a0a-869a3e0b2686",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 179012,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Compile check passed. Every test fails against the stub, and all expected values agree with brute-force validation.\n\n35 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_has_close_elements_hidden.py"
+    ],
+    "open": []
+  }
+}

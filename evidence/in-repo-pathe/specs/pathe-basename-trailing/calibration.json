@@ -1,0 +1,189 @@
+{
+  "slug": "pathe-basename-trailing",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/pathe-basename-trailing.spec.ts :: [happy-1] basename keeps its existing results for paths without a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-1] basename treats an undefined extension like an omitted one",
+    "test/pathe-basename-trailing.spec.ts :: [happy-2] basename returns the segment before a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-2] basename returns the share of a UNC path with a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-1] basename skips repeated trailing separators",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-1] basename skips a mixed run of trailing slashes and backslashes",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-2] basename ignores doubled inner separators",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-2] basename ignores doubled inner backslashes with a trailing backslash",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-3] basename returns dot segments literally",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-3] basename does not resolve a trailing parent segment followed by a separator",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-4] basename of a root-only path is empty",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-4] basename of the empty string is empty",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-5] basename does not apply an extension to an empty basename",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-5] basename with an extension stays empty for repeated root separators",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-6] basename of a drive-letter-only path is the drive",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-6] basename uppercases a lowercase drive root",
+    "test/pathe-basename-trailing.spec.ts :: [happy-3] basename removes a matching extension after skipping trailing separators",
+    "test/pathe-basename-trailing.spec.ts :: [happy-3] basename removes only an extension the segment actually ends with",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-7] basename never matches an extension containing a separator",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-7] basename never matches an extension that is only a separator",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-8] basename with an empty extension removes nothing",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-8] basename with an empty extension still skips repeated trailing separators",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-9] basename leaves an empty string when the extension equals the whole segment",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-9] basename leaves an empty string for a dot-file segment equal to the extension",
+    "test/pathe-basename-trailing.spec.ts :: [happy-4] parse of a POSIX directory path with a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-4] parse of a POSIX directory path with a trailing backslash",
+    "test/pathe-basename-trailing.spec.ts :: [happy-5] parse keeps the extension of a file-like segment with a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-5] parse takes only the last extension of a multi-dot segment with a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-6] parse of a Windows path with a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-6] parse of a lowercase-drive Windows path with a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-10] parse takes dir from dirname, which removes only one trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-10] parse of a Windows path with two trailing backslashes",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-11] parse of the root-only path",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-11] parse of a backslash root-only path",
+    "test/pathe-basename-trailing.spec.ts :: [happy-7] parse keeps its existing results for paths without a trailing separator",
+    "test/pathe-basename-trailing.spec.ts :: [happy-7] parse keeps its existing result for a relative backslash path",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-12] extname and dirname keep their trailing-separator behaviour",
+    "test/pathe-basename-trailing.spec.ts :: [boundary-12] dirname of a Windows path with a trailing separator is the drive root"
+  ],
+  "publicOnSkeleton": {
+    "passed": 14,
+    "total": 38
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 53,
+  "kept": [
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-2] basename returns the segment before a trailing separator for other names and depths",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-2] basename treats a trailing backslash on a slash path as a separator",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-2] basename returns the last name of other UNC-style paths with a trailing separator",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-2] basename returns a drive-like segment after the start of the path unchanged",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-1] basename skips long runs of trailing slashes",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-1] basename skips long runs of trailing backslashes",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-1] basename skips mixed trailing runs in other orders",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-2] basename ignores many empty inner segments",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-2] basename returns the last segment of a long path with a trailing run",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-3] basename returns dot segments literally with backslashes and repeated separators",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-3] basename does not resolve chains of dot segments",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-6] basename of other drive roots is the drive",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-6] basename uppercases other lowercase drive roots",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-3] basename handles every listed extension case after a trailing separator",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-3] basename removes a matching extension after long and mixed trailing runs",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-3] basename keeps the segment when it does not end with the extension",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-3] basename removes an extension from a drive or dot segment after a trailing separator",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-7] basename never matches an extension ending in a backslash or a separator run",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-7] basename never matches an extension spanning more than the last segment",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-8] basename with an empty extension removes nothing after other trailing runs",
+    "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-8] basename with an empty extension removes nothing from a short segment or a separator-only path",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-4] parse of the listed POSIX directory path with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-4] parse of other POSIX directory paths with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-4] parse of a dot-directory with a trailing separator has no extension",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-4] parse of a parent segment with a trailing separator is not resolved",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-4] parse of a relative directory path with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-5] parse of the listed file-like segment with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-5] parse keeps other extensions of a file-like segment with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-5] parse of a segment ending in a dot with a trailing separator has no extension",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-5] parse keeps the extension of a file-like segment after repeated trailing separators",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-6] parse of the listed Windows path with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-6] parse of other Windows paths with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-6] parse of a drive root takes base and name from the drive",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-6] parse of a UNC share with a trailing separator",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-10] parse of the listed path with two trailing separators",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-10] parse with three trailing separators keeps dirname's dir",
+    "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-10] parse with longer and mixed trailing runs keeps dirname's dir"
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-1] basename returns the last segment of every listed path without a trailing separator",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-1] basename keeps the last segment of deeper and mixed-separator paths",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-1] basename removes only a suffix the last segment ends with, without a trailing separator",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [happy-1] basename treats an undefined extension like an omitted one on other paths",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-4] basename of every listed root-only or empty path is empty",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-4] basename of a long or mixed run of separators only is empty",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-5] basename with an extension stays empty for every separator-only path",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-9] basename leaves an empty string for every listed whole-segment extension",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/basename.spec.ts :: [boundary-9] basename leaves an empty string for a whole-segment extension after long trailing runs",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-11] parse of the listed root-only path",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-11] parse of longer and mixed separator-only paths",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-7] parse keeps every listed existing result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [happy-7] parse keeps its existing results for other paths without a trailing separator",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-12] extname and dirname keep every listed trailing-separator result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-12] extname stays empty for other paths with trailing separators",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-basename-trailing/parse.spec.ts :: [boundary-12] dirname removes only one trailing separator for other paths",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 38,
+      "total": 38
+    },
+    "hidden": {
+      "passed": 37,
+      "total": 37
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 312,
+      "total": 312
+    },
+    "notes": "`basename` now skips trailing separators, and the full test suite passes: 403 of 403 tests in 5 files, including both new suites. ESLint, Prettier and the TypeScript check report no problems.\n\nNothing in `src/path.ts` threw `not implemented` — `basename` existed but returned `\"\"` for paths ending in a separator. So the change is to that one function. It now returns the last non-empty segment of the path, so all trailing `/` and `\\` are ignored, with backslashes converted first as before. If there is no such segment, as with `\"\"`, `/` or `\\\\`, it returns `\"\"`. The extension is still removed the same way, but now from that segment. `parse` gets the fix through `basename`. No other code changed, so all other exports behave as before.\n\nFailing tests: none",
+    "sessions": [
+      {
+        "sessionId": "fd55da42-06e0-45b8-a1fb-d6783479b02f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.17031370000000004,
+        "turns": 7,
+        "durationMs": 32029,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.17031370000000004
+  }
+}

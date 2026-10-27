@@ -1,0 +1,55 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176ec-21dd-7e52-aadc-770ca1366fb1",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 16,
+        "durationMs": 236072,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "30 tests in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/calendar-rules.test.ts",
+      "tests/public/invalid-shifts.test.ts",
+      "tests/public/related-shifts.test.ts",
+      "tests/public/shift-rules.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176ef-bd4e-7893-8074-b6aa11e46bcf",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 27,
+        "durationMs": 648001,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passes. All tests fail against the current stubs as required.\n\n57 tests in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/calendar.test.ts",
+      "tests/private/invalid.test.ts",
+      "tests/private/relations.test.ts",
+      "tests/private/shift-boundaries.test.ts"
+    ],
+    "open": []
+  }
+}

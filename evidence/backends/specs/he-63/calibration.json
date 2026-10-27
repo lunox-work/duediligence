@@ -1,0 +1,48 @@
+{
+  "slug": "he-63",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_fibfib.py :: TestFibFib.test_docstring_example_eight",
+    "tests/public/test_fibfib.py :: TestFibFib.test_docstring_example_five",
+    "tests/public/test_fibfib.py :: TestFibFib.test_docstring_example_one",
+    "tests/public/test_fibfib.py :: TestFibFib.test_first_recurrence_step",
+    "tests/public/test_fibfib.py :: TestFibFib.test_initial_value_two",
+    "tests/public/test_fibfib.py :: TestFibFib.test_initial_value_zero",
+    "tests/public/test_fibfib.py :: TestFibFib.test_larger_index",
+    "tests/public/test_fibfib.py :: TestFibFib.test_recurrence_after_first_step"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 16,
+  "kept": [
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_contiguous_small_indices",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_descending_indices",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_immediately_beyond_public_largest_index",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_index_four_thousand_ninety_six",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_index_one_after_nonzero_result",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_index_one_thousand",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_integer_precision_beyond_floating_point",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_integer_precision_beyond_machine_word",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_interleaved_large_small_and_duplicate_indices",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_ninth_element",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_repeated_nonbase_index",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_seventh_element",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_sixth_element",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_tenth_element",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_two_after_later_index",
+    "tests/private/test_fibfib_hidden.py :: TestFibFibHidden.test_zero_after_later_index"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 8
+    },
+    "hidden": {
+      "passed": 16,
+      "total": 16
+    }
+  }
+}

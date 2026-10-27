@@ -1,0 +1,29 @@
+{
+  "sha256": "754ba30196adaa38f60bf5fff921664d7f9200210a5ed129e14c0294a78c0355",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T13:26:57.826Z",
+  "decided": [
+    "`max` validation: none; `limitJobs` returns a provider for any `max` (0, -1, 1.5, `NaN`, `Infinity`, …) without throwing; with `max` 0 no `create` is ever admitted.",
+    "Name: the limited provider keeps the inner provider's `name`; it is a new object.",
+    "What counts as a live job: from admission of `create` until the job's `destroy()` settles, not until `create` resolves.",
+    "Queue order: waiting creates are admitted first in first out; a freed slot is handed to the oldest waiter, so later calls cannot jump the queue.",
+    "Inner `create` rejecting or throwing synchronously: slot freed at once, the same error passes through, the call always returns a promise.",
+    "Signal already aborted at call time: with a slot free the call is admitted and the inner `create` is called with that signal (the abort is left to the inner provider); with no slot free it rejects with `signal.reason` at once, without queueing or calling the inner `create`.",
+    "Signal aborting while waiting: rejects with `signal.reason`, leaves the queue, takes no slot; aborting after admission is left to the inner provider.",
+    "Inner `destroy` rejecting: the slot is still freed and the same error passes through.",
+    "Repeated or overlapping `destroy` calls: each is forwarded to the inner job, but only one slot is freed.",
+    "A job never destroyed keeps its slot indefinitely; no timeout, since the wrapper has no clock.",
+    "Forwarded `stage`/`exec`/`read`: same arguments, same results and errors, still forwarded after `destroy`.",
+    "`id` and `environment` of the limited job are the inner job's own values (same `environment` object).",
+    "Scope of the count: each `limitJobs` call has its own; wrapping twice composes to the tighter cap.",
+    "`EVALUATION_JOBS_MAX` is `2`; wiring it into `main.ts` is expected but outside the unit-tested surface.",
+    "Seam (the files the stub writes): apps/worker/src/evaluation/limit.ts",
+    "Allowed paths (what the implementer may change): apps/worker/src/evaluation/limit.ts"
+  ],
+  "seam": [
+    "apps/worker/src/evaluation/limit.ts"
+  ],
+  "allowedPaths": [
+    "apps/worker/src/evaluation/limit.ts"
+  ]
+}

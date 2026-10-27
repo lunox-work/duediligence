@@ -1,0 +1,41 @@
+{
+  "from": "escrow-split",
+  "spec": {
+    "sessionId": "757273eb-80b7-4006-8f00-eb0176bc97a6",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.592721,
+    "turns": 7,
+    "durationMs": 157295,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `spec.md`, the only file I changed. It follows the requested layout and ends with the `Decided:` list. I didn't change `src/index.ts`, and since there's no implementation yet, nothing has been run against the spec.\n\nThe decisions most likely to matter in review:\n\n- **Exact arithmetic:** the split uses exact integer math. Large-bounty test cases are included where plain floating-point math rounds wrong by one. For example, `4503599627370497 × 7500 bps` should give 3377699720527872 for the hidden-test part; plain float math gives …873. I checked these values with node.\n- **Zero amounts:** a release of 0 is still recorded when the bounty is above 0 (for example bounty 1 at 75%, or a share of 0 or 10000). That way the UAT step, which requires the hidden-test release first, still works.\n- **Status follows the gates:** status is \"partially released\" after the hidden-test release, even when nothing remains. It becomes \"fully released\" only after UAT approval.\n- **UAT pays what's left:** the UAT release is the bounty minus whatever has already been released, not a fresh calculation of the share.\n- **Pro bono:** a bounty of 0 is always \"pro bono\". It records no releases, writes nothing to the store, and never rejects UAT approval. The stored state has no way to tell whether a pro bono task passed its hidden tests, so there's nothing to check the order against.\n- **Duplicate events:** \"already done\" is judged by which releases exist, not by event id. The id is only checked for being a non-empty string.\n- **Overlapping calls:** one handler handles calls one at a time, in the order they arrive. The store has only `get` and `set`, so the spec says that two handlers using the same store at the same time is not supported.\n- **Store failures:** the handler rejects with the store's own error and keeps no memory of the attempt. Retrying the same event then works normally, and calls queued behind the failure still go through."
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "d38bd431-5491-4afc-a3ba-370f39ac5fb6",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.4437136000000002,
+        "turns": 20,
+        "durationMs": 388506,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.4437136000000002,
+    "finalText": "I've written the public test suite in `tests/public/`. `npm run build` reports no errors, and against the real `src/index.ts` every test fails because the bodies throw, as expected.\n\nEvery one of the spec's 37 scenarios has a happy-path test and at least one boundary test, keyed `[happy-N]`, `[boundary-N]`, `[unhappy-N]` and `[concurrency-N]` in spec order:\n\n- **`split-bounty.test.ts`**: all the `splitBounty` example rows, -0 handling and argument errors. Boundaries include 2⁵³ (one past the largest safe integer), a share of 10000.5, a share of -0, a boxed `Number`, and checking that the bounty is reported first.\n- **`create-handler.test.ts`**: task validation, and invalid events rejecting without touching the store. One test checks that an invalid event rejects without waiting for a call that is still in progress.\n- **`handle.test.ts`**: state handling, both releases, repeats, pro bono, and store failures, including a `get` or `set` that throws synchronously rather than rejecting.\n- **`concurrency.test.ts`**: overlapping calls against a store whose `get` and `set` resolve after `setImmediate`, so no real clock is used. One test checks that the second call's `get` starts only after the first call's `set` has finished.\n\nTo check the tests themselves, I ran them against a throwaway implementation in a scratch copy of the project, and all 68 passed. I then tried two broken versions: floating-point splitting failed the 2 top-of-range tests, and dropping the call queue failed 8 of the 10 concurrency tests. The build had emitted `.js` files into `src/` and `tests/public/`; I deleted them, so nothing outside `tests/public/` changed.\n\n68 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/concurrency.test.ts",
+      "tests/public/create-handler.test.ts",
+      "tests/public/handle.test.ts",
+      "tests/public/split-bounty.test.ts"
+    ]
+  }
+}

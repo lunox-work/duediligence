@@ -1,0 +1,75 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "7949fccf-0f0f-48d7-bb88-2bce6199ccdc",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.23622910000000003,
+        "turns": 7,
+        "durationMs": 35851,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.23622910000000003,
+    "finalText": "I created the contract at `packages/core/src/analysis.ts`. It holds the spec's exports exactly as the ticket gives them, with doc comments in the spec's words. Both function bodies are just `throw new Error(\"not implemented\");`, and the module imports nothing. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (105 of 105).\n\n- **Parameter names:** the repo's shared tsconfig turns on `noUnusedParameters`, so the stub parameters are named `_attempt`, `_maxAttempts` and `_value`. Callers aren't affected, and the implementation can drop the underscores once the parameters are used.\n- **`index.ts` not changed:** the spec says `packages/core/src/index.ts` should add `export * from \"./analysis.js\";`, but you asked me to write only the seam file. The implementation has to add that line, or the spec's \"package entry point re-exports the module\" scenario will fail.\n\nAdded: `ANALYSIS_STATUSES`, `AnalysisStatus`, `ANALYSIS_ERROR_CODES`, `AnalysisErrorCode`, `ARTIFACT_KINDS`, `ArtifactKind`, `GRAPHIFY_TOOL_VERSION`, `AnalysisParams`, `expiredAnalysis`, `canonicalJson`",
+    "problem": null,
+    "sha256": "930937281fb3a2dab33e1eebc585168ee787a07475081d3d2dcc34cc5b835236"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "7e343f25-8908-4f2b-be24-8499ac516f27",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5517733000000001,
+        "turns": 8,
+        "durationMs": 121235,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5517733000000001,
+    "finalText": "I wrote the test suite in three files in `packages/core/test/`. `npx tsc -p tsconfig.test.json` reports no errors. When run, 37 of the 44 tests fail and 7 pass. That's expected for now:\n\n- **The 36 tests that call `expiredAnalysis` or `canonicalJson` fail** because those bodies still throw `not implemented`.\n- **`[happy-3] the package entry point re-exports the module's values` also fails**, because `src/index.ts` doesn't re-export `analysis.js` yet. The spec makes adding that line part of the change. The test looks the names up by string instead of importing them, so it still type-checks before that line exists.\n- **The 7 tests that pass** check the constants and the `AnalysisParams` type. Those are already fixed in `analysis.ts`.\n\n**Files:**\n- `analysis-params-confirmed.vocabulary.test.ts`: covers happy-1 to happy-4 (the three lists, the tool version, the re-export from `index.ts`, and `AnalysisParams`). Two `@ts-expect-error` lines check that `deadlineMinutes` is required and readonly.\n- `analysis-params-confirmed.expired.test.ts`: covers happy-5 and boundary-1 to boundary-3 (`expiredAnalysis`).\n- `analysis-params-confirmed.canonical-json.test.ts`: covers happy-6 to happy-8, boundary-4 to boundary-10 and unhappy-1 to unhappy-4 (`canonicalJson`).\n\n**Structure:** Every scenario has two tests: one runs all of the spec's examples, the other adds one boundary case that follows directly from the spec's rules. Two examples:\n- An array that starts with a hole, `[, 1]`, is written as `[,1]`.\n- Symbol keys and extra array properties are ignored even when their values would otherwise be refused.\n\n**Conventions:** The tests use `node:test` and `node:assert/strict` like `bounty.test.ts` and `handle.test.ts`. They're flat top-level tests, each name starting with its scenario key. They use no clock, randomness, network or filesystem. The spec says the module imports nothing, but checking that would mean reading the source file, which the rules forbid, so no test covers it. I didn't change anything outside these three files.\n\n44 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "packages/core/test/analysis-params-confirmed.canonical-json.test.ts",
+      "packages/core/test/analysis-params-confirmed.expired.test.ts",
+      "packages/core/test/analysis-params-confirmed.vocabulary.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "fa8aef6e-4e14-4ee9-8ffe-6c65d8bd7a0c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.3819880000000002,
+        "turns": 21,
+        "durationMs": 375491,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.3819880000000002,
+    "finalText": "I've written the hidden suite in four files in `packages/core/test/hidden-analysis-params-confirmed/`:\n\n- `vocabulary.test.ts` covers the three lists, the pinned tool version, the entry point's re-export (and that every existing export is unchanged), and `AnalysisParams`.\n- `expired.test.ts` covers the watchdog rule.\n- `canonical-json.test.ts` covers the cases `canonicalJson` accepts.\n- `canonical-json-refused.test.ts` covers what it refuses.\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the current stub, all 42 tests fail.\n- I wrote a correct implementation in a copy of the build output in the scratchpad. Against it, all 42 hidden tests and all 44 public tests pass. Nothing outside the hidden test folder was changed.\n\n**Tests that reach the code through the entry point.** The lists and the tool version already have their final values in the stub, so a test of them alone would pass today. The `[happy-1]` and `[happy-2]` tests therefore read them through `src/index.ts`, which doesn't re-export the module yet. `[happy-4]` checks an `AnalysisParams` value through `canonicalJson` for the same reason.\n\n**Shortcuts the suite is aimed at:**\n- **Retry rule:** using `attempt + 1 <= maxAttempts` (caught by `2.5` of `3`), using `attempt >= maxAttempts` for NaN on either side and for negative values, or returning a cached failed object.\n- **Sorting keys:** building a new object and calling `JSON.stringify` (this reorders integer-like keys and loses an own `__proto__`), calling `toJSON` on a prototype, or sorting by code point (lone surrogates and private-use keys).\n- **Escaping:** keys that need escaping.\n- **Holes:** runs of holes and trailing holes.\n- **Wrapper objects and typed arrays:** `new Number`, `new Boolean`, `Uint8Array`.\n- **State between calls:** a record of visited values kept between calls, or one not cleared after a refused cycle.\n- **Refusals:** undefined, functions and symbols in any position, and bigints and cycles in any position.\n\n42 tests, in 4 files.\n\nOpen in the spec:\n- `[boundary-2] changing one result does not affect the next call`: it assigns to a returned result. In strict-mode ES modules that throws if the result is frozen, so the test quietly requires results to be mutable. The spec only says each call returns a new object.\n- `[unhappy-1] undefined, functions and symbols are refused` and `[unhappy-1] values that are not JSON are refused deep inside the structure`: their `assertRefused` helper checks `error.name === \"Error\"`. The spec says \"an Error (not a TypeError)\", so whether a subclass of Error with a different `name` is allowed is left open.",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-analysis-params-confirmed/canonical-json-refused.test.ts",
+      "packages/core/test/hidden-analysis-params-confirmed/canonical-json.test.ts",
+      "packages/core/test/hidden-analysis-params-confirmed/expired.test.ts",
+      "packages/core/test/hidden-analysis-params-confirmed/vocabulary.test.ts"
+    ],
+    "open": [
+      "`[boundary-2] changing one result does not affect the next call`: it assigns to a returned result. In strict-mode ES modules that throws if the result is frozen, so the test quietly requires results to be mutable. The spec only says each call returns a new object.",
+      "`[unhappy-1] undefined, functions and symbols are refused` and `[unhappy-1] values that are not JSON are refused deep inside the structure`: their `assertRefused` helper checks `error.name === \"Error\"`. The spec says \"an Error (not a TypeError)\", so whether a subclass of Error with a different `name` is allowed is left open."
+    ]
+  }
+}

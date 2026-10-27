@@ -1,0 +1,35 @@
+{
+  "sha256": "44743c0fa220cd56b5a04784a10ec388d1bfe103a326aa24bddfe61eb210a6aa",
+  "by": "phase-2 agent (not a person)",
+  "at": "2026-10-26T02:49:48.166Z",
+  "startedAt": "2026-10-26T02:47:23.007Z",
+  "minutes": 2.4,
+  "decided": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`; only ASCII digits count.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above 2**53 - 1 ms is rejected at parse time, never clamped.",
+    "Wrong text raises ValueError with \"duration\"; a non-string raises TypeError with \"duration\"; formatting raises TypeError or ValueError with \"milliseconds\".",
+    "`format_duration(0)` is `\"0ms\"`; every other result omits zero components; bools and floats, even whole ones, are not milliseconds."
+  ],
+  "drafted": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`; only ASCII digits count.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above 2**53 - 1 ms is rejected at parse time, never clamped.",
+    "Wrong text raises ValueError with \"duration\"; a non-string raises TypeError with \"duration\"; formatting raises TypeError or ValueError with \"milliseconds\".",
+    "`format_duration(0)` is `\"0ms\"`; every other result omits zero components; bools and floats, even whole ones, are not milliseconds."
+  ],
+  "changes": {
+    "kept": 9,
+    "edited": [],
+    "added": [],
+    "removed": []
+  }
+}

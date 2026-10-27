@@ -1,0 +1,23 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "2c17cbd4-ea27-4a39-a555-e7e9e04f7430",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2865477,
+        "turns": 8,
+        "durationMs": 82863,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.2865477,
+    "finalText": "I wrote the public test suite in `tests/public/test_reverse_brackets.py`. `python3 sandbox/compile_check.py` reports no errors. All 17 tests currently fail, as expected, because `src/main.py` still raises \"not implemented\".\n\n**What's covered:**\n- **Samples:** `(())()` gives 2 and `()` gives 1. The second is also the smallest input, N = 2.\n- **Small cases (N ≤ 16):** I worked out each answer by brute force. A search applies every allowed reversal, repeatedly, until no new string appears, then counts the strings found. Values: `()()`, `(())`, `(()())` → 1; `((()))()` → 2; `(())()()` and `()(())()` → 3; `(())((()))()` → 6. A second group checks swaps inside a nested block: `((())())` → 2; `((())())((())())` and `(((())())(()))` → 4.\n- **Large inputs, up to the N = 5000 limit:**\n  - `()`×2500 → 1\n  - a single nest 2500 deep → 1\n  - one `(())` among 2498 `()` → 2499\n  - 1250 `()` and 625 `(())` → C(1875, 625) mod 998244353\n  - chains of depth 1 to 70 side by side (N = 4970) → 70! mod 998244353. This is the case that actually exercises the modulo.\n\n**How the large answers were derived:** they're too big to brute-force. I computed them with a counting rule: the answer is the number of distinct orderings of the blocks, applied at every level of nesting. The statement doesn't say this. I checked it against the brute force on every valid string up to N = 14 and it matched each time. It's also the known solution to this problem, but those five answers rest on it rather than on direct search.\n\n17 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_reverse_brackets.py"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b2e-e1c1-77b3-a6d7-c176cc012949",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 60077,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "7 tests in 1 file; compile check passed.",
+    "problem": null,
+    "files": [
+      "tests/public/test_prime_fib.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b2f-ce8b-7cd0-935c-80678f989fa0",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 17,
+        "durationMs": 118972,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added 7 tests in 1 file. Compile check passes; all seven fail against the unimplemented stub as required.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_prime_fib.py"
+    ],
+    "open": []
+  }
+}

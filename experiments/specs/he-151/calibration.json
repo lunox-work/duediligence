@@ -1,0 +1,53 @@
+{
+  "slug": "he-151",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_empty_list",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_mixed_odd_even_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_negatives_and_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_odd_and_negative_even",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_single_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_large_odd_number_squared",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_negative_odd_ignored",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_negative_one_ignored",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_non_integer_ignored",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_odd_numbers_squared_and_summed",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_only_even_numbers_gives_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_only_non_integers_gives_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_single_element_one"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 13
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 23,
+  "kept": [
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_all_negatives",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_all_rules_combined",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_duplicate_mixed",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_duplicate_odds_each_counted",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_huge_even_ignored",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_huge_odd_exact",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_large_negative_odd_ignored",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_many_evens_zero",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_mixed_reordered",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_negative_between_odds",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_negative_non_integers_ignored",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_negative_one_alone",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_non_integer_first_then_odds",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_non_integers_mixed_with_odds",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_non_integers_rounding_to_odd_ignored",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_one_among_evens",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_only_non_integers",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_range_zero_to_999",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_single_even",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_single_negative_odd",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_single_seven",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_symmetric_range_negatives_ignored",
+    "tests/private/test_double_the_difference_private.py :: TestDoubleTheDifferencePrivate.test_zero_first_then_odd"
+  ],
+  "dropped": [],
+  "reference": null
+}

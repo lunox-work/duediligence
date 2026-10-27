@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "arc193_a",
+  "contest_id": "arc193",
+  "contest_date": "2025-02-23T00:00:00",
+  "difficulty": "hard",
+  "title": "Complement Interval Graph",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 2,
+  "privateCases": 40
+}

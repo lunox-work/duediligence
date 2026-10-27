@@ -1,0 +1,25 @@
+{
+  "sha256": "0439828fc6a19fdffdee39d81749988a55a5eb14e2d637ba963aab85b3cbd157",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T13:52:39.220Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The returned top-level object's prototype is an empty object (no own keys) whose own prototype is null, so `Object.getPrototypeOf(result)` is not `null`, `Object.getPrototypeOf(Object.getPrototypeOf(result))` is `null`, and `result instanceof Object` is `false`.",
+    "Every result shares the same prototype object: `Object.getPrototypeOf(parseQuery(\"a=1\")) === Object.getPrototypeOf(parseQuery(\"\"))`.",
+    "`__proto__` and `constructor` are still dropped, even though an object that inherits nothing would make them safe to keep.",
+    "The reserved-key check uses the decoded key and is exact and case-sensitive (`%5F%5Fproto%5F%5F` is dropped; `__PROTO__`, `Constructor`, `__proto__[]` are kept).",
+    "Only the top-level object has the null-prototype chain. Repeated-key values stay ordinary arrays (`Array.prototype`).",
+    "A repeated key named after an `Object.prototype` member holds only its query values, in input order.",
+    "The result has no inherited methods (`result.toString` is `undefined`). The other exports and the three types keep their current behaviour.",
+    "Each call returns a new object and keeps no state between calls. `parseQuery` is synchronous, so calls cannot overlap and there is no `@concurrency` scenario.",
+    "Seam (the files the stub writes): src/query.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/query.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

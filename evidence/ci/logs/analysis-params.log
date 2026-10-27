@@ -1,0 +1,18 @@
+analysis-params: incomplete. Public 30/44, hidden 34/55, existing 105/105; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at fef669251030a4d4c76ece610ec6419967ad07e0.
+Hidden suite sha256 33a4274f9b5358f44bf07165b4cc53f0443e089c363f2a3819df684af47611f0, sealed 2026-10-26T04:35:59.781Z.
+Failing scenarios: boundary-5, happy-8, unhappy-1, unhappy-2, unhappy-3, unhappy-4, unhappy-5, unhappy-6
+public: test/analysis-params.test.ts :: [unhappy-1] an attempt that is not a positive integer is refused
+public: test/analysis-params.test.ts :: [unhappy-1] an attempt just past the largest safe integer is refused
+public: test/analysis-params.test.ts :: [unhappy-2] a maxAttempts that is not a positive integer is refused
+public: test/analysis-params.test.ts :: [unhappy-2] a maxAttempts just past the largest safe integer is refused
+public: test/analysis-params.test.ts :: [unhappy-3] when both arguments are invalid, the attempt is reported
+public: test/analysis-params.test.ts :: [unhappy-3] the attempt is reported for any pair of invalid arguments
+public: test/analysis-params.test.ts :: [boundary-5] object properties whose value is undefined are left out
+public: test/analysis-params.test.ts :: [boundary-5] an object whose only properties are undefined is written empty
+public: test/analysis-params.test.ts :: [unhappy-4] top-level values that are not plain data are refused
+public: test/analysis-params.test.ts :: [unhappy-4] nested values that are not plain data are refused, toJSON included
+public: test/analysis-params.test.ts :: [unhappy-5] a cyclic structure is refused
+public: test/analysis-params.test.ts :: [unhappy-5] a cycle two objects deep is refused
+public: test/analysis-params.test.ts :: [unhappy-6] a cycle through an array is refused
+public: test/analysis-params.test.ts :: [unhappy-6] a cycle from an object through an array back to it is refused
+Check "independent-tests (drafted)": failure, incomplete: public 30/44, hidden 34/55, existing 105/105 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/analysis-params.json); not posted (no token).

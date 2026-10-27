@@ -1,0 +1,415 @@
+{
+  "selftest": {
+    "at": "2026-10-27T01:53:40.942Z",
+    "checks": [
+      {
+        "name": "scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "reference: passed, no service left",
+        "ok": true,
+        "verdict": "passed",
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 1.6,
+        "leftover": 0
+      },
+      {
+        "name": "stub: incomplete, no service left",
+        "ok": true,
+        "verdict": "incomplete",
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.5,
+        "leftover": 0
+      },
+      {
+        "name": "never answers: incomplete, no service left",
+        "ok": true,
+        "verdict": "incomplete",
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 11.4,
+        "leftover": 0
+      },
+      {
+        "name": "dies on its first request: incomplete, no service left",
+        "ok": true,
+        "verdict": "incomplete",
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.8,
+        "leftover": 0
+      },
+      {
+        "name": "over the memory ceiling: incomplete, no service left",
+        "ok": true,
+        "verdict": "incomplete",
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 3.3,
+        "leftover": 0
+      },
+      {
+        "name": "judge SIGKILLed while the service is up: service and boundary gone",
+        "ok": true,
+        "serviceWasUp": true,
+        "leftover": 0,
+        "boundaryLeft": 0
+      },
+      {
+        "name": "judge --seal on the reference: passed",
+        "ok": true,
+        "verdict": "passed"
+      },
+      {
+        "name": "hiddenSha256 equals the shell recipe and changes with the boundary",
+        "ok": true,
+        "hiddenSha256": "125fc9d3c4df62cffb31711a56fc5f94dc217485f234b7046bc31a6c5d9ac24c",
+        "recipe": "125fc9d3c4df62cffb31711a56fc5f94dc217485f234b7046bc31a6c5d9ac24c",
+        "changed": "3a97cbc9db9145f977b541277e4337f3c36c5d3d95f2811b478e4c0bb3c10f25"
+      },
+      {
+        "name": "a session's leftovers (its group, a scratch-path server, a process in its workdir) are gone after it ends; a concurrent session naming its workdir is not",
+        "ok": true,
+        "leftover": 0,
+        "bystanderAlive": true
+      }
+    ],
+    "wrong": 0
+  },
+  "calibration": {
+    "at": "2026-10-26T16:45:23.638Z",
+    "archive": {
+      "kept": 79,
+      "public": 30
+    },
+    "patch-apply": {
+      "written": 79,
+      "kept": 79,
+      "sameKeptAsArchive": true,
+      "public": 30,
+      "referencePublic": {
+        "passed": 30,
+        "total": 30
+      },
+      "referenceHidden": {
+        "passed": 79,
+        "total": 79
+      },
+      "dropped": 0
+    },
+    "patch-apply-cli": {
+      "written": 79,
+      "kept": 79,
+      "sameKeptAsArchive": true,
+      "public": 30,
+      "referencePublic": {
+        "passed": 30,
+        "total": 30
+      },
+      "referenceHidden": {
+        "passed": 79,
+        "total": 79
+      },
+      "dropped": 0
+    }
+  },
+  "oracle": {
+    "at": "2026-10-26T16:46:43.315Z",
+    "cases": 8842,
+    "judgedSet": {
+      "agreed": 7533,
+      "of": 7533,
+      "disagreements": {}
+    },
+    "allCases": {
+      "agreed": 8789,
+      "of": 8842,
+      "disagreements": {
+        "dup git:ok command:ok (files differ)": 21,
+        "drift git:ok command:ok (files differ)": 31,
+        "drift git:ok command:rej": 1
+      }
+    },
+    "sameAsModuleSeam": {
+      "same": 8842,
+      "of": 8842
+    },
+    "archive": "FINDINGS.md \"A git oracle on patch-apply\": the reference agrees with git on all 7,533 judged cases; the 53 others it disagrees on are a hunk matching at several places (compare.mjs --strict --ref: agreed 7533; without --strict 8789 of 8842)",
+    "minutes": 1.3,
+    "concurrency": 4,
+    "file": "evidence/seams/oracle/reference-cli.jsonl"
+  },
+  "repoSelftest": {
+    "at": "2026-10-26T16:48:29.139Z",
+    "checks": [
+      {
+        "name": "fit --seam http: supported, the service answered on base",
+        "ok": true,
+        "boundary": {
+          "ready": true,
+          "status": 200,
+          "seconds": 0.6
+        },
+        "existing": 1
+      },
+      {
+        "name": "repo.mjs --seam http: boundary recorded, no seam files, base is the stub",
+        "ok": true,
+        "hiddenDir": "test/hidden-svc-upper"
+      },
+      {
+        "name": "the suites list 1 public and 2 hidden tests on the change",
+        "ok": true,
+        "publicIds": [
+          "test/svc-upper.test.ts :: [happy-1] upper-cases abc"
+        ],
+        "kept": [
+          "test/hidden-svc-upper/upper.test.ts :: [happy-1] upper-cases a sentence",
+          "test/hidden-svc-upper/upper.test.ts :: [happy-1] keeps digits"
+        ]
+      },
+      {
+        "name": "judge --repo at base: incomplete, no service left",
+        "ok": true,
+        "verdict": "incomplete",
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        }
+      },
+      {
+        "name": "judge --repo at the change: passed, existing suite kept, no service left",
+        "ok": true,
+        "verdict": "passed",
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "existing": {
+          "passed": 1,
+          "total": 1
+        }
+      },
+      {
+        "name": "judge --seal --repo at the change: passed",
+        "ok": true,
+        "verdict": "passed"
+      }
+    ],
+    "wrong": 0
+  },
+  "submissions": {
+    "at": "2026-10-27T00:14:38.090Z",
+    "runs": 196,
+    "sameVerdict": 196,
+    "sameFailingHidden": 196,
+    "samePublic": 196,
+    "different": [],
+    "module": {
+      "overfit": 15,
+      "passed": 118,
+      "incomplete": 63
+    },
+    "command": {
+      "overfit": 15,
+      "passed": 118,
+      "incomplete": 63
+    },
+    "withGitOracle": {
+      "runs": 120,
+      "judgedSet": 7533,
+      "passedHidden": {
+        "module": 76,
+        "command": 76
+      },
+      "passedButDisagreeWithGit": {
+        "module": [
+          "double-blind-rule-haiku/17 (32)"
+        ],
+        "command": [
+          "double-blind-rule-haiku/17 (32)"
+        ]
+      }
+    }
+  },
+  "http": {
+    "at": "2026-10-27T01:59:47.298Z",
+    "slug": "csv-export-http",
+    "prepare": {
+      "public": 36,
+      "hiddenWritten": 48,
+      "kept": 48,
+      "reference": {
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 48,
+          "total": 48
+        }
+      },
+      "costUsd": 4.31
+    },
+    "stub": {
+      "verdict": "incomplete",
+      "public": {
+        "passed": 0,
+        "total": 36
+      },
+      "hidden": {
+        "passed": 0,
+        "total": 48
+      }
+    },
+    "runs": [
+      {
+        "variant": "haiku",
+        "run": 1,
+        "verdict": "overfit",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 47,
+          "total": 48
+        },
+        "costUsd": 0.03698782,
+        "refused": []
+      },
+      {
+        "variant": "haiku",
+        "run": 2,
+        "verdict": "overfit",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 47,
+          "total": 48
+        },
+        "costUsd": 0.0287432,
+        "refused": []
+      },
+      {
+        "variant": "haiku",
+        "run": 3,
+        "verdict": "passed",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 48,
+          "total": 48
+        },
+        "costUsd": null,
+        "refused": []
+      },
+      {
+        "variant": "haiku",
+        "run": 4,
+        "verdict": "overfit",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 47,
+          "total": 48
+        },
+        "costUsd": 0.040417770000000006,
+        "refused": []
+      },
+      {
+        "variant": "haiku",
+        "run": 5,
+        "verdict": "passed",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 48,
+          "total": 48
+        },
+        "costUsd": 0.03699543000000001,
+        "refused": []
+      },
+      {
+        "variant": "haiku",
+        "run": 6,
+        "verdict": "passed",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 48,
+          "total": 48
+        },
+        "costUsd": 0.0401421,
+        "refused": []
+      },
+      {
+        "variant": "haiku-retry-keyed",
+        "run": 1,
+        "verdict": "passed",
+        "public": {
+          "passed": 36,
+          "total": 36
+        },
+        "hidden": {
+          "passed": 48,
+          "total": 48
+        },
+        "costUsd": 0.01817795,
+        "refused": []
+      }
+    ]
+  }
+}

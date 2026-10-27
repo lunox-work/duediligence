@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b3e-22c5-7f33-99d0-43852f426dd1",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 46977,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "11 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_common.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b3e-dc5b-76a3-8676-656ee195c63f",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 175499,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "26 tests in 1 file. Compile check passes; all tests fail against the stub and pass against a reference.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_common.py"
+    ],
+    "open": []
+  }
+}

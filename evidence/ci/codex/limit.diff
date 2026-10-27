@@ -1,0 +1,101 @@
+diff --git a/apps/worker/src/evaluation/limit.ts b/apps/worker/src/evaluation/limit.ts
+new file mode 100644
+index 0000000..1bfedb6
+--- /dev/null
++++ b/apps/worker/src/evaluation/limit.ts
+@@ -0,0 +1,95 @@
++/**
++ * A cap on how many evaluation jobs one worker runs at once (ticket #104).
++ *
++ * The wrapper only counts and queues: it never looks at a job's files,
++ * commands or results, and it uses no clock, file system or process.
++ */
++
++import type { EvaluationJob, EvaluationProvider } from "sandbox-factory";
++
++/** Evaluation jobs one worker runs at once. */
++export const EVALUATION_JOBS_MAX = 2;
++
++/**
++ * At most `max` of a provider's jobs at once on this worker. Agent runs share
++ * a worker three at a time, and a job is a whole install, build and test
++ * run: past the cap, a job waits for one to be destroyed before it is
++ * created, or for its run to stop.
++ *
++ * Never throws for any `max`. The returned provider's `create` rejects with
++ * the inner `create`'s error, or with `signal.reason` when the signal aborts
++ * before the call is admitted; a limited job's `destroy` rejects with the
++ * inner `destroy`'s error.
++ */
++export function limitJobs(
++  provider: EvaluationProvider,
++  max: number,
++): EvaluationProvider {
++  let live = 0;
++  // Set iteration preserves insertion order and lets aborted waiters leave
++  // without retaining their specs or listeners until a slot becomes free.
++  const waiting = new Set<() => void>();
++
++  function release(): void {
++    live -= 1;
++    const oldest = waiting.values().next();
++    if (!oldest.done) {
++      waiting.delete(oldest.value);
++      oldest.value();
++    }
++  }
++
++  async function admit(
++    spec: Parameters<EvaluationProvider["create"]>[0],
++  ): Promise<EvaluationJob> {
++    live += 1;
++    let inner: EvaluationJob;
++    try {
++      inner = await provider.create(spec);
++    } catch (error) {
++      release();
++      throw error;
++    }
++
++    let released = false;
++    return {
++      id: inner.id,
++      environment: inner.environment,
++      stage: (files) => inner.stage(files),
++      exec: (command) => inner.exec(command),
++      read: (path) => inner.read(path),
++      async destroy() {
++        try {
++          return await inner.destroy();
++        } finally {
++          if (!released) {
++            released = true;
++            release();
++          }
++        }
++      },
++    };
++  }
++
++  return {
++    name: provider.name,
++    create(spec) {
++      if (live < max && waiting.size === 0) return admit(spec);
++      const { signal } = spec;
++      if (signal.aborted) return Promise.reject(signal.reason);
++      return new Promise<EvaluationJob>((resolve, reject) => {
++        const start = () => {
++          signal.removeEventListener("abort", abort);
++          resolve(admit(spec));
++        };
++        const abort = () => {
++          waiting.delete(start);
++          signal.removeEventListener("abort", abort);
++          reject(signal.reason);
++        };
++        waiting.add(start);
++        signal.addEventListener("abort", abort, { once: true });
++      });
++    },
++  };
++}

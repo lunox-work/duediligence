@@ -1,0 +1,29 @@
+{
+  "slug": "ladder-lcb_arc196_b-l4",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_a_two_by_four",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_modulo",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_mixed_two_by_three",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_multiple_cases",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_odd_a_in_row",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_sample_case_1",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_sample_case_2",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_all_a",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_all_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_impossible"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

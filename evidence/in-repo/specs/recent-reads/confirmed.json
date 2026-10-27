@@ -1,0 +1,30 @@
+{
+  "sha256": "ebba62cdbe6541f976f5b29ba821574be007939af1c1ee63d57e70f1c4733634",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T13:06:26.040Z",
+  "decided": [
+    "Default `ttlMs` is `RECENT_JIRA_READ_MS` (60000). Callers such as the hour-long field list pass their own value.",
+    "Default `max` is 1000, exported as the new constant `RECENT_JIRA_READS_MAX`.",
+    "Expiry is exclusive: an entry is fresh while `now() - writtenAt < ttlMs`, and is gone at exactly `ttlMs`.",
+    "A clock that moves backwards leaves the entry fresh, because the elapsed time is negative and so below `ttlMs`.",
+    "`get` never refreshes an entry's expiry or its eviction order.",
+    "`set` on an existing key replaces the value, restarts its ttl from `now()` and makes it the newest entry.",
+    "Eviction drops the oldest-written entry, and only when a new key is written into a full store.",
+    "Falsy values (`null`, `0`, `\"\"`, `false`) are returned as stored. Only `undefined` means a miss.",
+    "Values are returned by reference, not copied.",
+    "Keys are compared exactly and case-sensitively, and `\"\"` is a valid key.",
+    "Invalid `ttlMs` (not a finite number > 0) or `max` (not an integer ≥ 1) throws a `RangeError` at construction, with the exact messages above. `ttlMs` is checked first.",
+    "Options passed as `undefined` take their defaults.",
+    "Each `recentReads()` call returns an independent store.",
+    "Overlapping misses are not merged into one read: both callers read and write, the last `set` wins, and its ttl starts from its own write.",
+    "`issueKey` joins its parts with `\"\\n\"`, as `sharedCredential` does. Empty parts and parts containing a newline are accepted without validation.",
+    "Seam (the files the stub writes): apps/api/src/jira/recent.ts",
+    "Allowed paths (what the implementer may change): apps/api/src/jira/recent.ts"
+  ],
+  "seam": [
+    "apps/api/src/jira/recent.ts"
+  ],
+  "allowedPaths": [
+    "apps/api/src/jira/recent.ts"
+  ]
+}

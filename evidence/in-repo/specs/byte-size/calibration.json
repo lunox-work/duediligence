@@ -1,0 +1,89 @@
+{
+  "slug": "byte-size",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/byte-size.test.ts :: [happy-1] a small count is shown in bytes",
+    "test/byte-size.test.ts :: [happy-1] zero and the largest count below 1024 stay in bytes",
+    "test/byte-size.test.ts :: [happy-2] a count is shown in the largest unit it reaches",
+    "test/byte-size.test.ts :: [happy-2] each unit starts exactly at its power of 1024",
+    "test/byte-size.test.ts :: [boundary-1] 1024 TB stays in TB",
+    "test/byte-size.test.ts :: [boundary-1] the largest safe count is shown in TB",
+    "test/byte-size.test.ts :: [happy-3] small values keep one decimal, larger ones are whole",
+    "test/byte-size.test.ts :: [happy-3] a value that rounds to 10 at one decimal is shown whole",
+    "test/byte-size.test.ts :: [boundary-2] a half at one decimal rounds up",
+    "test/byte-size.test.ts :: [boundary-2] a half at a whole number rounds up",
+    "test/byte-size.test.ts :: [boundary-3] a value that rounds to 1024 moves to the next unit",
+    "test/byte-size.test.ts :: [boundary-3] a value just short of rounding to 1024 stays in its unit",
+    "test/byte-size.test.ts :: [unhappy-1] a negative or fractional count is refused",
+    "test/byte-size.test.ts :: [unhappy-1] non-finite and unsafe counts are refused"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 26,
+  "kept": [
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-1] every example of small counts are bytes",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-2] every example of each unit starts at its power of 1024",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-1] every example of TB is the largest unit",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-3] every example of small values keep a decimal",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-2] every example of halves round up",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-3] every example of rounding up to 1024 carries",
+    "test/hidden-byte-size/byte-size.test.ts :: [unhappy-1] every example of other numbers are refused",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-1] other small counts are shown in bytes",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-1] a thousand bytes and more get a comma",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-1] the bytes comma does not depend on the locale",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-2] other counts are shown in the largest unit they reach",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-2] a count just past a power of 1024 is in that unit",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-1] counts far past 1024 TB stay in TB",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-1] a TB value that rounds to 1024 stays in TB",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-1] a large TB value is rounded to a whole number",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-3] a decimal below 10 and a whole number from 10, in any unit",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-3] a thousand or more in a unit gets a comma",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-3] the unit comma does not depend on the locale",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-3] a MB value that rounds to 10 at one decimal is shown whole",
+    "test/hidden-byte-size/byte-size.test.ts :: [happy-3] a whole value is rounded from the value itself",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-2] other halves at one decimal round up",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-2] other halves at a whole number round up",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-3] a value that rounds to 1024 carries in every unit below TB",
+    "test/hidden-byte-size/byte-size.test.ts :: [boundary-3] a value just short of 1024 stays in its unit, in every unit",
+    "test/hidden-byte-size/byte-size.test.ts :: [unhappy-1] other negative and fractional counts are refused",
+    "test/hidden-byte-size/byte-size.test.ts :: [unhappy-1] other non-finite and unsafe counts are refused"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 26,
+      "total": 26
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 875,
+      "total": 875
+    },
+    "notes": "I implemented `byteSize` in `apps/web/src/lib/format.ts`. All 40 tests in the two byte-size suites pass, and the type check reports no errors.\n\nIn the whole suite, 913 of 915 tests pass. The two that fail are in `test/dev-hosts.test.ts` and are not caused by this change. They start a Vite dev server, and the sandbox doesn't allow opening a local port (`listen EPERM: operation not permitted 127.0.0.1`). They fail the same way with my change stashed. To run them, allow local port binding with `sandbox.network.allowLocalBinding: true` in your settings.\n\nHow it works:\n- **Rejected input:** anything that isn't a safe integer, or is negative, throws a `RangeError` whose message says \"bytes\". Nothing is clamped.\n- **Exact rounding:** the count is split into whole units plus a remainder. Rounding to one decimal and to a whole number (halves up) uses only that remainder, so the arithmetic stays exact. Multiplying the full count by 10 could go past `MAX_SAFE_INTEGER`.\n- **Choosing the unit:** below 10 the value is shown with one decimal. From 10 it is rounded whole from the original value, not from the one-decimal result. A whole value of 1024 below TB moves to the next unit and is rounded again. TB never moves up.\n- **Commas:** whole numbers use `toLocaleString(\"en-US\")`, the same as `plural`. They get commas whatever the browser's locale is.\n\nNo other file or export was changed.\n\nTests left failing:\ntest/dev-hosts.test.ts :: Vite loads dev hostnames from an env file and keeps unrelated hosts blocked :: the sandbox blocks local port binding (`listen EPERM`); fails the same without this change\ntest/dev-hosts.test.ts :: Vite defaults to localhost hosts when the extra list is empty :: the sandbox blocks local port binding (`listen EPERM`); fails the same without this change",
+    "sessions": [
+      {
+        "sessionId": "cf5d5ced-30a9-4458-a254-5b9a13456941",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.26432219999999995,
+        "turns": 8,
+        "durationMs": 125246,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.26432219999999995
+  }
+}

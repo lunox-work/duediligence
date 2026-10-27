@@ -1,0 +1,54 @@
+{
+  "slug": "he-4",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_all_negative_values",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_docstring_example",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_fractional_mean_and_deviation",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_identical_elements",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_mixed_sign_values",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_single_element",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_skewed_data_uses_arithmetic_mean",
+    "tests/public/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviation.test_two_fractional_values"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 22,
+  "kept": [
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_almost_identical_elements",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_balanced_signs_with_zero",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_descending_negative_fractional_pair",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_fractional_pair_crossing_zero",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_fractional_values_with_unequal_multiplicities",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_identical_positive_elements",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_identical_zero_elements",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_irregular_negative_fractions",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_large_baseline_with_fractional_spread",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_large_singleton",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_long_imbalanced_two_value_dataset",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_long_symmetric_dataset",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_negative_low_outlier",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_negative_singleton",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_seven_values_with_nonterminating_mean",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_shuffled_odd_progression",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_shuffled_six_element_progression",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_skewed_data_contains_mean",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_small_fractional_scale",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_unsorted_all_negative_values",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_unsorted_mixed_signs_with_zero",
+    "tests/private/test_mean_absolute_deviation.py :: TestMeanAbsoluteDeviationPrivate.test_zero_singleton"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 8
+    },
+    "hidden": {
+      "passed": 22,
+      "total": 22
+    }
+  }
+}

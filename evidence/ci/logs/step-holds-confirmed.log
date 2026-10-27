@@ -1,0 +1,4 @@
+step-holds-confirmed: passed. Public 30/30, hidden 34/34, existing 248/248; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at 6cbb45388bcff1576f84de23a11d065bf6b8997e.
+Hidden suite sha256 0c2c450d81f8aa63329361b661126af8c2dbdb3c82b4e7292c93f897e1890b9e, sealed 2026-10-26T04:35:58.957Z.
+[04:37:04] sandbox-factory 23708b8e6c2f: npx -y npm@10.9.2 ci --no-audit --no-fund
+Check "independent-tests (confirmed)": success, passed: public 30/30, hidden 34/34, existing 248/248 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/step-holds-confirmed.json); not posted (no token).

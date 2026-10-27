@@ -1,0 +1,4 @@
+handles-confirmed: passed. Public 42/42, hidden 49/49, existing 13/13; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at fc3e2c5abd23b1d5ee5bf9a341fcf37dcb9af40a.
+Hidden suite sha256 f798c11f00bcf233ae3d49c7bea97699abb42cf8e19d3288d881aa32bad096c9, sealed 2026-10-26T04:35:59.854Z.
+[04:39:12] sandbox-factory 7b323763e764: npx -y npm@10.9.2 ci --no-audit --no-fund
+Check "independent-tests (confirmed)": success, passed: public 42/42, hidden 49/49, existing 13/13 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/handles-confirmed.json); not posted (no token).

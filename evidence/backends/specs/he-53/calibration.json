@@ -1,0 +1,52 @@
+{
+  "slug": "he-53",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_add.py :: TestAdd.test_both_operands_zero",
+    "tests/public/test_add.py :: TestAdd.test_docstring_example_five_plus_seven",
+    "tests/public/test_add.py :: TestAdd.test_docstring_example_two_plus_three",
+    "tests/public/test_add.py :: TestAdd.test_mixed_sign_integers",
+    "tests/public/test_add.py :: TestAdd.test_opposite_integers_cancel",
+    "tests/public/test_add.py :: TestAdd.test_two_negative_integers",
+    "tests/public/test_add.py :: TestAdd.test_zero_first_operand",
+    "tests/public/test_add.py :: TestAdd.test_zero_second_operand"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 20,
+  "kept": [
+    "tests/private/test_add.py :: TestAddPrivate.test_both_zero_and_single_zero_combinations",
+    "tests/private/test_add.py :: TestAddPrivate.test_decimal_carry",
+    "tests/private/test_add.py :: TestAddPrivate.test_equal_negative_operands",
+    "tests/private/test_add.py :: TestAddPrivate.test_equal_positive_operands",
+    "tests/private/test_add.py :: TestAddPrivate.test_huge_cancellation",
+    "tests/private/test_add.py :: TestAddPrivate.test_huge_mixed_sign_operands_leave_small_residual",
+    "tests/private/test_add.py :: TestAddPrivate.test_huge_negative_first_zero_second",
+    "tests/private/test_add.py :: TestAddPrivate.test_huge_negative_sum",
+    "tests/private/test_add.py :: TestAddPrivate.test_huge_positive_sum",
+    "tests/private/test_add.py :: TestAddPrivate.test_negative_first_with_negative_result",
+    "tests/private/test_add.py :: TestAddPrivate.test_negative_first_with_positive_result",
+    "tests/private/test_add.py :: TestAddPrivate.test_negative_operands_in_descending_magnitude_order",
+    "tests/private/test_add.py :: TestAddPrivate.test_positive_first_cancellation",
+    "tests/private/test_add.py :: TestAddPrivate.test_positive_first_with_negative_result",
+    "tests/private/test_add.py :: TestAddPrivate.test_positive_first_zero_second",
+    "tests/private/test_add.py :: TestAddPrivate.test_positive_operands_in_descending_order",
+    "tests/private/test_add.py :: TestAddPrivate.test_sum_crosses_signed_64_bit_boundary",
+    "tests/private/test_add.py :: TestAddPrivate.test_two_ones",
+    "tests/private/test_add.py :: TestAddPrivate.test_zero_first_huge_second",
+    "tests/private/test_add.py :: TestAddPrivate.test_zero_first_negative_second"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 8
+    },
+    "hidden": {
+      "passed": 20,
+      "total": 20
+    }
+  }
+}

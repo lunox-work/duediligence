@@ -1,0 +1,56 @@
+{
+  "slug": "he-25",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_factorize.py :: TestFactorize.test_composite_factors_are_prime",
+    "tests/public/test_factorize.py :: TestFactorize.test_distinct_factors_in_ascending_order",
+    "tests/public/test_factorize.py :: TestFactorize.test_docstring_eight",
+    "tests/public/test_factorize.py :: TestFactorize.test_docstring_seventy",
+    "tests/public/test_factorize.py :: TestFactorize.test_docstring_twenty_five",
+    "tests/public/test_factorize.py :: TestFactorize.test_mixed_factor_multiplicities",
+    "tests/public/test_factorize.py :: TestFactorize.test_one_has_no_prime_factors",
+    "tests/public/test_factorize.py :: TestFactorize.test_single_prime_factor",
+    "tests/public/test_factorize.py :: TestFactorize.test_smallest_prime",
+    "tests/public/test_factorize.py :: TestFactorize.test_smallest_repeated_prime_factor"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 22,
+  "kept": [
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_all_odd_mixed_multiplicities",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_ascending_order_with_repeated_odd_factors",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_close_larger_prime_factors",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_cube_of_seven",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_eight_distinct_prime_factors",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_five_factors_of_two",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_four_distinct_odd_factors",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_four_mixed_multiplicities",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_large_square_after_small_factor",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_larger_prime",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_largest_factor_has_highest_multiplicity",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_long_power_of_three",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_long_power_of_two",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_one_after_composite_and_repeated",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_one_between_prime_calls",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_smallest_odd_prime",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_smallest_odd_prime_square",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_square_of_composite_with_four_prime_factors",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_square_of_larger_prime",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_three_factors_beyond_public_primes",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_two_digit_prime",
+    "tests/private/test_factorize_hidden.py :: TestFactorizeHidden.test_widely_separated_prime_factors"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 10,
+      "total": 10
+    },
+    "hidden": {
+      "passed": 22,
+      "total": 22
+    }
+  }
+}

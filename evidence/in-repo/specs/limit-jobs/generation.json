@@ -1,0 +1,67 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "936d7f0d-7a06-430f-bcb5-ea5a1f8ad63d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2302577,
+        "turns": 10,
+        "durationMs": 40675,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2302577,
+    "finalText": "I created `apps/worker/src/evaluation/limit.ts`. It exports exactly what the spec lists, and `npx tsc -p tsconfig.test.json` now reports no errors. The existing suite passes: 120 tests, 0 failures. The new file is the only change to the repository.\n\n- **`EVALUATION_JOBS_MAX`** is exported with the value `2`.\n- **`limitJobs(provider, max): EvaluationProvider`** has the spec's doc comment, including that it throws a `RangeError` unless `max` is a positive safe integer. Its body is `throw new Error(\"not implemented\");`.\n- **Types:** `EvaluationProvider` is imported as a type from `sandbox-factory`, the same way `local-process.ts` does it. No new types or error classes were needed.\n\nThe two parameters are named `_provider` and `_max` in the code, not `provider` and `max` as in the spec. The project's compiler settings reject unused parameters, which made the empty stub fail to compile, and a leading underscore is how this codebase marks them. Callers pass arguments by position, so the names don't change how anyone uses the function, and the doc comment still uses `provider` and `max`. Whoever implements it can rename them back.\n\nExported names added: `EVALUATION_JOBS_MAX`, `limitJobs`",
+    "problem": null,
+    "sha256": "479036b76f3ca23f15060f5cfee00dbebb21c4e7df6e38c038c99bfdb84c1a04"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "a4102cb9-e9dc-4b2b-8341-ed0ddee3acb4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0423354,
+        "turns": 11,
+        "durationMs": 247892,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.0423354,
+    "finalText": "I wrote the test suite in `apps/worker/test/limit-jobs.test.ts`. It compiles with no errors under `npx tsc -p tsconfig.test.json`. Running it as you specified, 51 of 52 tests fail with `not implemented`, as expected. The one that passes is `[happy-1] EVALUATION_JOBS_MAX is 2`, because that constant is already set in the interface.\n\nTo check the tests themselves, I ran them against a quick reference implementation I wrote in the scratchpad, outside the repo. All 52 passed. Git status shows only the new test file; nothing else in the repo was touched.\n\n**How it's built**\n- It uses `node:test`'s `test` and `node:assert/strict`, with flat top-level tests and no `describe`.\n- Each scenario has two tests, both starting with its key (`[happy-1]` to `[happy-5]`, `[unhappy-1]` to `[unhappy-7]`, `[boundary-1]` to `[boundary-5]`, `[concurrency-1]` to `[concurrency-9]`): one for the scenario as written, one for a boundary case.\n- Scenario outlines run all their example rows in a loop inside one test.\n- The fake inner provider and fake jobs are built in the test file, following the pattern in `sandbox-build.test.ts`. Every `create`, `stage`, `exec`, `read` and `destroy` returns a promise that the test resolves or rejects itself.\n- Before each check, the tests let pending promises run with `setImmediate`, as the spec suggests. There's no clock, randomness, network or filesystem.\n\n**Examples of the boundary cases**\n- A `max` of `-0`, `Number.MIN_VALUE` or `-Infinity` is rejected.\n- A slot freed by a failed `create` still goes to the oldest waiter.\n- If one of two overlapping `destroy` calls settles first, that alone frees the slot.\n- An abort while the admitted inner `create` is still pending is left for the inner provider to answer.\n- A looser outer cap wrapped around a tighter inner one is held to the inner cap.\n\n52 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/worker/test/limit-jobs.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "aa5decb0-7d62-4a04-9357-7632590f5cdc",
+        "model": "claude-opus-5-5",
+        "ok": false,
+        "exitCode": 143,
+        "timedOut": true,
+        "costUsd": 2.5117552000000005,
+        "turns": 36,
+        "durationMs": 1500535,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 2.5117552000000005,
+    "finalText": "I wrote the hidden suite in `apps/worker/test/hidden-limit-jobs/limit-jobs.test.ts`. It compiles cleanly with `npx tsc -p tsconfig.test.json`, and all 57 tests fail against the stub.\n\n**How I checked it:**\n- **Correct implementation:** I wrote a reference implementation in the scratchpad, outside the repo. It passes all 57 hidden tests and all 52 public ones.\n- **Shortcut implementations:** I tried 7 broken versions of that implementation. Six still pass the public suite, and the hidden suite catches five of those six:\n  - a waiter whose signal aborts after it was admitted removes the wrong waiter, because `splice(indexOf(...))` gets −1 and drops the last one;\n  - the abort listener isn't removed when a waiter is admitted;\n  - `max` is checked with `Number.isInteger` and `!== 2**53` instead of \"safe integer\";\n  - an already-aborted signal is only checked when a slot is free;\n  - a synchronous throw from the inner `create` is only caught on the immediate path, not when a waiter is admitted.\n- **The sixth, not caught:** handing the freed slot over one microtask late. This is effectively unobservable, because no caller's `await` continuation runs in between.\n- **The seventh:** freeing the slot as soon as `destroy` is called, without waiting for it to settle. The public suite already catches it, and so do both hidden `[concurrency-2]` tests.\n\n**Coverage:**\n- Every scenario key has at least two tests: `happy-1`–`5`, `unhappy-1`–`7`, `boundary-1`–`5`, `concurrency-1`–`9`.\n- Each test has a comment naming the public test it extends, and every one of the 54 public tests is named at least once.\n- One test uses `node:events` `getEventListeners` to check the spec's note that \"admitted calls hold no listener on the caller's signal\".\n\n**Things you should know:**\n- **No `await` can hang.** Every wait on the limited provider's promises gives up after 50 `setImmediate` turns and fails the test. Without this, one shortcut left a promise pending forever and the run hung until it was killed. There's no real clock involved.\n- **The `[concurrency-4]` tests are strict about timing.** They create the late call inside a `.then` on the destroy promise, so it runs exactly where code after `await J1.destroy()` would.\n\n57 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/worker/test/hidden-limit-jobs/limit-jobs.test.ts"
+    ],
+    "open": []
+  }
+}

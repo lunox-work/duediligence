@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-abc396_f",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc396_f",
+  "contest_id": "abc396",
+  "contest_date": "2025-03-08T00:00:00",
+  "difficulty": "hard",
+  "title": "Rotated Inversions",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 3,
+  "privateCases": 40
+}

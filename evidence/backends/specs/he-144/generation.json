@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b1c-7a33-7710-9fa7-22b5e20b17a4",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 8,
+        "durationMs": 55151,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "11 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_simplify.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b1d-53d9-7862-86d2-943c2e23bfb8",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 20,
+        "durationMs": 166610,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "29 tests in 1 file. Syntax check passed.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_simplify_hidden.py"
+    ],
+    "open": []
+  }
+}

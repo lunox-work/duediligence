@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b36-45a8-7b70-bc29-7adb7086a2fe",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 9,
+        "durationMs": 42813,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "8 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_is_palindrome.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b36-ef05-73b2-8c55-7ef72c970190",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 18,
+        "durationMs": 193909,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "29 tests in 1 file. Syntax check passes; every test fails against the placeholder.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_is_palindrome_hidden.py"
+    ],
+    "open": []
+  }
+}

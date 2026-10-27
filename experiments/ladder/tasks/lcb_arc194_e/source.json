@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-arc194_e",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "arc194_e",
+  "contest_id": "arc194",
+  "contest_date": "2025-03-09T00:00:00",
+  "difficulty": "hard",
+  "title": "Swap 0^X and 1^Y",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 2,
+  "privateCases": 40
+}

@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-26T05:19:33.207Z",
+  "specSha256": "d6e93e36af28952e34b01811cbd751142e7a53ba2105c5d8c80e56fe8bcb7330",
+  "drafted": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above Number.MAX_SAFE_INTEGER is rejected at parse time, never clamped.",
+    "Parse errors carry \"duration\" in their message; format errors carry \"milliseconds\".",
+    "`formatDuration(0)` is `\"0ms\"`; every other result omits zero components."
+  ],
+  "confirmedAt": "2026-10-26T05:19:38.531Z"
+}

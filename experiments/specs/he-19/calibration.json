@@ -1,0 +1,41 @@
+{
+  "slug": "he-19",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_all_ten_numerals_shuffled",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_already_sorted_input",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_descending_input",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_docstring_example",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_duplicates_are_kept",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_extremes_zero_and_nine",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_output_space_delimited",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_single_numeral",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_sorts_by_value_not_alphabetically"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 15,
+  "kept": [
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_all_same_numeral",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_all_ten_numerals_reversed",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_alphabetical_order_differs_from_value",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_already_sorted_all_ten",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_already_sorted_with_duplicates",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_descending_input_with_duplicates",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_each_numeral_twice",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_empty_string",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_extremes_already_ascending",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_extremes_repeated",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_large_input",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_longer_descending_input",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_multiple_values_duplicated",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_not_sorted_by_word_length",
+    "tests/private/test_sort_numbers_private.py :: TestSortNumbersPrivate.test_output_single_spaces_many_numerals"
+  ],
+  "dropped": [],
+  "reference": null
+}

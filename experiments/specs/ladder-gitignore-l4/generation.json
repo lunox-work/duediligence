@@ -1,0 +1,36 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "82eaa101-6917-49a3-96cc-94490f60a984",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1346336,
+        "turns": 3,
+        "durationMs": 23396,
+        "subtype": "success",
+        "apiError": null
+      },
+      {
+        "sessionId": "82eaa101-6917-49a3-96cc-94490f60a984",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3173334,
+        "turns": 3,
+        "durationMs": 55806,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.451967,
+    "finalText": "I added `tests/public/isIgnored.test.ts`, and it type-checks with no errors.\n\n**Where the test keys come from:** `spec.md` has no tagged scenarios. Its one sentence says the function returns \"whether git ignores the file\", so git's own `.gitignore` rules define the answer. I treated that as a single scenario and keyed every test `[happy-1]`. A comment at the top of the file says so. If you add tagged scenarios to the spec, the test names need re-keying to match.\n\n**What the tests cover:**\n- **Basics:** an empty `.gitignore`, blank lines and `#` comments, and `\\#` / `\\!` escapes.\n- **Patterns without a slash:** they match a file or directory at any depth.\n- **A trailing `/`:** it matches directories only.\n- **A leading or middle `/`:** it ties the pattern to the root.\n- **Wildcards:** `*` and `?` don't cross a `/`, and a `[0-9]` set matches one character.\n- **`**`:** used at the start, at the end, and in the middle.\n- **Negation with `!`:**\n  - the last matching line wins;\n  - a file can't be brought back if its parent directory is excluded;\n  - excluding `logs/*` does let a file in it be brought back;\n  - the git docs' \"exclude everything except `foo/bar`\" example.\n- **Trailing spaces:** ignored unless escaped.\n\n**Checks:**\n- **Types:** I ran `tsc -p tsconfig.json --noEmit`, which does the same type check as `npm run build`. I didn't run `npm run build` itself because it writes compiled `.js` files into `src/`.\n- **Expected answers:** I compared all 52 assertions against real git 2.54 (`git check-ignore --no-index`) in throwaway repos in the scratchpad. All 52 matched.\n- **Test run:** I haven't run the tests. They will fail until `isIgnored` is implemented.\n\n19 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/isIgnored.test.ts"
+    ]
+  }
+}

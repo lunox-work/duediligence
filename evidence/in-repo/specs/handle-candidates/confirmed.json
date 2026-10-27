@@ -1,0 +1,21 @@
+{
+  "sha256": "80697e56ac5106f7363ecaf76070ada779eab9ad66709d0a0fdc1ef8a31ed1d5",
+  "by": "Charlie Angriawan",
+  "at": "2026-10-25T09:15:28.468Z",
+  "decided": [
+    "The first candidate is the stem itself; numbering starts at 2 with no separator (`ada2`), as `suggest` does today.",
+    "The stem is cut to make room for the number; the number is never cut.",
+    "A cut keeps a trailing hyphen or underscore (it is still a valid handle).",
+    "A variant equal to an earlier candidate is skipped and numbering continues; skipped numbers are not reused.",
+    "The stem must pass `checkHandle` as given; it is not cleaned or lowercased. Errors for the stem say \"stem\".",
+    "The count must be an integer from 1 to 100; other counts throw a RangeError that says \"count\".",
+    "Seam (the files the stub writes): packages/core/src/handle.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/handle.ts"
+  ],
+  "seam": [
+    "packages/core/src/handle.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/handle.ts"
+  ]
+}

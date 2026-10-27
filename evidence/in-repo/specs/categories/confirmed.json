@@ -1,0 +1,44 @@
+{
+  "sha256": "209083d7bdca87a9974cc9babbdb333a74dad5cf396602d582c32c43fdf20b91",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T15:32:21.663Z",
+  "decided": [
+    "Entry point: tests import from `packages/core/src/selection/index.ts`, which re-exports all four modules. The root `src/index.ts`, `bounty.ts` and `handle.ts` are unchanged.",
+    "Day counting: `ageDays` and `daysSinceUpdate` are `floor(elapsed ms / 86_400_000)`, clamped at 0. A missing, unparseable or future date gives 0.",
+    "`daysSinceUpdate` falls back to `ageDays` when `updated` is missing or unparseable.",
+    "An invalid `now` makes `factsFor` throw a `RangeError`.",
+    "`dueInDays` and `release.inDays` are UTC calendar-day differences taken from the date's first ten characters (`YYYY-MM-DD`). They are negative when overdue and null when unparseable.",
+    "`assigned` requires a non-blank assignee name.",
+    "`inSprint` is true for any sprint whose state is not \"closed\", compared case-insensitively.",
+    "`carriedSince` is the earliest closed sprint's `startDate ?? endDate`, returned verbatim. It is null when none of them parse.",
+    "Links: the type name is matched trimmed and case-insensitively. \"Duplicate\" counts in either direction. \"Blocks\" counts only outward links to tickets whose status category is not \"done\".",
+    "Null `votes`/`watchers` become 0. A null or absent `commentCount` stays null, and `commentsAtLeast` never matches it.",
+    "`PRIORITY_RANKS` contents: Highest/High/Blocker/Critical are high, Major/Medium are medium, Low/Lowest/Minor/Trivial are low. Keys are looked up as own properties, trimmed and lowercased. `priorityName` is trimmed, and blank becomes null.",
+    "`release` is the earliest-dated unreleased version, including overdue ones. Ties go to array order, and undated or unparseable versions are ignored.",
+    "`evaluate`: `all()` matches and `any()` does not. `all` short-circuits and `any` evaluates every child. Clauses keep order, drop nulls and duplicates, and are empty when the rule does not match.",
+    "`describe` is called only after `test` matched. Called directly, it describes whatever facts it is given.",
+    "Signal ids are `kebab-name:<threshold>`. Description wording and singular/plural (singular only for exactly 1) are as in the signal table.",
+    "`deadlineWithin` includes overdue dates, accepts a due date or a release, and describes the nearer one, with a tie going to the due date.",
+    "Signal factories throw a `RangeError` for negative or non-finite thresholds, and `priorityAtMost` throws for an unknown rank.",
+    "The registry's ids, threshold names, defaults, rule compositions and `why` texts are as tabled here.",
+    "Overrides: null, undefined, negative and non-finite values keep the default. 0 and fractions are accepted. Unknown threshold keys and unknown category ids are ignored.",
+    "`enabled` is true unless it is exactly false. Disabled categories still appear in `resolveCategories`, with their thresholds resolved.",
+    "Duplicate category ids and the reserved id \"uncategorized\" make resolve/createClassifier throw an `Error`, with the messages given above.",
+    "Reason format: clauses joined with \", \" and the first character upper-cased. It falls back to the category's `why` when there are no clauses.",
+    "Matches come in registry order. An issue with no match gets `[]`, and `UNCATEGORIZED` is never returned.",
+    "`createClassifier` resolves and builds rules once, at creation, and only for enabled categories.",
+    "Everything is synchronous, frozen where exported as a constant, and stateless, so overlapping calls cannot interfere. No `@concurrency` scenario applies.",
+    "Seam (the files the stub writes): packages/core/src/selection/index.ts, packages/core/src/selection/facts.ts, packages/core/src/selection/rules.ts, packages/core/src/selection/signals.ts, packages/core/src/selection/categories.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/selection/"
+  ],
+  "seam": [
+    "packages/core/src/selection/index.ts",
+    "packages/core/src/selection/facts.ts",
+    "packages/core/src/selection/rules.ts",
+    "packages/core/src/selection/signals.ts",
+    "packages/core/src/selection/categories.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/selection/"
+  ]
+}

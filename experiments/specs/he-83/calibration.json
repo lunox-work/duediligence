@@ -1,0 +1,31 @@
+{
+  "slug": "he-83",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_four_digits",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_one_digit",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_ten_digits",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_three_digits",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_two_digits_counts_overlap_once"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 5
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 9,
+  "kept": [
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_eleven_digits",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_five_digits_by_hand",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_four_hundred_digits_exact",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_one_digit_matches_brute_force",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_one_digit_not_double_counted",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_seven_eight_nine_digits",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_six_digits_brute_force",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_thirty_digits_exact",
+    "tests/private/test_starts_one_ends_private.py :: TestStartsOneEndsPrivate.test_three_digits_brute_force"
+  ],
+  "dropped": [],
+  "reference": null
+}

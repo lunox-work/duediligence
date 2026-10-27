@@ -1,0 +1,64 @@
+{
+  "slug": "he-114",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_all_zero_elements",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_docstring_negative_example",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_docstring_positive_example",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_minimum_includes_a_positive_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_minimum_is_a_prefix",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_minimum_is_a_suffix",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_minimum_is_an_interior_subarray",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_separated_negatives_cannot_skip_an_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_single_negative_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_single_positive_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_single_zero_element",
+    "tests/public/test_min_sub_array_sum.py :: TestMinSubArraySum.test_zero_among_positive_elements"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 28,
+  "kept": [
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_all_positive_values_exceed_machine_integer",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_best_slice_is_not_the_last_negative_run",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_bridge_cost_exactly_cancels_first_negative",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_exhaustive_small_arrays",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_interior_minimum_contains_zero",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_interior_minimum_crosses_two_positive_bridges",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_large_cancellation_with_small_negative_result",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_long_negative_array",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_long_prefix_with_positive_bridges",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_long_suffix_with_positive_bridges",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_long_zero_array",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_many_mixed_values_against_all_contiguous_slices",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_no_wraparound_between_negative_endpoints",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_nonpositive_array_with_zero_gaps",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_positive_duplicate_minima",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_positive_minimum_at_last_index",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_positive_separator_between_negative_clusters",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_restart_after_running_sum_becomes_positive",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_single_arbitrarily_large_negative",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_single_arbitrarily_large_positive",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_tied_singletons_and_longer_slice",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_two_negative_elements",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_two_positive_elements",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_whole_array_with_multiple_positive_bridges",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_zero_after_negative",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_zero_before_negative",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_zero_minima_at_both_ends",
+    "tests/private/test_min_sub_array_sum_hidden.py :: TestMinSubArraySumHidden.test_zero_with_positive_tail"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 12,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 28,
+      "total": 28
+    }
+  }
+}

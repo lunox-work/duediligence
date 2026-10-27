@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3784",
+  "contest_id": "biweekly-contest-152",
+  "contest_date": "2025-03-15T07:30:00",
+  "difficulty": "hard",
+  "title": "longest-common-prefix-of-k-strings-after-removal",
+  "kind": "functional",
+  "fn_name": "longestCommonPrefix",
+  "publicCases": 2,
+  "privateCases": 40
+}

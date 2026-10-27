@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b32-edcb-7183-89c8-45cbed5c8462",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 60810,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "10 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_change_base.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b33-dd92-7ac2-b4dc-8b5f2d7f64c6",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 17,
+        "durationMs": 157287,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "40 tests in 1 file. Syntax check passed; all expected values verified independently.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_change_base.py"
+    ],
+    "open": []
+  }
+}

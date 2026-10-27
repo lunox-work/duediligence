@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-arc195_b",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "arc195_b",
+  "contest_id": "arc195",
+  "contest_date": "2025-03-23T00:00:00",
+  "difficulty": "hard",
+  "title": "Uniform Sum",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 3,
+  "privateCases": 40
+}

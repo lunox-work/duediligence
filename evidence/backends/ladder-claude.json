@@ -1,0 +1,1766 @@
+{
+  "agreement": [
+    {
+      "slug": "ladder-kestrel-l0",
+      "level": 0,
+      "compiled": true,
+      "passed": 73,
+      "total": 74,
+      "failing": [
+        "tests/public/tagged.test.ts :: [happy-8] boundary: a tagged comparator of the same minor is not enough when it does not hold"
+      ]
+    },
+    {
+      "slug": "ladder-kestrel-l1",
+      "level": 1,
+      "compiled": true,
+      "passed": 31,
+      "total": 32,
+      "failing": [
+        "tests/public/rule-8-tagged.test.ts :: [rule-8] a tagged version needs every comparator to hold as well"
+      ]
+    },
+    {
+      "slug": "ladder-kestrel-l2",
+      "level": 2,
+      "compiled": true,
+      "passed": 22,
+      "total": 23,
+      "failing": [
+        "tests/public/satisfies.test.ts :: [rule-3] ^V with major 0 still spans the whole major"
+      ]
+    },
+    {
+      "slug": "ladder-kestrel-l3",
+      "level": 3,
+      "compiled": true,
+      "passed": 14,
+      "total": 14,
+      "failing": []
+    },
+    {
+      "slug": "ladder-kestrel-l4",
+      "level": 4,
+      "compiled": true,
+      "passed": 1,
+      "total": 1,
+      "failing": []
+    }
+  ],
+  "rescored": {
+    "runs": 140,
+    "differingFromArchive": 0,
+    "means": {
+      "a/double-blind/L0": 100,
+      "a/double-blind-own/L0": 100,
+      "a/self-tested/L0": 100,
+      "a/spec-only/L0": 100,
+      "a/double-blind/L1": 100,
+      "a/double-blind-own/L1": 100,
+      "a/self-tested/L1": 100,
+      "a/spec-only/L1": 100,
+      "a/double-blind/L2": 52.3,
+      "a/double-blind-own/L2": 52.1,
+      "a/self-tested/L2": 56.8,
+      "a/spec-only/L2": 56.3,
+      "a/double-blind/L3": 42.7,
+      "a/double-blind-own/L3": 47.7,
+      "a/self-tested/L3": 59,
+      "a/spec-only/L3": 59.2,
+      "a/double-blind/L4": 37.3,
+      "a/double-blind-own/L4": 37.2,
+      "a/self-tested/L4": 47.2,
+      "a/spec-only/L4": 45.8,
+      "b/double-blind/L1": 100,
+      "b/double-blind-own/L1": 100,
+      "b/double-blind/L2": 100,
+      "b/double-blind-own/L2": 100,
+      "b/double-blind/L3": 100,
+      "b/double-blind-own/L3": 100,
+      "b/double-blind/L4": 100,
+      "b/double-blind-own/L4": 100
+    },
+    "rows": [
+      {
+        "key": "ladder-kestrel-l0/double-blind-haiku/1",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-haiku/2",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-haiku/3",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-haiku/4",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-haiku/5",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-own-haiku/1",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-own-haiku/2",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-own-haiku/3",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-own-haiku/4",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/double-blind-own-haiku/5",
+        "level": 0,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/self-tested-haiku/1",
+        "level": 0,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/self-tested-haiku/2",
+        "level": 0,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/self-tested-haiku/3",
+        "level": 0,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/self-tested-haiku/4",
+        "level": 0,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/self-tested-haiku/5",
+        "level": 0,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/spec-only-haiku/1",
+        "level": 0,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/spec-only-haiku/2",
+        "level": 0,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/spec-only-haiku/3",
+        "level": 0,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/spec-only-haiku/4",
+        "level": 0,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l0/spec-only-haiku/5",
+        "level": 0,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-haiku/1",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-haiku/2",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-haiku/3",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-haiku/4",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-haiku/5",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-own-haiku/1",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-own-haiku/2",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-own-haiku/3",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-own-haiku/4",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/double-blind-own-haiku/5",
+        "level": 1,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/self-tested-haiku/1",
+        "level": 1,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/self-tested-haiku/2",
+        "level": 1,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/self-tested-haiku/3",
+        "level": 1,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/self-tested-haiku/4",
+        "level": 1,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/self-tested-haiku/5",
+        "level": 1,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/spec-only-haiku/1",
+        "level": 1,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/spec-only-haiku/2",
+        "level": 1,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/spec-only-haiku/3",
+        "level": 1,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/spec-only-haiku/4",
+        "level": 1,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1/spec-only-haiku/5",
+        "level": 1,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 1,
+        "public": {
+          "passed": 31,
+          "total": 32
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-haiku/1",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-haiku/2",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.553030303030303,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.553030303030303
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-haiku/3",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-haiku/4",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-haiku/5",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-own-haiku/1",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5454545454545454,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5454545454545454
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-own-haiku/2",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-own-haiku/3",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-own-haiku/4",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/double-blind-own-haiku/5",
+        "level": 2,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5151515151515151,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5151515151515151
+      },
+      {
+        "key": "ladder-kestrel-l2/self-tested-haiku/1",
+        "level": 2,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.5833333333333334,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5833333333333334
+      },
+      {
+        "key": "ladder-kestrel-l2/self-tested-haiku/2",
+        "level": 2,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.5454545454545454,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5454545454545454
+      },
+      {
+        "key": "ladder-kestrel-l2/self-tested-haiku/3",
+        "level": 2,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.5833333333333334,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5833333333333334
+      },
+      {
+        "key": "ladder-kestrel-l2/self-tested-haiku/4",
+        "level": 2,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.5833333333333334,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5833333333333334
+      },
+      {
+        "key": "ladder-kestrel-l2/self-tested-haiku/5",
+        "level": 2,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.5454545454545454,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5454545454545454
+      },
+      {
+        "key": "ladder-kestrel-l2/spec-only-haiku/1",
+        "level": 2,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5808080808080808,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5808080808080808
+      },
+      {
+        "key": "ladder-kestrel-l2/spec-only-haiku/2",
+        "level": 2,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5959595959595959,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5959595959595959
+      },
+      {
+        "key": "ladder-kestrel-l2/spec-only-haiku/3",
+        "level": 2,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5454545454545454,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5454545454545454
+      },
+      {
+        "key": "ladder-kestrel-l2/spec-only-haiku/4",
+        "level": 2,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5454545454545454,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5454545454545454
+      },
+      {
+        "key": "ladder-kestrel-l2/spec-only-haiku/5",
+        "level": 2,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5454545454545454,
+        "public": {
+          "passed": 23,
+          "total": 23
+        },
+        "archiveMacro": 0.5454545454545454
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-haiku/1",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.3181818181818182,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.3181818181818182
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-haiku/2",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.44696969696969696,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.44696969696969696
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-haiku/3",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.4419191919191918,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.4419191919191918
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-haiku/4",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.46464646464646464,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.46464646464646464
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-haiku/5",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.46464646464646464,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.46464646464646464
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-own-haiku/1",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5025252525252525,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.5025252525252525
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-own-haiku/2",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.45454545454545453,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.45454545454545453
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-own-haiku/3",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.44696969696969696,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.44696969696969696
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-own-haiku/4",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.46464646464646464,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.46464646464646464
+      },
+      {
+        "key": "ladder-kestrel-l3/double-blind-own-haiku/5",
+        "level": 3,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.5176767676767677,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.5176767676767677
+      },
+      {
+        "key": "ladder-kestrel-l3/self-tested-haiku/1",
+        "level": 3,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.46464646464646464,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.46464646464646464
+      },
+      {
+        "key": "ladder-kestrel-l3/self-tested-haiku/2",
+        "level": 3,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.6868686868686869,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.6868686868686869
+      },
+      {
+        "key": "ladder-kestrel-l3/self-tested-haiku/3",
+        "level": 3,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.6868686868686869,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.6868686868686869
+      },
+      {
+        "key": "ladder-kestrel-l3/self-tested-haiku/4",
+        "level": 3,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.46464646464646464,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.46464646464646464
+      },
+      {
+        "key": "ladder-kestrel-l3/self-tested-haiku/5",
+        "level": 3,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.6464646464646464,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.6464646464646464
+      },
+      {
+        "key": "ladder-kestrel-l3/spec-only-haiku/1",
+        "level": 3,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5378787878787878,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.5378787878787878
+      },
+      {
+        "key": "ladder-kestrel-l3/spec-only-haiku/2",
+        "level": 3,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.6919191919191918,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.6919191919191918
+      },
+      {
+        "key": "ladder-kestrel-l3/spec-only-haiku/3",
+        "level": 3,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5328282828282828,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.5328282828282828
+      },
+      {
+        "key": "ladder-kestrel-l3/spec-only-haiku/4",
+        "level": 3,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.6868686868686869,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.6868686868686869
+      },
+      {
+        "key": "ladder-kestrel-l3/spec-only-haiku/5",
+        "level": 3,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.5126262626262625,
+        "public": {
+          "passed": 14,
+          "total": 14
+        },
+        "archiveMacro": 0.5126262626262625
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-haiku/1",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-haiku/2",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-haiku/3",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.40404040404040403,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.40404040404040403
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-haiku/4",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.5126262626262625,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.5126262626262625
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-haiku/5",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-own-haiku/1",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-own-haiku/2",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-own-haiku/3",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.43686868686868685,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.43686868686868685
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-own-haiku/4",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/double-blind-own-haiku/5",
+        "level": 4,
+        "condition": "a",
+        "arm": "double-blind-own",
+        "macro": 0.4722222222222222,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4722222222222222
+      },
+      {
+        "key": "ladder-kestrel-l4/self-tested-haiku/1",
+        "level": 4,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/self-tested-haiku/2",
+        "level": 4,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/self-tested-haiku/3",
+        "level": 4,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.46212121212121215,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.46212121212121215
+      },
+      {
+        "key": "ladder-kestrel-l4/self-tested-haiku/4",
+        "level": 4,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.4722222222222222,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4722222222222222
+      },
+      {
+        "key": "ladder-kestrel-l4/self-tested-haiku/5",
+        "level": 4,
+        "condition": "a",
+        "arm": "self-tested",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/spec-only-haiku/1",
+        "level": 4,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/spec-only-haiku/2",
+        "level": 4,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.4722222222222222,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4722222222222222
+      },
+      {
+        "key": "ladder-kestrel-l4/spec-only-haiku/3",
+        "level": 4,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.46212121212121215,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.46212121212121215
+      },
+      {
+        "key": "ladder-kestrel-l4/spec-only-haiku/4",
+        "level": 4,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.4747474747474747,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4747474747474747
+      },
+      {
+        "key": "ladder-kestrel-l4/spec-only-haiku/5",
+        "level": 4,
+        "condition": "a",
+        "arm": "spec-only",
+        "macro": 0.4065656565656565,
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "archiveMacro": 0.4065656565656565
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-haiku/1",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-haiku/2",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-haiku/3",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-haiku/4",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-haiku/5",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-own-haiku/1",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-own-haiku/2",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-own-haiku/3",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-own-haiku/4",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l1-b/double-blind-own-haiku/5",
+        "level": 1,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-haiku/1",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-haiku/2",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-haiku/3",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-haiku/4",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-haiku/5",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-own-haiku/1",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-own-haiku/2",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-own-haiku/3",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-own-haiku/4",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l2-b/double-blind-own-haiku/5",
+        "level": 2,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-haiku/1",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-haiku/2",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-haiku/3",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-haiku/4",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-haiku/5",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-own-haiku/1",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-own-haiku/2",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-own-haiku/3",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-own-haiku/4",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l3-b/double-blind-own-haiku/5",
+        "level": 3,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-haiku/1",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-haiku/2",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-haiku/3",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-haiku/4",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-haiku/5",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-own-haiku/1",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-own-haiku/2",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-own-haiku/3",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 74,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-own-haiku/4",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      },
+      {
+        "key": "ladder-kestrel-l4-b/double-blind-own-haiku/5",
+        "level": 4,
+        "condition": "b",
+        "arm": "double-blind-own",
+        "macro": 1,
+        "public": {
+          "passed": 73,
+          "total": 74
+        },
+        "archiveMacro": 1
+      }
+    ]
+  }
+}

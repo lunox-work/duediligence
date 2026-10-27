@@ -1,0 +1,48 @@
+{
+  "slug": "he-97",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_multiply.py :: TestMultiply.test_both_negative_single_digit",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_148_412",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_14_negative_15",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_19_28",
+    "tests/public/test_multiply.py :: TestMultiply.test_example_2020_1851",
+    "tests/public/test_multiply.py :: TestMultiply.test_negative_first_argument",
+    "tests/public/test_multiply.py :: TestMultiply.test_product_large_numbers",
+    "tests/public/test_multiply.py :: TestMultiply.test_product_of_unit_digits_typical",
+    "tests/public/test_multiply.py :: TestMultiply.test_product_of_zeros",
+    "tests/public/test_multiply.py :: TestMultiply.test_product_single_digit_inputs_largest",
+    "tests/public/test_multiply.py :: TestMultiply.test_product_with_zero_unit_digit"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 20,
+  "kept": [
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_all_digit_pairs_brute_force",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_all_digit_pairs_large_prefixes",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_both_negative_multi_digit",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_both_negative_ones",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_large_negative_number",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_multiples_of_ten",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_negative_first_argument_17",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_negative_second_argument_floor_mod_differs",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_negative_second_argument_result_positive",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_numbers_beyond_64_bits",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_product_not_reduced_mod_10",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_single_digit_ones",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_swapped_412_148",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_unit_digits_4_and_6",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_unit_digits_6_and_8",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_unit_digits_8_and_2_other_prefixes",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_unit_digits_9_and_9_multi_digit",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_zero_and_single_digit",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_zero_unit_digit_negative",
+    "tests/private/test_multiply_private.py :: TestMultiplyPrivate.test_zero_unit_digit_second_argument"
+  ],
+  "dropped": [],
+  "reference": null
+}

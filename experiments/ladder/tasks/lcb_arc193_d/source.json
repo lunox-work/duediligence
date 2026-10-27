@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-arc193_d",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "arc193_d",
+  "contest_id": "arc193",
+  "contest_date": "2025-02-23T00:00:00",
+  "difficulty": "hard",
+  "title": "Magnets",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 1,
+  "privateCases": 1
+}

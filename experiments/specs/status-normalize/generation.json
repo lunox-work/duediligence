@@ -1,0 +1,82 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "3c2e8822-39c1-4bb4-aa48-5295fb593ba7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.16238059999999999,
+        "turns": 6,
+        "durationMs": 33349,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.16238059999999999,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors. The build also created `src/index.js`; that file is compiler output, and `.gitignore` already excludes it.\n\nThe contract has three functions:\n- **`readStatus(stored)`** returns the status, or `null` when the value is no status.\n- **`writeStatus(value)`** returns the value to store. Its doc comment says it throws an error naming the value as given for anything that isn't a status, old spellings included. Its parameter is a plain `string`, so tests can pass values like `\"Review\"` or `\"in-review\"` and expect the throw.\n- **`readStatuses(rows)`** returns each row with its status or `null`, plus the `unreadable` list of original values.\n\nThe spec left a few things open, so I chose:\n- **No status** is `null`.\n- **Row ids** are `string`.\n- **The list of statuses** is only a type. The brief rules out exported constants with values, so there's no exported array.\n- **Cleaning** isn't exported as its own function. It's described in `readStatus`'s doc comment, and tests reach it through reading.\n- **Sort order and row order** in the table result aren't specified, because the spec doesn't state them.\n\nExports: SandboxStatus, readStatus, writeStatus, StoredStatusRow, ReadStatusRow, ReadStatusesResult, readStatuses",
+    "problem": null,
+    "sha256": "628a4ed88d9e6fb1ae6aeee9ddadafd4017322920d02e31e9cf13ab965cf4362"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "a1ee1b14-1d50-49a7-a89f-4681a7a2c0b9",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2586828,
+        "turns": 5,
+        "durationMs": 56981,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.2586828,
+    "finalText": "I wrote the public test suite for the spec in `tests/public/`. `npm run build` reports no errors. As expected, all 15 tests fail for now with `not implemented`.\n\nEach of the six scenarios has a happy-path test and at least one boundary test:\n\n- **`[happy-1]`** (`read-status.test.ts`): the four example values are read correctly. The boundary test checks that every status reads as itself, both already clean and in capitals with spaces padding both ends.\n- **`[happy-2]`**: `In-Review`, `under_review` and `LIVE` read as their statuses. The boundary test uses mixed runs of spaces, dashes and underscores, such as `\"  Under -_ REVIEW  \"`. A third test checks every spelling in the spec's table.\n- **`[unhappy-1]`**: `closed` and `archived` read as `null`. The boundary test checks that near misses (`drafts`, `revew`), an empty value and a value of only spaces also read as `null`.\n- **`[happy-3]`** (`write-status.test.ts`): `review` is written as itself. The boundary test writes all five statuses.\n- **`[unhappy-2]`**: `Review`, `in-review` and `closed` are refused with an error whose message contains the value. The boundary test checks that `\" draft\"` is named with its leading space kept. A third test checks that old spellings already in clean form (`in review`, `live`, `done`) are also refused on write.\n- **`[happy-4]`** (`read-statuses.test.ts`): a mixed table returns each row with its status, and the unreadable values come back sorted. The boundary test covers repeated values, the empty string, and `\"closed\"` alongside `\"closed \"`, which must be listed once each, exactly as stored. A third test checks that an empty table returns empty results.\n\nThree choices to be aware of:\n\n- **Row order:** the spec doesn't say whether rows come back in input order, so the tests sort them by id before comparing.\n- **Sorting:** the unreadable values are chosen so the expected order is the same whether the developer sorts by character codes or with `localeCompare`.\n- **Cleaning order:** I avoided values like `\"draft_\"`, where the result depends on whether trimming happens before or after separators are collapsed. The spec leaves that order open.\n\nRunning the build also compiles a `.js` file next to each `.ts` file, including `src/index.js`. Those files are ignored by `.gitignore`.\n\n15 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/read-status.test.ts",
+      "tests/public/read-statuses.test.ts",
+      "tests/public/write-status.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "a99f6657-57f1-4239-ac35-ee6c75ac2608",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5004838,
+        "turns": 7,
+        "durationMs": 131255,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.5004838,
+    "finalText": "I wrote the hidden suite in `tests/private/`, in three files that match the public ones: `read-status.test.ts`, `write-status.test.ts` and `read-statuses.test.ts`. `npm run build` reports no errors, and all 25 tests fail against the current stubs. To check that the tests themselves are right, I ran them and the public suite against a small reference implementation in the scratchpad, and all 40 passed. After that I deleted the `.js` files the build had written into `src/` and `tests/` (they're gitignored), so only the three new `.ts` files remain.\n\n**Shortcuts the suite is built to catch:**\n- **Matching too loosely:** substring, prefix or fuzzy matching, e.g. `\"preview\"`, `\"not reviewed\"`, `\"draft review\"` or `\"undone\"` being read as a status.\n- **Stripping separators instead of turning them into one space:** e.g. `\"Pub-lished\"` read as published, or `\"inreview\"` read as review.\n- **Looking spellings up in a plain object:** `\"constructor\"`, `\"__proto__\"` and `\"toString\"` must read as no status.\n- **Writes that clean the value first:** lowercasing or trimming before writing, or accepting anything that reads as a status. Every old spelling and every case or padding variant is refused, and the error must contain the value exactly as given.\n- **Table-read mistakes:** de-duplicating or listing the cleaned value instead of the stored one, leaving the list in input order, or listing old spellings that did read. Tests include 1,000 rows and repeated values given in reverse order.\n\n**Left untested because the spec doesn't settle them:**\n- Separators at the ends of a value, such as `\"-draft-\"`.\n- Whether tabs count as ends to trim.\n- How the unreadable list is sorted when values differ by case or punctuation, since plain sorting and locale sorting disagree there.\n- The order in which rows come back.\n\n25 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/read-status.test.ts",
+      "tests/private/read-statuses.test.ts",
+      "tests/private/write-status.test.ts"
+    ],
+    "open": []
+  },
+  "notes": {
+    "sessionId": "78cc8e74-f72c-46fa-9d02-524d61fe75ef",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.1242642,
+    "turns": 3,
+    "durationMs": 21909,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `notes.md`, covering `readStatus`, `writeStatus` and `readStatuses`. The order of rows in the `readStatuses` result is noted as left open, because the tests sort by id before comparing.\n\n18 bullets: 15 behaviour bullets and 3 example sub-bullets under `readStatuses`.",
+    "problem": null
+  }
+}

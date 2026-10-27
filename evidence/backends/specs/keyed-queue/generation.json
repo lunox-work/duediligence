@@ -1,0 +1,50 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176ce-d7da-7fa1-b687-d6c1d2e6f295",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 225874,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passed with `npm run build -- --noEmit`.\n\n22 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/keyed-queue.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176d2-4bc6-7fe3-93ee-51991d947736",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 21,
+        "durationMs": 453102,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "All 22 public tests have named extensions. Build passes with `--noEmit`; all 34 private tests fail against the stubs.\n\n34 tests in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/abort-state.test.ts",
+      "tests/private/scheduling.test.ts"
+    ],
+    "open": []
+  }
+}

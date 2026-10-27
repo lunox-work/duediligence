@@ -1,0 +1,99 @@
+{
+  "slug": "handle-candidates",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/handle-candidates.test.ts :: [happy-1] a short stem gets plain numbered variants",
+    "test/handle-candidates.test.ts :: [happy-1] a 29-character stem fits every one-digit number without a cut",
+    "test/handle-candidates.test.ts :: [happy-2] one candidate is the stem alone",
+    "test/handle-candidates.test.ts :: [happy-2] one candidate from a 30-character stem is the whole stem, uncut",
+    "test/handle-candidates.test.ts :: [boundary-1] a 30-character stem loses its last character for a one-digit number",
+    "test/handle-candidates.test.ts :: [boundary-1] every one-digit variant of a 30-character stem is cut to 29 characters plus the digit",
+    "test/handle-candidates.test.ts :: [boundary-2] two-digit numbers cut one character more",
+    "test/handle-candidates.test.ts :: [boundary-2] a 29-character stem is first cut when the number reaches two digits",
+    "test/handle-candidates.test.ts :: [boundary-3] a cut that ends on a hyphen keeps it",
+    "test/handle-candidates.test.ts :: [boundary-3] a cut that ends on an underscore keeps it",
+    "test/handle-candidates.test.ts :: [boundary-4] a variant that repeats the stem is skipped",
+    "test/handle-candidates.test.ts :: [boundary-4] a variant that repeats an earlier variant is skipped, and its number is not reused",
+    "test/handle-candidates.test.ts :: [unhappy-1] an invalid stem is refused",
+    "test/handle-candidates.test.ts :: [unhappy-1] a stem that would only pass once trimmed is refused as given",
+    "test/handle-candidates.test.ts :: [unhappy-2] a count out of range is refused",
+    "test/handle-candidates.test.ts :: [unhappy-2] counts just outside the whole numbers 1 to 100 are refused",
+    "test/handle-candidates.test.ts :: [boundary-5] the largest count is allowed",
+    "test/handle-candidates.test.ts :: [boundary-5] the largest count from a 30-character stem ends on a three-digit number with the stem cut to 27"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 18
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 32,
+  "kept": [
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] a hyphenated stem gets plain numbered variants into two digits",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] a three-character stem gets plain numbered variants",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] a valid stem with edge hyphens, digits or underscores is used exactly as given",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] a 28-character stem fits every two-digit number without a cut",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] a 27-character stem is never cut, up to the largest count",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] the candidates for a smaller count are the start of those for a larger count",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-1] a call is not affected by the calls before it",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [happy-2] one candidate is each stem alone, unchanged",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-1] another 30-character stem keeps its first 29 characters for every one-digit number",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-1] a 30-character stem ending in a hyphen loses that hyphen for a one-digit number",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-2] a 30-character stem keeps 29 characters for one digit and 28 for two, up to 20",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-2] a 28-character stem is first cut when the number reaches three digits",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-2] a 29-character stem is uncut for one digit, cut to 28 for two and to 27 for three",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-3] a one-digit cut that ends on a hyphen keeps it",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-3] a two-digit cut that ends on an underscore keeps it",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-3] a cut that ends on a run of hyphens keeps every one of them",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-3] a stem of hyphens but its last character keeps every hyphen",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-4] after the variant that repeats the stem is skipped, numbering carries on into two digits",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-4] a stem of 30 ones skips 11 for the stem and 12 to 19 for earlier variants, then goes on at 20",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-4] a stem of 30 ones gives 100 distinct handles, the last numbered 109",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-4] the stem ending 0123 at the largest count skips 3 and 22 to 29 and ends at 109",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-4] a 29-character stem ending in 1 skips 12 to 19 and goes on at 20",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-1] stems with characters outside the charset are refused",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-1] stems shorter than 3 or longer than 30 characters are refused",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-1] an invalid stem is refused when only one candidate is asked for",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-1] an invalid stem is refused at the largest count",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-2] counts well above 100 are refused",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-2] counts below 1 and near-whole fractions are refused",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [unhappy-2] a count out of range is refused whatever the stem",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-5] the largest count from a short stem is the stem then 2 to 100",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-5] the largest count is allowed for other stems",
+    "test/hidden-handle-candidates/handle-candidates.test.ts :: [boundary-5] counts just inside the range give exactly that many candidates"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 18,
+      "total": 18
+    },
+    "hidden": {
+      "passed": 32,
+      "total": 32
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 333,
+      "total": 333
+    },
+    "notes": "I implemented `handleCandidates` in `packages/core/src/handle.ts`. The package's whole suite passes: 383 tests, 0 failing, including both handle-candidates suites.\n\nHow it works:\n- **Stem check:** the stem goes through `checkHandle` exactly as given, with no trimming or lowercasing. If it fails, the call throws an `Error` that says \"stem\" and gives the reason.\n- **Count check:** the count must be a whole number from 1 to 100. Anything else, including NaN, ±Infinity and -0, throws a `RangeError` that says \"count\". The limit of 100 is a private constant, `HANDLE_CANDIDATES_MAX_COUNT`, so no new exports were added.\n- **Building the list:** the stem comes first. Then, for each number n from 2 upwards, the variant is the stem cut to 30 minus n's digit count, followed by n. A trailing `-` or `_` left by the cut stays.\n- **Duplicates:** a variant that matches an earlier candidate is skipped, numbering carries on, and the skipped number is not reused. The loop always ends, because variants with the same digit count are always distinct.\n\nOnly `handle.ts` was changed, and Prettier reports it as clean.\n\nnone",
+    "sessions": [
+      {
+        "sessionId": "2e8c813e-e15b-4fa9-8e61-73d4dcb5df19",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.26822779999999996,
+        "turns": 5,
+        "durationMs": 34837,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.26822779999999996
+  }
+}

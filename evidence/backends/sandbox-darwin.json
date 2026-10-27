@@ -1,0 +1,104 @@
+{
+  "platform": "darwin",
+  "probes": [
+    {
+      "probe": "read own workdir",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "mine"
+    },
+    {
+      "probe": "write own workdir",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "probe": "node runs",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "probe": "python runs",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "probe": "git runs",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "git version 2.54.0 (Apple Git-157)"
+    },
+    {
+      "probe": "read a sibling workdir's hidden suite",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "cat: /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work/sandbox-other-0gyQcq/tests/private/hidden.test.ts: Operation not permitted"
+    },
+    {
+      "probe": "list WORK_ROOT",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "ls: /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work: Operation not permitted"
+    },
+    {
+      "probe": "read a spec's tests/private",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "cat: /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p5/home/specs/_sandbox-probe/tests/"
+    },
+    {
+      "probe": "list the home",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "ls: /Users/charlieangriawan: Operation not permitted"
+    },
+    {
+      "probe": "read ~/.codex/auth.json",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "cat: /Users/charlieangriawan/.codex/auth.json: Operation not permitted"
+    },
+    {
+      "probe": "read the package",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "cat: /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/package.json: Operation not permitted"
+    },
+    {
+      "probe": "write outside the workdir",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "/bin/sh: /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work/sandbox-other-0gyQcq/planted.txt: Operation not permitted"
+    },
+    {
+      "probe": "network (sandbox with network)",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "probe": "network (sandbox without network)",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "wrong": 0
+}

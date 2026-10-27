@@ -1,0 +1,9 @@
+{
+  "source": "HumanEval+ v0.1.10 (evalplus/humanevalplus_release)",
+  "task_id": "HumanEval/97",
+  "entry_point": "multiply",
+  "picked": "top",
+  "solutions": 31,
+  "basePassPlusFail": 4,
+  "plusPass": 2
+}

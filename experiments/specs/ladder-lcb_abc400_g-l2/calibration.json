@@ -1,0 +1,32 @@
+{
+  "slug": "ladder-lcb_abc400_g-l2",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_patisserie.py :: TestPatisserie.test_all_max_values_four_cakes",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_all_zero",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_brute_force_full_pairing",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_brute_force_large_values",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_brute_force_small_values",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_choose_best_pair_of_three",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_large_values_mixed_coordinates",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_large_values_single_pair",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_multiple_test_cases_in_order",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_pairing_matters",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_smallest_single_pair"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

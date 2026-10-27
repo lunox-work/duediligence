@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc399_e",
+  "contest_id": "abc399",
+  "contest_date": "2025-03-29T00:00:00",
+  "difficulty": "hard",
+  "title": "Replace",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 4,
+  "privateCases": 40
+}

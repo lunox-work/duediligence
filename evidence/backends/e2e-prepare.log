@@ -1,0 +1,16 @@
+[05:19:44] duration-parse skeleton started
+[05:19:44] installing @openai/codex@0.164.0 into /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/backends/backends/codex-0.164.0 (npm@10.9.2, once)
+[05:20:19] duration-parse skeleton done $0.00
+[05:20:19] duration-parse public started
+[05:21:50] duration-parse public done $0.00
+[05:21:51] duration-parse private started
+[05:28:23] duration-parse private done $0.00
+generated duration-parse
+[05:28:25] duration-parse reference started
+[05:29:07] duration-parse kept 90/90 hidden, dropped 0; reference public 80/80  
+duration-parse: ok, kept 90/90 hidden, public failing on reference: 0
+
+duration-parse: ready. Public 80 tests; hidden 90 kept of 90 (none dropped).
+Hidden suite sha256 8f17f295c0b2a4cb98400bc6825de4482243391ee92b8b529295737d02c234ba: the handout shows it, and the judge refuses once it changes.
+Next: node bin/run.mjs duration-parse, or node bin/handout.mjs duration-parse <dir>.
+exit 0

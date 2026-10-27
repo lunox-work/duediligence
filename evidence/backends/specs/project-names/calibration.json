@@ -1,0 +1,72 @@
+{
+  "slug": "project-names",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/name-registry.test.ts :: [happy-1] uses project- and the first four lowercase HMAC digest characters",
+    "tests/public/name-registry.test.ts :: [happy-1] names a single-character task id from its digest",
+    "tests/public/name-registry.test.ts :: [happy-2] returns the same name when a task is named again",
+    "tests/public/name-registry.test.ts :: [happy-2] reuses an extended name without treating the task as a new collision",
+    "tests/public/name-registry.test.ts :: [boundary-1] extends a colliding suffix from four to six characters",
+    "tests/public/name-registry.test.ts :: [boundary-1] extends to eight characters when both shorter names are occupied",
+    "tests/public/name-registry.test.ts :: [boundary-2] preserves the first task's name after a collision",
+    "tests/public/name-registry.test.ts :: [boundary-2] preserves the first task's name when collision order is reversed",
+    "tests/public/name-registry.test.ts :: [boundary-3] allows different tasks in separate registries to share a name",
+    "tests/public/name-registry.test.ts :: [boundary-3] allocates colliding names independently in both registries",
+    "tests/public/name-registry.test.ts :: [unhappy-1] rejects an empty registry key with an error",
+    "tests/public/name-registry.test.ts :: [unhappy-1] accepts a single-character key and uses it for the digest",
+    "tests/public/name-registry.test.ts :: [unhappy-2] rejects an empty task id with an error",
+    "tests/public/name-registry.test.ts :: [unhappy-2] accepts a space as a nonempty task id and hashes it literally"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 34,
+  "kept": [
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] extends a different collision pair under a different key",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] extends each later task using its own digest rather than a collision counter",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] reaches eight characters for an unrelated three-task collision",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] continues through an occupied eight-character name to ten characters",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] uses the other task's ten-character prefix when the deepest pair is reversed",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] stops at a free eight-character name even if another digest shares that prefix",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] uses six characters when a shared eight-character prefix has not been allocated",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] starts unrelated task names at four characters after a deep collision",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] allocates the shortest free names across all 24 orders of a collision group",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-1] handles thousands of tasks and collisions spread across many prefixes",
+    "tests/private/collisions-and-isolation.test.ts :: [happy-2] remembers a ten-character assignment during many interleaved collision lookups",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-2] preserves the first allocation after three later tasks extend to ten characters",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-2] preserves the first task and every later assignment in reverse four-task order",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-3] lets four interleaved registries give different tasks the same initial name",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-3] independently allocates four colliding tasks in opposite interleaved orders",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-3] creating a fresh registry neither inherits nor clears existing allocations",
+    "tests/private/collisions-and-isolation.test.ts :: [boundary-3] each registry retains its own secret when differently keyed registries are interleaved",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] derives names using several different secret keys",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] hashes other single-character ids including non-ASCII characters",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] preserves leading zeroes in the four-character hex suffix",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] handles keys below at and above the SHA256 HMAC block size",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] hashes complete long ids including differences at the very end",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] treats case whitespace separators and embedded NULs as literal id content",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] hashes Unicode keys and ids without normalizing their spelling",
+    "tests/private/digest-and-stability.test.ts :: [happy-1] accepts ids that are inherited JavaScript object property names",
+    "tests/private/digest-and-stability.test.ts :: [happy-2] remembers many nonadjacent tasks during reverse and interleaved lookups",
+    "tests/private/digest-and-stability.test.ts :: [happy-2] repeatedly reuses an id containing non-ASCII text and NUL",
+    "tests/private/digest-and-stability.test.ts :: [happy-2] repeats prototype-like task ids without losing their assignments",
+    "tests/private/empty-inputs.test.ts :: [unhappy-1] rejects empty keys between successful constructions using other keys",
+    "tests/private/empty-inputs.test.ts :: [unhappy-1] repeated failed constructions leave an existing collision registry usable",
+    "tests/private/empty-inputs.test.ts :: [unhappy-1] accepts other minimal keys and hashes whitespace and NUL keys literally",
+    "tests/private/empty-inputs.test.ts :: [unhappy-2] rejects repeated empty ids before and between successful names under different keys",
+    "tests/private/empty-inputs.test.ts :: [unhappy-2] rejecting empty ids preserves occupied names and permits further collision extensions",
+    "tests/private/empty-inputs.test.ts :: [unhappy-2] accepts longer whitespace-only ids and NUL without treating them as empty"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 34,
+      "total": 34
+    }
+  }
+}

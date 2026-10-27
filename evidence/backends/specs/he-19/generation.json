@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b23-cff8-73e2-90d5-3ab66d298dbc",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 48341,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Created the public suite; compile check passed.\n\n8 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_sort_numbers.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b24-8e42-77c0-a8bc-ef2debe6d009",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 133962,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Compile check passed. All private tests fail against the current `NotImplementedError` stub.\n\n20 tests in 1 file.\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_sort_numbers_hidden.py"
+    ],
+    "open": []
+  }
+}

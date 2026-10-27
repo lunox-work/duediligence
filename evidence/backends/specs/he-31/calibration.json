@@ -1,0 +1,64 @@
+{
+  "slug": "he-31",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_1",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_101",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_11",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_13441",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_4",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_6",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_example_61",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_odd_composite_9",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_prime_13",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_smallest_prime_2",
+    "tests/public/test_is_prime.py :: TestIsPrime.test_zero"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 29,
+  "kept": [
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_10",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_10201",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_105481",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_121",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_1369",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_14",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_143",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_25",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_27",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_341",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_49",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_561",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_8",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_composite_9797",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_negative_97",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_negative_one",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_negative_two",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_one",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_103",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_104729",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_127",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_17",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_257",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_3",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_5",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_7",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_7919",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_prime_97",
+    "tests/private/test_is_prime.py :: TestIsPrimePrivate.test_zero"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 11,
+      "total": 11
+    },
+    "hidden": {
+      "passed": 29,
+      "total": 29
+    }
+  }
+}

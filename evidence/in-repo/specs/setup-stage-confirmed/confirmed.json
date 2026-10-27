@@ -1,0 +1,27 @@
+{
+  "sha256": "24c7012a5647ce22a3a77eb452d8ec151bf6d83a863b79b9ebae52b9aacf1a63",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T13:28:13.432Z",
+  "decided": [
+    "Which connections count: only `connected` (healthy) ones; `broken` never makes a tool count for the stage or a step done.",
+    "Whether `available: false` with a positive count counts: `setupStage` ignores `available`, so the count still decides the stage (e.g. `jira.available: false, jira.connected: 2` is `\"jira\"`); `available: false` only removes that tool's step from `setupSteps`.",
+    "Whether boards affect the stage or steps: they do not.",
+    "Whether repositories affect the stage or steps: `github.repositories > 0` makes GitHub count for the stage, as `github.connected > 0` does, and is the only thing that makes the `github` step done; a GitHub connection with no repository gives the `\"github\"` stage but leaves the `github` step undone.",
+    "Odd counts (negative, `NaN`, fractional): read as positive only when `> 0`; nothing is rejected and nothing throws.",
+    "What \"size\" being done means: `proposals > 0` only; `bounties` (including a hand-written bounty) never completes it.",
+    "Which steps are listed: a tool's step is listed exactly when that tool is available; `canManage` and the counts don't matter; `size` is always listed.",
+    "Step order: `jira`, `github`, `size`, except when `setupStage` returns `\"github\"`, where it is `github`, `size`, `jira`; done steps keep their place.",
+    "Which step is current: the first listed undone one; none when all are done; done-out-of-order steps don't move it.",
+    "What `setupComplete` means: every step `setupSteps` lists is done (so it can't be true with an empty list, since `size` is always listed).",
+    "Whether `canManage` affects anything: it does not; none of the three functions reads it.",
+    "Purity: the input isn't mutated, and each `setupSteps` call returns a new array; no concurrency rules, because the functions are synchronous.",
+    "Seam (the files the stub writes): apps/web/src/features/onboarding/setup.ts",
+    "Allowed paths (what the implementer may change): apps/web/src/features/onboarding/setup.ts"
+  ],
+  "seam": [
+    "apps/web/src/features/onboarding/setup.ts"
+  ],
+  "allowedPaths": [
+    "apps/web/src/features/onboarding/setup.ts"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176cf-d210-71b1-9c3d-850da347c737",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 178376,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passed with `npm run build -- --noEmit`. All 10 scenarios have happy-path and boundary coverage.\n\n30 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/dependency-selection.test.ts",
+      "tests/public/licence-expressions.test.ts",
+      "tests/public/results-and-validation.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176d2-8c2c-7702-89ec-59a5ca98f521",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 24,
+        "durationMs": 601916,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "50 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/dependency-selection.test.ts",
+      "tests/private/licence-expressions.test.ts",
+      "tests/private/results-and-validation.test.ts"
+    ],
+    "open": []
+  }
+}

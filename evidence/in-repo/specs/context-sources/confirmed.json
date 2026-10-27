@@ -1,0 +1,37 @@
+{
+  "sha256": "13f0f3d4b865e0ed04f48c9a2ae6d2ffb73c7c0ea7c6e84783b5448677efc1c4",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T14:20:46.423Z",
+  "decided": [
+    "`NO_CONTEXT` is `{ jira: null, github: null }`, frozen.",
+    "`CONTEXT_DOCUMENT_BYTES_MAX` is 131072 (128 KiB). A larger document is counted in `omitted` and never read.",
+    "A file with a size that is 0 or less, or not finite, is ignored and not counted in `omitted`.",
+    "What counts as a document: a README (base `readme`, with no extension, `txt` or a document extension) at any depth, or a `md`/`markdown`/`mdx`/`rst`/`adoc`/`asciidoc` file at the root or under a `docs`/`doc`/`documentation`/`guide`/`guides`/`wiki` directory.",
+    "These are never documents: hidden segments, `node_modules`/`vendor`/`third_party`/`dist`/`build`, test files, and changelog/licence-style bases.",
+    "Document ranking: root README first, then distinct keywords matched (substring, case-insensitive), then depth, then code-point path order. The result is the same whatever the input order.",
+    "Paths are normalized with `normalizePath` and keep their case. Duplicate paths count once, and the first entry wins.",
+    "`omitted` from `contextDocuments` counts oversized documents plus those past the 12-document cap.",
+    "Keywords: lower-cased runs of letters and digits, at least 3 code units, not all digits, not stopwords (the exact list is given), no repeats, in first-seen order, with no cap.",
+    "Caller keywords are trimmed and lower-cased; blank keywords are ignored and repeats count once.",
+    "`keptDocuments` keeps the input order and does not re-rank.",
+    "The total cap cuts the document that reaches it. Once the room is 0, later documents are omitted and counted.",
+    "Cuts count UTF-16 code units and never split a surrogate pair. A cut that leaves nothing omits the document.",
+    "Blank texts are dropped without being counted. Uncut text is kept verbatim, with no line-ending normalization.",
+    "`keptDocuments` also enforces the 12-document cap and counts the extra documents in `omitted`.",
+    "No truncation marker goes into stored text. `truncated` carries that, and `renderSourceContext` adds `[truncated]`.",
+    "`jiraContextFields` leaves out `key` and `updated`, plus nulls, blank strings and empty arrays. It keeps `0` and always includes `subtaskCount`. Key order is fixed, and links are not capped.",
+    "`renderSourceContext` format: Jira section first, then the repository section, joined by one blank line.",
+    "`renderSourceContext` details: `### path` headings, `[truncated]` marker lines, `No documents.`, and the \"N more document(s) left out.\" line. There is no trailing newline, and the result is `\"\"` when both sources are null.",
+    "`contextDrift`: no drift when the overview has no version of a source. Drift when the step used no version or an older one. No drift when it used the same version or a later one.",
+    "Concurrency: every export is pure and synchronous with no shared mutable state, so there are no `@concurrency` scenarios.",
+    "Outside the seam, `STARTER_TOOL_VERSION` becomes `\"sandbox_starter@3\"`, and `index.ts` re-exports `sources.ts`.",
+    "Seam (the files the stub writes): packages/core/src/sources.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/"
+  ],
+  "seam": [
+    "packages/core/src/sources.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/"
+  ]
+}

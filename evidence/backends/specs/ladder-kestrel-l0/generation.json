@@ -1,0 +1,27 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17707-fc49-78b3-b1f3-6fc32f6135b7",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 140385,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "37 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/groups.test.ts",
+      "tests/public/ranges.test.ts",
+      "tests/public/versions.test.ts"
+    ]
+  }
+}

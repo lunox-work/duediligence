@@ -1,0 +1,47 @@
+{
+  "from": "weekly-digest",
+  "spec": {
+    "sessionId": "dc22490f-c821-46af-b93c-22895ea86ff3",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.527882,
+    "turns": 5,
+    "durationMs": 150163,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `spec.md` and changed nothing else. All dates and times in it were checked with Node's `Intl` against real calendar and daylight-saving data.\n\n- **What's in it:** a title and a short context paragraph, then one gherkin block with 10 `Rule:` sections. Every scenario is tagged `@happy`, `@boundary`, `@unhappy` or `@concurrency` and uses concrete inputs and outputs.\n- **Time zones:** both functions treat Monday as a full local day, from 00:00 Monday up to 00:00 Tuesday. Daylight saving is taken into account, and New York's November 2026 clock change has its own scenario.\n- **Rejected inputs:** an unknown time zone throws a `RangeError` with the message `Unknown time zone: \"<tz>\"`, and an invalid date throws a `RangeError` with its own fixed message.\n- **The main worked example:** five tasks, one of them merged, with an expected subject of `Weekly digest: 4 open tasks, 2 stalled` and an exact expected list. Most other scenarios compare against it.\n- **Exact boundaries:** each threshold is pinned to the millisecond. For example, a task whose last activity was exactly 14 days ago is stalled, and one a millisecond newer is not.\n\nFour of my decisions go beyond the ticket and are worth a look:\n- **Offset time zones:** values like `\"+08:00\"` are rejected, even though Node accepts them, because the interface asks for IANA names.\n- **Time zone in `buildDigest`:** it is checked but has no effect on the result. Age and \"stalled\" are measured in whole 24-hour periods, as the interface's doc comments say.\n- **Duplicate task IDs:** they are allowed and listed separately, keeping their input order.\n- **Out-of-contract inputs:** values that break the TypeScript types in other ways, such as a status of `\"closed\"` or a gate of 4, have no defined behaviour. Tests must not use them.\n\n`spec.md` ends with a `Decided:` list naming each open question I settled, one per line."
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "0a217fe4-7e8d-45c8-9934-bf6c48da06c3",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1226689999999997,
+        "turns": 20,
+        "durationMs": 280719,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1226689999999997,
+    "finalText": "The test suite is in `tests/public/`. It has two tests for each of the 30 scenarios: one for the normal case and one for an edge case. Every test name starts with its scenario key, from `[happy-1]` to `[concurrency-2]`.\n\n**Checks I ran:**\n- **Type check:** clean, with no errors. I ran it with the project's `tsconfig.json` and `--noEmit`, not `npm run build` itself. The build writes compiled `.js` files next to the sources, which would have put a file in `src/`, and you asked me not to write there.\n- **Against the current stubs:** all 60 tests fail on `not implemented`, as expected.\n- **Against a quick reference implementation** (kept only in the scratchpad, not in the project): all 60 pass. That run caught one problem in the spec itself, below.\n\n**Mistake in the spec:** in \"Older first uses the exact posting instant\", it says both entries have ageDays 6. But task `z` is posted at `2026-10-19T09:00:00.000Z` and now is `2026-10-26T09:00:00.000Z`. That is exactly 7 days, so under the spec's own ageDays rule its ageDays is 7. That test only checks the order (`z`, then `a`). The edge-case test for the same scenario uses two posting times 1 ms apart that both give ageDays 6, so \"ordered by instant, not by ageDays\" is still tested. The spec should probably be corrected.\n\n**Choices worth knowing:**\n- Where an outline has a few example rows, every row appears in one of its two tests.\n- Each test file has its own small helpers, because only files ending in `.test.ts` are allowed there.\n- One edge-case test passes fully frozen input to `buildDigest`. That follows from \"never modifies its arguments\": sorting the input array in place would throw on frozen input.\n\n60 tests, in 10 files.",
+    "problem": null,
+    "files": [
+      "tests/public/age.test.ts",
+      "tests/public/entry-fields.test.ts",
+      "tests/public/independence.test.ts",
+      "tests/public/invalid-dates.test.ts",
+      "tests/public/monday.test.ts",
+      "tests/public/open-tasks.test.ts",
+      "tests/public/ordering.test.ts",
+      "tests/public/stalled.test.ts",
+      "tests/public/subject.test.ts",
+      "tests/public/time-zone.test.ts"
+    ]
+  }
+}

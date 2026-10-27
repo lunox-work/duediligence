@@ -1,0 +1,46 @@
+{
+  "base": "7b323763e764cc4a14e13c24ad0f3a88822174a1",
+  "stage": "stub",
+  "at": "2026-10-25T13:53:30.321Z",
+  "compiled": true,
+  "passing": [
+    "test/index.test.ts :: normalizeTitle trims surrounding whitespace",
+    "test/index.test.ts :: normalizeTitle rejects a title that is empty after trimming",
+    "test/index.test.ts :: normalizeTitle rejects a title over the cap but accepts one at it",
+    "test/index.test.ts :: isValidTitle agrees with normalizeTitle",
+    "test/index.test.ts :: toggle flips done and leaves the original alone",
+    "test/index.test.ts :: toggle round-trips",
+    "test/index.test.ts :: rename normalizes the new title",
+    "test/index.test.ts :: rename rejects an invalid title",
+    "test/index.test.ts :: matchesFilter splits active from completed",
+    "test/index.test.ts :: filterTodos returns only the matching todos",
+    "test/index.test.ts :: countTodos totals add up",
+    "test/index.test.ts :: countTodos handles an empty list",
+    "test/index.test.ts :: isTodoFilter accepts every known filter and nothing else"
+  ],
+  "failing": [],
+  "crashed": [],
+  "onBase": {
+    "base": "7b323763e764cc4a14e13c24ad0f3a88822174a1",
+    "seconds": 2,
+    "at": "2026-10-25T12:30:19.546Z",
+    "compiled": true,
+    "passing": [
+      "test/index.test.ts :: normalizeTitle trims surrounding whitespace",
+      "test/index.test.ts :: normalizeTitle rejects a title that is empty after trimming",
+      "test/index.test.ts :: normalizeTitle rejects a title over the cap but accepts one at it",
+      "test/index.test.ts :: isValidTitle agrees with normalizeTitle",
+      "test/index.test.ts :: toggle flips done and leaves the original alone",
+      "test/index.test.ts :: toggle round-trips",
+      "test/index.test.ts :: rename normalizes the new title",
+      "test/index.test.ts :: rename rejects an invalid title",
+      "test/index.test.ts :: matchesFilter splits active from completed",
+      "test/index.test.ts :: filterTodos returns only the matching todos",
+      "test/index.test.ts :: countTodos totals add up",
+      "test/index.test.ts :: countTodos handles an empty list",
+      "test/index.test.ts :: isTodoFilter accepts every known filter and nothing else"
+    ],
+    "failing": [],
+    "crashed": []
+  }
+}

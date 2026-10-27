@@ -1,0 +1,64 @@
+{
+  "slug": "he-144",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_simplify.py :: TestSimplify.test_all_components_at_minimum_positive_value",
+    "tests/public/test_simplify.py :: TestSimplify.test_both_denominators_at_minimum_positive_value",
+    "tests/public/test_simplify.py :: TestSimplify.test_both_fractions_improper",
+    "tests/public/test_simplify.py :: TestSimplify.test_example_nonwhole_product",
+    "tests/public/test_simplify.py :: TestSimplify.test_example_partial_cancellation",
+    "tests/public/test_simplify.py :: TestSimplify.test_example_reciprocal_product",
+    "tests/public/test_simplify.py :: TestSimplify.test_large_fraction_just_above_one_is_not_whole",
+    "tests/public/test_simplify.py :: TestSimplify.test_minimum_numerators_with_proper_fractions",
+    "tests/public/test_simplify.py :: TestSimplify.test_nonwhole_product_greater_than_one",
+    "tests/public/test_simplify.py :: TestSimplify.test_unreduced_fraction_can_produce_whole_product",
+    "tests/public/test_simplify.py :: TestSimplify.test_whole_product_greater_than_one"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 29,
+  "kept": [
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_cancellation_produces_fifteen",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_enormous_integers_with_unit_denominators",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_enormous_nonwhole_factors_do_not_become_whole",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_enormous_unreduced_factors_cancel_exactly",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_fraction_just_above_seven",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_fraction_just_below_one",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_identity_times_nonwhole_fraction",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_integer_cancels_only_part_of_denominator",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_integer_followed_by_its_reciprocal",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_integral_product_without_any_whole_pairwise_quotient",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_near_integer_in_second_factor",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_near_integer_remainder_after_multiplication",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_nonwhole_product_with_larger_integer_part",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_partial_cancellation_leaves_noninteger_above_ten",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_positive_product_too_small_for_binary_float",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_proper_first_factor_produces_six",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_reciprocals_with_two_digit_numerators",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_repeated_improper_nonwhole_fraction",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_repeated_unit_fraction",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_repeated_unreduced_proper_fraction",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_repeated_unreduced_whole_fraction",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_two_improper_nonwhole_fractions",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_two_unreduced_fractions_produce_five",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_two_unreduced_fractions_produce_one_half",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_two_unreduced_whole_factors",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_unit_denominator_only_in_first_factor",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_unit_denominator_only_in_second_factor",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_unit_numerator_with_remaining_second_denominator",
+    "tests/private/test_simplify_hidden.py :: TestSimplifyHidden.test_unreduced_integer_times_identity"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 11,
+      "total": 11
+    },
+    "hidden": {
+      "passed": 29,
+      "total": 29
+    }
+  }
+}

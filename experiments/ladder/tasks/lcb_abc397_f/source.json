@@ -1,0 +1,15 @@
+{
+  "from": "lcb-atcoder-abc397_f",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc397_f",
+  "contest_id": "abc397",
+  "contest_date": "2025-03-15T00:00:00",
+  "difficulty": "hard",
+  "title": "Variety Split Hard",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 2,
+  "privateCases": 40
+}

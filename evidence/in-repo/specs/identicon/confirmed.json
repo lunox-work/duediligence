@@ -1,0 +1,28 @@
+{
+  "sha256": "895c61fa2199e49523d85bb515614ecc54312c69ab2de89d28ed71eeb03fed12",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T12:48:33.953Z",
+  "decided": [
+    "Hash algorithm: FNV-1a 32-bit over UTF-8 bytes, finalized with MurmurHash3 `fmix32`. It is synchronous and needs no dependency (`crypto.subtle` is async, and `node:crypto` cannot be bundled for the browser).",
+    "Bit layout: bit `row*3 + k` sets row `row`, source column `k` in `0..2`; cols 3 and 4 mirror cols 1 and 0.",
+    "`cells` order: row-major, 25 entries, top-left first.",
+    "Hue: integer `(h >>> 15) % 360` in `0..359`, with no rounding and bits disjoint from the grid.",
+    "Golden seeds: `a`, `user-1`, `user-2`, `Zb8f2Kq9Lm3Nx7Rt5Vw1Yc6Hd4Jp0Gs`.",
+    "Text handling: the seed is not trimmed, case-folded or Unicode-normalized; lone surrogates become U+FFFD via `TextEncoder`.",
+    "Empty seed: accepted, and gives the zero-byte hash's face.",
+    "Length limit: none; the whole seed is hashed.",
+    "Degenerate grids (all off or all on): returned as computed, never re-rolled.",
+    "Non-string input: throws `TypeError(\"identicon: seed must be a string\")`, with no coercion; this includes `String` objects.",
+    "Result objects: a new object per call, with both it and `cells` frozen; no cache or module state.",
+    "Overlapping calls: none can conflict, because the function is synchronous and stateless; results do not depend on call order.",
+    "Package surface: `index.ts` re-exports `identicon.ts`; all existing exports are unchanged.",
+    "Seam (the files the stub writes): packages/shared/src/identicon.ts",
+    "Allowed paths (what the implementer may change): packages/shared/src/"
+  ],
+  "seam": [
+    "packages/shared/src/identicon.ts"
+  ],
+  "allowedPaths": [
+    "packages/shared/src/"
+  ]
+}

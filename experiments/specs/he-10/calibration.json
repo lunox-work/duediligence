@@ -1,0 +1,46 @@
+{
+  "slug": "he-10",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_append_reversed_prefix_only_last_char_palindromic",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_append_reversed_prefix_typical",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_example_cat",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_example_cata",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_example_empty",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_longest_palindromic_postfix_is_whole_string",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_longest_palindromic_postfix_typical",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_shortest_palindrome_single_char",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_shortest_palindrome_typical"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 20,
+  "kept": [
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_all_distinct_chars",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_case_sensitive",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_empty_returns_empty_str",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_even_length_palindrome_unchanged",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_exhaustive_small_binary_strings",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_large_input_long_suffix",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_large_input_single_char_suffix",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_long_palindrome_unchanged",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_long_palindromic_suffix",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_non_ascii",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_palindromic_prefix_is_irrelevant",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_picks_longest_not_shortest_palindromic_suffix",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_punctuation_kept",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_random_strings_match_brute_force",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_result_properties",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_single_chars_unchanged",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_trailing_run_of_three",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_trailing_run_with_near_palindrome",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_two_equal_chars_unchanged",
+    "tests/private/test_make_palindrome_private.py :: TestMakePalindromePrivate.test_whitespace_not_stripped"
+  ],
+  "dropped": [],
+  "reference": null
+}

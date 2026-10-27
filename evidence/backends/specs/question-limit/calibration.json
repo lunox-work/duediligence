@@ -1,0 +1,67 @@
+{
+  "slug": "question-limit",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/question-limiter.test.ts :: [happy-1] a fresh allowance is 20 and repeated reads do not consume it",
+    "tests/public/question-limiter.test.ts :: [happy-1] reading with one question left preserves the final question",
+    "tests/public/question-limiter.test.ts :: [happy-2] the first accepted question reports and stores 19 remaining",
+    "tests/public/question-limiter.test.ts :: [happy-2] accepted questions still consume exactly one at the end of a UTC day",
+    "tests/public/question-limiter.test.ts :: [boundary-1] the twentieth question is accepted with zero remaining",
+    "tests/public/question-limiter.test.ts :: [boundary-1] the twentieth question is accepted at the final millisecond of the day",
+    "tests/public/question-limiter.test.ts :: [unhappy-1] the twenty-first question is refused with the specified message",
+    "tests/public/question-limiter.test.ts :: [unhappy-1] repeated refused questions keep the remaining count at zero",
+    "tests/public/question-limiter.test.ts :: [boundary-2] an exhausted allowance resets exactly at midnight UTC",
+    "tests/public/question-limiter.test.ts :: [boundary-2] a month rollover restores the full allowance when read at midnight UTC",
+    "tests/public/question-limiter.test.ts :: [happy-3] exhausting one pair leaves other tasks and contributors their full allowance",
+    "tests/public/question-limiter.test.ts :: [happy-3] distinct ID pairs with overlapping text have separate allowances",
+    "tests/public/question-limiter.test.ts :: [unhappy-2] either empty ID throws without using a fresh allowance",
+    "tests/public/question-limiter.test.ts :: [unhappy-2] empty IDs including both empty preserve the last available question"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 29,
+  "kept": [
+    "tests/private/allowances.test.ts :: [happy-1] hundreds of reads across fresh pairs preserve every allowance",
+    "tests/private/allowances.test.ts :: [happy-1] reads preserve every intermediate balance as well as an exhausted balance",
+    "tests/private/allowances.test.ts :: [happy-2] each of the first nineteen questions stores its own decreasing balance",
+    "tests/private/allowances.test.ts :: [happy-2] advancing through a UTC day consumes one per ask without an hourly reset",
+    "tests/private/allowances.test.ts :: [boundary-1] multiple interleaved pairs each accept their own twentieth question",
+    "tests/private/allowances.test.ts :: [boundary-1] a partial allowance survives many time changes until its twentieth ask",
+    "tests/private/allowances.test.ts :: [unhappy-1] all independently exhausted pairs return the exact refusal message",
+    "tests/private/allowances.test.ts :: [unhappy-1] hundreds of refusals neither underflow nor replenish an exhausted pair",
+    "tests/private/allowances.test.ts :: [happy-3] a grid of contributors and tasks retains unequal balances in reverse read order",
+    "tests/private/allowances.test.ts :: [happy-3] delimiter collisions and reversed ID pairs retain separate counts",
+    "tests/private/allowances.test.ts :: [happy-3] object property names and long non-ASCII IDs are ordinary independent IDs",
+    "tests/private/invalid-ids.test.ts :: [unhappy-2] repeated empty contributor requests preserve multiple fresh task allowances",
+    "tests/private/invalid-ids.test.ts :: [unhappy-2] repeated empty task requests preserve multiple fresh contributor allowances",
+    "tests/private/invalid-ids.test.ts :: [unhappy-2] invalid requests interleaved with every accepted question preserve exact balances",
+    "tests/private/invalid-ids.test.ts :: [unhappy-2] invalid IDs still throw after exhaustion and preserve unrelated partial balances",
+    "tests/private/invalid-ids.test.ts :: [unhappy-2] invalid requests at midnight leave the entire new daily allowance available",
+    "tests/private/invalid-ids.test.ts :: [unhappy-2] invalid IDs preserve several different partially used allowances",
+    "tests/private/utc-days.test.ts :: [boundary-2] an allowance started one millisecond before midnight resets immediately",
+    "tests/private/utc-days.test.ts :: [boundary-2] each of four consecutive UTC days has exactly twenty questions",
+    "tests/private/utc-days.test.ts :: [boundary-2] unused questions do not carry over and repeated reads see the new day",
+    "tests/private/utc-days.test.ts :: [boundary-2] year rollover resets both exhausted and partly used pairs",
+    "tests/private/utc-days.test.ts :: [boundary-2] leap day and the following March first each have a new allowance",
+    "tests/private/utc-days.test.ts :: [boundary-2] a non-leap February resets directly into March",
+    "tests/private/utc-days.test.ts :: [boundary-2] skipped months with the same day number cannot reuse an old balance",
+    "tests/private/utc-days.test.ts :: [boundary-2] the caller clock may advance before the first operation",
+    "tests/private/utc-days.test.ts :: [boundary-2] reading alone observes midnight without requiring an intervening ask",
+    "tests/private/utc-days.test.ts :: [boundary-2] staggered activity resets every pair without clearing new-day questions",
+    "tests/private/utc-days.test.ts :: [boundary-2] offset timestamps reset at UTC midnight rather than the written local date",
+    "tests/private/utc-days.test.ts :: [boundary-2] a clock returning the same mutable Date still exposes day changes"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 29,
+      "total": 29
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "slug": "he-77",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_iscube.py :: TestIscube.test_example_negative_one",
+    "tests/public/test_iscube.py :: TestIscube.test_example_one",
+    "tests/public/test_iscube.py :: TestIscube.test_example_one_hundred_eighty",
+    "tests/public/test_iscube.py :: TestIscube.test_example_sixty_four",
+    "tests/public/test_iscube.py :: TestIscube.test_example_two",
+    "tests/public/test_iscube.py :: TestIscube.test_example_zero",
+    "tests/public/test_iscube.py :: TestIscube.test_negative_cube_large",
+    "tests/public/test_iscube.py :: TestIscube.test_negative_cube_typical",
+    "tests/public/test_iscube.py :: TestIscube.test_negative_non_cube_just_beside_cube",
+    "tests/public/test_iscube.py :: TestIscube.test_negative_non_cube_typical",
+    "tests/public/test_iscube.py :: TestIscube.test_positive_cube_large",
+    "tests/public/test_iscube.py :: TestIscube.test_positive_cube_typical",
+    "tests/public/test_iscube.py :: TestIscube.test_positive_non_cube_just_above_cube",
+    "tests/public/test_iscube.py :: TestIscube.test_positive_non_cube_just_below_cube",
+    "tests/public/test_iscube.py :: TestIscube.test_positive_non_cube_next_to_large_cube",
+    "tests/public/test_iscube.py :: TestIscube.test_positive_non_cube_typical"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 16
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 12,
+  "kept": [
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_cube_of_million_minus_one_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_cube_of_million_plus_one_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_huge_cube_minus_one_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_huge_cube_odd_root",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_huge_cube_plus_one_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_huge_negative_cube_root_not_float_exact",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_huge_positive_cube_root_not_float_exact",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_negative_huge_cube_neighbour_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_negative_million_cube_neighbour_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_very_huge_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_very_huge_cube_plus_one_is_not_cube",
+    "tests/private/test_iscube_private.py :: TestIscubePrivate.test_very_huge_negative_cube"
+  ],
+  "dropped": [],
+  "reference": null
+}

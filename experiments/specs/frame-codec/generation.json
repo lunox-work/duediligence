@@ -1,0 +1,68 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "cf0b40a8-0f66-44cc-b8b8-402c4ccf7e5a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1531847,
+        "turns": 4,
+        "durationMs": 34417,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1531847,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` reports no errors.\n\nThe contract has two pure functions and three object types; there are no classes:\n\n- **`encode(type, payload)`** returns the encoded frame as a `Uint8Array`. Its doc comment says it throws when the type is 0xFF or outside 0 to 255, or the payload is longer than 65535 bytes. It uses a plain `Error`, since the spec names no error class.\n- **`decode(bytes)`** returns `{ frames, errors, leftover }`. It keeps no state between calls: to handle a frame split across calls, the caller decodes the left-over bytes followed by the next part, as the spec describes. The behaviour depends on nothing outside the input, so there are no time, key or randomness parameters.\n- **`FrameErrorCode`** allows only the five codes the spec names: `\"check\"`, `\"truncated\"`, `\"framing\"`, `\"escape\"` and `\"type\"`.\n\nThe left-over bytes field is called `leftover` because the spec doesn't name it; both test suites and the implementation will depend on that name.\n\nThe build also produced `src/index.js`, which I deleted so that `src/index.ts` is the only file written (`*.js` is gitignored anyway). Running the build again will recreate it.\n\nExports: `Frame`, `FrameErrorCode`, `FrameError`, `DecodeResult`, `encode`, `decode`",
+    "problem": null,
+    "sha256": "1d45beef7223a0bc90ca9ab33e28b068ec86bcccadb96045a0c77ae232de5850"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "7b74d22f-1af2-4e8b-993b-3a21cbacf213",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7228081999999999,
+        "turns": 11,
+        "durationMs": 189263,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.7228081999999999,
+    "finalText": "I wrote the public test suite in three files under `tests/public/`, and `npm run build` reports no errors.\n\n**What it covers.** All 11 scenarios have a happy-path test and at least one boundary test:\n- **`encode.test.ts`** covers the encoding scenarios: `happy-1`, `boundary-1` and `unhappy-1`. The boundaries include a check byte of 0x7E that must be escaped, a length byte of 0x7D, and a 65,535-byte payload that must still encode.\n- **`decode-well-formed.test.ts`** covers `happy-2`, `boundary-2` and `boundary-3`. One test cuts a frame at every point after its start byte, including between an escape byte and the byte it escapes. Another checks that stray 0x7F and 0x7D bytes between frames are not errors.\n- **`decode-damaged.test.ts`** covers `unhappy-2` to `unhappy-6`. Each damaged frame is followed by a good one, so the tests also check where decoding resumes and at which offset each error is reported.\n\n**How I checked them.** I built the byte sequences by hand. To catch arithmetic mistakes, I ran the compiled tests against a throwaway implementation in the scratchpad, outside the project, and all 29 passed. That implementation was only for checking and is not part of what you're handing over.\n\n**Against the current stubs,** `npm test` gives 26 failures and 3 passes. The 3 that pass are the `unhappy-1` tests that expect `encode` to throw, and the stub's \"not implemented\" error counts as a throw.\n\n**Cases I left out on purpose:**\n- **0x7D followed by 0x7E:** this could reasonably be read as either an \"escape\" or a \"truncated\" error.\n- **Length too short:** a frame whose length cuts the payload short could be reported as either \"check\" or \"framing\".\n- **Non-integer types such as 1.5:** the spec doesn't say whether these can be encoded.\n\nThe build also wrote `.js` files into `src/` and `tests/public/`. I deleted them, so only the three `.ts` test files are new.\n\n29 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/decode-damaged.test.ts",
+      "tests/public/decode-well-formed.test.ts",
+      "tests/public/encode.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "042714ce-619e-4e1f-aa5f-2d8bbe92cd1b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.6586248,
+        "turns": 12,
+        "durationMs": 455441,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.6586248,
+    "finalText": "I wrote 62 tests in three files under `tests/private/`. `npm run build` reports no errors, and all 62 fail against the current `not implemented` interface.\n\nTo check that the tests are correct, I wrote a reference implementation in the scratchpad, outside the project. It passes all 62 private tests and all 29 public ones. The build had also written compiled `.js` files into `src/`, `tests/public/` and `tests/private/`; I deleted them, so the only files left outside `tests/private/` are the ones you started with.\n\n- **`encode.test.ts` (20 tests: happy-1, boundary-1, unhappy-1):**\n  - Correct values for check bytes and length bytes, including lengths above 255.\n  - Escaping of the type, of each length byte (high and low, 0x7D, 0x7E and 0x7F) and of a check byte of 0x7F or 0x7D; bytes next to the reserved ones are not escaped.\n  - A payload passed as a view into a larger buffer.\n  - Types that become valid if reduced to 8 bits (0x1FF, -255, 2³²+1), which a shortcut that masks the type would let through.\n  - Payloads of 65537 and 131072 bytes are rejected.\n  - Spec.md doesn't say what the encoding error must say, so the failure tests check for an `Error` whose message is not \"not implemented\".\n- **`decode-well-formed.test.ts` (16 tests: happy-2, boundary-2, boundary-3):**\n  - Escaped types, every type from 0x00 to 0xFE, every byte value, and payloads up to 65535 bytes.\n  - A stray 0x7D right before a start byte does not escape it.\n  - Decoding a view into a larger buffer.\n  - A frame with every field escaped, cut at every point, and frames split across three calls.\n  - Payloads made only of escaped bytes, which catch a decoder that counts the length in raw bytes rather than unescaped ones.\n- **`decode-damaged.test.ts` (26 tests: unhappy-2 to unhappy-6):**\n  - Each error kind in new positions, at its raw offset after frames that contain escapes.\n  - Error offsets in a call that completes a split frame.\n  - A check byte computed without the high length byte.\n  - A start byte or bad escape inside a frame whose length says up to 65535 bytes: the frames after it must still be found, not swallowed as payload.\n  - Framing errors where the length is too short or too long.\n\nSome cases the spec doesn't settle, and I left them untested: 0x7D followed by 0x7E (escape error or truncated), type 0xFF with a wrong check byte (type or check), and a wrong check byte together with a missing end byte (check or framing). None of the public tests assert these either.\n\n62 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/decode-damaged.test.ts",
+      "tests/private/decode-well-formed.test.ts",
+      "tests/private/encode.test.ts"
+    ],
+    "open": []
+  }
+}

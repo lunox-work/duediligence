@@ -1,0 +1,45 @@
+{
+  "slug": "he-159",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_eat.py :: TestEat.test_all_at_upper_bound",
+    "tests/public/test_eat.py :: TestEat.test_enough_boundary_need_equals_remaining",
+    "tests/public/test_eat.py :: TestEat.test_enough_boundary_need_zero",
+    "tests/public/test_eat.py :: TestEat.test_enough_typical",
+    "tests/public/test_eat.py :: TestEat.test_example_enough_carrots_one_left",
+    "tests/public/test_eat.py :: TestEat.test_example_enough_carrots_some_left",
+    "tests/public/test_eat.py :: TestEat.test_example_need_equals_remaining",
+    "tests/public/test_eat.py :: TestEat.test_example_not_enough_carrots",
+    "tests/public/test_eat.py :: TestEat.test_not_enough_boundary_need_one_more_than_remaining",
+    "tests/public/test_eat.py :: TestEat.test_not_enough_boundary_remaining_zero",
+    "tests/public/test_eat.py :: TestEat.test_not_enough_typical"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 17,
+  "kept": [
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_all_zero",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_enough_leftover_ignores_number",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_enough_need_one_less_than_remaining_max",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_enough_number_larger_than_stock",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_enough_number_zero",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_enough_one_left_large",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_need_equals_remaining_max_number_zero",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_need_equals_remaining_one",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_need_zero_full_stock",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_need_zero_remaining_zero_number_max",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_not_enough_need_max_remaining_one_less",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_not_enough_number_zero",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_not_enough_total_is_number_plus_remaining",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_remaining_zero_need_max",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_result_is_two_element_list",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_upper_bound_need_one",
+    "tests/private/test_eat_private.py :: TestEatPrivate.test_upper_bound_need_zero"
+  ],
+  "dropped": [],
+  "reference": null
+}

@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "9f196404-053e-49ec-be0b-977b765eb33c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.15176029999999996,
+        "turns": 5,
+        "durationMs": 32998,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.15176029999999996,
+    "finalText": "I wrote the public test suite in `tests/public/test_factorize.py`. `python3 sandbox/compile_check.py` reports no errors. Running `python3 sandbox/run.py public` gives 0 of 9 passing, and every failure is the expected `NotImplementedError`.\n\n**What's covered:**\n- **Docstring examples, one test each:** 8 → `[2, 2, 2]`, 25 → `[5, 5]`, 70 → `[2, 5, 7]`.\n- **Prime factors, smallest to largest:** typical case 30 → `[2, 3, 5]`; boundary case 2 → `[2]` (the smallest prime).\n- **Each factor repeated as often as it appears:** typical case 72 → `[2, 2, 2, 3, 3]`; boundary case 4 → `[2, 2]` (the smallest number with a repeated factor).\n- **The factors multiply back to the input:** typical case 1155 → `[3, 5, 7, 11]`; boundary case 9973 → `[9973]` (a large prime).\n\nEach expected value that doesn't come from the docstring has a comment showing how I worked it out by hand. I also checked all of them against a quick reference factorizer I ran once in the shell; it isn't saved anywhere.\n\n**Left out on purpose:** I didn't test n = 1, 0 or negative numbers. The docstring doesn't say what those should return, so every input in the suite is 2 or more.\n\n9 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_factorize.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "f7baf7f4-d434-4c2e-896d-8d2ad258ea29",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2218345,
+        "turns": 3,
+        "durationMs": 55511,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2218345,
+    "finalText": "I wrote the hidden suite in `tests/private/test_factorize_private.py`. `sandbox/compile_check.py` reports no errors. Against the stub, all 27 tests fail with `not implemented`. To check the expected values, I ran the suite against a plain trial-division reference kept in the scratchpad, not in the project. All 27 passed, and the whole run took about 0.05 s.\n\nWhat the suite covers:\n- **`n = 1` returns `[]`.** The public suite skips this input. The rules settle it anyway: 1 has no prime factors, and an empty list multiplies to 1. Zero and negative numbers are left out, because no list of primes can multiply to them.\n- **A leftover prime above √n:** 19946 = 2·9973, 606, 776, and 96·1000003. This catches trial division that stops at √n and drops the last factor. The only public case of this kind, 9973, is itself prime.\n- **Repeated factors and divisor lists:** 2^60, 16, 12 and 2^20·3^12. These catch versions that return each prime once (as a set would), list divisors like 4 and 8, or stop after a fixed number of divisions.\n- **Odd prime powers and mixed powers:** 49, 243, 343, 9973², 1573, 18900 and 2205.\n- **Many distinct factors:** the product of the primes up to 23, and the Carmichael number 561 (which fools Fermat-style primality tests).\n- **Large primes and semiprimes:** 2^31−1 and 104723·104729. The test itself confirms these are prime by trial division.\n- **Range checks:** every n from 2 to 3000, and 200 values starting at 1,000,000. Each result is checked to be a list of primes, in order, whose product is n. Prime factorization is unique, so that check proves the answer is right.\n\nEach test extending a public test names it in a comment above.\n\n27 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_factorize_private.py"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3744",
+  "contest_id": "weekly-contest-442",
+  "contest_date": "2025-03-22T19:30:00",
+  "difficulty": "hard",
+  "title": "minimum-operations-to-make-array-elements-zero",
+  "kind": "functional",
+  "fn_name": "minOperations",
+  "publicCases": 2,
+  "privateCases": 40
+}

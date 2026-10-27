@@ -1,0 +1,15 @@
+{
+  "from": "lcb-leetcode-3783",
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3783",
+  "contest_id": "biweekly-contest-151",
+  "contest_date": "2025-03-01T06:30:00",
+  "difficulty": "hard",
+  "title": "permutations-iv",
+  "kind": "functional",
+  "fn_name": "permute",
+  "publicCases": 3,
+  "privateCases": 40
+}

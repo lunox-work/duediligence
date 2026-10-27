@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "name": "api session ends ok",
+      "ok": true,
+      "detail": "{\"ok\":true,\"subtype\":\"success\",\"finalText\":\"done\",\"apiError\":null}"
+    },
+    {
+      "name": "api writes and edits inside the workdir",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "api Read outside the workdir refused",
+      "ok": true,
+      "detail": "/private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work/selftest-other-8gCz96/tests/private/hidden.test.ts is outside the working directory /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work/selftest-own-UQZnwC"
+    },
+    {
+      "name": "api Bash cannot read a sibling workdir",
+      "ok": true,
+      "detail": "cat: /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-work/selftest-other-8gCz96/tests/private/hidden.test.ts: Operation not permitted"
+    },
+    {
+      "name": "api Read of .. refused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "api Glob, Grep and Bash work in the workdir",
+      "ok": true,
+      "detail": "[\"src/a.txt\",\"src/a.txt:1:B\",\"B\\n4\\n(exit 0)\"]"
+    },
+    {
+      "name": "marker never reached the API",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "request: key, version, model, tools, fallback",
+      "ok": true,
+      "detail": "/v1/messages?beta=true beta=server-side-fallback-2026-07-01"
+    },
+    {
+      "name": "api cost from usage",
+      "ok": true,
+      "detail": "0.032"
+    },
+    {
+      "name": "transcript shape: init, assistant tool_use, user tool_result, result",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "peeks reads the api transcript (the hidden path twice)",
+      "ok": true,
+      "detail": "Read:tests/private, Bash:tests/private"
+    },
+    {
+      "name": "audit reads the api transcript",
+      "ok": true,
+      "detail": "Read:private, Bash:private"
+    },
+    {
+      "name": "api resume continues the conversation",
+      "ok": true,
+      "detail": "9 messages"
+    },
+    {
+      "name": "exec gets the prompt on stdin and runs in the workdir",
+      "ok": true,
+      "detail": "denied"
+    },
+    {
+      "name": "no login copy left in session state",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "wrong": 0
+}

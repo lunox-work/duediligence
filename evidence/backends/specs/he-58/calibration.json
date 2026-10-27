@@ -1,0 +1,71 @@
+{
+  "slug": "he-58",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_common.py :: TestCommon.test_both_lists_empty",
+    "tests/public/test_common.py :: TestCommon.test_common_elements_are_sorted_numerically",
+    "tests/public/test_common.py :: TestCommon.test_disjoint_lists",
+    "tests/public/test_common.py :: TestCommon.test_duplicates_in_both_lists_are_removed",
+    "tests/public/test_common.py :: TestCommon.test_empty_first_list",
+    "tests/public/test_common.py :: TestCommon.test_empty_second_list",
+    "tests/public/test_common.py :: TestCommon.test_first_docstring_example",
+    "tests/public/test_common.py :: TestCommon.test_lists_containing_only_one_repeated_value",
+    "tests/public/test_common.py :: TestCommon.test_partial_overlap_excludes_elements_present_in_only_one_list",
+    "tests/public/test_common.py :: TestCommon.test_second_docstring_example",
+    "tests/public/test_common.py :: TestCommon.test_single_common_element"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 26,
+  "kept": [
+    "tests/private/test_common.py :: TestCommonPrivate.test_boolean_elements",
+    "tests/private/test_common.py :: TestCommonPrivate.test_both_empty_after_populated_call",
+    "tests/private/test_common.py :: TestCommonPrivate.test_different_repeated_values",
+    "tests/private/test_common.py :: TestCommonPrivate.test_disjoint_interleaved_signed_values",
+    "tests/private/test_common.py :: TestCommonPrivate.test_distinct_singletons",
+    "tests/private/test_common.py :: TestCommonPrivate.test_duplicates_only_in_first_list",
+    "tests/private/test_common.py :: TestCommonPrivate.test_duplicates_only_in_second_list",
+    "tests/private/test_common.py :: TestCommonPrivate.test_empty_second_with_strings",
+    "tests/private/test_common.py :: TestCommonPrivate.test_equal_negative_singletons",
+    "tests/private/test_common.py :: TestCommonPrivate.test_first_list_is_singleton_subset",
+    "tests/private/test_common.py :: TestCommonPrivate.test_float_intersection",
+    "tests/private/test_common.py :: TestCommonPrivate.test_heavy_asymmetric_duplicates",
+    "tests/private/test_common.py :: TestCommonPrivate.test_longer_subset",
+    "tests/private/test_common.py :: TestCommonPrivate.test_many_shared_multiples",
+    "tests/private/test_common.py :: TestCommonPrivate.test_numeric_order_with_different_digit_lengths",
+    "tests/private/test_common.py :: TestCommonPrivate.test_numeric_strings_sort_lexicographically",
+    "tests/private/test_common.py :: TestCommonPrivate.test_only_repeated_negative",
+    "tests/private/test_common.py :: TestCommonPrivate.test_only_repeated_zero",
+    "tests/private/test_common.py :: TestCommonPrivate.test_repeated_exclusive_values_are_excluded",
+    "tests/private/test_common.py :: TestCommonPrivate.test_same_list_as_both_arguments",
+    "tests/private/test_common.py :: TestCommonPrivate.test_string_intersection",
+    "tests/private/test_common.py :: TestCommonPrivate.test_tuple_elements",
+    "tests/private/test_common.py :: TestCommonPrivate.test_zero_is_the_only_common_value"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/test_common.py :: TestCommonPrivate.test_empty_first_with_nested_lists",
+      "reason": "The reference cannot satisfy it: TypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+    },
+    {
+      "id": "tests/private/test_common.py :: TestCommonPrivate.test_list_elements",
+      "reason": "The reference cannot satisfy it: TypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+    },
+    {
+      "id": "tests/private/test_common.py :: TestCommonPrivate.test_repeated_empty_list_elements",
+      "reason": "The reference cannot satisfy it: TypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 11,
+      "total": 11
+    },
+    "hidden": {
+      "passed": 23,
+      "total": 23
+    }
+  }
+}

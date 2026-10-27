@@ -1,0 +1,81 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "80939a7b-671b-4bf6-b2bc-bae9f38739a0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.14928889999999997,
+        "turns": 6,
+        "durationMs": 40058,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.14928889999999997,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finishes with no errors. The build also creates `src/index.js`; that's the compiler's output and `.gitignore` already excludes it. I didn't touch any other file.\n\nThe contract is one function plus two types:\n\n- **`buildRequisitionsCsv(requisitions)`** returns the whole CSV as a string, with the byte order mark first. Its doc comment says it throws an `Error` naming the requisition's id in each bad-data case the spec lists. No time, key or randomness is involved, so nothing else needs to be passed in.\n- **`Requisition`** is the input object: `id: string`, an optional `title` that may also be `null` (both count as missing), `status`, `openings`, `filled` and `createdAt: Date`.\n- **`RequisitionStatus`** is the list of four valid statuses.\n\nDecisions the test writers and the implementer should know about:\n\n- **`status` is a plain `string`, not the four-status type.** That way a typed test can pass an unknown status without a cast. The doc comment points to `RequisitionStatus` for the valid values.\n- **The creation time is a `Date`.** An invalid creation time means an invalid `Date`, such as `new Date(\"x\")`, rather than a string that can't be parsed.\n- **The id is a `string`.** The \"then id\" tie-break therefore sorts ids as text, not as numbers.\n\nExports: `RequisitionStatus`, `Requisition`, `buildRequisitionsCsv`",
+    "problem": null,
+    "sha256": "63c6e764d4688c111e55f19ab5a4c872d9a99ba5e31dba07d9ac7c3f4bda6337"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "ab6f59dc-dcda-4904-bca4-7e0b1ff1cb51",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.39386479999999996,
+        "turns": 7,
+        "durationMs": 102631,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.39386479999999996,
+    "finalText": "I wrote the public test suite in `tests/public/requisitions-csv.test.ts`. `npm run build` reports no errors. All 12 tests run and fail, as expected: 11 with `not implemented`, and the refusal test because the error it gets (`not implemented`) doesn't name the requisition's id.\n\nEach of the six scenarios has a happy-path test and a boundary test:\n\n| Key | Happy path | Boundary |\n|---|---|---|\n| `[happy-1]` | Requisitions given out of order come out by creation time; the exact output is checked, from the byte order mark to the final `\\r\\n` | Requisitions with the same creation time are ordered by id |\n| `[happy-2]` | All four statuses, plain-digit numbers (including 0 and 1500), and a title that is `null` or missing | A creation time with a ±05:00 offset that falls on a different UTC date, and `23:59:59.999Z` |\n| `[boundary-1]` | No requisitions gives exactly the byte order mark and the header row | The header ends with `\\r\\n` and no blank row follows it |\n| `[boundary-2]` | A title with a comma or a double quote is quoted, with inner quotes doubled | `\\n`, `\\r`, a space at the start or end, and a title with only inner spaces (not quoted) |\n| `[unhappy-1]` | A title starting with `=`, `+`, `-`, `@` or a tab gets a leading `'`; `a=b` is unchanged | The quoting rule applies after the `'` is added (`\\r` at the start, an inner `\"`, a comma); a title starting with a space is not defused |\n| `[unhappy-2]` | Each kind of bad requisition (unknown or wrong-case status, negative/fractional/NaN numbers, filled > openings, invalid date) throws an `Error` naming the bad requisition's id, even after a valid one | Filled equal to openings, and openings and filled both 0, are accepted; filled one above openings is refused |\n\nSome assumptions the developer should know about:\n- **Ids:** I used ids where any ordering method gives the same answer, because the spec doesn't say how ids compare.\n- **Formula check:** it is applied only to titles, since the spec only mentions titles.\n- **Build output:** the build also writes `.js` files next to the sources, including `src/index.js`. These are covered by `.gitignore`.\n\n12 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/requisitions-csv.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "ceafdcd3-6aa9-43bd-8db4-0364e8e69109",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1976304000000002,
+        "turns": 15,
+        "durationMs": 330812,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.1976304000000002,
+    "finalText": "The private suite is in `tests/private/`, in four files.\n\n- **`layout.test.ts`** covers `[happy-1]`, `[happy-2]` and `[boundary-1]`: file layout, row order, how values are written, and the empty file.\n- **`fields.test.ts`** covers `[boundary-2]` and `[unhappy-1]`: quoting and formula defusing.\n- **`refusal.test.ts`** covers `[unhappy-2]`: refusing bad data.\n- **`timezone.test.ts`** covers `[happy-2]`: it sets `process.env.TZ` to UTC+14 and then UTC−12 inside each test and restores it afterwards. Without this, an implementation that writes local dates would pass whenever the grader's machine runs in UTC.\n\n**Checks:**\n- `npm run build` reports no errors.\n- Against the stub, all 47 private tests fail and none crash.\n- I wrote a reference implementation in a scratch copy outside the repo. It passes all 47 private tests and all 12 public ones.\n- I also ran shortcut versions against both suites. Each one passes the public suite (or, for local dates, all but one public test) and fails at least one private test:\n  - writing local dates instead of UTC dates;\n  - looking up the status with `in` on a plain object, which accepts `\"toString\"`;\n  - writing numbers with `String(n)`, which gives `1e+21`;\n  - not padding the year to four digits (`999` instead of `0999`);\n  - ordering by the written date, then id, instead of by the full creation time;\n  - defusing more characters than the spec lists.\n\nTwo expectations are firm readings of the spec rather than restatements of it. Openings of 10^21 must be written as 22 plain digits. A year before 1000 must be written with four digits, as in `0999-04-07`.\n\nThe build writes compiled `.js` files into `src/` and `tests/`, so I deleted them. Only the `.ts` sources remain.\n\n47 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/fields.test.ts",
+      "tests/private/layout.test.ts",
+      "tests/private/refusal.test.ts",
+      "tests/private/timezone.test.ts"
+    ],
+    "open": []
+  },
+  "notes": {
+    "sessionId": "0165e9b9-12e1-4b6a-b254-44cb83c63e5a",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.17677220000000002,
+    "turns": 3,
+    "durationMs": 27785,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I wrote `notes.md`, covering five areas: file layout, field formats, quoting, formula protection, and refusing bad data. It has 24 bullets: 18 top-level and 6 sub-bullets listing the kinds of bad data that are refused.",
+    "problem": null
+  }
+}

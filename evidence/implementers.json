@@ -1,0 +1,327 @@
+{
+  "at": "2026-10-26T13:52:09.787Z",
+  "specs": [
+    "csv-export",
+    "licence-scan",
+    "patch-apply",
+    "tool-versions",
+    "retention-sweep",
+    "escrow-split",
+    "keyed-queue",
+    "frame-codec",
+    "statement-import",
+    "shift-compliance"
+  ],
+  "planned": 50,
+  "table": {
+    "codex-cli": {
+      "total": {
+        "runs": 50,
+        "passed": 50,
+        "overfit": 0,
+        "incomplete": 0,
+        "refused": 0,
+        "sessionFailed": 0,
+        "peeks": 0
+      },
+      "specs": {
+        "csv-export": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "licence-scan": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "patch-apply": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "tool-versions": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "retention-sweep": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "escrow-split": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "keyed-queue": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "frame-codec": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "statement-import": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "shift-compliance": {
+          "runs": 5,
+          "passed": 5,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        }
+      }
+    },
+    "haiku, archive, public suite + own tests": {
+      "total": {
+        "runs": 105,
+        "passed": 100,
+        "overfit": 5,
+        "incomplete": 0,
+        "refused": 0,
+        "sessionFailed": 0,
+        "peeks": 0
+      },
+      "specs": {
+        "csv-export": {
+          "runs": 15,
+          "passed": 11,
+          "overfit": 4,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "licence-scan": {
+          "runs": 20,
+          "passed": 20,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "patch-apply": {
+          "runs": 20,
+          "passed": 19,
+          "overfit": 1,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "tool-versions": {
+          "runs": 50,
+          "passed": 50,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "retention-sweep": {
+          "runs": 0,
+          "passed": 0,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "escrow-split": {
+          "runs": 0,
+          "passed": 0,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "keyed-queue": {
+          "runs": 0,
+          "passed": 0,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "frame-codec": {
+          "runs": 0,
+          "passed": 0,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "statement-import": {
+          "runs": 0,
+          "passed": 0,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "shift-compliance": {
+          "runs": 0,
+          "passed": 0,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        }
+      }
+    },
+    "haiku, archive, public suite": {
+      "total": {
+        "runs": 220,
+        "passed": 197,
+        "overfit": 23,
+        "incomplete": 0,
+        "refused": 0,
+        "sessionFailed": 0,
+        "peeks": 0
+      },
+      "specs": {
+        "csv-export": {
+          "runs": 15,
+          "passed": 6,
+          "overfit": 9,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "licence-scan": {
+          "runs": 20,
+          "passed": 19,
+          "overfit": 1,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "patch-apply": {
+          "runs": 20,
+          "passed": 20,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "tool-versions": {
+          "runs": 50,
+          "passed": 42,
+          "overfit": 8,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "retention-sweep": {
+          "runs": 20,
+          "passed": 16,
+          "overfit": 4,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "escrow-split": {
+          "runs": 15,
+          "passed": 14,
+          "overfit": 1,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "keyed-queue": {
+          "runs": 20,
+          "passed": 20,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "frame-codec": {
+          "runs": 20,
+          "passed": 20,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "statement-import": {
+          "runs": 20,
+          "passed": 20,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        },
+        "shift-compliance": {
+          "runs": 20,
+          "passed": 20,
+          "overfit": 0,
+          "incomplete": 0,
+          "refused": 0,
+          "sessionFailed": 0,
+          "peeks": 0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "3dac6984-b770-4c1a-8126-704ad3ef10d7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.25523450000000003,
+        "turns": 6,
+        "durationMs": 65246,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.25523450000000003,
+    "finalText": "I wrote `src/index.ts` and `npm run build` finished with no errors. The build also produced `src/index.js`, which I deleted so that `src/index.ts` is the only file I've added. The test command rebuilds it anyway.\n\nDecisions that each test author and the implementer need to know:\n\n- **`LedgerError` has no constructor in the contract.** TypeScript won't compile a subclass of `Error` whose constructor only throws without first calling `super`. So the class only declares `code` (one of the five spec codes). Tests can check `instanceof LedgerError` and `.code`, and the implementation adds its own constructor.\n- **`Ledger` is the only class**, because it holds state. You create one with `new Ledger({ currency, feeRateBps })`, and it throws `\"invalid_ledger\"` if either value is invalid. I left out a task ID because the spec never uses or validates one.\n- **Money calls take one object argument:** `fund({ amount, key })`, `release({ amount, contributor, key })` and `refund({ amount, key })`. Each returns its entry. Each doc comment lists the error codes the spec says that call can throw.\n- **Balances are methods, not properties.** `balances()` returns `{ funded, held, released, refunded, fees }`, where `released` is before fees. The other methods are `paidTo(contributor)` (net paid), `status()` and `entries()`.\n- **Entries are a union on `kind`.** All entries have `kind`, `amount`, `key` and `sequence` (starting at 1). Release entries also have `contributor`, `fee` and `net`.\n- **`releaseFee(amount, feeRateBps)` is a standalone function** so the fee-rounding scenario can be tested directly. The spec doesn't say what it does with invalid input, so the contract doesn't either.\n\nExports: `LedgerErrorCode`, `LedgerError`, `LedgerStatus`, `EntryKind`, `LedgerOptions`, `FundRequest`, `ReleaseRequest`, `RefundRequest`, `FundEntry`, `ReleaseEntry`, `RefundEntry`, `Entry`, `Balances`, `releaseFee`, `Ledger`",
+    "problem": null,
+    "sha256": "a3918cceb4eb01c384430383ee1cd8aa8bc1b13833e37194e8ea9b0f055fc6b3"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "07a20967-8b8b-4c1c-b488-7ee7b3eb584f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6983217999999999,
+        "turns": 15,
+        "durationMs": 175825,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.6983217999999999,
+    "finalText": "I wrote four test files in `tests/public/`, one for each rule in the spec:\n\n- **`money.test.ts`**: funding, releasing, fee rounding, refunding, insufficient funds, and invalid amounts and ledgers.\n- **`status.test.ts`**: how the status moves, and closing.\n- **`idempotency.test.ts`**: repeated keys, key conflicts, rejected keys being reusable, and retries after the ledger closed.\n- **`entries.test.ts`**: entry listing, sequence numbers, and the rule that funded equals held plus released plus refunded.\n\nEvery scenario has a happy-path test and at least one boundary test. Some boundary cases I picked:\n\n- **Largest amount:** funding exactly `Number.MAX_SAFE_INTEGER`, and rejecting one more than that.\n- **Exact fee:** the fee on `MAX_SAFE_INTEGER` at 9999 bps must be `9006298534815517`. Plain floating-point gives …516, so a non-exact implementation will fail.\n- **Fee rate limits:** 10000 bps takes the whole amount as fee, so the contributor gets 0. Rates of 0 and 10000 are accepted and -1 is rejected.\n- **Closing:** the ledger closes on the exact entry that empties it, across a mix of releases and refunds.\n- **Retries:** a repeated release returns its original entry even when the balance could no longer cover it, and after the ledger has closed.\n- **Key conflicts:** a fund's key reused for a refund of the same amount is refused, since the two requests look the same apart from their kind.\n\nWherever a call is rejected, the tests also check that status, balances and entries haven't changed.\n\n**Checks run:**\n- **Type-check:** passes with no errors. I ran the compiler with the project's own `tsconfig.json` but with output turned off, rather than `npm run build` itself. The build writes `.js` files next to the sources, including into `src/`, which you asked me not to touch. No `.js` files are left in the project.\n- **Against the stubs:** compiled into the scratchpad, all 30 tests fail, as expected.\n- **Against a reference implementation:** to make sure the tests themselves are correct, I wrote a quick throwaway implementation in the scratchpad (`/private/tmp/claude-501/-private-var-folders-9k-pldvsgmx3kz-k53f-53t5m900000gn-T-double-blind-work-escrow-ledger-public-0euzls/07a20967-8b8b-4c1c-b488-7ee7b3eb584f/scratchpad/ref/src/index.ts`). All 30 pass against it. Nothing outside `tests/public/` was changed.\n\n30 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/entries.test.ts",
+      "tests/public/idempotency.test.ts",
+      "tests/public/money.test.ts",
+      "tests/public/status.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "724200ba-b074-4d14-a8f1-8e19320dcf39",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.4596568,
+        "turns": 18,
+        "durationMs": 398999,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.4596568,
+    "finalText": "I've written the hidden suite in `tests/private/`. `npm run build` reports no errors, and all 57 tests fail against the current stubs.\n\nTo check that the tests are correct, I wrote a reference implementation in a scratchpad copy of the project. All 87 tests pass on it (30 public, 57 private). I also tried five shortcut versions there, each passing the public suite or failing only one public test. Each one failed the private suite:\n\n- **Floating-point fee:** rounding `amount * (bps/10000)` half to even in floating point passes the public test at Number.MAX_SAFE_INTEGER and 9999 bps. It gives wrong fees elsewhere at large amounts, for example at 4999 bps.\n- **`paidTo` ignoring the contributor:** counting every release instead of only that contributor's.\n- **Closing on release only:** only marking the ledger closed after a release or a single refund, so several refunds that empty it don't close it.\n- **Loose key matching:** not checking the kind of call when a key is reused.\n- **Retries after closing:** only allowing release retries once the ledger is closed, not fund or refund retries.\n\nEvery test names the public test it extends in a comment above it. Where two errors could both apply and the spec doesn't say which wins, the tests avoid that case. Examples: a used key with an invalid amount, a key conflict on a closed ledger, a key conflict that would also be uncovered. The tests also don't check validation of contributors or keys, or totals above Number.MAX_SAFE_INTEGER.\n\nRunning the build left compiled `.js` files next to the sources, so I deleted them. Apart from the six files below, the project is as it was; `src/` and `tests/public/` are unchanged.\n\nWhat each file covers:\n- **`fees.test.ts`:** half-to-even rounding at several rates, checked against an exact BigInt calculation over a grid of small amounts and a sweep of large ones. It also checks that each ledger's own fee rate sets its fees.\n- **`money.test.ts`:** several fundings, releases and refunds; separate payments to several contributors; insufficient funds after refunds, top-ups and earlier releases; and the balance equation after every call, including rejected ones.\n- **`validation.test.ts`:** other bad currencies, fee rates and amounts (`NaN`, `Infinity`, `-0`, fractions, values above the maximum), valid edge values, and that rejected calls change nothing.\n- **`status.test.ts`:** closing after several refunds or several releases, staying \"funded\" or \"partially released\" through long runs, rejected calls leaving the status alone, and two ledgers keeping separate statuses.\n- **`idempotency.test.ts`:** retries of fund and refund calls, and of earlier calls after later entries; retries after closing for every kind; key conflicts across kinds; keys freed by rejected calls; keys kept separate per ledger; and interleaved retries.\n- **`entries.test.ts`:** 30 entries in order with no gaps in sequence numbers, the details of each release, sequence numbers across every kind of rejection, and separate records per ledger.\n\n57 tests, in 6 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/entries.test.ts",
+      "tests/private/fees.test.ts",
+      "tests/private/idempotency.test.ts",
+      "tests/private/money.test.ts",
+      "tests/private/status.test.ts",
+      "tests/private/validation.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "he-25",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_factorize.py :: TestFactorize.test_docstring_example_25",
+    "tests/public/test_factorize.py :: TestFactorize.test_docstring_example_70",
+    "tests/public/test_factorize.py :: TestFactorize.test_docstring_example_8",
+    "tests/public/test_factorize.py :: TestFactorize.test_multiplicity_boundary_smallest_repeated",
+    "tests/public/test_factorize.py :: TestFactorize.test_multiplicity_typical_mixed_powers",
+    "tests/public/test_factorize.py :: TestFactorize.test_order_boundary_smallest_prime",
+    "tests/public/test_factorize.py :: TestFactorize.test_order_typical_distinct_primes",
+    "tests/public/test_factorize.py :: TestFactorize.test_product_boundary_large_prime",
+    "tests/public/test_factorize.py :: TestFactorize.test_product_typical_odd_composite"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 27,
+  "kept": [
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_carmichael_561",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_cube_of_seven",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_eight_is_not_divisor_list",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_five",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_large_composite_with_large_prime_tail",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_mersenne_prime_2_pow_31_minus_1",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_mixed_powers_large_multiplicity",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_mixed_powers_many",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_mixed_powers_odd_primes",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_nine",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_odd_composite_with_repeats",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_one_has_no_prime_factors",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_power_of_three",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_power_of_two_1024",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_power_of_two_2_pow_60",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_power_of_two_times_large_prime",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_primorial_up_to_23",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_product_rule_all_up_to_3000",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_product_rule_large_range",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_semiprime_of_two_large_primes",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_six",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_small_primes_times_prime_above_sqrt",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_square_of_large_prime",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_square_of_seven",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_three",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_twelve",
+    "tests/private/test_factorize_private.py :: TestFactorizePrivate.test_two_times_large_prime"
+  ],
+  "dropped": [],
+  "reference": null
+}

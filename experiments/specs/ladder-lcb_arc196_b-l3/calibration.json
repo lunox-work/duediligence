@@ -1,0 +1,34 @@
+{
+  "slug": "ladder-lcb_arc196_b-l3",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_a_2x4",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_a_odd_height",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_a_odd_width",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_all_b_3x3",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_b_column_2x3",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_b_row_3x2",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_even",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_a_odd_width",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_large_all_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_sample_1",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_several_cases_in_one_input",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_all_a",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_all_b",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_b_row",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_checkerboard",
+    "tests/public/test_torus_loop.py :: TestTorusLoop.test_smallest_single_b"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 16
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

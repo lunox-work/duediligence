@@ -1,0 +1,53 @@
+[11:43:55] ufo-filter-query prepare
+[11:43:55] ufo-join-relative prepare
+[11:44:06] ufo-filter-query drafting spec.md
+[11:44:08] ufo-join-relative drafting spec.md
+[11:44:11] waiting for a session slot (2 max, 40% memory free)
+[11:44:13] waiting for a session slot (2 max, 40% memory free)
+[11:49:11] waiting for a session slot (2 max, 40% memory free)
+[11:49:14] waiting for a session slot (2 max, 40% memory free)
+[11:54:12] waiting for a session slot (2 max, 40% memory free)
+[11:54:14] waiting for a session slot (2 max, 40% memory free)
+[11:59:15] waiting for a session slot (2 max, 40% memory free)
+[12:04:15] waiting for a session slot (2 max, 40% memory free)
+[12:13:26] ufo-filter-query prepare: {"case":"ufo-filter-query","arm":"drafted","exit":0,"status":"ok","public":54,"hiddenWritten":54,"hiddenKept":54,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":2.6}
+[12:13:26] ufo-filter-query-confirmed prepare
+[12:13:34] ufo-filter-query-confirmed the developer confirms spec.md
+[12:13:39] waiting for a session slot (2 max, 40% memory free)
+[12:33:06] ufo-join-relative prepare: {"case":"ufo-join-relative","arm":"drafted","exit":1,"output":"[12:08:13] ufo-join-relative skeleton started\n[12:08:18] waiting for a session slot (2 max, 40% memory free)\n[12:12:43] ufo-join-relative skeleton done $0.25\n[12:12:47] ufo-join-relative public started\n[12:12:52] waiting for a sessio
+[12:33:06] ufo-join-relative-confirmed prepare
+[12:33:17] ufo-join-relative-confirmed the developer confirms spec.md
+[12:33:22] waiting for a session slot (2 max, 40% memory free)
+[12:39:45] ufo-filter-query-confirmed prepare: {"case":"ufo-filter-query","arm":"confirmed","exit":0,"status":"ok","public":52,"hiddenWritten":52,"hiddenKept":52,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":2.14}
+[12:39:45] ufo-without-host prepare
+[12:39:56] ufo-without-host drafting spec.md
+[12:40:01] waiting for a session slot (2 max, 40% memory free)
+[12:52:41] ufo-without-host prepare: {"case":"ufo-without-host","arm":"drafted","exit":0,"status":"ok","public":33,"hiddenWritten":34,"hiddenKept":34,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.69}
+[12:52:41] ufo-without-host-confirmed prepare
+[12:52:52] ufo-without-host-confirmed the developer confirms spec.md
+[12:53:04] ufo-join-relative-confirmed prepare: {"case":"ufo-join-relative","arm":"confirmed","exit":1,"output":"[12:38:58] ufo-join-relative-confirmed skeleton started\n[12:39:03] waiting for a session slot (2 max, 40% memory free)\n[12:40:14] ufo-join-relative-confirmed skeleton done $0.17\n[12:40:17] ufo-join-relative-confirmed public started\
+[12:53:04] ufo-base-prefix prepare
+[12:53:13] ufo-base-prefix drafting spec.md
+[13:08:36] ufo-without-host-confirmed prepare: {"case":"ufo-without-host","arm":"confirmed","exit":0,"status":"ok","public":30,"hiddenWritten":41,"hiddenKept":41,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.23}
+[13:08:36] ufo-drive-letters prepare
+[13:08:47] ufo-drive-letters drafting spec.md
+[13:08:52] waiting for a session slot (2 max, 40% memory free)
+[13:13:53] waiting for a session slot (2 max, 40% memory free)
+[13:16:08] ufo-base-prefix prepare: {"case":"ufo-base-prefix","arm":"drafted","exit":0,"status":"ok","public":67,"hiddenWritten":165,"hiddenKept":65,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.98}
+[13:16:08] ufo-base-prefix-confirmed prepare
+[13:16:16] ufo-base-prefix-confirmed the developer confirms spec.md
+[13:16:21] waiting for a session slot (2 max, 40% memory free)
+[13:34:50] ufo-base-prefix-confirmed prepare: {"case":"ufo-base-prefix","arm":"confirmed","exit":0,"status":"ok","public":24,"hiddenWritten":54,"hiddenKept":21,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.4}
+[13:34:50] ufo-query-null-proto prepare
+[13:34:59] ufo-query-null-proto drafting spec.md
+[13:35:04] waiting for a session slot (2 max, 40% memory free)
+[13:43:36] ufo-drive-letters prepare: {"case":"ufo-drive-letters","arm":"drafted","exit":0,"status":"ok","public":55,"hiddenWritten":66,"hiddenKept":31,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":2.01}
+[13:43:36] ufo-drive-letters-confirmed prepare
+[13:43:48] ufo-drive-letters-confirmed the developer confirms spec.md
+[13:48:52] ufo-query-null-proto prepare: {"case":"ufo-query-null-proto","arm":"drafted","exit":0,"status":"ok","public":44,"hiddenWritten":115,"hiddenKept":115,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.53}
+[13:48:52] ufo-query-null-proto-confirmed prepare
+[13:49:01] ufo-query-null-proto-confirmed the developer confirms spec.md
+[13:49:06] waiting for a session slot (2 max, 40% memory free)
+[13:59:39] ufo-drive-letters-confirmed prepare: {"case":"ufo-drive-letters","arm":"confirmed","exit":0,"status":"ok","public":44,"hiddenWritten":154,"hiddenKept":60,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.94}
+[14:00:11] ufo-query-null-proto-confirmed prepare: {"case":"ufo-query-null-proto","arm":"confirmed","exit":0,"status":"ok","public":45,"hiddenWritten":71,"hiddenKept":71,"open":0,"referenceRegressions":0,"publicFailingOnReference":0,"costUsd":1.8}
+exit 0

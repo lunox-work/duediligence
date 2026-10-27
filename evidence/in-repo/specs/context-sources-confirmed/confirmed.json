@@ -1,0 +1,36 @@
+{
+  "sha256": "e35eb26abbe14d97cf57ad3bb8ccdffd209382ce935d5bf942575b8a4f3ca799",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T14:41:07.950Z",
+  "decided": [
+    "`NO_CONTEXT` is `{ jira: null, github: null }`. It is not frozen.",
+    "`CONTEXT_DOCUMENT_BYTES_MAX` is 262144 (256 KiB). A larger document is ignored and not counted in `omitted`.",
+    "A file with a size that is 0 or less, or not finite, is ignored and not counted in `omitted`.",
+    "What counts as a document: any `.md`/`.mdx`/`.markdown` file (case-insensitive), at any depth and in any directory. READMEs without one of these extensions, `.txt`, `.rst` and `.adoc` files are not documents.",
+    "These are never documents: paths with a `.github` segment, paths under a skipped directory (exact-case match), and boilerplate stems (changelog, licence, security and the like). Other hidden directories and test directories are not excluded.",
+    "Paths are used as given, with no normalization and no de-duplication.",
+    "Document ranking: by tier (root README, root guides, docs/adr directories, other READMEs, other files). A keyword match lifts a document ahead of the tier above its own but never ahead of the root README, then depth, then code-point path order. The result is the same whatever the input order.",
+    "A keyword matches when it is a substring of the lower-cased path. Keywords are used as given, not trimmed or lower-cased. Matching several keywords ranks the same as matching one.",
+    "`omitted` from `contextDocuments` counts only the documents past the 12-document cap.",
+    "Keywords: the lower-cased title split on runs of characters other than ASCII `a-z0-9`, with words of at least 4 characters kept (digits included), no repeats, in first-seen order. There is no stopword list and no cap.",
+    "`keptDocuments` keeps the input order and does not re-rank. It has no count cap of its own.",
+    "Each text has `\\r\\n` and `\\r` turned into `\\n` and is trimmed before it is cut and measured.",
+    "The total cap cuts the document that reaches it. Once the room is 0, later documents are omitted and counted.",
+    "Cuts count UTF-16 code units.",
+    "Blank texts are dropped and counted in `omitted`.",
+    "No truncation marker goes into stored text. `truncated` carries that, and `renderSourceContext` adds ` (cut short)` to the document's heading.",
+    "`jiraContextFields` gives `issueType, status, priority, labels, components, fixVersions, dueDate, storyPoints, originalEstimateHours, remainingEstimateHours, votes, watchers, subtasks, hasParent, links` in that order. It leaves out nulls and empty arrays, keeps blank strings and `0`, and leaves out `subtasks` when it is 0. It never includes `key`, `updated`, `statusCategory`, `parentKey` or a link's `key`. Estimates are in hours rounded to one decimal, and links are not capped.",
+    "`renderSourceContext` format: the `Jira fields:` section first, then the `Repository documents:` section, joined by one blank line. Documents use `--- path ---` headings. The issue key, repository name, branch, commit and omitted count are not rendered. There is no trailing newline added. A repository with no documents contributes nothing, and the result is `\"\"` when neither source contributes.",
+    "`contextDrift`: no drift when the overview has no version of a source. Drift when the step used no version or an older one. No drift when it used the same version or a later one.",
+    "Concurrency: every export is pure and synchronous with no shared mutable state, so there are no `@concurrency` scenarios.",
+    "Outside the seam, `STARTER_TOOL_VERSION` becomes `\"sandbox_starter@3\"`, `index.ts` re-exports `sources.ts`, and `repo/stack.ts` exports `inSkippedDirectory`.",
+    "Seam (the files the stub writes): packages/core/src/sources.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/"
+  ],
+  "seam": [
+    "packages/core/src/sources.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "sha256": "e1ea6b277434a88f9eaa8af4cc7556bf404647f6ee6a7b8ffc8cd42f3ccd9895",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T13:35:06.385Z",
+  "decided": [
+    "`TICKET_LIMITS` shape and values: title 255, description 20 000 (the ADF cap), issue type 60, priority 60, label 255, 20 labels, component 255, 20 components. It is frozen.",
+    "Lengths are counted in UTF-16 code units (`String.length`), the same way zod `.max` counts them.",
+    "`clampTicketTitle` trims, cuts to 254 code units, removes trailing whitespace and adds \"…\", following the repo's existing `truncate` idiom. It never rejects or throws.",
+    "`clampTicketTitle` leaves inner whitespace and line breaks alone, so titles already hashed keep their hashes.",
+    "`clampTicketTitle` drops a high surrogate left at the cut, so an emoji is never split.",
+    "An empty or blank title clamps to \"\" and is not rejected.",
+    "`normalizeSpecText` behaves exactly like the Jira package's private `normalize`, including a final trim at both ends.",
+    "`ticketSpecHash` matches `pricingSpecHash` byte for byte: SHA-256 of the JSON array of three normalized strings, as lowercase hex.",
+    "`ticketSpecHash` does not clamp the title, does not swap an empty issue type for `DEFAULT_ISSUE_TYPE`, and is case-sensitive.",
+    "`ticketSpecHash` calls are independent: overlapping calls resolve in call order to their own hashes.",
+    "`ticketKey`: a non-blank `jiraKey` wins and is returned trimmed. Otherwise the key is `#<number>`.",
+    "`ticketKey` checks the number only when the key falls back to it. It must be a safe integer ≥ 1, or a `RangeError` with a fixed message is thrown.",
+    "`packages/core/src/index.ts` re-exports `./ticket.js`. No other core export changes.",
+    "Seam (the files the stub writes): packages/core/src/ticket.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/ticket.ts"
+  ],
+  "seam": [
+    "packages/core/src/ticket.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/ticket.ts"
+  ]
+}

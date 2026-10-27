@@ -1,0 +1,58 @@
+{
+  "slug": "he-34",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_unique.py :: TestUnique.test_all_elements_equal",
+    "tests/public/test_unique.py :: TestUnique.test_already_sorted_distinct_elements",
+    "tests/public/test_unique.py :: TestUnique.test_docstring_example",
+    "tests/public/test_unique.py :: TestUnique.test_empty_list",
+    "tests/public/test_unique.py :: TestUnique.test_removes_repeated_elements",
+    "tests/public/test_unique.py :: TestUnique.test_single_element",
+    "tests/public/test_unique.py :: TestUnique.test_sorts_distinct_elements"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 20,
+  "kept": [
+    "tests/private/test_unique.py :: TestUniquePrivate.test_adjacent_large_integers",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_all_empty_strings",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_alternating_two_values",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_boolean_values",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_descending_distinct_sequence",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_empty_slice",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_fractional_values_are_sorted_and_deduplicated",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_large_interleaved_duplicate_blocks",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_many_equal_negative_elements",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_multi_digit_numeric_order",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_only_zero_duplicates",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_single_large_negative_integer",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_single_multicharacter_string",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_sorted_distinct_large_integers",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_sorted_runs_with_different_lengths",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_string_duplicates_and_prefixes",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_tuple_elements",
+    "tests/private/test_unique.py :: TestUniquePrivate.test_unsorted_signed_duplicates"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/test_unique.py :: TestUniquePrivate.test_list_elements_with_separated_equal_values",
+      "reason": "The reference cannot satisfy it: TypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+    },
+    {
+      "id": "tests/private/test_unique.py :: TestUniquePrivate.test_repeated_empty_list_elements",
+      "reason": "The reference cannot satisfy it: TypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 7,
+      "total": 7
+    },
+    "hidden": {
+      "passed": 18,
+      "total": 18
+    }
+  }
+}

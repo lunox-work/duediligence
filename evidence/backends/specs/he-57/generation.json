@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b3c-6b0d-7ee2-ba6c-7276cd0eebbb",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 13,
+        "durationMs": 70314,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "14 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_monotonic.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b3d-7fe5-7291-95c1-668ed88bd523",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 172881,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Compile check passed. All tests fail against the unimplemented interface.\n\n34 tests in 1 file.\n\nOpen in the spec:\n\n- `test_constant_list`: Does monotonicity permit an entirely constant list?\n- `test_increasing_with_equal_neighbors`: Does increasing permit equal neighbors?\n- `test_decreasing_with_equal_neighbors`: Does decreasing permit equal neighbors?",
+    "problem": null,
+    "files": [
+      "tests/private/test_monotonic_hidden.py"
+    ],
+    "open": [
+      "`test_constant_list`: Does monotonicity permit an entirely constant list?",
+      "`test_increasing_with_equal_neighbors`: Does increasing permit equal neighbors?",
+      "`test_decreasing_with_equal_neighbors`: Does decreasing permit equal neighbors?"
+    ]
+  }
+}

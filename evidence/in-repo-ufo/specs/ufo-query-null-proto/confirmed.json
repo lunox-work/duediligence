@@ -1,0 +1,24 @@
+{
+  "sha256": "9e35ca253aabeb4b170221e9da606b8df02bcdbd947712f0c0d2996dd636ae21",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-26T13:40:28.965Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The returned top-level object has a null prototype (`Object.getPrototypeOf(result) === null`).",
+    "`__proto__` and `constructor` are still dropped, even though a null-prototype object would make them safe to keep.",
+    "The reserved-key check uses the decoded key and is exact and case-sensitive (`%5F%5Fproto%5F%5F` is dropped; `__PROTO__`, `Constructor`, `__proto__[]` are kept).",
+    "Only the top-level object has a null prototype. Repeated-key values stay ordinary arrays (`Array.prototype`).",
+    "A repeated key named after an `Object.prototype` member holds only its query values, in input order.",
+    "The result has no inherited methods (`result.toString` is `undefined`). The other exports and the three types keep their current behaviour.",
+    "Each call returns a new object and keeps no state between calls. `parseQuery` is synchronous, so calls cannot overlap and there is no `@concurrency` scenario.",
+    "Seam (the files the stub writes): src/query.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/query.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

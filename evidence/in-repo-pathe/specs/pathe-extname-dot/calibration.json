@@ -1,0 +1,370 @@
+{
+  "slug": "pathe-extname-dot",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"index.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"x.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"./x.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"file.txt.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"a.b.c.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"a/b/index.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"/temp/myfile.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-1] extname(\"a.b/c.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-2] extname(\"C:\\\\temp\\\\myfile.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-2] extname(\"\\\\temp\\\\myfile.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-2] extname(\".\\\\myfile.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-1] extname(\"foo..\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-1] extname(\"foo...\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-1] extname(\"..foo.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-2] extname(\".index.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-2] extname(\".index..\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-3] extname(\"C:.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-3] win32.extname(\"C:.\") should be \".\" like extname",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\".\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"..\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"...\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"....\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"/.\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"/..\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"a/.\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"a/..\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"./..\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"C:\\\\..\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [boundary-4] extname(\"/...\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"./\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"../\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"..\\\\\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"index./\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"index.//\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"foo.\\\\\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"index.js/\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-1] extname(\"a.b/\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-2] extname(\"\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [unhappy-2] posix.extname(\"\") and win32.extname(\"\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"/temp/myfile.html\") should be \".html\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"./myfile.html\") should be \".html\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"./myfile.tar.gz\") should be \".gz\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"./myfile.tar.gz.br\") should be \".br\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\".foo\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"..foo\") should be \".foo\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"foo.123\") should be \".123\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"./dir/file\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"C:\\\\temp\\\\myfile.html\") should be \".html\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\"\\\\temp\\\\myfile.html\") should be \".html\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-3] extname(\".\\\\myfile.html\") should be \".html\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-4] parse(\"index.\")",
+    "test/pathe-extname-dot.spec.ts :: [happy-4] parse(\"/home/user/file.txt.\")",
+    "test/pathe-extname-dot.spec.ts :: [happy-4] parse(\"C:\\\\temp\\\\myfile.\")",
+    "test/pathe-extname-dot.spec.ts :: [happy-4] parse(\"./dir/foo..\")",
+    "test/pathe-extname-dot.spec.ts :: [happy-4] parse(\"...\")",
+    "test/pathe-extname-dot.spec.ts :: [happy-4] parse(\"..\")",
+    "test/pathe-extname-dot.spec.ts :: [happy-5] posix.extname(\"index.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-5] win32.extname(\"C:\\temp\\myfile.\") should be \".\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-5] posix.extname(\"..\") should be \"\"",
+    "test/pathe-extname-dot.spec.ts :: [happy-5] win32.extname(\"...\") should be \".\""
+  ],
+  "publicOnSkeleton": {
+    "passed": 31,
+    "total": 60
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 155,
+  "kept": [
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"a.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"README.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"my file.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"archive.tar.gz.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"a.b.c.d.e.f.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"some/deep/nested/dir/index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"/a/b/c/d/e/f/g/file.txt.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"../foo.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"../../foo.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"./../a/b.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"a/b/../c.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"a./b.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"a.b.c/d.e.f/g.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"1.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"-.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"файл.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"😀.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"x y z.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/dir/name.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-1] hidden extname(\"index.html.\") is \".\" and not \".html\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"a\\\\b\\\\index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"..\\\\foo.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"D:\\\\dir\\\\sub\\\\file.txt.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"c:\\\\temp\\\\myfile.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"a\\\\b/c\\\\d/e.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"a/b\\\\c.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"\\\\\\\\server\\\\share\\\\file.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\"a.b\\\\c.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-2] hidden extname(\".\\\\.\\\\x.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"foo....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"foo..................................................\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"...foo.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"...foo..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"a.b..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"a..b..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"dir/foo..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"/abs/dir/foo...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"C:\\\\temp\\\\foo..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"dir\\\\foo...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-1] hidden extname(\"x..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\".a.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\".a..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\".index...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\".foo.bar.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\"dir/.index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\"/home/user/.bashrc.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\"dir\\\\.index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\"C:\\\\Users\\\\me\\\\.config.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-2] hidden extname(\"./.hidden.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"D:.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"c:.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"z:.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"C:..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"C:...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"C:foo.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-3] hidden extname(\"C:foo.txt.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\".....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"................................................................\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"a/.....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"a/b/c/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"../...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"./...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"dir\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"C:\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"C:/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\".../...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"../../....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"dir\\\\.\") should be \"\" and extname(\"dir\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"dir\\\\..\") should be \"\" and extname(\"dir\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"\\\\.\") should be \"\" and extname(\"\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"\\\\..\") should be \"\" and extname(\"\\\\....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"C:/..\") should be \"\" and extname(\"C:/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"C:\\\\.\") should be \"\" and extname(\"C:\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"../..\") should be \"\" and extname(\"../...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"./.\") should be \"\" and extname(\"./...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\".../..\") should be \"\" and extname(\".../...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"..../.\") should be \"\" and extname(\"..../....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"a/b/c/..\") should be \"\" and extname(\"a/b/c/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"foo./..\") should be \"\" and extname(\"foo./...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/extname.spec.ts :: [boundary-4] hidden extname(\"a\\\\b/..\") should be \"\" and extname(\"a\\\\b/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"C:\\\\temp\\\\myfile.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"foo..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\".index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"a/b/file.txt.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"dir\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"..\") should be \"\" and posix.extname(\"....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\".\") should be \"\" and posix.extname(\"a/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"a/..\") should be \"\" and posix.extname(\"/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname(\"C:\\\\..\") should be \"\" and posix.extname(\"C:\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"C:\\\\temp\\\\myfile.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"foo..\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\".index.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"a/b/file.txt.\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"dir\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"..\") should be \"\" and win32.extname(\"....\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\".\") should be \"\" and win32.extname(\"a/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"a/..\") should be \"\" and win32.extname(\"/...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden win32.extname(\"C:\\\\..\") should be \"\" and win32.extname(\"C:\\\\...\") should be \".\"",
+    "test/hidden-pathe-extname-dot/namespaces.spec.ts :: [happy-5] hidden posix.extname and win32.extname agree with extname",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"a.b.c.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\".index.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"....\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"/...\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"dir/foo...\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"/home/user/.bashrc.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"C:\\\\dir\\\\file.txt.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"\\\\temp\\\\myfile.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"a\\\\b\\\\index.html.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"C:.\")",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse(\"index./\") takes ext from extname of its base",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse of \".\" and \"a/..\" keep name, \"a/....\" gives ext \".\"",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden parse ext matches extname(base) and name + ext is base",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden posix.parse on paths ending with a dot",
+    "test/hidden-pathe-extname-dot/parse.spec.ts :: [happy-4] hidden win32.parse on paths ending with a dot"
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"index.///\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"index.\\\\\\\\\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"index./\\\\/\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"a/b/index./\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"/temp/myfile./\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"C:\\\\temp\\\\myfile.\\\\\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\".../\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"...\\\\\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"..../\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\".index./\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"foo../\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"C:./\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"file.txt/\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"C:\\\\temp\\\\myfile.html\\\\\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"/\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"\\\\\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"//\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"a/./\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-1] hidden extname(\"a/../\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [unhappy-2] hidden extname(\"\") should be \"\" after extname(\"index.\")",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"a./b.js\") should be \".js\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"a./b\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"foo./bar\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"foo.\\\\bar\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"a.b/c\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"...foo\") should be \".foo\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"a/..foo\") should be \".foo\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\".index.js\") should be \".js\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"file.x\") should be \".x\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"file.a.b.c.d\") should be \".d\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"C:foo.txt\") should be \".txt\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"D:\\\\a.b\\\\c.d\") should be \".d\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"file\") should be \"\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/extname.spec.ts :: [happy-3] hidden extname(\"name.extension-with-a-much-longer-tail\") should be \".extension-with-a-much-longer-tail\"",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-extname-dot/parse.spec.ts :: [unhappy-2] hidden parse(\"\") has empty ext and name",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 60,
+      "total": 60
+    },
+    "hidden": {
+      "passed": 120,
+      "total": 120
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 383,
+      "total": 383
+    },
+    "notes": "I changed `extname` in `src/_path.ts:217`, and all 598 tests in the full suite now pass, including both new suites. I didn't change anything outside `src/`.\n\nThe function converts `\\` to `/`, then looks at the part of the path after the last `/`:\n- **Empty, `\".\"` or `\"..\"`:** it returns `\"\"`, so a path ending in a separator still has no extension.\n- **Ends with a dot:** it returns `\".\"`. This covers `\"index.\"`, `\"foo..\"`, `\"...\"` and `\".index.\"`.\n- **Anything else:** it uses the existing regular expression, unchanged.\n\nI didn't touch `parse` or the `posix`/`win32` versions; they call `extname`, so they pick up the new results.\n\nFor the third case I kept the old expression even though the spec's wording of that rule doesn't quite match it. The spec says a dot that is the first character of the last part never starts an extension. But the old expression gives `\".foo\"` for paths like `\"/.foo\"` or `\"a/.foo\"`, where Node gives `\"\"`. The spec also says the existing behaviour must not change, so I kept it, and no test checks this case. Following the wording instead would change what `\"a/.foo\"` returns.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "743ab2cd-538d-45b8-998c-437e8ae7b42d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1415662,
+        "turns": 5,
+        "durationMs": 24137,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1415662
+  }
+}

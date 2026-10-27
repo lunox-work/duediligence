@@ -1,0 +1,72 @@
+{
+  "slug": "he-57",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_monotonic.py :: TestMonotonic.test_constant_list",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_decreasing_across_zero",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_decreasing_with_equal_neighbors",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_docstring_decreasing",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_docstring_increasing",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_docstring_not_monotonic",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_empty_list",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_increasing_across_zero",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_increasing_with_equal_neighbors",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_single_element",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_three_elements_with_peak",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_three_elements_with_valley",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_two_decreasing_elements",
+    "tests/public/test_monotonic.py :: TestMonotonic.test_two_increasing_elements"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 34,
+  "kept": [
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_all_orders_of_five_distinct_integers",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_alternating_duplicate_values",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_decreasing_only_positive",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_decreasing_skips_zero",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_empty",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_equal_endpoints_surround_peak",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_equal_neighbors_with_peak",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_equal_neighbors_with_valley",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_first_step_breaks_decreasing_suffix",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_first_step_breaks_increasing_suffix",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_fractional_decreasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_fractional_increasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_fractional_peak",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_increasing_only_negative",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_increasing_skips_zero",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_interior_swap_in_decreasing_list",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_interior_swap_in_increasing_list",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_large_integer_increasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_large_integer_interior_reversal",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_last_step_breaks_decreasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_last_step_breaks_increasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_long_increasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_long_negative_decreasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_peak_with_decreasing_endpoints",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_single_fraction",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_single_negative",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_single_zero",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_small_floats_reversal",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_strings_decreasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_strings_increasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_strings_interior_reversal",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_two_negative_increasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_two_positive_decreasing",
+    "tests/private/test_monotonic_hidden.py :: TestMonotonicHidden.test_valley_with_increasing_endpoints"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 34,
+      "total": 34
+    }
+  }
+}

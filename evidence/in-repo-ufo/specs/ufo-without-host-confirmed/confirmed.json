@@ -1,0 +1,30 @@
+{
+  "sha256": "2d743bed2e75ed29615c53751d65619262f91fbb9c814c6209794716f0e1ed13",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T12:53:18.557Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "Use `parseURL` to split the input, with an empty pathname replaced by `\"/\"` and search and hash appended unchanged.",
+    "Return `\"/\"` when the pathname is empty, including the empty string and query-only or hash-only input.",
+    "Keep path, search and hash exactly as given: no encoding, decoding, case change, slash collapsing or trailing-slash change, and keep empty `?` and `#`.",
+    "Return host-less relative input such as `foo/bar` unchanged, without adding a leading slash.",
+    "Treat protocol-relative input (`//host/...`, `/\\host/...`) as having a host, and remove that host.",
+    "For `blob:`, `data:`, `javascript:` and `vbscript:`, return everything after the protocol verbatim.",
+    "For other protocols not followed by `//` (`mailto:`, `tel:`, `custom:/foo`), return `\"/\"`.",
+    "In URLs with a protocol or that are protocol-relative, convert backslashes to `/`. In host-less paths, keep them.",
+    "Ignore leading whitespace and NUL characters before a protocol.",
+    "Drop the slash before a Windows drive letter in a file URL (`file:///C:/foo` → `C:/foo`).",
+    "Make no idempotency guarantee: a result starting with `//` is re-read as protocol-relative.",
+    "Return type is `string`, inferred, while the ticket's declaration is kept as written.",
+    "Never throw for string input, and add no runtime type check. Non-string arguments are a compile-time error only.",
+    "Seam (the files the stub writes): src/utils.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

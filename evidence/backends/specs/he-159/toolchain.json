@@ -1,0 +1,5 @@
+{
+  "name": "python",
+  "prompts": "pyfunc",
+  "backend": "codex-cli"
+}

@@ -1,0 +1,3787 @@
+{
+  "fn": "satisfies",
+  "cases": [
+    {
+      "id": "c0001",
+      "rule": "R1",
+      "args": [
+        "7.0",
+        ">=0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0002",
+      "rule": "R1",
+      "args": [
+        "v0.12.1",
+        "=v0.12.1"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0003",
+      "rule": "R1",
+      "args": [
+        "0.2:10",
+        "<=0.2:10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0004",
+      "rule": "R1",
+      "args": [
+        "0.1.7-rc1",
+        ">=0.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0005",
+      "rule": "R1",
+      "args": [
+        " 0.1.25",
+        "= 0.1.25"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0006",
+      "rule": "R1",
+      "args": [
+        "0.x",
+        ">=0.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0007",
+      "rule": "R1",
+      "args": [
+        "4.0:rc",
+        ">=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0008",
+      "rule": "R1",
+      "args": [
+        "7.3",
+        "=7.3.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0009",
+      "rule": "R1",
+      "args": [
+        "4.1.0:",
+        ">=0.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0010",
+      "rule": "R1",
+      "args": [
+        "0.7:z9",
+        ">=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0011",
+      "rule": "R1",
+      "args": [
+        "1.12.3:1a",
+        "=1.12.3:1a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0012",
+      "rule": "R1",
+      "args": [
+        "0.7",
+        ">=0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0013",
+      "rule": "R1",
+      "args": [
+        "12.0:10",
+        "=12.0.0:10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0014",
+      "rule": "R1",
+      "args": [
+        "",
+        ""
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0015",
+      "rule": "R1",
+      "args": [
+        "4.0:rc10",
+        ">=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0016",
+      "rule": "R1",
+      "args": [
+        "25.12.7:a",
+        "=25.12.7:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0017",
+      "rule": "R1",
+      "args": [
+        "1.7.0:",
+        "<=1.7.0:"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0018",
+      "rule": "R1",
+      "args": [
+        "7.1.25:rc",
+        "<=7.1.25:rc"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0019",
+      "rule": "R1",
+      "args": [
+        " 7.1.7",
+        "<= 7.1.7"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0020",
+      "rule": "R1",
+      "args": [
+        "25.25",
+        ">=0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0021",
+      "rule": "R1",
+      "args": [
+        "25.3.3:z9",
+        ">=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0022",
+      "rule": "R1",
+      "args": [
+        "2.3.3:",
+        "2.3.3:"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0023",
+      "rule": "R1",
+      "args": [
+        "2.3.25:rc10",
+        "2.3.25:rc10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0024",
+      "rule": "R1",
+      "args": [
+        "09.12",
+        ">=0.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0025",
+      "rule": "R1",
+      "args": [
+        "12.12.7:rc.1",
+        "<=12.12.7:rc.1"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0026",
+      "rule": "R1",
+      "args": [
+        "0.25.12",
+        ">=0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0027",
+      "rule": "R1",
+      "args": [
+        "4.0",
+        ">=0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0028",
+      "rule": "R1",
+      "args": [
+        "10.0.2:rc.1",
+        ">=0.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0029",
+      "rule": "R1",
+      "args": [
+        "12.3:alpha",
+        "12.3.0:alpha"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0030",
+      "rule": "R1",
+      "args": [
+        " 25.7.3",
+        " 25.7.3"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0031",
+      "rule": "R1",
+      "args": [
+        "3",
+        "=3"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0032",
+      "rule": "R1",
+      "args": [
+        "0.0.0:",
+        ">=0.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0033",
+      "rule": "R1",
+      "args": [
+        "7.10",
+        ">=0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0034",
+      "rule": "R1",
+      "args": [
+        "7.1.4:rc.1",
+        "=7.1.4:rc.1"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0035",
+      "rule": "R1",
+      "args": [
+        "0.25.3:b",
+        "=0.25.3:b"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0036",
+      "rule": "R1",
+      "args": [
+        "10.1.3.12",
+        "<=10.1.3.12"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0037",
+      "rule": "R1",
+      "args": [
+        "1.0:rc10",
+        "=1.0.0:rc10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0038",
+      "rule": "R1",
+      "args": [
+        "2.1:beta",
+        "=2.1.0:beta"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0039",
+      "rule": "R1",
+      "args": [
+        " 0.25.0",
+        "= 0.25.0"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0040",
+      "rule": "R1",
+      "args": [
+        "10.10:z9",
+        ">=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0041",
+      "rule": "R1",
+      "args": [
+        "0.10:a",
+        ">=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0042",
+      "rule": "R1",
+      "args": [
+        "10.4.2:RC1",
+        "=10.4.2:RC1"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0043",
+      "rule": "R1",
+      "args": [
+        "0.25",
+        "=0.25.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0044",
+      "rule": "R1",
+      "args": [
+        "25.10:rc2",
+        "=25.10.0:rc2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0045",
+      "rule": "R2",
+      "args": [
+        "0.1.0:rc1",
+        "<0.1.0:alpha"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0046",
+      "rule": "R2",
+      "args": [
+        "1.3.0:alpha",
+        "<=1.3.0:beta10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0047",
+      "rule": "R2",
+      "args": [
+        "4.4.1",
+        "<2.7.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0048",
+      "rule": "R2",
+      "args": [
+        "0.10.0:rc2",
+        ">=0.10.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0049",
+      "rule": "R2",
+      "args": [
+        "1.7.0:b",
+        "<=1.7.0:beta10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0050",
+      "rule": "R2",
+      "args": [
+        "3.0.0",
+        ">=12.3.3"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0051",
+      "rule": "R2",
+      "args": [
+        "10.10.0",
+        ">3.0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0052",
+      "rule": "R2",
+      "args": [
+        "0.7.0:z9",
+        ">0.7.0:rc1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0053",
+      "rule": "R2",
+      "args": [
+        "4.0.3",
+        "<=4.1.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0054",
+      "rule": "R2",
+      "args": [
+        "3.0.2",
+        "<0.25.3"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0055",
+      "rule": "R2",
+      "args": [
+        "7.4.0:rc1",
+        "<=7.4.0:rc10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0056",
+      "rule": "R2",
+      "args": [
+        "25.0.0:a1",
+        "<=25.0.0:rc10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0057",
+      "rule": "R2",
+      "args": [
+        "0.10.0:beta2",
+        ">0.10.0:2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0058",
+      "rule": "R2",
+      "args": [
+        "2.2.0:b",
+        "<=2.2.0:rc"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0059",
+      "rule": "R2",
+      "args": [
+        "12.1.0",
+        ">=10.10.25"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0060",
+      "rule": "R2",
+      "args": [
+        "0.12.12",
+        ">=25.4.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0061",
+      "rule": "R2",
+      "args": [
+        "12.1.7",
+        ">=12.0.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0062",
+      "rule": "R2",
+      "args": [
+        "0.1.3",
+        ">=1.1.25"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0063",
+      "rule": "R2",
+      "args": [
+        "4.12.2",
+        ">=7.25.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0064",
+      "rule": "R2",
+      "args": [
+        "12.12.7",
+        ">0.0.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0065",
+      "rule": "R2",
+      "args": [
+        "12.1.0:10",
+        ">=12.1.0:alpha"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0066",
+      "rule": "R2",
+      "args": [
+        "4.4.3",
+        "<0.2.3"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0067",
+      "rule": "R2",
+      "args": [
+        "4.1.1",
+        "<3.0.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0068",
+      "rule": "R2",
+      "args": [
+        "0.25.0:rc10",
+        "<=0.25.0:rc"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0069",
+      "rule": "R2",
+      "args": [
+        "0.12.12",
+        ">=4.0.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0070",
+      "rule": "R2",
+      "args": [
+        "10.1.25",
+        "<2.2.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0071",
+      "rule": "R2",
+      "args": [
+        "1.25.0:b",
+        "<=1.25.0:beta2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0072",
+      "rule": "R2",
+      "args": [
+        "4.4.25",
+        ">4.7.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0073",
+      "rule": "R2",
+      "args": [
+        "0.0.0",
+        "<=0.10.4"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0074",
+      "rule": "R2",
+      "args": [
+        "25.0.0:rc1b",
+        ">=25.0.0:z9"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0075",
+      "rule": "R2",
+      "args": [
+        "25.2.0:rc",
+        "<=25.2.0:beta10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0076",
+      "rule": "R2",
+      "args": [
+        "4.7.25",
+        ">=0.4.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0077",
+      "rule": "R2",
+      "args": [
+        "2.2.10",
+        "<10.0.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0078",
+      "rule": "R2",
+      "args": [
+        "0.25.0:rc",
+        ">0.25.0:beta10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0079",
+      "rule": "R2",
+      "args": [
+        "25.0.0:1a",
+        "<=25.0.0:rc2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0080",
+      "rule": "R2",
+      "args": [
+        "3.7.12",
+        ">=2.4.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0081",
+      "rule": "R2",
+      "args": [
+        "4.1.25",
+        "<7.0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0082",
+      "rule": "R2",
+      "args": [
+        "12.1.25",
+        "<12.4.4"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0083",
+      "rule": "R2",
+      "args": [
+        "12.10.4",
+        "<=12.3.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0084",
+      "rule": "R2",
+      "args": [
+        "0.2.0",
+        ">=2.3.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0085",
+      "rule": "R2",
+      "args": [
+        "25.12.7",
+        "<=0.4.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0086",
+      "rule": "R2",
+      "args": [
+        "2.7.7",
+        "<=4.3.25"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0087",
+      "rule": "R2",
+      "args": [
+        "3.3.0:rc",
+        "<3.3.0:2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0088",
+      "rule": "R2",
+      "args": [
+        "3.12.1",
+        ">4.25.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0089",
+      "rule": "R3",
+      "args": [
+        "25.4.25",
+        ">=25.4.25"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0090",
+      "rule": "R3",
+      "args": [
+        "25.3.1",
+        ">=25.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0091",
+      "rule": "R3",
+      "args": [
+        "0.10",
+        ">0.10.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0092",
+      "rule": "R3",
+      "args": [
+        "2.25",
+        "<=2.25.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0093",
+      "rule": "R3",
+      "args": [
+        "7.10.25",
+        "<=1.0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0094",
+      "rule": "R3",
+      "args": [
+        "3.0.0",
+        "=3.0.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0095",
+      "rule": "R3",
+      "args": [
+        "12.2",
+        "=12.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0096",
+      "rule": "R3",
+      "args": [
+        "25.10.4",
+        "<=25.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0097",
+      "rule": "R3",
+      "args": [
+        "3.4.0",
+        "<0.4.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0098",
+      "rule": "R3",
+      "args": [
+        "1.2",
+        "<=1.2.13"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0099",
+      "rule": "R3",
+      "args": [
+        "4.2",
+        "<=10.3.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0100",
+      "rule": "R3",
+      "args": [
+        "10.7.1",
+        "=10.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0101",
+      "rule": "R3",
+      "args": [
+        "0.7.12",
+        ">=0.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0102",
+      "rule": "R3",
+      "args": [
+        "3.0",
+        "=3.0.3"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0103",
+      "rule": "R3",
+      "args": [
+        "0.0",
+        "=2.25.3"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0104",
+      "rule": "R3",
+      "args": [
+        "2.2.0",
+        ">2.2.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0105",
+      "rule": "R3",
+      "args": [
+        "25.10",
+        "12.25.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0106",
+      "rule": "R3",
+      "args": [
+        "7.1",
+        ">=7.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0107",
+      "rule": "R3",
+      "args": [
+        "3.7",
+        "<=3.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0108",
+      "rule": "R3",
+      "args": [
+        "12.4",
+        "<=12.4"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0109",
+      "rule": "R3",
+      "args": [
+        "0.4.7",
+        ">0.4.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0110",
+      "rule": "R3",
+      "args": [
+        "4.7",
+        "<3.12.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0111",
+      "rule": "R3",
+      "args": [
+        "0.4.12",
+        "<=2.0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0112",
+      "rule": "R3",
+      "args": [
+        "10.12",
+        "10.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0113",
+      "rule": "R3",
+      "args": [
+        "0.0.12",
+        "<=0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0114",
+      "rule": "R3",
+      "args": [
+        "7.25.0",
+        ">7.25.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0115",
+      "rule": "R3",
+      "args": [
+        "4.1",
+        "<=4.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0116",
+      "rule": "R3",
+      "args": [
+        "3.1",
+        ">=3.1.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0117",
+      "rule": "R3",
+      "args": [
+        "7.3",
+        "<7.3.26"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0118",
+      "rule": "R3",
+      "args": [
+        "1.10",
+        "1.10.8"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0119",
+      "rule": "R3",
+      "args": [
+        "3.25.4",
+        ">3.25"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0120",
+      "rule": "R3",
+      "args": [
+        "3.0.7",
+        ">3.0.8"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0121",
+      "rule": "R3",
+      "args": [
+        "2.0",
+        "<2.0.11"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0122",
+      "rule": "R3",
+      "args": [
+        "4.3",
+        "=4.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0123",
+      "rule": "R3",
+      "args": [
+        "10.10.12",
+        ">=10.10.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0124",
+      "rule": "R3",
+      "args": [
+        "12.0",
+        ">=12.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0125",
+      "rule": "R3",
+      "args": [
+        "12.7.0",
+        ">12.7.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0126",
+      "rule": "R3",
+      "args": [
+        "10.0.2",
+        "<=10.0.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0127",
+      "rule": "R3",
+      "args": [
+        "12.0.10",
+        "12.0.10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0128",
+      "rule": "R3",
+      "args": [
+        "0.25",
+        "=0.25"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0129",
+      "rule": "R3",
+      "args": [
+        "1.7",
+        "<=2.7.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0130",
+      "rule": "R3",
+      "args": [
+        "12.3.10",
+        "<1.25.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0131",
+      "rule": "R3",
+      "args": [
+        "25.12.3",
+        "=2.10.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0132",
+      "rule": "R3",
+      "args": [
+        "1.1",
+        "<3.0.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0133",
+      "rule": "R4",
+      "args": [
+        "1.12.3",
+        "~1.12.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0134",
+      "rule": "R4",
+      "args": [
+        "12.3.0",
+        "~12.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0135",
+      "rule": "R4",
+      "args": [
+        "1.1",
+        "~1.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0136",
+      "rule": "R4",
+      "args": [
+        "2.2",
+        "~2.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0137",
+      "rule": "R4",
+      "args": [
+        "2.5.0",
+        "~2.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0138",
+      "rule": "R4",
+      "args": [
+        "1.6.9",
+        "~1.7.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0139",
+      "rule": "R4",
+      "args": [
+        "25.3.0",
+        "~25.2.25"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0140",
+      "rule": "R4",
+      "args": [
+        "10.1.0",
+        "~10.0.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0141",
+      "rule": "R4",
+      "args": [
+        "10.12",
+        "~10.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0142",
+      "rule": "R4",
+      "args": [
+        "4.2.9",
+        "~4.3"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0143",
+      "rule": "R4",
+      "args": [
+        "10.4.2",
+        "~10.4.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0144",
+      "rule": "R4",
+      "args": [
+        "26.2.4",
+        "~25.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0145",
+      "rule": "R4",
+      "args": [
+        "10.0.13",
+        "~10.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0146",
+      "rule": "R4",
+      "args": [
+        "12.3.0",
+        "~12.2.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0147",
+      "rule": "R4",
+      "args": [
+        "0.4.0",
+        "~0.3.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0148",
+      "rule": "R4",
+      "args": [
+        "10.2.9",
+        "~10.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0149",
+      "rule": "R4",
+      "args": [
+        "0.2.15",
+        "~0.2"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0150",
+      "rule": "R4",
+      "args": [
+        "4.11.0",
+        "~4.10.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0151",
+      "rule": "R4",
+      "args": [
+        "10.26.0",
+        "~10.25"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0152",
+      "rule": "R4",
+      "args": [
+        "3.25.4",
+        "~2.25.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0153",
+      "rule": "R4",
+      "args": [
+        "3.11.9",
+        "~3.12.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0154",
+      "rule": "R4",
+      "args": [
+        "1.12.7",
+        "~0.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0155",
+      "rule": "R4",
+      "args": [
+        "0.0",
+        "~0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0156",
+      "rule": "R4",
+      "args": [
+        "4.25",
+        "~4.25.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0157",
+      "rule": "R4",
+      "args": [
+        "0.11.0",
+        "~0.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0158",
+      "rule": "R4",
+      "args": [
+        "0.1.0",
+        "~0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0159",
+      "rule": "R4",
+      "args": [
+        "10.26.0",
+        "~10.25.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0160",
+      "rule": "R4",
+      "args": [
+        "10.11.9",
+        "~10.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0161",
+      "rule": "R4",
+      "args": [
+        "1.4.25",
+        "~0.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0162",
+      "rule": "R4",
+      "args": [
+        "0.3.0",
+        "~0.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0163",
+      "rule": "R4",
+      "args": [
+        "12.12.2",
+        "~12.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0164",
+      "rule": "R4",
+      "args": [
+        "10.2.4",
+        "~10.2.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0165",
+      "rule": "R4",
+      "args": [
+        "4.12.14",
+        "~4.12.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0166",
+      "rule": "R4",
+      "args": [
+        "3.0.9",
+        "~3.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0167",
+      "rule": "R4",
+      "args": [
+        "1.25",
+        "~1.25.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0168",
+      "rule": "R4",
+      "args": [
+        "26.4.7",
+        "~25.4.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0169",
+      "rule": "R4",
+      "args": [
+        "7.13.0",
+        "~7.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0170",
+      "rule": "R4",
+      "args": [
+        "1.0.9",
+        "~1.1"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0171",
+      "rule": "R4",
+      "args": [
+        "4.0.4",
+        "~3.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0172",
+      "rule": "R4",
+      "args": [
+        "13.4.4",
+        "~12.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0173",
+      "rule": "R4",
+      "args": [
+        "1.10",
+        "~1.10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0174",
+      "rule": "R4",
+      "args": [
+        "2.0.9",
+        "~2.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0175",
+      "rule": "R4",
+      "args": [
+        "4.0.9",
+        "~4.0.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0176",
+      "rule": "R4",
+      "args": [
+        "1.9.9",
+        "~1.10.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0177",
+      "rule": "R5",
+      "args": [
+        "3.0.0",
+        "^2.0.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0178",
+      "rule": "R5",
+      "args": [
+        "1.0.0",
+        "^0.4.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0179",
+      "rule": "R5",
+      "args": [
+        "0.3",
+        "^0.3.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0180",
+      "rule": "R5",
+      "args": [
+        "3.6.0",
+        "^3.7.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0181",
+      "rule": "R5",
+      "args": [
+        "3.1.0",
+        "^3.2.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0182",
+      "rule": "R5",
+      "args": [
+        "3.13.0",
+        "^3.12.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0183",
+      "rule": "R5",
+      "args": [
+        "0.10.0",
+        "^0.10.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0184",
+      "rule": "R5",
+      "args": [
+        "2.0.2",
+        "^2.0.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0185",
+      "rule": "R5",
+      "args": [
+        "2.25.11",
+        "^2.25.10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0186",
+      "rule": "R5",
+      "args": [
+        "1.0.0",
+        "^0.4.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0187",
+      "rule": "R5",
+      "args": [
+        "4.0.0",
+        "^3.4.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0188",
+      "rule": "R5",
+      "args": [
+        "0.8.0",
+        "^0.7.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0189",
+      "rule": "R5",
+      "args": [
+        "0.12",
+        "^0.12.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0190",
+      "rule": "R5",
+      "args": [
+        "1.4",
+        "^1.4.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0191",
+      "rule": "R5",
+      "args": [
+        "0.4.1",
+        "^0.4.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0192",
+      "rule": "R5",
+      "args": [
+        "2.0.0",
+        "^1.12.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0193",
+      "rule": "R5",
+      "args": [
+        "1.7.5",
+        "^1.7.4"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0194",
+      "rule": "R5",
+      "args": [
+        "2.4.0",
+        "^2.3.7"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0195",
+      "rule": "R5",
+      "args": [
+        "0.2.0",
+        "^0.1.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0196",
+      "rule": "R5",
+      "args": [
+        "0.13.0",
+        "^0.10.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0197",
+      "rule": "R5",
+      "args": [
+        "0.15.0",
+        "^0.12.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0198",
+      "rule": "R5",
+      "args": [
+        "2.0",
+        "^2.0.12"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0199",
+      "rule": "R5",
+      "args": [
+        "2.0",
+        "^2.0.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0200",
+      "rule": "R5",
+      "args": [
+        "0.11.0",
+        "^0.12.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0201",
+      "rule": "R5",
+      "args": [
+        "3.0.0",
+        "^2.0.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0202",
+      "rule": "R5",
+      "args": [
+        "0.4.3",
+        "^0.4.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0203",
+      "rule": "R5",
+      "args": [
+        "2.1.0",
+        "^2.1.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0204",
+      "rule": "R5",
+      "args": [
+        "0.10",
+        "^0.10.25"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0205",
+      "rule": "R5",
+      "args": [
+        "1.0.0",
+        "^0.10.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0206",
+      "rule": "R5",
+      "args": [
+        "1.6.0",
+        "^1.7.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0207",
+      "rule": "R5",
+      "args": [
+        "0.7.2",
+        "^0.7.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0208",
+      "rule": "R5",
+      "args": [
+        "2.0.0",
+        "^1.12.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0209",
+      "rule": "R5",
+      "args": [
+        "0.0.3",
+        "^0.0.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0210",
+      "rule": "R5",
+      "args": [
+        "1.0.0",
+        "^0.25.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0211",
+      "rule": "R5",
+      "args": [
+        "1.24.0",
+        "^1.25.7"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0212",
+      "rule": "R5",
+      "args": [
+        "0.12.3",
+        "^0.12.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0213",
+      "rule": "R5",
+      "args": [
+        "0.2.0",
+        "^0.1.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0214",
+      "rule": "R5",
+      "args": [
+        "2.0.0",
+        "^1.4.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0215",
+      "rule": "R5",
+      "args": [
+        "2.12.2",
+        "^2.12.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0216",
+      "rule": "R5",
+      "args": [
+        "0.6.0",
+        "^0.7.4"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0217",
+      "rule": "R5",
+      "args": [
+        "3.1.10",
+        "^3.1.10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0218",
+      "rule": "R5",
+      "args": [
+        "2.24.0",
+        "^2.25.25"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0219",
+      "rule": "R5",
+      "args": [
+        "0.0.0",
+        "^0.0.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0220",
+      "rule": "R5",
+      "args": [
+        "4.0.0",
+        "^3.10.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0221",
+      "rule": "R6",
+      "args": [
+        "4.3.25",
+        "*"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0222",
+      "rule": "R6",
+      "args": [
+        "2.25.25",
+        ">2.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0223",
+      "rule": "R6",
+      "args": [
+        "13.4.0",
+        "~12.4.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0224",
+      "rule": "R6",
+      "args": [
+        "12.12.1",
+        "12.x.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0225",
+      "rule": "R6",
+      "args": [
+        "1.0.12",
+        "*"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0226",
+      "rule": "R6",
+      "args": [
+        "0.2.0",
+        "~2.25.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0227",
+      "rule": "R6",
+      "args": [
+        "8.1.0",
+        ">7.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0228",
+      "rule": "R6",
+      "args": [
+        "12.25.2",
+        "12.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0229",
+      "rule": "R6",
+      "args": [
+        "1.3.12",
+        "1.0.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0230",
+      "rule": "R6",
+      "args": [
+        "7.4.0",
+        "7.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0231",
+      "rule": "R6",
+      "args": [
+        "0.3.2",
+        "*"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0232",
+      "rule": "R6",
+      "args": [
+        "7.2.12",
+        "x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0233",
+      "rule": "R6",
+      "args": [
+        "25.10.4",
+        ">25.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0234",
+      "rule": "R6",
+      "args": [
+        "7.1.3",
+        ">12.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0235",
+      "rule": "R6",
+      "args": [
+        "8.25.0",
+        "7.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0236",
+      "rule": "R6",
+      "args": [
+        "2.0.1",
+        "2.0.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0237",
+      "rule": "R6",
+      "args": [
+        "1.0.0",
+        "0.0.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0238",
+      "rule": "R6",
+      "args": [
+        "1.3.0",
+        ">0.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0239",
+      "rule": "R6",
+      "args": [
+        "12.1.3",
+        "0.*"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0240",
+      "rule": "R6",
+      "args": [
+        "1.25.25",
+        "1.*"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0241",
+      "rule": "R6",
+      "args": [
+        "4.3.12",
+        "4.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0242",
+      "rule": "R6",
+      "args": [
+        "25.10.12",
+        "25.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0243",
+      "rule": "R6",
+      "args": [
+        "0.7.0",
+        "0.x.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0244",
+      "rule": "R6",
+      "args": [
+        "1.2.0",
+        "0.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0245",
+      "rule": "R6",
+      "args": [
+        "12.7.3",
+        "12.x.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0246",
+      "rule": "R6",
+      "args": [
+        "0.10.10",
+        "*"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0247",
+      "rule": "R6",
+      "args": [
+        "4.4.12",
+        "4.*"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0248",
+      "rule": "R6",
+      "args": [
+        "1.12.0",
+        "*"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0249",
+      "rule": "R6",
+      "args": [
+        "0.25.12",
+        "0.*"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0250",
+      "rule": "R6",
+      "args": [
+        "0.10.3",
+        ">0.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0251",
+      "rule": "R6",
+      "args": [
+        "2.1.2",
+        "2.1.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0252",
+      "rule": "R6",
+      "args": [
+        "1.3.0",
+        "~0.3.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0253",
+      "rule": "R6",
+      "args": [
+        "10.7.10",
+        "10.7.x"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0254",
+      "rule": "R6",
+      "args": [
+        "25.4.2",
+        "x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0255",
+      "rule": "R6",
+      "args": [
+        "4.3.7",
+        "0.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0256",
+      "rule": "R6",
+      "args": [
+        "0.10.0",
+        "2.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0257",
+      "rule": "R6",
+      "args": [
+        "11.2.0",
+        ">10.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0258",
+      "rule": "R6",
+      "args": [
+        "1.25.0",
+        ">0.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0259",
+      "rule": "R6",
+      "args": [
+        "4.12.0",
+        ">3.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0260",
+      "rule": "R6",
+      "args": [
+        "12.25.3",
+        ">12.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0261",
+      "rule": "R6",
+      "args": [
+        "26.3.0",
+        "25.3.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0262",
+      "rule": "R6",
+      "args": [
+        "0.0.2",
+        "0.x.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0263",
+      "rule": "R6",
+      "args": [
+        "0.4.7",
+        ">0.x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0264",
+      "rule": "R6",
+      "args": [
+        "2.25.0",
+        "1.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0265",
+      "rule": "R7",
+      "args": [
+        "12.10.0",
+        ">=12.0.0,<0.7.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0266",
+      "rule": "R7",
+      "args": [
+        "0.3.2",
+        "0.3.2 - 7.25.7"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0267",
+      "rule": "R7",
+      "args": [
+        "10.3.25",
+        " >=10.0.7 , <2.2.2 "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0268",
+      "rule": "R7",
+      "args": [
+        "3.0.0",
+        ">= 0.7.4"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0269",
+      "rule": "R7",
+      "args": [
+        "2.0.1",
+        "=2.0.1, *"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0270",
+      "rule": "R7",
+      "args": [
+        "0.1.25",
+        "=0.1.25, *"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0271",
+      "rule": "R7",
+      "args": [
+        "3.10.3",
+        "=3.4.0|=3.0.3|=3.10.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0272",
+      "rule": "R7",
+      "args": [
+        "0.4.2",
+        ">=2.0.1,"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0273",
+      "rule": "R7",
+      "args": [
+        "4.1.2",
+        ">=1.3.25,<4.10.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0274",
+      "rule": "R7",
+      "args": [
+        "0.4.1",
+        ">=1.4.12,<25.10.2|=0.4.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0275",
+      "rule": "R7",
+      "args": [
+        "4.7.12",
+        ">= 2.10.4"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0276",
+      "rule": "R7",
+      "args": [
+        "3.7.3",
+        ">=0.0.1,<2.3.2"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0277",
+      "rule": "R7",
+      "args": [
+        "3.3.12",
+        "|=3.3.12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0278",
+      "rule": "R7",
+      "args": [
+        "10.4.25",
+        ">=7.4.12,<2.0.25|=10.4.25"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0279",
+      "rule": "R7",
+      "args": [
+        "12.1.12",
+        "=1.2.1||=12.1.12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0280",
+      "rule": "R7",
+      "args": [
+        "7.1.10",
+        ">=12.10.0 <0.7.4"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0281",
+      "rule": "R7",
+      "args": [
+        "7.7.12",
+        "=10.25.7||=7.7.12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0282",
+      "rule": "R7",
+      "args": [
+        "12.4.4",
+        "=12.4.4, *"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0283",
+      "rule": "R7",
+      "args": [
+        "25.1.1",
+        "|=25.1.1"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0284",
+      "rule": "R7",
+      "args": [
+        "1.10.7",
+        "=1.10.7, *"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0285",
+      "rule": "R7",
+      "args": [
+        "10.7.7",
+        ">= 0.10.10"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0286",
+      "rule": "R7",
+      "args": [
+        "7.25.12",
+        ">=10.12.12,"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0287",
+      "rule": "R7",
+      "args": [
+        "1.2.0",
+        "=25.2.2|=12.4.12|=1.2.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0288",
+      "rule": "R7",
+      "args": [
+        "10.25.1",
+        "<7.10.4 | >12.0.25"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0289",
+      "rule": "R7",
+      "args": [
+        "25.10.25",
+        "=25.10.25, *"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0290",
+      "rule": "R7",
+      "args": [
+        "4.3.1",
+        "=0.12.25||=4.3.1"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0291",
+      "rule": "R7",
+      "args": [
+        "12.0.0",
+        "<25.7.0 | >4.10.3"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0292",
+      "rule": "R7",
+      "args": [
+        "0.7.1",
+        "<2.4.12 | >10.0.1"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0293",
+      "rule": "R7",
+      "args": [
+        "2.0.0",
+        ">= 12.4.2"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0294",
+      "rule": "R7",
+      "args": [
+        "0.10.10",
+        "=25.3.0|=7.7.4|=0.10.10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0295",
+      "rule": "R7",
+      "args": [
+        "25.25.10",
+        "<25.10.10 | >0.10.10"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0296",
+      "rule": "R7",
+      "args": [
+        "2.25.0",
+        "|=2.25.0"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0297",
+      "rule": "R7",
+      "args": [
+        "3.12.25",
+        "3.12.25 - 0.2.1"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0298",
+      "rule": "R7",
+      "args": [
+        "1.12.10",
+        ">=12.12.4,<7.0.10"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0299",
+      "rule": "R7",
+      "args": [
+        "1.12.7",
+        ">= 25.10.10"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0300",
+      "rule": "R7",
+      "args": [
+        "4.0.7",
+        "=4.0.3||=4.0.7"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0301",
+      "rule": "R7",
+      "args": [
+        "0.2.25",
+        ">=2.7.7,"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0302",
+      "rule": "R7",
+      "args": [
+        "25.1.4",
+        ">= 7.4.3"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0303",
+      "rule": "R7",
+      "args": [
+        "1.0.10",
+        ">=0.0.7 <0.7.0"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0304",
+      "rule": "R7",
+      "args": [
+        "3.7.7",
+        " >=7.2.3 , <3.2.7 "
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0305",
+      "rule": "R7",
+      "args": [
+        "0.3.7",
+        "<2.3.4 | >0.0.4"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0306",
+      "rule": "R7",
+      "args": [
+        "4.4.3",
+        "=12.12.0||=4.4.3"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0307",
+      "rule": "R7",
+      "args": [
+        "10.2.12",
+        ">=3.4.0,<0.3.12|=10.2.12"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0308",
+      "rule": "R7",
+      "args": [
+        "7.12.4",
+        "7.12.4 - 12.0.12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0309",
+      "rule": "R8",
+      "args": [
+        "4.4.2:1a",
+        ">=4.4.0|>=4.4.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0310",
+      "rule": "R8",
+      "args": [
+        "0.0.0:a1",
+        "<0.1.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0311",
+      "rule": "R8",
+      "args": [
+        "25.7.2:alpha",
+        "~25.7.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0312",
+      "rule": "R8",
+      "args": [
+        "4.4.3:10",
+        ">=4.4.0|>=4.4.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0313",
+      "rule": "R8",
+      "args": [
+        "0.3.2:1a",
+        "<0.4.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0314",
+      "rule": "R8",
+      "args": [
+        "1.12.2:rc1",
+        ">=1.12.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0315",
+      "rule": "R8",
+      "args": [
+        "10.2.1:beta",
+        "*"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0316",
+      "rule": "R8",
+      "args": [
+        "10.0.0:1a",
+        "^10.0.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0317",
+      "rule": "R8",
+      "args": [
+        "1.10.2:beta",
+        "~1.10.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0318",
+      "rule": "R8",
+      "args": [
+        "12.25.1:rc",
+        ">=12.25.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0319",
+      "rule": "R8",
+      "args": [
+        "3.10.2:rc1",
+        "<3.11.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0320",
+      "rule": "R8",
+      "args": [
+        "7.2.2:beta10",
+        ">=7.2.0|>=7.2.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0321",
+      "rule": "R8",
+      "args": [
+        "0.1.3:b",
+        ">=0.1.0:a,<1.0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0322",
+      "rule": "R8",
+      "args": [
+        "1.12.1:z9",
+        ">=1.12.9:rc"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0323",
+      "rule": "R8",
+      "args": [
+        "1.4.3:rc1b",
+        ">=1.4.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0324",
+      "rule": "R8",
+      "args": [
+        "2.3.3:a1",
+        ">=2.2.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0325",
+      "rule": "R8",
+      "args": [
+        "4.1.1:beta",
+        ">=4.0.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0326",
+      "rule": "R8",
+      "args": [
+        "1.7.2:a1",
+        ">=1.6.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0327",
+      "rule": "R8",
+      "args": [
+        "4.4.2:beta",
+        ">=4.4.0|>=4.4.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0328",
+      "rule": "R8",
+      "args": [
+        "7.10.1:beta10",
+        "7.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0329",
+      "rule": "R8",
+      "args": [
+        "25.0.0:rc",
+        "^25.0.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0330",
+      "rule": "R8",
+      "args": [
+        "2.0.3:beta2",
+        ">=2.0.0|>=2.0.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0331",
+      "rule": "R8",
+      "args": [
+        "4.2.2:rc2",
+        ">=4.1.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0332",
+      "rule": "R8",
+      "args": [
+        "1.7.0:z9",
+        "1.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0333",
+      "rule": "R8",
+      "args": [
+        "2.0.0:a1",
+        "<2.1.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0334",
+      "rule": "R8",
+      "args": [
+        "10.12.3:10",
+        ">=10.12.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0335",
+      "rule": "R8",
+      "args": [
+        "25.1.2:beta10",
+        "*"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0336",
+      "rule": "R8",
+      "args": [
+        "25.7.1:2",
+        ">=25.7.0:a,<26.0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0337",
+      "rule": "R8",
+      "args": [
+        "4.4.2:z9",
+        "<4.5.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0338",
+      "rule": "R8",
+      "args": [
+        "3.2.0:10",
+        "~3.2.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0339",
+      "rule": "R8",
+      "args": [
+        "25.0.1:1a",
+        "^25.0.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0340",
+      "rule": "R8",
+      "args": [
+        "2.25.3:beta10",
+        ">=2.25.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0341",
+      "rule": "R8",
+      "args": [
+        "0.2.3:rc10",
+        "~0.2.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0342",
+      "rule": "R8",
+      "args": [
+        "0.2.2:rc10",
+        "^0.2.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0343",
+      "rule": "R8",
+      "args": [
+        "7.10.3:b",
+        ">=7.10.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0344",
+      "rule": "R8",
+      "args": [
+        "12.7.0:z9",
+        ">=12.7.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0345",
+      "rule": "R8",
+      "args": [
+        "12.2.0:b",
+        ">=12.2.9:rc"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0346",
+      "rule": "R8",
+      "args": [
+        "12.12.3:rc1",
+        "12.x"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0347",
+      "rule": "R8",
+      "args": [
+        "12.2.3:1a",
+        ">=12.2.0:a,<13.0.0"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0348",
+      "rule": "R8",
+      "args": [
+        "7.0.0:z9",
+        "~7.0.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0349",
+      "rule": "R8",
+      "args": [
+        "2.12.2:beta10",
+        "~2.12.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0350",
+      "rule": "R8",
+      "args": [
+        "2.2.1:a1",
+        ">=2.2.0|>=2.2.0:a"
+      ],
+      "expected": true
+    },
+    {
+      "id": "c0351",
+      "rule": "R8",
+      "args": [
+        "4.2.0:10",
+        ">=4.2.0"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0352",
+      "rule": "R8",
+      "args": [
+        "25.3.1:2",
+        ">=25.2.0:a"
+      ],
+      "expected": false
+    },
+    {
+      "id": "c0353",
+      "rule": "R9",
+      "args": [
+        "7.0.0",
+        "~0"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0354",
+      "rule": "R9",
+      "args": [
+        "4.0.1",
+        ""
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0355",
+      "rule": "R9",
+      "args": [
+        "0.7.3",
+        "==0.7.3"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0356",
+      "rule": "R9",
+      "args": [
+        "0.7.4",
+        ">>0.7.4"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0357",
+      "rule": "R9",
+      "args": [
+        "x1.25.3",
+        "nonsense"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0358",
+      "rule": "R9",
+      "args": [
+        "0.1.4",
+        "==0.1.4"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0359",
+      "rule": "R9",
+      "args": [
+        "1.10.2",
+        "~12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0360",
+      "rule": "R9",
+      "args": [
+        "1.2.3.4",
+        "=1.2.3"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0361",
+      "rule": "R9",
+      "args": [
+        "25.0.12",
+        ">=25.0.12,<25.0.12x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0362",
+      "rule": "R9",
+      "args": [
+        "10.12.0",
+        "~2"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0363",
+      "rule": "R9",
+      "args": [
+        "2.25.0",
+        ">=2.25.0,<2.25.0x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0364",
+      "rule": "R9",
+      "args": [
+        "0.25.1",
+        ">=0.25.1,<0.25.1x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0365",
+      "rule": "R9",
+      "args": [
+        "1.4.1",
+        "=1.4.1:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0366",
+      "rule": "R9",
+      "args": [
+        "7.2.3-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0367",
+      "rule": "R9",
+      "args": [
+        "7.12.0",
+        "=7.12.0:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0368",
+      "rule": "R9",
+      "args": [
+        "4.1.0",
+        "=4.1.0:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0369",
+      "rule": "R9",
+      "args": [
+        "7.7.7",
+        "=7.7.7:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0370",
+      "rule": "R9",
+      "args": [
+        "x10.2.2",
+        "nonsense"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0371",
+      "rule": "R9",
+      "args": [
+        "4.0.4",
+        "~25"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0372",
+      "rule": "R9",
+      "args": [
+        "7.0.12",
+        "==7.0.12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0373",
+      "rule": "R9",
+      "args": [
+        "0.7.2",
+        "==0.7.2"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0374",
+      "rule": "R9",
+      "args": [
+        "4.7.4-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0375",
+      "rule": "R9",
+      "args": [
+        "12.4.25-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0376",
+      "rule": "R9",
+      "args": [
+        "12.2.3",
+        ""
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0377",
+      "rule": "R9",
+      "args": [
+        "7.2.4",
+        ">=7.2.4,<7.2.4x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0378",
+      "rule": "R9",
+      "args": [
+        "3.4.25",
+        "==3.4.25"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0379",
+      "rule": "R9",
+      "args": [
+        "25.2.12-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0380",
+      "rule": "R9",
+      "args": [
+        "0.3.12",
+        "=0.3.12:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0381",
+      "rule": "R9",
+      "args": [
+        "4.0.3",
+        "~0"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0382",
+      "rule": "R9",
+      "args": [
+        "0.3.25",
+        "~10"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0383",
+      "rule": "R9",
+      "args": [
+        "3.7.3",
+        ""
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0384",
+      "rule": "R9",
+      "args": [
+        "1.7.0",
+        ">=1.7.0,<1.7.0x"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0385",
+      "rule": "R9",
+      "args": [
+        "2.4.2",
+        ">>2.4.2"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0386",
+      "rule": "R9",
+      "args": [
+        "7.10.7",
+        "=7.10.7:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0387",
+      "rule": "R9",
+      "args": [
+        "0.25.7",
+        "~1"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0388",
+      "rule": "R9",
+      "args": [
+        "2.3.25",
+        "=2.3.25:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0389",
+      "rule": "R9",
+      "args": [
+        "12.0.1",
+        ""
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0390",
+      "rule": "R9",
+      "args": [
+        "0.10.7",
+        "=0.10.7:"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0391",
+      "rule": "R9",
+      "args": [
+        "x10.0.7",
+        "nonsense"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0392",
+      "rule": "R9",
+      "args": [
+        "10.1.10-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0393",
+      "rule": "R9",
+      "args": [
+        "1.0.7-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    },
+    {
+      "id": "c0394",
+      "rule": "R9",
+      "args": [
+        "7.10.0",
+        "~12"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0395",
+      "rule": "R9",
+      "args": [
+        "0.1.4",
+        ">>0.1.4"
+      ],
+      "expected": {
+        "throws": "range"
+      }
+    },
+    {
+      "id": "c0396",
+      "rule": "R9",
+      "args": [
+        "7.7.25-rc1",
+        "*"
+      ],
+      "expected": {
+        "throws": "version"
+      }
+    }
+  ]
+}

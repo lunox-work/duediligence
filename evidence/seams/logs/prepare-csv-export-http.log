@@ -1,0 +1,39 @@
+[16:41:33] csv-export-http skeleton started
+[16:42:12] csv-export-http skeleton done $0.23
+[16:42:12] csv-export-http public started
+[16:45:53] csv-export-http public fix turn: Only tests/public/*.test.ts may be written; also touched: tests/public/helpers.ts (added). Undo those.
+[16:46:33] csv-export-http public done $1.73
+[16:46:33] csv-export-http private started
+[16:51:27] csv-export-http private fix turn: No test files at tests/private/*.test.ts.
+[16:51:29] csv-export-http private FAILED: No test files at tests/private/*.test.ts. $1.56
+csv-export-http private: No test files at tests/private/*.test.ts.
+1 step(s) failed
+exit 1
+[01:33:30] csv-export-http private started
+[01:41:36] csv-export-http private done $1.71
+generated csv-export-http
+
+csv-export-http: the public suite asserts 13 thing(s) the spec leaves open:
+- The spec gives the error body as `{"error": <a message>}` (400) or `{"error": ..., "id": ...}` (422). It doesn't say whether other keys may also appear. Each public test below requires exactly those keys; my tests only check that `error` is a string and `id` matches.
+- `[unhappy-2] a requisition with an unknown status is refused with 422 naming its id`
+- `[unhappy-2] statuses written as in the CSV, or missing, are unknown`
+- `[unhappy-2] a title that is neither a string nor null is refused`
+- `[unhappy-2] openings or filled that is not a whole number of at least 0 is refused`
+- `[unhappy-2] filled one more than openings is refused, filled equal to openings is not`
+- `[unhappy-2] a creation time not written as YYYY-MM-DDTHH:MM:SS with Z or an offset is refused`
+- `[unhappy-2] a creation time that names no real time is refused`
+- `[unhappy-2] when several requisitions are bad, the first in the request's order is named`
+- `[unhappy-3] a body that is not JSON is refused with 400`
+- `[unhappy-3] an empty body or plain text is not JSON`
+- `[unhappy-3] JSON that is not an array is refused with 400`
+- `[unhappy-3] an item that is not an object with a string id is refused with 400`
+
+Decide each in spec.md, confirm it again and rerun this script (the suites are rewritten), or rerun with --accept-open to leave them open: the hidden suite then tests neither reading.
+generated csv-export-http
+[01:42:17] csv-export-http reference started
+[01:43:47] csv-export-http kept 48/48 hidden, dropped 0; reference public 36/36  
+csv-export-http: ok, kept 48/48 hidden, public failing on reference: 0
+
+csv-export-http: ready. Public 36 tests; hidden 48 kept of 48 (none dropped).
+Hidden suite sha256 750a548142fc30259656afc7d05c3152cb5f6c65f29286d211165e14fd631c99: the handout shows it, and the judge refuses once it changes.
+Next: node bin/run.mjs csv-export-http, or node bin/handout.mjs csv-export-http <dir>.

@@ -1,0 +1,143 @@
+# Reusable workflow: CI mode for a repository that keeps its hidden suite
+# elsewhere. Fetches the seal (bin/seal.mjs) from one of
+#   - a private repository: seal-repository + seal-path, read with the
+#     seal-token secret;
+#   - an artifact, of this or another repository's run: seal-artifact
+#     (+ seal-artifact-repository, seal-artifact-run-id), read with
+#     seal-token or github.token;
+#   - a secret URL: the seal-url secret, with seal-auth as its
+#     Authorization header;
+# then runs action.yml: `independent-tests ci --seal … --repo . --ref <head>`,
+# which posts a check with the verdict, counts and failing scenario keys.
+#
+#   jobs:
+#     judge:
+#       permissions: { contents: read, checks: write, actions: read }
+#       uses: feversoul/independent-tests/.github/workflows/judge.yml@main
+#       with: { seal-repository: you/seals, seal-path: seals/<slug>.seal.gz }
+#       secrets: { seal-token: ${{ secrets.SEALS_TOKEN }} }
+name: independent-tests judge
+on:
+  workflow_call:
+    inputs:
+      seal-repository:
+        description: owner/name of a private repository holding the seal.
+        type: string
+        default: ""
+      seal-repository-ref:
+        description: Branch, tag or SHA of seal-repository.
+        type: string
+        default: ""
+      seal-path:
+        description: The seal's path in seal-repository or in the artifact.
+        type: string
+        default: ""
+      seal-artifact:
+        description: Name of an artifact holding the seal.
+        type: string
+        default: ""
+      seal-artifact-repository:
+        description: owner/name the artifact belongs to (default this repository).
+        type: string
+        default: ""
+      seal-artifact-run-id:
+        description: The run that uploaded the artifact (default this run).
+        type: string
+        default: ""
+      check-name:
+        description: Name of the check run.
+        type: string
+        default: independent-tests
+      ref:
+        description: Commit to judge (default the pull request's head, else github.sha).
+        type: string
+        default: ""
+      package-repository:
+        description: Where independent-tests itself comes from.
+        type: string
+        default: feversoul/independent-tests
+      package-ref:
+        description: Its branch, tag or SHA.
+        type: string
+        default: main
+      fail-on-verdict:
+        type: boolean
+        default: true
+    secrets:
+      seal-token:
+        required: false
+      seal-url:
+        required: false
+      seal-auth:
+        required: false
+    outputs:
+      conclusion:
+        value: ${{ jobs.judge.outputs.conclusion }}
+      title:
+        value: ${{ jobs.judge.outputs.title }}
+
+jobs:
+  judge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      actions: read
+    outputs:
+      conclusion: ${{ steps.judge.outputs.conclusion }}
+      title: ${{ steps.judge.outputs.title }}
+    steps:
+      - name: Check out the change
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check out independent-tests
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ inputs.package-repository }}
+          ref: ${{ inputs.package-ref }}
+          path: .independent-tests
+          persist-credentials: false
+      - name: Fetch the seal from a private repository
+        if: inputs.seal-repository != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ inputs.seal-repository }}
+          ref: ${{ inputs.seal-repository-ref }}
+          token: ${{ secrets.seal-token }}
+          path: .independent-tests-seal
+          sparse-checkout: ${{ inputs.seal-path }}
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - name: Fetch the seal from an artifact
+        if: inputs.seal-artifact != ''
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ inputs.seal-artifact }}
+          path: .independent-tests-seal
+          github-token: ${{ secrets.seal-token || github.token }}
+          repository: ${{ inputs.seal-artifact-repository || github.repository }}
+          run-id: ${{ inputs.seal-artifact-run-id || github.run_id }}
+      - name: Locate the seal
+        id: seal
+        env:
+          SEAL_URL: ${{ secrets.seal-url }}
+          SEAL_PATH: ${{ inputs.seal-path }}
+        run: |
+          if [ -n "$SEAL_URL" ]; then echo "seal=$SEAL_URL" >> "$GITHUB_OUTPUT"
+          elif [ -n "$SEAL_PATH" ] && [ -f ".independent-tests-seal/$SEAL_PATH" ]; then echo "seal=$PWD/.independent-tests-seal/$SEAL_PATH" >> "$GITHUB_OUTPUT"
+          else
+            found=$(find .independent-tests-seal -name '*.seal.gz' -type f 2>/dev/null | head -n 2)
+            if [ "$(printf '%s\n' "$found" | grep -c .)" != 1 ]; then echo "::error::no single seal found; set seal-path"; exit 1; fi
+            echo "seal=$PWD/$found" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Judge
+        id: judge
+        uses: ./.independent-tests
+        with:
+          seal: ${{ steps.seal.outputs.seal }}
+          seal-auth: ${{ secrets.seal-auth }}
+          ref: ${{ inputs.ref }}
+          check-name: ${{ inputs.check-name }}
+          fail-on-verdict: ${{ inputs.fail-on-verdict }}

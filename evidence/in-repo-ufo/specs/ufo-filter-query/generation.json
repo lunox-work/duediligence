@@ -1,0 +1,69 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "d66cc204-0321-459a-8195-e22009bd5c2e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1578756,
+        "turns": 5,
+        "durationMs": 28174,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1578756,
+    "finalText": "I added `filterQuery` to `src/utils.ts`, right after `getQuery`. It uses the signature from the ticket exactly, and its body is `throw new Error(\"not implemented\");`. The doc comment follows the other exports' JSDoc style, with `@example` and `@group utils`. It also says the function throws a `TypeError` when `input` isn't a string or `predicate` isn't a function. No other export changed, and I didn't add any new types: the spec doesn't name a constant or error class.\n\n`npx tsc -p tsconfig.json --noEmit` reports no errors, and `npx vitest run` passes all 474 tests in 13 files. `src/utils.ts` is the only file I changed.\n\nExported names added: `filterQuery`",
+    "problem": null,
+    "sha256": "b51097e12c2d3b0d8270e7f6b154787c78edb2f40e33b5a84085df32d0d96779"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "19597423-34f4-476b-a452-085681217239",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5016071,
+        "turns": 6,
+        "durationMs": 135668,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5016071,
+    "finalText": "I've written the suite in `test/ufo-filter-query.test.ts`. Every one of the 24 scenarios has a test for its happy path and at least one boundary test. A few have extra boundary tests: happy-3 and boundary-2 have two each.\n\n**Checks:**\n- **Type check:** `npx tsc -p tsconfig.json --noEmit` reports no errors. That config only covers `src/`, so I also type-checked the test file separately, and it is clean too.\n- **Current run:** `npx vitest run test/ufo-filter-query.` fails all 54 tests, as expected, because `filterQuery` still throws `not implemented`.\n- **Sanity check of the expectations:** I ran an unmodified copy of the suite against the simple implementation the spec's notes describe. All 54 passed. That implementation lives only in the scratchpad and isn't in the repo.\n\n**Choices in the boundary tests:**\n- **No-`?` input:** for \"returned exactly as given\", I use `HTTP://Example.COM/a b%zz#x y`. Any parse-and-rebuild step would change it, so the test catches an implementation that normalises when it shouldn't.\n- **Throwing predicate:** the error is checked by identity (`toBe`), to match \"the same Error\".\n- **`vbscript:`:** the spec's rule lists it but its table has no example, so I gave it its own test.\n- **Integer-like keys:** a test checks `10` and `9` come out numerically (`9` first), not alphabetically.\n- **Left out:** I didn't test which error wins when both arguments are invalid, because the spec doesn't say which check runs first.\n\nI created only the test file; nothing else in the repo changed.\n\n54 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "test/ufo-filter-query.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "b98083d9-a930-464c-801e-50f6fa46683f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1321021,
+        "turns": 15,
+        "durationMs": 268980,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1321021,
+    "finalText": "I've written the hidden suite in `test/hidden-ufo-filter-query/`. Every one of its 54 tests fails against the stub as it stands, and `npx tsc -p tsconfig.json --noEmit` reports no errors.\n\nTo check that the expected values are right, I ran the suite in the scratchpad against an implementation built the way the spec's notes describe. All 54 tests and the public suite passed. I also tried two shortcut implementations, and each passed the whole public suite but failed one hidden test:\n- One checks for script protocols before checking that the predicate is a function. It fails `[unhappy-4] the predicate check runs before inputs that are returned unchanged`.\n- One sorts keys with its own \"all digits\" rule instead of following `parseQuery` order. It fails `[boundary-7] keys are offered in the same order getQuery gives them`.\n\n**Files:**\n- `url-shape.test.ts` covers happy 1–4 and 10, and boundary 1–5 and 10. It includes IPv6, `file:`, auth and encoded-path URLs; inputs without a `\"?\"` that rebuilding would change; script protocols in mixed case; and a rewritten query that must match `withQuery` exactly.\n- `predicate-calls.test.ts` covers happy 5–9 and boundary 6–9:\n  - **Predicate calls:** how many times it is called, with what arguments, and whether each value arrives as a string or an array.\n  - **Decoding:** values decode the same way `getQuery` decodes them.\n  - **Ordering:** repeated keys are written together; integer-like and other keys follow `getQuery`'s order, including `01` and `-1`.\n  - **Empty values and `\"?\"`:** these survive inside repeated keys and inside values.\n- `errors-and-state.test.ts` covers unhappy 1–4 and concurrency 1–2:\n  - **`__proto__` and `constructor`:** dropped even when encoded or repeated, while look-alikes such as `prototype` and `toString` are kept.\n  - **Errors thrown by the predicate:** non-`Error` values and a `TypeError` pass through unchanged.\n  - **Argument checks:** non-string inputs include a `URL` object and an array, and the error messages are checked exactly. Non-function predicates are rejected even for inputs that would otherwise be returned unchanged.\n  - **Nesting and repeats:** nested calls two levels deep, a nested call that throws, and repeated calls after one that threw.\n\nEach test name starts with its scenario key, and tests that extend a public test name it in a comment above.\n\n54 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "test/hidden-ufo-filter-query/errors-and-state.test.ts",
+      "test/hidden-ufo-filter-query/predicate-calls.test.ts",
+      "test/hidden-ufo-filter-query/url-shape.test.ts"
+    ],
+    "open": []
+  }
+}

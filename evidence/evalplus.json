@@ -1,0 +1,42 @@
+{
+  "scoredAt": "2026-10-26T04:14:06.858Z",
+  "runner": "bin/runners/pytest.mjs (pytest 8.4.2)",
+  "python": "Python 3.14.8",
+  "all": {
+    "tasks": 40,
+    "solutions": 1240,
+    "wrong": 926,
+    "wrongAcceptedByBase": {
+      "count": 162,
+      "percent": 17.5
+    },
+    "wrongAcceptedByGenerated": {
+      "count": 71,
+      "percent": 7.7
+    },
+    "rightRejectedByGenerated": {
+      "count": 23,
+      "of": 314
+    }
+  },
+  "without22and60": {
+    "tasks": 38,
+    "solutions": 1178,
+    "wrong": 889,
+    "wrongAcceptedByBase": {
+      "count": 133,
+      "percent": 15
+    },
+    "wrongAcceptedByGenerated": {
+      "count": 43,
+      "percent": 4.8
+    },
+    "rightRejectedByGenerated": {
+      "count": 3,
+      "of": 289
+    }
+  },
+  "rowsComparedWithArchive": 1240,
+  "rowsDifferingFromArchive": 0,
+  "differences": []
+}

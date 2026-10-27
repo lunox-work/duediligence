@@ -1,0 +1,53 @@
+{
+  "sha256": "e5d00365e473dcac1353e7a6cfe8837713c01b0b06269e05fa6bea42e1a94790",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-26T11:57:32.889Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "An input with no `\"?\"` is returned exactly as given (not normalised), and the predicate is not called.",
+    "Ticket: silent.",
+    "Instead: always parse and rebuild the URL, so path or fragment encoding could change.",
+    "When a query is present, it is written again with `stringifyQuery` (normalised encoding, `a=` becomes `a`, empty `&&` segments dropped), even if every key is kept.",
+    "Ticket: silent.",
+    "Instead: keep the original raw `key=value` segments byte for byte and only remove the rejected ones.",
+    "When no parameters are left, the `\"?\"` is removed. That includes `\"/foo?\"`, which becomes `\"/foo\"`.",
+    "Ticket: silent.",
+    "Instead: leave a trailing `\"?\"`.",
+    "The predicate is called once per distinct key, with a `string[]` for a repeated key, and it keeps or drops all of that key's values together.",
+    "Ticket: \"export function filterQuery(input: string, predicate: (key: string, value: string | string[]) => boolean): string;\"",
+    "Instead: call the predicate once per `key=value` pair, so single values of a repeated key can be dropped.",
+    "Key order for both the predicate calls and the output follows `parseQuery` object order: integer-like keys first in ascending order, then other keys in first-appearance order. A repeated key's values are written together where the key first appears.",
+    "Ticket: silent.",
+    "Instead: strict first-appearance order of the original pairs.",
+    "Keys and values reach the predicate decoded, the same as `getQuery`.",
+    "Ticket: \"predicate: (key: string, value: string | string[]) => boolean\"",
+    "Instead: pass the raw, still-encoded strings.",
+    "The predicate's return value is read as truthy or falsy, like `Array.prototype.filter`.",
+    "Ticket: \"=> boolean\"",
+    "Instead: keep a key only when the predicate returns exactly `true`.",
+    "`__proto__` and `constructor` keys are always removed and never offered to the predicate.",
+    "Ticket: silent.",
+    "Instead: offer them to the predicate and keep them if it accepts them.",
+    "Script-protocol inputs (`blob:`, `data:`, `javascript:`, `vbscript:`) are returned unchanged. Rebuilding them through `stringifyParsedURL` would turn `data:x?a=1` into `data://x?a=1`.",
+    "Ticket: silent.",
+    "Instead: treat them like any other URL and rebuild them.",
+    "An error thrown by the predicate propagates unchanged, and no later keys are offered.",
+    "Ticket: silent.",
+    "Instead: catch the error and treat it as \"drop this key\".",
+    "A non-string `input` throws `TypeError(\"URL input should be string received <typeof> (<input>)\")`, using `resolveURL`'s wording. A non-function `predicate` throws `TypeError(\"filterQuery predicate should be a function received <typeof>\")`. Both checks run before anything else, even when the input has no `\"?\"`.",
+    "Ticket: silent.",
+    "Instead: no runtime checks, leaving whatever error (or none) the internals happen to produce.",
+    "The function is synchronous and keeps no state, so `filterQuery` calls nested inside a predicate are independent and repeated calls give the same result.",
+    "Ticket: silent.",
+    "Instead: forbid re-entrant calls from the predicate.",
+    "Seam (the files the stub writes): src/utils.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

@@ -1,0 +1,195 @@
+[2026-10-26T11:41:30Z] node evidence/implementers.mjs import
+usage: node bin/import-archive.mjs <slug>... [--archive <dir>] [--force]
+[2026-10-26T11:41:30Z] exit 1
+[2026-10-26T11:41:30Z] node evidence/implementers.mjs run codex-cli --runs 5 --concurrency 2
+[11:41:30] 49 codex-cli run(s) to go
+[11:41:30] csv-export codex-cli 1 agent started
+[11:41:30] csv-export codex-cli 2 agent started
+[11:43:09] csv-export codex-cli 2 agent done, 2 path(s) changed
+[11:43:09] csv-export codex-cli 3 agent started
+[11:43:25] csv-export codex-cli 1 agent done, 2 path(s) changed
+[11:43:25] csv-export codex-cli 4 agent started
+[11:44:40] csv-export codex-cli 3 agent done, 2 path(s) changed
+[11:44:40] csv-export codex-cli 5 agent started
+[11:44:58] csv-export codex-cli 4 agent done, 2 path(s) changed
+[11:44:58] licence-scan codex-cli 1 agent started
+[11:45:50] csv-export codex-cli 5 agent done, 2 path(s) changed
+[11:45:50] licence-scan codex-cli 2 agent started
+[11:47:24] licence-scan codex-cli 1 agent done, 3 path(s) changed
+[11:47:24] licence-scan codex-cli 3 agent started
+[11:47:53] licence-scan codex-cli 2 agent done, 3 path(s) changed
+[11:47:53] licence-scan codex-cli 4 agent started
+[11:50:18] licence-scan codex-cli 3 agent done, 3 path(s) changed
+[11:50:18] licence-scan codex-cli 5 agent started
+[11:50:36] licence-scan codex-cli 4 agent done, 2 path(s) changed
+[11:50:36] patch-apply codex-cli 1 agent started
+[11:51:08] patch-apply codex-cli 1 agent ended with an error, 0 path(s) changed
+[11:51:08] patch-apply codex-cli 2 agent started
+[11:51:50] licence-scan codex-cli 5 agent ended with an error, 1 path(s) changed
+[11:51:51] patch-apply codex-cli 3 agent started
+[11:55:07] patch-apply codex-cli 2 agent done, 4 path(s) changed
+[11:55:07] patch-apply codex-cli 4 agent started
+[11:55:12] waiting for a session slot (2 max, 40% memory free)
+[2026-10-26T11:55:46Z] node evidence/implementers.mjs import
+usage: node bin/import-archive.mjs <slug>... [--archive <dir>] [--force]
+[2026-10-26T11:55:46Z] exit 1
+[2026-10-26T11:55:46Z] node evidence/implementers.mjs run codex-cli --runs 5 --concurrency 1
+[11:55:46] 37 codex-cli run(s) to go
+[11:55:46] patch-apply codex-cli 3 agent started
+[11:55:51] waiting for a session slot (2 max, 40% memory free)
+[12:00:52] waiting for a session slot (2 max, 40% memory free)
+[12:05:52] waiting for a session slot (2 max, 40% memory free)
+[12:13:01] patch-apply codex-cli 3 agent done, 3 path(s) changed
+[12:13:01] patch-apply codex-cli 4 agent started
+[12:16:59] patch-apply codex-cli 4 agent done, 2 path(s) changed
+[12:16:59] patch-apply codex-cli 5 agent started
+[12:20:06] patch-apply codex-cli 5 agent done, 2 path(s) changed
+[12:20:06] tool-versions codex-cli 1 agent started
+[12:22:15] tool-versions codex-cli 1 agent done, 2 path(s) changed
+[12:22:15] tool-versions codex-cli 2 agent started
+[12:24:27] tool-versions codex-cli 2 agent done, 2 path(s) changed
+[12:24:27] tool-versions codex-cli 3 agent started
+[12:27:47] tool-versions codex-cli 3 agent done, 2 path(s) changed
+[12:27:47] tool-versions codex-cli 4 agent started
+[12:29:40] tool-versions codex-cli 4 agent done, 2 path(s) changed
+[12:29:40] tool-versions codex-cli 5 agent started
+[12:31:35] tool-versions codex-cli 5 agent done, 2 path(s) changed
+[12:31:35] retention-sweep codex-cli 1 agent started
+[12:34:01] retention-sweep codex-cli 1 agent done, 2 path(s) changed
+[12:34:01] retention-sweep codex-cli 2 agent started
+[12:36:00] retention-sweep codex-cli 2 agent done, 2 path(s) changed
+[12:36:01] retention-sweep codex-cli 3 agent started
+[12:37:49] retention-sweep codex-cli 3 agent done, 2 path(s) changed
+[12:37:49] retention-sweep codex-cli 4 agent started
+[12:40:12] retention-sweep codex-cli 4 agent done, 2 path(s) changed
+[12:40:12] retention-sweep codex-cli 5 agent started
+[12:42:27] retention-sweep codex-cli 5 agent done, 2 path(s) changed
+[12:42:27] escrow-split codex-cli 1 agent started
+[12:44:50] escrow-split codex-cli 1 agent done, 2 path(s) changed
+[12:44:50] escrow-split codex-cli 2 agent started
+[12:47:26] escrow-split codex-cli 2 agent done, 2 path(s) changed
+[12:47:26] escrow-split codex-cli 3 agent started
+[12:48:40] escrow-split codex-cli 3 agent done, 2 path(s) changed
+[12:48:40] escrow-split codex-cli 4 agent started
+[12:50:49] escrow-split codex-cli 4 agent done, 2 path(s) changed
+[12:50:49] escrow-split codex-cli 5 agent started
+[12:52:54] escrow-split codex-cli 5 agent done, 2 path(s) changed
+[12:52:54] keyed-queue codex-cli 2 agent started
+[12:55:13] keyed-queue codex-cli 2 agent done, 2 path(s) changed
+[12:55:13] keyed-queue codex-cli 3 agent started
+[12:57:44] keyed-queue codex-cli 3 agent done, 2 path(s) changed
+[12:57:44] keyed-queue codex-cli 4 agent started
+[13:00:27] keyed-queue codex-cli 4 agent done, 2 path(s) changed
+[13:00:27] keyed-queue codex-cli 5 agent started
+[13:03:23] keyed-queue codex-cli 5 agent done, 2 path(s) changed
+[13:03:23] frame-codec codex-cli 1 agent started
+[13:05:40] frame-codec codex-cli 1 agent done, 2 path(s) changed
+[13:05:40] frame-codec codex-cli 2 agent started
+[13:08:10] frame-codec codex-cli 2 agent done, 2 path(s) changed
+[13:08:10] frame-codec codex-cli 3 agent started
+[13:10:38] frame-codec codex-cli 3 agent done, 2 path(s) changed
+[13:10:38] frame-codec codex-cli 4 agent started
+[13:12:47] frame-codec codex-cli 4 agent ended with an error, 1 path(s) changed
+[13:12:47] frame-codec codex-cli 5 agent started
+[13:15:33] frame-codec codex-cli 5 agent done, 2 path(s) changed
+[13:15:33] statement-import codex-cli 1 agent started
+[13:15:38] waiting for a session slot (2 max, 40% memory free)
+[13:18:33] statement-import codex-cli 1 agent done, 2 path(s) changed
+[13:18:33] statement-import codex-cli 2 agent started
+[13:21:15] statement-import codex-cli 2 agent done, 2 path(s) changed
+[13:21:15] statement-import codex-cli 3 agent started
+[13:22:49] statement-import codex-cli 3 agent done, 2 path(s) changed
+[13:22:49] statement-import codex-cli 4 agent started
+[13:25:06] statement-import codex-cli 4 agent done, 2 path(s) changed
+[13:25:06] statement-import codex-cli 5 agent started
+[13:27:07] statement-import codex-cli 5 agent done, 2 path(s) changed
+[13:27:07] shift-compliance codex-cli 1 agent started
+[13:29:43] shift-compliance codex-cli 1 agent done, 2 path(s) changed
+[13:29:43] shift-compliance codex-cli 2 agent started
+[13:32:09] shift-compliance codex-cli 2 agent done, 2 path(s) changed
+[13:32:09] shift-compliance codex-cli 3 agent started
+[13:35:10] shift-compliance codex-cli 3 agent done, 2 path(s) changed
+[13:35:10] shift-compliance codex-cli 4 agent started
+[13:37:45] shift-compliance codex-cli 4 agent done, 2 path(s) changed
+[13:37:45] shift-compliance codex-cli 5 agent started
+[13:39:45] shift-compliance codex-cli 5 agent done, 2 path(s) changed
+[2026-10-26T13:39:45Z] exit 0
+[2026-10-26T13:39:45Z] node evidence/implementers.mjs grade
+[13:39:46] csv-export/codex-cli/1 passed public 12/12, hidden 47/47 
+[13:39:47] csv-export/codex-cli/2 passed public 12/12, hidden 47/47 
+[13:39:48] csv-export/codex-cli/3 passed public 12/12, hidden 47/47 
+[13:39:49] csv-export/codex-cli/4 passed public 12/12, hidden 47/47 
+[13:39:50] csv-export/codex-cli/5 passed public 12/12, hidden 47/47 
+[13:39:52] escrow-split/codex-cli/1 passed public 22/22, hidden 46/46 
+[13:39:53] escrow-split/codex-cli/2 passed public 22/22, hidden 46/46 
+[13:39:54] escrow-split/codex-cli/3 passed public 22/22, hidden 46/46 
+[13:39:56] escrow-split/codex-cli/4 passed public 22/22, hidden 46/46 
+[13:39:57] escrow-split/codex-cli/5 passed public 22/22, hidden 46/46 
+[13:39:58] frame-codec/codex-cli/1 passed public 29/29, hidden 62/62 
+[13:39:59] frame-codec/codex-cli/2 passed public 29/29, hidden 62/62 
+[13:40:01] frame-codec/codex-cli/3 passed public 29/29, hidden 62/62 
+[13:40:02] frame-codec/codex-cli/4 passed public 29/29, hidden 62/62 
+[13:40:03] frame-codec/codex-cli/5 passed public 29/29, hidden 62/62 
+[13:40:05] keyed-queue/codex-cli/1 passed public 22/22, hidden 52/52 
+[13:40:06] keyed-queue/codex-cli/2 passed public 22/22, hidden 52/52 
+[13:40:08] keyed-queue/codex-cli/3 passed public 22/22, hidden 52/52 
+[13:40:09] keyed-queue/codex-cli/4 passed public 22/22, hidden 52/52 
+[13:40:11] keyed-queue/codex-cli/5 passed public 22/22, hidden 52/52 
+[13:40:12] licence-scan/codex-cli/1 passed public 29/29, hidden 61/61 
+[13:40:13] licence-scan/codex-cli/2 passed public 29/29, hidden 61/61 
+[13:40:15] licence-scan/codex-cli/3 passed public 29/29, hidden 61/61 
+[13:40:16] licence-scan/codex-cli/4 passed public 29/29, hidden 61/61 
+[13:40:17] licence-scan/codex-cli/5 passed public 29/29, hidden 61/61 
+[13:40:19] patch-apply/codex-cli/1 incomplete public 0/30, hidden 0/79 scenarios boundary-1, boundary-2, boundary-3, happy-1, happy-2, happy-3, happy-4, happy-5, unhappy-1, unhappy-2, unhappy-3
+[13:40:20] patch-apply/codex-cli/2 passed public 30/30, hidden 79/79 
+[13:40:21] patch-apply/codex-cli/3 passed public 30/30, hidden 79/79 
+[13:40:23] patch-apply/codex-cli/4 passed public 30/30, hidden 79/79 
+[13:40:24] patch-apply/codex-cli/5 passed public 30/30, hidden 79/79 
+[13:40:26] retention-sweep/codex-cli/1 passed public 29/29, hidden 60/60 
+[13:40:27] retention-sweep/codex-cli/2 passed public 29/29, hidden 60/60 
+[13:40:28] retention-sweep/codex-cli/3 passed public 29/29, hidden 60/60 
+[13:40:29] retention-sweep/codex-cli/4 passed public 29/29, hidden 60/60 
+[13:40:31] retention-sweep/codex-cli/5 passed public 29/29, hidden 60/60 
+[13:40:32] shift-compliance/codex-cli/1 passed public 26/26, hidden 56/56 
+[13:40:33] shift-compliance/codex-cli/2 passed public 26/26, hidden 56/56 
+[13:40:35] shift-compliance/codex-cli/3 passed public 26/26, hidden 56/56 
+[13:40:36] shift-compliance/codex-cli/4 passed public 26/26, hidden 56/56 
+[13:40:37] shift-compliance/codex-cli/5 passed public 26/26, hidden 56/56 
+[13:40:39] statement-import/codex-cli/1 passed public 43/43, hidden 60/60 
+[13:40:40] statement-import/codex-cli/2 passed public 43/43, hidden 60/60 
+[13:40:41] statement-import/codex-cli/3 passed public 43/43, hidden 60/60 
+[13:40:43] statement-import/codex-cli/4 passed public 43/43, hidden 60/60 
+[13:40:44] statement-import/codex-cli/5 passed public 43/43, hidden 60/60 
+[13:40:45] tool-versions/codex-cli/1 passed public 43/43, hidden 77/77 
+[13:40:47] tool-versions/codex-cli/2 passed public 43/43, hidden 77/77 
+[13:40:48] tool-versions/codex-cli/3 passed public 43/43, hidden 77/77 
+[13:40:49] tool-versions/codex-cli/4 passed public 43/43, hidden 77/77 
+[13:40:50] tool-versions/codex-cli/5 passed public 43/43, hidden 77/77 
+50 result(s) in results.jsonl
+[2026-10-26T13:40:50Z] exit 0
+[2026-10-26T13:40:50Z] node evidence/implementers.mjs report
+codex-cli: 47 passed, 0 overfit, 0 incomplete, 0 refused of 47 (3 sessions failed); peek attempts in 0
+haiku, archive, public suite + own tests: 100 passed, 5 overfit, 0 incomplete, 0 refused of 105 (0 sessions failed); peek attempts in 0
+haiku, archive, public suite: 197 passed, 23 overfit, 0 incomplete, 0 refused of 220 (0 sessions failed); peek attempts in 0
+[2026-10-26T13:40:50Z] exit 0
+[2026-10-26T13:41:20Z] node evidence/implementers.mjs import
+usage: node bin/import-archive.mjs <slug>... [--archive <dir>] [--force]
+[2026-10-26T13:41:20Z] exit 1
+[2026-10-26T13:41:20Z] node evidence/implementers.mjs run codex-cli --runs 5 --concurrency 1
+[13:41:20] 3 codex-cli run(s) to go
+[13:41:20] licence-scan codex-cli 5 agent started
+[13:41:25] waiting for a session slot (2 max, 40% memory free)
+[13:45:39] licence-scan codex-cli 5 agent done, 2 path(s) changed
+[13:45:39] patch-apply codex-cli 1 agent started
+[13:49:27] patch-apply codex-cli 1 agent done, 2 path(s) changed
+[13:49:27] frame-codec codex-cli 4 agent started
+[13:51:40] frame-codec codex-cli 4 agent done, 2 path(s) changed
+[2026-10-26T13:51:40Z] exit 0
+[2026-10-26T13:51:40Z] node evidence/implementers.mjs grade
+50 result(s) in results.jsonl
+[2026-10-26T13:51:40Z] exit 0
+[2026-10-26T13:51:40Z] node evidence/implementers.mjs report
+codex-cli: 47 passed, 0 overfit, 0 incomplete, 0 refused of 47 (3 sessions failed); peek attempts in 0
+haiku, archive, public suite + own tests: 100 passed, 5 overfit, 0 incomplete, 0 refused of 105 (0 sessions failed); peek attempts in 0
+haiku, archive, public suite: 197 passed, 23 overfit, 0 incomplete, 0 refused of 220 (0 sessions failed); peek attempts in 0
+[2026-10-26T13:51:40Z] exit 0

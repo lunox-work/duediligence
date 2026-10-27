@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176f8-80e8-7bb0-9a5a-0bc82f847958",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 181150,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "35 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/parsing.test.ts",
+      "tests/public/reporting.test.ts",
+      "tests/public/sources.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176fb-460f-7322-aaae-1fdcb2553bdb",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 20,
+        "durationMs": 409880,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passes. Every test fails against the stub as required. All 35 public tests have named extensions.\n\n48 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/parsing.test.ts",
+      "tests/private/reporting.test.ts",
+      "tests/private/sources.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "636a4628-a4a1-4a60-b38c-eff31a2a6fa2",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1421106,
+        "turns": 4,
+        "durationMs": 16820,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1421106,
+    "finalText": "I added `reverseResolveAlias(path: string, aliases: Record<string, string>): string[]` to `src/utils.ts`, right after `resolveAlias`. Its body is just `throw new Error(\"not implemented\");` and its doc comment follows the style of the other functions in the file.\n\n- **Existing code:** every existing export (`normalizeAliases`, `resolveAlias`, `filename`) and every internal is unchanged. `src/index.ts` doesn't re-export the new function, as the spec requires.\n- **Types and constants:** the spec doesn't name any, so I added none. The function takes the same `Record<string, string>` alias map that `resolveAlias` uses.\n- **Errors:** the doc comment says nothing about throwing, because the spec says the function never throws for string inputs. It does say that the function returns `[]` when nothing matches, and that results come back as a new array, sorted longest first.\n- **Checks:** `npx tsc -p tsconfig.json --noEmit` reports no errors, and `npx vitest run` passes all 362 tests, the same as before. `src/utils.ts` is the only file I changed.\n\nAdded: `reverseResolveAlias`",
+    "problem": null,
+    "sha256": "9c86116103eb609d747c3cb0df97e7db08fcbb9c1f2b6bd5091af5a493206e20"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "030fcd77-4f16-448a-922e-a7f7c03efb9a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5517135999999999,
+        "turns": 6,
+        "durationMs": 124777,
+        "subtype": "success",
+        "apiError": null
+      },
+      {
+        "sessionId": "030fcd77-4f16-448a-922e-a7f7c03efb9a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6254333999999999,
+        "turns": 2,
+        "durationMs": 13268,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1771469999999997,
+    "finalText": "I gave the file the wrong extension: it used `.test.ts` when the instructions called for the `.spec.ts` ending the existing tests use. It's now `test/pathe-reverse-alias-confirmed.spec.ts`, and its contents are unchanged.\n\nAfter the rename, `npx tsc -p tsconfig.json --noEmit` reports no errors. `npx vitest run test/pathe-reverse-alias-confirmed.` finds the file and runs it: 46 tests fail because the function body throws `not implemented`, which is expected. The 2 that pass are the `[happy-10]` checks that `resolveAlias` hasn't changed, since they don't call the new function. Nothing else in the repo was touched.\n\n48 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "test/pathe-reverse-alias-confirmed.spec.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "2d57c469-b3b9-4659-b1b8-926ae4d02bd0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0772461,
+        "turns": 11,
+        "durationMs": 273920,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.0772461,
+    "finalText": "I wrote 53 hidden tests in one file: `test/hidden-pathe-reverse-alias-confirmed/reverse-resolve-alias.spec.ts`.\n\n**Verification:**\n- **Against the stub:** all 53 fail, because every body still throws `not implemented`.\n- **Type check:** `npx tsc -p tsconfig.json --noEmit` reports no errors.\n- **Against a working version:** I wrote a straightforward implementation of the spec's algorithm in a scratch copy of the repo, outside this folder. The public suite (48 tests) and all 53 hidden tests pass against it.\n- **Against shortcuts:** I also ran some deliberately wrong versions in that scratch copy. These pass the whole public suite but fail the hidden one:\n  - breaking ties between equal-length results alphabetically;\n  - using the alias map's insertion order instead of the order `normalizeAliases` gives;\n  - collapsing repeated slashes in the path before matching.\n\n  Other shortcuts are caught by more hidden tests than public ones: removing duplicate results, case-insensitive matching, normalising the targets, resolving `./`, skipping empty targets, and not upper-casing the drive letter.\n\n**Coverage:**\n- **Keys:** the tests cover every scenario key: `happy-1`…`happy-10`, `boundary-1`…`boundary-10` and `unhappy-1`…`unhappy-4`. Each test has a comment naming the public test it extends.\n- **Main shortcut cases:**\n  - maps other than the fixture, so a lookup table built from the fixture fails;\n  - a long alias on a deeper target, so ordering by alias specificity instead of result length fails;\n  - three-way ties not in alphabetical order;\n  - ties where `normalizeAliases` order differs from insertion order (`{abc, \"a/b\"}`);\n  - duplicates that come from different targets, and three copies of one result;\n  - a target's text appearing later in the path (`/usr/root/x`);\n  - `/root//index.js` and `/src/../root/index.js`, so normalising before matching fails;\n  - targets containing `..`, `//`, `/.` or a lower-case drive letter, which must match only as written;\n  - a drive-root target `C:/`, and the empty and `/` targets against drive-letter paths;\n  - a frozen map whose targets `normalizeAliases` rewrites, with no keys or symbols added to the map;\n  - a returned array changed by the caller not affecting the next call.\n- **`happy-10` (resolveAlias unchanged):** each of these tests calls `reverseResolveAlias` on the same map before checking `resolveAlias`, so they fail against the stub. A test of `resolveAlias` alone would already pass, which breaks the rule that every test must fail now.\n\n**Not tested:** the spec's statement that `src/index.ts` does not re-export the function. It has no scenario key, and a test of it would already pass against the stub.\n\n53 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "test/hidden-pathe-reverse-alias-confirmed/reverse-resolve-alias.spec.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sha256": "e0f6b24c5a5922e486d1149ac59011df06289ebc222066fd28a52f1bb2063ce9",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T12:48:16.102Z",
+  "decided": [
+    "Scope approval: same test as `scopeApproved`. The approval's version must equal the bounty's version exactly, and that includes version 0.",
+    "Price approval: only the exact, case-sensitive status `\"approved\"` counts. A `null` proposal and any other status hold.",
+    "Order: the sandbox reports `\"scope\"` before `\"price\"` when both are unapproved, so the earliest step wins.",
+    "`stepHeldBy(\"price\", …)` never reads `proposal` and never returns `\"price\"`.",
+    "Drift (`stageDrift`), sandbox status, publication lapse and extra properties on the arguments never affect the hold.",
+    "A runtime `step` outside `\"price\" | \"sandbox\"`: `stepHeldBy` throws `RangeError` with `Unknown held step: \"<step>\"`. It does not return null.",
+    "Reason wording: `The <step> waits on the <heldBy>: approve the <heldBy> first.` It is one sentence with no surrounding whitespace.",
+    "A pair that `stepHeldBy` cannot return, such as `(\"price\", \"price\")`: `stepHeldReason` throws `RangeError` with `No hold of \"<step>\" by \"<heldBy>\"`.",
+    "Purity: both functions are synchronous and do not change their arguments. Calls cannot overlap in any way that matters, so there are no `@concurrency` scenarios.",
+    "Going back (unapproving, removing, unpublishing) goes through no core function. The scope is never held, because nothing comes before it.",
+    "Re-export: both functions reach `packages/core/src/index.ts` through the existing `export *`. No new types or constants are exported.",
+    "Seam (the files the stub writes): packages/core/src/stages.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/"
+  ],
+  "seam": [
+    "packages/core/src/stages.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "repo",
+  "repo": "../sandbox-factory",
+  "base": "aaf77e964e983127c157940a39e16b06cf844ddd",
+  "package": "apps/web",
+  "packageManager": "npm@10.9.2",
+  "buildFirst": [
+    "packages/core",
+    "packages/shared",
+    "packages/client"
+  ],
+  "runner": "vitest",
+  "testDir": "apps/web/test",
+  "testPattern": "*.test.{ts,tsx}",
+  "build": "tsc -p tsconfig.test.json --noEmit",
+  "hiddenDir": "apps/web/test/hidden-byte-size",
+  "seam": [
+    "apps/web/src/lib/format.ts"
+  ],
+  "allowedPaths": [
+    "apps/web/src/lib/format.ts"
+  ],
+  "examples": [
+    "apps/web/test/bounties.test.tsx",
+    "apps/web/test/pricing-rubric.test.tsx",
+    "apps/web/test/ndjson.test.ts"
+  ]
+}

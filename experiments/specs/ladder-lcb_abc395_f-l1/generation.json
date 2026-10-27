@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "ffe98d27-79a4-416f-b175-7cbb1a135f9e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2816467,
+        "turns": 5,
+        "durationMs": 75709,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2816467,
+    "finalText": "I wrote the suite in `tests/public/test_smooth_occlusion.py`. `compile_check.py` reports no errors, and all 11 tests currently fail because `src/main.py` raises \"not implemented\", which is expected.\n\n**No sample tests.** `spec.md` doesn't include any sample inputs or outputs, so there was nothing to copy. Every expected value is derived instead, with the reasoning in a comment on each test. I also checked every answer two ways:\n- **Small cases:** an exhaustive search over every possible H and every final set of upper-tooth lengths.\n- **Large cases:** a separate solver, which I first checked against the exhaustive search on 3,000 random tiny inputs.\n\nAll values agreed. Both checkers are only in the scratchpad; nothing was written outside `tests/public/`.\n\n**What the tests cover:**\n- **Smallest input:** N=2 with every length 1, already fitting (answer 0).\n- **The neighbour limit X:**\n  - The sums already match, but a gap larger than X still forces grinding.\n  - The same teeth with a larger X need no grinding.\n- **The smallest sum caps H:** one case where it sets the answer, and one with a short upper tooth in the middle.\n- **Largest values (10⁹):**\n  - All lengths at 10⁹: answer 0.\n  - X = 10⁹: answer 0.\n  - X = 1: answer 1999999996.\n- **Largest N (2×10⁵):**\n  - Every length at 10⁹: answer 0.\n  - A ramp that fits exactly: answer 0.\n  - Teeth alternating between (10⁹, 10⁹) and (1, 1): answer 199999999800000, which needs more than 32 bits.\n\n11 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_smooth_occlusion.py"
+    ]
+  }
+}

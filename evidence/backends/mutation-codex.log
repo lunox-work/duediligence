@@ -1,0 +1,37 @@
+[07:06:10] escrow-ledger mutating
+[07:06:10] frame-codec mutating
+[07:06:10] gherkin-parse mutating
+[07:06:10] invite-codes mutating
+[07:09:02] escrow-ledger public kills 64/69, hidden kills 0 of the 5 public survivors
+[07:09:03] keyed-queue mutating
+[07:09:07] gherkin-parse public kills 53/81, hidden kills 0 of the 28 public survivors
+[07:09:07] licence-scan mutating
+[07:11:22] invite-codes public kills 29/30, hidden kills 0 of the 1 public survivors
+[07:11:22] money-format mutating
+[07:11:37] money-format public kills 10/10, hidden kills 0 of the 0 public survivors
+[07:11:37] name-scan mutating
+[07:12:09] licence-scan public kills 69/81, hidden kills 5 of the 12 public survivors
+[07:12:09] patch-apply mutating
+[07:14:21] name-scan public kills 84/105, hidden kills 5 of the 21 public survivors
+[07:14:21] project-names mutating
+[07:14:44] project-names public kills 13/14, hidden kills 0 of the 1 public survivors
+[07:14:44] promo-stack mutating
+[07:16:28] promo-stack public kills 46/56, hidden kills 1 of the 10 public survivors
+[07:16:28] question-limit mutating
+[07:17:03] question-limit public kills 26/26, hidden kills 0 of the 0 public survivors
+[07:17:03] retention-sweep mutating
+[07:17:54] retention-sweep public kills 29/33, hidden kills 0 of the 4 public survivors
+[07:17:54] reverse-diff mutating
+[07:23:34] patch-apply public kills 69/120, hidden kills 2 of the 51 public survivors
+[07:23:34] shift-compliance mutating
+[07:25:46] shift-compliance public kills 78/93, hidden kills 6 of the 15 public survivors
+[07:25:46] statement-import mutating
+[07:32:18] reverse-diff public kills 66/106, hidden kills 13 of the 40 public survivors
+[07:32:18] status-normalize mutating
+[07:32:32] status-normalize public kills 5/6, hidden kills 0 of the 1 public survivors
+[07:32:32] tool-versions mutating
+[07:34:14] tool-versions public kills 40/44, hidden kills 0 of the 4 public survivors
+[07:34:14] usage-counter mutating
+[07:35:38] usage-counter public kills 25/33, hidden kills 0 of the 8 public survivors
+[07:35:38] weekly-digest mutating
+[07:36:46] weekly-digest public kills 30/36, hidden kills 0 of the 6 public survivors

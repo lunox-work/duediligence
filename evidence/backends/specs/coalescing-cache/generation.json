@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176b1-6195-70a2-967f-ebe8b179944f",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 19,
+        "durationMs": 185690,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "24 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/cache.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176b4-3a11-7f63-a875-417273e51b49",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 21,
+        "durationMs": 561421,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "37 tests in 1 file. Build passes; all tests fail against the stub.\n\nOpen in the spec:\n\n- “different keys start independently and may settle in reverse order”: exact loader invocation order between keys is unspecified.\n- “rejection for one key does not settle another key's load”: exact loader invocation order between keys is unspecified.\n- “several pending loads use capacity in settlement order”: exact invocation order for pending loads started together is unspecified.",
+    "problem": null,
+    "files": [
+      "tests/private/cache.test.ts"
+    ],
+    "open": [
+      "“different keys start independently and may settle in reverse order”: exact loader invocation order between keys is unspecified.",
+      "“rejection for one key does not settle another key's load”: exact loader invocation order between keys is unspecified.",
+      "“several pending loads use capacity in settlement order”: exact invocation order for pending loads started together is unspecified."
+    ]
+  }
+}

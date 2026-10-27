@@ -1,0 +1,29 @@
+{
+  "sha256": "c532bd0c17125b5bf0647a2cd74f2e015f9ad8b6ca291145c2c236f202baec96",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T14:00:14.738Z",
+  "decided": [
+    "Meaning of `attempt`: the analysis's attempt number, raised by one only when the watchdog requeues it (a retry count, not a count of lease claims). A requeue returns `attempt + 1`, the next attempt's number. A failure returns `attempt` unchanged.",
+    "Requeue boundary: requeue when `attempt < maxAttempts`, otherwise fail. So `maxAttempts` is the total number of attempts allowed.",
+    "`attempt > maxAttempts` (the limit was lowered): fail with `attempt` unchanged. It is not rejected.",
+    "`expiredAnalysis` does not validate its arguments and never throws: `expiredAnalysis(0, 3)` is `{ status: \"queued\", attempt: 1 }`, `expiredAnalysis(1, 0)` is `{ status: \"failed\", attempt: 1 }`, `expiredAnalysis(NaN, 3)` is `{ status: \"failed\", attempt: NaN }`.",
+    "`canonicalJson` key order: own enumerable string keys sorted by UTF-16 code unit at every depth, the JCS (RFC 8785) convention.",
+    "`canonicalJson` layout: no whitespace, arrays in order, strings and numbers exactly as `JSON.stringify` writes them (`-0` → `0`, non-ASCII unescaped, lone surrogates escaped, `NaN` and `±Infinity` → `null`).",
+    "Any non-array object, whatever its prototype, is written as its own enumerable string keys: `new Date(0)` → `{}`, `new Map()` → `{}`, `new String(\"x\")` → `{\"0\":\"x\"}`. `toJSON` is never called.",
+    "An array hole is written as nothing: `[1, , 3]` → `[1,,3]`.",
+    "Values `canonicalJson` refuses: `undefined` (at the top level, as an array element and as an object property value), functions and symbols throw an `Error` with message `\"Cache parameters must be JSON values.\"`; bigints throw a `TypeError`; cycles throw a `RangeError`. The last two have no fixed message.",
+    "Symbol keys and non-index array properties are ignored. A non-cyclic shared reference is written each place it appears.",
+    "`AnalysisParams` stays a type only, with no validator, because the ticket gives none.",
+    "The vocabulary arrays are not frozen at runtime, matching `bounty.ts`.",
+    "`index.ts` re-exports the new module, as it does every other core module.",
+    "No `@concurrency` scenarios: both functions are synchronous and stateless, so calls cannot overlap.",
+    "Seam (the files the stub writes): packages/core/src/analysis.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/"
+  ],
+  "seam": [
+    "packages/core/src/analysis.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/"
+  ]
+}

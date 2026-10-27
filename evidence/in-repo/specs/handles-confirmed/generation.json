@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "a2c42e04-a28a-4311-b02c-56ae77286a5c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2070938,
+        "turns": 6,
+        "durationMs": 34181,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2070938,
+    "finalText": "I created `packages/core/src/handle.ts` with the signatures exactly as the spec lists them. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (13 of 13).\n\n- **Constants:** `HANDLE_MIN_LENGTH = 3` and `HANDLE_MAX_LENGTH = 30` are exported as real values, not `declare`d.\n- **Function bodies:** every function body is `throw new Error(\"not implemented\");`. No doc comment says a function throws, because the spec says none of them throws for any string. Invalid input comes back as `status: \"invalid\"`.\n- **Allowed-character pattern:** I left the private `/^[a-z0-9_-]+$/` pattern out. It isn't exported, so it's the implementer's job, and the \"no helpers\" rule applies.\n- **Doc comments:** these use the spec's wording, including the two fixed reason strings on `HandleRejected`.\n\n**Gap:** the spec also says `packages/core/src/index.ts` should gain `export * from \"./handle.js\";`. You told me to write only the seam file, so I didn't touch `index.ts`. Until someone adds that line, the scenario \"The handle exports are also reachable from the package root\" will fail. Either the implementer adds it, or you allow me to add it as part of the contract.\n\nAdded: `HANDLE_MIN_LENGTH`, `HANDLE_MAX_LENGTH`, `HandleProblem`, `HandleRejected`, `HandleCheck`, `toHandleCase`, `checkHandle`, `NormalizedHandle`, `normalizeHandle`, `isValidHandle`, `toHandleStem`, `handleStemFromEmail`",
+    "problem": null,
+    "sha256": "3e0fd81a05c966f1c5e0abb53ae8ed9b97f5782107b3afffeed927ae5f262109"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "db0df97c-4661-4b2b-8092-f29afde1edc0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5230018,
+        "turns": 7,
+        "durationMs": 123881,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5230018,
+    "finalText": "I wrote the suite in `packages/core/test/handles-confirmed.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the run command finds and runs the file.\n\n**Results:** as expected, most tests fail with `not implemented`. The two `[happy-1]` tests pass already, because the interface file defines the constants and its full set of exports. Both `[happy-2]` tests fail for a different reason: `index.ts` doesn't yet have the `export * from \"./handle.js\"` line. To keep the compile clean before that line exists, they read the package root through a namespace import rather than named imports.\n\n**Coverage:** every scenario has two tests, a happy path and a boundary case:\n- **Spec examples:** for scenario outlines, the examples are split between the two tests. One covers the typical rows; the other covers the edge rows, such as empty input, the exact length limits, untrimmed whitespace and non-ASCII characters.\n- **Single scenarios:** for scenarios with only one example, the boundary test uses inputs whose result follows directly from the spec's rules:\n  - an exact-export check showing the private pattern isn't exported;\n  - the existing root exports still being present;\n  - idempotence on whitespace-only input;\n  - a 100000-hyphen run followed by `abc`;\n  - the no-`@` and multiple-`@` cases matching `toHandleStem` of the local part.\n- **Return objects:** one `[happy-4]` test also checks the spec's statement that each call returns a new object that isn't frozen.\n- **No timing test:** the spec says `toHandleStem` runs in linear time, but checking that would need a real clock. The long-input tests only check the results.\n\n42 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/handles-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "97e73bc7-868d-4819-b9d3-53ebed6be1a9",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.3897982,
+        "turns": 19,
+        "durationMs": 353192,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.3897982,
+    "finalText": "I wrote the hidden suite in `packages/core/test/hidden-handles-confirmed/`, in four files: `exports.test.ts`, `case-and-check.test.ts`, `normalize-and-valid.test.ts` and `stems.test.ts`.\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the stub as it stands, all 49 tests fail. The handle tests fail with `not implemented`. The package-root tests fail because `index.ts` doesn't re-export `handle.ts` yet.\n- I wrote a reference implementation of the spec in the scratchpad (not in the repo). All 49 hidden tests and all 42 public tests pass against it.\n- I tried five shortcut implementations. Each passes the public suite or nearly does, and the hidden suite fails each one:\n  - **Replacing characters before lowercasing in `toHandleStem`:** caught by `[happy-7]` (a Kelvin sign `K` should become `k`, and `İstanbul` should give `i-stanbul`).\n  - **Counting code points instead of UTF-16 units:** caught by `[boundary-3]` (one emoji plus `a` is a charset problem; 16 emoji is a length problem).\n  - **In `normalizeHandle`, checking the trimmed input before lowercasing:** caught by `[happy-5]`, `[boundary-4]`, `[unhappy-2]`, `[boundary-5]` and `[happy-6]`.\n  - **Returning the same rejection object on every call:** caught by `[unhappy-1]` and `[unhappy-2]`.\n  - **A pattern with the `m` flag, which accepts line breaks:** caught by `[unhappy-1]` and `[happy-6]`.\n\n**Coverage beyond the public suite:**\n- Every disallowed ASCII character, tested at the start, middle and end of a handle.\n- Every length from 0 to 64.\n- Whitespace that `trim` removes but a simple trim would miss, such as no-break and ideographic spaces.\n- Collapsing runs and stripping hyphens before the 30-character cut, and no stripping after it.\n- Hyphens kept between replaced runs (`a - b` gives `a---b`).\n- Email domains other than `example.test`.\n- 500 texts built from a fixed, seeded sequence, all of whose stems must pass `checkHandle`.\n\n**One shortcut the suite can't catch:** stripping outer hyphens with the regex `/^-+|-+$/` takes quadratic time. The `[boundary-8]` test with 100,000 hyphens in the middle of the text makes that version slower (about 4s), but it still passes. The spec requires linear time, but measuring that would need a real clock, which the rules don't allow.\n\n49 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-handles-confirmed/case-and-check.test.ts",
+      "packages/core/test/hidden-handles-confirmed/exports.test.ts",
+      "packages/core/test/hidden-handles-confirmed/normalize-and-valid.test.ts",
+      "packages/core/test/hidden-handles-confirmed/stems.test.ts"
+    ],
+    "open": []
+  }
+}

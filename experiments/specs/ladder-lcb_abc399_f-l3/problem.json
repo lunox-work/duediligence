@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc399_f",
+  "contest_id": "abc399",
+  "contest_date": "2025-03-29T00:00:00",
+  "difficulty": "hard",
+  "title": "Range Power Sum",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 3,
+  "privateCases": 40
+}

@@ -1,0 +1,93 @@
+{
+  "at": "2026-10-26T11:29:24.807Z",
+  "platform": "darwin",
+  "outcomes": [
+    {
+      "variant": "selftest-reference",
+      "expect": "passed",
+      "verdict": "passed",
+      "ok": true,
+      "public": {
+        "passed": 22,
+        "total": 22
+      },
+      "hidden": {
+        "passed": 52,
+        "total": 52
+      },
+      "refused": [],
+      "hiddenSha256": "2c1fff303612114c08ec3cb19c46b37a69bc7bfa175d7755b6bea88474a39b92"
+    },
+    {
+      "variant": "selftest-nothing",
+      "expect": "incomplete",
+      "verdict": "incomplete",
+      "ok": true,
+      "public": {
+        "passed": 1,
+        "total": 22
+      },
+      "hidden": {
+        "passed": 0,
+        "total": 52
+      },
+      "refused": [],
+      "hiddenSha256": "2c1fff303612114c08ec3cb19c46b37a69bc7bfa175d7755b6bea88474a39b92"
+    },
+    {
+      "variant": "selftest-lookup",
+      "expect": "overfit",
+      "verdict": "overfit",
+      "ok": true,
+      "public": {
+        "passed": 43,
+        "total": 43
+      },
+      "hidden": {
+        "passed": 56,
+        "total": 60
+      },
+      "refused": [],
+      "hiddenSha256": "ba086c5bee4dc3d20193593bae23171d421cc3283a548d2550208f09baa83c55"
+    },
+    {
+      "variant": "selftest-tamper",
+      "expect": "refused",
+      "verdict": "refused",
+      "ok": true,
+      "public": {
+        "passed": 0,
+        "total": 22
+      },
+      "hidden": {
+        "passed": 0,
+        "total": 52
+      },
+      "refused": [
+        "tests/public/abort.test.ts (changed)",
+        "tests/public/parallel-across-keys.test.ts (changed)",
+        "tests/public/serial-per-key.test.ts (changed)",
+        "tests/public/state.test.ts (changed)"
+      ],
+      "hiddenSha256": "2c1fff303612114c08ec3cb19c46b37a69bc7bfa175d7755b6bea88474a39b92"
+    },
+    {
+      "variant": "selftest-escape",
+      "expect": "passed",
+      "verdict": "passed",
+      "ok": true,
+      "public": {
+        "passed": 22,
+        "total": 22
+      },
+      "hidden": {
+        "passed": 52,
+        "total": 52
+      },
+      "refused": [],
+      "hiddenSha256": "2c1fff303612114c08ec3cb19c46b37a69bc7bfa175d7755b6bea88474a39b92",
+      "escape": "cat: /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-selftest-pmhtmx/specs/keyed-queue/tests/private/abort.test.ts: Operation not permitted\nls: /private/var/folders/9k/pldvsgmx3kz_k53f_53t5m900000gn/T/independent-tests-selftest-pmhtmx/specs/keyed-queue/tests/private: Operation not permitted\n"
+    }
+  ],
+  "hiddenUnreadable": true
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "ladder-lcb_abc400_e-l1",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_public.py :: TestPublic.test_100",
+    "tests/public/test_public.py :: TestPublic.test_1000",
+    "tests/public/test_public.py :: TestPublic.test_123456789",
+    "tests/public/test_public.py :: TestPublic.test_143_just_below_square",
+    "tests/public/test_public.py :: TestPublic.test_144_unequal_exponents",
+    "tests/public/test_public.py :: TestPublic.test_404",
+    "tests/public/test_public.py :: TestPublic.test_60_falls_back_to_36",
+    "tests/public/test_public.py :: TestPublic.test_99_skips_prime_power",
+    "tests/public/test_public.py :: TestPublic.test_just_below_largest_a",
+    "tests/public/test_public.py :: TestPublic.test_largest_a_is_itself_400_number",
+    "tests/public/test_public.py :: TestPublic.test_max_q_at_max_a",
+    "tests/public/test_public.py :: TestPublic.test_several_queries_in_order",
+    "tests/public/test_public.py :: TestPublic.test_smallest_a_is_itself_400_number"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 13
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc400_e",
+  "contest_id": "abc400",
+  "contest_date": "2025-04-05T00:00:00",
+  "difficulty": "hard",
+  "title": "Ringo's Favorite Numbers 3",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 1,
+  "privateCases": 4
+}

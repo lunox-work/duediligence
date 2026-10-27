@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "298eaf16-1838-4522-8eff-2268f0e61667",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.21131119999999998,
+        "turns": 6,
+        "durationMs": 56359,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.21131119999999998,
+    "finalText": "I wrote the public suite in `tests/public/test_broken_wheel.py`. `python3 sandbox/compile_check.py` reports no errors. When run, all 20 cases fail with \"Runtime Error\" because `src/main.py` raises \"not implemented\", which is what we expected.\n\n**There are no samples to cover.** `spec.md` doesn't include any sample inputs or outputs, so no test is a sample from the statement. Every expected value comes from one of two places:\n\n- **Brute force on tiny inputs (19 cases).** A `brute()` function in the test file tries every orientation of every edge and counts the distinct in-degree sequences. These cases are all eight strings at the smallest size, N = 3, plus eleven more strings with N from 4 to 10. The largest one checks 2^18 orientations, and the whole suite runs in about 1.5 s. One of them, N = 3 with `010`, gives 14; I think that matches the original contest's first sample, but I didn't use that to set any expected value.\n- **All zeros at the largest size, N = 10^6 (1 case).** With no spokes, the graph is a cycle of N vertices plus a vertex with no edges. If any vertex on the cycle has in-degree 0 or 2, that fixes the direction of every edge, so only one orientation produces that sequence. The all-ones sequence comes from both one-way orientations. That makes the answer (2^N − 1) mod 998244353. A comment in the test gives this argument, and I checked the formula against the brute force for N = 3 to 9.\n\nI left out large inputs that contain any `1`, because I can't state their answers with certainty.\n\n20 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_broken_wheel.py"
+    ]
+  }
+}

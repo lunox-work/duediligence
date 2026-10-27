@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "2c7d5453-b606-4839-a5a2-8fb849b17600",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2043837,
+        "turns": 5,
+        "durationMs": 51723,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2043837,
+    "finalText": "I wrote the suite in `tests/public/test_valid_date.py`. `python3 sandbox/compile_check.py` reports no errors. Running `python3 sandbox/run.py public` loads all 24 tests, and all 24 fail with `NotImplementedError`, which is expected until the function is written. Plain `unittest discover` on `tests/public` won't import it, because that folder has no `__init__.py`. Use the sandbox runner instead.\n\n**What's covered:**\n- **Docstring examples:** one test each, 5 in total.\n- **Rule 1 (not empty):** `''` returns False. The boundary case is `' '`, which isn't empty but has no `mm-dd-yyyy` parts, so rule 4 makes it False.\n- **Rule 2 (day ranges):** for each group of months there is a mid-month day and the last day, both True, and one day past the end, which is False. The groups are 31-day months, 30-day months, and February. Day `00` is False and day `01` is True.\n- **Rule 3 (month range):** months `12` and `01` are True; `13` and `00` are False.\n- **Rule 4 (format):** `'04122003'` (no separators) and `'04-12'` (no year) are both False.\n\n**Cases I left out on purpose:**\n- **29 February in a non-leap year:** read literally, the docstring allows day 29 in February in any year. A developer might reasonably use a real calendar instead, so I tested `02-29` with 2020, a leap year, where both readings give True.\n- **Single-digit day or month, or a two-digit year:** the docstring's own example `'04-0-2040'` is False because of day 0, not because of its length. So the docstring doesn't settle whether something like `'04-5-2040'` passes rule 4, and I didn't test it.\n\nEach test checks the exact `True`/`False` value with `assertIs`, and every case the docstring doesn't answer directly has a comment explaining how I got the expected value.\n\n24 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_valid_date.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "399614c6-52a8-461b-a1d4-2a97fb36e1b8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.33832789999999996,
+        "turns": 6,
+        "durationMs": 81712,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.33832789999999996,
+    "finalText": "I wrote the hidden suite in `tests/private/test_valid_date_private.py`. All 57 tests fail against the current stub, which raises `not implemented`, and `sandbox/compile_check.py` reports no errors.\n\n**What it covers:**\n- **Each month's day limit:** every month is checked at its last allowed day and one day past it. One test also runs every month 01–12 against every day 00–35, and its expected answers come straight from the table in rule 2.\n- **February 29 in any year:** rule 2 allows day 29 in month 2 and no rule limits the year, so 2021, 1900 and 2023 must all give True. This catches an implementation built on `datetime`, which the public suite (using only the leap year 2020) cannot tell apart.\n- **Months out of range:** every month 00 and 13–99 is invalid, including `13-31`, which catches a \"default to 31 days\" fallback.\n- **Day before month:** cases like `01-13-2020` (valid) and `25-07-1999` (invalid) catch an implementation that reads the date as day-month-year.\n- **Leading zeros:** `08-09` and `09-08` catch parsing that would treat a leading zero as octal.\n- **Year limits:** years 0000 and 9999 are valid, since no rule restricts the year.\n- **Bad formats:** dot, space and mixed separators; year-first order; empty fields; an extra field; letters; minus signs.\n\n**What it leaves alone:** I didn't test anything the docstring leaves undecided, such as one-digit months or days (`4-12-2003`), years that aren't four digits, or spaces around the date.\n\n**How I checked it:** I ran the private and public suites together against three throwaway versions, kept in a temp folder and never written into `src/`:\n- A strict version that requires exactly two-digit month, two-digit day and four-digit year: passes all 81 tests.\n- The lenient HumanEval original: passes all 81. That suggests no test depends on behaviour the docstring leaves open.\n- A `datetime.strptime` shortcut: fails 5 tests (February 29 in non-leap years, and year 0000).\n\nI deleted the `__pycache__` folders my test runs created, so nothing outside `tests/private/` changed.\n\n57 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_valid_date_private.py"
+    ],
+    "open": []
+  }
+}

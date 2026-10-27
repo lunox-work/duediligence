@@ -1,0 +1,1 @@
+Your coding agent's tests pass. Ours didn't: across 550 runs, 18 submissions that passed every test they could see failed a hidden suite they never saw, and not one touched the tests. double-blind, hidden acceptance tests for coding agents. lunox.work

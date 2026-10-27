@@ -1,0 +1,32 @@
+identicon: incomplete. Public 10/38, hidden 3/80, existing 85/85; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at 8a308ddc5e561788ae5d7c50220417705a53f690.
+Hidden suite sha256 8f0f120732f680e34986717b16a52eb2d1023098393a7b19ead85f64c3a4a048, sealed 2026-10-26T04:35:58.887Z.
+Failing scenarios: boundary-1, boundary-2, boundary-3, boundary-4, concurrency-1, concurrency-2, happy-1, happy-2, happy-4, happy-5, happy-6, unhappy-1, unhappy-2
+public: test/identicon.test.ts :: [happy-1] the pinned seed "a" produces its pinned face
+public: test/identicon.test.ts :: [happy-1] the pinned seed "user-1" produces its pinned face
+public: test/identicon.test.ts :: [happy-1] the pinned seed "user-2" produces its pinned face
+public: test/identicon.test.ts :: [happy-1] the 31-character pinned seed produces its pinned face
+public: test/identicon.test.ts :: [happy-2] the face for "a" deep-equals the literal cells array and hue
+public: test/identicon.test.ts :: [happy-2] the face for "a" is row-major with the top-left cell first
+public: test/identicon.test.ts :: [happy-5] the result for "user-1" and its cells are frozen
+public: test/identicon.test.ts :: [happy-5] the cells of a result cannot grow
+public: test/identicon.test.ts :: [concurrency-1] earlier calls with "user-2", "a" and "" do not change "user-1"
+public: test/identicon.test.ts :: [concurrency-1] a rejected call in between does not change "user-1"
+public: test/identicon.test.ts :: [concurrency-2] tasks resuming out of order still get the pinned faces
+public: test/identicon.test.ts :: [boundary-1] seed "a" gives its own face (baseline)
+public: test/identicon.test.ts :: [boundary-1] seed "A" gives its own face (case is significant)
+public: test/identicon.test.ts :: [boundary-1] seed " a" gives its own face (whitespace is not trimmed)
+public: test/identicon.test.ts :: [boundary-1] NFC and NFD spellings of café give different faces
+public: test/identicon.test.ts :: [boundary-2] a lone high surrogate hashes as U+FFFD
+public: test/identicon.test.ts :: [boundary-2] a lone low surrogate also hashes as U+FFFD
+public: test/identicon.test.ts :: [boundary-3] the empty seed is accepted and gives the zero-byte face
+public: test/identicon.test.ts :: [boundary-3] the empty seed's degenerate rows are not adjusted
+public: test/identicon.test.ts :: [boundary-4] "x" repeated 10000 times is hashed in full
+public: test/identicon.test.ts :: [boundary-4] "x" repeated 9999 times gives a different, pinned face
+public: test/identicon.test.ts :: [unhappy-1] a undefined seed throws a TypeError
+public: test/identicon.test.ts :: [unhappy-1] a null seed throws a TypeError
+public: test/identicon.test.ts :: [unhappy-1] a 42 seed throws a TypeError
+public: test/identicon.test.ts :: [unhappy-1] a {} seed throws a TypeError
+public: test/identicon.test.ts :: [unhappy-1] an array seed ["a"] throws rather than being coerced
+public: test/identicon.test.ts :: [unhappy-2] new String("a") is not a string seed
+public: test/identicon.test.ts :: [unhappy-2] new String("") is not a string seed either
+Check "independent-tests (drafted)": failure, incomplete: public 10/38, hidden 3/80, existing 85/85 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/identicon.json); not posted (no token).

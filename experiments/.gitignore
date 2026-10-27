@@ -1,0 +1,4 @@
+runs/
+template/node_modules/
+
+specs/lcb-*/tests/private/cases.json

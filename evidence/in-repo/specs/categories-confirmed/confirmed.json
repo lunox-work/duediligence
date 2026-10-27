@@ -1,0 +1,43 @@
+{
+  "sha256": "bf3f8c3eb97a58b244459d66ca5942c1e5406b769f456449f08e0c6f78ca662f",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-25T15:57:47.505Z",
+  "decided": [
+    "Entry point: tests import from `packages/core/src/selection/index.ts`, which re-exports all four modules. The root `src/index.ts`, `bounty.ts` and `handle.ts` are unchanged.",
+    "Day counting: `ageDays` and `daysSinceUpdate` are `floor(elapsed ms / 86_400_000)`, clamped at 0. A missing, unparseable or future date gives 0. `daysSinceUpdate` does not fall back to `ageDays`.",
+    "`dueInDays` and `release.inDays` are differences in UTC calendar days between now and the parsed date (full timestamp, offset applied). They are negative when overdue and null when the date is missing or unparseable.",
+    "`assigned` is true for any non-null assignee, blank or not.",
+    "`inSprint` is true for any sprint whose state is not exactly \"closed\" (case-sensitive).",
+    "`carriedSince` is the UTC month name of the earliest closed sprint's `startDate`, or its `endDate` when `startDate` does not parse (\"February\"). The year is appended when it differs from now's UTC year (\"November 2025\"). It is null when no date parses.",
+    "Links: the type name is matched as a case-insensitive substring (\"duplicate\", \"block\"). Only inward \"Duplicate\" links count. \"Blocks\" counts only outward links whose status category is not exactly \"done\" (case-sensitive).",
+    "Null `votes`/`watchers` become 0. A null or absent `commentCount` stays null, and `commentsAtLeast` never matches it.",
+    "`PRIORITY_RANKS` contents: lowest/trivial/low/minor are low, medium/normal are medium. Names are trimmed and lowercased before lookup. Any other non-blank name ranks \"high\", and a blank or null priority ranks \"none\". `priorityName` is trimmed, and blank becomes null.",
+    "`PRIORITY_RANKS`, `BUG_ISSUE_TYPES` and `CATEGORIES` are not frozen.",
+    "`release` is the earliest-dated unreleased version that is today or later. Overdue, undated and unparseable versions are ignored. Ties go to array order.",
+    "`evaluate`: `all()` matches and `any()` does not. Both `all` and `any` evaluate every child. Clauses keep rule order, drop nulls, keep duplicates, and are empty when the rule does not match.",
+    "`describe` is called only after `test` matched. Called directly, it describes whatever facts it is given, except `deadlineWithin`, which describes only a date inside its window and otherwise returns \"due today\".",
+    "Signal ids are the kebab name without the threshold (`open-at-least`), and `priority-at-most-low`/`priority-at-most-medium`. Description wording and singular/plural (singular only for exactly 1) are as in the signal table.",
+    "`deadlineWithin` matches 0 to n days ahead, not overdue. It accepts a due date or a release and describes the nearer one inside the window, with a tie going to the due date.",
+    "Signal factories do not validate their threshold: negative, fractional and non-finite numbers are used as given.",
+    "The registry's ids, threshold names, defaults, rule compositions and `why` texts are as tabled here.",
+    "Overrides: null, undefined and non-finite values keep the default. Any finite number is accepted, including 0, fractions and negatives. Unknown threshold keys and unknown category ids are ignored.",
+    "`enabled` is true unless it is false. Disabled categories still appear in `resolveCategories`, with their thresholds resolved.",
+    "Category lists are not checked for duplicate or reserved ids.",
+    "Reason format: clauses joined with \", \" and the first character upper-cased. It falls back to the category's `label` when there are no clauses.",
+    "Matches come in registry order. An issue with no match gets `[]`, and `UNCATEGORIZED` is never returned.",
+    "`createClassifier` resolves and builds rules once, at creation, and only for enabled categories.",
+    "Everything is synchronous and stateless, so overlapping calls cannot interfere. No `@concurrency` scenario applies.",
+    "Seam (the files the stub writes): packages/core/src/selection/index.ts, packages/core/src/selection/facts.ts, packages/core/src/selection/rules.ts, packages/core/src/selection/signals.ts, packages/core/src/selection/categories.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/selection/"
+  ],
+  "seam": [
+    "packages/core/src/selection/index.ts",
+    "packages/core/src/selection/facts.ts",
+    "packages/core/src/selection/rules.ts",
+    "packages/core/src/selection/signals.ts",
+    "packages/core/src/selection/categories.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/selection/"
+  ]
+}

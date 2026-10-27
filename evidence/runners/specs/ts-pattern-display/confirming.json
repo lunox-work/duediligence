@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-26T02:48:43.476Z",
+  "specSha256": "6048fc645c1f6edb794e84617cc5a8320a326fcd63942999f64b824e09a42192",
+  "drafted": [
+    "Plain JSON values keep JSON.stringify's exact output, compact, so today's message for plain objects is unchanged.",
+    "`undefined` is shown, as a top-level value, an array element and an object property (`\"k\":undefined`).",
+    "BigInt displays as `12n`; NaN and the infinities by name.",
+    "Maps and Sets display as `Map {k => v, ...}` and `Set {v, ...}` in insertion order.",
+    "Class instances get their constructor's name in front; plain and null-prototype objects do not.",
+    "Functions are `[Function name]` or `[Function]`; Errors are `[Name: message]`; symbols are `Symbol(desc)`.",
+    "Objects with toJSON (Dates) display what toJSON returns.",
+    "A value inside itself is `[Circular]`; shared values are shown in full.",
+    "A getter that throws displays the error as a value; displayValue never throws.",
+    "The display is cut at 200 UTF-16 code units, then `…`.",
+    "Seam (the files the stub writes): src/errors.ts",
+    "Allowed paths (what the implementer may change): src/errors.ts"
+  ],
+  "confirmedAt": "2026-10-26T02:49:48.270Z"
+}

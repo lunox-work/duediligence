@@ -1,0 +1,82 @@
+{
+  "slug": "status-normalize",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/read-status.test.ts :: [happy-1] statuses written another way are read as themselves",
+    "tests/public/read-status.test.ts :: [happy-1] every status, already clean or mixed case with padded ends, reads as itself",
+    "tests/public/read-status.test.ts :: [happy-2] old spellings with dashes, underscores and capitals are read as their status",
+    "tests/public/read-status.test.ts :: [happy-2] every known old spelling is read as its status",
+    "tests/public/read-status.test.ts :: [happy-2] a mixed run of spaces, dashes and underscores counts as one space",
+    "tests/public/read-status.test.ts :: [unhappy-1] values that are no status read as null",
+    "tests/public/read-status.test.ts :: [unhappy-1] near misses, empty and spaces-only values read as null, not the nearest status",
+    "tests/public/read-statuses.test.ts :: [happy-4] reading many rows gives each its status and lists what could not be read",
+    "tests/public/read-statuses.test.ts :: [happy-4] unreadable values are listed once each, sorted, exactly as stored",
+    "tests/public/read-statuses.test.ts :: [happy-4] reading no rows gives no rows and nothing unreadable",
+    "tests/public/write-status.test.ts :: [happy-3] a status is written as itself",
+    "tests/public/write-status.test.ts :: [happy-3] every status is written as itself",
+    "tests/public/write-status.test.ts :: [unhappy-2] values other than a status are refused with an error naming them",
+    "tests/public/write-status.test.ts :: [unhappy-2] a status with a padded end is refused, named as given",
+    "tests/public/write-status.test.ts :: [unhappy-2] an old spelling, even already clean, is never accepted on write"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 15
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 25,
+  "kept": [
+    "tests/private/read-status.test.ts :: [happy-1] statuses in other case mixes and paddings read as themselves",
+    "tests/private/read-status.test.ts :: [happy-1] every status in title case with long uneven padding reads as itself",
+    "tests/private/read-status.test.ts :: [happy-2] other old spellings with capitals, dashes and underscores read as their status",
+    "tests/private/read-status.test.ts :: [happy-2] every known old spelling in upper case, padded or with other separators reads as its status",
+    "tests/private/read-status.test.ts :: [happy-2] long and mixed separator runs between words count as one space",
+    "tests/private/read-status.test.ts :: [unhappy-1] other words that are no status or old spelling read as null",
+    "tests/private/read-status.test.ts :: [unhappy-1] other near misses of statuses and old spellings read as null",
+    "tests/private/read-status.test.ts :: [unhappy-1] a status split by separators, or an old spelling run together, reads as null",
+    "tests/private/read-status.test.ts :: [unhappy-1] values that merely contain a status or old spelling read as null",
+    "tests/private/read-status.test.ts :: [unhappy-1] names inherited by plain objects read as null",
+    "tests/private/read-status.test.ts :: [unhappy-1] values made only of separators read as null",
+    "tests/private/read-statuses.test.ts :: [happy-4] a table of every status and old spelling reads each row and lists only the unreadable",
+    "tests/private/read-statuses.test.ts :: [happy-4] unreadable values given in reverse order and repeated are listed once each, sorted",
+    "tests/private/read-statuses.test.ts :: [happy-4] unreadable values that clean to the same text are each listed, exactly as stored",
+    "tests/private/read-statuses.test.ts :: [happy-4] empty and spaces-only values are listed once each, exactly as stored, sorted",
+    "tests/private/read-statuses.test.ts :: [happy-4] values named like plain-object members read as no status and are listed",
+    "tests/private/read-statuses.test.ts :: [happy-4] many rows that all read as statuses list nothing unreadable",
+    "tests/private/read-statuses.test.ts :: [happy-4] each row keeps its own id and status when ids are given out of order",
+    "tests/private/write-status.test.ts :: [happy-3] each status written in reverse order, twice, is stored as itself",
+    "tests/private/write-status.test.ts :: [happy-3] draft, published, claimed and merged are each stored as themselves",
+    "tests/private/write-status.test.ts :: [unhappy-2] a status in another case is refused, named as given",
+    "tests/private/write-status.test.ts :: [unhappy-2] a status padded on the right or on both sides is refused, named as given",
+    "tests/private/write-status.test.ts :: [unhappy-2] every other clean old spelling is refused on write, named as given",
+    "tests/private/write-status.test.ts :: [unhappy-2] old spellings with capitals, dashes, underscores or padding are refused, named as given",
+    "tests/private/write-status.test.ts :: [unhappy-2] other values that are no status are refused, named as given"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 15,
+      "total": 15
+    },
+    "hidden": {
+      "passed": 25,
+      "total": 25
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented the spec in `src/index.ts`, and every test now passes: 15 of 15 in the public suite and 25 of 25 in the private suite.\n\n- **`readStatus`** cleans the stored value as the spec describes: it trims the ends, lowercases it, and turns every run of spaces, `-` and `_` into one space. It then returns the cleaned text if it is one of the five statuses, or the status a known old spelling maps to. Anything else reads as `null`; there is no fuzzy or partial matching. The lookups use `Set` and `Map` rather than plain objects, so values like `constructor` or `__proto__` also read as `null`.\n- **`writeStatus`** accepts only an exact status value, without cleaning it first. Anything else, including old spellings and values with different capitals or padding, throws an error that quotes the value exactly as given.\n- **`readStatuses`** reads each row with `readStatus` and collects the original stored values that came back as no status. Each one is listed once, exactly as stored, in plain JavaScript string sort order.\n\nNone of the tests contradicted the spec, so I didn't have to bend the code to fit any of them.\n\nFailing tests: none",
+    "sessions": [
+      {
+        "sessionId": "c4f638dc-2364-4e32-b18c-21d6df7b6a96",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1964647,
+        "turns": 4,
+        "durationMs": 24585,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1964647
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "4b66a246-c219-42c2-b759-7f44c1ea2629",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6096316999999999,
+        "turns": 6,
+        "durationMs": 161042,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.6096316999999999,
+    "finalText": "I've written the test suite in `tests/public/`, one file per rule. `npm run build` reports no errors. When run, all 32 tests fail, as expected, because `satisfies` throws `not implemented`.\n\n**Test names use `[rule-N]` keys.** `spec.md` has no `@kind` tags (no `@` anywhere), so `[unhappy-2]`-style keys aren't possible. Its scenarios are the nine numbered rules, so each test starts with `[rule-1]` … `[rule-9]`, numbered in spec order. If your grader expects a different tag word, it's a find-and-replace.\n\n**Coverage per rule (happy path, then boundary):**\n1. **Versions:** `2.4` equals `2.4.0`, and zeros and tags are valid. The boundary is a list of malformed versions that must throw with \"version\" in the message: leading zeros, a prefix, spaces, a fourth number, a `-` before the tag, an empty or uppercase tag, `1.2.x`.\n2. **Order:** numbers compare as numbers (`1.10` > `1.9`), an untagged version beats a tagged one, and tags compare run by run. The boundary is that tags whose runs are all equal are the same version (`rc01` = `rc1`).\n3. **Comparators:** each operator, and a bare version meaning `=V`. The boundary is a version exactly at V: only `>=` and `<=` hold.\n4. **Tilde:** `~1.2.3` stays within 1.2. The boundaries are `~1.2` / `~0.0` stopping at the next minor, and tagged starting points.\n5. **Caret:** `^1.2.3` stays within major 1. The boundary is major 0, which also keeps the minor; `^0.0.3` still allows `0.0.9`, which is where it differs from semver.\n6. **Wildcards:** `*`, `M.x` and `M.N.x`. The boundary is misplaced wildcards, or wildcards with an operator or `~`/`^`, which must throw with \"range\" in the message.\n7. **AND/OR:** commas, bars, commas binding tighter than bars, and allowed spacing. The boundaries are empty comparators or groups, spaces inside a comparator, and an invalid group that still makes the range invalid when another group would hold.\n8. **Tagged versions:** the tagged comparator must be in the same group and have the same major and minor. The boundaries are a tagged comparator of a different minor, a wildcard, and the tag sitting in a group that doesn't hold.\n9. **Errors:** messages contain \"version\" or \"range\". The boundary is that when both inputs are invalid, the message contains \"version\".\n\n**Two readings beyond the spec's literal words:**\n- **Letter runs** are compared as whole strings by character code. I avoided cases where one run is a prefix of the other (`a` vs `ab`), because the spec doesn't settle those.\n- **`~V` and `^V` count as naming V** for rule 8, since the spec only says a wildcard names no version.\n\nBuilding writes `.js` files next to the sources; I deleted them afterwards, so nothing outside `tests/public/` changed.\n\n32 tests, in 9 files.",
+    "problem": null,
+    "files": [
+      "tests/public/rule-1-versions.test.ts",
+      "tests/public/rule-2-order.test.ts",
+      "tests/public/rule-3-comparators.test.ts",
+      "tests/public/rule-4-tilde.test.ts",
+      "tests/public/rule-5-caret.test.ts",
+      "tests/public/rule-6-wildcards.test.ts",
+      "tests/public/rule-7-and-or.test.ts",
+      "tests/public/rule-8-tagged.test.ts",
+      "tests/public/rule-9-errors.test.ts"
+    ]
+  }
+}

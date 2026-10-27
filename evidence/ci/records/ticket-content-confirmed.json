@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-26T04:38:56.174Z",
+  "slug": "ticket-content-confirmed",
+  "verdict": "overfit",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "ee0bef013a078340116991400e3bfb1a730560be",
+  "public": {
+    "passed": 51,
+    "total": 51
+  },
+  "hidden": {
+    "passed": 48,
+    "total": 49
+  },
+  "existing": {
+    "passed": 139,
+    "total": 139
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [
+    "happy-9"
+  ],
+  "hiddenSha256": "a6e84b22c2180f8cc804925e6a893c9bf308bc175c0379d083ab59345a75fa0d",
+  "sealedAt": "2026-10-26T04:35:59.556Z",
+  "committedAt": null
+}

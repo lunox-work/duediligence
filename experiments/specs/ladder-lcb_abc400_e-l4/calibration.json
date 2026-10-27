@@ -1,0 +1,30 @@
+{
+  "slug": "ladder-lcb_abc400_e-l4",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_public.py :: TestPublic.test_exactly_second_400_number",
+    "tests/public/test_public.py :: TestPublic.test_just_below_and_at_144",
+    "tests/public/test_public.py :: TestPublic.test_just_below_largest_a",
+    "tests/public/test_public.py :: TestPublic.test_just_below_second_400_number",
+    "tests/public/test_public.py :: TestPublic.test_largest_a",
+    "tests/public/test_public.py :: TestPublic.test_max_q_all_largest_a",
+    "tests/public/test_public.py :: TestPublic.test_max_q_mixed",
+    "tests/public/test_public.py :: TestPublic.test_sample_1",
+    "tests/public/test_public.py :: TestPublic.test_smallest_a"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

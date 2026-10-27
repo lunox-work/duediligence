@@ -1,0 +1,27 @@
+{
+  "sha256": "173d6313cbdee45947a53a610eb6358d93899d15678f71b615de863e6cd9b453",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T13:45:28.992Z",
+  "decided": [
+    "Meaning of `attempt`: the 1-based number of the attempt whose lease expired. A requeue returns `attempt + 1`, the next attempt's number. A failure returns `attempt` unchanged.",
+    "Requeue boundary: requeue when `attempt < maxAttempts`, otherwise fail. So `maxAttempts` is the total number of attempts allowed.",
+    "`attempt > maxAttempts` (the limit was lowered): fail with `attempt` unchanged. It is not rejected.",
+    "Invalid `expiredAnalysis` arguments (not a positive safe integer): throw a `RangeError` with fixed messages, checking `attempt` first. The return type has no null case, so it cannot return null the way `parseMinorUnits` does.",
+    "`canonicalJson` key order: own enumerable string keys sorted by UTF-16 code unit at every depth, the JCS (RFC 8785) convention.",
+    "`canonicalJson` layout: no whitespace, arrays in order, strings and numbers exactly as `JSON.stringify` writes them (`-0` → `0`, non-ASCII unescaped, lone surrogates escaped).",
+    "Values `canonicalJson` refuses: undefined (except as an object property value, which is left out), array holes, functions, symbols, bigints, non-finite numbers, non-plain objects (Date, Map, boxed primitives, class instances) and cycles. Each throws a `TypeError` with a fixed message.",
+    "`toJSON` is not called. Symbol keys and non-index array properties are ignored. A non-cyclic shared reference is written each place it appears.",
+    "`AnalysisParams` stays a type only, with no validator, because the ticket gives none.",
+    "The vocabulary arrays are not frozen at runtime, matching `bounty.ts`.",
+    "`index.ts` re-exports the new module, as it does every other core module.",
+    "No `@concurrency` scenarios: both functions are synchronous and stateless, so calls cannot overlap.",
+    "Seam (the files the stub writes): packages/core/src/analysis.ts",
+    "Allowed paths (what the implementer may change): packages/core/src/"
+  ],
+  "seam": [
+    "packages/core/src/analysis.ts"
+  ],
+  "allowedPaths": [
+    "packages/core/src/"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "slug": "coalescing-cache",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/capacity.test.ts :: [boundary-4] with a maximum of 2, reading a and then loading c drops b",
+    "tests/public/capacity.test.ts :: [boundary-4] a stale read counts as a use, so the fresher but unread entry is dropped",
+    "tests/public/capacity.test.ts :: [boundary-5] with a maximum of 1, a stays served while b's load is unsettled and is gone once it settles",
+    "tests/public/capacity.test.ts :: [boundary-5] a is served fresh up to its last fresh millisecond while b loads, and b is served once it settles",
+    "tests/public/freshness.test.ts :: [happy-2] a value loaded at 1000 with fresh-for 5000 is served at 5999 without loading",
+    "tests/public/freshness.test.ts :: [happy-2] freshness counts from when the load settled, not when it started",
+    "tests/public/freshness.test.ts :: [boundary-2] a stale value is served at once, refreshed once in the background, then fresh until 12000",
+    "tests/public/freshness.test.ts :: [boundary-2] a value refreshed at 7000 is stale at 12000: served at once and refreshed again",
+    "tests/public/freshness.test.ts :: [boundary-3] an expired value is not served: the get at 11000 waits for a new load and gets its value",
+    "tests/public/freshness.test.ts :: [boundary-3] a get made while the reload of an expired value is unsettled waits for the new value too",
+    "tests/public/freshness.test.ts :: [unhappy-2] a failed refresh calls the error handler and keeps the stale value, and the next stale get refreshes again",
+    "tests/public/freshness.test.ts :: [unhappy-2] without an error handler a failed refresh keeps the value stale until its last millisecond",
+    "tests/public/invalidate.test.ts :: [happy-3] after invalidating a fresh entry, get calls the loader and resolves with the new value",
+    "tests/public/invalidate.test.ts :: [happy-3] an invalidated stale entry is not served: get waits for the new load",
+    "tests/public/invalidate.test.ts :: [boundary-6] invalidating during a load: both waiting gets get its value, and the next get loads again",
+    "tests/public/invalidate.test.ts :: [boundary-6] invalidating during a background refresh discards both the stale and the refreshed value",
+    "tests/public/one-load-per-key.test.ts :: [happy-1] three gets before the load settles call the loader once and all resolve with its value",
+    "tests/public/one-load-per-key.test.ts :: [happy-1] gets made in later turns and at later times while the load is unsettled still share it",
+    "tests/public/one-load-per-key.test.ts :: [boundary-1] gets for two keys call the loader once per key before either load settles",
+    "tests/public/one-load-per-key.test.ts :: [boundary-1] the second key's load settling first resolves only its own get",
+    "tests/public/one-load-per-key.test.ts :: [unhappy-1] both waiting gets reject with the loader's error and a later get calls the loader again",
+    "tests/public/one-load-per-key.test.ts :: [unhappy-1] a get at the same instant the load failed calls the loader again, and that success is kept"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 22
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 36,
+  "kept": [
+    "tests/private/capacity.test.ts :: [boundary-4] with a maximum of 3, each new entry drops the least recently used one, not the first stored",
+    "tests/private/capacity.test.ts :: [boundary-4] a cache at its maximum of 3 keeps all three, and the fourth drops exactly one",
+    "tests/private/capacity.test.ts :: [boundary-4] with no reads, the entry stored first is the one dropped",
+    "tests/private/capacity.test.ts :: [boundary-4] a refresh replacing an entry does not drop another entry",
+    "tests/private/capacity.test.ts :: [boundary-4] an invalidated entry leaves room, so a new entry drops nothing",
+    "tests/private/capacity.test.ts :: [boundary-5] with a maximum of 2, three unsettled loads do not drop the one entry, and one settling leaves room for both",
+    "tests/private/capacity.test.ts :: [boundary-5] with a maximum of 1, when the later load settles first its entry replaces a",
+    "tests/private/freshness.test.ts :: [happy-2] with fresh-for 250, a value loaded at 40000 is served throughout 40000 to 40249 without loading",
+    "tests/private/freshness.test.ts :: [happy-2] falsy values are stored and served fresh without loading",
+    "tests/private/freshness.test.ts :: [boundary-2] fresh reads do not extend freshness: the value loaded at 1000 is stale and refreshed at 6000",
+    "tests/private/freshness.test.ts :: [boundary-2] with fresh-for 100 and stale-for 50, stale gets from 100 to 149 share one refresh, fresh again for 100 after it settles",
+    "tests/private/freshness.test.ts :: [boundary-2] a refresh that settles at 9000 makes the value fresh until 14000, counted from when it settled",
+    "tests/private/freshness.test.ts :: [boundary-2] two stale keys are each refreshed once and each served its own stale value",
+    "tests/private/freshness.test.ts :: [boundary-2] the stale get at the first stale millisecond starts a refresh for its key",
+    "tests/private/freshness.test.ts :: [boundary-3] a value long expired is not served: the get waits for the new load and the new value is kept",
+    "tests/private/freshness.test.ts :: [boundary-3] with stale-for 0, the value expires the moment it stops being fresh",
+    "tests/private/freshness.test.ts :: [boundary-3] with other durations, the value expires at fresh-for plus stale-for after it settled",
+    "tests/private/freshness.test.ts :: [boundary-3] when the reload of an expired value fails, the get rejects and the old value is still never returned",
+    "tests/private/freshness.test.ts :: [boundary-3] a get after expiry while the background refresh is unsettled waits for that refresh, not the old value",
+    "tests/private/freshness.test.ts :: [unhappy-2] a failed refresh does not renew the value: it still expires at 11000",
+    "tests/private/freshness.test.ts :: [unhappy-2] each failed refresh calls the error handler with its own error and key, and a later refresh that succeeds is kept",
+    "tests/private/freshness.test.ts :: [unhappy-2] without an error handler, gets made while a refresh is failing all resolve with the stale value",
+    "tests/private/invalidate.test.ts :: [happy-3] invalidating one key reloads only that key, and each reloaded value is kept",
+    "tests/private/invalidate.test.ts :: [happy-3] invalidating twice and getting from several callers makes one load whose value all receive",
+    "tests/private/invalidate.test.ts :: [boundary-6] after a discarded load, the next load for the key is stored as usual",
+    "tests/private/invalidate.test.ts :: [boundary-6] invalidating one key during its load does not discard another key's load",
+    "tests/private/invalidate.test.ts :: [boundary-6] with a maximum of 1, a discarded load does not drop the entry already held",
+    "tests/private/invalidate.test.ts :: [unhappy-1] a load invalidated while in flight that rejects rejects both waiting gets with its error",
+    "tests/private/one-load-per-key.test.ts :: [happy-1] fifty gets before the load settles call the loader once with the key and all resolve with the same value",
+    "tests/private/one-load-per-key.test.ts :: [happy-1] another key's load settling does not end the sharing of a load still in flight",
+    "tests/private/one-load-per-key.test.ts :: [happy-1] a get long past fresh-for plus stale-for still shares the unsettled load",
+    "tests/private/one-load-per-key.test.ts :: [boundary-1] twelve keys each get their own load before any settles, and each get resolves with its own key's value",
+    "tests/private/one-load-per-key.test.ts :: [boundary-1] keys named like object properties load separately and are kept separately",
+    "tests/private/one-load-per-key.test.ts :: [boundary-1] one key's load rejecting does not reject the other key's get",
+    "tests/private/one-load-per-key.test.ts :: [unhappy-1] three waiting gets reject with a non-Error reason as given, and each later failure is its own",
+    "tests/private/one-load-per-key.test.ts :: [unhappy-1] a failed load for another key neither stores anything nor drops a fresh entry"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 22,
+      "total": 22
+    },
+    "hidden": {
+      "passed": 36,
+      "total": 36
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented the cache in `src/index.ts`, and all tests pass: 22 of 22 in the public suite and 36 of 36 in the private suite. The exported names and signatures are unchanged and I added no other files.\n\nHow it works:\n- **One load per key:** stored values live in one `Map` and loads in flight in another. A `get` that finds no usable value joins the load already running for that key, or starts one if there isn't one.\n- **Fresh, stale, expired:** an entry's age is counted from when its load settled. While the age is under fresh-for, the stored value is returned straight away. While it's under fresh-for plus stale-for, the stored value is still returned straight away and one background refresh starts if none is running. After that, the entry is dropped and the `get` waits for a new load, or joins a refresh that is still running.\n- **Failures:** a failed load is never stored. A failed background refresh calls `onError` with the error and the key. It leaves the old value as it was, so the value still expires on its original schedule. The refresh's promise has a no-op catch on it so a failure isn't reported as an unhandled rejection.\n- **Maximum entries:** the entries `Map` is kept in least-recently-used order, and a stale read moves an entry to the most recent end. An entry is only added when its load succeeds, and the oldest are dropped at that point if the cache is over its maximum. A load that is still running, failed, or invalidated never pushes anything out.\n- **Invalidate:** this drops the entry and marks any load in flight for the key as discarded. Callers already waiting still get its result, but it isn't stored, and the next `get` starts a fresh load.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "1024c832-14f0-4172-ac6e-2a14b6ea03e1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.43639550000000005,
+        "turns": 9,
+        "durationMs": 63275,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.43639550000000005
+  }
+}

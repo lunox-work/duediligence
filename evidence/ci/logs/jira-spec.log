@@ -1,0 +1,48 @@
+jira-spec: incomplete. Public 40/84, hidden 13/71, existing 63/63; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at e57785e3eef1541ef717513e5d9d259409312002.
+Hidden suite sha256 c197ed84003d8b6b9748c2a3ad3040bd5f6da02860861f760a8ad1e2b4aa472c, sealed 2026-10-26T04:36:00.076Z.
+Failing scenarios: boundary-1, boundary-10, boundary-11, boundary-12, boundary-2, boundary-3, boundary-4, boundary-5, boundary-8, boundary-9, concurrency-1, concurrency-2, happy-10, happy-11, happy-12, happy-3, happy-4, happy-5, happy-6, happy-8, happy-9, unhappy-1, unhappy-2
+public: test/jira-spec.hash.test.ts :: [happy-3] specHash of a plain summary and description is its known hash
+public: test/jira-spec.hash.test.ts :: [happy-3] specHash of a description with a newline is its known hash
+public: test/jira-spec.hash.test.ts :: [happy-3] specHash hashes non-ASCII and astral characters as UTF-8
+public: test/jira-spec.hash.test.ts :: [boundary-1] two empty strings still hash
+public: test/jira-spec.hash.test.ts :: [boundary-2] moving text across the summary/description boundary changes the hash
+public: test/jira-spec.hash.test.ts :: [boundary-3] a trailing space in the description is significant
+public: test/jira-spec.hash.test.ts :: [boundary-3] a leading space in the summary is significant
+public: test/jira-spec.hash.test.ts :: [boundary-4] line endings are not normalised before hashing
+public: test/jira-spec.hash.test.ts :: [unhappy-1] an undefined summary rejects with a TypeError naming summary
+public: test/jira-spec.hash.test.ts :: [unhappy-1] a numeric summary rejects with a TypeError naming summary
+public: test/jira-spec.hash.test.ts :: [unhappy-1] a null descriptionText rejects with a TypeError naming descriptionText
+public: test/jira-spec.hash.test.ts :: [unhappy-1] an object descriptionText rejects with a TypeError naming descriptionText
+public: test/jira-spec.hash.test.ts :: [concurrency-1] overlapping calls each resolve to their own input's hash
+public: test/jira-spec.hash.test.ts :: [concurrency-1] many interleaved calls each resolve to their own input's hash
+public: test/jira-spec.issue.test.ts :: [happy-6] a complete v3 issue becomes a spec
+public: test/jira-spec.issue.test.ts :: [happy-6] fields beyond the spec fields add no keys to the result
+public: test/jira-spec.issue.test.ts :: [happy-9] issue type and updated stamp do not affect the hash
+public: test/jira-spec.issue.test.ts :: [happy-9] a missing issue type and stamp, and a different key, leave the hash alone
+public: test/jira-spec.issue.test.ts :: [happy-10] a plain-string description is kept exactly
+public: test/jira-spec.issue.test.ts :: [happy-10] an empty string description is kept as the empty string
+public: test/jira-spec.issue.test.ts :: [boundary-8] carriage returns and surrounding whitespace are not normalised
+public: test/jira-spec.issue.test.ts :: [boundary-8] a whitespace-only string description is kept as is
+public: test/jira-spec.issue.test.ts :: [boundary-9] an absent or null description becomes the empty string
+public: test/jira-spec.issue.test.ts :: [boundary-9] a number, boolean or array description becomes the empty string
+public: test/jira-spec.issue.test.ts :: [happy-11] ADF flattens to text: paragraphs join with a newline
+public: test/jira-spec.issue.test.ts :: [happy-11] ADF flattens to text: heading then paragraph
+public: test/jira-spec.issue.test.ts :: [happy-11] ADF flattens to text: bullet list items, one per line
+public: test/jira-spec.issue.test.ts :: [happy-11] ADF flattens to text: code block keeps its own newlines
+public: test/jira-spec.issue.test.ts :: [happy-11] ADF flattens to text: emoji uses attrs.text
+public: test/jira-spec.issue.test.ts :: [happy-11] ADF flattens to text: task items hold inline content
+public: test/jira-spec.issue.test.ts :: [happy-11] the hash of an ADF description is the hash of its flattened text
+public: test/jira-spec.issue.test.ts :: [boundary-10] empty or degenerate ADF: a rule is an empty block
+public: test/jira-spec.issue.test.ts :: [boundary-10] empty or degenerate ADF: whitespace is not trimmed
+public: test/jira-spec.issue.test.ts :: [unhappy-2] malformed ADF is ignored rather than thrown on: node with no type joins with newlines
+public: test/jira-spec.issue.test.ts :: [unhappy-2] malformed ADF is ignored rather than thrown on: mention without attrs
+public: test/jira-spec.issue.test.ts :: [unhappy-2] non-node items between blocks add no separator
+public: test/jira-spec.issue.test.ts :: [boundary-11] deeply nested ADF does not overflow the stack
+public: test/jira-spec.issue.test.ts :: [boundary-11] deeply nested ADF under a doc with an empty innermost node is empty
+public: test/jira-spec.issue.test.ts :: [boundary-12] a fields block of {} yields a spec of defaults
+public: test/jira-spec.issue.test.ts :: [boundary-12] a fields block of null yields a spec of defaults
+public: test/jira-spec.issue.test.ts :: [boundary-12] a fields block of undefined yields a spec of defaults
+public: test/jira-spec.issue.test.ts :: [boundary-12] a fields block of all-null members yields a spec of defaults
+public: test/jira-spec.issue.test.ts :: [concurrency-2] overlapping calls each resolve to their own issue's spec
+public: test/jira-spec.issue.test.ts :: [concurrency-2] many interleaved string and ADF calls each resolve to their own spec
+Check "independent-tests (drafted)": failure, incomplete: public 40/84, hidden 13/71, existing 63/63 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/jira-spec.json); not posted (no token).

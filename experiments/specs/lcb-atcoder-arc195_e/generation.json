@@ -1,0 +1,23 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "2661d762-5fbb-4f63-b92a-7095fc89ca0e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.21875109999999998,
+        "turns": 7,
+        "durationMs": 59805,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.21875109999999998,
+    "finalText": "I wrote the public test suite in `tests/public/test_random_tree_distance.py`. `compile_check.py` reports no errors. All 8 tests fail with a Runtime Error for now, because `src/main.py` raises `not implemented`, which is expected.\n\n**The cases:**\n- **Samples 1, 2 and 3:** one test each, with input and output exactly as the statement gives them.\n- **Smallest input at the largest weight:** N=2 with A₂=10⁹. There is only one tree, so the answer is 10⁹ mod 998244353 = 1755647, worked out by hand.\n- **N=3 with both weights 10⁹, all three pairs:** worked out by hand from the two possible trees. The sums are 2a, 3a and 3a, which gives 3511294, 5266941 and 5266941.\n- **Repeated query:** asking `1 3` twice must print 3 both times.\n- **N=6, all 15 pairs:** the expected answers are computed inside the test by building all 5! = 120 trees and adding up the path weights directly.\n- **N=8 with weights near 10⁹:** computed the same way over all 7! = 5040 trees, so the modulo step gets tested.\n\nTo make sure the brute force can be trusted, I ran it on samples 1 and 3 (all 40,320 trees for N=9) and on both hand-worked cases. It matched every expected value. No case goes outside the constraints, and nothing outside `tests/public/` was changed.\n\n8 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_random_tree_distance.py"
+    ]
+  }
+}

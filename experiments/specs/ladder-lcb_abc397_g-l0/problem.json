@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "abc397_g",
+  "contest_id": "abc397",
+  "contest_date": "2025-03-15T00:00:00",
+  "difficulty": "hard",
+  "title": "Maximize Distance",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 3,
+  "privateCases": 40
+}

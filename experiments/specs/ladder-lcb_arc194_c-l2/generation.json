@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "21c7dee0-b515-4cf2-9f9b-a727087c0a1e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3153366,
+        "turns": 7,
+        "durationMs": 83466,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.3153366,
+    "finalText": "The suite is in `tests/public/test_cost_to_flip.py`. `compile_check.py` reports no errors, and all 13 tests fail with a Runtime Error because `src/main.py` raises `not implemented`, as expected.\n\n**Two gaps in `spec.md`:** it has no sample inputs and no constraints section. So there are no sample tests, and every expected value was worked out by hand or by brute force. For the limits, I used this problem's original contest bounds (AtCoder ARC194 C): N ≤ 2×10^5 and 1 ≤ C_i ≤ 10^6. Only the large C values and the full-size test depend on those bounds; if your bounds are different, check those cases.\n\n**What's covered:**\n- **N = 1, all four combinations of A and B:** worked out by hand. These include the edge the statement points out, that the cost is charged on A *after* the flip: flipping 1→0 costs 0, and flipping 0→1 costs C_1.\n- **N = 1 with C_1 = 10^6**, the largest single value under the original bounds.\n- **A already equal to B (N = 5):** answer 0.\n- **Small cases, N from 2 to 8:** expected values come from a brute-force search in the test file that tries every possible state of A and charges each flip exactly as the statement defines it. They include:\n  - the case where turning off a costly element that A and B already agree on, then back on at the end, comes out cheaper (105 against 203);\n  - all 1s to all 0s;\n  - all 0s to all 1s with different costs;\n  - mixed cases with costs up to 10^6.\n  - The 4-element case (answer 16) is the original contest's first sample, re-checked by brute force rather than taken from memory.\n- **Full-size case:** N = 2×10^5, all 0s to all 1s, every C_i = 10^6. The answer is C·N(N+1)/2 = 20000100000000000. A comment in the test explains why: each element's last flip turns it on for good, so the j-th of those flips costs at least j·C, and flipping each element once costs exactly that.\n\n13 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_cost_to_flip.py"
+    ]
+  }
+}

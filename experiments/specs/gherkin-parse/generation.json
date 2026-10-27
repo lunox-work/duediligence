@@ -1,0 +1,84 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "a8e6d7b1-bac9-4594-978d-2d15d0b4bb5c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.17430230000000002,
+        "turns": 6,
+        "durationMs": 53363,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.17430230000000002,
+    "finalText": "I've written `src/index.ts`, and `npm run build` finished with no errors. The build also creates `src/index.js`, which is gitignored; I deleted it so `src/index.ts` is the only file I left.\n\nThe parser itself is one function, `parseFeature(text)`. It returns a `Feature`: the feature's name, its background, and its scenarios in file order. Its doc comment lists every case where the spec says parsing fails, each throwing a `ParseError` at the offending line.\n\n**Departure from the rules:** the `ParseError` constructor has a `super(message);` line before `throw new Error(\"not implemented\");`. TypeScript won't compile a subclass of `Error` whose constructor never calls `super`, so the body can't be just the throw. The constructor takes `(message, line)`, and `line` is a read-only property.\n\n**Choices the spec leaves open, written into the doc comments so both test suites assume the same thing:**\n- **Tags:** each tag is kept as written, including its `@` (for example `\"@happy\"`).\n- **Doc strings and tables:** a step's `docString` is a list of lines and its `table` is a list of rows of trimmed cells. Each is `null` when the step has none.\n- **Background:** `background` is the list of background steps, or `null` when the file has no `Background:` line.\n- **Not included:** the spec gives no line number for the feature or the background, so neither has a `line` field.\n\nExports: StepKeyword, Step, Scenario, Feature, ParseError, parseFeature",
+    "problem": null,
+    "sha256": "c7af1b510aab8a4c872a4bf3cd74c8e33b2206f8b3bca7a39911fc2dcc699d29"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "2efede28-b03c-43fb-9941-38bf8d4cbb85",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4563383999999999,
+        "turns": 7,
+        "durationMs": 121076,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.4563383999999999,
+    "finalText": "I've written the public test suite in four files under `tests/public/`. `npm run build` reports no errors. All 18 tests fail with `not implemented`, as expected while the bodies throw.\n\n| Key | File | What's tested |\n|---|---|---|\n| `[happy-1]` | `valid-files.test.ts` | **Happy path:** two scenarios using all six keywords, checked against the whole `Feature` object. **Boundary:** `\\r\\n` line endings and tab indentation; a scenario name and step text containing `:`. **Also:** step text is whatever follows the keyword and exactly one space, so `Given  x` gives ` x`. |\n| `[happy-2]` | `valid-files.test.ts` | **Happy path:** description lines, comments, blank lines, and tags on the next scenario only. **Boundary:** comments that look like keywords or tags; tags from several tag lines all go to the next scenario. |\n| `[happy-3]` | `valid-files.test.ts` | **Happy path:** the background is returned on its own and not copied into the scenarios. **Boundary:** a `Background:` with no steps gives `[]`, not `null`. |\n| `[boundary-1]` | `doc-strings-and-tables.test.ts` | **Happy path:** the doc string's opening-quote indentation is removed from each line, and table cells are trimmed. **Boundary:** a doc string holding `Feature:`, `Scenario Outline:`, `Given`, `#`, `@` and `\\|` lines keeps them as text. |\n| `[unhappy-1]` | `errors.test.ts` | Each listed error, checking it is a `ParseError` with the right `line` and that its message includes `line <n>`. **Boundary:** line counting across `\\r\\n` and blank lines. |\n| `[boundary-2]` | `empty-feature.test.ts` | **Happy path:** `Feature: Empty\\n`. **Boundary:** no final newline; also a description, a comment and `\\r\\n` blank lines. |\n\nWhere the spec leaves something open, the tests don't pin it down:\n- **Comments before `Feature:`:** never used, because the spec doesn't say whether they count as \"other content\".\n- **Step before any scenario:** that error is tested with the step after a tag line, so it can't be read as a description line.\n- **\"Not supported\" wording:** the `Scenario Outline:` message is only checked for \"support\" (any case), because the exact wording isn't given.\n- **Tag order:** checked without regard to order.\n\nThe build writes compiled `.js` files next to the tests. They're gitignored and `npm test` produces them anyway.\n\n18 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/doc-strings-and-tables.test.ts",
+      "tests/public/empty-feature.test.ts",
+      "tests/public/errors.test.ts",
+      "tests/public/valid-files.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "ca7b8aab-53ab-4ead-b2c5-f3df7ea45db3",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0978838,
+        "turns": 14,
+        "durationMs": 307697,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.0978838,
+    "finalText": "I wrote the hidden suite in four files under `tests/private/`, one per public file. `npm run build` reports no errors. All 47 tests fail against the interface as it stands, each with `not implemented`.\n\nTo check the tests themselves, I ran them against a throwaway implementation in a copy of the project in the scratchpad: it passes all 18 public and all 47 private tests. Nothing in `src/`, `tests/public/` or the config files was changed. The build had written compiled `.js` files into `src/` and `tests/public/`, and I deleted them.\n\n**Coverage:**\n- **All six scenarios:** `happy-1` to `happy-3`, `boundary-1`, `boundary-2` and `unhappy-1`.\n- **Each public test is extended,** with the public test named in a comment above the new one. The extensions include other feature names, 40 scenarios, a 30-row table, mixed `\\n`/`\\r\\n` endings, and doc strings and tables on later steps and background steps.\n- **Shortcuts an implementation tuned to the public suite would take, and the case that catches each:**\n  - recognising only the literal `Feature: Empty`: an empty feature with another name;\n  - errors whose line is one digit: error lines of 10 or more;\n  - checking only `Given` for a step before any scenario: every other keyword after a tag line;\n  - tags that carry over to later scenarios: tags in the middle of four scenarios;\n  - treating any word that starts with a keyword as a step: `Givenness is rare`;\n  - a leftover `\\r` in the last table cell: CRLF tables;\n  - reporting the first doc string's opening line: an unclosed doc string after a closed one;\n  - scanning the file for `Scenario Outline:` before parsing: the outline sits inside an unclosed doc string, and the error must name the doc string's line.\n\nA few tests rely on a plain reading rather than an explicit sentence in the spec:\n- lines of only spaces and tabs count as blank;\n- `Examples:`, a lower-case `then`, and free text straight after `Scenario:` are each \"none of the forms\" and fail at their line;\n- when several lines are bad, the error names the first one.\n\nI left out anything the spec doesn't settle:\n- a step line straight after `Feature:` (description or error);\n- comments or tags before `Feature:`;\n- blank lines inside a doc string;\n- tags before `Background:`;\n- table and doc-string edge forms.\n\n47 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/doc-strings-and-tables.test.ts",
+      "tests/private/empty-feature.test.ts",
+      "tests/private/errors.test.ts",
+      "tests/private/valid-files.test.ts"
+    ],
+    "open": []
+  },
+  "notes": {
+    "sessionId": "58938cb8-d147-4791-a296-e95e84144a0a",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.2848635,
+    "turns": 5,
+    "durationMs": 63382,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I wrote `notes.md`, with sections for result shape, feature line and layout, scenarios, steps, comments, tags, background, doc strings, tables and errors.\n\nA few points the developer can't get from the ticket alone:\n- **Exact output fields:** results are compared by exact deep equality, so feature, scenario and step objects must have only the documented fields.\n- **Tag order:** order is pinned for tags on a single line, but not when tags come from several lines.\n- **Doc string content:** lines inside a doc string are never treated as keywords, comments, tags or table rows.\n- **Unclosed doc string:** it fails at the line of the opening `\"\"\"`, even if step-like lines come after it.\n- **Error messages:** must contain `line <n>` with no further digit right after the number. The `Scenario Outline:` error must also contain the word \"support\".\n\n50 bullets (plus 13 sub-bullets: the step list and the error examples).",
+    "problem": null
+  }
+}

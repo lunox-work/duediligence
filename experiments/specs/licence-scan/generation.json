@@ -1,0 +1,80 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "f1065a12-1e18-4270-b214-77de5f2adfb7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.18596459999999998,
+        "turns": 5,
+        "durationMs": 33669,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.18596459999999998,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors. The build also created `src/index.js` next to it; `.gitignore` already excludes `*.js`.\n\nThe contract is one function plus three types:\n\n- **`scanLicences(versionLockfile, submissionLockfile)`** takes the two lockfiles as raw text. It returns a `ScanResult`, or throws if either text isn't JSON, has no `\"packages\"` object, or has a `lockfileVersion` other than 3. Every scenario in the spec can be tested through this one call.\n- **`ScanResult`** is `{ passed: boolean; offenders: Offender[] }`. Offenders are listed once per name and version pair, ordered by name, then version.\n- **`Offender`** is `{ name; version; licence: string | null; reason }`.\n- **`OffenceReason`** is `\"copyleft\" | \"unknown\"`.\n\nTwo choices the spec doesn't fully settle:\n\n- **No licence:** `licence` is `null` when an entry has none. I used `null` rather than leaving the field out, so both test suites can compare whole objects the same way.\n- **Old-style licences:** for an old `license` object or `licenses` array, the spec doesn't say what \"licence as written\" should be. I left it unspecified rather than make up a rule. Tests that check that field in those cases may disagree with the implementation.\n\nscanLicences, ScanResult, Offender, OffenceReason",
+    "problem": null,
+    "sha256": "ff3090540a3c385dcbb5942ee0ab88abde2fe3544c8e6b5e5d4ca33ee812676a"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "59958929-06c6-4f89-88d8-82a34eadc9ed",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4274849,
+        "turns": 7,
+        "durationMs": 108953,
+        "subtype": "success"
+      },
+      {
+        "sessionId": "59958929-06c6-4f89-88d8-82a34eadc9ed",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5166979,
+        "turns": 2,
+        "durationMs": 11211,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.9441828000000001,
+    "finalText": "I deleted `tests/public/helpers.ts`. The `lockfile` helper and `BASE` constant it held are now copied into each of the three test files, so `tests/public/` contains only `added.test.ts`, `licences.test.ts` and `result.test.ts`. The tests themselves haven't changed.\n\n`npm run build` reports no errors, and all 29 tests fail against the stub, as expected. I removed the `.js` files the build created again, so nothing outside `tests/public/` has changed.\n\n29 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/added.test.ts",
+      "tests/public/licences.test.ts",
+      "tests/public/result.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "7c51e963-6158-4243-8bb7-f93b51533c5c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.5065128000000003,
+        "turns": 15,
+        "durationMs": 389633,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.5065128000000003,
+    "finalText": "The hidden suite is written in `tests/private/`. `npm run build` reports no errors, and all 61 tests fail against the current stubs.\n\nTo check the tests themselves, I wrote a full implementation in a scratch copy of the project, outside the repo. It passes all 90 public and private tests. I then broke it in eight shortcut ways, and every one failed at least one private test. Five of those shortcuts pass the whole public suite:\n- taking the name from the last path segment, so `@a/util` and `@b/util` look the same;\n- matching on the entry's `name` field instead of its path;\n- leaving the version's dev entries out when checking what it already had;\n- treating an exception named after the GPL (`Apache-2.0 WITH GPL-3.0-linking-exception`) as making the licence copyleft;\n- reading `AND`/`OR` left to right. The public precedence example happens to give the same answer either way; `MIT OR Apache-2.0 AND GPL-3.0-only` does not.\n\nWhat the files cover:\n- **`added.test.ts`**:\n  - **[happy-1]**: a pair the version already had stays unscanned even when its licence changed, or the version had it only as a dev dependency. Packages only the version holds are never scanned. A 150-package case mixes old and new packages.\n  - **[boundary-1]**: the old and new versions kept side by side, several new versions of one name, prerelease versions, and scoped or deeply nested paths.\n  - **[boundary-2]**: dev entries mixed with production ones, `optional: true` still scanned, and one pair added both as dev and as production.\n- **`licences.test.ts`**:\n  - **[happy-2]**, **[unhappy-1]**, **[boundary-3]**, **[boundary-4]**: more identifiers and mixed case, parentheses, and precedence cases that only pass if `AND` binds tighter than `OR`.\n  - **[unhappy-2]**: expressions that don't parse count as \"unknown\" even when they name the GPL. Also covers `SEE LICENSE IN` and `LicenseRef-` values that mention the GPL, and edge cases in the old-style `license` object and `licenses` array.\n- **`result.test.ts`** (**[happy-3]**): ordering checked with many offenders and with \"copyleft\" and \"unknown\" ones interleaved, one pair under three paths listed once, and the project entry never scanned even when its version changed. Also: names come from the path, not the entry's `name` field, and the licence is reported exactly as written.\n- **`refused.test.ts`** (**[unhappy-3]**): each test first confirms valid lockfiles give a result, then checks that bad text is refused with an `Error` in either position. Bad text includes non-JSON, JSON that isn't an object, a `packages` value that isn't an object, and lockfile versions 1, 2 and 4. The spec gives no error message, so the tests check only that an `Error` is thrown.\n\nI left out cases the spec doesn't settle:\n- version ordering where plain string order and semver order disagree;\n- operators written in lowercase;\n- a `LicenseRef-` mixed into a larger expression;\n- `devOptional`;\n- what licence text to report for old-style objects and arrays;\n- a missing `lockfileVersion`.\n\nRunning the build also created ignored `.js` files in `src/` and `tests/public/`. I deleted the ones in `tests/private/`.\n\n61 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/added.test.ts",
+      "tests/private/licences.test.ts",
+      "tests/private/refused.test.ts",
+      "tests/private/result.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "ladder-lcb_abc400_g-l4",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_samples.py :: TestSamples.test_spec_incomplete"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 1
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

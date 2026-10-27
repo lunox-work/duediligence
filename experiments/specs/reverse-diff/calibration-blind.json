@@ -1,0 +1,95 @@
+{
+  "slug": "reverse-diff",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/hunks.test.ts :: hunk content: whole-word identifiers are mapped in context, removed, added lines and the @@ text",
+    "tests/public/hunks.test.ts :: hunk content: words containing the public name are left, while it is mapped at line edges",
+    "tests/public/hunks.test.ts :: one pass: a replaced name is not replaced again",
+    "tests/public/hunks.test.ts :: one pass: the result does not depend on table order",
+    "tests/public/paths.test.ts :: file headers: every public path in the header lines becomes the real path",
+    "tests/public/paths.test.ts :: file headers: a file entry does not map a longer file name that shares its prefix",
+    "tests/public/paths.test.ts :: directory entry: maps every path under the directory",
+    "tests/public/paths.test.ts :: directory entry: matches whole path segments only, so ledgers/x.ts is not mapped",
+    "tests/public/paths.test.ts :: renames: rename from and rename to lines are mapped",
+    "tests/public/paths.test.ts :: new and deleted files: /dev/null headers are left as they are",
+    "tests/public/paths.test.ts :: most specific path entry wins over a covering directory entry",
+    "tests/public/paths.test.ts :: most specific path entry wins regardless of table order, and siblings use the directory entry",
+    "tests/public/unchanged.test.ts :: unchanged: lines without public names, no-newline markers and a missing final newline are kept",
+    "tests/public/unchanged.test.ts :: unchanged: CRLF and LF line endings are each kept on mapped and unmapped lines",
+    "tests/public/unmapped.test.ts :: unmapped: a path no entry covers is left untouched and reported once",
+    "tests/public/unmapped.test.ts :: unmapped: paths are reported in the order they first appear, skipping mapped ones"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 16
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 37,
+  "kept": [
+    "tests/private/headers.test.ts :: headers: spec example file path is mapped in diff --git, --- and +++ lines",
+    "tests/private/headers.test.ts :: headers: other file entries map each file of a multi-file diff",
+    "tests/private/headers.test.ts :: headers: spec example directory entry maps a path under it",
+    "tests/private/headers.test.ts :: headers: directory entry with a multi-segment real name maps files at several depths",
+    "tests/private/headers.test.ts :: headers: directory entry with a multi-segment public name maps only paths under all its segments",
+    "tests/private/headers.test.ts :: headers: path entry matches whole segments only, spec example ledgers/x.ts",
+    "tests/private/headers.test.ts :: headers: names sharing only a prefix with a directory entry are not mapped",
+    "tests/private/headers.test.ts :: headers: directories named a and b are mapped without disturbing the a/ and b/ prefixes",
+    "tests/private/headers.test.ts :: headers: public path names are matched literally, not as patterns",
+    "tests/private/headers.test.ts :: renames: spec example rename lines and a /dev/null header are handled",
+    "tests/private/headers.test.ts :: renames: a deleted file keeps its +++ /dev/null header",
+    "tests/private/headers.test.ts :: renames: a rename across differently mapped directories with a hunk maps both sides",
+    "tests/private/headers.test.ts :: specific: spec example file entry wins over its directory entry",
+    "tests/private/headers.test.ts :: specific: deepest of three nested entries wins whatever the table order",
+    "tests/private/headers.test.ts :: specific: a nested directory entry covers only whole segments, others fall back to the parent",
+    "tests/private/headers.test.ts :: one pass: swapped path entries are each applied once",
+    "tests/private/hunks.test.ts :: hunks: spec example maps Sheet in context, removed, added lines and hunk header text",
+    "tests/private/hunks.test.ts :: hunks: whole words only, at every position in a line, other words left alone",
+    "tests/private/hunks.test.ts :: hunks: several identifiers across several hunks and files are all mapped",
+    "tests/private/hunks.test.ts :: hunks: hunk line numbers are kept while the text after the second @@ is mapped",
+    "tests/private/hunks.test.ts :: hunks: path and identifier entries apply together in one diff",
+    "tests/private/hunks.test.ts :: one pass: spec example +Beta(Gamma) becomes +Alpha(Beta)",
+    "tests/private/hunks.test.ts :: one pass: swapped identifiers trade places in every kind of hunk line",
+    "tests/private/hunks.test.ts :: one pass: a chain of three identifiers listed in reverse order is applied once",
+    "tests/private/hunks.test.ts :: one pass: a real name that contains another public name is not mapped again",
+    "tests/private/unchanged.test.ts :: unchanged: a diff holding no public name comes back byte for byte",
+    "tests/private/unchanged.test.ts :: unchanged: no-newline markers and a missing final newline are kept while content is mapped",
+    "tests/private/unchanged.test.ts :: unchanged: no-newline marker is kept even when its words are public names",
+    "tests/private/unchanged.test.ts :: unchanged: CRLF line endings are kept while paths and identifiers are mapped",
+    "tests/private/unchanged.test.ts :: unchanged: mixed line endings and no final newline are each kept as they were",
+    "tests/private/unchanged.test.ts :: unchanged: an empty diff maps to an empty diff with nothing unmapped",
+    "tests/private/unmapped.test.ts :: unmapped: spec example docs/readme.md is left as is and reported once",
+    "tests/private/unmapped.test.ts :: unmapped: paths are reported once each in order of first appearance",
+    "tests/private/unmapped.test.ts :: unmapped: renames report only the uncovered side, in order",
+    "tests/private/unmapped.test.ts :: unmapped: with an empty table every path is reported and the diff is unchanged",
+    "tests/private/unmapped.test.ts :: unmapped: paths in a CRLF diff are reported without the line ending",
+    "tests/private/unmapped.test.ts :: unmapped: a new uncovered file is reported and kept"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 16,
+      "total": 16
+    },
+    "hidden": {
+      "passed": 37,
+      "total": 37
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented the spec in `src/index.ts` and every test passes: 16 of 16 in the public suite and 37 of 37 in the private suite, both run with `node sandbox/run.mjs`. No test contradicted the spec, and I didn't change any test or config file.\n\nHow it works:\n- **File paths:** paths are mapped on `diff --git`, `---`/`+++`, `rename from/to` and `copy from/to` lines. The `a/` and `b/` prefixes stay as they are, and `/dev/null` is never mapped or reported.\n- **Choosing a path entry:** an entry matches only whole path segments, and the most specific (longest) matching entry wins whatever the table order. A path no entry covers is left alone and reported once, in the order it first appears.\n- **Identifiers:** every public name is replaced in one pass, matching whole words only. This applies to context, removed and added lines and to the text after the second `@@`; the line numbers on `@@` lines stay as they are.\n- **Hunk boundaries:** the line counts on each `@@` line are used to tell where a hunk ends. That way a hunk line that happens to start with `---` isn't mistaken for a file header.\n- **Unchanged bytes:** `\\ No newline at end of file` markers, each line's own line ending (LF or CRLF) and a missing final newline are all kept.\n\nTwo additions go a little beyond the spec: paths in `Binary files … differ` lines are mapped too, and anything after a tab on a `---`/`+++` line (such as a timestamp) is kept unchanged.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "8fd7c236-c6ee-435d-9d0c-b8651a53ff9f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5121917,
+        "turns": 10,
+        "durationMs": 84452,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.5121917
+  }
+}

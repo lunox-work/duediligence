@@ -1,0 +1,42 @@
+{
+  "slug": "he-106",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_solution.py :: TestF.test_docstring_example",
+    "tests/public/test_solution.py :: TestF.test_first_even_position_uses_factorial",
+    "tests/public/test_solution.py :: TestF.test_first_position_uses_one_based_index",
+    "tests/public/test_solution.py :: TestF.test_later_even_position_uses_factorial",
+    "tests/public/test_solution.py :: TestF.test_later_odd_position_uses_sum",
+    "tests/public/test_solution.py :: TestF.test_three_element_list_uses_indices_one_through_three",
+    "tests/public/test_solution.py :: TestF.test_zero_size_returns_empty_list"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 11,
+  "kept": [
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_changing_and_repeated_sizes",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_empty_size_before_and_after_nonempty_size",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_fifteen_positions_include_later_odd_sums",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_four_positions_end_in_twenty_four",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_fourteen_positions_include_large_even_products",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_long_sequence_with_even_final_index",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_long_sequence_with_odd_final_index",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_nine_positions_include_both_new_branches",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_single_position_after_longer_request",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_ten_positions_end_in_factorial",
+    "tests/private/test_factorial_sum.py :: TestFactorialSumPrivate.test_twenty_four_positions_preserve_exact_factorials"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 7,
+      "total": 7
+    },
+    "hidden": {
+      "passed": 11,
+      "total": 11
+    }
+  }
+}

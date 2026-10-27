@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "f451958b-64e2-43ac-9d1e-65f91bb317ce",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2170163,
+        "turns": 6,
+        "durationMs": 43716,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2170163,
+    "finalText": "I wrote the contract in `packages/core/src/analysis.ts`. It type-checks with no errors, and all 105 existing tests still pass.\n\n- **What's in it:** the constants and types exactly as the spec lists them, with the three lists as plain `as const` arrays like `WHOLE_BOUNTY_COMPLEXITIES`. The two functions have the spec's signatures, and their bodies only throw \"not implemented\". The file imports nothing.\n- **Errors:** the doc comment on `expiredAnalysis` says it throws a `RangeError`, and the one on `canonicalJson` says it throws a `TypeError`. I didn't add any error classes.\n- **Parameter names:** the package config doesn't allow unused parameters, so I named them `_attempt`, `_maxAttempts` and `_value`. Callers see the same types.\n- **`index.ts` not updated:** the spec says `packages/core/src/index.ts` should add `export * from \"./analysis.js\";`, but you asked me to write only the seam file, so I didn't. The implementer has to add that line, or the spec's scenario that imports from `index.ts` will fail.\n\nExported names added: `ANALYSIS_STATUSES`, `AnalysisStatus`, `ANALYSIS_ERROR_CODES`, `AnalysisErrorCode`, `ARTIFACT_KINDS`, `ArtifactKind`, `GRAPHIFY_TOOL_VERSION`, `AnalysisParams`, `expiredAnalysis`, `canonicalJson`",
+    "problem": null,
+    "sha256": "4d310999b41fc06288f47dc6971f0f7b8e04ab69da3113efcaa85f11637eacb0"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "0f1e7d3b-741d-4ac6-8527-113155b3a8b5",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5304378000000001,
+        "turns": 6,
+        "durationMs": 131894,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5304378000000001,
+    "finalText": "`npx tsc -p tsconfig.test.json` reports no errors. When I ran the suite, 38 tests failed, as expected, and 6 passed.\n\nThe 6 that pass check the constants, which already have their values: the list values and that the lists aren't frozen, the tool version (both tests), and the `AnalysisParams` tests. They should keep passing once the functions are implemented. The rest fail because `expiredAnalysis` and `canonicalJson` throw `not implemented`, or because `index.ts` doesn't re-export the module yet.\n\nHow the suite is laid out:\n- **Two tests per scenario.** Each has a main-path test and one boundary test, keyed `[happy-1]`…`[happy-8]`, `[boundary-1]`…`[boundary-8]` and `[unhappy-1]`…`[unhappy-6]` in spec order. They're flat `test()` calls using `node:assert/strict`, the same style as `bounty.test.ts` and `handle.test.ts`.\n- **Boundary cases.** Where a scenario has a table of examples, I split the rows: the edge rows (`MAX_SAFE_INTEGER`, the nested refusals for `canonicalJson`) go in the boundary test. Otherwise the boundary test uses a nearby case that follows from the spec's rules. Examples: a `maxAttempts` of `MAX_SAFE_INTEGER + 1`, a deeply frozen input to `canonicalJson`, cycles that go two levels deep or through an array, and non-enumerable properties being ignored.\n- **Re-export checks.** These go through `import * as core from \"../src/index.js\"` and look names up by string. That way the file compiles now, while `index.ts` doesn't export the module yet.\n- **Error checks.** These require exactly a `RangeError` or `TypeError` with the spec's exact message.\n\nI wrote only `packages/core/test/analysis-params.test.ts`; nothing else was changed.\n\n44 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/analysis-params.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "e747a468-2876-4c97-a6a4-b84ae238e8a1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.4344589,
+        "turns": 19,
+        "durationMs": 353652,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.4344589,
+    "finalText": "I wrote the hidden suite in `packages/core/test/hidden-analysis-params/`. It compiles with `npx tsc -p tsconfig.test.json` with no errors. Against the current interface all 55 tests fail as required. Against a reference implementation I kept in the scratchpad, all 55 pass, and so does the public suite.\n\n- **`vocabulary.test.ts`** (`[happy-1]` to `[happy-4]`): the lists and the tool version are already in the seam file, so a test that reads them from `analysis.ts` would pass now. These tests read them through `src/index.ts` instead, which doesn't re-export the new module yet. That means they partly depend on the re-export from `[happy-3]`. They also check that every existing export of `handle`, `bounty`, `selection`, `pricing` and `repo` is still there and unchanged, and that `AnalysisParams` has no runtime value.\n- **`expired-analysis.test.ts`**: tries limits other than 3 and checks that a requeue returns `attempt + 1`, not the limit. It covers one below, at and above many limits, including the largest safe integer. Bad inputs include `-0`, `Number.MIN_VALUE`, `1 + EPSILON`, `2**60`, and non-numbers like `\"2\"` and `true` (both of which pass an `>= 1` check). It also checks that an invalid `maxAttempts` is refused when the attempt is at or past it, where skipping the check would just fail the analysis, and tries every pair of invalid arguments.\n- **`canonical-json.test.ts`**:\n  - **Key order:** cases where a locale-aware sort or code-point order gives a different result. Also prefixes, the empty key, integer-like keys, and an own `__proto__` key in both kinds of object.\n  - **Output format:** every one of the 65,536 single UTF-16 characters compared with `JSON.stringify`, as a value and as a key. Also extreme numbers, and spaces inside strings, which a shortcut that strips whitespace from the output would lose.\n  - **Shortcuts:** values `JSON.stringify` would drop or write as `null` (symbols, functions, `NaN` in arrays). Also holes, more kinds of non-plain object, and proof that `toJSON` is never called.\n  - **Ignored properties and cycles:** symbol keys and extra array properties whose values couldn't be encoded. Shared values at different depths, and cycles that don't pass through the root.\n\nI also ran six deliberately wrong versions of the code. Five passed the public suite, or failed only part of it, and every one of those five failed tests in this suite. They were: sorting keys with `localeCompare`, accepting `\"2\"` or `true` as an attempt, writing symbols as `null`, never clearing the cycle-detection set, and skipping the `maxAttempts` check when the attempt is at or past it. The sixth, on array holes, behaved exactly like the correct code because a hole reads as `undefined` anyway, so neither suite could catch it.\n\n55 tests, in 3 files.\n\nOpen in the spec:\n- `[boundary-2] changing one result does not affect a later call` writes to the returned object. That assumes the result can be changed, but the spec only says each call returns a new object. A frozen result would throw a `TypeError` on that write in strict-mode modules.",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-analysis-params/canonical-json.test.ts",
+      "packages/core/test/hidden-analysis-params/expired-analysis.test.ts",
+      "packages/core/test/hidden-analysis-params/vocabulary.test.ts"
+    ],
+    "open": [
+      "`[boundary-2] changing one result does not affect a later call` writes to the returned object. That assumes the result can be changed, but the spec only says each call returns a new object. A frozen result would throw a `TypeError` on that write in strict-mode modules."
+    ]
+  }
+}

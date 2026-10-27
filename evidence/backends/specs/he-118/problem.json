@@ -1,0 +1,9 @@
+{
+  "source": "HumanEval+ v0.1.10 (evalplus/humanevalplus_release)",
+  "task_id": "HumanEval/118",
+  "entry_point": "get_closest_vowel",
+  "picked": "random",
+  "solutions": 31,
+  "basePassPlusFail": 1,
+  "plusPass": 3
+}

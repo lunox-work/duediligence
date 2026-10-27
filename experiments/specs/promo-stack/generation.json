@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "ac533815-a634-4861-8ce5-04ac818cceb7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1919763,
+        "turns": 5,
+        "durationMs": 36432,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1919763,
+    "finalText": "I've written `src/index.ts`, and `npm run build` reports no errors.\n\n- **One function:** pricing is a single function, `priceCart(lines, promotions)`, which returns a `PricedCart`. The spec describes no stored state, so there's no class.\n- **Promotions:** `Promotion` is a union of the four kinds, told apart by `kind`. All four share `id`, `priority`, `exclusive` and an optional `tag`. The kind-specific fields are `percent`; `amount` (fixed, in cents off each unit); `buy` and `free`; and `minimum` and `amount` (threshold).\n- **Results:** each applied promotion is reported as `{ promotionId, amount }`. That shape is used both for a line's `promotions` and for the cart's `orderPromotions`.\n- **Errors:** the doc comment on `priceCart` says it throws in the three cases the spec names: an unknown kind (naming the promotion id), a duplicate id (naming that id), and a bad price or quantity (naming the product id). There are no custom error classes.\n- **Two choices the spec doesn't make:**\n  - The doc comment says priced lines come back in the same order as the cart lines, so tests can match them up by position.\n  - Because `Promotion` is a union, a test written in TypeScript needs a cast to pass an unknown kind. Plain `.js` tests don't.\n- **Cleanup:** the build also writes `src/index.js` (it's gitignored). I deleted it, so `src/index.ts` is the only file I left behind.\n\nExports: `CartLine`, `PromotionBase`, `PercentPromotion`, `FixedPromotion`, `BundlePromotion`, `ThresholdPromotion`, `Promotion`, `AppliedPromotion`, `PricedLine`, `PricedCart`, `priceCart`",
+    "problem": null,
+    "sha256": "b895c643cc0638424516c58947578a88919127c2fd9afb9324c3e3c524c34c1b"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "3a37e6ad-c00e-484d-8bd9-d8b31db7642b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5961890000000001,
+        "turns": 13,
+        "durationMs": 143014,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.5961890000000001,
+    "finalText": "I've written the test suite: four files in `tests/public/`, with two or more tests for every scenario in the spec. `npm run build` finishes with no errors. When run, every test fails with `not implemented`, as expected. The build also wrote `.js` files, including `src/index.js`, so I deleted them; only the `.ts` test files are left.\n\n| File | Scenarios |\n|---|---|\n| `line-promotions.test.ts` | happy-1, happy-2, happy-3, boundary-1 to boundary-4 |\n| `exclusive-promotions.test.ts` | boundary-5, boundary-6 |\n| `threshold-promotions.test.ts` | happy-4, boundary-7 |\n| `bad-input.test.ts` | unhappy-1, unhappy-2, unhappy-3 |\n\nWhere I left something unasserted because the spec doesn't settle it:\n\n- **Order total floored at 0 (boundary-7):** the test checks only that the total is 0. The spec doesn't say how much the second threshold reports once the total has hit zero.\n- **Bundle with an incomplete group (happy-3):** the test checks only the line total. The spec doesn't say whether a bundle that frees nothing is still reported.\n- **Thresholds:** no test sets a tag on a threshold or combines one with an exclusive promotion, since the spec doesn't say how those interact.\n- **Errors:** the bad-input tests check only that the error message contains the promotion id or product id.\n\nSome choices that go beyond the scenario text:\n\n- **Shuffled input:** promotions are passed out of priority order, so the sorting is actually tested.\n- **Thresholds judged on the full subtotal (boundary-7):** one test uses a minimum of 9500. That only passes if the second threshold is checked against 10000 and not against the 9400 left after the first.\n- **Bad quantities (unhappy-3):** negative and non-whole quantities each get their own test, alongside the quantity-0 case.\n\n31 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/bad-input.test.ts",
+      "tests/public/exclusive-promotions.test.ts",
+      "tests/public/line-promotions.test.ts",
+      "tests/public/threshold-promotions.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "0f32f604-bcc3-493b-99d5-e4f72beb2fdb",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.3631616,
+        "turns": 14,
+        "durationMs": 349883,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.3631616,
+    "finalText": "I wrote 57 hidden tests in 4 files under `tests/private/`. Against the current stub every one of them fails, and `tsc` builds with no errors.\n\n**Checks:**\n- **Reference implementation:** I wrote one in the scratchpad from the spec. All 57 private tests and all 31 public tests pass against it, so the expected values are consistent with the spec.\n- **Shortcuts:** I also tried five shortcut versions of that reference. Each one passes the whole public suite and fails at least one of these tests:\n  - working out the percentage as `total * (p/100)`, which loses the half cent in floating point;\n  - sorting priorities as text, so 10 comes before 9;\n  - capping a fixed amount by the original unit price instead of what is left on the line;\n  - stopping early on lines priced at 0;\n  - limiting how many promotions a line can take.\n- **Cleanup:** the build writes `.js` files next to `src/` and `tests/public/`. I deleted them, so the only change in the project is the new `tests/private/` folder.\n\n**What it covers:**\n- **Line promotions (`line-promotions.test.ts`, 23 tests):**\n  - **Matching:** tagged and untagged promotions across many lines; bundles with more than one free unit per group.\n  - **Order:** priorities compared as numbers, and ties broken by id with prefix ids like \"alpha\" before \"alphabet\".\n  - **Stacking:** a bundle's free units priced at what earlier promotions left, including after another bundle, and a bundle placed before a percent.\n  - **Rounding:** half-cent amounts where floating point drifts below the half, rounding on the line total rather than per unit, and rounding at each step when promotions stack.\n  - **Never below zero:** a fixed amount capped at what an earlier percent left, every kind reported with 0 on a line already at 0, percentages above 100, and lines with unit price 0.\n- **Exclusive promotions (`exclusive-promotions.test.ts`, 10 tests):**\n  - an exclusive promotion only ends the lines it matches;\n  - when priorities tie, the id decides which promotion counts as \"earlier\";\n  - an exclusive promotion applied with 0 on a line at 0 still blocks the ones after it;\n  - three exclusive promotions on one line, and lines that are each ended by a different exclusive promotion.\n- **Thresholds (`threshold-promotions.test.ts`, 10 tests):**\n  - a threshold the subtotal before line promotions would meet but the subtotal after does not;\n  - thresholds are never reported on lines, and an exclusive line promotion does not block them;\n  - several thresholds, some not qualifying, with priorities compared as numbers;\n  - a later threshold whose minimum equals the subtotal still applies after an earlier one has taken the total below it;\n  - the order total stays at 0 while the line totals are unchanged.\n- **Bad input (`bad-input.test.ts`, 14 tests):**\n  - **Unknown kind:** refused with an empty cart, when the promotion sits behind an exclusive one, when every line has quantity 0, and when the kind is missing altogether.\n  - **Duplicate ids:** refused with an empty cart, for two thresholds far apart in the list, when one copy would be skipped, and when other promotions sort between the copies.\n  - **Bad lines:** a negative price even when quantity is 0, a negative quantity deep in the cart, and quantities 2.25, 0.5 and −0.5. Each error must name the product id.\n  - **Quantity 0:** such a line is not affected by promotions of any kind or by thresholds.\n\nWhere the spec leaves something open, I did not test it either way:\n- whether a promotion that takes off 0 (a bundle with no full group) is reported on a line that is not at 0;\n- what amount is reported for a threshold when the order total is capped at 0;\n- what the `exclusive` flag or a tag means on a threshold;\n- non-whole unit prices;\n- which error wins when the input has more than one problem;\n- whether the caller's promotion array may be reordered;\n- how the unit price rounds when the line total does not divide evenly by the quantity.\n\n57 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/bad-input.test.ts",
+      "tests/private/exclusive-promotions.test.ts",
+      "tests/private/line-promotions.test.ts",
+      "tests/private/threshold-promotions.test.ts"
+    ],
+    "open": []
+  }
+}

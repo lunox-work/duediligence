@@ -1,0 +1,68 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "61afef7a-7ed9-4ef0-8682-bf00be8e03ee",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1818301,
+        "turns": 5,
+        "durationMs": 29395,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1818301,
+    "finalText": "I added the two functions the spec asks for to the end of `packages/core/src/stages.ts`. Every existing export is unchanged, and both new bodies are `throw new Error(\"not implemented\");`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes: 248 tests, 0 failures. No other file was changed. Both functions reach `packages/core/src/index.ts` through its existing `export * from \"./stages.js\"`.\n\n- **Types:** the signatures use the codebase's `BountyStep`. The `step` parameter is `Exclude<BountyStep, \"scope\">` and `stepHeldBy` returns `Exclude<BountyStep, \"sandbox\"> | null`. These are the same types as the spec's `\"price\" | \"sandbox\"` and `\"scope\" | \"price\"`. The `bounty` and `proposal` parameters use the same inline shapes as `scopeApproved` and `bountyStatus`.\n- **Parameter names:** the compiler config rejects unused parameters, so the stub parameters have an underscore in front (`_step`, `_bounty`, `_proposal`, `_heldBy`). Callers pass arguments by position, so the names don't affect the contract. The implementer can drop the underscores.\n- **No throws documented:** the spec says neither function throws, even with an unexpected `step` or `heldBy`, so neither doc comment mentions throwing.\n- **No new types or constants:** the spec's \"Decided\" list says none are added, so none were.\n- **Module comment left as is:** the comment at the top of `stages.ts` still says \"The steps are not locked to each other.\" That is no longer true with this change. I didn't edit it because you asked for the new exports only, so the implementer should update it.\n\nExported names added: `stepHeldBy`, `stepHeldReason`",
+    "problem": null,
+    "sha256": "6401b3305fcfb8481d771144c56dedde825adf0ff29806cccd92b5449f198754"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "1b23f372-8bb0-40a6-a2a6-1d3a522c1cf4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4812317,
+        "turns": 7,
+        "durationMs": 106283,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.4812317,
+    "finalText": "I wrote the suite in `packages/core/test/step-holds-confirmed.test.ts`. It uses the same `node:test` and `node:assert/strict` style as `stages.test.ts`, with flat top-level tests only.\n\n**What it covers.** There are two tests for each of the 15 spec scenarios: one for the happy path (the scenario's own examples) and one boundary case.\n- **Happy (6 scenarios):** version 1,000,000; the same answer when called twice on frozen arguments; each reason has no surrounding whitespace or newline, and the three reasons differ; every hold `stepHeldBy` can return maps to the right sentence; `scopeApproved` at version 0; `bountyStatus` with `\"Approved\"`.\n- **Unhappy (4 scenarios):** approvals one version off in either direction; an approval newer than the bounty's version; other step strings such as `\"sandbox \"` and `\"Sandbox\"`, which are held like the price and never read the proposal; reason pairs that can't happen, such as `(\"\", \"\")` and `(\"sandbox\", \"Scope\")`.\n- **Boundary (5 scenarios):**\n  - A proposal that throws if its `status` is read, to check that the price never looks at it.\n  - Version 0 with no approval, or with another version's approval.\n  - Near-misses of `\"approved\"`.\n  - A price and a sandbox that `stageDrift` reports as behind, which still aren't held.\n  - Extra fields that look as if they should count, such as a bounty with its own `proposal: { status: \"approved\" }`, which approve nothing.\n\n**Results.**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the current stubs, 28 tests fail with `not implemented`, as expected. The 2 `[happy-6]` tests pass, because they cover existing exports that already work.\n- As a sanity check, I swapped in a minimal implementation written from the spec, in a scratch copy of the compiled output only. All 30 tests passed. The repository is untouched apart from the new test file.\n\n30 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/step-holds-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "24aebfe4-c552-4429-9cb0-edecaf58cc46",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8209458000000002,
+        "turns": 11,
+        "durationMs": 190312,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.8209458000000002,
+    "finalText": "I wrote the hidden suite as two files in `packages/core/test/hidden-step-holds-confirmed/`. It compiles cleanly. Against the interface as it stands, all 34 tests fail with `not implemented`.\n\nTo check the suite would pass a correct implementation, I temporarily patched the compiled `dist-test/src/stages.js` with a straightforward one. All 34 hidden tests and the 30 public ones passed. I then ran five shortcut versions that pass the whole public suite, and the hidden suite failed each of them:\n\n- comparing versions with `Object.is` (it treats `-0` and `0` as different, while the spec's `===` treats them as equal);\n- trimming or lower-casing the step before comparing it;\n- doing the same to `heldBy`;\n- trimming the proposal's status;\n- treating any step whose lower-cased form is `\"sandbox\"` as the sandbox.\n\nRe-running `tsc` rebuilt that compiled file from the unchanged source. Nothing outside the test folder was edited.\n\nWhat the suite covers, beyond the spec's own examples:\n\n- **`stepHeldBy`, scope approval:** wide version ranges and gaps in both directions, an approval ahead of the bounty's version, `NaN` (never approved, since `NaN === NaN` is false) and `-0` against `0` (approved).\n- **The proposal is never looked at:** for the price, and for steps other than `\"price\"` and `\"sandbox\"`, the proposal is a proxy that throws on any kind of access, not just on reading `status`.\n- **Order of checks:** the scope is checked before the price, and a sandbox over an approved scope with a `null` proposal is held by the price.\n- **Statuses close to `\"approved\"`:** many near misses (case, whitespace, prefixes and suffixes) still leave the sandbox held by the price.\n- **Drift:** a sandbox behind its price is not held once both earlier steps are approved, and steps with nothing behind are still held while unapproved.\n- **Extra fields:** fields that look like approvals, and every kind of sandbox state, don't change the result.\n- **Purity:** a proxy records any write to the arguments, rather than relying only on frozen objects.\n- **Unknown steps:** other strings, and values that aren't strings at all (`undefined`, `null`, numbers).\n- **`stepHeldReason`:** the three sentences in any call order. For impossible pairs, steps like `\"price \"` or `\"PRICE\"` don't get the price's sentence, only the exact holder `\"scope\"` gets the scope-and-price sentence, and non-string values aren't refused.\n- **Agreement between the two functions:** every hold `stepHeldBy` returns over a grid of bounties and proposals maps to the right sentence.\n- **Existing exports (`happy-6`):** `scopeApproved` and `bountyStatus` checked against `stepHeldBy`, so these tests also fail against the stub.\n\n34 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-step-holds-confirmed/step-held-by.test.ts",
+      "packages/core/test/hidden-step-holds-confirmed/step-held-reason.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "slug": "question-limit",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/question-limit.test.ts :: full allowance: a contributor with no questions today has 20 remaining",
+    "tests/public/question-limit.test.ts :: full allowance: reading the remaining count more than 20 times uses no questions",
+    "tests/public/question-limit.test.ts :: accepted question: the first question is accepted and 19 remain",
+    "tests/public/question-limit.test.ts :: accepted question: the first question at exactly 00:00:00.000 UTC is accepted and 19 remain",
+    "tests/public/question-limit.test.ts :: twentieth question: after 19 questions the twentieth is accepted with 0 remaining",
+    "tests/public/question-limit.test.ts :: twentieth question: remaining reads 1 before the twentieth question and 0 after it",
+    "tests/public/question-limit.test.ts :: twenty-first question: it is refused with 0 remaining and the limit message",
+    "tests/public/question-limit.test.ts :: twenty-first question: further questions stay refused and remaining stays at 0",
+    "tests/public/question-limit.test.ts :: midnight reset: refused at 23:59:59.999Z, accepted at 00:00:00.000Z with 19 remaining",
+    "tests/public/question-limit.test.ts :: midnight reset: questions from 00:00:00.000Z to 23:59:59.999Z count as one day, the next starts full",
+    "tests/public/question-limit.test.ts :: separate allowances: an exhausted contributor can still ask about another task, and others can ask about the task",
+    "tests/public/question-limit.test.ts :: separate allowances: pairs whose ids would collide if naively joined stay separate",
+    "tests/public/question-limit.test.ts :: empty ids: asking with an empty contributor id or an empty task id throws",
+    "tests/public/question-limit.test.ts :: empty ids: rejected questions use no allowance even when only one question is left"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 33,
+  "kept": [
+    "tests/private/allowance.test.ts :: a contributor with nothing asked today reads the full allowance of 20",
+    "tests/private/allowance.test.ts :: reading the remaining count twice does not use a question",
+    "tests/private/allowance.test.ts :: full allowance is reported for other contributors, tasks and dates",
+    "tests/private/allowance.test.ts :: many reads of the remaining count leave all 20 questions available",
+    "tests/private/allowance.test.ts :: the first accepted question leaves 19",
+    "tests/private/allowance.test.ts :: the first question for other ids is accepted and the read count drops to 19",
+    "tests/private/allowance.test.ts :: each accepted question uses exactly one from the allowance",
+    "tests/private/allowance.test.ts :: after seven questions the remaining count is 13",
+    "tests/private/allowance.test.ts :: the twentieth question is accepted and leaves 0",
+    "tests/private/allowance.test.ts :: the twentieth question for other ids is accepted and the read count is then 0",
+    "tests/private/allowance.test.ts :: the twenty-first question is refused with the limit message and 0 remaining",
+    "tests/private/allowance.test.ts :: every question past the limit is refused with the same message",
+    "tests/private/allowance.test.ts :: allowances are separate per task and per contributor",
+    "tests/private/allowance.test.ts :: exhausting one pair leaves every other pair with its own full allowance",
+    "tests/private/allowance.test.ts :: interleaved questions are counted for each pair independently",
+    "tests/private/allowance.test.ts :: pairs whose ids would collide when joined are still separate",
+    "tests/private/allowance.test.ts :: swapping contributor and task ids gives a different allowance",
+    "tests/private/daily-reset.test.ts :: the count resets at midnight UTC after a full day of questions",
+    "tests/private/daily-reset.test.ts :: the count resets at midnight UTC across a year boundary",
+    "tests/private/daily-reset.test.ts :: the count resets at midnight UTC into a leap day",
+    "tests/private/daily-reset.test.ts :: the remaining count reads 20 again at the start of the next UTC day",
+    "tests/private/daily-reset.test.ts :: a partly used allowance is full again on the next UTC day",
+    "tests/private/daily-reset.test.ts :: questions anywhere within one UTC day count toward the same day",
+    "tests/private/daily-reset.test.ts :: the clock is read on every call, not only when the limiter is created",
+    "tests/private/daily-reset.test.ts :: refused questions do not carry over into the next day",
+    "tests/private/daily-reset.test.ts :: each UTC day keeps its own count over consecutive days",
+    "tests/private/daily-reset.test.ts :: the reset applies to every contributor and task pair",
+    "tests/private/validation.test.ts :: a question with an empty contributor id fails and uses no allowance",
+    "tests/private/validation.test.ts :: a question with an empty task id fails and uses no allowance",
+    "tests/private/validation.test.ts :: a question with both ids empty fails",
+    "tests/private/validation.test.ts :: failed questions do not use a partly spent allowance",
+    "tests/private/validation.test.ts :: an empty id fails every time, however often it is tried",
+    "tests/private/validation.test.ts :: an empty id fails even when the contributor has used up a task's allowance"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 33,
+      "total": 33
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented the spec in `src/index.ts`, and all tests pass: 14 of 14 public and 33 of 33 private, none skipped.\n\nHow it works:\n- **Storage:** question counts are kept in two levels of lookup, first by contributor and then by task. Because the two ids are never joined into one string, pairs like `\"a:b\"/\"c\"` and `\"a\"/\"b:c\"` can't be mixed up.\n- **Daily reset:** each record holds a UTC day number, which is the clock time divided by 24 hours and rounded down. A record from an earlier day counts as zero, so the count resets at exactly 00:00:00.000 UTC.\n- **Clock:** it's read on every call, not just when the limiter is created.\n- **Limit:** `remaining` only reads the count and never uses a question. `ask` accepts up to 20 questions a day. After that it refuses with 0 remaining and the exact message from the spec.\n- **Empty ids:** `ask` throws if the contributor id or task id is empty, before it touches any count. The spec doesn't say what `remaining` should do with empty ids, so it just returns the count without checking.\n\nI didn't change any test, config or sandbox file.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "5d4fe316-fc3f-4089-af23-768cfb537c82",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2132153,
+        "turns": 6,
+        "durationMs": 29145,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.2132153
+  }
+}

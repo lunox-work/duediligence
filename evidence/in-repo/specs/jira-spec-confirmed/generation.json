@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "12ff4442-c7c6-4241-b138-6efeb4fa3d67",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2958239,
+        "turns": 9,
+        "durationMs": 36213,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2958239,
+    "finalText": "I created `packages/jira/src/spec.ts`. It compiles with no errors under `tsconfig.test.json`, and the existing suite still passes (63 of 63). Nothing else in the repo changed.\n\n- **What it contains:** `JiraIssueSpec` and the two function signatures are exactly as the ticket gives them, and both function bodies just throw \"not implemented\". `SPEC_FIELDS` is exported with its real value, so tests can import it. Each function's doc comment says it rejects with a `TypeError`: `specHash` when an argument isn't a string, `toIssueSpec` when `fields` is `null` or `undefined`.\n- **Not covered by this file:** the spec also has `adfToText` in a new `src/adf.ts`, re-exports in `index.ts`, and a new `JiraClient.issueSpec` method. You limited this to the one seam file, so none of those exist yet. `spec.ts` doesn't import `adf.ts`, since it would fail to compile until that file exists. Until they're added, the last scenario (\"The package index re-exports the new surface\") can't pass, and the implementer will need to create `adf.ts` with `adfToText(document: unknown): string`.\n\nExported names added: `JiraIssueSpec`, `SPEC_FIELDS`, `specHash`, `toIssueSpec`",
+    "problem": null,
+    "sha256": "c9f1930cada0022f80bab7a36aead9238023f2eb833b0625d7648110bee59f35"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "32bd3be4-b5af-4075-8b51-5b9787f26710",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8796445999999999,
+        "turns": 16,
+        "durationMs": 192504,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.8796445999999999,
+    "finalText": "I wrote three test files in `packages/jira/test/`. `npx tsc -p tsconfig.test.json` reports no errors. The run gives 124 tests: 119 fail and 5 pass.\n\n- **`jira-spec-confirmed.hash.test.ts`**: `SPEC_FIELDS`, the unchanged `ISSUE_FIELDS`, `specHash` (known hashes, whitespace and line-ending rules, Unicode, `TypeError` rejections, concurrent calls) and the package index re-exports.\n- **`jira-spec-confirmed.issue-spec.test.ts`**: `toIssueSpec` (result shape and keys, input not modified, defaults for `summary`, `issuetype` and `updated`, string descriptions and the 20,000-character cap, `null`/`undefined` fields rejecting, concurrent calls).\n- **`jira-spec-confirmed.adf.test.ts`**: ADF flattening (every spec example row, degenerate and malformed trees, the 100,000-level nesting case).\n\nEvery scenario has its own test, and every example row in a Scenario Outline is a separate test. Each scenario also has at least one extra edge-case test drawn from the spec's definitions. Examples: heading levels clamped to 1–6, the length cap on ADF descriptions, NFC vs NFD forms of \"Café\" hashing differently, and a rejecting call running alongside valid ones.\n\n**The 5 that pass now:** the two `SPEC_FIELDS` tests, the two `ISSUE_FIELDS` tests, and a check that the existing index exports are still there. They pass because those values already exist; they guard against regressions. Everything else fails because the bodies throw `not implemented`, and because `adf.ts` doesn't exist yet.\n\n**Things to know:**\n- I checked every hash in the spec against Node's own SHA-256 using the spec's `canon` definition, and they all match.\n- The index re-export test loads `index.js` and `adf.js` through import paths stored in variables. That keeps the suite compiling before `adf.ts` and the new exports exist.\n- I didn't change anything outside the three test files.\n\n124 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "packages/jira/test/jira-spec-confirmed.adf.test.ts",
+      "packages/jira/test/jira-spec-confirmed.hash.test.ts",
+      "packages/jira/test/jira-spec-confirmed.issue-spec.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "9d248fa5-6674-457f-83d5-79ea0f7dd10d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.0577846,
+        "turns": 28,
+        "durationMs": 486727,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 2.0577846,
+    "finalText": "I wrote the hidden suite as three files in `packages/jira/test/hidden-jira-spec-confirmed/`:\n\n- **`hash.test.ts`** covers `specHash` and the package entry point.\n- **`issue-spec.test.ts`** covers how `toIssueSpec` reads each field, string descriptions, the 20,000-character cap, the defaults, rejections and concurrent calls.\n- **`adf.test.ts`** covers ADF flattening, empty and malformed ADF, and deep nesting.\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the current stubs, all 150 tests fail, either with `not implemented` or on the `TypeError` check.\n- I wrote a throwaway implementation of the spec in the scratchpad. Your public suite plus this one (274 tests) all pass against it. So the expected values agree with the spec as I read it, and no test asks for something the spec doesn't require.\n- I also tried four shortcut versions of that implementation, and the hidden suite caught each one:\n  - trimming both ends of every line when hashing (only the hidden suite catches this);\n  - applying the length cap before collapsing whitespace;\n  - treating arrays as a list of child nodes;\n  - joining summary and description with a newline instead of a NUL.\n\n**Shortcuts the hidden tests target:**\n- **Hashing:** hashes are computed with `node:crypto` for many new inputs, so a hard-coded table of known hashes fails.\n- **Canonical form:** the summary is canonicalised line by line too. Leading spaces on inner lines are kept. Mixed line endings, including `\\r\\r\\n` and `\\n\\r`, are handled.\n- **Field reads:** fields outside `SPEC_FIELDS` throw if read, and a deeply frozen input catches any write.\n- **Length cap:** the cap applies after whitespace is collapsed and across joined ADF blocks, and the hash covers the truncated text.\n- **ADF:** arrays are nodes with nothing to read, and text inside ADF blocks is not collapsed. Lists nest, numbering continues past 9, and only an exact `\"DONE\"` ticks a task.\n- **Deep nesting:** 100,000 levels of untyped nodes, inline nodes and lists must not overflow the stack. Content beside a too-deep branch is kept.\n- **Concurrency:** 24–30 overlapping calls of very different sizes must each resolve to their own result, in order, with rejections mixed in.\n\n**Gaps:**\n- There is no hidden test for `[happy-2]` (`ISSUE_FIELDS` unchanged), or for `SPEC_FIELDS` read on its own. Both values already exist, so such a test would pass against the stubs and break the \"every test must fail\" rule. `[happy-1]` is covered instead through what `toIssueSpec` reads.\n- The entry-point tests (`[happy-12]`) load `index.js` and `adf.js` through paths held in variables, as the public suite does. `adf.ts` doesn't exist yet, and this keeps the files compiling.\n\n150 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/jira/test/hidden-jira-spec-confirmed/adf.test.ts",
+      "packages/jira/test/hidden-jira-spec-confirmed/hash.test.ts",
+      "packages/jira/test/hidden-jira-spec-confirmed/issue-spec.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176ba-91ed-7c13-8f47-9e85f5003866",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 209889,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added coverage for all 14 scenarios, with two tests each. Build type-check passes with `npm run build -- --noEmit`.\n\n28 tests in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/lifecycle.test.ts",
+      "tests/public/movements.test.ts",
+      "tests/public/records.test.ts",
+      "tests/public/validation.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176bd-c71a-7f21-900c-b26f72a2d386",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 30,
+        "durationMs": 509167,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passes. All 37 tests fail against the stubs as required.\n\n37 tests in 4 files.\n\nOpen in the spec:\n\nThese public tests prohibit extra returned fields through exact object comparisons; the spec leaves additional fields unspecified:\n\n- “funding adds to held and accumulates across entries” — balance fields.\n- “funding accepts the minimum and maximum valid amounts” — balance fields.\n- “releasing deducts gross amounts and accumulates net pay per contributor” — balance fields.\n- “a one-unit release permits zero and full fee rates” — balance fields.\n- “the maximum safe amount has an exact fee at 9999 basis points” — balance fields.\n- “refunds reduce held and accumulate the total returned to the funder” — balance fields.\n- “a one-unit refund takes no fee even at the full fee rate” — balance fields.\n- “entries retain their fields and order while balances follow the record” — entry and balance fields.\n- “an empty record starts at sequence one and rejections and retries add no entries” — entry and balance fields.",
+    "problem": null,
+    "files": [
+      "tests/private/idempotency.test.ts",
+      "tests/private/lifecycle-records.test.ts",
+      "tests/private/movements.test.ts",
+      "tests/private/validation.test.ts"
+    ],
+    "open": [
+      "These public tests prohibit extra returned fields through exact object comparisons; the spec leaves additional fields unspecified:",
+      "“funding adds to held and accumulates across entries” — balance fields.",
+      "“funding accepts the minimum and maximum valid amounts” — balance fields.",
+      "“releasing deducts gross amounts and accumulates net pay per contributor” — balance fields.",
+      "“a one-unit release permits zero and full fee rates” — balance fields.",
+      "“the maximum safe amount has an exact fee at 9999 basis points” — balance fields.",
+      "“refunds reduce held and accumulate the total returned to the funder” — balance fields.",
+      "“a one-unit refund takes no fee even at the full fee rate” — balance fields.",
+      "“entries retain their fields and order while balances follow the record” — entry and balance fields.",
+      "“an empty record starts at sequence one and rejections and retries add no entries” — entry and balance fields."
+    ]
+  }
+}

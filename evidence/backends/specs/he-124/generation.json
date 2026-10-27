@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17719-4a9a-7e82-9566-91790ea09cce",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 86267,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "43 tests in 1 file; compile check passed.",
+    "problem": null,
+    "files": [
+      "tests/public/test_valid_date.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a1771a-9efd-7181-b480-d93c3693b9a3",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 16,
+        "durationMs": 224732,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Compile check passed. All tests fail against the unimplemented interface, and all 43 public tests have extensions.\n\n110 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_valid_date.py"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "sha256": "3f0b936adbe5caec2c03a2bb566678089716475f7ec781e5b0a7e0396a7a8509",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-25T14:02:42.939Z",
+  "decided": [
+    "Hash algorithm and format: SHA-256 through `crypto.subtle`, written as 64 lowercase hex characters with no prefix.",
+    "Hash input encoding: UTF-8 of `JSON.stringify([summary, descriptionText])`, so text moved between the two fields cannot collide.",
+    "Hash scope: only the summary and the description text count. Key, issue type and `updated` do not change it.",
+    "No trimming, whitespace collapsing, line-ending or Unicode normalisation, before or during hashing.",
+    "`specHash` with a non-string argument rejects with a `TypeError` that names the argument.",
+    "Missing or non-string `summary` becomes `\"\"`, not `toIssueDto`'s `\"(no summary)\"` placeholder, so placeholder text never lands in the spec or the hash.",
+    "Missing or non-string `issuetype.name` becomes `\"Task\"`, matching `toIssueDto`. An empty string is kept.",
+    "Non-string `updated` becomes `null`. Strings pass through unvalidated.",
+    "`key` is passed through verbatim, with no validation.",
+    "`fields` of `null` or `undefined` is treated as `{}`.",
+    "Description: a string is kept verbatim, an object is read as ADF, and anything else becomes `\"\"`.",
+    "ADF flattening: the per-type text table above. Children of textblock types join with `\"\"`, all other nodes join with `\"\\n\"`. Unknown inline nodes add nothing. Non-node `content` items are skipped.",
+    "ADF nesting: 100,000 levels must flatten without a stack overflow.",
+    "The result has exactly six own keys, and the input `fields` object is not mutated.",
+    "Concurrent calls share no state, and each resolves to the result of its own input.",
+    "`ISSUE_FIELDS` is unchanged. `index.ts` re-exports the new values and the type.",
+    "Seam (the files the stub writes): packages/jira/src/spec.ts",
+    "Allowed paths (what the implementer may change): packages/jira/src/"
+  ],
+  "seam": [
+    "packages/jira/src/spec.ts"
+  ],
+  "allowedPaths": [
+    "packages/jira/src/"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "slug": "he-39",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_fifth_prime_fibonacci",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_first_prime_fibonacci",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_fourth_prime_fibonacci",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_second_prime_fibonacci",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_third_prime_fibonacci",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_seventh_prime_fibonacci_skips_odd_composites",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_sixth_prime_fibonacci_skips_even_number"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 7,
+  "kept": [
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_descending_ranks_and_repeated_fifth",
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_eighth_prime_fibonacci",
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_eleventh_prime_fibonacci",
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_ninth_prime_fibonacci",
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_second_rank_after_later_queries",
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_tenth_prime_fibonacci",
+    "tests/private/test_prime_fib.py :: TestPrimeFibPrivate.test_third_rank_interleaved_with_large_ranks"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 7,
+      "total": 7
+    },
+    "hidden": {
+      "passed": 7,
+      "total": 7
+    }
+  }
+}

@@ -1,0 +1,78 @@
+# CI mode: judge a commit against a sealed hidden suite (bin/seal.mjs) and
+# post a check with the verdict, counts and failing scenario keys, never a
+# hidden test's name or body. The seal must already be on the runner, or be
+# an https URL; .github/workflows/judge.yml fetches it from a private
+# repository, a private artifact or a secret URL and calls this action.
+# The checkout needs the spec's base commit: actions/checkout with
+# fetch-depth: 0. The job needs `checks: write` to post the check.
+name: independent-tests judge
+description: Judge a pull request against a hidden test suite it never saw, and post the verdict as a check.
+author: feversoul
+branding:
+  icon: check-square
+  color: gray-dark
+inputs:
+  seal:
+    description: Path of the seal file on the runner, or an https URL.
+    required: true
+  seal-auth:
+    description: Authorization header value for an https seal (for example "Bearer <token>").
+    required: false
+    default: ""
+  repo:
+    description: The checkout to judge.
+    required: false
+    default: "."
+  ref:
+    description: The commit to judge. Default the pull request's head, else github.sha.
+    required: false
+    default: ""
+  check-name:
+    description: Name of the check run.
+    required: false
+    default: independent-tests
+  github-token:
+    description: Token that posts the check run (checks write). Empty skips posting.
+    required: false
+    default: ${{ github.token }}
+  fail-on-verdict:
+    description: Fail the step unless the verdict is passed.
+    required: false
+    default: "true"
+  node-version:
+    description: Node.js version to judge with (22.12 or later).
+    required: false
+    default: "22"
+outputs:
+  conclusion:
+    description: success when passed, otherwise failure.
+    value: ${{ steps.judge.outputs.conclusion }}
+  title:
+    description: The verdict and counts, as the check's title.
+    value: ${{ steps.judge.outputs.title }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: ${{ inputs.node-version }}
+    - id: judge
+      shell: bash
+      env:
+        INDEPENDENT_TESTS_SEAL_AUTH: ${{ inputs.seal-auth }}
+        INDEPENDENT_TESTS_GITHUB_TOKEN: ${{ inputs.github-token }}
+        SEAL: ${{ inputs.seal }}
+        REPO: ${{ inputs.repo }}
+        REF: ${{ inputs.ref || github.event.pull_request.head.sha || github.sha }}
+        CHECK_NAME: ${{ inputs.check-name }}
+        FAIL_ON_VERDICT: ${{ inputs.fail-on-verdict }}
+      run: |
+        flags=()
+        if [ "$FAIL_ON_VERDICT" != "true" ]; then flags+=(--exit-zero); fi
+        node "$GITHUB_ACTION_PATH/bin/cli.mjs" ci --seal "$SEAL" --repo "$REPO" --ref "$REF" \
+          --name "$CHECK_NAME" --out "$RUNNER_TEMP/independent-tests-check.json" "${flags[@]}"
+    - if: always()
+      shell: bash
+      env:
+        SEAL: ${{ inputs.seal }}
+      run: case "$SEAL" in https://*) ;; *) rm -f "$SEAL" ;; esac

@@ -1,0 +1,69 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "36c0ffca-1ae2-4333-9e84-cfe0cb31a6a2",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1441053,
+        "turns": 3,
+        "durationMs": 16508,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1441053,
+    "finalText": "I've written `src/index.ts` and `npm run build` reports no errors.\n\nThe contract has two functions:\n\n- **`parseDuration(text: string): number`** — turns a duration string into milliseconds. Its doc comment says it throws an `Error` whose message contains \"duration\" if the text isn't a valid duration or the total is above `Number.MAX_SAFE_INTEGER`.\n- **`formatDuration(ms: number): string`** — gives the shortest string that parses back to `ms`. Its doc comment says it throws an `Error` whose message contains \"milliseconds\" if `ms` isn't a non-negative safe integer.\n\nBoth bodies are just `throw new Error(\"not implemented\");`. The spec says both are pure functions, so neither needs a clock, key or randomness parameter. I didn't add any error classes, constants or other types, because the spec names none and the tests need none.\n\nRunning the build also created `src/index.js`. The `tsconfig.json` has no `outDir`, so `tsc` writes the compiled file next to the source. It's a build output, not something I wrote by hand.\n\nExports: `parseDuration`, `formatDuration`",
+    "problem": null,
+    "sha256": "7ba81091bcdda679b7aba266923206549d6545acb97137fcfd72c3f8d3e140c7"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "fa72648a-80a8-41b1-b91b-bc192b57c96b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2621528,
+        "turns": 6,
+        "durationMs": 61514,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2621528,
+    "finalText": "I wrote the public test suite in two files. `npm run build` reports no errors. Running the suite gives 0 of 22 passing, which is expected while the bodies throw `not implemented`. The rejection tests also fail for now, because that error message contains neither \"duration\" nor \"milliseconds\".\n\nEach of the 11 scenarios gets two tests: its happy path, taken from the spec's scenario or full example table, plus one boundary case.\n\n**`tests/public/parse.test.ts`**\n- **`[happy-1]`:** the table, plus one duration using all five units, and `1m1ms` to check that `m` and `ms` are told apart.\n- **`[boundary-1]`:** `\"  45m\\n\"`, plus tabs and CRLF around `1h30m`.\n- **`[unhappy-1]`:** the table, plus whitespace only, a bare `0`, `00s`, `3MS`, `3Ms` and a tab between components.\n- **`[happy-2]`:** `90m`, plus counts exactly equal to the next unit's size (`60m`, `1000ms`).\n- **`[unhappy-2]`:** the table, plus a repeated zero component (`0h0h`), `1ms1ms` and `1ms1m`.\n- **`[boundary-2]`:** `104249991d8h59m991ms`, plus `9007199254740991ms` as a single component.\n- **`[unhappy-3]`:** `…992ms`, plus `9007199254740992ms` and `99999999999999999999d`, which must be rejected rather than clamped.\n\n**`tests/public/format.test.ts`**\n- **`[happy-3]`:** the table, plus values where one unit rolls over into the next (1, 999, 1000, 60000, 3600000, 86400001).\n- **`[boundary-3]`:** `MAX_SAFE_INTEGER`, plus one below it.\n- **`[boundary-4]`:** the round trip for 123456789, plus round trips for 0 and `MAX_SAFE_INTEGER`.\n- **`[unhappy-4]`:** the table, plus `-Infinity`, `0.5` and `MIN_SAFE_INTEGER`.\n\nThe tests only check that each error is an `Error` whose message contains the right word. I left `-0` out because the spec doesn't say whether it counts as non-negative. The build creates `.js` files in `src/` and `tests/public/`; I deleted them so that only the two `.test.ts` files are new.\n\n22 tests, in 2 files.",
+    "problem": null,
+    "files": [
+      "tests/public/format.test.ts",
+      "tests/public/parse.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "20c12810-2d91-481f-95c6-c82d131c93ef",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5885362,
+        "turns": 12,
+        "durationMs": 158363,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5885362,
+    "finalText": "I've written the hidden suite in `tests/private/parse.test.ts` and `tests/private/format.test.ts`. `npm run build` reports no errors.\n\n**Checks:**\n- **Against the stub:** all 39 tests fail. Every rejection test checks that the error is an `Error` whose message contains \"duration\" (parsing) or \"milliseconds\" (formatting), so the stub's `not implemented` error doesn't satisfy them.\n- **Against a correct implementation:** I wrote one in a scratch copy of the project (not in `src/`). All 39 private tests and all 22 public tests pass against it.\n- **Cleanup:** the build writes `.js` files next to the sources, including in `src/` and `tests/public/`. I deleted those so nothing is left outside `tests/private/`.\n\n**Shortcuts the suite is built to catch:**\n- **Checking only the first component:** leading zeros, signs and decimals in a later component (`1h05m`, `1h-30m`, `1h0.5m`).\n- **Parsing counts with `Number()` or `parseInt`:** `1e3ms`, `0x10s`, `1_000ms`, `.5s`, `Infinityms`, `-0s`.\n- **Scanning for matches and skipping what's left over:** text before, between or after components (`x1h`, `1h30m!`, `1mss`, `1msms`), a count with no unit after it (`1h30`) and a unit with no count before it (`1hm`).\n- **`m` and `ms` confused:** `1m1s`, `1m1s1ms`, `3sm`.\n- **Hard-coded uppercase checks:** `3D`, `3H`, `3M`, `3mS`, `1h30M`.\n- **Whitespace:** newlines and CRLF inside a duration are rejected; whitespace-only input made of tabs and newlines is rejected.\n- **Unit order and repeats:** every out-of-order pair and every unit repeated, including zero counts.\n- **Safe-integer limit:**\n  - The largest safe total written in hours, minutes or seconds parses.\n  - One millisecond more, in each of those spellings, is rejected.\n  - A single component over the limit is rejected.\n  - Components that are each safe but whose sum is not are rejected.\n  - A 400-digit count is rejected, not clamped.\n- **Formatting from a lookup table:** a fixed spread of 900 values across the safe range, compared with the shortest form defined in R4 and round-tripped through parsing. Also values just below each unit's edge, zero components in the middle, and parse-then-format of non-canonical strings.\n- **Loose input checks in formatting:** other negatives, fractions (`Number.EPSILON`, `Number.MIN_VALUE`), integers above the safe range, and values that aren't numbers (`\"1000\"`, `1000n`, `null`, `undefined`, `{}`). R4 says anything that isn't a non-negative safe integer is rejected, so these count.\n\nI left `formatDuration(-0)` untested, because the spec doesn't say whether -0 counts as non-negative.\n\n39 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/format.test.ts",
+      "tests/private/parse.test.ts"
+    ],
+    "open": []
+  }
+}

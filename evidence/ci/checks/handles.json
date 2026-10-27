@@ -1,0 +1,11 @@
+{
+  "name": "independent-tests (drafted)",
+  "head_sha": "fc3e2c5abd23b1d5ee5bf9a341fcf37dcb9af40a",
+  "status": "completed",
+  "conclusion": "failure",
+  "completed_at": "2026-10-26T04:42:25.472Z",
+  "output": {
+    "title": "incomplete: public 34/42, hidden 28/47, existing 13/13",
+    "summary": "| verdict | public | hidden | existing |\n| --- | ---: | ---: | ---: |\n| **incomplete** | 34/42 | 28/47 | 13/13 |\n\nFailing scenarios (keys from the spec; the hidden tests stay hidden): `boundary-10`, `boundary-2`, `boundary-3`, `boundary-4`, `boundary-7`, `boundary-8`, `boundary-9`, `happy-1`, `unhappy-1`, `unhappy-2`\n\nHidden suite sha256 `9418d98552eedbc137f9b48ef92ebccb6eca03c4da1d46e681fde2ef76ad98bd`, sealed 2026-10-26T04:35:59.925Z. Commit `fc3e2c5abd23b1d5ee5bf9a341fcf37dcb9af40a`."
+  }
+}

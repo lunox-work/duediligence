@@ -1,0 +1,73 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "cf79cb18-8efd-47ba-a8a5-0308d30614a2",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3971987,
+        "turns": 11,
+        "durationMs": 55752,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.3971987,
+    "finalText": "I created `packages/core/src/sources.ts`. It contains every export the spec lists, with the spec's signatures, and each function body is `throw new Error(\"not implemented\");`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (228 of 228). No other file was changed.\n\n- **Constants:** these have their stated values, including `NO_CONTEXT = Object.freeze({ jira: null, github: null })`, so tests can import them at runtime.\n- **Reused types:** `StageDrift` is imported as a type from `./stages.js`. The `repo/tree.ts` helpers aren't imported yet, because the repo's `noUnusedLocals` setting would reject unused imports in a stub. The implementation should import them.\n- **Parameter names:** the repo also has `noUnusedParameters` on, so the stub parameters are written `_title`, `_files`, `_keywords` and so on. That's how the codebase already handles unused parameters (`src/sandbox/project.ts:437`). Callers aren't affected, and the implementation can rename them.\n- **Not done:** the spec also asks for `export * from \"./sources.js\";` in `src/index.ts` and for `STARTER_TOOL_VERSION` to become `\"sandbox_starter@3\"`. I left both alone because you asked me to write only the seam. Until the re-export is added, tests should import from `src/sources.js`, not the package root.\n- **Errors:** the spec doesn't say any of these calls fails, so no doc comment mentions a throw.\n\nAdded: `CONTEXT_SOURCES`, `ContextSource`, `JiraIssueLinkContext`, `JiraContext`, `GithubContextDocument`, `GithubContext`, `ContextVersions`, `NO_CONTEXT`, `CONTEXT_DOCUMENTS_MAX`, `CONTEXT_DOCUMENT_BYTES_MAX`, `CONTEXT_DOCUMENT_CHARS`, `CONTEXT_TOTAL_CHARS`, `contextKeywords`, `contextDocuments`, `keptDocuments`, `jiraContextFields`, `renderSourceContext`, `contextDrift`",
+    "problem": null,
+    "sha256": "ba384a2a2d6df30a5c0fa50fad0711d21856a8d0818b6287330b7b06650dcb50"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "f113bb9e-70a8-437e-b2ae-8945a4f91910",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8908136,
+        "turns": 13,
+        "durationMs": 187929,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.8908136,
+    "finalText": "I wrote the test suite in `packages/core/test/context-sources.test.ts`. It compiles with no errors under `npx tsc -p tsconfig.test.json`.\n\nWhen run against the stub, 67 tests fail with `not implemented`, as expected. The other 4 already pass: these are the `[happy-1]` and `[happy-2]` constant tests, because the interface file already defines `CONTEXT_SOURCES`, the caps and the frozen `NO_CONTEXT`.\n\n- **Layout:** the style matches the nearby tests (`node:test` `test`, `node:assert/strict`). Every test is a flat top-level test with a unique name, keyed by its scenario: `[happy-1]`–`[happy-11]`, `[boundary-1]`–`[boundary-20]` and `[unhappy-1]`–`[unhappy-4]`, in spec order.\n- **Coverage per scenario:** one test runs every example row from the spec (outline rows are looped, with each row's input as the failure label). A second test adds a boundary case that follows from the spec's rules. Examples:\n  - the full stopword list is dropped;\n  - `contextDocuments`: oversized documents and documents past the count cap both add to `omitted`;\n  - for a duplicated path, the first entry wins even when it is the oversized one;\n  - when `keptDocuments` hits a cut that would leave half a character, the leftover room still takes a later one-character document;\n  - an emoji that fits whole inside the cap is kept;\n  - `jiraContextFields` returns new link objects, not just a new array;\n  - blank documents are rendered as a heading only;\n  - a document of 60,000 characters is rendered in full, because `renderSourceContext` applies no caps.\n- **Determinism:** the tests are pure, with no clock, randomness, network or filesystem. Fixtures are written out inline in the file.\n- **Nothing else changed:** the build output goes to `dist-test/`, which git ignores.\n\n71 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/context-sources.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "94e403e8-906a-42de-92f6-95d100024a02",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.3468080999999996,
+        "turns": 21,
+        "durationMs": 563923,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 2.3468080999999996,
+    "finalText": "I wrote 92 tests in 7 files under `packages/core/test/hidden-context-sources/`, one file per area: `constants`, `keywords`, `documents`, `kept`, `jira`, `render` and `drift`.\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- All 92 tests fail against the interface as it stands, each with `not implemented`.\n- I also wrote a throwaway reference implementation in the scratchpad, outside the repo, to check my expected values. The hidden and public suites both pass against it (163 tests).\n- Four shortcuts are each caught by a hidden test:\n  - lower-casing each word after splitting the title, instead of the title before splitting;\n  - filtering out unusable sizes before removing duplicate paths;\n  - copying a link with `{ ...link }` instead of rebuilding it from its four keys;\n  - shrinking the room by the cap instead of by the length kept (the public suite catches this too).\n\n**Coverage:**\n- **Keys:** every test name starts with a scenario key: `[happy-1]` to `[happy-11]`, `[boundary-1]` to `[boundary-20]`, `[unhappy-1]` to `[unhappy-4]`. Each test that extends a public test names it in a comment above.\n- **Constants:** the two constant scenarios (`[happy-1]`, `[happy-2]`) would pass against the stub if they only checked values. So those tests also check that the functions apply those values, which makes them fail on the stub as required.\n- **Main shortcuts targeted:**\n  - Keywords: other scripts, word length counted in UTF-16 code units (`𝐀b`), and `İstanbul` (the title is lower-cased before it is split).\n  - What counts as a document: directory names that only partly match a docs directory, and names that resemble excluded or skipped ones. For example, `README.zh-CN.md` counts at the root but does not lead as a README. `Test/README.md` counts because the existing `isTestFile` is case-sensitive.\n  - Duplicate paths: when two entries normalize to the same path, the first wins even if its size is unusable.\n  - Ranking happens before the count cap.\n  - Sorting uses the normalized path, in `<` order.\n  - Cuts by the remaining room never split a surrogate pair.\n  - A document dropped because its cut is empty does not take one of the 12 places.\n  - Jira fields come out in the fixed order whatever the context's key order, and links are rebuilt with exactly their four keys.\n  - Rendering keeps line endings and leading blank lines inside a document's text.\n  - A current version of 0 still drifts from a step that used none.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-context-sources/constants.test.ts",
+      "packages/core/test/hidden-context-sources/documents.test.ts",
+      "packages/core/test/hidden-context-sources/drift.test.ts",
+      "packages/core/test/hidden-context-sources/jira.test.ts",
+      "packages/core/test/hidden-context-sources/kept.test.ts",
+      "packages/core/test/hidden-context-sources/keywords.test.ts",
+      "packages/core/test/hidden-context-sources/render.test.ts"
+    ],
+    "open": []
+  }
+}

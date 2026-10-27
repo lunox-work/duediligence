@@ -1,0 +1,68 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "d4da870d-db4a-4036-ae51-5dddbc5aea86",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.11645509999999999,
+        "turns": 5,
+        "durationMs": 32197,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.11645509999999999,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors.\n\nThe contract is a single function that takes the terms and the files and returns the matches plus the paths of skipped files. Every rule in the spec can be tested through that one call, so I didn't export any separate word-splitting or term-filtering functions:\n\n- **`ScanFile`**: a file to scan, with `path` and `text`.\n- **`Match`**: one match, with `path`, `term` (as given), `line`, `column` and `text` (exactly as written in the file). The doc comment repeats the spec's rules: line and column both count from 1, columns count UTF-16 code units, and a match in the file's path has line 0.\n- **`ScanResult`**: `matches`, in order by path, then line, then column, and `skipped`, the paths of files whose text contains a NUL character.\n- **`scan(terms: string[], files: ScanFile[]): ScanResult`**: its body is `throw new Error(\"not implemented\");`. Its doc comment doesn't say it throws, because the spec never says the scan fails: a file that isn't text is listed in `skipped` instead.\n\nThe scan doesn't depend on time, secrets or randomness, so there was nothing to add as a parameter.\n\nThe build also created `src/index.js`. The compiler made that file, not me, and `.gitignore` already excludes it (`*.js`). Nothing else was changed.\n\nExported names: `ScanFile`, `Match`, `ScanResult`, `scan`",
+    "problem": null,
+    "sha256": "08103de4622587c5f62e62315241e4676e63bb9119a5f0e7ded1006aa5c91a42"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "d97fb566-ab8c-4a60-aa82-1d17fc133338",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5128652,
+        "turns": 10,
+        "durationMs": 136369,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.5128652,
+    "finalText": "I wrote the public test suite in three files under `tests/public/`. `npm run build` reports no errors. Against the stub in `src/`, all 25 tests fail with `not implemented`, as expected.\n\nTo check my expected values, I also ran the compiled tests against a quick reference implementation I wrote in the scratchpad, outside the project. All 25 passed. That makes the hand-worked columns, ordering and overlap results self-consistent, though it doesn't prove they match how the developer will implement the spec. Nothing outside `tests/public/` was changed. The build also puts its compiled `.js` files next to the tests there; `.gitignore` already ignores them.\n\n**What each scenario gets (happy path, then boundary):**\n- **Spellings of one term:** the four spellings from the spec; and a term given in another spelling (`\"Harbor Lights\"`) still matches `harbor_lights`.\n- **Inside a longer identifier:** the spec's `acmeOrders / MyAcme / ACMEOrders / acmes / pacme` example; and a digit or accented letter next to the term (`acme2`, `x2acme`, `acmeé`) stops a match, while `acme_2` matches.\n- **Words written together:** `harborlights` is not a match; nor are `HARBORLIGHTS` and `Harborlights`.\n- **No match across a line:** a `\\n` break, and a `\\r\\n` break; plus a test that any run of separators within a line (`\" -- // \"`, tabs) joins the words.\n- **Short and generic terms:** the spec's six terms are not reported; every word in the generic list is skipped whatever its case; a term with exactly 4 letters and digits is scanned but one with 3 is not; a term with no letter is skipped; and `acme-api` is still scanned.\n- **Match details:** path, term as given, line and column, with CRLF lines; and columns counted in UTF-16 units (an emoji counts as 2).\n- **Path is scanned:** the spec's path gives line 0, column 10; and a match in the path comes before matches in the text.\n- **Overlaps:** the longer match wins; at equal length the term given first wins (tested with the term order both ways); matches that don't overlap are all reported.\n- **Ordering:** sorted by path, then line, then column across files given out of order; and line 10 sorts after line 2 (by number, not as text).\n- **Files containing NUL:** such a file is skipped and listed while the other files are still scanned; and a single trailing NUL is enough, while a file without one isn't listed.\n\n**Calls I made where the spec is open to reading:**\n- A match in the path counts columns from 1, like the text does.\n- Skipped files are only given paths with no term in them, because the spec doesn't say whether a skipped file's path is still scanned.\n- No test depends on the order of the `skipped` list, because the spec doesn't give one.\n\n25 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/matching.test.ts",
+      "tests/public/reporting.test.ts",
+      "tests/public/skipped-terms.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "3c7950c1-1a31-4841-8d9e-6350abb8d773",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.2240920999999998,
+        "turns": 12,
+        "durationMs": 380902,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.2240920999999998,
+    "finalText": "I wrote the hidden suite in `tests/private/`, in three files: `matching.test.ts`, `terms.test.ts` and `reporting.test.ts`. `npm run build` reports no errors. Against the current stub, all 42 tests fail.\n\n**Checking the expected values.** I wrote a throwaway reference implementation in the scratchpad, outside the project. The public and private suites together pass against it, 67 of 67. I then gave it nine shortcuts an implementer might take. Each one still passed the whole public suite and failed at least one private test:\n\n| Shortcut | Private tests failed |\n|---|---|\n| Treating only ASCII and Latin letters as word letters | 1 |\n| Counting only ASCII letters toward the 4-character minimum | 1 |\n| Splitting lines at a lone `\\r` | 1 |\n| Splitting words where a digit is followed by a capital | 2 |\n| Sorting columns as strings rather than numbers | 9 |\n| Checking the generic-word list against the raw term (e.g. `\"Client!\"` not skipped) | 1 |\n| Breaking overlap ties by term length instead of the matched text's length | 3 |\n| Treating matches that only touch as overlapping | 2 |\n| Returning early with no skipped paths when there are no terms to scan | 1 |\n\n**What the suite covers beyond the public one:**\n- **Spellings:** more joiners (`::`, `/`, no-break space, em dash, emoji, a lone `\\r` inside a line). Also tricky case splits such as `HARBORLights` and `XMLHttpRequest`, and ones that must not match, like `harborlIGHTS` and `Web3Labs`.\n- **Unicode:** letters from other scripts and from outside the Basic Multilingual Plane continue a word. Non-ASCII uppercase and lowercase letters split words and compare ignoring case.\n- **Terms:** a term written as an identifier, and a term reported exactly as given, punctuation included. Generic words wrapped in punctuation are still skipped. Words that contain or extend a generic word (`domain`, `tests`) are scanned. Also terms with no letters or digits at all, and how the 4-character minimum is counted.\n- **Overlaps:** the longer match starts later; the longer matched text against the longer term, and against the term with more words; a match nested in the middle; two longer matches on either side of a shorter one; the same term given twice; matches that touch but share no character.\n- **Ordering and size:** 40 files given in reverse order; line and column compared as numbers; a match on line 5000; columns in a path that holds surrogate pairs; several matches in one path.\n- **NUL files:** several refused files at once; other control characters do not refuse a file; a NUL file is still listed when no term is scanned; no files at all.\n\n**Things the spec leaves open, which I did not test:**\n- Whether a refused file's path is still scanned.\n- The order of the skipped list (I compare it sorted).\n- Whether a term made only of generic words, like `web-app`, is skipped.\n- How a term's overlapping matches with itself are resolved.\n- How paths that differ in case are ordered.\n- Whether non-ASCII digits and combining marks count as part of a word.\n\nRunning the build also wrote compiled `.js` files into `src/` and `tests/public/`. I deleted them, along with the ones in `tests/private/`, so only the three `.ts` test files were added.\n\n42 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/matching.test.ts",
+      "tests/private/reporting.test.ts",
+      "tests/private/terms.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "slug": "question-limit",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/question-limit.test.ts :: full allowance: a contributor with no questions today has 20 remaining",
+    "tests/public/question-limit.test.ts :: full allowance: reading the remaining count more than 20 times uses no questions",
+    "tests/public/question-limit.test.ts :: accepted question: the first question is accepted and 19 remain",
+    "tests/public/question-limit.test.ts :: accepted question: the first question at exactly 00:00:00.000 UTC is accepted and 19 remain",
+    "tests/public/question-limit.test.ts :: twentieth question: after 19 questions the twentieth is accepted with 0 remaining",
+    "tests/public/question-limit.test.ts :: twentieth question: remaining reads 1 before the twentieth question and 0 after it",
+    "tests/public/question-limit.test.ts :: twenty-first question: it is refused with 0 remaining and the limit message",
+    "tests/public/question-limit.test.ts :: twenty-first question: further questions stay refused and remaining stays at 0",
+    "tests/public/question-limit.test.ts :: midnight reset: refused at 23:59:59.999Z, accepted at 00:00:00.000Z with 19 remaining",
+    "tests/public/question-limit.test.ts :: midnight reset: questions from 00:00:00.000Z to 23:59:59.999Z count as one day, the next starts full",
+    "tests/public/question-limit.test.ts :: separate allowances: an exhausted contributor can still ask about another task, and others can ask about the task",
+    "tests/public/question-limit.test.ts :: separate allowances: pairs whose ids would collide if naively joined stay separate",
+    "tests/public/question-limit.test.ts :: empty ids: asking with an empty contributor id or an empty task id throws",
+    "tests/public/question-limit.test.ts :: empty ids: rejected questions use no allowance even when only one question is left"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 47,
+  "kept": [
+    "tests/private/question-limit-timezone.test.ts :: [boundary-2] the count resets at midnight UTC when the local time zone is behind UTC",
+    "tests/private/question-limit-timezone.test.ts :: [boundary-2] the count resets at midnight UTC when the local time zone is ahead of UTC",
+    "tests/private/question-limit-timezone.test.ts :: [boundary-2] questions on one UTC day spanning a local midnight count as one day",
+    "tests/private/question-limit-timezone.test.ts :: [boundary-1] the twentieth question is accepted with 0 remaining when the day spans a local midnight",
+    "tests/private/question-limit.test.ts :: [happy-1] a contributor with no questions has 20 remaining even after others have asked",
+    "tests/private/question-limit.test.ts :: [happy-1] a fresh limiter reports 20 remaining for arbitrary ids",
+    "tests/private/question-limit.test.ts :: [happy-1] reading the remaining count between every question uses no questions",
+    "tests/private/question-limit.test.ts :: [happy-1] reading many pairs 100 times each uses none of their questions",
+    "tests/private/question-limit.test.ts :: [happy-1] reading the remaining count after exhaustion and refusal keeps it at 0, and reading on a new day does not use one",
+    "tests/private/question-limit.test.ts :: [happy-2] each accepted question uses exactly one, counting 19 down to 0",
+    "tests/private/question-limit.test.ts :: [happy-2] the first question by other ids at another time is accepted with 19 remaining",
+    "tests/private/question-limit.test.ts :: [happy-2] the first question at 23:59:59.999 UTC is accepted with 19 remaining",
+    "tests/private/question-limit.test.ts :: [happy-2] the first question at midnight on year and leap-day boundaries is accepted with 19 remaining",
+    "tests/private/question-limit.test.ts :: [happy-2] the result of an accepted question has accepted true",
+    "tests/private/question-limit.test.ts :: [boundary-1] the twentieth question is accepted when earlier ones were spread across the day and interleaved with other pairs",
+    "tests/private/question-limit.test.ts :: [boundary-1] on the day after an exhausted day, the twentieth question is accepted and the twenty-first refused",
+    "tests/private/question-limit.test.ts :: [boundary-1] the twentieth question is accepted for every one of several pairs",
+    "tests/private/question-limit.test.ts :: [unhappy-1] the twenty-first question by other ids on another day is refused with the exact message",
+    "tests/private/question-limit.test.ts :: [unhappy-1] fifty further questions all stay refused, remaining never goes below 0",
+    "tests/private/question-limit.test.ts :: [unhappy-1] refusals for one pair do not use questions of other pairs",
+    "tests/private/question-limit.test.ts :: [unhappy-1] the twenty-first question is refused when the twenty were asked across the whole day",
+    "tests/private/question-limit.test.ts :: [unhappy-1] a contributor exhausting a second task is refused on it with the same message",
+    "tests/private/question-limit.test.ts :: [boundary-2] questions asked late on one day do not count the next day, even within 24 hours",
+    "tests/private/question-limit.test.ts :: [boundary-2] questions asked early on a day still count late that same day",
+    "tests/private/question-limit.test.ts :: [boundary-2] a partly used day resets to the full allowance at midnight UTC, not to what was left",
+    "tests/private/question-limit.test.ts :: [boundary-2] the reset happens across month and year boundaries",
+    "tests/private/question-limit.test.ts :: [boundary-2] the same day-of-month in another month or year is a different day",
+    "tests/private/question-limit.test.ts :: [boundary-2] the count resets on a later day even when days are skipped",
+    "tests/private/question-limit.test.ts :: [boundary-2] each of several consecutive days has its own allowance of 20",
+    "tests/private/question-limit.test.ts :: [boundary-2] the reset applies to every pair, not only the one that asks first",
+    "tests/private/question-limit.test.ts :: [boundary-2] remaining read just after midnight is 20 without any question asked first",
+    "tests/private/question-limit.test.ts :: [boundary-2] the clock is read at each call, not once when the limiter is created",
+    "tests/private/question-limit.test.ts :: [happy-3] the other task and the other contributor each get a full 20 after c1 exhausts t1",
+    "tests/private/question-limit.test.ts :: [happy-3] partial counts are tracked independently for each contributor and task pair",
+    "tests/private/question-limit.test.ts :: [happy-3] many contributors on many tasks each get their own allowance",
+    "tests/private/question-limit.test.ts :: [happy-3] the same string as contributor id and as task id names different allowances",
+    "tests/private/question-limit.test.ts :: [happy-3] ids containing common separators do not collide with other pairs",
+    "tests/private/question-limit.test.ts :: [happy-3] ids that would collide under JSON-array or length-free encodings stay separate",
+    "tests/private/question-limit.test.ts :: [happy-3] ids that are names of Object prototype properties get ordinary allowances",
+    "tests/private/question-limit.test.ts :: [happy-3] ids differing only by case or by unicode content are different",
+    "tests/private/question-limit.test.ts :: [happy-3] ids that differ only by surrounding whitespace are different",
+    "tests/private/question-limit.test.ts :: [happy-3] long ids are tracked separately",
+    "tests/private/question-limit.test.ts :: [unhappy-2] an empty task id fails with an error even when the contributor is exhausted elsewhere",
+    "tests/private/question-limit.test.ts :: [unhappy-2] empty ids fail with an error, not a refused or accepted result",
+    "tests/private/question-limit.test.ts :: [unhappy-2] failed questions use no allowance of any pair",
+    "tests/private/question-limit.test.ts :: [unhappy-2] failed questions before any valid question leave the full allowance for every pair",
+    "tests/private/question-limit.test.ts :: [unhappy-2] empty ids still fail on a new day and use none of that day's allowance"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 47,
+      "total": 47
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented the question limiter in `src/index.ts`, and every test passes: 14 of 14 public and 47 of 47 private, including the time-zone tests.\n\nHow it works:\n- **Counts:** each contributor-and-task pair keeps one record: which UTC day it's for and how many questions were asked that day. Records are stored by contributor, then by task, in two separate lookups rather than one joined text key. This means ids containing separators or sharing names with built-in object properties (like `__proto__`) can't collide.\n- **Day boundary:** the current day is the clock time in milliseconds divided by 24 hours and rounded down. That rolls over exactly at 00:00 UTC, whatever the machine's local time zone is.\n- **The clock** is read on every call, and when the stored day is older than today the count is treated as 0. Reading the remaining count never uses a question.\n- **Limit:** the 21st question and every one after it are refused with 0 remaining and the exact message from the spec.\n- **Empty ids:** an empty contributor id or task id throws an error before anything is counted.\n\nI added no other files and changed nothing outside `src/index.ts`.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "8bccb1c6-7a90-45e3-b06b-29963f658c0b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2271593,
+        "turns": 6,
+        "durationMs": 37436,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.2271593
+  }
+}

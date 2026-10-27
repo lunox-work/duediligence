@@ -1,0 +1,65 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "b0987f6e-b662-484c-8c94-1b5bd784f8a2",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.12470780000000001,
+        "turns": 5,
+        "durationMs": 29169,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.12470780000000001,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors.\n\nThe contract is one class, because the spec describes stored state: how many questions each contributor has asked about each task today.\n\n- **`QuestionLimiter`** takes a `Clock` (a function that returns a `Date`) when it is created. A test can control the time, for example by stepping from `2026-03-01T23:59:59.999Z` to `2026-03-02T00:00:00.000Z` for the midnight reset.\n- **`remaining(contributorId, taskId)`** returns how many questions are left today and does not use one up.\n- **`ask(contributorId, taskId)`** returns an `AskResult`. Its doc comment says it throws when either id is empty and that no allowance is used.\n- **`AskResult`** is either `{ accepted: true; remaining }` or `{ accepted: false; remaining; message }`.\n\nTo set up a scenario like \"has asked 19 questions today\", a test calls `ask` that many times; there is no separate way to preload counts. The spec only says asking fails on empty ids, so `remaining` is not documented as throwing.\n\nThe build also created `src/index.js`. It's covered by `.gitignore`, and I didn't write it myself.\n\nExports: `Clock`, `AskResult`, `QuestionLimiter`",
+    "problem": null,
+    "sha256": "81935bdedcc62ebb5fe5433ab3291587c808df145457a33c9924d87bc77c7efe"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "88b68441-dda4-402f-8ba5-965d8f6539ee",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.27627159999999995,
+        "turns": 6,
+        "durationMs": 68847,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.27627159999999995,
+    "finalText": "I wrote the public test suite in `tests/public/question-limit.test.ts`. `npm run build` reports no errors. When run, every test fails with `not implemented`, as expected while the bodies throw.\n\nEach of the spec's seven scenarios has a happy-path test and a boundary test:\n\n| Scenario | Happy path | Boundary case |\n|---|---|---|\n| Full allowance | A new contributor/task pair reads 20, and reading doesn't use a question | Reading the count 25 times (more than the limit) still leaves all 20 questions |\n| Accepted question uses one | The first question is accepted with 19 left; `remaining()` agrees | The first question at exactly `00:00:00.000Z` gives 19 |\n| Twentieth accepted | After 19 questions, the 20th is accepted with 0 left | `remaining()` reads 1 before the 20th question and 0 after it |\n| Twenty-first refused | It's refused with 0 left and the exact message from the spec | Further questions stay refused and the count never drops below 0 |\n| Midnight reset | The spec's case: refused at `23:59:59.999Z`, accepted at `00:00:00.000Z` with 19 left | Questions at `00:00:00.000Z` and `23:59:59.999Z` count as the same day; the next day starts at 20 |\n| Separate allowances | With c1/t1 used up, c1/t2 and c2/t1 are still accepted | ID pairs that would clash if naively joined into one key stay separate (e.g. `\"a:b\"`/`\"c\"` and `\"a\"`/`\"b:c\"`) |\n| Empty ids | An empty contributor id, an empty task id, or both all throw | With one question left, 50 rejected asks use none of it; the 20th question is still accepted |\n\n- **Fixed clock:** every test passes a hand-set clock that only moves when the test moves it, and nothing touches the network or filesystem.\n- **Not tested:** the tests don't check what kind of error the empty-id case throws, or what `remaining()` does with empty ids, because the spec doesn't say.\n- **Cleanup:** the build produced `src/index.js` and `tests/public/question-limit.test.js`. I deleted both, so the only file I added is the `.ts` test file.\n\n14 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/question-limit.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "bd6a7b3f-5908-417c-8586-175010eec1a1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8128384000000001,
+        "turns": 12,
+        "durationMs": 218501,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.8128384000000001,
+    "finalText": "I've written the hidden suite in `tests/private/`. `npm run build` reports no errors, and all 47 tests fail against the current interface because the constructor throws `not implemented`.\n\nTo check the suite, I ran it in a scratch copy of the project against an implementation I wrote to the spec. It passed 47/47. I also ran it against five shortcut versions; each one passes some or all of the public suite, and the hidden suite catches all five:\n\n| Shortcut | Public | Private |\n|---|---|---|\n| Day taken from local time instead of UTC | 12/14 | 35/47 |\n| Day keyed on day-of-month only (`getUTCDate`) | **14/14** | 46/47 |\n| Rolling 24-hour window instead of a midnight-UTC reset | 13/14 | 37/47 |\n| Empty ids return a refused result instead of throwing | 12/14 | 42/47 |\n| Ids joined into a key with `:` | 13/14 | 46/47 |\n\nThe day-of-month shortcut is the only one that passes the whole public suite; the hidden suite catches it by comparing the same date in different months and years. The `:` join is already caught by the public suite, so the hidden suite adds more separators on top of it.\n\nWhat the hidden tests add beyond the public ones:\n- **Local time zones:** a separate file sets `process.env.TZ` to Los Angeles, Tokyo, Kiritimati and New York, and restores it after each test. This catches implementations that work out the day in local time.\n- **Midnight reset:** a late-day batch resets at 00:00 UTC even within 24 hours, and an early-day batch still counts at 23:59:59.999. A partly used day resets to 20, not to what was left. It also covers month, year and leap-day boundaries, skipped days, several days in a row, and every pair resetting rather than only the one that asks first.\n- **Separate allowances:** pairs get full allowances of 20 and partial counts are tracked when asks are interleaved. Ids that could collide are checked: other separators, a null byte, JSON-style quoting, `__proto__`/`constructor`/`toString`, case, Unicode, surrounding whitespace and long ids.\n- **Empty ids:** they throw an `Error` rather than returning a result, even when the pair is exhausted or on a new day. No pair loses any allowance.\n- **Counting and refusals:** the count goes down by exactly one per question from 19 to 0, reads interleaved with every ask use nothing, and 50 refusals in a row never go below 0. A refusal for one pair doesn't use another pair's questions.\n\nThe spec names no error message for empty ids, so those tests only check that an `Error` is thrown and that no allowance is used.\n\nI deleted the compiled `.js` files my builds produced in `src/` and `tests/`, which left them as they were before. The helper code is copied into each test file, because the rules require every file in `tests/private/` to end in `.test.ts`.\n\n47 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/question-limit-timezone.test.ts",
+      "tests/private/question-limit.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "he-10",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_docstring_cat",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_docstring_cata",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_docstring_empty_string",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_even_length_palindromic_suffix",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_longest_of_multiple_palindromic_suffixes",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_non_ascii_characters",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_only_final_character_is_palindromic_suffix",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_single_character_needs_no_append",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_spaces_are_preserved_in_reversed_prefix",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_uppercase_and_lowercase_are_distinct",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_whole_even_length_palindrome_needs_no_append",
+    "tests/public/test_make_palindrome.py :: TestMakePalindrome.test_whole_odd_length_palindrome_needs_no_append"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 30,
+  "kept": [
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_alternating_repeated_pattern",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_case_sensitive_three_character_input",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_combining_mark_is_a_separate_string_character",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_digits_with_even_suffix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_duplicate_letters_in_prefix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_embedded_nul_is_preserved",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_empty_string",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_internal_palindrome_is_not_a_suffix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_long_odd_suffix_with_two_character_prefix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_long_repeated_prefix_before_unique_final_character",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_longer_whole_even_palindrome",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_longer_whole_odd_palindrome",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_longest_of_nested_even_suffixes",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_longest_of_nested_odd_suffixes",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_many_identical_characters",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_matching_endpoints_with_nonpalindromic_middle",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_minus_sign_is_an_ordinary_character",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_multiple_emoji_with_distinct_endpoints",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_non_ascii_even_suffix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_odd_suffix_with_longer_prefix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_palindromic_prefix_is_not_a_suffix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_punctuation_is_reversed_as_characters",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_single_emoji",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_single_nul_character",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_six_character_even_suffix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_suffix_occupies_almost_entire_input",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_tab_and_newline_in_prefix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_two_distinct_characters",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_two_trailing_spaces_form_even_suffix",
+    "tests/private/test_make_palindrome.py :: TestMakePalindromePrivate.test_whitespace_only_palindrome"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 12,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 30,
+      "total": 30
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b44-66e1-7e73-9004-dfa6a4cc9d1d",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 60080,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "13 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_is_simple_power.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b45-53d8-7562-b915-aceb539a269c",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 159390,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "44 tests in 1 file. All reject the stub; expected values independently verified. Compile check passed.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_is_simple_power.py"
+    ],
+    "open": []
+  }
+}

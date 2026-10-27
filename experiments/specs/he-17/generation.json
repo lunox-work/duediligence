@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "1c98924f-81ec-42e8-8662-238b8466fb65",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.13458169999999997,
+        "turns": 4,
+        "durationMs": 30698,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.13458169999999997,
+    "finalText": "I wrote the suite in `tests/public/test_parse_music.py`. `python3 sandbox/compile_check.py` reports no errors. I haven't run the tests, since they will fail until the function is implemented.\n\nWhat's covered:\n- **The docstring example:** one test, with its exact expected list.\n- **`'o'` → 4, `'o|'` → 2, `'.|'` → 1:** for each, a typical case of three of the same note and a boundary case of a single note with no spaces. The single `'o|'` test checks it returns `[2]`, not 4 from its leading `'o'`.\n- **One integer per note, in order:** a typical mixed case (`'.| o| o'` → `[1, 2, 4]`) and two boundary cases where `'o'` and `'o|'` sit next to each other (`'o o|'` → `[4, 2]`, `'o| o'` → `[2, 4]`).\n\nEach expected value comes straight from the legend, and each test has a comment saying how. Every input uses single spaces between notes, as the docstring example does.\n\nI left out the empty string. The docstring doesn't say what it should return, and splitting `''` on a space gives `['']`, not an empty list, so there's no answer I can be sure of.\n\n10 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_parse_music.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "438ec9af-1f65-4089-b246-3a60bb23405a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.18178729999999999,
+        "turns": 3,
+        "durationMs": 38741,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.18178729999999999,
+    "finalText": "I wrote the hidden suite in `tests/private/test_parse_music_private.py`. `sandbox/compile_check.py` reports no errors. Against the current stub, all 19 tests fail with the `not implemented` error. As a sanity check, I ran them against a simple reference implementation I wrote in the scratchpad (outside the project), and all 19 pass.\n\nWhat the suite covers:\n- **Empty string:** returns `[]`, since there are no notes.\n- **Docstring example:** the same notes reversed and rotated, so a hardcoded answer or one built from note counts fails.\n- **Each note type, many times over:** 50 `o`, 40 `o|` and 40 `.|`. This catches an implementation that counts `o` characters as whole notes and so returns 4 for `o|`.\n- **Neighbouring notes:** `.| o| .|` catches treating every note ending in `|` the same. `o .| .| o` checks that quarter notes stay separate from the whole notes around them.\n- **Order:** the other orders of the three note types, all 27 three-note sequences, and a 1000-note random sequence with a fixed seed. These catch sorted, grouped or reordered output. Expected values for the generated inputs come from mapping each note through the docstring's legend.\n- **Whole/half pairs:** alternating, grouped, and mixed runs, extending the two public tests that put `o` next to `o|`.\n- **Return type:** the result is a `list`.\n\nEach test that extends a public test names it in a comment above it. I didn't test anything the docstring leaves open, such as double, leading or trailing spaces, or invalid notes.\n\n19 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_parse_music_private.py"
+    ],
+    "open": []
+  }
+}

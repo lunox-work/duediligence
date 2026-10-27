@@ -1,0 +1,39 @@
+{
+  "slug": "he-83",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_single_digit_minimum_length",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_six_digits_with_multiple_interior_digits",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_three_digits_excludes_leading_zero",
+    "tests/public/test_starts_one_ends.py :: TestStartsOneEnds.test_two_digits_inclusive_or"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 11,
+  "kept": [
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_eight_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_eleven_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_five_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_four_digits_against_exhaustive_count",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_one_hundred_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_one_thousand_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_seven_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_single_digit_among_repeated_calls",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_ten_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_twenty_digits",
+    "tests/private/test_starts_one_ends.py :: TestStartsOneEndsPrivate.test_twenty_five_digits_exact_count"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 4,
+      "total": 4
+    },
+    "hidden": {
+      "passed": 11,
+      "total": 11
+    }
+  }
+}

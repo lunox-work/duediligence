@@ -1,0 +1,73 @@
+{
+  "slug": "status-normalize",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/status.test.ts :: [happy-1] reads canonical statuses with the example spellings",
+    "tests/public/status.test.ts :: [happy-1] trims both ends and normalizes case for every canonical status",
+    "tests/public/status.test.ts :: [happy-2] reads every documented legacy spelling and the example variants",
+    "tests/public/status.test.ts :: [happy-2] collapses repeated mixed separators before looking up legacy spellings",
+    "tests/public/status.test.ts :: [unhappy-1] returns null for unrecognized values without guessing",
+    "tests/public/status.test.ts :: [unhappy-1] returns null for empty values and unknown values after cleaning",
+    "tests/public/status.test.ts :: [happy-3] writes review as itself",
+    "tests/public/status.test.ts :: [happy-3] writes the remaining statuses including the shortest and longest values",
+    "tests/public/status.test.ts :: [unhappy-2] refuses the example invalid writes and names each original value",
+    "tests/public/status.test.ts :: [unhappy-2] refuses every legacy alias and blank or padded writes",
+    "tests/public/status.test.ts :: [happy-4] reads mixed rows and reports sorted distinct original unreadable values",
+    "tests/public/status.test.ts :: [happy-4] returns empty rows and unreadable values for an empty table",
+    "tests/public/status.test.ts :: [happy-4] returns no unreadable values when every stored value is recognized"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 36,
+  "kept": [
+    "tests/private/read-status.test.ts :: [happy-1] reads every ASCII case combination of each canonical status",
+    "tests/private/read-status.test.ts :: [happy-1] trims one-sided padding and whitespace at the ends",
+    "tests/private/read-status.test.ts :: [happy-1] reads canonical values beyond a fixed short padding limit",
+    "tests/private/read-status.test.ts :: [happy-2] applies case and end cleaning to every legacy alias",
+    "tests/private/read-status.test.ts :: [happy-2] accepts every short mixed separator run for both two-word aliases",
+    "tests/private/read-status.test.ts :: [happy-2] collapses long separator runs without truncating the alias",
+    "tests/private/read-status.test.ts :: [unhappy-1] requires the entire cleaned value to match a status or alias",
+    "tests/private/read-status.test.ts :: [unhappy-1] preserves word boundaries instead of deleting separators inside canonical words",
+    "tests/private/read-status.test.ts :: [unhappy-1] rejects additional near misses plurals truncations and transpositions",
+    "tests/private/read-status.test.ts :: [unhappy-1] does not treat other punctuation as a documented separator",
+    "tests/private/read-status.test.ts :: [unhappy-1] rejects names inherited by ordinary JavaScript lookup objects",
+    "tests/private/read-status.test.ts :: [unhappy-1] reads long blank separator-only and trimmed-empty strings as null",
+    "tests/private/read-status.test.ts :: [unhappy-1] does not truncate long unknown values into recognized prefixes",
+    "tests/private/read-status.test.ts :: [unhappy-1] does not repair accents fullwidth letters or lookalike characters",
+    "tests/private/read-statuses.test.ts :: [happy-4] reads a large mixed table without limiting rows or unique unreadable values",
+    "tests/private/read-statuses.test.ts :: [happy-4] associates results with ids across reversed and rotated input orders",
+    "tests/private/read-statuses.test.ts :: [happy-4] preserves every row even when identifiers repeat or resemble object keys",
+    "tests/private/read-statuses.test.ts :: [happy-4] deduplicates unreadable values while retaining identical repeated rows",
+    "tests/private/read-statuses.test.ts :: [happy-4] distinguishes original unknown values that have identical cleaned text",
+    "tests/private/read-statuses.test.ts :: [happy-4] sorts distinct unreadable originals independently of first and last occurrence",
+    "tests/private/read-statuses.test.ts :: [happy-4] reports singleton unknown empty and whitespace originals exactly",
+    "tests/private/read-statuses.test.ts :: [happy-4] reads hundreds of recognized rows spanning every status and legacy spelling",
+    "tests/private/read-statuses.test.ts :: [happy-4] keeps every row in a table with no recognized values",
+    "tests/private/read-statuses.test.ts :: [happy-4] empty reads stay empty before and after populated batch reads",
+    "tests/private/read-statuses.test.ts :: [happy-4] successive populated batches report only their own unreadable originals",
+    "tests/private/read-statuses.test.ts :: [happy-4] retains long unreadable originals and recognizes long separator runs in the same batch",
+    "tests/private/read-statuses.test.ts :: [happy-4] does not reuse a preceding row status for later unreadable rows",
+    "tests/private/write-status.test.ts :: [happy-3] repeated writes and reads of review remain the canonical value",
+    "tests/private/write-status.test.ts :: [happy-3] writes all statuses in changing orders and round trips each stored value",
+    "tests/private/write-status.test.ts :: [unhappy-2] refuses every noncanonical ASCII capitalization of every status",
+    "tests/private/write-status.test.ts :: [unhappy-2] refuses left right and two-sided padding for every canonical status",
+    "tests/private/write-status.test.ts :: [unhappy-2] refuses cleaned variants of every alias even when reading accepts them",
+    "tests/private/write-status.test.ts :: [unhappy-2] refuses other unknown words punctuation numeric strings and object property names",
+    "tests/private/write-status.test.ts :: [unhappy-2] names the entire long invalid original instead of its cleaned or truncated form",
+    "tests/private/write-status.test.ts :: [unhappy-2] refuses several blank lengths and the empty value",
+    "tests/private/write-status.test.ts :: [unhappy-2] invalid writes remain invalid when interleaved with successful writes"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 13,
+      "total": 13
+    },
+    "hidden": {
+      "passed": 36,
+      "total": 36
+    }
+  }
+}

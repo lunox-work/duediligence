@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b25-a92c-7991-8040-c61a60aa0f17",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 10,
+        "durationMs": 57580,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "9 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_filter_integers.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b26-8b8b-7e72-95b0-24848aa4d159",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 143706,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "26 tests in 1 file. Compile check passed; every test fails against the stub.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_filter_integers.py"
+    ],
+    "open": []
+  }
+}

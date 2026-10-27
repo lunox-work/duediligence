@@ -1,0 +1,23 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "99af7ef9-4347-41dc-9a21-0b05c264b591",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.27601230000000004,
+        "turns": 6,
+        "durationMs": 85236,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.27601230000000004,
+    "finalText": "I've written the public suite in `tests/public/test_strongly_connected.py`. `compile_check.py` reports no errors. All 18 tests currently fail with `Runtime Error`, which is expected because `src/main.py` still raises `NotImplementedError`.\n\nWhat it covers:\n\n- **Samples (3):** each statement sample, checked against its literal expected output.\n- **N = 1 (2), worked out by hand:** `BW` gives 1, because the added edge 2→1 closes a cycle. `WB` gives 0, because vertex 1 has no incoming edge.\n- **Small cases (10, N = 2 to 5):** expected values come from a brute force inside the test file. It tries every white-to-black pairing and checks strong connectivity with a forward and a reverse search from vertex 1. It reproduces all three sample answers, including 240792 for sample 3. The cases include strings that must give 0 (`WWBB`, `BWWB`) and mixed patterns (`BWBW…`, `BBWWBBWW`, etc.).\n- **Largest N = 200000 (3), each reasoned in a comment:**\n  - `B`×N then `W`×N gives N! mod 998244353. Every added edge goes backward, black 1 crosses every cut up to N, and white 2N crosses every cut from N on, so all pairings work.\n  - `W`×N then `B`×N gives 0, because vertex 1 is white and nothing can point into it.\n  - A string ending in `B` gives 0, because vertex 2N is black and has no outgoing edge.\n\nI wrote nothing outside `tests/public/`.\n\n18 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_strongly_connected.py"
+    ]
+  }
+}

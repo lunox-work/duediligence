@@ -1,0 +1,31 @@
+setup-stage: incomplete. Public 21/48, hidden 27/64, existing 813/813; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at ddaf803050e52faf61ac348dc0d927a804201848.
+Hidden suite sha256 a670b5adb03b90854fa888cf99c965c688ff977500c95a8ed425d3e540ab2777, sealed 2026-10-26T04:35:59.478Z.
+Failing scenarios: boundary-1, boundary-10, boundary-11, boundary-12, boundary-13, boundary-14, boundary-15, boundary-2, boundary-3, boundary-5, boundary-6, boundary-7, boundary-8, boundary-9, happy-1, happy-3, happy-4, happy-5, unhappy-2, unhappy-3, unhappy-4
+public: test/setup-stage.test.ts :: [boundary-1] boards, repositories, proposals and bounties leave a Jira workspace at the jira stage
+public: test/setup-stage.test.ts :: [boundary-1] boards, repositories, proposals and bounties alone leave a workspace barebone
+public: test/setup-stage.test.ts :: [boundary-2] GitHub repositories without a GitHub connection are barebone
+public: test/setup-stage.test.ts :: [boundary-2] GitHub repositories without a GitHub connection do not turn a Jira workspace into both
+public: test/setup-stage.test.ts :: [boundary-5] a fractional bounty count sizes the workspace even beside a NaN proposal count
+public: test/setup-stage.test.ts :: [boundary-6] a tool the server does not offer has no step even with a connection count
+public: test/setup-stage.test.ts :: [boundary-7] someone who cannot manage sees only the steps of tools already connected, and size
+public: test/setup-stage.test.ts :: [boundary-8] boards and repositories alone complete no step
+public: test/setup-stage.test.ts :: [boundary-8] boards and repositories do not list a tool's step for someone who cannot manage
+public: test/setup-stage.test.ts :: [boundary-9] GitHub connected and sized before Jira still leaves the Jira step current
+public: test/setup-stage.test.ts :: [boundary-10] a member with nothing connected has the size step current
+public: test/setup-stage.test.ts :: [boundary-10] a member with nothing connected who has sized has no current step
+public: test/setup-stage.test.ts :: [boundary-11] every step done leaves none current
+public: test/setup-stage.test.ts :: [boundary-11] a lone size step that is done is not current
+public: test/setup-stage.test.ts :: [boundary-12] a hand-written bounty completes setup as a proposal would
+public: test/setup-stage.test.ts :: [boundary-12] a member's lone size step is completed by a bounty with no proposals
+public: test/setup-stage.test.ts :: [unhappy-2] a tool the server does not offer is not connected, whatever its count
+public: test/setup-stage.test.ts :: [unhappy-2] infinite connection counts for tools the server does not offer are barebone
+public: test/setup-stage.test.ts :: [unhappy-3] a member whose workspace has only broken Jira sites sees no Jira step
+public: test/setup-stage.test.ts :: [unhappy-3] a member with broken Jira sites and GitHub connected sees the GitHub step but no Jira step
+public: test/setup-stage.test.ts :: [unhappy-4] broken Jira sites keep the Jira step current after GitHub is connected
+public: test/setup-stage.test.ts :: [happy-3] each step is done on its own fact
+public: test/setup-stage.test.ts :: [happy-3] fractional counts above zero mark their steps done
+public: test/setup-stage.test.ts :: [happy-4] current is the first undone step in list order
+public: test/setup-stage.test.ts :: [happy-4] with Jira not on offer, current skips to the first undone listed step
+public: test/setup-stage.test.ts :: [happy-5] setupComplete is true exactly when every listed step is done
+public: test/setup-stage.test.ts :: [happy-5] a member with Jira connected and something sized is complete without a GitHub step
+Check "independent-tests (drafted)": failure, incomplete: public 21/48, hidden 27/64, existing 813/813 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/setup-stage.json); not posted (no token).

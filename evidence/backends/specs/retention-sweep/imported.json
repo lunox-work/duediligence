@@ -1,0 +1,18 @@
+{
+  "from": "/Users/charlieangriawan/Repositories/lunox-work/public/double-blind-experiment/specs/retention-sweep",
+  "at": "2026-10-26T05:23:27.554Z",
+  "heldOut": false,
+  "why": "Its suites were in the archive's working folder and its published write-ups before this import; anyone who worked there may have read them.",
+  "commitment": null,
+  "commitmentNote": "No prepared.json, so no hiddenSha256 was recorded before any submission; judge prints the hash it computes and checks nothing.",
+  "archiveToolchain": {},
+  "files": [
+    "spec.md",
+    "skeleton",
+    "tests/public",
+    "tests/private",
+    "reference",
+    "calibration.json",
+    "generation.json"
+  ]
+}

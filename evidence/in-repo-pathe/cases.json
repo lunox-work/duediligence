@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "pathe-unc-resolve",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "b52fcacc59717a1e4a8783d4bbfae7fa81b4db07",
+    "package": ".",
+    "seam": [
+      "src/_path.ts"
+    ],
+    "subject": "fix(resolve): preserve UNC prefix (#245) (#246)",
+    "message": ""
+  },
+  {
+    "slug": "pathe-extname-dot",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "e78663c58ef172169f9c1c4d4dbc64191eee3885",
+    "package": ".",
+    "seam": [
+      "src/_path.ts"
+    ],
+    "subject": "fix(extname): handle inputs ending with dot (#203)",
+    "message": ""
+  },
+  {
+    "slug": "pathe-format-partial",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "4353c6aa69db3ec90adc4a30fd54bbe1f5f0b675",
+    "package": ".",
+    "seam": [
+      "src/_path.ts"
+    ],
+    "subject": "fix(format): allow calls with partial arguments (#198)",
+    "message": ""
+  },
+  {
+    "slug": "pathe-reverse-alias",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "91582889fc1fecefe023690bf8badabe5d38084f",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "feat(utils): add `reverseResolveAlias` util (#173)",
+    "message": ""
+  },
+  {
+    "slug": "pathe-filename-dot",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "e68f5cd2c9360a000c2907d53a9dfc06582c712e",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "fix(utils/filename): handle files beginning with a period or without ext (#185)",
+    "message": ""
+  },
+  {
+    "slug": "pathe-basename-trailing",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "7534c0cba5c688c255d39b338847f7a99ca406d1",
+    "package": ".",
+    "seam": [
+      "src/path.ts"
+    ],
+    "subject": "fix(basename): ignore trailing seperator (#180)",
+    "message": ""
+  },
+  {
+    "slug": "pathe-alias-trailing",
+    "repo": "https://github.com/unjs/pathe",
+    "commit": "2fa8aaaa6fdf88eaf3713e016cc0a324b9ecc691",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "fix(resolveAlias): handle aliases ending with trailing slash (#155)",
+    "message": ""
+  }
+]

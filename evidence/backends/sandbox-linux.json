@@ -1,0 +1,104 @@
+{
+  "platform": "linux",
+  "probes": [
+    {
+      "probe": "read own workdir",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "mine"
+    },
+    {
+      "probe": "write own workdir",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "probe": "node runs",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "probe": "python runs",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "probe": "git runs",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": "git version 2.39.5"
+    },
+    {
+      "probe": "read a sibling workdir's hidden suite",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "/bin/cat: /tmp/independent-tests-work/sandbox-other-iJGuXL/tests/private/hidden.test.ts: No such file or directory"
+    },
+    {
+      "probe": "list WORK_ROOT",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "sandbox-own-xpbqSS"
+    },
+    {
+      "probe": "read a spec's tests/private",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "/bin/cat: /root/ithome/specs/_sandbox-probe/tests/private/hidden.test.ts: No such file or directory"
+    },
+    {
+      "probe": "list the home",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "."
+    },
+    {
+      "probe": "read ~/.codex/auth.json",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "/bin/cat: /root/.codex/auth.json: No such file or directory"
+    },
+    {
+      "probe": "read the package",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "/bin/cat: /pkg/package.json: No such file or directory"
+    },
+    {
+      "probe": "write outside the workdir",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": "/bin/sh: 1: cannot create /tmp/independent-tests-work/sandbox-other-iJGuXL/planted.txt: Directory nonexistent"
+    },
+    {
+      "probe": "network (sandbox with network)",
+      "expected": "allowed",
+      "got": "allowed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "probe": "network (sandbox without network)",
+      "expected": "denied",
+      "got": "denied",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "wrong": 0
+}

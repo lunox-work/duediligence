@@ -1,0 +1,116 @@
+{
+  "slug": "he-32",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_find_zero.py :: TestFindZero.test_cubic_with_one_real_root",
+    "tests/public/test_find_zero.py :: TestFindZero.test_docstring_cubic_example",
+    "tests/public/test_find_zero.py :: TestFindZero.test_docstring_linear_example",
+    "tests/public/test_find_zero.py :: TestFindZero.test_fractional_coefficients",
+    "tests/public/test_find_zero.py :: TestFindZero.test_minimum_length_with_negative_leading_coefficient",
+    "tests/public/test_find_zero.py :: TestFindZero.test_repeated_root_accepts_either_distinct_zero",
+    "tests/public/test_find_zero.py :: TestFindZero.test_several_distinct_roots_accepts_any_one",
+    "tests/public/test_find_zero.py :: TestFindZero.test_six_coefficients_with_interior_zeros",
+    "tests/public/test_find_zero.py :: TestFindZero.test_small_nonzero_leading_coefficient",
+    "tests/public/test_find_zero.py :: TestFindZero.test_zero_constant_term_and_unique_zero_root"
+  ],
+  "publicFailingOnReference": [
+    "tests/public/test_find_zero.py :: TestFindZero.test_six_coefficients_with_interior_zeros",
+    "tests/public/test_find_zero.py :: TestFindZero.test_small_nonzero_leading_coefficient"
+  ],
+  "hiddenWritten": 36,
+  "kept": [
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_dense_eleventh_degree",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_five_distinct_real_roots",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_fractional_dense_cubic",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_fractional_linear_positive_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_fractional_linear_root_outside_unit_interval",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_linear_both_coefficients_negative",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_linear_large_positive_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_linear_nonintegral_positive_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_linear_positive_coefficients",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_linear_positive_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_linear_zero_constant",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_small_negative_slope",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_sparse_ninth_degree_positive_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_sparse_quintic_negative_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_sparse_quintic_with_negative_leading_term",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_sparse_seventh_degree_negative_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_uniformly_large_cubic_coefficients",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_unique_half_integer_cubic_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_unique_negative_cubic_root",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_unique_positive_cubic_root_with_negative_leading_term",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_zero_and_two_asymmetric_nonzero_roots",
+    "tests/private/test_find_zero.py :: TestFindZeroHidden.test_zero_root_of_seventh_degree_polynomial"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_double_and_triple_roots_together",
+      "reason": "The reference cannot satisfy it: AssertionError: 3.316322652937407e-06 != 0.0 within 7 places (3.316322652937407e-06 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_fifth_order_root_with_negative_leading_term",
+      "reason": "The reference cannot satisfy it: AssertionError: 5.2656145842143845e-06 != 0.0 within 7 places (5.2656145842143845e-06 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_irrational_fifth_root",
+      "reason": "The reference cannot satisfy it: ZeroDivisionError: division by zero"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_irrational_negative_cube_root",
+      "reason": "The reference cannot satisfy it: ZeroDivisionError: division by zero"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_irrational_positive_cube_root",
+      "reason": "The reference cannot satisfy it: ZeroDivisionError: division by zero"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_negative_triple_root",
+      "reason": "The reference cannot satisfy it: AssertionError: 3.6627279370206626e-06 != 0.0 within 7 places (3.6627279370206626e-06 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_nonzero_double_root_and_simple_root",
+      "reason": "The reference cannot satisfy it: AssertionError: -6.2501293616011865e-06 != 0.0 within 7 places (6.2501293616011865e-06 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_pure_cubic_fractional_root",
+      "reason": "The reference cannot satisfy it: ZeroDivisionError: division by zero"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_pure_cubic_negative_root",
+      "reason": "The reference cannot satisfy it: ZeroDivisionError: division by zero"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_sparse_fifteenth_degree",
+      "reason": "The reference cannot satisfy it: AssertionError: 1.000000540078104 != 1.0 within 7 places (5.400781040165725e-07 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_three_nonzero_roots_of_mixed_sign",
+      "reason": "The reference cannot satisfy it: AssertionError: 1.3875239135430206e-07 != 0.0 within 7 places (1.3875239135430206e-07 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_three_positive_roots_with_negative_leading_term",
+      "reason": "The reference cannot satisfy it: AssertionError: 1.2353089451355714e-06 != 0.0 within 7 places (1.2353089451355714e-06 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_uniformly_small_cubic_coefficients",
+      "reason": "The reference cannot satisfy it: AssertionError: 0 != -2.0 within 7 places (2.0 difference)"
+    },
+    {
+      "id": "tests/private/test_find_zero.py :: TestFindZeroHidden.test_uniformly_small_fractional_linear_coefficients",
+      "reason": "The reference cannot satisfy it: AssertionError: 0 != 0.6 within 7 places (0.6 difference)"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 10
+    },
+    "hidden": {
+      "passed": 22,
+      "total": 22
+    }
+  }
+}

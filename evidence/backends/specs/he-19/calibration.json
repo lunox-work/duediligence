@@ -1,0 +1,52 @@
+{
+  "slug": "he-19",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_all_valid_words_in_reverse_order",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_all_values_equal",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_already_sorted_values",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_docstring_example",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_numeric_order_for_mixed_words",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_repeated_values_are_preserved",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_single_nine",
+    "tests/public/test_sort_numbers.py :: TestSortNumbers.test_single_zero"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 20,
+  "kept": [
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_all_words_already_sorted",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_all_words_shuffled",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_already_sorted_with_duplicate_runs",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_different_three_values",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_example_values_in_another_order",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_long_input_with_every_word_and_unequal_counts",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_mixed_subset_including_one_and_three",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_repeated_endpoints",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_eight",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_five",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_four",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_one",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_seven",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_six",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_three",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_single_two",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_six_before_seven",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_thirty_seven_equal_values",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_three_after_two",
+    "tests/private/test_sort_numbers_hidden.py :: TestSortNumbersHidden.test_uneven_repetitions_in_mixed_order"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 8,
+      "total": 8
+    },
+    "hidden": {
+      "passed": 20,
+      "total": 20
+    }
+  }
+}

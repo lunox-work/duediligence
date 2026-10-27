@@ -1,0 +1,46 @@
+{
+  "slug": "he-24",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_composite_100",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_docstring_example_15",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_excludes_n_itself_4",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_odd_composite_21",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_prime_13",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_prime_square_49",
+    "tests/public/test_largest_divisor.py :: TestLargestDivisor.test_smallest_input_2"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 7
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 22,
+  "kept": [
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_45_is_15_not_largest_prime_factor",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_even_30",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_even_6",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_even_million",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_large_even_999966",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_odd_composite_63",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_power_of_two_1024",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_power_of_two_8",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_3",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_7919",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_997",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_999983",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_cube_27",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_square_121",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_square_25",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_square_9",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_square_961",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_prime_square_994009",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_product_11_13_is_13",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_product_5_7_is_7",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_smallest_factor_5_gives_35",
+    "tests/private/test_largest_divisor_private.py :: TestLargestDivisorPrivate.test_three_primes_1001"
+  ],
+  "dropped": [],
+  "reference": null
+}

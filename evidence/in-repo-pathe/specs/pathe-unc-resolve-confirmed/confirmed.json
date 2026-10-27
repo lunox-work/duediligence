@@ -1,0 +1,53 @@
+{
+  "sha256": "542bd6cb947d9573d08ad941e2c5f2d82d3abec02624cdecb6a73dd7bf02ba17",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T13:19:16.725Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "What counts as a UNC anchor: any absolute anchor that starts with two separators (`_UNC_REGEX`, the same test `normalize` uses), in any mix of `/` and `\\`.",
+    "Ticket: \"fix(resolve): preserve UNC prefix (#245) (#246)\"",
+    "Instead: Node `win32` rule, where a UNC root needs exactly two separators followed by a server name and a share name.",
+    "How the prefix is written: always as `//` plus the body, with backslashes converted like the rest of the output.",
+    "Ticket: \"fix(resolve): preserve UNC prefix (#245) (#246)\"",
+    "Instead: keep the input's original separators (`\\\\server\\share`) as Node `win32` does.",
+    "Three or more leading separators (`\"///foo\"`): result is `\"//foo\"`, matching `normalize`. Separators only (`\"//\"`, `\"///\"`) give `\"//\"`.",
+    "Ticket: silent.",
+    "Instead: collapse to a single `/` (`\"/foo\"`), as `path.posix.resolve` does.",
+    "Climbing above the share with `..`: no clamping at `//server/share`. Segments are removed like any others, and once the body is empty the result is `\"//\"` (`resolve(\"//server/share\", \"..\", \"..\")` gives `\"//\"`), where `normalize` gives `\"/\"`.",
+    "Ticket: silent.",
+    "Instead: return `\"/\"` as `normalize` does, or clamp at the share root (`\"//server/share\"`) as Node `win32` does.",
+    "Trailing separator: stripped, including for a bare share (`\"//server/share/\"` gives `\"//server/share\"`), as `resolve` already does for other paths.",
+    "Ticket: silent.",
+    "Instead: keep a trailing separator on a share root (`\"\\\\\\\\server\\\\share\\\\\"`) as Node `win32` does.",
+    "Which argument decides UNC-ness: only the anchor. A later root-relative (`\"/foo\"`) or drive (`\"C:/foo\"`) argument replaces a UNC anchor completely.",
+    "Ticket: silent.",
+    "Instead: Node `win32`, where a later `\"/foo\"` stays on the earlier UNC share (`\\\\server\\share\\foo`).",
+    "UNC working directory: a UNC `process.cwd()` that serves as the anchor keeps its prefix.",
+    "Ticket: silent.",
+    "Instead: apply the fix only to explicit arguments.",
+    "`//.` device paths: still not absolute (`isAbsolute` unchanged), so they resolve against the cwd as before.",
+    "Ticket: silent.",
+    "Instead: treat `//./` as an absolute device root and return `\"//./foo/bar\"`, as `normalize` and Node `win32` do.",
+    "Relative results when the cwd is empty: when the leftmost non-empty argument starts with two separators, the result gets the `//` prefix (`resolve(\"//./x\")` gives `\"//x\"`); otherwise it stays relative (`resolve(\"..\", \"..\")` gives `\"../..\"`).",
+    "Ticket: silent.",
+    "Instead: return `\"x\"` with no prefix, or `\"//./x\"` as `normalize` does for a non-absolute UNC-looking input.",
+    "Effect on `format`: it follows `resolve`, so a UNC root or dir with `root` set now keeps `//`.",
+    "Ticket: \"The change keeps the exports' names and signatures.\"",
+    "Instead: keep `format`'s old single-slash output.",
+    "Effect on `relative`: it takes on the new `resolve` output, so a UNC path paired with a non-UNC absolute path gains an empty segment or an extra `..` (`relative(\"/a\", \"//server/share/b\")` gives `\"..//server/share/b\"`, `relative(\"//server/share/a\", \"/b\")` gives `\"../../../../b\"`). UNC-to-UNC and non-UNC results are unchanged.",
+    "Ticket: \"The change keeps the exports' names and signatures.\"",
+    "Instead: keep today's outputs (`\"../server/share/b\"`, `\"../../../b\"`), or return `to` as-is when the roots differ, as Node `win32` does.",
+    "Overlapping calls: `resolve` is synchronous and keeps no state between calls, so a UNC result never leaks into a later call.",
+    "Ticket: silent.",
+    "Instead: no alternative needed. A pure function has nothing to order.",
+    "Seam (the files the stub writes): src/_path.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/_path.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

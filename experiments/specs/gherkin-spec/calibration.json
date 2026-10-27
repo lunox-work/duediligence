@@ -1,0 +1,100 @@
+{
+  "slug": "gherkin-spec",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/cleaning.test.ts :: [boundary-1] list markers and stray whitespace are removed from criteria",
+    "tests/public/cleaning.test.ts :: [boundary-1] the title is cleaned of whitespace but keeps its list marker",
+    "tests/public/cleaning.test.ts :: [boundary-1] a list marker is removed only once",
+    "tests/public/cleaning.test.ts :: [boundary-2] empty criteria are skipped and repeated titles are numbered",
+    "tests/public/cleaning.test.ts :: [boundary-2] criteria that differ only before cleaning count as repeated",
+    "tests/public/layout.test.ts :: [happy-1] two criteria produce the exact feature text at .spec/<KEY>.feature",
+    "tests/public/layout.test.ts :: [happy-1] a single criterion gives one scenario, one trailing newline and no carriage returns",
+    "tests/public/layout.test.ts :: [happy-2] a plain criterion becomes one Then step with its first character lowercased",
+    "tests/public/layout.test.ts :: [happy-2] an all-uppercase acronym first word is left as it is",
+    "tests/public/layout.test.ts :: [happy-2] a first word containing a digit is left as it is",
+    "tests/public/layout.test.ts :: [happy-3] a criterion written as steps is split at its keywords and titled with the whole criterion",
+    "tests/public/layout.test.ts :: [happy-3] keywords are matched ignoring case, only as whole words, and written capitalized",
+    "tests/public/no-criteria.test.ts :: [unhappy-1] a ticket with no criteria gets the TODO feature",
+    "tests/public/no-criteria.test.ts :: [unhappy-1] a ticket whose criteria are all empty once cleaned gets the TODO feature",
+    "tests/public/no-criteria.test.ts :: [unhappy-2] a lowercase key is refused with an error naming the key",
+    "tests/public/no-criteria.test.ts :: [unhappy-2] a key without a dash is refused with an error naming the key",
+    "tests/public/no-criteria.test.ts :: [unhappy-2] a key with a letter after the dash is refused with an error naming the key",
+    "tests/public/no-criteria.test.ts :: [unhappy-2] a title that is only whitespace is refused with an error saying the title is empty"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 18
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 40,
+  "kept": [
+    "tests/private/cleaning.test.ts :: [boundary-1] every marker kind is removed with other text, other spacing and another order",
+    "tests/private/cleaning.test.ts :: [boundary-1] marker characters in the middle or end of a criterion are kept",
+    "tests/private/cleaning.test.ts :: [boundary-1] a marker and whitespace are removed before an acronym or steps are recognised",
+    "tests/private/cleaning.test.ts :: [boundary-1] the title keeps other list markers and has its whitespace runs collapsed",
+    "tests/private/cleaning.test.ts :: [boundary-1] a title that is only a list marker is kept",
+    "tests/private/cleaning.test.ts :: [boundary-1] only the first of two markers of any kind is removed",
+    "tests/private/cleaning.test.ts :: [boundary-2] numbering continues past three, into two digits",
+    "tests/private/cleaning.test.ts :: [boundary-2] interleaved repeats are numbered per title",
+    "tests/private/cleaning.test.ts :: [boundary-2] empty criteria at the start, end and between produce no scenario and no extra lines",
+    "tests/private/cleaning.test.ts :: [boundary-2] repeated criteria written as steps get numbered titles and the same steps",
+    "tests/private/cleaning.test.ts :: [boundary-2] every marker kind and whitespace variant counts as the same title",
+    "tests/private/layout.test.ts :: [happy-1] five criteria keep their order, each in its own scenario, under another key",
+    "tests/private/layout.test.ts :: [happy-1] the path is .spec/ followed by the key and .feature for other valid keys",
+    "tests/private/layout.test.ts :: [happy-1] criteria with CRLF line breaks, plain and in steps, give no carriage returns and one trailing newline",
+    "tests/private/layout.test.ts :: [happy-1] twenty criteria give twenty scenarios, each after one empty line",
+    "tests/private/layout.test.ts :: [happy-2] only the first character is lowercased; later capitals are kept",
+    "tests/private/layout.test.ts :: [happy-2] a criterion already starting in lowercase is kept as it is in its step",
+    "tests/private/layout.test.ts :: [happy-2] other first words of two or more uppercase letters are left as they are",
+    "tests/private/layout.test.ts :: [happy-2] a first word with a lowercase letter after its capitals has its first character lowercased",
+    "tests/private/layout.test.ts :: [happy-2] an acronym after the first word does not keep the first character",
+    "tests/private/layout.test.ts :: [happy-2] a first word with a digit anywhere in it is left as it is",
+    "tests/private/layout.test.ts :: [happy-2] a digit after the first word does not keep the first character",
+    "tests/private/layout.test.ts :: [happy-2] a criterion whose first word is And or But becomes one lowercased Then step",
+    "tests/private/layout.test.ts :: [happy-2] a first word that only begins with a keyword is not written in steps",
+    "tests/private/layout.test.ts :: [happy-2] a plain criterion with keywords after its first word is not split",
+    "tests/private/layout.test.ts :: [happy-3] every keyword is split on, including repeated And",
+    "tests/private/layout.test.ts :: [happy-3] a criterion may start with When or Then and repeat keywords in any order",
+    "tests/private/layout.test.ts :: [happy-3] keywords in upper or mixed case are written capitalized",
+    "tests/private/layout.test.ts :: [happy-3] words that contain a keyword are not split",
+    "tests/private/layout.test.ts :: [happy-3] the text after each keyword is kept as written",
+    "tests/private/layout.test.ts :: [happy-3] steps criteria and plain criteria mix in one file",
+    "tests/private/no-criteria.test.ts :: [unhappy-1] the TODO feature names another key and uses the cleaned title",
+    "tests/private/no-criteria.test.ts :: [unhappy-1] the TODO feature keeps a list marker in the title",
+    "tests/private/no-criteria.test.ts :: [unhappy-1] many whitespace-only criteria give the TODO feature",
+    "tests/private/no-criteria.test.ts :: [unhappy-2] keys with lowercase letters or not starting with a letter are refused, naming the key",
+    "tests/private/no-criteria.test.ts :: [unhappy-2] keys with a missing or malformed dash part are refused, naming the key",
+    "tests/private/no-criteria.test.ts :: [unhappy-2] keys with other characters after the digits are refused, naming the key",
+    "tests/private/no-criteria.test.ts :: [unhappy-2] an invalid key is refused even when the ticket has no criteria",
+    "tests/private/no-criteria.test.ts :: [unhappy-2] an empty title is refused with an error saying the title is empty",
+    "tests/private/no-criteria.test.ts :: [unhappy-2] an empty title is refused even when the ticket has no criteria"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 18,
+      "total": 18
+    },
+    "hidden": {
+      "passed": 40,
+      "total": 40
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented `generateFeatureFile` in `src/index.ts`, and all tests pass: 18/18 public and 40/40 private. I didn't change any test or config file, and none of the tests contradicted the spec.\n\nHow it works, in the order the code runs:\n- **Key check:** the key must match `^[A-Z][A-Z0-9]*-[0-9]+$`. Otherwise it throws an error that includes the key. The key and title are checked before the criteria, so a bad key or empty title is refused even when there are no criteria.\n- **Title:** every run of whitespace becomes one space and the ends are trimmed. List markers stay. If nothing is left, it throws an error saying the title is empty.\n- **Cleaning criteria:** whitespace is collapsed first. Then one leading marker (`-`, `*`, `1.`, `2)`, `[ ]`, `[x]`) is removed, but only when a space or the end of the text follows it, so something like \"2.5 payouts\" keeps its \"2.\". Criteria that end up empty are dropped.\n- **Steps or plain:** a criterion is treated as steps only if its first word is Given, When or Then, in any case. It is then split before every whole word Given, When, Then, And or But, and each keyword is written capitalised. Any other criterion becomes one `Then` step with its first character lowercased. The exception is a first word that is two or more uppercase letters only (like \"API\") or contains a digit (like \"V2\"); then it is left as written.\n- **Repeated titles:** each title has its own count, so repeats get \" (2)\", \" (3)\" and so on.\n- **No criteria:** the file is the TODO feature naming the key.\n\nTwo edge cases the spec doesn't cover are left as is:\n- A criterion that happens to read like a numbered repeat, such as \"X (2)\" alongside two plain \"X\" criteria, would give two scenarios with the same title.\n- A \"whole word\" is anything between spaces, so a keyword with punctuation attached, like \"Then,\", isn't split on.\n\nTests left failing:\nnone",
+    "sessions": [
+      {
+        "sessionId": "bf2f7211-fb8e-42c8-bc50-187e32e4ddbe",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3638923,
+        "turns": 9,
+        "durationMs": 54703,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.3638923
+  }
+}

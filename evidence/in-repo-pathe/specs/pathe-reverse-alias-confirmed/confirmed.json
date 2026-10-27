@@ -1,0 +1,53 @@
+{
+  "sha256": "979c4d6b51ae3f3fd043cc99e4db6c95055be9bf532941a053b0be081b33aafc",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T14:35:56.234Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "If nothing matches, the result is `[]`. The input path is not returned.",
+    "Ticket: silent.",
+    "Instead: return `[path]`, mirroring `resolveAlias`, which returns the input unchanged.",
+    "The function returns every matching alias, not just the best one.",
+    "Ticket: silent.",
+    "Instead: return only the most specific match (the signature's `string[]` already rules out a single string).",
+    "Results are sorted by length, longest first. Ties keep the order from `normalizeAliases`.",
+    "Ticket: silent.",
+    "Instead: shortest (most specific) first, or the order the aliases were found in.",
+    "Duplicate results are kept: each matching alias adds its own entry, even when two are identical.",
+    "Ticket: silent.",
+    "Instead: remove duplicates and keep the first one.",
+    "Only the input path is normalised, with `normalizeWindowsPath` as `resolveAlias` does (backslashes and the drive letter). `.`/`..` segments and repeated slashes are not resolved before matching. Targets are used as `normalizeAliases` returns them. The rest of the path after the target goes through `join`, so dot segments and repeated slashes in it are collapsed in the result (`/root/../etc/passwd` with `@` → `/root` gives `etc/passwd`).",
+    "Ticket: silent.",
+    "Instead: compare both the input and the targets after `normalize()`.",
+    "A target matches only at a segment boundary: the next character is `/` or the path ends.",
+    "Ticket: silent.",
+    "Instead: plain string-prefix matching.",
+    "A target ending in `/` matches only paths that contain that slash, as `resolveAlias` does for alias keys, so `/x/` does not match `/x`. A trailing slash on the path is kept in the result.",
+    "Ticket: silent.",
+    "Instead: ignore a trailing slash on a target, so `/x/` matches `/x`.",
+    "Matching is case-sensitive, except for the drive letter of the input path, which `normalizeWindowsPath` upper-cases.",
+    "Ticket: silent.",
+    "Instead: case-insensitive matching on Windows-style paths.",
+    "Aliases with an empty target are not skipped. They match `\"\"` and every path that starts with `/`, so `\"\"` with `{ \"e\": \"\" }` gives `[\"e\"]`. With no empty target, an empty path gives `[]`.",
+    "Ticket: silent.",
+    "Instead: skip empty targets and always return `[]` for an empty path.",
+    "The alias is put in front exactly as written, including any trailing slash, and the result goes through `join` (so `\"~/\"` + `\"\"` gives `\"~/\"`, and `\"r\"` + `\"/\"` gives `\"r\"`).",
+    "Ticket: silent.",
+    "Instead: strip trailing slashes from the alias in the output.",
+    "Targets are resolved against each other with `normalizeAliases` before matching. Targets are otherwise matched literally, and are not resolved back through other aliases.",
+    "Ticket: silent.",
+    "Instead: also return chains of aliases, e.g. `@/bingpot/index.ts` → `bingpot`.",
+    "The function is not re-exported from `src/index.ts`.",
+    "Ticket: silent.",
+    "Instead: also export it from the main `pathe` entry.",
+    "Seam (the files the stub writes): src/utils.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

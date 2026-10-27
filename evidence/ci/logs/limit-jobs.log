@@ -1,0 +1,8 @@
+limit-jobs: incomplete. Public 48/52, hidden 54/57, existing 120/120; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at 7b02bd50879f0d3ec2fe1de39144957dbd265146.
+Hidden suite sha256 2f762da7edd932f017d5655fc0ba21079d8cde8381200239c2fbfe0698f311f3, sealed 2026-10-26T04:35:59.174Z.
+Failing scenarios: unhappy-1, unhappy-6
+public: test/limit-jobs.test.ts :: [unhappy-1] an invalid max throws a RangeError synchronously
+public: test/limit-jobs.test.ts :: [unhappy-1] negative zero and the smallest positive fraction are rejected too
+public: test/limit-jobs.test.ts :: [unhappy-6] a signal already aborted at call time rejects with its reason even with a slot free
+public: test/limit-jobs.test.ts :: [unhappy-6] an already aborted signal without a given reason rejects with signal.reason and takes no slot
+Check "independent-tests (drafted)": failure, incomplete: public 48/52, hidden 54/57, existing 120/120 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/limit-jobs.json); not posted (no token).

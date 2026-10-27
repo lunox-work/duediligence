@@ -1,0 +1,87 @@
+{
+  "slug": "project-names",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/collisions.test.ts :: a collision within an organization gets a six-character suffix",
+    "tests/public/collisions.test.ts :: when six characters are also taken the suffix grows to eight",
+    "tests/public/collisions.test.ts :: the task named first keeps its name",
+    "tests/public/collisions.test.ts :: whichever colliding task is named first keeps the short name",
+    "tests/public/collisions.test.ts :: different organizations may hold the same name",
+    "tests/public/collisions.test.ts :: names taken in another organization never lengthen a suffix",
+    "tests/public/naming.test.ts :: a task's name is project- and the first four digest characters",
+    "tests/public/naming.test.ts :: leading zeros in the digest are kept in the name",
+    "tests/public/naming.test.ts :: the same task always gets the same name",
+    "tests/public/naming.test.ts :: a task that got a longer suffix keeps it when named again",
+    "tests/public/validation.test.ts :: a registry needs a key",
+    "tests/public/validation.test.ts :: a one-character key is enough to create a registry",
+    "tests/public/validation.test.ts :: a task needs an id",
+    "tests/public/validation.test.ts :: a one-character task id is named"
+  ],
+  "publicOnSkeleton": {
+    "passed": 1,
+    "total": 14
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 31,
+  "kept": [
+    "tests/private/collisions.test.ts :: [boundary-1] when eight characters are also taken the suffix grows to ten",
+    "tests/private/collisions.test.ts :: [boundary-1] several tasks sharing only four characters each get six",
+    "tests/private/collisions.test.ts :: [boundary-1] a longer name is free when the colliding task holds only the short one",
+    "tests/private/collisions.test.ts :: [boundary-1] a third colliding task with a different sixth character gets six",
+    "tests/private/collisions.test.ts :: [boundary-1] collisions in one group do not lengthen names in another",
+    "tests/private/collisions.test.ts :: [boundary-1] tasks that collide under one key need not collide under another",
+    "tests/private/collisions.test.ts :: [boundary-2] the first task keeps its name when a chain of collisions follows",
+    "tests/private/collisions.test.ts :: [boundary-2] reversing the order of a collision chain reverses who keeps the short name",
+    "tests/private/collisions.test.ts :: [boundary-2] the first task keeps its name in the eight-character group",
+    "tests/private/collisions.test.ts :: [boundary-3] two organizations each hold the whole collision chain",
+    "tests/private/collisions.test.ts :: [boundary-3] a chain named in one organization leaves a third organization untouched",
+    "tests/private/collisions.test.ts :: [boundary-3] organizations with different keys may hold the same name",
+    "tests/private/naming.test.ts :: [happy-1] many task ids are each named from their own digest",
+    "tests/private/naming.test.ts :: [happy-1] the name depends on the registry's key",
+    "tests/private/naming.test.ts :: [happy-1] the same task gets different names under different keys",
+    "tests/private/naming.test.ts :: [happy-1] a long key is used as an HMAC key",
+    "tests/private/naming.test.ts :: [happy-1] a key of a single space is not empty",
+    "tests/private/naming.test.ts :: [happy-1] a task id of a single space is not empty",
+    "tests/private/naming.test.ts :: [happy-1] a long task id is named from its digest",
+    "tests/private/naming.test.ts :: [happy-1] three leading zeros in the digest are kept in the name",
+    "tests/private/naming.test.ts :: [happy-1] leading zeros are kept under another key",
+    "tests/private/naming.test.ts :: [happy-1] a name is lowercase hex",
+    "tests/private/naming.test.ts :: [happy-2] tasks named repeatedly in interleaved order keep their names",
+    "tests/private/naming.test.ts :: [happy-2] naming a task again does not take another name",
+    "tests/private/naming.test.ts :: [happy-2] the same task gets the same name in two registries with the same key",
+    "tests/private/naming.test.ts :: [happy-2] tasks with eight- and ten-character names keep them when named again",
+    "tests/private/validation.test.ts :: [unhappy-1] an empty key fails while a non-empty key still works",
+    "tests/private/validation.test.ts :: [unhappy-2] an empty task id fails and the registry stays usable",
+    "tests/private/validation.test.ts :: [unhappy-2] an empty task id fails after other tasks have been named",
+    "tests/private/validation.test.ts :: [unhappy-2] a failed naming takes no name",
+    "tests/private/validation.test.ts :: [unhappy-2] an empty task id fails under another key"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 31,
+      "total": 31
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented `NameRegistry` in `src/index.ts`, and every test passes: 14 of 14 public and 31 of 31 private.\n\nHow it works:\n- **Setup:** the constructor rejects an empty key and stores the key with two pieces of state: which name each task got, and which names are taken in this registry.\n- **Naming a task:** `name(taskId)` rejects an empty id. If the task already has a name, it returns that same name. Otherwise it computes the HMAC-SHA256 of the id under the key as lowercase hex. It tries `project-` plus the first 4 characters, then 6, 8, and so on, and keeps the first name that isn't taken. A task named earlier always keeps its name.\n- **Separate organizations:** each registry keeps its own record of taken names, so names held by another organization never make a suffix longer.\n- **One case the spec doesn't cover:** if every length up to the full 64-character digest were already taken, it throws an error. That's practically impossible, and no test reaches it.\n\nNone of the tests contradicted the spec, so I didn't leave any failing on purpose.\n\nnone",
+    "sessions": [
+      {
+        "sessionId": "f2771bc6-6d79-4a98-b65f-9bdff9718189",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1983101,
+        "turns": 4,
+        "durationMs": 27251,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1983101
+  }
+}

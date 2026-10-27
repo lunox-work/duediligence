@@ -1,0 +1,10 @@
+[16:45:35] oracle: 1000 cases
+[16:45:44] oracle: 2000 cases
+[16:45:52] oracle: 3000 cases
+[16:46:01] oracle: 4000 cases
+[16:46:10] oracle: 5000 cases
+[16:46:19] oracle: 6000 cases
+[16:46:27] oracle: 7000 cases
+[16:46:36] oracle: 8000 cases
+[16:46:43] {"at":"2026-10-26T16:46:43.315Z","cases":8842,"judgedSet":{"agreed":7533,"of":7533,"disagreements":{}},"allCases":{"agreed":8789,"of":8842,"disagreements":{"dup git:ok command:ok (files differ)":21,"drift git:ok command:ok (files differ)":31,"drift git:ok command:rej":1}},"sameAsModuleSeam":{"same":8842,"of":8842},"archive":"FINDINGS.md \"A git oracle on patch-apply\": the reference agrees with git on all 7,533 judged cases; the 53 others it disagrees on are a hunk matching at several places (compare.mjs --strict --ref: agreed 7533; without --strict 8789 of 8842)","minutes":1.3,"concurrency":4,"file":"evidence/seams/oracle/reference-cli.jsonl"}
+exit 0

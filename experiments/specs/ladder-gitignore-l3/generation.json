@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "e4b46be6-03da-459b-bae2-765bd999e1e1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2555164,
+        "turns": 5,
+        "durationMs": 64736,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2555164,
+    "finalText": "I wrote the suite in `tests/public/isIgnored.test.ts`. `tsc` builds it with no errors, and every test fails with `not implemented`, as expected. I deleted the `.js` files the build created in `src/` and `tests/public/`, so only the test file is new.\n\n**The spec has no tagged scenarios.** `spec.md` is a single paragraph with no `@happy`/`@unhappy` tags. So the `[kind-N]` keys you asked for have nothing to point to, and I had to choose the keys myself. I treated each rule the spec lists as one scenario, in the spec's order, and keyed them all as `happy`:\n\n| Key | Rule | Happy path | Boundary case |\n|---|---|---|---|\n| `[happy-1]` | glob patterns | `*.log` matches a file at any depth | in `doc/*.txt`, `*` doesn't cross `/` |\n| `[happy-2]` | `#` comments | `#notes.txt` is a comment, not a pattern | `\\#notes.txt` is a pattern that matches `#notes.txt` |\n| `[happy-3]` | `!` re-include | `!keep.log` overrides an earlier `*.log` | it can't re-include a file whose parent directory is excluded |\n| `[happy-4]` | trailing `/` | `build/` ignores everything under any `build` directory | `build/` doesn't match a file named `build` |\n| `[happy-5]` | leading `/` | `/todo.txt` matches only at the root | a slash in the middle (`doc/frotz`) also anchors to the root |\n\nIf this suite is checked against a tagged version of the spec, the keys will need changing to match it.\n\nThe spec defines its rules only as \"gitignore's usual ones\", so I took each expected result from git's documented gitignore behaviour. I avoided less certain areas such as trailing spaces, `**`, and character classes.\n\n10 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/isIgnored.test.ts"
+    ]
+  }
+}

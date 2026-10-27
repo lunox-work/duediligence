@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b19-6d2a-7040-8a85-98d8cc38001e",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 66487,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "13 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_prod_signs.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b1a-731e-7581-8d13-485d31668460",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 133860,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added 25 tests covering all 13 public tests with named extensions. Compilation passes, and every test fails against the unimplemented interface.\n\n25 tests, in 1 file.\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_prod_signs_hidden.py"
+    ],
+    "open": []
+  }
+}

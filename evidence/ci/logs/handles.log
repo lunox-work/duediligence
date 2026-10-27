@@ -1,0 +1,12 @@
+handles: incomplete. Public 34/42, hidden 28/47, existing 13/13; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at fc3e2c5abd23b1d5ee5bf9a341fcf37dcb9af40a.
+Hidden suite sha256 9418d98552eedbc137f9b48ef92ebccb6eca03c4da1d46e681fde2ef76ad98bd, sealed 2026-10-26T04:35:59.925Z.
+Failing scenarios: boundary-10, boundary-2, boundary-3, boundary-4, boundary-7, boundary-8, boundary-9, happy-1, unhappy-1, unhappy-2
+public: test/handles.test.ts :: [boundary-2] checkHandle rejects handles of 0, 2 and 31 characters for length
+public: test/handles.test.ts :: [unhappy-1] checkHandle rejects spaces, slashes, at signs and dots for charset
+public: test/handles.test.ts :: [unhappy-1] checkHandle does not lowercase or trim, and rejects non-ASCII for charset
+public: test/handles.test.ts :: [boundary-3] checkHandle reports length, not charset, when a handle is too short or long and has bad characters
+public: test/handles.test.ts :: [boundary-3] checkHandle reports charset when the length is right but a character is bad
+public: test/handles.test.ts :: [unhappy-2] normalizeHandle returns exactly the checkHandle rejection with no handle or display
+public: test/handles.test.ts :: [unhappy-2] normalizeHandle rejects blank input for length and uppercase non-ASCII for charset
+public: test/handles.test.ts :: [boundary-7] toHandleStem never ends a cut stem in a hyphen and trims leading hyphens before cutting
+Check "independent-tests (drafted)": failure, incomplete: public 34/42, hidden 28/47, existing 13/13 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/handles.json); not posted (no token).

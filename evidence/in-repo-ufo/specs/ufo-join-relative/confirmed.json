@@ -1,0 +1,41 @@
+{
+  "sha256": "c8d00f152a2475eebf86a6fb6804bcbbd1020e954e918241c829397f5d9db82a",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-10-26T12:08:10.840Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "`joinURL` goes back to a plain join: each input after the first is added after one `/`, with one leading `./` or `/` removed, and `.`/`..` are never resolved.",
+    "Ticket: \"export function joinURL(base: string, ...input: string[]): string;\"",
+    "Instead: keep the current relative-aware `joinURL` and only change its parameter list.",
+    "`joinURL` skips inputs after `base` that are `\"\"` or `/`, and treats a falsy `base` as `\"\"`.",
+    "Ticket: silent.",
+    "Instead: throw a `TypeError` on a non-string `base`, as `resolveURL` does.",
+    "`joinURL` removes at most one leading `./` or `/` from each input after the first, so `\"a\", \"//b\"` gives `\"a//b\"`.",
+    "Ticket: silent.",
+    "Instead: remove all leading slashes so that the result never contains `//`.",
+    "`joinRelativeURL` is the current `joinURL` algorithm moved unchanged, including the net depth counter (`\"../a\", \"../b\"` gives `\"b\"`; `\"/a\", \"../../../d\"` gives `\"../d\"`).",
+    "Ticket: \"export function joinRelativeURL(..._input: string[]): string;\"",
+    "Instead: resolve paths like RFC 3986 / POSIX (`\"../a\", \"../b\"` gives `\"../b\"`, and an absolute path never goes above `/`).",
+    "`joinRelativeURL` gives `scheme://` no special treatment, so `\"http://x.com\", \"b\"` gives `\"http:/x.com/b\"`.",
+    "Ticket: silent.",
+    "Instead: detect a leading protocol and keep its `//`, giving `\"http://x.com/b\"`.",
+    "Neither function treats `?` or `#` specially. Query and fragment text is part of the path string.",
+    "Ticket: silent.",
+    "Instead: parse with `parseURL`, join only the pathname, and keep search and hash.",
+    "Neither function validates its input or throws. Falsy values are skipped, and other non-strings are outside the contract.",
+    "Ticket: silent.",
+    "Instead: throw a `TypeError` for any non-string argument.",
+    "`withBase` keeps calling `joinURL`, so `withBase(\"../bar\", \"/foo\")` now gives `\"/foo/../bar\"`.",
+    "Ticket: silent.",
+    "Instead: switch `withBase` to `joinRelativeURL` so that it keeps giving `\"/bar\"`.",
+    "Seam (the files the stub writes): src/utils.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

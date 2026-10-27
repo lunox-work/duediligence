@@ -1,0 +1,38 @@
+{
+  "sha256": "09f9483cda5bfcc70be051199091e02ae5272e3c96daae0c99765541b22c867b",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T13:54:06.479Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "A last segment ending with a dot (`\"index.\"`, `\"file.txt.\"`, `\"foo..\"`) gives `\".\"`, not `\"\"`.",
+    "Ticket: \"fix(extname): handle inputs ending with dot (#203)\"",
+    "Instead: return `\"\"`, treating a trailing dot as no extension (the current behaviour).",
+    "Paths of dots: only the whole inputs `\".\"` and `\"..\"` give `\"\"`. `\"...\"`, `\"....\"` and so on give `\".\"`, which matches Node and settles the `\"...\"` TODO in the tests. A last segment `\".\"` or `\"..\"` after a separator (`\"/.\"`, `\"/..\"`, `\"a/.\"`, `\"a/..\"`, `\"./..\"`, `\"C:\\..\"`) gives `\".\"`, unlike Node.",
+    "Ticket: silent.",
+    "Instead: give `\"\"` whenever the last segment is `\".\"` or `\"..\"`, as Node does, so that `\"/..\"` and `\"a/..\"` would give `\"\"`.",
+    "Dotfile names ending with a dot (`\".index.\"`) give `\".\"`, as Node does.",
+    "Ticket: silent.",
+    "Instead: give `\"\"`, treating a leading-dot name as having no extension at all.",
+    "A path ending with `/` or `\\` still gives `\"\"`, even when the name before it ends with a dot (`\"index./\"`) or has an extension (`\"index.js/\"`). This keeps the current behaviour and differs from Node, which gives `\".\"` and `\".js\"`.",
+    "Ticket: silent.",
+    "Instead: strip trailing separators first, as Node and pathe's own `basename` do.",
+    "A drive-relative input such as `\"C:.\"` is an ordinary segment and gives `\".\"`, as Node's posix `extname` does.",
+    "Ticket: silent.",
+    "Instead: give `\"\"`, as Node's `win32.extname` does, treating `C:.` as the current directory on drive C.",
+    "`parse` follows the new `extname`, with `name` equal to `base` minus that `ext` (`\"index.\"` → name `\"index\"`, `\"...\"` → name `\"..\"`), and its code stays the same.",
+    "Ticket: \"The change keeps the exports' names and signatures.\"",
+    "Instead: leave `parse`'s `ext` and `name` as they were for inputs ending with a dot.",
+    "Windows backslashes are normalised before the trailing dot is found (`\"C:\\temp\\myfile.\"` → `\".\"`), as the existing `extname` already does.",
+    "Ticket: silent.",
+    "Instead: look at the raw input, so that only `/` counts as a separator.",
+    "Seam (the files the stub writes): src/_path.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/_path.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

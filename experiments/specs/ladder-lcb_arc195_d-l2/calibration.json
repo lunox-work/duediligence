@@ -1,0 +1,30 @@
+{
+  "slug": "ladder-lcb_arc195_d-l2",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_all_distinct",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_all_equal",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_alternating_eleven",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_large_all_equal",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_multiple_cases",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_one_two_one",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_swap_helps",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_three_values_repeated",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_two_distinct",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_two_distinct_reversed",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_two_equal",
+    "tests/public/test_swap_and_erase.py :: TestSwapAndErase.test_two_equal_larger_value"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 12
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 1,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001"
+  ],
+  "dropped": [],
+  "reference": null
+}

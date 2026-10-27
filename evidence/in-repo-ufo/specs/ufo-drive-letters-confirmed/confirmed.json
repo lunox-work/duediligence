@@ -1,0 +1,47 @@
+{
+  "sha256": "4ff4570cb4beb8015f40d26dfa25458d9c62ebd74e21929c6049691783a97b92",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-10-26T13:45:12.800Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The protocol check is case-sensitive: only `file:` as written normalizes. `FILE:///C:/x` and `File:///C:/x` return protocol `file:` but keep the pathname `/C:/x`.",
+    "Ticket: \"fix(parseURL): only normalize windows drive letters with `file://` protocol (#246)\"",
+    "Instead: compare the protocol without regard to case, so `FILE:///C:/x` gives `C:/x`.",
+    "For `file:` URLs, the first `/` followed by a letter and `:` anywhere after the host is removed, as before this change. That gives `file:///home/C:/x` → `/homeC:/x`, `file:///x?y=/C:` → search `?y=C:`, `file:///x#/C:` → hash `#C:`, and `file:///x/a:b/C:/y` → `/xa:b/C:/y` (only the first match).",
+    "Ticket: silent.",
+    "Instead: normalize only when the drive letter comes first in the path and leave later segments, the search and the hash alone.",
+    "With `file:////C:/x` (an extra slash), only the slash directly before the drive letter is removed, so the pathname is `/C:/x`.",
+    "Ticket: silent.",
+    "Instead: remove all leading slashes before a drive letter, giving `C:/x`.",
+    "A drive letter is exactly one ASCII letter followed by `:`. `CD:`, digits, non-ASCII letters and the legacy `C|` form do not count.",
+    "Ticket: silent.",
+    "Instead: also accept the legacy `|` drive separator (`file:///C|/x` → `C:/x`), the way WHATWG URL parsing does.",
+    "The drive letter keeps its case (`file:///d:/x` → `d:/x`).",
+    "Ticket: silent.",
+    "Instead: uppercase the drive letter.",
+    "A file URL with a host (`file://host/C:/x`) is still normalized, to `C:/x`.",
+    "Ticket: silent.",
+    "Instead: normalize only when the host is empty (`file:///…`).",
+    "`file://C:/x` keeps `C:` as the host and `/x` as the pathname. The host is not reinterpreted as a drive.",
+    "Ticket: silent.",
+    "Instead: treat a host that looks like a drive letter as the start of the path (`host \"\"`, `pathname \"C:/x\"`).",
+    "Protocol-relative inputs (`//host/C:/x`) count as non-file and keep `/C:/x`.",
+    "Ticket: \"only normalize windows drive letters with `file://` protocol\"",
+    "Instead: assume `file:` for protocol-relative inputs.",
+    "`defaultProto` decides through the URL it builds: `\"file://\"` normalizes and any other value, including `\"FILE://\"`, does not.",
+    "Ticket: silent.",
+    "Instead: never normalize when the protocol came from `defaultProto`.",
+    "`stringifyParsedURL` is not changed, so `file:///C:/x` still round-trips to `file://C:/x`.",
+    "Ticket: silent.",
+    "Instead: have `stringifyParsedURL` add back a `/` before a drive-letter pathname for `file:` URLs.",
+    "Seam (the files the stub writes): src/parse.ts",
+    "Allowed paths (what the implementer may change): src/"
+  ],
+  "seam": [
+    "src/parse.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ]
+}

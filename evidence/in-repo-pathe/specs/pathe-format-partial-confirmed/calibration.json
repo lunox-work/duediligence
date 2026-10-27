@@ -1,0 +1,171 @@
+{
+  "slug": "pathe-format-partial-confirmed",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] name only formats to the name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] ext only formats to the ext",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] name and ext are concatenated",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] empty ext adds nothing to the name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] dir and name without ext",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] absolute dir and ext without name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] relative dir and ext without name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] root and name without ext",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] root and ext without name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-1] result never contains the string undefined",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-1] an empty object formats to the empty string",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-2] fields set to undefined explicitly are treated as missing",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-3] fields set to null are treated as missing",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-2] ext without a dot gets one after the name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-2] ext without a dot and no name gets a dot",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-2] multi-part ext without a leading dot gets one dot",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-2] ext without a dot under a root",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-2] ext without a dot under a dir and no name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-4] a lone dot ext is not given another dot",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-4] an ext starting with two dots is used as given",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-5] a name that starts with a dot and no ext is kept as is",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-3] base wins over name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-3] base wins over an ext without a dot",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-3] base wins over ext under a root",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-6] an empty-string base still counts as given",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-7] absolute dir only is returned without a trailing separator",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-7] relative dir only is returned as given",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-7] dir with a trailing separator keeps it",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-7] root only formats to the root",
+    "test/pathe-format-partial-confirmed.spec.ts :: [boundary-7] root and dir both slash format to a single slash",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] dir takes over from root with a base",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] root, dir and name without ext",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] root, name and dotted ext",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] Windows dir with a base uses forward slashes",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] Windows dir with a name only",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] Windows dir with an ext without a dot and no name",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-4] Windows root with name and ext without a dot",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-5] posix.format and win32.format share the change",
+    "test/pathe-format-partial-confirmed.spec.ts :: [happy-5] default export format handles an empty object",
+    "test/pathe-format-partial-confirmed.spec.ts :: [unhappy-1] calling format without a path object throws a TypeError"
+  ],
+  "publicOnSkeleton": {
+    "passed": 19,
+    "total": 40
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 39,
+  "kept": [
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] other names alone format to the name",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] other dotted exts alone format to the ext",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] dir and name without root are joined with no normalisation",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] deep relative dir and ext without name",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] root with a relative dir and name is resolved",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] root with dir and ext without name",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] more partial objects never produce undefined or NaN",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-2] explicit undefined base does not hide name and ext",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-3] null base does not hide name and ext",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-3] null name or ext contributes nothing",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-3] null root or dir contributes nothing",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-2] other exts without a dot get exactly one",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-2] ext containing dots but not leading gets one leading dot",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-2] ext without a dot with dir and name",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-2] root with ext without a dot and no name",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-2] dotfile name with an ext without a dot",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-4] a lone dot ext without a name or under a dir",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-4] exts with several leading dots are used as given",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-5] dotfile names under a dir or root are kept as is",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-4] absolute dir takes over from another root",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-4] lower-case drive in dir is upper-cased",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-4] Windows dir with name and ext without a dot",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-4] lower-case Windows root with dir, name and ext",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-5] every namespace normalises ext and drops missing fields",
+    "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-5] default export format normalises ext"
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] dir, name and dotted ext without base",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-1] empty ext adds nothing under a dir or root",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-1] empty object through every namespace formats to the empty string",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-2] every field undefined formats to the empty string",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-3] base wins over name and ext together",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-3] base without an extension is not given ext",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [happy-3] base wins under root and dir",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-6] empty base alone or with dir drops name and ext",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-6] empty base under a root leaves only the root",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-7] other dirs only are returned as given",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-7] relative and Windows dirs with a trailing separator keep it",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [boundary-7] root and dir without a file part are resolved",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [unhappy-1] every namespace throws a TypeError without a path object",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-pathe-format-partial-confirmed/format-partial.spec.ts :: [unhappy-1] calling format with no argument at all throws a TypeError",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 40,
+      "total": 40
+    },
+    "hidden": {
+      "passed": 25,
+      "total": 25
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 375,
+      "total": 375
+    },
+    "notes": "I fixed `format` in `src/_path.ts`. Calls that leave out `name`, `ext` or both no longer put `\"undefined\"` into the result. All 454 tests pass, including both new suites, and `tsc --noEmit` and `eslint src` report nothing.\n\n`format` already had a working body rather than one that throws `not implemented`, so I changed that body instead of writing it from scratch. Two lines changed:\n\n- **`ext`:** a missing or empty `ext` adds nothing, one that starts with `\".\"` is used as given, and anything else gets a `\".\"` in front.\n- **File part:** still `p.base ?? …`, so `base` wins even when it is `\"\"`. Otherwise it is `(p.name ?? \"\")` followed by the `ext` suffix.\n\nThe rest of `format` is unchanged: it still drops empty segments, uses `resolve` when there is a `root`, and passes the result through `normalizeWindowsPath`. Because the fields are only read through optional checks, `null` behaves like a missing field, and `format(undefined)` still throws a `TypeError`. `posix.format`, `win32.format` and the default export's `format` are the same function, so they change too.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "726a7139-f6ba-46b8-b6a4-e169b2cc2b99",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1494424,
+        "turns": 3,
+        "durationMs": 20822,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1494424
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176fa-2183-7c61-9b31-90da204941a9",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 176430,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "20 tests in 2 files.",
+    "problem": null,
+    "files": [
+      "tests/public/digest.test.ts",
+      "tests/public/schedule.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176fc-d457-7032-b1b0-dd4c3d243066",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 18,
+        "durationMs": 328394,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "32 tests in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/digest.test.ts",
+      "tests/private/schedule.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "scoredAt": "2026-10-24T06:32:35.204Z",
+  "tasks": 40,
+  "solutions": 1240,
+  "wrongByPlus": 918,
+  "all": {
+    "HumanEval base tests": {
+      "acceptedWrong": 162,
+      "rejectedWrong": 756,
+      "acceptedRight": 314,
+      "rejectedRight": 8
+    },
+    "generated public suite": {
+      "acceptedWrong": 120,
+      "rejectedWrong": 798,
+      "acceptedRight": 321,
+      "rejectedRight": 1
+    },
+    "generated hidden suite": {
+      "acceptedWrong": 73,
+      "rejectedWrong": 845,
+      "acceptedRight": 298,
+      "rejectedRight": 24
+    },
+    "generated public + hidden": {
+      "acceptedWrong": 64,
+      "rejectedWrong": 854,
+      "acceptedRight": 298,
+      "rejectedRight": 24
+    }
+  },
+  "top": {
+    "HumanEval base tests": {
+      "acceptedWrong": 160,
+      "rejectedWrong": 516,
+      "acceptedRight": 246,
+      "rejectedRight": 8
+    },
+    "generated public suite": {
+      "acceptedWrong": 116,
+      "rejectedWrong": 560,
+      "acceptedRight": 253,
+      "rejectedRight": 1
+    },
+    "generated hidden suite": {
+      "acceptedWrong": 72,
+      "rejectedWrong": 604,
+      "acceptedRight": 230,
+      "rejectedRight": 24
+    },
+    "generated public + hidden": {
+      "acceptedWrong": 63,
+      "rejectedWrong": 613,
+      "acceptedRight": 230,
+      "rejectedRight": 24
+    }
+  },
+  "random": {
+    "HumanEval base tests": {
+      "acceptedWrong": 2,
+      "rejectedWrong": 240,
+      "acceptedRight": 68,
+      "rejectedRight": 0
+    },
+    "generated public suite": {
+      "acceptedWrong": 4,
+      "rejectedWrong": 238,
+      "acceptedRight": 68,
+      "rejectedRight": 0
+    },
+    "generated hidden suite": {
+      "acceptedWrong": 1,
+      "rejectedWrong": 241,
+      "acceptedRight": 68,
+      "rejectedRight": 0
+    },
+    "generated public + hidden": {
+      "acceptedWrong": 1,
+      "rejectedWrong": 241,
+      "acceptedRight": 68,
+      "rejectedRight": 0
+    }
+  },
+  "passBaseFailPlus": {
+    "count": 162,
+    "generatedRejects": 104
+  },
+  "passPublicFailPlus": {
+    "count": 120,
+    "hiddenRejects": 56
+  },
+  "rightButHiddenRejects": 23,
+  "testsDroppedByReference": 18,
+  "testsKept": 1263
+}

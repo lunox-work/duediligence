@@ -1,0 +1,11 @@
+[07:59:17] frame-codec mutating
+[08:10:25] frame-codec public kills 85/101, hidden kills 0 of the 16 public survivors
+[08:10:25] keyed-queue mutating
+[10:36:45] keyed-queue public kills 45/51, hidden kills 0 of the 6 public survivors
+[10:36:45] statement-import mutating
+[10:39:39] statement-import public kills 99/120, hidden kills 7 of the 21 public survivors
+26 spec(s): judged 1413, public killed 1132, public + hidden 1172
+[10:39:39] patch-apply mutating
+[11:09:00] patch-apply public kills 141/250, hidden kills 5 of the 109 public survivors
+26 spec(s): judged 1543, public killed 1204, public + hidden 1247
+done

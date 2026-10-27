@@ -1,0 +1,23 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5ea94ce2-296d-4b8e-a4e7-80d164e6f866",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2712134,
+        "turns": 8,
+        "durationMs": 65403,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.2712134,
+    "finalText": "I wrote 13 tests in `tests/public/test_bonfire.py`. `sandbox/compile_check.py` reports no errors. All 13 currently fail with a Runtime Error because `src/main.py` raises `not implemented`, as expected.\n\n- **Samples:** the three samples from the statement, one test each.\n- **Smallest input:** N=1 with the target cell `(-1,0)` (answer `1`) and with `(1,0)` (answer `0`).\n- **The edge the statement singles out:** new smoke is generated only if (0,0) has no smoke. With `NSN`, the smoke returns to (0,0) at t=2, so nothing new is made. Two tests watch this from cells `(1,0)` and `(-1,0)`.\n- **Largest size, N=200000:**\n  - all `N` moves, watched from R=−N (the most extreme row allowed), where smoke first arrives at t=N\n  - all `N` moves, watched from `(-1,0)`, which has smoke at every step\n  - all `E` moves, watched from C=N\n  - the corner (−N,−N), which no smoke can reach because it is 2N steps away and only N moves happen (all zeros)\n  - alternating `NS`, watched from both sides, which gives the repeating patterns `01…` and `10…`\n\nI worked out the answers that the statement doesn't give by hand. Each test has a comment explaining how. As a cross-check, I wrote a separate script that follows the rules step by step and ran it on small versions of every case. It reproduced all three samples and every hand-derived pattern. That script is only in the scratchpad and is not part of the suite.\n\n13 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_bonfire.py"
+    ]
+  }
+}

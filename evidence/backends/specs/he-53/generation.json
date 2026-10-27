@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b39-e6a6-7a21-a01f-bae62b02938f",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 49910,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "8 tests in 1 file. Compile check passed.",
+    "problem": null,
+    "files": [
+      "tests/public/test_add.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b3a-bfc1-7031-a02c-073cb71c3464",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 108851,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "20 tests in 1 file. Compile check passes; all tests reject the unimplemented stub.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_add.py"
+    ],
+    "open": []
+  }
+}

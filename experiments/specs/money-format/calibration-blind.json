@@ -1,0 +1,84 @@
+{
+  "slug": "money-format",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/errors.test.ts :: unsupported currency GBP is refused with a message naming it",
+    "tests/public/errors.test.ts :: unsupported currency JPY with no minor digits is refused with a message naming it",
+    "tests/public/errors.test.ts :: fractional minor units are refused as not an integer",
+    "tests/public/errors.test.ts :: negative fraction of a minor unit is refused as not an integer",
+    "tests/public/format.test.ts :: whole USD amount renders without decimals",
+    "tests/public/format.test.ts :: whole USD amount of exactly 1,000 gets its first group separator",
+    "tests/public/format.test.ts :: fractional USD amount renders with two decimals",
+    "tests/public/format.test.ts :: fractional USD amount of a single minor unit keeps two decimals",
+    "tests/public/format.test.ts :: EUR amount below one unit keeps its leading zero",
+    "tests/public/format.test.ts :: EUR amount of one minor unit keeps its leading zeros",
+    "tests/public/format.test.ts :: IDR amount never shows decimals",
+    "tests/public/format.test.ts :: IDR amount of 999 has no group separator and no decimals",
+    "tests/public/format.test.ts :: zero USD is a whole amount",
+    "tests/public/format.test.ts :: zero EUR is a whole amount",
+    "tests/public/format.test.ts :: negative USD amount carries a leading minus sign",
+    "tests/public/format.test.ts :: negative USD amount of one minor unit carries a leading minus sign",
+    "tests/public/format.test.ts :: largest safe USD amount formats exactly",
+    "tests/public/format.test.ts :: most negative safe USD amount formats exactly"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 18
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 24,
+  "kept": [
+    "tests/private/errors.test.ts :: unsupported GBP from the spec is refused naming GBP",
+    "tests/private/errors.test.ts :: other unsupported currencies are refused naming the currency",
+    "tests/private/errors.test.ts :: fractional minor units from the spec are refused as not an integer",
+    "tests/private/errors.test.ts :: other non-integer minor units are refused as not an integer",
+    "tests/private/errors.test.ts :: non-finite minor units are refused as not an integer",
+    "tests/private/format.test.ts :: whole USD amount from the spec renders without decimals",
+    "tests/private/format.test.ts :: whole USD amounts of other sizes render without decimals",
+    "tests/private/format.test.ts :: whole EUR amounts render without decimals",
+    "tests/private/format.test.ts :: fractional USD amount from the spec renders with two decimals",
+    "tests/private/format.test.ts :: fractional amounts keep both decimal digits including zeros",
+    "tests/private/format.test.ts :: fractional EUR amounts render with two decimals",
+    "tests/private/format.test.ts :: sub-unit EUR amount from the spec keeps its leading zero",
+    "tests/private/format.test.ts :: other sub-unit amounts keep the leading zero and two decimals",
+    "tests/private/format.test.ts :: IDR amount from the spec is grouped with no decimals",
+    "tests/private/format.test.ts :: IDR amounts of other sizes never show decimals",
+    "tests/private/format.test.ts :: the same minor units format by each currency's own digits",
+    "tests/private/format.test.ts :: zero USD from the spec renders as a whole amount",
+    "tests/private/format.test.ts :: zero in EUR and IDR renders as a whole amount",
+    "tests/private/format.test.ts :: negative USD amount from the spec carries a leading minus sign",
+    "tests/private/format.test.ts :: other negative amounts carry a leading minus before the code",
+    "tests/private/format.test.ts :: largest safe USD amount from the spec formats exactly",
+    "tests/private/format.test.ts :: largest safe amount formats exactly in EUR and IDR",
+    "tests/private/format.test.ts :: smallest safe amount formats exactly with a leading minus",
+    "tests/private/format.test.ts :: other large safe amounts format exactly"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 18,
+      "total": 18
+    },
+    "hidden": {
+      "passed": 24,
+      "total": 24
+    },
+    "touchedOutsideSrc": [],
+    "notes": "I implemented `formatMoney` in `src/index.ts`, and every test now passes: public 18/18, private 24/24. I didn't find any test that contradicts the spec or another test.\n\n- **Currencies:** there's a lookup of the supported codes and their minor-unit digits: USD and EUR use 2, IDR uses 0. Any other code throws `Unsupported currency: <code>`.\n- **Non-whole amounts:** anything that isn't a whole number, including `NaN` and `±Infinity`, throws an error saying the amount must be an integer.\n- **Formatting:** the amount is converted to `BigInt` so values up to `MAX_SAFE_INTEGER` stay exact. It's split into whole units and a fraction, and the whole units are grouped in threes with \",\".\n- **Decimals:** they appear only when the fraction is non-zero, padded to the currency's digit count (e.g. `USD 1.01`). So `USD 1,250` has none and `USD 1,250.50` has two.\n- **Negatives:** the minus sign goes before the currency code (`-USD 12.50`).\n\nOne behaviour no test covers: if both the currency and the amount are invalid, the currency error is the one thrown.\n\nnone",
+    "sessions": [
+      {
+        "sessionId": "cf07e39c-1289-46fa-acdf-c1305485641e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.15760890000000002,
+        "turns": 4,
+        "durationMs": 21651,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.15760890000000002
+  }
+}

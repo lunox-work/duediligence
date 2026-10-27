@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b41-8bab-7e92-8a91-148a0013e7cb",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 11,
+        "durationMs": 53943,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "8 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_fibfib.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b42-60a0-7911-9c92-12ece1f18db4",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 131959,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Added 16 tests in 1 file. Compile check passed; all tests fail against the unimplemented interface.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_fibfib_hidden.py"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "source": "HumanEval+ v0.1.10 (evalplus/humanevalplus_release)",
+  "task_id": "HumanEval/154",
+  "entry_point": "cycpattern_check",
+  "picked": "top",
+  "solutions": 31,
+  "basePassPlusFail": 4,
+  "plusPass": 1
+}

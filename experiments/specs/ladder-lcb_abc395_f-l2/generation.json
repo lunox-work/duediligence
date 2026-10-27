@@ -1,0 +1,24 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "0c776f8b-357d-48f3-9f74-9c30ef41e694",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.28229460000000006,
+        "turns": 6,
+        "durationMs": 81348,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.28229460000000006,
+    "finalText": "I wrote the public suite in `tests/public/test_smooth_occlusion.py`. `compile_check.py` reports no errors, and all 8 tests fail with a Runtime Error, as expected while the program raises `not implemented`.\n\n**The spec is missing two things you asked me to cover.** `spec.md` has no samples and no constraints section, so:\n- There are no statement samples to turn into tests.\n- I couldn't tell what the largest allowed value is, so there is no max-value case.\n- To stay inside any plausible limits, every case uses N ≥ 2, X ≥ 1, every length ≥ 1, and single-digit lengths (X goes up to 100).\n\n**How the expected values were checked.** Each answer is worked out by hand in a comment, using the fact that the cost is sum(U_i + D_i) − N·H, so the goal is the largest workable H. I also confirmed every answer with a brute force that tries every H and every set of final upper lengths. A fast reference version matched that brute force on 3,000 random tiny inputs; it was only used for checking and isn't in the tests.\n\n**What the cases cover:**\n- **Already fitting:** the smallest input, where nothing needs grinding, and a case where a large X makes nothing need grinding.\n- **H limited by the smallest sum:** H can't exceed the smallest U_i + D_i.\n- **Limited by X:** the difference allowed between neighbouring upper teeth is what decides H.\n- **Short upper tooth:** it holds back its neighbours, tested with the short tooth on the left, on the right and in the middle.\n- **Mixed:** one 4-tooth case where both limits are active.\n\n**Ending a tooth at length 0.** That's the only edge the statement points out. I searched small inputs for a case where the best answer requires a tooth ground to 0 and found none, so there's no test for it.\n\n8 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_smooth_occlusion.py"
+    ]
+  }
+}

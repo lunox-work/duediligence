@@ -1,0 +1,36 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "ebcec27c-21c5-4728-8e23-3be52a3bd159",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1392787,
+        "turns": 4,
+        "durationMs": 26611,
+        "subtype": "success",
+        "apiError": null
+      },
+      {
+        "sessionId": "ebcec27c-21c5-4728-8e23-3be52a3bd159",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3263513,
+        "turns": 5,
+        "durationMs": 46591,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.46563,
+    "finalText": "I've written the suite in `tests/public/satisfies.test.ts`. The build reports no errors, and running the tests gives 12 failures and 2 passes. The 2 that pass are the \"throws\" tests: the placeholder `not implemented` error happens to satisfy `assert.throws`. They will start testing real behaviour once `satisfies` is implemented.\n\n**The keys are my own.** `spec.md` still tags no scenarios, so there is nothing for keys like `[happy-1]` to point to. I numbered the spec's clauses in order and used those as stand-in scenarios:\n- **`[happy-1]` to `[happy-6]`:** versions with a colon tag, `>=`, `~`, `^`, `,` for AND, and `|` for OR.\n- **`[unhappy-1]`:** \"throws when not valid\". This comes from the doc comment in `src/index.ts`, not from the spec.\n\nIf a spec with real tagged scenarios turns up, these keys will need redoing.\n\n**The tests only check what clearly follows from the spec:**\n- A version satisfies `>=` itself.\n- `~` and `^` include their base version and exclude the version just below it.\n- `,` means every part must match, and `|` means any one part can.\n- Text that isn't a version, or a `>=` with no version after it, throws.\n\nThey assume ranges are written without spaces, like `>=2.4.1`.\n\n**What they leave out:** they don't check the upper limits of `~` and `^`, how tags sort, which of `,` and `|` binds tighter, or which other inputs count as invalid. The spec doesn't say, so any test of those would be a guess.\n\n14 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/satisfies.test.ts"
+    ]
+  }
+}

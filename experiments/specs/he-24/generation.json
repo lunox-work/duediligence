@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "51a6d391-c9a9-4129-907c-756698780361",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1418001,
+        "turns": 5,
+        "durationMs": 28758,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.1418001,
+    "finalText": "I wrote the public suite in `tests/public/test_largest_divisor.py`: one flat `unittest.TestCase` class with one method per case. `python3 sandbox/compile_check.py` reports no errors. Through `sandbox/run.py public`, all 7 tests fail with `NotImplementedError: not implemented`, which is expected until the function is written.\n\n**What's covered:**\n- **The docstring example:** `largest_divisor(15) == 5`.\n- **Typical cases of the one rule** (the largest number below n that divides n evenly):\n  - 100 → 50, an even composite\n  - 21 → 7, an odd composite whose smallest factor is 3\n  - 49 → 7, the square of a prime\n- **Boundary cases:**\n  - 13 → 1, a prime: only 1 and n divide it\n  - 2 → 1, the smallest input that has a divisor below n\n  - 4 → 2, which checks that n itself is excluded\n\nEach expected value has a comment listing n's divisors, which is how I worked it out by hand.\n\n**Inputs I left out:** every test uses n ≥ 2. The docstring doesn't say what should happen for n ≤ 1: for 1 there is no positive divisor smaller than n, and 0 and negative numbers aren't covered either. So there are no tests for those.\n\n7 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_largest_divisor.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "c5a30ab0-7fec-4e5b-89eb-538d39b18804",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.22891929999999996,
+        "turns": 4,
+        "durationMs": 57066,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.22891929999999996,
+    "finalText": "I wrote the private suite in `tests/private/test_largest_divisor_private.py`. Against the current stub, every test fails. To check the expected values, I ran the suite in the scratchpad against a plain O(n) reference implementation (scan down from n−1, return the first divisor). All 25 tests passed, taking 0.09s in total. `compile_check.py` reports no errors.\n\nWhat the suite covers:\n- **Extensions of each public test:**\n  - Other products of two primes (35, 143).\n  - Odd composites whose smallest factor is 3, 5 or 7 (63, 175, 1001).\n  - Even numbers and powers of two (6, 30, 8, 1024, 999966, 10⁶).\n  - Prime squares and a prime cube (9, 25, 121, 961, 994009 = 997², 27).\n  - Primes (3, 997, 7919, 999983).\n- **Cases a shortcut would get wrong:**\n  - An implementation that only tries the factors 2, 3, 5 and 7 fails on 121, 143, 961 and 994009.\n  - Returning the largest prime factor fails on 45 (it gives 5 instead of 15) and on 1001.\n  - A square-root bound that is off by one fails on 9, 25 and 121.\n  - Returning `n / 2` as a float fails the int-type check.\n- **Sweeps against a brute force:** every n from 2 to 60 is checked for being below n, dividing n and matching the brute force. Every n from 2 to 1500 is checked against the brute force.\n- **Inputs:** all are between 2 and 10⁶, so even a naive loop finishes well within a second. Nothing tests n ≤ 1, because the docstring doesn't say what happens there.\n\n25 tests in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_largest_divisor_private.py"
+    ],
+    "open": []
+  }
+}

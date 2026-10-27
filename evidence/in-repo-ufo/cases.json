@@ -1,0 +1,90 @@
+[
+  {
+    "slug": "ufo-filter-query",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "3c4b43de1128f2c04c2131db9a7e9fe2c7daf0d5",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "feat: add `filterQuery` utility (#287)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-join-relative",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "69e26f8983a6a67aa5bf8c50d9b9c06f17d32796",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "feat: `joinRelativeURL` (#220)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-without-host",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "aa54b6ae8f8b320bc0e03b4ff3ffc0bb2aa2b964",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "feat: add `withoutHost` utility (#212)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-parse-filename",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "4cbab46fa3e4eaf83e33e1673ebb48056fc46ff8",
+    "package": ".",
+    "seam": [
+      "src/parse.ts"
+    ],
+    "subject": "feat: add `parseFilename` utility (#125)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-trailing-fragment",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "f4c0400d0956fe8e124066a5d7fbf8a88b381962",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "fix: respect fragment in trailing slash utils (#175)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-base-prefix",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "eb29945470c8629309764f026a36e7f477a9a1ff",
+    "package": ".",
+    "seam": [
+      "src/utils.ts"
+    ],
+    "subject": "fix(withBase, withoutBase): prevent false prefix matches (#313)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-drive-letters",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "229e83e6b6c9c6edec4baa3a699bd6207ab031e1",
+    "package": ".",
+    "seam": [
+      "src/parse.ts"
+    ],
+    "subject": "fix(parseURL): only normalize windows drive letters with `file://` protocol (#246)",
+    "message": ""
+  },
+  {
+    "slug": "ufo-query-null-proto",
+    "repo": "https://github.com/unjs/ufo",
+    "commit": "4d024df0134e2484b1e22ba17a08fea31e90de92",
+    "package": ".",
+    "seam": [
+      "src/query.ts"
+    ],
+    "subject": "fix(parseQuery): use object with null prototype (#286)",
+    "message": ""
+  }
+]

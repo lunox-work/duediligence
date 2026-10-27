@@ -1,0 +1,213 @@
+{
+  "slug": "he-76",
+  "status": "dropped",
+  "reason": "No hidden test survived calibration.",
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_example_eight_is_power_of_two",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_example_five_is_not_power_of_three",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_example_one_is_power_of_four",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_example_three_is_not_power_of_one",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_example_three_is_not_power_of_two",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_example_two_is_power_of_two",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_exponent_one_for_another_base",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_higher_power_of_another_base",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_one_is_power_of_one",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_value_between_one_and_base",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_value_immediately_above_a_power",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_value_immediately_below_a_power",
+    "tests/public/test_is_simple_power.py :: TestIsSimplePower.test_zero_exponent"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 44,
+  "kept": [],
+  "dropped": [
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_even_nonpower_of_two",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_exponent_one_composite_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_exponent_one_negative_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_fraction_is_not_power_of_positive_integer",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_fractional_base_negative_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_fractional_base_nonpower",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_fractional_base_positive_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_high_power_composite_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_large_exact_decimal_power",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_large_value_with_base_one",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_multiple_of_three_that_is_not_a_power",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_base_even_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_base_odd_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_base_wrong_sign_for_even_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_base_wrong_sign_for_odd_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_exponent_negative_base_even",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_exponent_negative_base_odd",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_exponent_negative_base_wrong_sign",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_exponent_positive_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_fractional_base_even_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_fractional_base_negative_odd_exponent",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_fractional_base_wrong_sign",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_nonpower_with_negative_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_one_base_negative_one",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_one_base_one",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_one_base_other_negative_value",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_one_base_other_positive_value",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_one_is_not_power_of_one",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_negative_value_positive_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_nonzero_nonunit_value_with_zero_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_one_above_large_power",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_one_below_large_power",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_one_with_large_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_power_of_two_exponent_257",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_same_prime_factors_do_not_make_power",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_smaller_base_is_not_power_of_larger_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_square_of_composite_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_square_with_wrong_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_value_just_below_large_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_zero_exponent_negative_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_zero_is_power_of_zero",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_zero_with_base_one",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_zero_with_negative_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    },
+    {
+      "id": "tests/private/test_is_simple_power.py :: TestIsSimplePowerPrivate.test_zero_with_positive_base",
+      "reason": "The reference cannot satisfy it: it did not run"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 13,
+      "total": 13
+    },
+    "hidden": {
+      "passed": 0,
+      "total": 0
+    }
+  }
+}

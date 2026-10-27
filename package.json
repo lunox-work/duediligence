@@ -1,0 +1,51 @@
+{
+  "name": "independent-tests",
+  "version": "0.1.0",
+  "description": "Hidden, calibrated test suites for AI coding agents: a public suite the agent works against and a hidden suite it never sees that judges the result.",
+  "keywords": [
+    "ai-agents",
+    "coding-agents",
+    "hidden-tests",
+    "test-generation",
+    "claude-code",
+    "evaluation",
+    "acceptance-tests",
+    "typescript",
+    "python",
+    "pytest",
+    "jest",
+    "go",
+    "rust"
+  ],
+  "homepage": "https://github.com/feversoul/independent-tests#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/feversoul/independent-tests.git"
+  },
+  "type": "module",
+  "bin": {
+    "independent-tests": "bin/cli.mjs"
+  },
+  "files": [
+    "bin/",
+    "prompts/",
+    "template/",
+    "template-python/",
+    "template-go/",
+    "template-rust/",
+    "specs/duration-parse/",
+    "!specs/duration-parse/confirmed.json",
+    "!specs/duration-parse/confirming.json",
+    "AGENTS.md",
+    "README.md",
+    "RESULTS.md",
+    "SKILL.md"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ]
+}

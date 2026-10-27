@@ -1,0 +1,276 @@
+{
+  "slug": "ufo-drive-letters",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] file:///C:/home/user drops the slash before the drive letter",
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] file:///c:/x drops the slash before a lowercase drive letter",
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] file:///Z:/x?y=1#top keeps search and hash",
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] file:///C:\\x replaces the backslash and drops the slash",
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] file://host/C:/x normalizes the drive letter with a host",
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] boundary: file:///A:/ with the first letter and a trailing slash",
+    "test/ufo-drive-letters.test.ts ::  > [happy-1] boundary: file:///z:/x with the last lowercase letter",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-1] FILE:///C:/x is a file URL",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-1] File:///C:/x is a file URL",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-1] \\0file:///C:/x is a file URL",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-1] fIlE:///C:/x with mixed case is a file URL",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-2] one leading space before file: is skipped",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-2] a leading tab and space before file: are skipped",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-3] file:///C: gives the bare drive letter",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-3] file:///C:?q=1#h gives the bare drive letter with search and hash",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-4] file:///d:/Data keeps the lowercase drive letter",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-4] file:///D:/data keeps the uppercase drive letter",
+    "test/ufo-drive-letters.test.ts ::  > [happy-2] defaultProto \"file://\" normalizes /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-2] boundary: defaultProto \"file://\" normalizes /z:/a?b=1#c",
+    "test/ufo-drive-letters.test.ts ::  > [happy-3] http://test.com/C:/x keeps /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-3] https://e.com/a:b keeps /a:b",
+    "test/ufo-drive-letters.test.ts ::  > [happy-3] ftp://h/D:/x keeps /D:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-3] https://e.com/C:?q=1 keeps /C: and the search",
+    "test/ufo-drive-letters.test.ts ::  > [happy-3] http://test.com\\C:\\x replaces backslashes and keeps /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-3] boundary: HTTP://test.com/c:#h with an uppercase protocol keeps /c:",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-5] //host/C:/x is protocol-relative and keeps /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-5] //host/c: is protocol-relative and keeps /c:",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-6] defaultProto \"http://\" keeps /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-6] defaultProto \"https://\" keeps /C:",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-7] files:///C:/x is not the file protocol",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-7] myfile:///C:/x is not the file protocol",
+    "test/ufo-drive-letters.test.ts ::  > [happy-4] http://test.com/C:/x?y=1#h round-trips through stringifyParsedURL",
+    "test/ufo-drive-letters.test.ts ::  > [happy-4] boundary: //host/c: round-trips through stringifyParsedURL",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-8] file:///home/C:/x leaves a later segment alone",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-8] file:///x?y=/C: leaves the search alone",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-8] file:///x#/C: leaves the hash alone",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-8] file:////C:/x checks only one leading slash",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-8] file:///C:/home/D:/x#/E: normalizes only the first drive letter",
+    "test/ufo-drive-letters.test.ts ::  > [unhappy-1] file:///CD:/x with two letters is not normalized",
+    "test/ufo-drive-letters.test.ts ::  > [unhappy-1] file:///1:/x with a digit is not normalized",
+    "test/ufo-drive-letters.test.ts ::  > [unhappy-1] file:///C|/x with the legacy separator is not normalized",
+    "test/ufo-drive-letters.test.ts ::  > [unhappy-1] file:///home/x without a drive letter is not normalized",
+    "test/ufo-drive-letters.test.ts ::  > [unhappy-1] file:///é:/x with a non-ASCII letter is not normalized",
+    "test/ufo-drive-letters.test.ts ::  > [unhappy-1] boundary: file:///:/x with no letter and file:///C/x with no colon are not normalized",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-9] file://C:/x keeps C: as the host",
+    "test/ufo-drive-letters.test.ts ::  > [boundary-9] file://c: keeps c: as the host with an empty pathname",
+    "test/ufo-drive-letters.test.ts ::  > [happy-5] file:///home/user keeps /home/user",
+    "test/ufo-drive-letters.test.ts ::  > [happy-5] /C:/x without a protocol keeps /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-5] C:/x without a protocol keeps C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-5] data:/C:/x keeps /C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-5] boundary: blob:/c: and /c: keep their leading slash",
+    "test/ufo-drive-letters.test.ts ::  > [happy-6] file:///C:/x stringifies to file://C:/x",
+    "test/ufo-drive-letters.test.ts ::  > [happy-6] boundary: FILE:///C:?y=1#h stringifies to file://C:?y=1#h",
+    "test/ufo-drive-letters.test.ts ::  > [happy-7] parseFilename reads a.txt from http://e.com/C:/dir/a.txt",
+    "test/ufo-drive-letters.test.ts ::  > [happy-7] boundary: parseFilename reads C: from http://e.com/C: but nothing from file:///C:"
+  ],
+  "publicOnSkeleton": {
+    "passed": 36,
+    "total": 55
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 66,
+  "kept": [
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] non-file protocols keep the slash before every drive letter",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] http://user:pw@h:8080/C:/x?q=1#h keeps /C:/x with auth and port",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] http://h/C:/file:///x mentions file: only in the path and keeps /C:",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] https://h/D:?u=file:///C:/x mentions file: only in the search",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] http://h/C:/x with defaultProto \"file://\" keeps /C:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] HTTPS://e.com\\d:\\a\\b keeps /d:/a/b",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-3] http://e.com/C:/x/D:/y#/E: keeps every drive-like segment",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-5] //u@host/D:/x?y=1#z is protocol-relative and keeps /D:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-5] \\\\host\\C:\\x with backslashes is protocol-relative and keeps /C:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-5] //file/C:/x with a host named file keeps /C:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-6] defaultProto \"ftp://\" and \"HTTP://\" keep /z:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-6] defaultProto \"files://\" keeps /C:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-6] defaultProto \"//\" keeps /C:/x and is protocol-relative",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-7] protocols that only resemble file: are not the file protocol",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-7] files://host/c:?q#h keeps /c: with a host, search and hash",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-4] non-file drive-letter URLs round-trip through stringifyParsedURL",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-4] /C:/x with defaultProto \"http://\" stringifies to http:///C:/x",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] file:///a/b/z: and file://host/home/C:/x leave later segments alone",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] file://?/C: and file://#/C: leave the search and hash alone",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] file:///x?a=1&b=/D:#/E:/y leaves both search and hash alone",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] file:///?/C: with a root path leaves the search alone",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] file://///C:/x and file:\\\\\\\\C:\\x keep their extra slashes",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] file:///./C:/x does not skip a dot segment",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-8] /a/C:/x with defaultProto \"file://\" leaves the later segment alone",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] file:///ABC:/x/D:/y keeps the whole pathname",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] file:///C| and file:///c|/x/D:/y are not normalized",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] file:///1:/x/C:/y and file:///home/x/C: keep the whole pathname",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] file:///é:/x/D: keeps the whole pathname",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-9] file://C:/home/D:/x keeps C: as the host and the later segment",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-7] parseFilename reads a bare drive segment from ftp://h/D: and //host/c:",
+    "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-7] parseFilename reads C:.txt from https://e.com/C:.txt in strict mode"
+  ],
+  "dropped": [
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-1] every ASCII letter A-Z and a-z is a drive letter in a file: URL",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-1] file://srv/q:/a/b?k=v#frag normalizes with a host, search and hash",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-1] file://user:pw@host:21/C:/x normalizes with auth and a port",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-1] file:\\\\\\Y:\\a\\b with only backslashes normalizes to Y:/a/b",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-1] file:///C:/home/D:/x?q=/E:#/F: drops only the first slash",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-1] file:///C:/x with defaultProto \"http://\" still normalizes",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-1] FILE:///c:/x and FiLe:///C:/x are file URLs",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-1] fILE://host/Q:/x?a#b with an odd casing normalizes",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-1] \\0\\0FILE:///C:/x with several NULs is a file URL",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-2] several spaces, newlines and tabs before file: are skipped",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-2] mixed whitespace and NUL before FILE: are skipped",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-3] file:///z: and file:///C:#h give the bare drive letter",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-3] file://host/C: gives the bare drive letter with the host",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-4] every drive letter keeps its case",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-4] FILE:///q:/X with an uppercase protocol keeps the lowercase drive",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-2] defaultProto \"file://\" normalizes /c: and keeps later segments",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-2] defaultProto \"FILE://\" builds a file URL and normalizes",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-2] defaultProto \"file://\" with a backslash path normalizes",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] ASCII characters next to the letters are not drive letters",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] the Kelvin sign and long s are not drive letters",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] other non-ASCII letters are not drive letters",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [unhappy-1] other separators after a letter are not drive separators",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-9] file://z:/x?q#h keeps z: as the host",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-9] file://u@C:/x keeps C: as the host after auth",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-9] FILE://C:\\x keeps C: as the host",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [boundary-9] C:/x with defaultProto \"file://\" keeps C: as the host",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-5] blob:, data:, javascript: and vbscript: keep the whole rest as pathname",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-5] /C:/x?y=/D:#/E: without a protocol keeps its parts",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-5] C:\\x and c: without a protocol keep their pathname",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-5] file:///home/user/a.txt?x#y has no drive letter and keeps its parts",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-6] file:///z:/a?b#c stringifies to file://z:/a?b#c",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-6] file://host/C:/x stringifies to file://hostC:/x",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-6] file:///C:/x/D:/y#/E: stringifies with only the first slash gone",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-7] parseFilename reads the last segment for other non-file drive paths",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-ufo-drive-letters/drive-letters.test.ts ::  > [happy-7] parseFilename reads a.txt from file:///C:/dir/a.txt",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 55,
+      "total": 55
+    },
+    "hidden": {
+      "passed": 31,
+      "total": 31
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 467,
+      "total": 467
+    },
+    "notes": "I changed one expression in `parseURL` in `src/parse.ts`. The slash in front of a Windows drive letter is now removed only when the protocol is `file:`, in any letter case, and the drive letter comes first in the path. The regex is now anchored, `^\\/(?=[A-Za-z]:)`, so anything that looks like a drive letter later in the path, in the search or in the hash is left alone. Every other URL keeps its pathname as written.\n\nThere was no `not implemented` stub in `src/parse.ts`; the old drive-letter code was still in place, so I edited that line directly. Nothing else changed, and the exports and their signatures are the same.\n\nThe full `npx vitest run` passes: 15 files and 588 tests, including both drive-letter suites (55 and 66 tests). ESLint and Prettier report no problems in `src/parse.ts`.\n\nTests left failing:\nnone",
+    "sessions": [
+      {
+        "sessionId": "0c434153-dc2f-47fc-8464-6d3c28539cf9",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.14203169999999998,
+        "turns": 4,
+        "durationMs": 27402,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.14203169999999998
+  }
+}

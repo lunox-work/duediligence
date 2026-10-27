@@ -1,0 +1,34 @@
+{
+  "slug": "he-39",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_boundary_skips_composite_fibonacci_run",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_n1",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_n2",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_n3",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_n4",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_example_n5",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_typical_seventh_prime_fibonacci",
+    "tests/public/test_prime_fib.py :: TestPrimeFib.test_typical_sixth_prime_fibonacci"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 8
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 9,
+  "kept": [
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_eleventh_prime_fibonacci",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_first_is_not_one",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_matches_brute_force_1_to_11",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_ninth_prime_fibonacci",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_order_of_calls_does_not_matter",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_results_prime_fibonacci_and_increasing",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_returns_int",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_skips_composites_with_prime_index",
+    "tests/private/test_prime_fib_private.py :: TestPrimeFibPrivate.test_tenth_prime_fibonacci"
+  ],
+  "dropped": [],
+  "reference": null
+}

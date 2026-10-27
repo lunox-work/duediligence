@@ -1,0 +1,83 @@
+{
+  "statuses": {
+    "full": "the rule, what happens otherwise, and worked examples",
+    "rule": "the rule and what happens otherwise, no examples",
+    "partial": "the rule named or described loosely, without its edge cases",
+    "absent": "not mentioned"
+  },
+  "rules": {
+    "R1": {
+      "title": "MAJOR.MINOR[.PATCH][:tag]; missing patch is 0; strict grammar",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "partial",
+      "L4": "absent"
+    },
+    "R2": {
+      "title": "numeric cores; untagged above tagged; tags run by run, digits below letters",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "absent",
+      "L4": "absent"
+    },
+    "R3": {
+      "title": "=, >, >=, <, <= and a bare version",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "rule",
+      "L3": "partial",
+      "L4": "absent"
+    },
+    "R4": {
+      "title": "~V: at least V, same major and minor",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "rule",
+      "L3": "partial",
+      "L4": "absent"
+    },
+    "R5": {
+      "title": "^V: at least V, same major; same minor too when major is 0",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "partial",
+      "L4": "absent"
+    },
+    "R6": {
+      "title": "*, M.x, M.N.x; nothing else is a wildcard",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "absent",
+      "L4": "absent"
+    },
+    "R7": {
+      "title": ", is AND, | is OR; spaces only around separators",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "partial",
+      "L4": "absent"
+    },
+    "R8": {
+      "title": "a tagged version needs a tagged comparator with the same major.minor",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "absent",
+      "L4": "absent"
+    },
+    "R9": {
+      "title": "errors name version or range; the version is checked first",
+      "L0": "full",
+      "L1": "rule",
+      "L2": "partial",
+      "L3": "partial",
+      "L4": "partial"
+    }
+  },
+  "note": "The skeleton, the same at every level, says it throws an Error on invalid input, so R9 is partial at L3 and L4."
+}

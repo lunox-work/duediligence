@@ -1,0 +1,1512 @@
+{
+  "scoredAt": "2026-10-27T05:26:37.444Z",
+  "runner": "bin/runners/pytest.mjs (pytest 8.4.2)",
+  "python": "Python 3.14.8",
+  "all": {
+    "tasks": 40,
+    "solutions": 1240,
+    "wrong": 926,
+    "wrongAcceptedByBase": {
+      "count": 162,
+      "percent": 17.5
+    },
+    "wrongAcceptedByGenerated": {
+      "count": 63,
+      "percent": 6.8
+    },
+    "rightRejectedByGenerated": {
+      "count": 5,
+      "of": 314
+    }
+  },
+  "without22and60": {
+    "tasks": 38,
+    "solutions": 1178,
+    "wrong": 889,
+    "wrongAcceptedByBase": {
+      "count": 133,
+      "percent": 15
+    },
+    "wrongAcceptedByGenerated": {
+      "count": 34,
+      "percent": 3.8
+    },
+    "rightRejectedByGenerated": {
+      "count": 5,
+      "of": 289
+    }
+  },
+  "rowsComparedWithArchive": 1240,
+  "rowsDifferingFromArchive": 113,
+  "differences": [
+    {
+      "slug": "he-11",
+      "at": 27,
+      "set": "starcoderbase-3b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 14,
+      "set": "gpt-4-1106-preview_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-122",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 14,
+      "set": "gpt-4-1106-preview_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-124",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-13",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-13",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 15,
+      "set": "gpt-4_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-144",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-17",
+      "at": 19,
+      "set": "incoder-6b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-25",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 5,
+      "set": "codegen-2b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 12,
+      "set": "codet5p-2b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 20,
+      "set": "mistral-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-31",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-32",
+      "at": 15,
+      "set": "gpt-4_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-43",
+      "at": 15,
+      "set": "gpt-4_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-44",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-44",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-44",
+      "at": 19,
+      "set": "incoder-6b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 6,
+      "set": "codegen-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 7,
+      "set": "codegen2-16b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 13,
+      "set": "codet5p-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 16,
+      "set": "gpt-j_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 19,
+      "set": "incoder-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 20,
+      "set": "mistral-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-46",
+      "at": 28,
+      "set": "starcoderbase-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-48",
+      "at": 16,
+      "set": "gpt-j_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-49",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-49",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-49",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-57",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-57",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-57",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-57",
+      "at": 15,
+      "set": "gpt-4_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-57",
+      "at": 20,
+      "set": "mistral-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-57",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 5,
+      "set": "codegen-2b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 8,
+      "set": "codegen2-1b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 9,
+      "set": "codegen2-3b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 10,
+      "set": "codegen2-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 11,
+      "set": "codet5p-16b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 12,
+      "set": "codet5p-2b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 14,
+      "set": "gpt-4-1106-preview_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 16,
+      "set": "gpt-j_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 18,
+      "set": "incoder-1b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 19,
+      "set": "incoder-6b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 20,
+      "set": "mistral-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 23,
+      "set": "santacoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 26,
+      "set": "starcoderbase-1b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 29,
+      "set": "vicuna-13b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-60",
+      "at": 30,
+      "set": "vicuna-7b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 1,
+      "set": "code-llama-13b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 3,
+      "set": "code-llama-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 4,
+      "set": "codegen-16b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 5,
+      "set": "codegen-2b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 6,
+      "set": "codegen-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 7,
+      "set": "codegen2-16b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 8,
+      "set": "codegen2-1b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 9,
+      "set": "codegen2-3b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 10,
+      "set": "codegen2-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 11,
+      "set": "codet5p-16b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 12,
+      "set": "codet5p-2b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 13,
+      "set": "codet5p-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 14,
+      "set": "gpt-4-1106-preview_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 16,
+      "set": "gpt-j_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 17,
+      "set": "gptneo-2b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 18,
+      "set": "incoder-1b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 19,
+      "set": "incoder-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 20,
+      "set": "mistral-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 22,
+      "set": "polycoder_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 23,
+      "set": "santacoder_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 24,
+      "set": "stablelm-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 25,
+      "set": "starcoder_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 26,
+      "set": "starcoderbase-1b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 27,
+      "set": "starcoderbase-3b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 28,
+      "set": "starcoderbase-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 29,
+      "set": "vicuna-13b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-76",
+      "at": 30,
+      "set": "vicuna-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": true
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 2,
+      "set": "code-llama-34b_temp_0.0",
+      "archive": {
+        "public": true,
+        "hidden": false
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 5,
+      "set": "codegen-2b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 6,
+      "set": "codegen-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 12,
+      "set": "codet5p-2b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 13,
+      "set": "codet5p-6b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 22,
+      "set": "polycoder_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 23,
+      "set": "santacoder_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 26,
+      "set": "starcoderbase-1b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 27,
+      "set": "starcoderbase-3b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-77",
+      "at": 28,
+      "set": "starcoderbase-7b_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": true
+      },
+      "now": {
+        "public": false,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-83",
+      "at": 0,
+      "set": "chatgpt_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    },
+    {
+      "slug": "he-83",
+      "at": 21,
+      "set": "phind-code-llama-34b-v2_temp_0.0",
+      "archive": {
+        "public": false,
+        "hidden": false
+      },
+      "now": {
+        "public": true,
+        "hidden": false
+      }
+    }
+  ]
+}

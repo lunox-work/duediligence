@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "6612c30b-7916-4aab-9f5d-fee48b0ae064",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1661919,
+        "turns": 5,
+        "durationMs": 36787,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.1661919,
+    "finalText": "I wrote `src/index.ts`, and `npm run build` finished with no errors. The build also produced `src/index.js` as its normal output; `.gitignore` already excludes `*.js`. I made no other changes.\n\n**What's in the contract:**\n- **`Cache<V>`** is a class, because the spec describes something that keeps state: stored entries, loads in flight, and least-recently-used order.\n  - **`new Cache(options)`** creates a cache.\n  - **`get(key: string): Promise<V>`** returns the value for a key. Its doc comment says it rejects with the loader's error when the load it is waiting on fails.\n  - **`invalidate(key: string): void`** drops the entry for a key. A load already in flight for that key is not stored when it settles.\n- **`CacheOptions<V>`** is what the cache is created with: `loader`, `freshForMs`, `staleForMs`, `maxEntries`, `clock`, and an optional `onError`.\n- **`Loader<V>`**, **`Clock`** and **`ErrorHandler`** are the types for those three functions. `ErrorHandler` is `(error: unknown, key: string) => void`.\n\nThe current time always comes from the `clock` you pass in, so tests control it. Every body, including the constructor, is `throw new Error(\"not implemented\");`, and there are no constants, helpers or error classes.\n\n**Choices the other teams need to know about:**\n- **Keys are `string`.** The spec only uses string keys like \"a\" and \"b\", so I didn't make the key type generic.\n- **No way to look inside the cache.** I didn't add methods like `has` or `size`, because the spec never needs them. Every scenario can be checked through what `get` returns and how many times the loader is called.\n\nExports: `Cache`, `CacheOptions`, `Loader`, `Clock`, `ErrorHandler`",
+    "problem": null,
+    "sha256": "b0281ab95894aa81670866c677b1ce99ba8f9ee118a9e558ff93ff1270251a64"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5e6d3c90-af1b-43df-a683-6666562783e0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8087968000000001,
+        "turns": 9,
+        "durationMs": 232185,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 0.8087968000000001,
+    "finalText": "I've written the public test suite in `tests/public/`, two tests per scenario: the spec's happy path and one boundary case. `npm run build` reports no errors. Against the stub they will all fail, as expected.\n\nTo check that the tests themselves are right, I ran them against a quick reference implementation in a scratch copy of the project. All 22 passed. `src/` was not changed. Running the build also wrote compiled `.js` files into `src/` and `tests/public/`; I deleted them, so only the `.ts` test files remain.\n\n| File | Scenarios |\n|---|---|\n| `one-load-per-key.test.ts` | `happy-1`, `boundary-1`, `unhappy-1` |\n| `freshness.test.ts` | `happy-2`, `boundary-2`, `boundary-3`, `unhappy-2` |\n| `capacity.test.ts` | `boundary-4`, `boundary-5` |\n| `invalidate.test.ts` | `happy-3`, `boundary-6` |\n\n**How the tests work:**\n- **Loader:** a fake loader records each call and returns a promise that the test resolves or rejects by hand.\n- **Clock:** the clock is a variable the test sets, and it's set before each load settles. Entry age therefore counts from settlement, as the spec says.\n- **Waiting:** tests let pending promises run by yielding to the event loop with `setImmediate`. Nothing uses a timer or the real clock.\n- **Settled or not:** each `get` result is recorded as it settles, so a test can check that a call has not resolved yet. This covers \"served without waiting for the loader\" and \"waits for the new load\".\n- **Helpers:** each file has its own copy of the helpers, because only `.test.ts` files are allowed in `tests/public/`.\n\n**The boundary cases:**\n- **`happy-1`:** gets spread across separate event-loop turns and clock times still share one load.\n- **`boundary-1`:** when the second key's load settles first, only that key's get resolves.\n- **`unhappy-1`:** a retry at the same instant as the failure calls the loader again, and that successful result is kept.\n- **`happy-2`:** freshness counts from when the load settled, not when it started.\n- **`boundary-2`:** at time 12000 the refreshed value is stale, so it is served at once and refreshed again.\n- **`boundary-3`:** a second get during the reload also waits for the new value and never gets the old one.\n- **`unhappy-2`:** with no error handler, after a failed refresh the value is still served stale at 10999 and another refresh starts.\n- **`boundary-4`:** a stale read counts as a use, so the fresher entry that wasn't read is the one dropped.\n- **`boundary-5`:** \"a\" is served up to its last fresh millisecond while \"b\" loads, and \"b\" is served without loading once it settles.\n- **`happy-3`:** after invalidating a stale entry, get waits for a new load instead of serving the stale value.\n- **`boundary-6`:** invalidating during a background refresh throws away both the stale value and the refreshed one.\n\n22 tests, in 4 files.",
+    "problem": null,
+    "files": [
+      "tests/public/capacity.test.ts",
+      "tests/public/freshness.test.ts",
+      "tests/public/invalidate.test.ts",
+      "tests/public/one-load-per-key.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "4f4b601b-e378-45d6-92b5-0caa01fb76e8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.3032218000000002,
+        "turns": 14,
+        "durationMs": 359522,
+        "subtype": "success"
+      }
+    ],
+    "costUsd": 1.3032218000000002,
+    "finalText": "I wrote the hidden suite in `tests/private/`, in four files that match the public ones: `one-load-per-key`, `freshness`, `capacity` and `invalidate`. `npm run build` reports no errors.\n\n**How I checked it:**\n- **Against the stub:** all 36 tests fail.\n- **Against a correct implementation:** I wrote one in the scratchpad, not in `src/`. It passes all 36 tests and all 22 public tests.\n- **Against shortcuts:** I made broken versions of that implementation, each passing the public suite, and the private suite fails every one:\n  - reading a stored value only if it is truthy;\n  - timing a refresh from when it started;\n  - a failed refresh resetting the entry's age;\n  - evicting before replacing an existing entry;\n  - discarding every load after an invalidation, not just the one in flight;\n  - dropping an entry when a load fails.\n\n**What the suite covers:** all 11 scenarios (happy-1..3, boundary-1..6, unhappy-1..2). Each test has a comment naming the public test it extends. The main additions:\n- **Shared loads:** 50 gets sharing one load, and a get made long after expiry still sharing an unsettled load.\n- **Keys:** 12 keys settled in reverse order, and keys like `__proto__` or `constructor`.\n- **Errors:** a rejection reason that isn't an `Error`, and repeated failures.\n- **Timing:** other fresh-for and stale-for values, stale-for 0, values like `0`, `null` and `undefined` being stored, and fresh reads not extending freshness.\n- **Capacity:** least-recently-used eviction with a maximum of 3 (not first-in-first-out), and loads that settle out of order.\n- **Invalidation:** the load after a discarded one is stored as usual.\n\nThree tests rely on readings of the spec that follow from it but are not spelled out word for word:\n- **Expiry during a refresh:** a `get` after expiry, while a background refresh is still running, waits for that refresh instead of starting a second load. This follows from \"One load at a time per key\".\n- **Failed load:** a failed load for another key does not push out an existing fresh entry, because a failed load is not stored.\n- **Discarded load:** an invalidated load that settles does not push out an existing entry either, because its result is not stored.\n\nI deleted the `.js` files the build left in `src/` and both test folders. Nothing else outside `tests/private/` was changed.\n\n36 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/capacity.test.ts",
+      "tests/private/freshness.test.ts",
+      "tests/private/invalidate.test.ts",
+      "tests/private/one-load-per-key.test.ts"
+    ],
+    "open": []
+  }
+}

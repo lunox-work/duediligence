@@ -1,0 +1,22 @@
+{
+  "name": "repo",
+  "repo": "evidence/in-repo-ufo/checkout/ufo",
+  "base": "3aaf64da654ecff350b32cc76edc52723fcd67fe",
+  "package": ".",
+  "packageManager": "pnpm@8.15.4",
+  "buildFirst": [],
+  "runner": "vitest",
+  "testDir": "test",
+  "testPattern": "*.test.ts",
+  "build": "tsc -p tsconfig.json --noEmit",
+  "hiddenDir": "test/hidden-ufo-join-relative",
+  "seam": [
+    "src/utils.ts"
+  ],
+  "allowedPaths": [
+    "src/"
+  ],
+  "examples": [
+    "test/punycode.test.ts"
+  ]
+}

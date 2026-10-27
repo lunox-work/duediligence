@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "30d87b51-aacb-4094-b0f9-6ab8d22fec98",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2101015,
+        "turns": 5,
+        "durationMs": 28968,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.2101015,
+    "finalText": "I created `packages/core/src/handle.ts`. It has the signatures from the spec, both constants with their values (`3` and `30`), and every function body is `throw new Error(\"not implemented\");`. I modelled it on the existing `index.ts`, and the doc comments are taken from the spec's wording.\n\n`npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (13 of 13).\n\n- **Root re-export not added:** the spec also wants the line `export * from \"./handle.js\";` in `packages/core/src/index.ts`. You told me to write only the seam file, so I didn't add it. Until the implementer adds it, the scenario that imports these from the package root will fail. That includes making a test file that imports these names from `index.ts` fail to compile.\n- **Private pattern left out:** the spec's private pattern `/^[a-z0-9_-]+$/` isn't exported and isn't part of the signatures, so it's left for the implementer.\n- **No \"throws\" notes:** the spec says no function throws for any string, so no doc comment mentions throwing.\n- **Build output deleted:** I removed the ignored `dist-test` folder before and after the check, so it no longer exists. The test command rebuilds it.\n\nAdded: `HANDLE_MIN_LENGTH`, `HANDLE_MAX_LENGTH`, `HandleProblem`, `HandleRejected`, `HandleCheck`, `toHandleCase`, `checkHandle`, `NormalizedHandle`, `normalizeHandle`, `isValidHandle`, `toHandleStem`, `handleStemFromEmail`",
+    "problem": null,
+    "sha256": "2be02566148d0eb7d40ee8f1967c3729dd2aae5c5d2522e01a8edcae5417e4b0"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "10f38923-6b66-43e0-a7f1-de3b94f14f8b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6121372,
+        "turns": 10,
+        "durationMs": 148572,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.6121372,
+    "finalText": "I wrote the suite in `packages/core/test/handles.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors. Against the real seam all 42 tests fail with `not implemented`, as expected.\n\nTo check my expected values, I ran the compiled tests against a small reference implementation in the scratchpad. That copy also re-exported `handle.js` from the root. All 42 passed there. The repository itself has only the new test file.\n\n**Coverage:** each of the 21 scenarios (8 `@happy`, 11 `@boundary`, 2 `@unhappy`) gets two tests: one for its typical rows and one for its edge rows. The rows come from the spec's example tables, plus a few cases that follow directly from the spec. Tests follow `index.test.ts`: `node:test` `test`, `node:assert/strict`, flat top-level tests with unique `[kind-n]` names.\n\n**Choices the implementer should know about:**\n- **`[happy-2]` (root re-exports):** `index.ts` doesn't export the handle module yet. Naming those exports in an import would break `tsc`, so this test imports the root as a namespace and looks them up by name. Until the `export * from \"./handle.js\"` line is added, it fails with a clear message.\n- **Prose rules folded into keyed tests:** some spec rules come from the prose, not a scenario. I put them in the tests closest to them:\n  - `handle.ts` exports exactly the eight runtime values, and the pattern isn't exported.\n  - The existing todo exports are still there and still work.\n  - Each call returns a new object that isn't frozen.\n- **Reason strings:** results are compared in full, including the fixed reason text, even where a scenario only names the status and problem. The spec fixes those strings, so this follows from it.\n- **Inputs not in the tables:**\n  - `[boundary-8]`: 100000 hyphens followed by `a`, and 100000 dots.\n  - `[boundary-11]`: an address with no `@`, and one with two.\n  - Both follow from the stated steps. Nothing measures time, so the linear-time requirement isn't asserted.\n\n42 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/core/test/handles.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "206aaf99-02f7-4c15-a786-02d8f42c3f59",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.3024091,
+        "turns": 24,
+        "durationMs": 330592,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.3024091,
+    "finalText": "I wrote the hidden suite in four files under `packages/core/test/hidden-handles/`: `surface`, `case-and-check`, `normalize` and `stems`, each ending in `.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors.\n\n**Against the current stubs:** all 47 tests fail. Most fail on the `not implemented` throw. The package-root tests fail because `index.ts` doesn't re-export `handle.ts` yet. The tests on the constants also call `checkHandle`, so they fail too, even though the constants already have the right values.\n\n**Against a reference implementation:** I wrote one in the scratchpad from the spec, along with the line `index.ts` is meant to add. All 47 hidden tests and all 42 public tests pass against it.\n\n**Shortcuts that pass the public suite but fail this one:**\n- **Stems:** replacing disallowed characters before lowercasing. Example: `\"\\u212Aelvin\"` should give `kelvin`, and `İstanbul` should give `i-stanbul`.\n- **`normalizeHandle` length:** checking the length on the typed input instead of the lowercased form. Example: `\"İİ\"` is 2 code units as typed but 4 once lowercased, so it should fail on the character set, not the length.\n- **Trimming:** trimming only spaces, tabs and newlines instead of everything `trim()` removes, such as non-breaking spaces and the byte-order mark.\n\n**Other mistakes that would fail tests here:**\n- counting characters (code points) instead of UTF-16 code units for length\n- a multiline (`m`) flag on the pattern\n- splitting the email on the last `@` instead of the first\n- removing only one trailing hyphen after the cut\n- returning one shared result object instead of a new one each call\n\n**One gap:** a stem function that takes quadratic time is not caught. Its run of the stems file took about 7 seconds instead of under a second, but the rules forbid using a clock, so I couldn't turn that into a failing assertion.\n\n47 tests, in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-handles/case-and-check.test.ts",
+      "packages/core/test/hidden-handles/normalize.test.ts",
+      "packages/core/test/hidden-handles/stems.test.ts",
+      "packages/core/test/hidden-handles/surface.test.ts"
+    ],
+    "open": []
+  }
+}

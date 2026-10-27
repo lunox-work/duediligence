@@ -1,0 +1,40 @@
+{
+  "slug": "he-53",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_add.py :: TestAdd.test_boundary_both_zero",
+    "tests/public/test_add.py :: TestAdd.test_boundary_negative_operand_cancels",
+    "tests/public/test_add.py :: TestAdd.test_example_2_plus_3",
+    "tests/public/test_add.py :: TestAdd.test_example_5_plus_7",
+    "tests/public/test_add.py :: TestAdd.test_typical_sum_of_two_positive_ints"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 5
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 18,
+  "kept": [
+    "tests/private/test_add_private.py :: TestAddPrivate.test_both_negative",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_doctest_repr_2_plus_3",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_doctest_repr_5_plus_7",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_equal_operands_overlapping_bits",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_mixed_signs_negative_result",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_mixed_signs_positive_result",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_negative_first_cancels",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_past_signed_64_bit_max",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_past_signed_64_bit_min",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_second_operand_larger",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_swapped_3_plus_2",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_swapped_7_plus_5",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_unseen_positive_pair",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_very_large_mixed_signs",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_very_large_operands",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_zero_left_identity",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_zero_plus_negative",
+    "tests/private/test_add_private.py :: TestAddPrivate.test_zero_right_identity"
+  ],
+  "dropped": [],
+  "reference": null
+}

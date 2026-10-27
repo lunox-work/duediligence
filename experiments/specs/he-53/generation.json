@@ -1,0 +1,47 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "1d2aea86-7ee3-4e19-a29c-c5f7ee15ff65",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.12248350000000001,
+        "turns": 4,
+        "durationMs": 22114,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.12248350000000001,
+    "finalText": "I wrote the public suite in `tests/public/test_add.py`. `python3 sandbox/compile_check.py` reports no errors. When run, all 5 tests fail with `NotImplementedError: not implemented`, as expected while the function is unimplemented.\n\n- **Docstring examples, one test each:** `add(2, 3) == 5` and `add(5, 7) == 12`.\n- **The one rule (the result is x + y):**\n  - Typical case: `add(40, 2) == 42`.\n  - Boundary case: `add(0, 0) == 0`.\n  - A second boundary case: `add(7, -7) == 0`. The `int` type allows negative inputs, so I added this one beyond the one boundary case you asked for.\n\nThe expected values I worked out by hand have a comment in the test saying how. Every result is an integer, so all comparisons are exact with `assertEqual`.\n\n5 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_add.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "33a7eb60-7b60-4959-ac98-16fd03e10a07",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.17032450000000002,
+        "turns": 4,
+        "durationMs": 37712,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.17032450000000002,
+    "finalText": "I wrote the hidden suite in `tests/private/test_add_private.py`. All 19 tests fail against the current stub, which raises `not implemented`. All 19 pass against a plain `return x + y` that I ran in a scratch copy outside the project. `sandbox/compile_check.py` reports no errors.\n\nWhat the suite covers:\n- **Doctest output:** the docstring's examples print `5` and `12`, so the results must look exactly like that. Returning `5.0` or `\"5\"` fails.\n- **Swapped order:** both doctest pairs are checked with the operands the other way round.\n- **Unseen values:** pairs the public tests don't use, so an implementation that just memorises the visible cases fails.\n- **Bitwise look-alikes:** `add(6, 6)` catches using bitwise OR or XOR instead of addition. `add(1, 99)` catches returning `x - y` or the larger operand.\n- **Zero:** zero on each side of a non-zero number, and zero with a negative number.\n- **Signs:** mixed signs that don't cancel, giving a positive or a negative result. Cancelling with the negative number first. Both numbers negative. These catch shortcuts built on absolute values.\n- **Very large numbers:** results just past the 64-bit integer limits in both directions, plus 10**30-sized operands. Python integers have no size limit, so code that wraps around like 64-bit arithmetic fails.\n- **Grid check:** every pair from -20 to 20, in both orders, compared against Python's own `x + y`.\n\n19 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_add_private.py"
+    ],
+    "open": []
+  }
+}

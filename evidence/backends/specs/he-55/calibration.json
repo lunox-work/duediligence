@@ -1,0 +1,42 @@
+{
+  "slug": "he-55",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_fib.py :: TestFib.test_docstring_eighth_number",
+    "tests/public/test_fib.py :: TestFib.test_docstring_first_number",
+    "tests/public/test_fib.py :: TestFib.test_docstring_tenth_number",
+    "tests/public/test_fib.py :: TestFib.test_second_number",
+    "tests/public/test_fib.py :: TestFib.test_sixth_number"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 13,
+  "kept": [
+    "tests/private/test_fib.py :: TestFibPrivate.test_eleventh_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_fifth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_forty_seventh_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_fourth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_hundredth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_many_indices_in_nonmonotonic_order",
+    "tests/private/test_fib.py :: TestFibPrivate.test_ninth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_seventh_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_seventy_ninth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_third_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_twelfth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_twentieth_number",
+    "tests/private/test_fib.py :: TestFibPrivate.test_two_hundred_fiftieth_number"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 5,
+      "total": 5
+    },
+    "hidden": {
+      "passed": 13,
+      "total": 13
+    }
+  }
+}

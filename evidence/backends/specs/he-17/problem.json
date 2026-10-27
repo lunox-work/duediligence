@@ -1,0 +1,9 @@
+{
+  "source": "HumanEval+ v0.1.10 (evalplus/humanevalplus_release)",
+  "task_id": "HumanEval/17",
+  "entry_point": "parse_music",
+  "picked": "random",
+  "solutions": 31,
+  "basePassPlusFail": 0,
+  "plusPass": 8
+}

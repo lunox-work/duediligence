@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b23-1e05-7992-9268-b6d94576bb9e",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 50188,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "8 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_parse_music.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b23-e36c-78a1-a04e-1bbe588233d8",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 15,
+        "durationMs": 115780,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "15 tests in 1 file. Compile check passed; all tests fail against the stub, and expected outputs were independently verified.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_parse_music.py"
+    ],
+    "open": []
+  }
+}

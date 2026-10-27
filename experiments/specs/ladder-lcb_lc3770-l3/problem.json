@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "leetcode",
+  "question_id": "3770",
+  "contest_id": "weekly-contest-439",
+  "contest_date": "2025-03-01T18:30:00",
+  "difficulty": "hard",
+  "title": "lexicographically-smallest-generated-string",
+  "kind": "functional",
+  "fn_name": "generateString",
+  "publicCases": 3,
+  "privateCases": 40
+}

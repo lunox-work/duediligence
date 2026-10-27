@@ -1,0 +1,91 @@
+{
+  "slug": "he-77",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_iscube.py :: TestIsCube.test_example_negative_one",
+    "tests/public/test_iscube.py :: TestIsCube.test_example_one",
+    "tests/public/test_iscube.py :: TestIsCube.test_example_one_hundred_eighty",
+    "tests/public/test_iscube.py :: TestIsCube.test_example_sixty_four",
+    "tests/public/test_iscube.py :: TestIsCube.test_example_two",
+    "tests/public/test_iscube.py :: TestIsCube.test_example_zero",
+    "tests/public/test_iscube.py :: TestIsCube.test_large_integer_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_negative_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_one_above_large_integer_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_one_above_negative_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_one_above_positive_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_one_below_negative_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_one_below_positive_cube",
+    "tests/public/test_iscube.py :: TestIsCube.test_positive_cube"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 34,
+  "kept": [
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_cube_of_composite_root",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_cube_with_trailing_zeroes",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_fifth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_integer_that_is_both_square_and_cube",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_cube_with_trailing_zeroes",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_even_root",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_integer_just_above_minus_eight",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_integer_just_below_minus_eight",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_ninth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_square_magnitude_without_cube_root",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_noncube_with_possible_cube_last_digit",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_above_cube_of_large_odd_root",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_above_fifth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_above_large_negative_cube",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_above_negative_fifth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_below_cube_of_large_odd_root",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_below_fifth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_below_large_negative_cube",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_one_below_negative_fifth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_positive_integer_just_above_eight",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_positive_integer_just_below_eight",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_positive_square_without_integer_cube_root",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_power_of_two_that_is_not_a_cube",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_seventh_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_sixth_integer_cubed",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_small_negative_noncube",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_smallest_positive_cube_above_one",
+    "tests/private/test_iscube.py :: TestIsCubePrivate.test_three_is_not_a_cube"
+  ],
+  "dropped": [
+    {
+      "id": "tests/private/test_iscube.py :: TestIsCubePrivate.test_cube_larger_than_finite_float_range",
+      "reason": "The reference cannot satisfy it: OverflowError: int too large to convert to float"
+    },
+    {
+      "id": "tests/private/test_iscube.py :: TestIsCubePrivate.test_cube_of_root_beyond_exact_float_integers",
+      "reason": "The reference cannot satisfy it: AssertionError: False is not True"
+    },
+    {
+      "id": "tests/private/test_iscube.py :: TestIsCubePrivate.test_large_negative_cube",
+      "reason": "The reference cannot satisfy it: AssertionError: False is not True"
+    },
+    {
+      "id": "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_cube_larger_than_finite_float_range",
+      "reason": "The reference cannot satisfy it: OverflowError: int too large to convert to float"
+    },
+    {
+      "id": "tests/private/test_iscube.py :: TestIsCubePrivate.test_negative_noncube_larger_than_finite_float_range",
+      "reason": "The reference cannot satisfy it: OverflowError: int too large to convert to float"
+    },
+    {
+      "id": "tests/private/test_iscube.py :: TestIsCubePrivate.test_noncube_larger_than_finite_float_range",
+      "reason": "The reference cannot satisfy it: OverflowError: int too large to convert to float"
+    }
+  ],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 14,
+      "total": 14
+    },
+    "hidden": {
+      "passed": 28,
+      "total": 28
+    }
+  }
+}

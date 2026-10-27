@@ -1,0 +1,30 @@
+{
+  "slug": "ladder-lcb_abc400_g-l3",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_patisserie.py :: TestPatisserie.test_all_zero_scores",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_best_single_pair_not_in_optimum",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_choose_best_of_three",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_every_cake_paired",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_multiple_test_cases_one_line_each",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_odd_n_leaves_one_cake_unpaired",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_price_uses_one_dimension_per_pair",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_several_k_on_same_cakes",
+    "tests/public/test_patisserie.py :: TestPatisserie.test_smallest_single_pair"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 9
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 4,
+  "kept": [
+    "tests/private/test_hidden.py :: Hidden.test_case_0001",
+    "tests/private/test_hidden.py :: Hidden.test_case_0002",
+    "tests/private/test_hidden.py :: Hidden.test_case_0003",
+    "tests/private/test_hidden.py :: Hidden.test_case_0004"
+  ],
+  "dropped": [],
+  "reference": null
+}

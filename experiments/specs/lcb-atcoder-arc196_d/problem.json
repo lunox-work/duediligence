@@ -1,0 +1,14 @@
+{
+  "benchmark": "LiveCodeBench code_generation_lite",
+  "file": "test6.jsonl",
+  "platform": "atcoder",
+  "question_id": "arc196_d",
+  "contest_id": "arc196",
+  "contest_date": "2025-04-06T00:00:00",
+  "difficulty": "hard",
+  "title": "Roadway",
+  "kind": "stdin",
+  "fn_name": null,
+  "publicCases": 2,
+  "privateCases": 40
+}

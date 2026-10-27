@@ -1,0 +1,58 @@
+{
+  "slug": "he-151",
+  "status": "ok",
+  "reason": null,
+  "scripted": true,
+  "publicIds": [
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_empty_list",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_mixed_odd_even_and_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_negative_numbers_and_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_positive_odd_and_negative_even",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_example_zero_only",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_fractional_numbers_are_ignored",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_fractions_on_either_side_of_an_odd_integer",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_integers_around_zero",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_negative_odd_integers_are_ignored",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_positive_even_integers_contribute_nothing",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_smallest_positive_odd_integer",
+    "tests/public/test_double_the_difference.py :: TestDoubleTheDifference.test_sums_squares_including_repeated_odd_numbers"
+  ],
+  "publicFailingOnReference": [],
+  "hiddenWritten": 22,
+  "kept": [
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_both_sides_of_zero_in_scrambled_order",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_descending_mixed_integers",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_duplicates_among_negative_and_fractional_lookalikes",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_empty_lists_between_nonempty_calls",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_fractional_neighbors_of_multiple_odds",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_interleaved_negative_and_positive_odds",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_long_consecutive_integer_list",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_many_repeats_with_ineligible_blocks",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_mixed_fractional_values_and_integers",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_negative_fractions_only",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_negative_values_and_zero_only",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_only_fractions_near_small_integers",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_only_last_entry_contributes",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_positive_odd_between_negative_evens",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_repeated_ones",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_repeated_zeros",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_separated_repeated_odds",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_single_positive_fraction",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_unsorted_larger_positive_evens",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_very_large_even_integer",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_very_large_odd_integer",
+    "tests/private/test_double_the_difference.py :: TestDoubleTheDifferencePrivate.test_zero_with_fractional_neighbors"
+  ],
+  "dropped": [],
+  "reference": {
+    "source": "the spec's reference/ (archive), no session",
+    "public": {
+      "passed": 12,
+      "total": 12
+    },
+    "hidden": {
+      "passed": 22,
+      "total": 22
+    }
+  }
+}

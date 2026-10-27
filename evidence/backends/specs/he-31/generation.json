@@ -1,0 +1,49 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a17b28-c358-7c00-affe-cf25ddcce8a0",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 12,
+        "durationMs": 55926,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "11 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/test_is_prime.py"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a17b29-a003-7cb1-a8af-3987d70af79e",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 14,
+        "durationMs": 128526,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "29 tests in 1 file. Compile check passed; all expected values independently verified.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/test_is_prime.py"
+    ],
+    "open": []
+  }
+}

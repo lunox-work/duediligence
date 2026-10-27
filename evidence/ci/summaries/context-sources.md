@@ -1,0 +1,10 @@
+### independent-tests (drafted): incomplete: public 25/71, hidden 32/92, existing 228/228
+
+| verdict | public | hidden | existing |
+| --- | ---: | ---: | ---: |
+| **incomplete** | 25/71 | 32/92 | 228/228 |
+
+Failing scenarios (keys from the spec; the hidden tests stay hidden): `boundary-1`, `boundary-10`, `boundary-11`, `boundary-12`, `boundary-13`, `boundary-14`, `boundary-15`, `boundary-16`, `boundary-17`, `boundary-18`, `boundary-2`, `boundary-3`, `boundary-4`, `boundary-5`, `boundary-6`, `boundary-7`, `boundary-9`, `happy-1`, `happy-10`, `happy-2`, `happy-3`, `happy-4`, `happy-5`, `happy-6`, `happy-7`, `happy-8`, `happy-9`, `unhappy-1`, `unhappy-3`
+
+Hidden suite sha256 `c36efdd98825d037274e35a7d62a0b32ce099d4d5b9876db570e4fed2ddc7a8a`, sealed 2026-10-26T04:36:00.389Z. Commit `d3016bce6cd4eea76e653c6df162053285dbbb92`.
+

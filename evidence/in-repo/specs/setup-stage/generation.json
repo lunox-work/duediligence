@@ -1,0 +1,67 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "753ed9bd-929f-4b91-beb7-0eaa3d8b1dc8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.21438590000000005,
+        "turns": 8,
+        "durationMs": 118341,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.21438590000000005,
+    "finalText": "I created the contract file `apps/web/src/features/onboarding/setup.ts`. It exports exactly the types and signatures the spec lists, with the codebase's 2-space indentation and doc comments. Each function body is just `throw new Error(\"not implemented\");`. Nothing else in the repository changed.\n\n- **Parameter name:** the type check rejected unused parameters in the stub bodies, so the parameter is named `_facts` rather than `facts`. Callers aren't affected because they pass it by position.\n- **Errors and constants:** the spec says all three functions never throw, so no doc comment says they do. The spec names no constants, so none are exported.\n- **Type check:** `npx tsc -p tsconfig.test.json --noEmit` reports no errors.\n- **Tests:** 811 of 813 pass. The 2 failures are in `test/dev-hosts.test.ts`, which fails with `listen EPERM: operation not permitted 127.0.0.1` because this sandbox doesn't allow binding local ports. I got exactly the same result with the new file temporarily moved out, so it doesn't come from this change. To run that test here, set `sandbox.network.allowLocalBinding: true` in your settings.\n\nExported names added: `SetupStage`, `SetupFacts`, `setupStage`, `SetupStepId`, `SetupStep`, `setupSteps`, `setupComplete`",
+    "problem": null,
+    "sha256": "550c5f150a030b0c37929057b09dc6cc44ecffddb00fa7cdba737cf83e4a3270"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "eb3a1555-3769-47c0-8c08-9769eb7ca5dc",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5218802,
+        "turns": 7,
+        "durationMs": 122112,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.5218802,
+    "finalText": "I wrote the test suite in `apps/web/test/setup-stage.test.ts`. It type-checks with no errors. Running `npx vitest run test/setup-stage.` gives 48 tests, and all 48 fail with `not implemented`, as expected while the bodies throw. The only file I added is the test file, and I formatted it with Prettier.\n\n**How it's laid out**\n- **Two tests per scenario**, for all 24 scenarios (5 `@happy`, 15 `@boundary`, 4 `@unhappy`), each named with its key such as `[unhappy-2]`:\n  - **Happy path:** checks every row of the scenario's examples table, or its single case if it has no table.\n  - **Boundary case:** one extra edge case that follows directly from the spec's definitions. Examples:\n    - `Number.MIN_VALUE`, `-0` and `Infinity` as counts\n    - `available: false` alongside a large connection count\n    - a member (`canManage: false`) whose only step, `size`, is done, so no step is current\n    - broken Jira sites with GitHub already connected\n- **Setup:** a `facts(change)` helper builds the spec's starting facts and changes only the fields a test names. Imports, `test` and `expect` follow `analysis-labels.test.ts`: flat tests, no `describe`.\n- **The \"for any facts\" scenario (`[boundary-13]`):** checked over fixed grids of inputs, one of ordinary counts and one of odd counts (`-1`, `NaN`, `0.5`, `Infinity`), so it stays deterministic.\n- **The purity scenario (`[boundary-14]`):** deep-freezes the input with `Object.freeze` and compares it afterwards against a `structuredClone` snapshot.\n\nThe tests appear in the file grouped by tag (happy, then boundary, then unhappy) rather than in spec order. The keys still follow spec order.\n\n48 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/web/test/setup-stage.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "d0c789dd-d838-4609-9bb2-be27fba0ab48",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1187497,
+        "turns": 13,
+        "durationMs": 269722,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.1187497,
+    "finalText": "I wrote the hidden suite in `apps/web/test/hidden-setup-stage/setup-stage.test.ts`. All 64 tests fail against the current interface, where every function throws \"not implemented\". `tsc -p tsconfig.test.json --noEmit` reports no errors.\n\n**Coverage:**\n- **Keys:** every scenario key in the spec is used: `happy-1`…`happy-5`, `boundary-1`…`boundary-15` and `unhappy-1`…`unhappy-4`.\n- **Extensions:** every public test has at least one test extending it, named in a comment above it.\n- **Sweeps:** several tests check results over grids of facts. The grids cover every combination of availability and `canManage`, and counts including 0, 1, −1, `NaN`, 0.5 and ±Infinity. The expected values come from the spec's own definitions, not from the code under test.\n\n**Shortcuts the public suite misses that these tests catch:**\n- **Adding the counts:** working out \"something is sized\" from `proposals + bounties > 0`. With `proposals: 3, bounties: -5` or `proposals: 1, bounties: NaN`, the workspace should count as sized; with `proposals: -1, bounties: 1`, setup should be complete.\n- **Choosing `current` too early:** picking the current step before dropping the steps a member doesn't see. A member with only GitHub connected should have `size` current.\n- **Other gaps:**\n  - setup counts as complete for a member whose only Jira sites are broken\n  - it does not count as complete for a manager with broken Jira sites, even with GitHub connected and something sized\n  - the facts' nested objects are not replaced\n  - emptying one `setupSteps` result doesn't change the next.\n\n**Checks I ran in the scratchpad (nothing outside the hidden folder was touched):**\n- A correct implementation passes both the public suite and this one: 112 tests.\n- Three shortcut implementations pass all 48 public tests but fail 5–6 tests here. A fourth, which also breaks 2 public tests, fails 6 here.\n- One rewrite of `setupComplete` that I'd expected to be a shortcut turned out to be equivalent to the spec, and both suites pass it, as they should.\n\n64 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/web/test/hidden-setup-stage/setup-stage.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "he-63",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_fibfib.py :: TestFibfib.test_base_case_one",
+    "tests/public/test_fibfib.py :: TestFibfib.test_base_case_two",
+    "tests/public/test_fibfib.py :: TestFibfib.test_base_case_zero",
+    "tests/public/test_fibfib.py :: TestFibfib.test_efficient_boundary_large_n_recurrence_holds",
+    "tests/public/test_fibfib.py :: TestFibfib.test_efficient_typical_n_30",
+    "tests/public/test_fibfib.py :: TestFibfib.test_example_fibfib_1",
+    "tests/public/test_fibfib.py :: TestFibfib.test_example_fibfib_5",
+    "tests/public/test_fibfib.py :: TestFibfib.test_example_fibfib_8",
+    "tests/public/test_fibfib.py :: TestFibfib.test_recurrence_boundary_n_3",
+    "tests/public/test_fibfib.py :: TestFibfib.test_recurrence_boundary_n_4",
+    "tests/public/test_fibfib.py :: TestFibfib.test_recurrence_typical_n_10"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 11
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 16,
+  "kept": [
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_efficient_n_35_fast",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_exact_value_n_100",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_exact_value_n_100_nonzero",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_exact_value_n_300_big_integer",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_exact_value_n_500",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_hand_value_n_11",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_hand_value_n_12",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_hand_value_n_15",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_hand_value_n_6",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_hand_value_n_7",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_hand_value_n_9",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_large_then_small_calls",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_repeated_call_same_result",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_result_is_int_large",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_value_n_20",
+    "tests/private/test_fibfib_private.py :: TestFibfibPrivate.test_value_n_50"
+  ],
+  "dropped": [],
+  "reference": null
+}

@@ -1,0 +1,5 @@
+ticket-content-confirmed: overfit. Public 51/51, hidden 48/49, existing 139/139; /private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory at ee0bef013a078340116991400e3bfb1a730560be.
+Hidden suite sha256 a6e84b22c2180f8cc804925e6a893c9bf308bc175c0379d083ab59345a75fa0d, sealed 2026-10-26T04:35:59.556Z.
+Failing scenarios: happy-9
+[04:38:31] sandbox-factory c659da75f06f: npx -y npm@10.9.2 ci --no-audit --no-fund
+Check "independent-tests (confirmed)": failure, overfit: public 51/51, hidden 48/49, existing 139/139 (payload in /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/ci/checks/ticket-content-confirmed.json); not posted (no token).

@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176d8-735b-76b1-8821-3ddf13311f3f",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 17,
+        "durationMs": 234413,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "25 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/filtering.test.ts",
+      "tests/public/matching.test.ts",
+      "tests/public/reporting.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176dc-0882-7ef3-8472-09a4263f1ee1",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 18,
+        "durationMs": 425942,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "Build passes with `--noEmit`. All tests fail on the stub as required.\n\n49 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/filtering.test.ts",
+      "tests/private/matching.test.ts",
+      "tests/private/reporting.test.ts"
+    ],
+    "open": []
+  }
+}

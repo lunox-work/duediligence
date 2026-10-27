@@ -1,0 +1,53 @@
+{
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01a176c1-7768-75c2-8d56-0726362cd0f8",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 20,
+        "durationMs": 249094,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "38 tests in 3 files.",
+    "problem": null,
+    "files": [
+      "tests/public/decode-errors.test.ts",
+      "tests/public/decode-stream.test.ts",
+      "tests/public/encode.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "01a176c5-4525-7d03-ae21-15dec45f3549",
+        "model": "gpt-6.1-sol",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": null,
+        "turns": 26,
+        "durationMs": 474099,
+        "subtype": "success",
+        "apiError": null,
+        "backend": "codex-cli"
+      }
+    ],
+    "costUsd": 0,
+    "finalText": "46 tests in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "tests/private/decode-errors.test.ts",
+      "tests/private/decode-stream.test.ts",
+      "tests/private/encode.test.ts"
+    ],
+    "open": []
+  }
+}

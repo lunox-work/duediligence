@@ -1,0 +1,9 @@
+{
+  "name": "python",
+  "prompts": "pyfunc",
+  "reference": false,
+  "generate": [
+    "public",
+    "private"
+  ]
+}

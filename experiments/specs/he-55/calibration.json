@@ -1,0 +1,30 @@
+{
+  "slug": "he-55",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_fib.py :: TestFib.test_boundary_fib_2",
+    "tests/public/test_fib.py :: TestFib.test_example_fib_1",
+    "tests/public/test_fib.py :: TestFib.test_example_fib_10",
+    "tests/public/test_fib.py :: TestFib.test_example_fib_8",
+    "tests/public/test_fib.py :: TestFib.test_typical_fib_12"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 5
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 8,
+  "kept": [
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_100_exact",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_11",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_13_to_15",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_20",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_25",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_3",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_4_and_5",
+    "tests/private/test_fib_private.py :: TestFibPrivate.test_fib_6_7_9"
+  ],
+  "dropped": [],
+  "reference": null
+}

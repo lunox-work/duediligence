@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-26T04:42:35.219Z",
+  "slug": "jira-spec",
+  "verdict": "incomplete",
+  "checkout": "/private/tmp/claude-501/-Users-charlieangriawan-Repositories-lunox-work/612c9fc5-052a-49b0-b7c1-81bdaee20a80/scratchpad/p3/sandbox-factory",
+  "ref": "e57785e3eef1541ef717513e5d9d259409312002",
+  "public": {
+    "passed": 40,
+    "total": 84
+  },
+  "hidden": {
+    "passed": 13,
+    "total": 71
+  },
+  "existing": {
+    "passed": 63,
+    "total": 63
+  },
+  "compiled": {
+    "public": true,
+    "hidden": true
+  },
+  "regressions": [],
+  "refused": [],
+  "outsideScope": [],
+  "ownTests": [],
+  "failedScenarios": [
+    "boundary-1",
+    "boundary-10",
+    "boundary-11",
+    "boundary-12",
+    "boundary-2",
+    "boundary-3",
+    "boundary-4",
+    "boundary-5",
+    "boundary-8",
+    "boundary-9",
+    "concurrency-1",
+    "concurrency-2",
+    "happy-10",
+    "happy-11",
+    "happy-12",
+    "happy-3",
+    "happy-4",
+    "happy-5",
+    "happy-6",
+    "happy-8",
+    "happy-9",
+    "unhappy-1",
+    "unhappy-2"
+  ],
+  "hiddenSha256": "c197ed84003d8b6b9748c2a3ad3040bd5f6da02860861f760a8ad1e2b4aa472c",
+  "sealedAt": "2026-10-26T04:36:00.076Z",
+  "committedAt": null
+}

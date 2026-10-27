@@ -1,0 +1,37 @@
+{
+  "slug": "he-22",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_all_integers",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_docstring_example_ints_with_containers",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_docstring_example_string_float_int",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_empty_list",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_mixed_values_keep_integers_in_order",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_no_integers",
+    "tests/public/test_filter_integers.py :: TestFilterIntegers.test_repeated_integers_are_all_kept"
+  ],
+  "publicOnSkeleton": {
+    "passed": 0,
+    "total": 7
+  },
+  "publicFailingOnReference": [],
+  "hiddenWritten": 13,
+  "kept": [
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_all_integers_large_magnitudes",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_all_integers_long_descending",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_int_first_then_string_and_float",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_integral_float_is_not_kept",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_ints_between_int_like_non_ints",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_ints_nested_in_containers_are_not_extracted",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_large_mixed_input",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_many_duplicates_kept_with_multiplicity",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_no_integers_other_types",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_order_preserved_when_not_sorted",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_same_int_repeated_many_times",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_single_int",
+    "tests/private/test_filter_integers_private.py :: TestFilterIntegersPrivate.test_single_non_int"
+  ],
+  "dropped": [],
+  "reference": null
+}

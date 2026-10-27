@@ -1,0 +1,65 @@
+{
+  "from": "invite-codes",
+  "change": {
+    "sessionId": "912b2ef1-d005-4faa-a771-36cad37c82f4",
+    "model": "claude-opus-5-5",
+    "ok": true,
+    "exitCode": 0,
+    "timedOut": false,
+    "costUsd": 0.22346169999999999,
+    "turns": 3,
+    "durationMs": 51791,
+    "subtype": "success",
+    "apiError": null,
+    "finalText": "I've written `change/ticket.md` (11 lines) and `change/spec.md`. `src/` and `spec.md` are unchanged.\n\n**The change:** the company can now revoke a code that has already been used. Revoking it takes back the task access that code gave, and from then on the code is refused to everyone, including the contributor who used it.\n\nThis touches code other behaviour relies on:\n- **Revoking:** the check that refuses to revoke a used code goes, and revoking now has to remove the task from the contributor's access list.\n- **Redeeming:** today a used code is checked before a revoked one, so the person who used it always gets back in. That order flips, and the \"already has access\" check now has to allow someone to get access back.\n- **Listing:** the state logic currently puts \"used\" above \"revoked\", and that order reverses too.\n\n**Details the ticket left open, decided in the spec:**\n- A used code can still be revoked after its expiry time.\n- Revoking a code that is already revoked changes nothing. So a contributor who got access back with a second code keeps it.\n- A contributor whose access was taken back can regain it by redeeming another unused code for the same task.\n- A revoked used code still shows who used it and when.\n- Only that one task's access is withdrawn; the contributor's other tasks are untouched.\n\nAll other scenarios are copied word for word. \"A used code cannot be used by someone else\" still holds as written, because the code there was never revoked.\n\nChanged:\n- Unknown and revoked codes are refused (rewritten)\n- A task's codes are listed with their state (rewritten)\n- Revoking a used code withdraws the access it granted (added, @happy)\n- A used code can be revoked after its expiry time (added, @boundary)\n- Access taken back can be regained with another code (added, @boundary)"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5525ab81-9334-47e6-833d-8843a8fc2264",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7908958000000001,
+        "turns": 15,
+        "durationMs": 206988,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 0.7908958000000001,
+    "finalText": "I've written the public test suite in `tests/public/invite-codes.test.ts`. `npm run build` reports no errors, and all 25 tests currently fail with \"not implemented\", as expected.\n\n**Coverage:** each of the 12 scenarios has a happy-path test and a boundary test. `[unhappy-2]` has three, one for each of its outcomes: \"unknown\", \"revoked\", and \"revoked for the user and anyone else\". Boundary cases include redeeming at 1 ms before expiry and exactly at expiry, revoking 1 ms after expiry, and listing a code at its expiry instant. There's also a scripted random source that forces a repeated code, so the test can check the code is drawn again.\n\n**Determinism:**\n- The clock is fixed and set by each test.\n- The random source is scripted: it counts up, so successive codes differ.\n- The store is held in memory.\n- The concurrency tests use a store whose calls resolve only after a fixed number of event-loop turns, so other work runs in between. No timers or real time are involved.\n\n**Checking the tests:** I ran them against a throwaway implementation in the scratchpad, never in `src/`, and all 25 passed. With its lock removed, both `[concurrency-1]` tests failed, so they do catch the double-redemption race. I deleted the `.js` files the build produced, so the only file added to the project is the test file.\n\n**Decision for you:** the comment on `revoke` in `src/index.ts` says \"Throws if the code has been used\", but the spec says revoking a used code succeeds and takes back its access (`[happy-3]`, `[boundary-4]`, `[boundary-5]`, `[unhappy-2]`). The tests follow the spec, so an implementation that follows the comment will fail them. You may want to tell the developer the comment is out of date.\n\n25 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "tests/public/invite-codes.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "5c1fd88f-e9db-4612-9055-57a5671433f6",
+        "model": "claude-opus-5-5",
+        "ok": false,
+        "exitCode": 143,
+        "timedOut": true,
+        "costUsd": 1.849714,
+        "turns": 20,
+        "durationMs": 901187,
+        "subtype": "success",
+        "apiError": null
+      }
+    ],
+    "costUsd": 1.849714,
+    "finalText": "I've written 48 tests in `tests/private/`. All 48 fail against the current `not implemented` interface, and `npm run build` reports no errors.\n\nTo check that the suite isn't wrong in the other direction, I wrote a reference implementation in the scratchpad (nothing in `src/` changed). It passes both the public suite and all 48 private tests. I then made five deliberately flawed versions of it; the private suite caught every one:\n\n- **No locking:** 9 private tests fail, including lost updates when different codes are redeemed at once.\n- **Only one space and one dash stripped from typed codes:** the public suite passes, 5 private tests fail.\n- **\"Already has access\" whenever the contributor has any access at all:** 8 private tests fail.\n- **Duplicate check only within the same task:** the public suite passes, 2 private tests fail.\n- **Revoking a revoked code again withdraws the user's current access:** caught.\n\n**What the suite covers:**\n- All 12 scenarios have tests (happy-1 to 4, boundary-1 to 5, unhappy-1 and 2, concurrency-1), and each public test has at least one private test extending it, named in a comment above.\n- **Shortcuts targeted:**\n  - more than 15 codes;\n  - repeats checked against codes for other tasks, against used, revoked and expired codes, and redrawn more than once;\n  - codes typed with mixed case, spaces between every character, or all three variations at once;\n  - each code expiring from its own creation time;\n  - a code refused with \"already has access\" that can later regain the task;\n  - races with up to five contenders, many store delay patterns, a store that reads late, and contenders typing the same code differently.\n\n**Left untested because the spec doesn't say:**\n- which reason wins when more than one applies (for example, used and expired);\n- what revoking a code that was never made does;\n- whether `revoke` accepts lowercase or dashed input;\n- the order of `tasksFor` (always compared sorted);\n- which letter each random draw maps to (only the alphabet and that the same draws give the same codes).\n\n**Spec vs interface:** the comment on `revoke` in `src/index.ts` says it \"Throws if the code has been used\". The spec, and the public suite, require revoking a used code to succeed and withdraw its access. I followed the spec.\n\n**Housekeeping:** I deleted the `.js` files my builds created outside `tests/private/`. There's also an empty `tests/private/.claude/` folder, which the tool harness created when the working directory moved there for a moment. I didn't create it and left it in place; it only matters if the grader objects to anything there besides `.test.ts` files.\n\n48 tests, in 3 files.\n\nOpen in the spec:\n- `[boundary-5] revoking an already revoked code changes nothing, so regained access is kept` checks that revoking the code a second time succeeds without an error. The spec only says this \"changes nothing\", and the interface comment says `revoke` throws for a code that has been used. Whether the second revoke may throw is open, so my tests accept either.",
+    "problem": null,
+    "files": [
+      "tests/private/create-and-list.test.ts",
+      "tests/private/redeem.test.ts",
+      "tests/private/revoke-and-race.test.ts"
+    ],
+    "open": [
+      "`[boundary-5] revoking an already revoked code changes nothing, so regained access is kept` checks that revoking the code a second time succeeds without an error. The spec only says this \"changes nothing\", and the interface comment says `revoke` throws for a code that has been used. Whether the second revoke may throw is open, so my tests accept either."
+    ]
+  }
+}
