@@ -459,24 +459,89 @@ export const TOOLCHAINS = {
   // HTTP service (`boundary` in toolchain.json, `execChain`), never an
   // import. The suite runs under bin/runners/boundary.mjs, which `stage`
   // copies into the tree as sandbox/boundary.mjs so sessions run the same.
+  // The code may be Python, Go or Rust instead (`boundary.language`, `NATIVE`).
   exec: {
     name: "exec",
     template: TEMPLATE,
     skeleton: ["src/cli.ts"],
     isTest: (path) => path.endsWith(".test.ts"),
     testPattern: "*.test.ts",
+    // A tree in another language (`NATIVE`) also builds .bin/ (Go) or
+    // target/ (Rust), or leaves __pycache__ under src/.
     generated: (path, files) =>
-      path.endsWith(".js") && files[path.replace(/\.js$/, ".ts")] !== undefined,
+      (path.endsWith(".js") && files[path.replace(/\.js$/, ".ts")] !== undefined) ||
+      Object.values(NATIVE).some((native) => native.generated(path)),
     marker: "sandbox/boundary.json",
     checkCommand: "npm run build",
-    check: () => [process.execPath, ["node_modules/typescript/bin/tsc", "-p", "tsconfig.json", "--noEmit"]],
+    check: (dir) =>
+      nativeIn(dir) === null
+        ? [process.execPath, ["node_modules/typescript/bin/tsc", "-p", "tsconfig.json", "--noEmit"]]
+        : [process.execPath, ["sandbox/build.mjs", "--check"]],
     suite: (dir, suite) => {
       const [bin, argv] = TOOLCHAINS.node.suite(dir, suite);
+      // In another language the suites' build is sandbox/build.mjs: the TypeScript suites, then src/.
+      if (nativeIn(dir) !== null) argv[1] = JSON.stringify({ ...JSON.parse(argv[1]), build: [process.execPath, "sandbox/build.mjs"] });
       return [process.execPath, [join(RUNNERS, "boundary.mjs"), join(dir, "sandbox", "boundary.json"), "--", bin, ...argv]];
     },
     reference: true,
   },
 };
+/**
+ * A command or service written in another language than its suites:
+ * toolchain.json `boundary.language`. The suites stay TypeScript on
+ * node:test and reach the code only through the boundary, so nothing
+ * above the tree differs; the tree is the node template plus `files`, the
+ * skeleton is `entry` (a stub that exits 2, or a server answering 501),
+ * and bin/runners/native-build.mjs, staged as sandbox/build.mjs, builds
+ * the suites and then src/ for `npm run build`, the judge and a service's
+ * start alike. The briefs are prompts/exec-native/ and prompts/http-native/,
+ * rendered with `brief` and the boundary's own command. What the boundary
+ * runs is the spec's to state in toolchain.json, where the commitment hash
+ * covers it: `["python3", "src/cli.py"]`, `[".bin/task"]` (Go) or
+ * `["target/debug/task"]` (Rust), as a command or as a service's start.
+ */
+export const NATIVE = {
+  python: {
+    entry: { command: "src/cli.py", service: "src/server.py" },
+    files: {},
+    generated: (path) => path.split("/").includes("__pycache__") || path.endsWith(".pyc"),
+    brief: {
+      language: "Python 3",
+      stdlib: "Python's standard library only",
+      stub: "writes `not implemented` and a newline on stderr and exits with code 2 (`sys.exit(2)`)",
+      server: "an `http.server.ThreadingHTTPServer`",
+      extra: "",
+    },
+  },
+  go: {
+    entry: { command: "src/main.go", service: "src/main.go" },
+    files: { "go.mod": "module task\n\ngo 1.22\n" },
+    generated: (path) => path.startsWith(".bin/"),
+    brief: {
+      language: "Go",
+      stdlib: "Go's standard library only",
+      stub: "writes `not implemented` and a newline on stderr and exits with code 2 (`os.Exit(2)`)",
+      server: "`net/http`",
+      extra: " `src/` is `package main` (module `task`); other files there are part of it.",
+    },
+  },
+  rust: {
+    entry: { command: "src/main.rs", service: "src/main.rs" },
+    files: {
+      "Cargo.toml": '[package]\nname = "task"\nversion = "0.1.0"\nedition = "2021"\npublish = false\n\n[[bin]]\nname = "task"\npath = "src/main.rs"\n\n[dependencies]\n',
+    },
+    generated: (path) => path.startsWith("target/") || path === "Cargo.lock",
+    brief: {
+      language: "Rust",
+      stdlib: "the Rust standard library only (no crates)",
+      stub: "writes `not implemented` and a newline on stderr and exits with code 2 (`std::process::exit(2)`)",
+      server: "a `std::net::TcpListener` speaking HTTP/1.1 itself",
+      extra: " `src/main.rs` is the crate root of the binary `task`; other files under `src/` are its modules.",
+    },
+  },
+};
+/** The language of an exec tree in another language than TypeScript, from its sandbox/boundary.json, or null. */
+const nativeIn = (dir) => readJson(join(dir, "sandbox", "boundary.json"), {}).language ?? null;
 /**
  * A black-box seam (toolchain.json `boundary`): exactly one of
  * `command` (argv, relative to the tree or package; the suites spawn it
@@ -492,12 +557,20 @@ export function boundaryOf(config, slug) {
   const kinds = ["command", "service"].filter((kind) => boundary[kind] !== undefined);
   if (kinds.length !== 1) throw new Error(`${slug}: toolchain.json boundary names ${kinds.length === 0 ? "neither" : "both"} a command and a service`);
   if (boundary.service !== undefined && boundary.service.start === undefined) throw new Error(`${slug}: toolchain.json boundary.service has no start`);
+  if (boundary.language !== undefined && !Object.hasOwn(NATIVE, boundary.language))
+    throw new Error(`${slug}: toolchain.json boundary.language is ${JSON.stringify(boundary.language)}; one of ${Object.keys(NATIVE).join(", ")}`);
   return boundary;
 }
-/** What boundary.mjs reads for a tree of `chain`: its boundary, a service built first on the node template. */
+/** What boundary.mjs reads for a tree of `chain`: its boundary, a service built first (in its language, if not TypeScript). */
 const boundaryConfig = (chain) =>
   chain.name === "exec" && chain.boundary.service !== undefined
-    ? { build: [process.execPath, "node_modules/typescript/bin/tsc", "-p", "tsconfig.json"], ...chain.boundary }
+    ? {
+        build:
+          chain.boundary.language === undefined
+            ? [process.execPath, "node_modules/typescript/bin/tsc", "-p", "tsconfig.json"]
+            : [process.execPath, "sandbox/build.mjs"],
+        ...chain.boundary,
+      }
     : chain.boundary;
 /**
  * The `exec` toolchain for a toolchain.json: the skeleton is the entry the
@@ -508,10 +581,11 @@ export function execChain(config, slug) {
   const boundary = boundaryOf(config, slug);
   if (boundary === null) throw new Error(`${slug}: an exec toolchain.json needs a boundary (command or service)`);
   const service = boundary.service !== undefined;
+  const native = boundary.language === undefined ? null : NATIVE[boundary.language];
   return {
     ...TOOLCHAINS.exec,
-    skeleton: service ? ["src/server.ts"] : ["src/cli.ts"],
-    prompts: service ? "http" : "exec",
+    skeleton: native !== null ? [native.entry[service ? "service" : "command"]] : service ? ["src/server.ts"] : ["src/cli.ts"],
+    prompts: `${service ? "http" : "exec"}${native === null ? "" : "-native"}`,
     ...config,
     boundary,
     name: "exec",
@@ -763,13 +837,26 @@ export function prompt(name, chain = TOOLCHAINS.node) {
     );
   const folders = [chain.prompts, chain.name].filter(Boolean).flatMap((folder) => [folder, PROMPT_FALLBACK[folder]]);
   const own = folders.filter(Boolean).map((folder) => join(PROMPTS, folder, `${name}.md`)).find((path) => existsSync(path));
+  const native = chain.name === "exec" && chain.boundary?.language !== undefined;
   if (own === undefined) {
     // prompts/<name>.md is TypeScript: never a brief for another language.
-    if (!["node", "repo", "exec"].includes(chain.name)) throw new Error(`No prompt ${name} for the ${chain.name} toolchain (prompts/${folders[0]}/)`);
+    if (!["node", "repo", "exec"].includes(chain.name) || native) throw new Error(`No prompt ${name} for the ${chain.name} toolchain (prompts/${folders[0]}/)`);
     return readFileSync(join(PROMPTS, `${name}.md`), "utf8");
   }
   const text = readFileSync(own, "utf8");
+  if (native) return renderNative(text, chain, name);
   return chain.name === "repo" ? render(text, chain, name) : text;
+}
+/** A prompts/exec-native/ or http-native/ brief for the spec's language and boundary. */
+function renderNative(text, chain, name) {
+  const { brief, entry } = NATIVE[chain.boundary.language];
+  const service = chain.boundary.service !== undefined;
+  const argv = service ? chain.boundary.service.start : chain.boundary.command;
+  const values = { ...brief, entry: entry[service ? "service" : "command"], run: Array.isArray(argv) ? argv.join(" ") : argv };
+  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+    if (!(key in values)) throw new Error(`prompts/${chain.prompts}/${name}.md: no placeholder {{${key}}}`);
+    return values[key];
+  });
 }
 
 /** A list as inline code, comma-separated. */
@@ -1154,6 +1241,14 @@ export function stage(dir, slug, parts = {}) {
   copy(chain.ensure !== undefined ? chain.ensure() : chain.template === TEMPLATE ? ensureTemplate() : chain.template, dir);
   if (chain.name === "exec") {
     writeBoundary(join(dir, "sandbox"), chain);
+    const native = NATIVE[chain.boundary.language];
+    if (native !== undefined) {
+      copy(join(RUNNERS, "native-build.mjs"), join(dir, "sandbox", "build.mjs"));
+      for (const [path, text] of Object.entries(native.files)) writeFileSync(join(dir, path), text);
+      // `npm test` builds through it too: the suites, then src/.
+      const pkg = readJson(join(dir, "package.json"));
+      writeJson(join(dir, "package.json"), { ...pkg, scripts: { ...pkg.scripts, build: "node sandbox/build.mjs" } });
+    }
     // `npm test` and the node-test runner load sandbox.env: a command boundary needs no wrapper there.
     if (chain.boundary.command !== undefined)
       writeFileSync(

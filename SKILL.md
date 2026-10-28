@@ -30,7 +30,12 @@ boundary is `{"name": "exec", "boundary": {"command": ["node", "src/cli.js"]}}`
 or
 `{"name": "exec", "boundary": {"service": {"start": ["node", "src/server.js"], "healthcheck": "/"}}}`
 on the same TypeScript template; draft its spec by
-`prompts/exec/spec-from-ticket.md` or `prompts/http/spec-from-ticket.md`. **A
+`prompts/exec/spec-from-ticket.md` or `prompts/http/spec-from-ticket.md`. Its
+code may be Python, Go or Rust instead: add `"language": "python"`, `"go"` or
+`"rust"` to the boundary, whose command (or the service's `start`) is then
+`["python3", "src/cli.py"]` (`src/server.py` for a service), `[".bin/task"]` or
+`["target/debug/task"]`; the suites stay TypeScript, and the briefs are
+`prompts/exec-native/` and `prompts/http-native/`. **A
 change inside a repository** is built in the person's own checkout of one
 package, with its runner and its existing suite, which must keep passing; the
 steps marked _Repository_ below are for that target.
@@ -150,7 +155,8 @@ listed with the decisions, and changing either voids the confirmation.
 
 `independent-tests prepare <slug>`. It generates the skeleton
 (`skeleton/src/index.ts`, `solution.py`, `task.go` or `lib.rs`; for `exec`,
-`src/cli.ts`, which exits 2, or `src/server.ts`, which answers 501), the public
+`src/cli.ts`, which exits 2, or `src/server.ts`, which answers 501, or with a
+`language` `src/cli.py`, `src/server.py`, `src/main.go` or `src/main.rs`), the public
 suite and the hidden suite in three blind sessions, then calibrates: every
 hidden test must fail on the skeleton, and a reference written in a fourth
 session must pass both suites. Exit codes:
@@ -193,7 +199,8 @@ Pick with the person:
   audit is needed.
 
 `BRIEF.md` is `prompts/agent.md` (`prompts/repo/agent.md` on a repository,
-`prompts/exec/` or `prompts/http/agent.md` at a command or a service): pass the
+`prompts/exec/` or `prompts/http/agent.md` at a command or a service, `-native/`
+in another language): pass the
 public suite and write one test of your own per scenario, with inputs unlike the
 public ones; on a repository, also keep the existing suite passing and stay
 inside the allowed paths.
