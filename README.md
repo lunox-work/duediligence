@@ -5,28 +5,35 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/independent-tests"><img src="https://img.shields.io/npm/v/independent-tests?style=flat-square&label=npm" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT license"></a>
+  <a href="SKILL.md"><img src="https://img.shields.io/badge/Claude_Code-skill-D97757?style=flat-square" alt="Claude Code skill"></a>
+  <a href="#install"><img src="https://img.shields.io/badge/judges-any_coding_agent-555?style=flat-square" alt="Judges any coding agent"></a>
+</p>
+
+<p align="center">
+  <img src="assets/hero.png" width="100%" alt="Coding agents that report a task complete are wrong 71% of the time (75 of 105). Independent tests cut that to 9% (9 of 105).">
+</p>
+
+<table>
+<tr>
+<td align="center" width="25%"><h3>75 of 105</h3>green runs failed tests<br>they never saw<br><sub>from a loose ticket</sub></td>
+<td align="center" width="25%"><h3>30 → 81</h3>of 105 pass when the<br>agent gets a public suite<br><sub>same agent, p &lt; 1e-11</sub></td>
+<td align="center" width="25%"><h3>95 of 100</h3>rejections upheld<br>by a blind referee<br><sub>on another model</sub></td>
+<td align="center" width="25%"><h3>0 of 2,522</h3>runs touched a test<br>or the harness<br><sub>wrong without cheating</sub></td>
+</tr>
+</table>
+
+<p align="center">
   <a href="#before--after">Before/After</a> •
   <a href="#install">Install</a> •
+  <a href="#does-a-hidden-suite-catch-what-green-tests-miss">Proof</a> •
+  <a href="#try-it-in-five-minutes">Try it</a> •
   <a href="#the-numbers">The numbers</a> •
   <a href="RESULTS.md">RESULTS.md</a>
 </p>
 
 ---
-
-**105 of 105** agents said their own tests passed. **75** of them failed tests
-they never saw. None of them cheated.
-
-```
-own tests green                 ████████████████████  105/105
-hidden suite, from the ticket   ██████░░░░░░░░░░░░░░   30/105
-  + a public suite from here    ███████████████░░░░░   81/105   p < 1e-11
-```
-
-Same agent (Haiku 5.5), same loose tickets, 7 specs × 15 runs. The only change
-in the third row: the decisions the ticket left open, confirmed by a person and
-handed to the agent as tests it can see, judged by tests it can't. Were the
-rejections fair? A blind referee on another model, given the spec, the code and
-one anonymised failing test, upheld 95 of 100.
 
 ## Before / After
 
@@ -34,7 +41,7 @@ one anonymised failing test, upheld 95 of 100.
 <tr>
 <td width="50%">
 
-### 🗣️ The agent's report
+### 🗣️ The agent: "my 21 tests pass"
 
 > "The escrow release logic in `src/index.ts` is implemented. The build is clean
 > and my 21 tests under `tests/own/` pass."
@@ -45,7 +52,7 @@ one anonymised failing test, upheld 95 of 100.
 </td>
 <td width="50%">
 
-### 🔒 The hidden suite
+### 🔒 Tests it never saw: 43 of 46
 
 ```
 hidden 43/46
@@ -61,22 +68,18 @@ hidden: [boundary-2] passing hidden tests on a
 </tr>
 </table>
 
+**Same code. 21 green tests. One wrong guess, and the agent knew it was
+guessing.**
+
 escrow-split, run 1. 14 of 15 runs made the same guess. The ticket never said
 what a $0 bounty does; the agent picked an answer, then wrote 21 tests that
 agree with it. Green tests from the author of the code test the author's
 guesses.
 
-In 2025 METR caught frontier models
-[reward hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/) in 30%
-of RE-Bench runs: patching the grader, copying its answers. That is what
-sandboxes guard against. In 2,522 sandboxed runs here no agent changed a test or the harness, and
-the hidden suites still rejected 71% from a loose ticket. The agent does not
-need to cheat to be wrong.
-
 ## Install
 
 ```sh
-git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests
+npx skills add lunox-work/independent-tests -g
 ```
 
 Then ask your coding agent (Claude Code, Codex, Cursor, or any agent that loads
@@ -84,8 +87,32 @@ skills): _"write tests my agent can't see for this ticket"_. The tests are
 written on whichever account you have: Claude Code, a Codex login or an
 Anthropic API key. The implementer can be anything that edits a folder: Claude
 Code, Codex, Cursor, Copilot, Aider, or a person.
-[Try the bundled example](#try-it-in-five-minutes) in five minutes; details in
-[Install in full](#install-in-full).
+[Try the bundled example](#try-it-in-five-minutes) in five minutes; a git clone
+and the CLI are in [Install in full](#install-in-full).
+
+## Does a hidden suite catch what green tests miss?
+
+**105 of 105** agents said their own tests passed. **75** of them failed tests
+they never saw. None of them cheated.
+
+<p align="center">
+  <img src="assets/runs.png" width="100%" alt="One square per run, 7 specs by 15 runs, red where the hidden suite failed. Agent alone: 75 of 105 wrong. With a public suite: 24 of 105. After one retry told only the failing scenario: 9 of 105.">
+</p>
+
+Same agent (Haiku 5.5), same loose tickets, 7 specs × 15 runs. The only change
+in the middle column (p < 1e-11): the decisions the ticket left open, confirmed
+by a person and handed to the agent as tests it can see, judged by tests it
+can't. In the last, each of the 24 rejected runs got one retry told only the
+failing scenario's key, never the test; 15 then passed. Were the
+rejections fair? A blind referee on another model, given the spec, the code and
+one anonymised failing test, upheld 95 of 100.
+
+In 2025 METR caught frontier models
+[reward hacking](https://metr.org/blog/2025-06-05-recent-reward-hacking/) in 30%
+of RE-Bench runs: patching the grader, copying its answers. That is what
+sandboxes guard against. In 2,522 sandboxed runs here no agent changed a test or
+the harness, and the hidden suites still rejected 71% from a loose ticket. The
+agent does not need to cheat to be wrong.
 
 ## What it is
 
@@ -262,17 +289,19 @@ WSL2 for an enforced sandbox; judging and handouts need none.
 ## Install in full
 
 ```sh
-npx -y independent-tests --help         # the CLI; nothing to clone
-git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests
+npx skills add lunox-work/independent-tests -g   # the skill, for Claude Code and other agents
+git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests  # or the whole repo
+npx -y independent-tests --help                  # the CLI; nothing to clone
 ```
 
-The clone is the skill (SKILL.md), which calls the same CLI. Needs Node 20.19 or
-later on macOS, Linux or Windows, and one of: Claude Code signed in, a Codex
-login, or `ANTHROPIC_API_KEY`. The first command that needs the toolchain
-installs `template/`'s dependencies with npm 10.9.2 under
-`~/.independent-tests/`, once. Then ask your agent for tests an agent can't see
-for a ticket, or to judge a submission against a spec. The handout folder needs
-only Node, so the implementing agent can run anywhere.
+Either install puts the skill (SKILL.md) in place; it calls the same CLI,
+through `npx` when only SKILL.md was copied. Needs Node 20.19 or later on macOS,
+Linux or Windows, and one of: Claude Code signed in, a Codex login, or
+`ANTHROPIC_API_KEY`. The first command that needs the toolchain installs
+`template/`'s dependencies with npm 10.9.2 under `~/.independent-tests/`, once.
+Then ask your agent for tests an agent can't see for a ticket, or to judge a
+submission against a spec. The handout folder needs only Node, so the
+implementing agent can run anywhere.
 
 Specs, runs and results live in `~/.independent-tests/`
 (`INDEPENDENT_TESTS_HOME`; `independent-tests where` prints the folders), never
@@ -412,6 +441,9 @@ reads the runner's disk and sends it over the network is not stopped.
 
 ## Layout
 
+<details>
+<summary>Every file and folder, in the repository and in <code>~/.independent-tests/</code></summary>
+
 ```
 SKILL.md            the steps the skill runs
 AGENTS.md           this README's section for coding agents, verbatim
@@ -472,3 +504,18 @@ evidence/seams.mjs  black-box seams: patch-apply as a command against git apply,
 
 A development checkout keeps its own `specs/`, `runs/` and `results.jsonl` with
 `INDEPENDENT_TESTS_HOME=.`.
+
+</details>
+
+---
+
+<p align="center">
+  <strong>Caught a green run that was wrong? A ⭐ helps the next person find this.</strong>
+  <br>
+  <sub>
+    <a href="RESULTS.md">RESULTS.md</a> ·
+    <a href="AGENTS.md">AGENTS.md</a> ·
+    <a href="SKILL.md">SKILL.md</a> ·
+    <a href="https://github.com/lunox-work/independent-tests/issues">Issues</a>
+  </sub>
+</p>

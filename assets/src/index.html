@@ -1,0 +1,124 @@
+<!doctype html>
+<!-- Source of assets/hero.png and assets/runs.png; render with `node assets/src/render.mjs`.
+     Every number comes from experiments/results.jsonl (ticket arms, the 7 specs behind "105 runs")
+     and runs/escrow-split/self-tested-haiku-ticket/1. -->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: Mono; src: url(fonts/dm-mono-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: Mono; src: url(fonts/dm-mono-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: Sans; src: url(fonts/dm-sans-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: Sans; src: url(fonts/dm-sans-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: Display; src: url(fonts/space-grotesk-latin-600-normal.woff2); font-weight: 600; }
+:root {
+  --bg: #09090b;
+  --line: rgb(255 255 255 / 0.08);
+  --text: #fafafa;
+  --muted: #71717a;
+  --pass: #22c55e;
+  --fail: #f43f5e;
+}
+* { box-sizing: border-box; margin: 0; }
+body { background: #000; }
+.scene { width: 1280px; background: var(--bg); color: var(--text); font-family: Sans; padding: 44px 64px; position: relative; overflow: hidden; }
+.scene::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgb(255 255 255 / 0.06), transparent); }
+.scene > * { position: relative; }
+.mark { font-family: Mono; font-size: 16px; color: var(--muted); letter-spacing: 0.02em; }
+.mark b { color: var(--text); font-weight: 500; }
+.cols { display: grid; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.col { padding: 36px 40px; display: flex; flex-direction: column; gap: 22px; }
+.col + .col { border-left: 1px solid var(--line); }
+.label { font-family: Mono; font-size: 14px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.label svg { width: 14px; height: 14px; }
+.num { font-family: Display; font-weight: 600; letter-spacing: -0.04em; line-height: 0.9; }
+.num small { color: var(--muted); font-size: 0.45em; letter-spacing: -0.02em; margin-left: 6px; }
+.pass { color: var(--pass); } .fail { color: var(--fail); }
+.dots { display: grid; gap: 6px; }
+.dots u { aspect-ratio: 1; border-radius: 30%; background: var(--pass); box-shadow: 0 0 12px rgb(34 197 94 / 0.25); }
+.dots u.f { background: var(--fail); box-shadow: 0 0 14px rgb(244 63 94 / 0.6); }
+h1 { font-family: Display; font-weight: 600; letter-spacing: -0.03em; }
+
+/* hero */
+#hero { height: 640px; display: flex; flex-direction: column; justify-content: space-between; }
+#hero h1 { font-size: 40px; line-height: 1.15; max-width: 1000px; }
+#hero .cols { grid-template-columns: 1fr 1fr; }
+#hero .col { flex-direction: row; justify-content: space-between; align-items: center; padding: 30px 40px; }
+#hero .col:first-child { padding-left: 0; }
+#hero .col:last-child { padding-right: 0; }
+.stat { display: flex; flex-direction: column; gap: 14px; }
+.stat .num { font-size: 104px; }
+.of { font-family: Mono; font-size: 15px; color: var(--muted); }
+#hero .dots, #runs .dots { grid-template-columns: repeat(15, 15px); gap: 4px; }
+#hero .dots u, #runs .dots u { box-shadow: none; }
+
+/* runs */
+#runs h1 { font-size: 44px; line-height: 1.1; margin: 28px 0 36px; }
+#runs .cols { grid-template-columns: repeat(3, 1fr); }
+#runs .col { padding: 32px 32px 34px; }
+#runs .col:first-child { padding-left: 0; }
+#runs .col:last-child { padding-right: 0; }
+#runs .num { font-size: 72px; }
+#runs .dots { grid-template-columns: repeat(15, 17px); }
+.foot { font-family: Mono; font-size: 14px; color: var(--muted); margin-top: 22px; }
+</style>
+</head>
+<body>
+
+<section class="scene" id="hero">
+  <div class="mark"><b>independent-tests</b></div>
+  <h1>Coding agents that report a task complete are wrong 71% of the time. <span class="pass">Independent tests cut that to 9%.</span></h1>
+  <div class="cols">
+    <div class="col">
+      <div class="stat"><div class="label">Agent alone</div><div class="num fail">71%</div><div class="of">75 of 105 wrong</div></div>
+      <div class="dots" data-arm="ticket"></div>
+    </div>
+    <div class="col">
+      <div class="stat"><div class="label">With independent-tests</div><div class="num pass">9%</div><div class="of">9 of 105 wrong</div></div>
+      <div class="dots" data-arm="retry"></div>
+    </div>
+  </div>
+  <div class="foot">Claude Haiku 5.5 · 7 loose tickets × 15 runs · wrong = fails tests it never saw</div>
+</section>
+
+<section class="scene" id="runs">
+  <div class="mark"><b>independent-tests</b></div>
+  <h1>105 agents reported a task complete.<br><span class="fail">75 were wrong.</span> <span class="pass">Then 9.</span></h1>
+  <div class="cols">
+    <div class="col">
+      <div class="label">Agent alone</div>
+      <div class="num fail">71%</div>
+      <div class="dots" data-arm="ticket"></div>
+      <div class="of">75 of 105 wrong</div>
+    </div>
+    <div class="col">
+      <div class="label">+ public suite</div>
+      <div class="num fail">23%</div>
+      <div class="dots" data-arm="public"></div>
+      <div class="of">24 of 105 wrong</div>
+    </div>
+    <div class="col">
+      <div class="label">+ one retry</div>
+      <div class="num pass">9%</div>
+      <div class="dots" data-arm="retry"></div>
+      <div class="of">9 of 105 wrong</div>
+    </div>
+  </div>
+  <div class="foot">Claude Haiku 5.5 · 7 loose tickets × 15 runs · the retry is told only which scenario failed</div>
+</section>
+
+<script>
+// Hidden-suite pass (1) or fail (0) per run 1..15, one row per spec, from experiments/results.jsonl:
+// csv-export, escrow-split, gherkin-parse, invite-codes, status-normalize, usage-counter, weekly-digest.
+// ticket: self-tested-haiku-ticket; public: double-blind-haiku-ticket; retry: public, with each of its
+// 24 failures replaced by double-blind-haiku-ticket-retry-keyed.
+const runs = {
+  ticket: ["000000000000000", "000000000100000", "000100001000001", "000000000000000", "000000000000000", "111111111111111", "010111101110111"],
+  public: ["000000000000000", "010010111010101", "111101111111011", "111111111111111", "111111111111111", "111111111111111", "111111111111111"],
+  retry:  ["011111111111111", "010010111011101", "111101111111011", "111111111111111", "111111111111111", "111111111111111", "111111111111111"],
+};
+const fill = (el, bits) => (el.innerHTML = [...bits].map((b) => `<u class="${b === "1" ? "" : "f"}"></u>`).join(""));
+for (const el of document.querySelectorAll(".dots[data-arm]")) fill(el, runs[el.dataset.arm].join(""));
+</script>
+</body>
+</html>
