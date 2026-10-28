@@ -27,10 +27,10 @@
 // process leading its own process group, which holds the service in that
 // group and SIGKILLs the whole group when (a) its stdin closes, which
 // happens when this process exits for any reason, SIGKILL included, (b)
-// the group's resident memory passes INDEPENDENT_TESTS_TEST_MAX_RSS_MB
+// the group's resident memory passes DUEDILIGENCE_TEST_MAX_RSS_MB
 // (default 1024; the service also gets NODE_OPTIONS
-// --max-old-space-size=INDEPENDENT_TESTS_TEST_HEAP_MB, default 512), as
-// guard.mjs does for test processes, or (c) INDEPENDENT_TESTS_SERVICE_MINUTES
+// --max-old-space-size=DUEDILIGENCE_TEST_HEAP_MB, default 512), as
+// guard.mjs does for test processes, or (c) DUEDILIGENCE_SERVICE_MINUTES
 // (default 30) pass. This process also kills the group itself when the
 // suite ends, on SIGINT, SIGTERM and SIGHUP, on an uncaught error, and
 // when its own caller dies (it is reparented).
@@ -59,9 +59,9 @@ if (split === -1 || split === argv.length - 1 || split > 1) {
 const source = split === 1 ? argv[0] : join(dirname(fileURLToPath(import.meta.url)), "boundary.json");
 const config = source.trim().startsWith("{") ? JSON.parse(source) : JSON.parse(readFileSync(source, "utf8"));
 const [bin, ...args] = argv.slice(split + 1);
-const HEAP_MB = Number(process.env.INDEPENDENT_TESTS_TEST_HEAP_MB ?? 512);
-const MAX_RSS_MB = Number(process.env.INDEPENDENT_TESTS_TEST_MAX_RSS_MB ?? 1024);
-const LIFETIME_MS = Number(process.env.INDEPENDENT_TESTS_SERVICE_MINUTES ?? 30) * 60_000;
+const HEAP_MB = Number(process.env.DUEDILIGENCE_TEST_HEAP_MB ?? 512);
+const MAX_RSS_MB = Number(process.env.DUEDILIGENCE_TEST_MAX_RSS_MB ?? 1024);
+const LIFETIME_MS = Number(process.env.DUEDILIGENCE_SERVICE_MINUTES ?? 30) * 60_000;
 const OUTPUT_CHARS = 4_000;
 const WINDOWS = process.platform === "win32";
 

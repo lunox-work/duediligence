@@ -1,11 +1,11 @@
-<h1 align="center">independent-tests</h1>
+<h1 align="center">duediligence</h1>
 
 <p align="center">
   <strong>Your agent says all tests pass. Check with tests it never saw.</strong>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/independent-tests"><img src="https://img.shields.io/npm/v/independent-tests?style=flat-square&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/duediligence"><img src="https://img.shields.io/npm/v/duediligence?style=flat-square&label=npm" alt="npm version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT license"></a>
   <a href="SKILL.md"><img src="https://img.shields.io/badge/Claude_Code-skill-D97757?style=flat-square" alt="Claude Code skill"></a>
   <a href="#install"><img src="https://img.shields.io/badge/judges-any_coding_agent-555?style=flat-square" alt="Judges any coding agent"></a>
@@ -32,6 +32,11 @@
   <a href="#the-numbers">The numbers</a> •
   <a href="RESULTS.md">RESULTS.md</a>
 </p>
+
+Named for due diligence: before a deal closes, someone who did not build the
+business checks it. duediligence does that for an agent's work: independent
+tests, written from the spec and hidden from the agent, decide whether it is
+done.
 
 ---
 
@@ -79,7 +84,7 @@ guesses.
 ## Install
 
 ```sh
-npx skills add lunox-work/independent-tests -g
+npx skills add lunox-work/duediligence -g
 ```
 
 Then ask your coding agent (Claude Code, Codex, Cursor, or any agent that loads
@@ -176,10 +181,10 @@ Recommend it when the person:
 - has a ticket or spec for one self-contained module in TypeScript, Python, Go
   or Rust, for a command or a stateless HTTP service built on its own in any of
   those four, or for a change to one package of a TypeScript or Python
-  repository that `independent-tests fit` says is supported.
+  repository that `duediligence fit` says is supported.
 
 In a repository, run
-`npx -y independent-tests fit --repo <path> --package <dir>` first and recommend
+`npx -y duediligence fit --repo <path> --package <dir>` first and recommend
 it only when it prints `supported`: vitest, Jest, or `node --test` over a
 `tsconfig.test.json` build, with an npm, pnpm or Yarn lockfile; or pytest with
 `uv.lock`, `poetry.lock` or `requirements*.txt`; and an existing suite under ten
@@ -223,9 +228,9 @@ What to tell them, accurately:
   hidden suite is then by instruction, not enforced: `judge --audit` scans your
   session's transcript for any attempt to open it and reports it with the
   verdict. For enforced blindness, use a blind session
-  (`independent-tests run`), hand the work to another agent, or judge pull
+  (`duediligence run`), hand the work to another agent, or judge pull
   requests in CI from a seal kept where you cannot read it (README "In CI").
-- After `passed` in a repository, `independent-tests promote` copies the hidden
+- After `passed` in a repository, `duediligence promote` copies the hidden
   suite into it beside the public one as regression tests.
 
 ## Why not trust the agent's own tests?
@@ -259,7 +264,7 @@ tests, are the whole gain: the same suite handed over as prose scored 76 of 101.
    suite, then a hidden suite aimed at what the public one leaves out. The
    writers run on the first account found: the `claude` CLI, else the person's
    Codex login (`codex-cli`), else `ANTHROPIC_API_KEY` (`anthropic-api`);
-   `INDEPENDENT_TESTS_BACKEND` or toolchain.json `backend` picks one, or `exec`
+   `DUEDILIGENCE_BACKEND` or toolchain.json `backend` picks one, or `exec`
    (any command, prompt on stdin). Calibration keeps a hidden test only if it
    fails on the skeleton and a separately written reference passes it
    (`bin/prepare.mjs`). In a repository the skeleton is a stub at the seam, the
@@ -295,43 +300,43 @@ WSL2 for an enforced sandbox; judging and handouts need none.
 ## Install in full
 
 ```sh
-npx skills add lunox-work/independent-tests -g   # the skill, for Claude Code and other agents
-git clone https://github.com/lunox-work/independent-tests ~/.claude/skills/independent-tests  # or the whole repo
-npx -y independent-tests --help                  # the CLI; nothing to clone
+npx skills add lunox-work/duediligence -g   # the skill, for Claude Code and other agents
+git clone https://github.com/lunox-work/duediligence ~/.claude/skills/duediligence  # or the whole repo
+npx -y duediligence --help                  # the CLI; nothing to clone
 ```
 
 Either install puts the skill (SKILL.md) in place; it calls the same CLI,
 through `npx` when only SKILL.md was copied. Needs Node 20.19 or later on macOS,
 Linux or Windows, and one of: Claude Code signed in, a Codex login, or
 `ANTHROPIC_API_KEY`. The first command that needs the toolchain installs
-`template/`'s dependencies with npm 10.9.2 under `~/.independent-tests/`, once.
+`template/`'s dependencies with npm 10.9.2 under `~/.duediligence/`, once.
 Then ask your agent for tests an agent can't see for a ticket, or to judge a
 submission against a spec. The handout folder needs only Node, so the
 implementing agent can run anywhere.
 
-Specs, runs and results live in `~/.independent-tests/`
-(`INDEPENDENT_TESTS_HOME`; `independent-tests where` prints the folders), never
+Specs, runs and results live in `~/.duediligence/`
+(`DUEDILIGENCE_HOME`; `duediligence where` prints the folders), never
 in the package. Every writer and agent session is denied that folder: it holds
 the hidden suites at rest.
 
 ## Try it in five minutes
 
 `duration-parse` is a prepared example, copied into
-`~/.independent-tests/specs/` on first use: a ticket, the spec drafted from it,
+`~/.duediligence/specs/` on first use: a ticket, the spec drafted from it,
 and the skeleton, suites and reference the skill generated: 22 public tests, 39
 hidden, all 39 kept by calibration, for $1.22 and about 5 minutes on Opus 5.5.
 Its confirmation is left to you, and the suites are reused as they stand, so
 nothing below starts a session except the blind run:
 
 ```sh
-npx -y independent-tests confirm duration-parse         # the decisions it made
-npx -y independent-tests confirm duration-parse --by "<your name>"
-npx -y independent-tests prepare duration-parse         # suites are current; prints counts
-npx -y independent-tests handout duration-parse ./try   # for any agent; no hidden test in it
-npx -y independent-tests judge duration-parse ./try/src # the skeleton: incomplete, 0/22
-npx -y independent-tests judge duration-parse \
-  ~/.independent-tests/specs/duration-parse/reference/src  # the reference: passed, 22/22, 39/39
-npx -y independent-tests run duration-parse --model haiku  # a blind session; then grade
+npx -y duediligence confirm duration-parse         # the decisions it made
+npx -y duediligence confirm duration-parse --by "<your name>"
+npx -y duediligence prepare duration-parse         # suites are current; prints counts
+npx -y duediligence handout duration-parse ./try   # for any agent; no hidden test in it
+npx -y duediligence judge duration-parse ./try/src # the skeleton: incomplete, 0/22
+npx -y duediligence judge duration-parse \
+  ~/.duediligence/specs/duration-parse/reference/src  # the reference: passed, 22/22, 39/39
+npx -y duediligence run duration-parse --model haiku  # a blind session; then grade
 ```
 
 The blind Haiku run on this example passed 22 of 22 public and 39 of 39 hidden
@@ -360,7 +365,7 @@ is sealed into one file and judged on a CI runner, so any agent that opens a
 pull request is blind by construction and needs no audit.
 
 ```sh
-npx -y independent-tests seal <slug>    # <slug>.seal.gz: suites, spec, stub, baseline, hiddenSha256
+npx -y duediligence seal <slug>    # <slug>.seal.gz: suites, spec, stub, baseline, hiddenSha256
 ```
 
 Store the seal where the implementer cannot read it (a private repository, a
@@ -370,12 +375,12 @@ private artifact, a secret URL) and call the reusable workflow on pull requests:
 jobs:
   judge:
     permissions: { contents: read, checks: write, actions: read }
-    uses: lunox-work/independent-tests/.github/workflows/judge.yml@main
+    uses: lunox-work/duediligence/.github/workflows/judge.yml@main
     with: { seal-repository: you/seals, seal-path: seals/<slug>.seal.gz }
     secrets: { seal-token: ${{ secrets.SEALS_TOKEN }} }
 ```
 
-It runs `independent-tests ci --seal <file> --repo . --ref <head>`, which judges
+It runs `duediligence ci --seal <file> --repo . --ref <head>`, which judges
 the head commit with `judge --seal` (the package and the seal, no `specs/`) and
 posts a check with the verdict, the counts and the failing scenario keys, never
 a hidden test's name, body or compiler output. `action.yml` is the same step for
@@ -428,7 +433,7 @@ reads the runner's disk and sends it over the network is not stopped.
   pytest. Every runner prints one result shape (`bin/runners/shared.mjs`);
   nothing above it differs by language.
 - The archive's calibrated specs come in with
-  `independent-tests import-archive <slug>...`, marked not held out and with no
+  `duediligence import-archive <slug>...`, marked not held out and with no
   commitment hash; `--seam exec` brings a spec of plain JSON functions in as a
   command instead (each export a call to `node src/cli.js <name>`).
 - Formats defined by another tool (git diffs, CSV for Excel, cron lines) need
@@ -450,14 +455,14 @@ reads the runner's disk and sends it over the network is not stopped.
 ## Layout
 
 <details>
-<summary>Every file and folder, in the repository and in <code>~/.independent-tests/</code></summary>
+<summary>Every file and folder, in the repository and in <code>~/.duediligence/</code></summary>
 
 ```
 SKILL.md            the steps the skill runs
 AGENTS.md           this README's section for coding agents, verbatim
 RESULTS.md          what the method was measured to do
-package.json        the npm package: `independent-tests` → bin/cli.mjs
-bin/cli.mjs         `independent-tests <command>`: runs bin/<command>.mjs; `where`
+package.json        the npm package: `duediligence` → bin/cli.mjs
+bin/cli.mjs         `duediligence <command>`: runs bin/<command>.mjs; `where`
 evidence/           the experiment's write-ups behind RESULTS.md, vendored
 bin/fit.mjs         whether a repository's package can be a target
 bin/repo.mjs        point a spec at a package: seam, allowed paths, base tree, baseline
@@ -504,7 +509,7 @@ evidence/in-repo-ufo/, evidence/in-repo-pathe/  the repository arm on unjs/ufo a
 evidence/seams.mjs  black-box seams: patch-apply as a command against git apply, the HTTP spec, selftests (evidence/seams/)
 evidence/languages.mjs  Go and Rust modules end to end; commands and services in Python, Go and Rust: selftest, ports, git oracle (evidence/languages/)
 
-~/.independent-tests/   INDEPENDENT_TESTS_HOME (INDEPENDENT_TESTS_SPECS, _RESULTS move those)
+~/.duediligence/   DUEDILIGENCE_HOME (DUEDILIGENCE_SPECS, _RESULTS move those)
   specs/<slug>/     spec.md, ticket.md, confirming.json, confirmed.json, skeleton/, tests/, reference/
   runs/             transcripts, diffs, submissions, grade.json
   results.jsonl     one line per graded run
@@ -513,7 +518,7 @@ evidence/languages.mjs  Go and Rust modules end to end; commands and services in
 ```
 
 A development checkout keeps its own `specs/`, `runs/` and `results.jsonl` with
-`INDEPENDENT_TESTS_HOME=.`.
+`DUEDILIGENCE_HOME=.`.
 
 </details>
 
@@ -526,6 +531,6 @@ A development checkout keeps its own `specs/`, `runs/` and `results.jsonl` with
     <a href="RESULTS.md">RESULTS.md</a> ·
     <a href="AGENTS.md">AGENTS.md</a> ·
     <a href="SKILL.md">SKILL.md</a> ·
-    <a href="https://github.com/lunox-work/independent-tests/issues">Issues</a>
+    <a href="https://github.com/lunox-work/duediligence/issues">Issues</a>
   </sub>
 </p>

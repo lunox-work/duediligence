@@ -4,7 +4,7 @@
 // commit of a repository and the package files it changed: base is the
 // parent commit, the ticket is the commit message, quoted, and the spec is
 // drafted from it at base by a blind session that never sees the diff.
-// Its specs live in evidence/in-repo/specs/ (INDEPENDENT_TESTS_SPECS), its
+// Its specs live in evidence/in-repo/specs/ (DUEDILIGENCE_SPECS), its
 // graded runs in evidence/in-repo/results.jsonl, and every step's record in
 // evidence/in-repo.jsonl, one line per case and step, newest wins.
 //
@@ -59,9 +59,9 @@ const CASES_ARG = (() => {
 })();
 const SET = CASES_ARG === null ? join(HERE, "in-repo") : dirname(CASES_ARG);
 // Runs stay in this checkout's runs/, beside the evidence they back.
-process.env.INDEPENDENT_TESTS_HOME ??= join(HERE, "..");
-process.env.INDEPENDENT_TESTS_SPECS ??= join(SET, "specs");
-process.env.INDEPENDENT_TESTS_RESULTS ??= join(SET, "results.jsonl");
+process.env.DUEDILIGENCE_HOME ??= join(HERE, "..");
+process.env.DUEDILIGENCE_SPECS ??= join(SET, "specs");
+process.env.DUEDILIGENCE_RESULTS ??= join(SET, "results.jsonl");
 const { detect } = await import("../bin/fit.mjs");
 const lib = await import("../bin/lib.mjs");
 const {

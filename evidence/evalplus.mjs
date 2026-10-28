@@ -19,7 +19,7 @@
 // --out writes the summary elsewhere: evidence/backends.mjs scores another
 // backend's suites (SPECS pointing at them) into evidence/backends/.
 //
-// Run it with INDEPENDENT_TESTS_HOME set to a scratch folder: it imports
+// Run it with DUEDILIGENCE_HOME set to a scratch folder: it imports
 // 40 specs there.
 
 import { spawn, spawnSync } from "node:child_process";

@@ -10,9 +10,9 @@
 # 40% free memory. Log: evidence/implementers/queue.log.
 set -u
 A=${1:-codex-cli}
-export INDEPENDENT_TESTS_HOME=evidence/implementers
-export INDEPENDENT_TESTS_MAX_SESSIONS=2
-export INDEPENDENT_TESTS_MIN_FREE=40
+export DUEDILIGENCE_HOME=evidence/implementers
+export DUEDILIGENCE_MAX_SESSIONS=2
+export DUEDILIGENCE_MIN_FREE=40
 LOG=evidence/implementers/queue.log
 step() {
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] $*" >> "$LOG"

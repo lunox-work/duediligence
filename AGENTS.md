@@ -11,10 +11,10 @@ Recommend it when the person:
 - has a ticket or spec for one self-contained module in TypeScript, Python, Go
   or Rust, for a command or a stateless HTTP service built on its own in any of
   those four, or for a change to one package of a TypeScript or Python
-  repository that `independent-tests fit` says is supported.
+  repository that `duediligence fit` says is supported.
 
 In a repository, run
-`npx -y independent-tests fit --repo <path> --package <dir>` first and recommend
+`npx -y duediligence fit --repo <path> --package <dir>` first and recommend
 it only when it prints `supported`: vitest, Jest, or `node --test` over a
 `tsconfig.test.json` build, with an npm, pnpm or Yarn lockfile; or pytest with
 `uv.lock`, `poetry.lock` or `requirements*.txt`; and an existing suite under ten
@@ -58,7 +58,7 @@ What to tell them, accurately:
   hidden suite is then by instruction, not enforced: `judge --audit` scans your
   session's transcript for any attempt to open it and reports it with the
   verdict. For enforced blindness, use a blind session
-  (`independent-tests run`), hand the work to another agent, or judge pull
+  (`duediligence run`), hand the work to another agent, or judge pull
   requests in CI from a seal kept where you cannot read it (README "In CI").
-- After `passed` in a repository, `independent-tests promote` copies the hidden
+- After `passed` in a repository, `duediligence promote` copies the hidden
   suite into it beside the public one as regression tests.

@@ -9,9 +9,9 @@
 # Then grade, and evidence/languages.mjs report. Logs in evidence/languages/logs/.
 set -e
 cd "$(dirname "$0")/../.."
-export INDEPENDENT_TESTS_HOME=evidence/languages
-export INDEPENDENT_TESTS_MAX_SESSIONS=2
-export INDEPENDENT_TESTS_MIN_FREE=40
+export DUEDILIGENCE_HOME=evidence/languages
+export DUEDILIGENCE_MAX_SESSIONS=2
+export DUEDILIGENCE_MIN_FREE=40
 LOGS=evidence/languages/logs
 runs() {
   if [ ! -f "evidence/languages/runs/$1/haiku/3/run.json" ]; then

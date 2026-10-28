@@ -19,8 +19,8 @@
 // pull request's base: the merge ref runs that workflow alone, and the
 // judge, given the head commit, sees no workflow change.
 //
-// `judge` runs bin/ci.mjs per case and arm in a fresh INDEPENDENT_TESTS_HOME
-// with no INDEPENDENT_TESTS_SPECS, the package and the seal only, as a CI
+// `judge` runs bin/ci.mjs per case and arm in a fresh DUEDILIGENCE_HOME
+// with no DUEDILIGENCE_SPECS, the package and the seal only, as a CI
 // box would, writing the Checks API body to evidence/ci/checks/<slug>.json,
 // the log to evidence/ci/logs/<slug>.log and a ledger line to
 // evidence/ci/ledger.jsonl (newest per slug wins). `leaks` greps every log,
@@ -36,8 +36,8 @@ import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
-process.env.INDEPENDENT_TESTS_HOME ??= ROOT;
-process.env.INDEPENDENT_TESTS_SPECS ??= join(HERE, "in-repo", "specs");
+process.env.DUEDILIGENCE_HOME ??= ROOT;
+process.env.DUEDILIGENCE_SPECS ??= join(HERE, "in-repo", "specs");
 const { HARNESS_FILES, args, log, pool, readJson, specDir, toolchainOf } = await import("../bin/lib.mjs");
 
 const OUT = join(HERE, "ci");
@@ -87,7 +87,7 @@ function commitOver(repo, parent, edits, message) {
     const lines = edits.map((edit) => edit.line).join("\n");
     if (lines !== "") git(repo, ["update-index", "--index-info"], { env, input: `${lines}\n` });
     const tree = git(repo, ["write-tree"], { env });
-    const fixed = { GIT_AUTHOR_NAME: "independent-tests", GIT_AUTHOR_EMAIL: "independent-tests@localhost", GIT_AUTHOR_DATE: "2026-10-26T00:00:00Z" };
+    const fixed = { GIT_AUTHOR_NAME: "duediligence", GIT_AUTHOR_EMAIL: "duediligence@localhost", GIT_AUTHOR_DATE: "2026-10-26T00:00:00Z" };
     return git(repo, ["commit-tree", tree, "-p", parent, "-m", message], {
       env: { ...process.env, ...fixed, GIT_COMMITTER_NAME: fixed.GIT_AUTHOR_NAME, GIT_COMMITTER_EMAIL: fixed.GIT_AUTHOR_EMAIL, GIT_COMMITTER_DATE: fixed.GIT_AUTHOR_DATE },
     });
@@ -103,13 +103,13 @@ function branches(repo) {
     const code = codeChanges(repo, item).map(({ path, removed }) => ({
       line: removed ? `0 ${"0".repeat(40)}\t${path}` : git(repo, ["ls-tree", item.commit, "--", path]),
     }));
-    const head = commitOver(repo, parent, code, `${item.subject}\n\nThe change to ${allowedOf(item).join(", ")} only (independent-tests CI fixture).`);
+    const head = commitOver(repo, parent, code, `${item.subject}\n\nThe change to ${allowedOf(item).join(", ")} only (duediligence CI fixture).`);
     const workflows = git(repo, ["ls-tree", "--name-only", parent, ".github/workflows/"]).split("\n").filter(Boolean);
     const base = commitOver(
       repo,
       parent,
-      [...workflows.map((path) => ({ line: `0 ${"0".repeat(40)}\t${path}` })), { line: `100644 blob ${workflowBlob}\t.github/workflows/independent-tests.yml` }],
-      "ci: judge pull requests with independent-tests only",
+      [...workflows.map((path) => ({ line: `0 ${"0".repeat(40)}\t${path}` })), { line: `100644 blob ${workflowBlob}\t.github/workflows/duediligence.yml` }],
+      "ci: judge pull requests with duediligence only",
     );
     git(repo, ["update-ref", `refs/heads/case/${item.slug}`, head]);
     git(repo, ["update-ref", `refs/heads/base/${item.slug}`, base]);
@@ -135,10 +135,10 @@ function judgeOne(item, arm, { clone, seals, home, work }) {
   for (const folder of ["checks", "logs", "records", "summaries"]) mkdirSync(join(OUT, folder), { recursive: true });
   const summary = join(OUT, "summaries", `${slug}.md`);
   rmSync(summary, { force: true });
-  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith("INDEPENDENT_TESTS_") && !key.startsWith("GITHUB_") && !/TOKEN/i.test(key)));
-  Object.assign(env, { INDEPENDENT_TESTS_HOME: home, ...(work ? { INDEPENDENT_TESTS_WORK: work } : {}), GITHUB_STEP_SUMMARY: summary });
+  const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith("DUEDILIGENCE_") && !key.startsWith("GITHUB_") && !/TOKEN/i.test(key)));
+  Object.assign(env, { DUEDILIGENCE_HOME: home, ...(work ? { DUEDILIGENCE_WORK: work } : {}), GITHUB_STEP_SUMMARY: summary });
   const argv = [join(ROOT, "bin", "cli.mjs"), "ci", "--seal", join(seals, `${slug}.seal.gz`), "--repo", clone, "--ref", head];
-  argv.push("--name", `independent-tests (${arm})`, "--out", join(OUT, "checks", `${slug}.json`), "--record", join(OUT, "records", `${slug}.json`));
+  argv.push("--name", `duediligence (${arm})`, "--out", join(OUT, "checks", `${slug}.json`), "--record", join(OUT, "records", `${slug}.json`));
   return new Promise((done) => {
     const started = Date.now();
     const child = spawn(process.execPath, argv, { env, cwd: clone });

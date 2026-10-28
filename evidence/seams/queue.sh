@@ -8,7 +8,7 @@
 # evidence/seams.json. Logs in evidence/seams/logs/.
 set -e
 cd "$(dirname "$0")/../.."
-export INDEPENDENT_TESTS_HOME=evidence/seams
+export DUEDILIGENCE_HOME=evidence/seams
 SLUG=csv-export-http
 # --accept-open: the hidden writer listed one open question (whether an error
 # body may hold keys beyond error and id; the public suite requires exactly

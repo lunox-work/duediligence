@@ -40,7 +40,7 @@ const SKIPPED = new Set(["skipped", "pending", "todo", "disabled"]);
 
 /** One run over every named file: the report's entries by path relative to the package, or the run's output. */
 function report() {
-  const scratch = mkdtempSync(join(realpathSync(tmpdir()), "independent-tests-jest-"));
+  const scratch = mkdtempSync(join(realpathSync(tmpdir()), "duediligence-jest-"));
   const outputFile = join(scratch, "report.json");
   try {
     // Under guard.mjs (shared.mjs `guardedSync`): the heap cap on every node

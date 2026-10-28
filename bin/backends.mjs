@@ -29,7 +29,7 @@
 //   (a Python venv linked to the host interpreter, a repository base with
 //   node_modules built for this OS) that a Linux container could not run,
 //   and one sandbox over the whole process is simpler to check than two.
-//   Model: a non-Claude `model`, else INDEPENDENT_TESTS_CODEX_MODEL, else
+//   Model: a non-Claude `model`, else DUEDILIGENCE_CODEX_MODEL, else
 //   the person's ~/.codex/config.toml `model` and reasoning effort. Billing
 //   is the Codex subscription, so costUsd is null. A usage or rate limit is
 //   reported as apiError `usage_limit_reached`, which the callers halt on.
@@ -39,7 +39,7 @@
 //   and Grep. The file tools resolve every path inside the workdir (real
 //   paths, so no symlink leaves it); Bash runs under `placement` without
 //   network. Cost from usage at list prices, stopped at the kind's budget.
-// - exec: any command (`command`, INDEPENDENT_TESTS_EXEC or toolchain.json
+// - exec: any command (`command`, DUEDILIGENCE_EXEC or toolchain.json
 //   `exec`) run by sh in the workdir under `placement`, the prompt on its
 //   stdin; its output is the transcript's one assistant message.
 //
@@ -161,7 +161,7 @@ export function placementPaths({ cwd, state, read = [] }) {
     ...(process.platform === "darwin" ? ["/Volumes"] : []),
   ];
   const deny = [...new Set(denied.map(real))].filter((path) => path !== "/").sort();
-  const extra = (process.env.INDEPENDENT_TESTS_SANDBOX_READ ?? "").split(":").filter(Boolean);
+  const extra = (process.env.DUEDILIGENCE_SANDBOX_READ ?? "").split(":").filter(Boolean);
   // Only what a denied folder would hide needs naming; anything else is readable already.
   const readable = [...new Set([...read, prefixOf(process.execPath), prefixOf(PYTHON), ...extra].filter(Boolean).map(real))]
     .filter((path) => deny.some((folder) => inside(path, folder)))
@@ -329,7 +329,7 @@ async function codexCli({ cwd, text, transcript, kind, resume, model, chain }) {
   const codexHome = join(state, "codex");
   mkdirSync(codexHome, { recursive: true });
   const settings = codexSettings();
-  const chosen = (model && !/^claude/.test(model) ? model : null) ?? process.env.INDEPENDENT_TESTS_CODEX_MODEL ?? settings.model;
+  const chosen = (model && !/^claude/.test(model) ? model : null) ?? process.env.DUEDILIGENCE_CODEX_MODEL ?? settings.model;
   // A writer gets the shell and file edits only: no web search, ChatGPT
   // apps (the person's connected accounts), plugins, browser, computer use,
   // hooks, sub-agents or image generation.
@@ -456,18 +456,18 @@ async function codexCli({ cwd, text, transcript, kind, resume, model, chain }) {
 
 async function execBackend({ cwd, text, transcript, kind, resume, chain, command }) {
   const { minutes } = limits(kind, chain);
-  const line = command ?? process.env.INDEPENDENT_TESTS_EXEC ?? chain?.exec;
+  const line = command ?? process.env.DUEDILIGENCE_EXEC ?? chain?.exec;
   const write = transcriptWriter(transcript, resume);
   const sessionId = resume ?? randomUUID();
   const base = { sessionId, model: null, costUsd: null, turns: 1, apiError: null, backend: "exec" };
   if (typeof line !== "string" || line === "") {
-    const finalText = "No command: set INDEPENDENT_TESTS_EXEC or toolchain.json `exec`.";
+    const finalText = "No command: set DUEDILIGENCE_EXEC or toolchain.json `exec`.";
     write({ type: "result", subtype: "error_during_execution", is_error: true, session_id: sessionId, result: finalText, backend: "exec" });
     return { ...base, ok: false, exitCode: null, timedOut: false, durationMs: 0, subtype: "error_during_execution", finalText, stderr: "" };
   }
   const state = stateOf(transcript, resume);
   const [bin, argv] = placement(shellBin("sh"), ["-c", line], { cwd, state });
-  const passed = (process.env.INDEPENDENT_TESTS_EXEC_ENV ?? "").split(",").filter((key) => key && process.env[key] !== undefined);
+  const passed = (process.env.DUEDILIGENCE_EXEC_ENV ?? "").split(",").filter((key) => key && process.env[key] !== undefined);
   const env = childEnv(state, Object.fromEntries(passed.map((key) => [key, process.env[key]])));
   write({ type: "system", subtype: "init", session_id: sessionId, model: null, cwd, backend: "exec", command: line });
   const slot = await takeSlot();
@@ -647,7 +647,7 @@ const systemPrompt = (cwd) =>
 
 async function anthropicApi({ cwd, text, transcript, kind, resume, model, maxTurns, chain }) {
   const { minutes, budgetUsd } = limits(kind, chain);
-  const chosen = model && /^claude/.test(model) ? model : (process.env.INDEPENDENT_TESTS_MODEL ?? DEFAULT_MODEL);
+  const chosen = model && /^claude/.test(model) ? model : (process.env.DUEDILIGENCE_MODEL ?? DEFAULT_MODEL);
   const state = stateOf(transcript, resume);
   const write = transcriptWriter(transcript, resume);
   const saved = join(state, "messages.json");

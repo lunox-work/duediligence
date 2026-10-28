@@ -67,24 +67,24 @@ const envPath = (value) => {
   return join(realpathSync(at), relative(at, path));
 };
 /**
- * The person's data: INDEPENDENT_TESTS_HOME, default ~/.independent-tests/.
+ * The person's data: DUEDILIGENCE_HOME, default ~/.duediligence/.
  * Under it: specs/<slug>/ (spec, suites, reference: the hidden suites at
  * rest), runs/ (transcripts, submissions, grades), results.jsonl, and
  * template/<lock hash>/ (the installed toolchain, `ensureTemplate`).
- * INDEPENDENT_TESTS_SPECS and INDEPENDENT_TESTS_RESULTS move those two
+ * DUEDILIGENCE_SPECS and DUEDILIGENCE_RESULTS move those two
  * anywhere (evidence/in-repo.mjs points them into evidence/in-repo/).
  * A development checkout keeps everything in place with
- * INDEPENDENT_TESTS_HOME=<checkout>. Every session's deny rules cover HOME,
+ * DUEDILIGENCE_HOME=<checkout>. Every session's deny rules cover HOME,
  * SPECS, RUNS and RESULTS wherever they are (`PRIVATE`, `sessionSettings`).
  */
-export const HOME = envPath(process.env.INDEPENDENT_TESTS_HOME ?? join(homedir(), ".independent-tests"));
-export const SPECS = process.env.INDEPENDENT_TESTS_SPECS ? envPath(process.env.INDEPENDENT_TESTS_SPECS) : join(HOME, "specs");
+export const HOME = envPath(process.env.DUEDILIGENCE_HOME ?? join(homedir(), ".duediligence"));
+export const SPECS = process.env.DUEDILIGENCE_SPECS ? envPath(process.env.DUEDILIGENCE_SPECS) : join(HOME, "specs");
 export const PROMPTS = join(ROOT, "prompts");
 export const RUNNERS = join(ROOT, "bin", "runners");
 export const RUNS = join(HOME, "runs");
-/** One line per graded run: HOME/results.jsonl, or INDEPENDENT_TESTS_RESULTS. */
-export const RESULTS = process.env.INDEPENDENT_TESTS_RESULTS
-  ? envPath(process.env.INDEPENDENT_TESTS_RESULTS)
+/** One line per graded run: HOME/results.jsonl, or DUEDILIGENCE_RESULTS. */
+export const RESULTS = process.env.DUEDILIGENCE_RESULTS
+  ? envPath(process.env.DUEDILIGENCE_RESULTS)
   : join(HOME, "results.jsonl");
 export const TRANSCRIPTS = join(homedir(), ".claude", "projects");
 /** The bundled specs (ROOT/specs/: duration-parse, the README's example). */
@@ -93,7 +93,7 @@ export const BUNDLED_SPECS = join(ROOT, "specs");
 // realpathSync.native: on Windows it also expands 8.3 short names (RUNNER~1) in TEMP.
 const realPath = WINDOWS ? realpathSync.native : realpathSync;
 const workBase =
-  process.env.INDEPENDENT_TESTS_WORK ?? join(realPath(tmpdir()), "independent-tests-work");
+  process.env.DUEDILIGENCE_WORK ?? join(realPath(tmpdir()), "duediligence-work");
 mkdirSync(workBase, { recursive: true });
 export const WORK_ROOT = realPath(workBase);
 /**
@@ -109,7 +109,7 @@ export const PRIVATE = [...new Set([ROOT, HOME, SPECS, RUNS])]
   .sort();
 for (const path of PRIVATE)
   if (inside(WORK_ROOT, path) || inside(path, WORK_ROOT))
-    throw new Error(`INDEPENDENT_TESTS_WORK (${WORK_ROOT}) and ${path} overlap; move one.`);
+    throw new Error(`DUEDILIGENCE_WORK (${WORK_ROOT}) and ${path} overlap; move one.`);
 
 /**
  * A fresh home gets the bundled specs: the first script to run with the
@@ -118,7 +118,7 @@ for (const path of PRIVATE)
  * person's own copy and never write into the package. A slug removed from
  * HOME/specs/ stays removed: HOME/bundled.json lists what was copied once.
  */
-if (process.env.INDEPENDENT_TESTS_SPECS === undefined && SPECS !== BUNDLED_SPECS && existsSync(BUNDLED_SPECS)) {
+if (process.env.DUEDILIGENCE_SPECS === undefined && SPECS !== BUNDLED_SPECS && existsSync(BUNDLED_SPECS)) {
   const record = join(HOME, "bundled.json");
   const copied = existsSync(record) ? JSON.parse(readFileSync(record, "utf8")) : [];
   const missing = readdirSync(BUNDLED_SPECS).filter(
@@ -151,7 +151,7 @@ export const TEMPLATE = existsSync(join(TEMPLATE_SOURCE, "node_modules"))
     );
 /**
  * The environment for a nested `npx` install: without the npm_* variables
- * an outer `npx independent-tests` sets (npm_config_package among them),
+ * an outer `npx duediligence` sets (npm_config_package among them),
  * which would make the inner npx run its package spec as the command.
  */
 export const installEnv = (extra = {}) => ({
@@ -192,9 +192,9 @@ export function ensureTemplate() {
 }
 /**
  * The interpreter the `python` toolchain and Python repositories run on:
- * INDEPENDENT_TESTS_PYTHON, default `python3` on PATH (`python` on Windows).
+ * DUEDILIGENCE_PYTHON, default `python3` on PATH (`python` on Windows).
  */
-export const PYTHON = process.env.INDEPENDENT_TESTS_PYTHON ?? DEFAULT_PYTHON;
+export const PYTHON = process.env.DUEDILIGENCE_PYTHON ?? DEFAULT_PYTHON;
 const PYTHON_SOURCE = join(ROOT, "template-python");
 /** The tree's own interpreter, which holds the pinned pytest: relative to a staged Python tree. */
 export const VENV_PYTHON = venvBin("python");
@@ -246,7 +246,7 @@ function toolchainTree(name, source, version, install) {
 export function ensurePython() {
   if (pythonTrees.has(PYTHON)) return pythonTrees.get(PYTHON);
   const probe = spawnSync(PYTHON, ["-c", "import sys; print(sys.version); print(sys.executable)"], { encoding: "utf8" });
-  if (probe.status !== 0) throw new Error(`No Python at ${PYTHON}: set INDEPENDENT_TESTS_PYTHON to a python3.`);
+  if (probe.status !== 0) throw new Error(`No Python at ${PYTHON}: set DUEDILIGENCE_PYTHON to a python3.`);
   const dest = toolchainTree("python", PYTHON_SOURCE, probe.stdout.trim(), (partial) => {
     const step = (bin, argv) => {
       const out = spawnSync(bin, argv, { cwd: partial, encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
@@ -691,7 +691,7 @@ export function commandOf(chain, suite) {
     const plain = commandOf({ ...chain, boundary: null }, suite);
     const cd = /^cd [^&]+ && /.exec(plain)?.[0] ?? "";
     const up = chain.package === "." ? "" : `${posix.relative(chain.package, ".")}/`;
-    return `${cd}node ${up}.git/independent-tests/boundary.mjs -- sh -c '${plain.slice(cd.length).replace(/'/g, "'\\''")}'`;
+    return `${cd}node ${up}.git/duediligence/boundary.mjs -- sh -c '${plain.slice(cd.length).replace(/'/g, "'\\''")}'`;
   }
   const inPackage = (path) => posix.relative(chain.package, path) || ".";
   const folder = { public: chain.publicDir, own: chain.publicDir, private: chain.hiddenDir, existing: chain.testDir }[suite];
@@ -815,7 +815,7 @@ export function limits(kind, chain = TOOLCHAINS.node) {
   };
 }
 export const TOOLS = ["Bash", "Read", "Edit", "Write", "Glob", "Grep"];
-/** Every session's model unless INDEPENDENT_TESTS_MODEL or a run's --model says otherwise. */
+/** Every session's model unless DUEDILIGENCE_MODEL or a run's --model says otherwise. */
 export const DEFAULT_MODEL = "claude-opus-5-5";
 /** A run folder's name for a model: its family, or the --model value as given. */
 export const variantOf = (model) =>
@@ -1131,8 +1131,8 @@ export const baseTree = (config) =>
     BASES,
     `${basename(config.repo)}-${config.base}${(config.buildFirst ?? []).length === 0 ? "" : `-${sha256(JSON.stringify(config.buildFirst)).slice(0, 8)}`}`,
   );
-const BASE_RECORD = join(".git", "independent-tests-base.json");
-const GIT_IDENTITY = ["-c", "user.name=independent-tests", "-c", "user.email=independent-tests@localhost"];
+const BASE_RECORD = join(".git", "duediligence-base.json");
+const GIT_IDENTITY = ["-c", "user.name=duediligence", "-c", "user.email=duediligence@localhost"];
 
 /** The prepared base tree of `config` (toolchain.json's fields), preparing it if it is missing. */
 export function prepareBase(config) {
@@ -1235,7 +1235,7 @@ export function stage(dir, slug, parts = {}) {
     if (parts.publicTests) copy(join(spec, "tests", "public"), join(dir, chain.publicDir));
     if (parts.hiddenTests) copy(join(spec, "tests", "private"), join(dir, chain.hiddenDir));
     // Inside .git, which no manifest lists, so it is never a change.
-    if (chain.boundary) writeBoundary(join(dir, ".git", "independent-tests"), chain);
+    if (chain.boundary) writeBoundary(join(dir, ".git", "duediligence"), chain);
     return dir;
   }
   copy(chain.ensure !== undefined ? chain.ensure() : chain.template === TEMPLATE ? ensureTemplate() : chain.template, dir);
@@ -1416,7 +1416,7 @@ export function findClaude() {
 export function claudeBin() {
   const found = findClaude();
   if (found === null)
-    throw new Error("No claude CLI: set CLAUDE_BIN, put claude on PATH, or install the VS Code extension. Or pick another backend: INDEPENDENT_TESTS_BACKEND=codex-cli or anthropic-api.");
+    throw new Error("No claude CLI: set CLAUDE_BIN, put claude on PATH, or install the VS Code extension. Or pick another backend: DUEDILIGENCE_BACKEND=codex-cli or anthropic-api.");
   return found;
 }
 /** How to start `claude` with `argv`: [bin, argv]; a cli.js runs on this Node. */
@@ -1478,14 +1478,14 @@ export function sessionSettings(cwd, chain) {
 
 /**
  * Every session of every script here takes a slot first: at most
- * INDEPENDENT_TESTS_MAX_SESSIONS at once (default 3), and none starts while
- * less than INDEPENDENT_TESTS_MIN_FREE percent of memory is free (default
+ * DUEDILIGENCE_MAX_SESSIONS at once (default 3), and none starts while
+ * less than DUEDILIGENCE_MIN_FREE percent of memory is free (default
  * 25): macOS's `memory_pressure`, elsewhere the OS's available memory. A
  * slot is a file under WORK_ROOT/slots holding its owner's pid; a dead
  * owner's slot is taken back.
  */
-const MAX_SESSIONS = Number(process.env.INDEPENDENT_TESTS_MAX_SESSIONS ?? 3);
-const MIN_FREE = Number(process.env.INDEPENDENT_TESTS_MIN_FREE ?? 25);
+const MAX_SESSIONS = Number(process.env.DUEDILIGENCE_MAX_SESSIONS ?? 3);
+const MIN_FREE = Number(process.env.DUEDILIGENCE_MIN_FREE ?? 25);
 const SLOTS = join(WORK_ROOT, "slots");
 export function freeMemoryPercent() {
   if (process.platform !== "darwin") return Math.round((freemem() / totalmem()) * 100);
@@ -1530,14 +1530,14 @@ export const BACKENDS = ["claude-cli", "anthropic-api", "codex-cli", "exec"];
 /**
  * A session's backend: `backend` when the caller names one (a run's
  * --backend, the referee's), else for the writers and the reference
- * INDEPENDENT_TESTS_BACKEND, then toolchain.json `backend`, then
+ * DUEDILIGENCE_BACKEND, then toolchain.json `backend`, then
  * `defaultBackend`. The implementing agent (`kind: "agent"`) skips the
  * writers' choice unless its caller names one: a spec's writer backend is
  * not its implementer.
  */
 export function backendOf({ backend, kind, chain } = {}) {
   const chosen =
-    backend ?? (kind === "agent" ? undefined : (process.env.INDEPENDENT_TESTS_BACKEND || chain?.backend)) ?? defaultBackend();
+    backend ?? (kind === "agent" ? undefined : (process.env.DUEDILIGENCE_BACKEND || chain?.backend)) ?? defaultBackend();
   if (!BACKENDS.includes(chosen)) throw new Error(`No backend ${chosen} (${BACKENDS.join(", ")})`);
   return chosen;
 }
@@ -1565,9 +1565,9 @@ export function defaultBackend() {
           : null;
   if (defaultChosen === null)
     throw new Error(
-      "No agent to run sessions on. Any one of: Claude Code signed in (`claude`, or CLAUDE_BIN), a Codex login (`codex login`, or OPENAI_API_KEY), or ANTHROPIC_API_KEY. INDEPENDENT_TESTS_BACKEND picks one when you have several.",
+      "No agent to run sessions on. Any one of: Claude Code signed in (`claude`, or CLAUDE_BIN), a Codex login (`codex login`, or OPENAI_API_KEY), or ANTHROPIC_API_KEY. DUEDILIGENCE_BACKEND picks one when you have several.",
     );
-  if (defaultChosen !== "claude-cli") log(`no claude CLI found: sessions run on ${defaultChosen} (INDEPENDENT_TESTS_BACKEND picks another)`);
+  if (defaultChosen !== "claude-cli") log(`no claude CLI found: sessions run on ${defaultChosen} (DUEDILIGENCE_BACKEND picks another)`);
   return defaultChosen;
 }
 /**
@@ -1688,7 +1688,7 @@ export async function claudeCli({ cwd, text, transcript, kind, resume, model, ma
     "--settings",
     JSON.stringify(sessionSettings(cwd, chain)),
     "--model",
-    model ?? process.env.INDEPENDENT_TESTS_MODEL ?? DEFAULT_MODEL,
+    model ?? process.env.DUEDILIGENCE_MODEL ?? DEFAULT_MODEL,
     ...(resume ? ["--resume", resume] : []),
     ...(maxTurns ? ["--max-turns", String(maxTurns)] : []),
   ];

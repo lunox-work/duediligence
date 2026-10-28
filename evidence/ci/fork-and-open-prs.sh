@@ -7,8 +7,8 @@
 #   SEALS_TOKEN=<fine-grained PAT: contents read on $OWNER/sandbox-factory-seals> \
 #   evidence/ci/fork-and-open-prs.sh <scratch clone with base/* and case/* branches> <seals dir>
 #
-# Before it: push this package to github.com/$OWNER/independent-tests (the
-# workflow calls $OWNER/independent-tests/.github/workflows/judge.yml@main),
+# Before it: push this package to github.com/$OWNER/duediligence (the
+# workflow calls $OWNER/duediligence/.github/workflows/judge.yml@main),
 # and run, from the package root,
 #   node evidence/ci.mjs branches --clone <clone>
 #   node evidence/ci.mjs seal --seals <seals dir>
@@ -20,7 +20,7 @@
 #      Actions disabled while branches are pushed (the fork's own workflows
 #      must not run on them);
 #   2. pushes ci/main (the newest base/* commit: one workflow,
-#      independent-tests.yml) as the fork's default branch, so
+#      duediligence.yml) as the fork's default branch, so
 #      pull_request_target and scheduled workflows find nothing to run,
 #      then every base/<slug> and case/<slug>;
 #   3. creates the private $OWNER/sandbox-factory-seals and pushes the 22
@@ -43,7 +43,7 @@ SLUGS=$(node -e 'for (const c of require(process.argv[1])) console.log(c.slug)' 
 gh repo fork "$UPSTREAM" --clone=false --default-branch-only
 gh api -X PUT "repos/$FORK/actions/permissions" -F enabled=false
 
-# 2. Branches. ci/main carries only the independent-tests workflow.
+# 2. Branches. ci/main carries only the duediligence workflow.
 git -C "$CLONE" remote remove fork 2>/dev/null || true
 git -C "$CLONE" remote add fork "git@github.com:$FORK.git"
 git -C "$CLONE" branch -f ci/main "base/$(echo "$SLUGS" | tail -n 1)"
@@ -54,7 +54,7 @@ for slug in $SLUGS; do
 done
 
 # 3. The private seal store.
-gh repo create "$SEALS_REPO" --private --description "independent-tests seals for the sandbox-factory CI fixture"
+gh repo create "$SEALS_REPO" --private --description "duediligence seals for the sandbox-factory CI fixture"
 store="$(mktemp -d)"
 git -C "$store" init -q -b main
 for slug in $SLUGS; do
@@ -63,7 +63,7 @@ for slug in $SLUGS; do
   cp "$SEALS/$slug.seal.gz" "$store/seals/case/$slug/drafted.seal.gz"
 done
 git -C "$store" add -A
-git -C "$store" -c user.name=independent-tests -c user.email=independent-tests@localhost commit -qm "seals for the 11 cases, both arms"
+git -C "$store" -c user.name=duediligence -c user.email=duediligence@localhost commit -qm "seals for the 11 cases, both arms"
 git -C "$store" push -q "git@github.com:$SEALS_REPO.git" main
 rm -rf "$store"
 
@@ -75,6 +75,6 @@ gh api -X PUT "repos/$FORK/actions/permissions" -F enabled=true -f allowed_actio
 for slug in $SLUGS; do
   gh pr create --repo "$FORK" --base "base/$slug" --head "case/$slug" \
     --title "case: $slug" \
-    --body "The commit's change inside its allowed paths, replayed at its parent (independent-tests evidence/in-repo/cases.json). Two checks judge it from sealed hidden suites: the confirmed spec's and the drafted spec's."
+    --body "The commit's change inside its allowed paths, replayed at its parent (duediligence evidence/in-repo/cases.json). Two checks judge it from sealed hidden suites: the confirmed spec's and the drafted spec's."
 done
 echo "Opened $(echo "$SLUGS" | wc -l | tr -d ' ') pull requests on $FORK; checks: gh pr checks <n> --repo $FORK"

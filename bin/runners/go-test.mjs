@@ -27,7 +27,7 @@ const { suite, files, build: command = null, go = "go", testTimeoutMs = 20_000, 
   "node bin/runners/go-test.mjs '<json>'",
 );
 const root = realpathSync(process.cwd());
-const scratch = mkdtempSync(join(realpathSync(tmpdir()), "independent-tests-go-"));
+const scratch = mkdtempSync(join(realpathSync(tmpdir()), "duediligence-go-"));
 const env = { ...process.env, GOFLAGS: "-mod=mod", GOTOOLCHAIN: "local", GOCACHE: process.env.GOCACHE ?? join(scratch, "cache"), ...extra };
 const run = (bin, argv, options = {}) =>
   spawnSync(bin, argv, { cwd: root, encoding: "utf8", env, maxBuffer: 64 * 1024 * 1024, ...options });

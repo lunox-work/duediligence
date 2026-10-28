@@ -127,7 +127,7 @@ function lookups(line) {
     .sort();
 }
 
-/** The run judged by another folder's suites for the same slug (bin/judge.mjs --json, INDEPENDENT_TESTS_SPECS there). */
+/** The run judged by another folder's suites for the same slug (bin/judge.mjs --json, DUEDILIGENCE_SPECS there). */
 function secondSuite(line) {
   if (second === null) return null;
   if (readJson(join(second, line.spec, "calibration.json"), null)?.status !== "ok") return { verdict: null, reason: "no calibrated second suite" };
@@ -136,7 +136,7 @@ function secondSuite(line) {
     const record = join(scratch, "judged.json");
     const run = spawnSync(process.execPath, [join(ROOT, "bin", "judge.mjs"), line.spec, join(runOf(line), "submission", "src"), "--json", record], {
       encoding: "utf8",
-      env: { ...process.env, INDEPENDENT_TESTS_SPECS: second },
+      env: { ...process.env, DUEDILIGENCE_SPECS: second },
       maxBuffer: 64 * 1024 * 1024,
     });
     if (!existsSync(record)) return { verdict: null, reason: `${run.stderr}${run.stdout}`.trim().split("\n").at(-1) };

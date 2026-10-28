@@ -7,7 +7,7 @@
 //                   [--name <check name>] [--out <payload.json>] [--record <file>]
 //                   [--no-post] [--exit-zero]
 //
-// 1. A URL seal is fetched with INDEPENDENT_TESTS_SEAL_AUTH as the
+// 1. A URL seal is fetched with DUEDILIGENCE_SEAL_AUTH as the
 //    Authorization header, if set, into a temporary file.
 // 2. bin/judge.mjs --seal <file> --repo <checkout> --ref <rev> --json <tmp>
 //    runs with an environment stripped of tokens, secrets and the Actions
@@ -21,7 +21,7 @@
 //    change that were refused or outside the allowed paths. passed →
 //    success, anything else → failure. --out writes the Checks API body;
 //    $GITHUB_STEP_SUMMARY, when set, gets the summary.
-// 4. With a token (INDEPENDENT_TESTS_GITHUB_TOKEN or GITHUB_TOKEN) and
+// 4. With a token (DUEDILIGENCE_GITHUB_TOKEN or GITHUB_TOKEN) and
 //    GITHUB_REPOSITORY, and without --no-post, it POSTs the check run to
 //    $GITHUB_API_URL (default https://api.github.com); the job needs
 //    `checks: write`.
@@ -51,13 +51,13 @@ if (typeof options.seal !== "string") {
   process.exit(1);
 }
 
-const scratch = mkdtempSync(join(realpathSync(tmpdir()), "independent-tests-ci-"));
+const scratch = mkdtempSync(join(realpathSync(tmpdir()), "duediligence-ci-"));
 process.on("exit", () => rmSync(scratch, { recursive: true, force: true }));
 
 // 1. The seal.
 let seal = options.seal;
 if (/^https:\/\//.test(seal)) {
-  const auth = process.env.INDEPENDENT_TESTS_SEAL_AUTH;
+  const auth = process.env.DUEDILIGENCE_SEAL_AUTH;
   const response = await fetch(seal, { headers: auth ? { Authorization: auth } : {} });
   if (!response.ok) {
     console.error(`fetching the seal: HTTP ${response.status}`);
@@ -74,7 +74,7 @@ const git = (...args) => spawnSync("git", ["-C", checkout, ...args], { encoding:
 const ref = typeof options.ref === "string" ? options.ref : undefined;
 const headSha = repoMode ? git("rev-parse", `${ref ?? "HEAD"}^{commit}`).stdout?.trim() || null : null;
 const recordFile = join(scratch, "record.json");
-const SCRUB = /TOKEN|SECRET|PASSWORD|CREDENTIAL|^ACTIONS_|^INPUT_|^GITHUB_(STEP_SUMMARY|OUTPUT|ENV|PATH|STATE)$|^INDEPENDENT_TESTS_(SPECS|SEAL_AUTH)$/i;
+const SCRUB = /TOKEN|SECRET|PASSWORD|CREDENTIAL|^ACTIONS_|^INPUT_|^GITHUB_(STEP_SUMMARY|OUTPUT|ENV|PATH|STATE)$|^DUEDILIGENCE_(SPECS|SEAL_AUTH)$/i;
 const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !SCRUB.test(key)));
 const judgeArgs = [
   join(BIN, "judge.mjs"),
@@ -93,7 +93,7 @@ const record = existsSync(recordFile) ? JSON.parse(readFileSync(recordFile, "utf
 if (typeof options.record === "string" && record !== null) writeFileSync(resolve(options.record), `${JSON.stringify(record, null, 2)}\n`);
 
 // 3. The check, from the record alone.
-const name = typeof options.name === "string" ? options.name : "independent-tests";
+const name = typeof options.name === "string" ? options.name : "duediligence";
 const fraction = (count) => (count ? `${count.passed}/${count.total}` : "-");
 const list = (items, limit = 50) =>
   [...items.slice(0, limit).map((item) => `- \`${String(item).replace(/`/g, "'")}\``), ...(items.length > limit ? [`- … ${items.length - limit} more`] : [])].join("\n");
@@ -138,7 +138,7 @@ if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMM
 if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `conclusion=${payload.conclusion}\ntitle=${title.replace(/\n/g, " ")}\n`);
 
 // 4. The Checks API, only with a token.
-const token = process.env.INDEPENDENT_TESTS_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
+const token = process.env.DUEDILIGENCE_GITHUB_TOKEN || process.env.GITHUB_TOKEN;
 const repository = process.env.GITHUB_REPOSITORY;
 let postFailed = false;
 if (options["no-post"] !== true && token && repository && headSha) {

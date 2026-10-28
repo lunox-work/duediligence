@@ -1,4 +1,4 @@
-# independent-tests: results
+# duediligence: results
 
 What the method was measured to do. About 3,000 graded agent runs on 26
 TypeScript specs, 40 LiveCodeBench problems, 40 HumanEval+ tasks and a spec
@@ -282,7 +282,7 @@ resumes a set.
 
 The README's five-minute path, run 2026-10-26 on the CLI alone: the `npm pack`
 tarball in a fresh `node:22` container (Node 22.23.4), no checkout mounted, as
-the unprivileged `node` user, with the data in a fresh `~/.independent-tests/`.
+the unprivileged `node` user, with the data in a fresh `~/.duediligence/`.
 No model session.
 
 | step                                           | global install (package dir root-owned) |  `npx --package <tarball>` |
@@ -291,7 +291,7 @@ No model session.
 | toolchain installed on first use (npm 10.9.2)  |                                     yes |                        yes |
 | `judge` the handout's skeleton                 |                `incomplete`, 0/22, 0/39 |   `incomplete`, 0/22, 0/39 |
 | `judge` the reference                          |              **`passed`, 22/22, 39/39** | **`passed`, 22/22, 39/39** |
-| the clone URL and `npx independent-tests` line |                                 pending |                    pending |
+| the clone URL and `npx duediligence` line |                                 pending |                    pending |
 
 The last row waits on the repository being pushed and the package published;
 neither exists yet.
@@ -426,7 +426,7 @@ CI mode (`bin/seal.mjs`, `judge --seal`, `bin/ci.mjs`, `action.yml`,
 `.github/workflows/judge.yml`), checked 2026-10-26 on the 11 repository cases
 with no model and nothing pushed: each case's change inside its allowed paths as
 a branch on its parent commit in a scratch clone of sandbox-factory, both arms'
-specs sealed, and every branch judged by `independent-tests ci`, the script the
+specs sealed, and every branch judged by `duediligence ci`, the script the
 workflow runs, in a fresh home with no `specs/` and fresh base installs
 ([evidence/ci.mjs](evidence/ci.mjs), `evidence/ci/`).
 
@@ -537,7 +537,7 @@ Claude's (22/22, 39/39).
 
 Codex CLI 0.164.0 (`gpt-6.1-sol`, the person's Codex login) implemented ten of
 the archive's core specs five times each, 2026-10-26, each from a handout folder
-made by `independent-tests handout` (template, spec, skeleton, public suite and
+made by `duediligence handout` (template, spec, skeleton, public suite and
 BRIEF.md; nothing hidden) under `sandbox-exec` over that folder, and every run
 was graded by `bin/grade.mjs`
 ([evidence/implementers.mjs](evidence/implementers.mjs),

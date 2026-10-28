@@ -1,10 +1,10 @@
 # The fixture's caller workflow (evidence/ci.mjs `branches` puts it on every
 # base/<slug> branch of the sandbox-factory fork as
-# .github/workflows/independent-tests.yml). A pull request case/<slug> →
+# .github/workflows/duediligence.yml). A pull request case/<slug> →
 # base/<slug> gets two checks: the confirmed spec's and the drafted spec's,
 # each judged from its seal in the private seals repository at
 # seals/case/<slug>/<arm>.seal.gz (evidence/ci/fork-and-open-prs.sh).
-name: independent-tests
+name: duediligence
 on:
   pull_request:
     branches: ["base/**"]
@@ -19,11 +19,11 @@ jobs:
       contents: read
       checks: write
       actions: read
-    uses: feversoul/independent-tests/.github/workflows/judge.yml@main
+    uses: feversoul/duediligence/.github/workflows/judge.yml@main
     with:
       seal-repository: feversoul/sandbox-factory-seals
       seal-path: seals/${{ github.head_ref }}/${{ matrix.arm }}.seal.gz
-      check-name: independent-tests (${{ matrix.arm }})
+      check-name: duediligence (${{ matrix.arm }})
       fail-on-verdict: false
     secrets:
       seal-token: ${{ secrets.SEALS_TOKEN }}

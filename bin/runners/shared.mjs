@@ -19,27 +19,27 @@ export const OUTPUT_CHARS = 4_000;
 /**
  * The memory caps on every test process the node:test, pytest, vitest and
  * Jest runners start (guard.mjs says why; go and cargo are not capped
- * yet): a V8 heap of INDEPENDENT_TESTS_TEST_HEAP_MB (default 512, through
+ * yet): a V8 heap of DUEDILIGENCE_TEST_HEAP_MB (default 512, through
  * NODE_OPTIONS so node --test's, vitest's and Jest's workers get it too)
- * and a resident-memory ceiling of INDEPENDENT_TESTS_TEST_MAX_RSS_MB
+ * and a resident-memory ceiling of DUEDILIGENCE_TEST_MAX_RSS_MB
  * (default 1024) over the whole process group.
  */
-export const TEST_HEAP_MB = Number(process.env.INDEPENDENT_TESTS_TEST_HEAP_MB ?? 512);
-export const TEST_MAX_RSS_MB = Number(process.env.INDEPENDENT_TESTS_TEST_MAX_RSS_MB ?? 1024);
+export const TEST_HEAP_MB = Number(process.env.DUEDILIGENCE_TEST_HEAP_MB ?? 512);
+export const TEST_MAX_RSS_MB = Number(process.env.DUEDILIGENCE_TEST_MAX_RSS_MB ?? 1024);
 /**
- * Workers a vitest or Jest run may start (`--maxWorkers`, INDEPENDENT_TESTS_TEST_WORKERS,
+ * Workers a vitest or Jest run may start (`--maxWorkers`, DUEDILIGENCE_TEST_WORKERS,
  * default 2; a runner config's `maxWorkers: null` passes none): their pools
  * size themselves to the cores, and ten workers of a real package's suite
  * went over the group ceiling on their own.
  */
-export const TEST_WORKERS = Number(process.env.INDEPENDENT_TESTS_TEST_WORKERS ?? 2);
+export const TEST_WORKERS = Number(process.env.DUEDILIGENCE_TEST_WORKERS ?? 2);
 /**
- * The group ceiling for a whole vitest or Jest run (INDEPENDENT_TESTS_SUITE_MAX_RSS_MB,
+ * The group ceiling for a whole vitest or Jest run (DUEDILIGENCE_SUITE_MAX_RSS_MB,
  * default 3072): one run holds the runner, its transform cache and its
  * workers, each under the heap cap. sandbox-factory's apps/web suite (813
  * tests, jsdom) peaks at 2.2 GB on two workers and 2.0 GB on one.
  */
-export const SUITE_MAX_RSS_MB = Number(process.env.INDEPENDENT_TESTS_SUITE_MAX_RSS_MB ?? 3072);
+export const SUITE_MAX_RSS_MB = Number(process.env.DUEDILIGENCE_SUITE_MAX_RSS_MB ?? 3072);
 const GUARD = join(dirname(fileURLToPath(import.meta.url)), "guard.mjs");
 
 /**

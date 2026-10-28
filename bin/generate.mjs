@@ -23,9 +23,9 @@
 // public writes the public suite and no other step (a spec whose hidden
 // suite is an oracle's cases, evidence/backends.mjs `ladder`); a hidden
 // suite there is still removed as stale once the public suite is new. The
-// writers' backend is lib.mjs `backendOf` (INDEPENDENT_TESTS_BACKEND, or
+// writers' backend is lib.mjs `backendOf` (DUEDILIGENCE_BACKEND, or
 // toolchain.json `backend`).
-// INDEPENDENT_TESTS_HIDDEN_MODEL picks the hidden writer's model; unset, it
+// DUEDILIGENCE_HIDDEN_MODEL picks the hidden writer's model; unset, it
 // uses the same model as every other session.
 
 import { existsSync, readFileSync, rmSync } from "node:fs";
@@ -88,7 +88,7 @@ function suitesOf(chain) {
       required: `${hiddenFolder}/${chain.testPattern}`,
       prompt: "hidden-tests",
       parts: { skeleton: true, publicTests: true },
-      model: () => process.env.INDEPENDENT_TESTS_HIDDEN_MODEL,
+      model: () => process.env.DUEDILIGENCE_HIDDEN_MODEL,
     },
   ];
 }

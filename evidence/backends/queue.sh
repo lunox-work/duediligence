@@ -8,12 +8,12 @@
 # Writers run through lib.mjs `session` and its slot limiter (three sessions
 # machine-wide). Suites land in evidence/backends/specs/, transcripts in
 # evidence/backends/runs/, the log in evidence/backends/queue.log. Then:
-#   INDEPENDENT_TESTS_HOME=<claude scratch home> node evidence/backends.mjs report --backend <backend>
+#   DUEDILIGENCE_HOME=<claude scratch home> node evidence/backends.mjs report --backend <backend>
 set -u
 B=${1:-codex-cli}
-export INDEPENDENT_TESTS_HOME=evidence/backends
+export DUEDILIGENCE_HOME=evidence/backends
 # At most two model sessions machine-wide while this runs (lib.mjs slots).
-export INDEPENDENT_TESTS_MAX_SESSIONS=2
+export DUEDILIGENCE_MAX_SESSIONS=2
 LOG=evidence/backends/queue.log
 step() {
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] $*" >> "$LOG"

@@ -1,6 +1,6 @@
 # Python task template
 
-The `python` toolchain: CPython 3 from PATH (`INDEPENDENT_TESTS_PYTHON`),
+The `python` toolchain: CPython 3 from PATH (`DUEDILIGENCE_PYTHON`),
 pytest pinned in `requirements.txt` and installed into `.venv/` on first
 use, no other packages, no network. `sandbox/` is the harness and is never
 part of a submission.
@@ -14,7 +14,7 @@ part of a submission.
   `python3 sandbox/compile_check.py` parses everything;
   `.venv/bin/python -m pytest tests/own` (`.venv/Scripts/python` on
   Windows) runs pytest directly.
-- `sandbox/independent_tests_reporter.py` is the pytest plugin both
+- `sandbox/duediligence_reporter.py` is the pytest plugin both
   `sandbox/run.py` and `bin/runners/pytest.mjs` read results from. A test
   named `test_<kind>_<n>__...` is keyed to that spec scenario.
 - `sandbox/check.py`, `sandbox/exec.py`, `sandbox/lcb/` serve imported

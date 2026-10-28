@@ -51,7 +51,7 @@ if (!["python", "go", "rust"].includes(language)) {
 }
 const env = {
   ...process.env,
-  GOCACHE: process.env.GOCACHE ?? join(tmpdir(), "independent-tests-go-cache"),
+  GOCACHE: process.env.GOCACHE ?? join(tmpdir(), "duediligence-go-cache"),
   GOFLAGS: "-mod=mod",
   GOTOOLCHAIN: "local",
 };

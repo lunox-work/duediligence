@@ -22,7 +22,7 @@
 // percent of free memory (default 40). Two specs at once without the caps
 // rebooted a 16 GB machine on 2026-10-26.
 //
-// Specs come from SPECS (INDEPENDENT_TESTS_SPECS); per spec every mutant and
+// Specs come from SPECS (DUEDILIGENCE_SPECS); per spec every mutant and
 // which suite killed it goes to <out>/<slug>.json (default
 // RUNS/_mutation/), one summary per spec to <out>/summary.jsonl. --compare
 // checks the mutants and kills against the archive's per-spec files;

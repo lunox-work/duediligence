@@ -1,7 +1,7 @@
 # A pytest plugin: one JSON line per finished test, and one per test file
-# that failed to collect, appended to the file INDEPENDENT_TESTS_REPORT
+# that failed to collect, appended to the file DUEDILIGENCE_REPORT
 # names, for sandbox/run.py and bin/runners/pytest.mjs to read. Loaded with
-# `-p independent_tests_reporter` and this folder on PYTHONPATH; without
+# `-p duediligence_reporter` and this folder on PYTHONPATH; without
 # the variable it only registers the `scenario` marker.
 #
 #   {"file": "tests/public/test_parse.py", "name": "[happy-1] TestParse.test_unit", "ok": true, "skipped": false, "error": null}
@@ -36,7 +36,7 @@ def pytest_configure(config):
 
 
 def _emit(record):
-    path = os.environ.get("INDEPENDENT_TESTS_REPORT")
+    path = os.environ.get("DUEDILIGENCE_REPORT")
     if not path:
         return
     with open(path, "a", encoding="utf-8") as handle:

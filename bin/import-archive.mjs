@@ -25,7 +25,7 @@
 //   node bin/import-archive.mjs <slug>... [--archive <dir>] [--force]
 //   node bin/import-archive.mjs <slug> --seam exec [--as <new slug>] [--archive <dir>] [--force]
 //
-// --archive defaults to INDEPENDENT_TESTS_ARCHIVE, then
+// --archive defaults to DUEDILIGENCE_ARCHIVE, then
 // experiments/ in this package. Exit 1 if any slug was
 // not imported.
 //
@@ -59,7 +59,7 @@ const COPIED = ["spec.md", "ticket.md", "problem.json", "skeleton", "tests/publi
 
 const { options, rest } = args();
 const archive = resolve(
-  typeof options.archive === "string" ? options.archive : (process.env.INDEPENDENT_TESTS_ARCHIVE ?? join(ROOT, "experiments")),
+  typeof options.archive === "string" ? options.archive : (process.env.DUEDILIGENCE_ARCHIVE ?? join(ROOT, "experiments")),
 );
 if (rest.length === 0) {
   console.error("usage: node bin/import-archive.mjs <slug>... [--archive <dir>] [--force]");

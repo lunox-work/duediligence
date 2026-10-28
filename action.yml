@@ -5,7 +5,7 @@
 # repository, a private artifact or a secret URL and calls this action.
 # The checkout needs the spec's base commit: actions/checkout with
 # fetch-depth: 0. The job needs `checks: write` to post the check.
-name: independent-tests judge
+name: duediligence judge
 description: Judge a pull request against a hidden test suite it never saw, and post the verdict as a check.
 author: feversoul
 branding:
@@ -30,7 +30,7 @@ inputs:
   check-name:
     description: Name of the check run.
     required: false
-    default: independent-tests
+    default: duediligence
   github-token:
     description: Token that posts the check run (checks write). Empty skips posting.
     required: false
@@ -59,8 +59,8 @@ runs:
     - id: judge
       shell: bash
       env:
-        INDEPENDENT_TESTS_SEAL_AUTH: ${{ inputs.seal-auth }}
-        INDEPENDENT_TESTS_GITHUB_TOKEN: ${{ inputs.github-token }}
+        DUEDILIGENCE_SEAL_AUTH: ${{ inputs.seal-auth }}
+        DUEDILIGENCE_GITHUB_TOKEN: ${{ inputs.github-token }}
         SEAL: ${{ inputs.seal }}
         REPO: ${{ inputs.repo }}
         REF: ${{ inputs.ref || github.event.pull_request.head.sha || github.sha }}
@@ -70,7 +70,7 @@ runs:
         flags=()
         if [ "$FAIL_ON_VERDICT" != "true" ]; then flags+=(--exit-zero); fi
         node "$GITHUB_ACTION_PATH/bin/cli.mjs" ci --seal "$SEAL" --repo "$REPO" --ref "$REF" \
-          --name "$CHECK_NAME" --out "$RUNNER_TEMP/independent-tests-check.json" "${flags[@]}"
+          --name "$CHECK_NAME" --out "$RUNNER_TEMP/duediligence-check.json" "${flags[@]}"
     - if: always()
       shell: bash
       env:

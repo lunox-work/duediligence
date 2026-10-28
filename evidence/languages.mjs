@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Go and Rust modules, and commands and services in Python, Go and Rust
 // (RESULTS.md "Go and Rust", "Commands and services in other languages").
-// Home: evidence/languages/ (INDEPENDENT_TESTS_HOME, set here unless given);
+// Home: evidence/languages/ (DUEDILIGENCE_HOME, set here unless given);
 // the model steps are evidence/languages/queue.sh.
 //
 //   node evidence/languages.mjs selftest [--json <file>]
@@ -44,12 +44,12 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const PACKAGE = join(HERE, "..");
 // The selftest's fixtures live in a scratch home, set before lib.mjs reads it.
 const SELFTEST_HOME = process.argv[2] === "selftest" ? mkdtempSync(join(tmpdir(), "languages-selftest-")) : null;
-if (SELFTEST_HOME !== null) process.env.INDEPENDENT_TESTS_HOME = SELFTEST_HOME;
-process.env.INDEPENDENT_TESTS_HOME ??= join(HERE, "languages");
+if (SELFTEST_HOME !== null) process.env.DUEDILIGENCE_HOME = SELFTEST_HOME;
+process.env.DUEDILIGENCE_HOME ??= join(HERE, "languages");
 const OUT = join(HERE, "languages");
 const SUMMARY = join(HERE, "languages.json");
 const SEAMS = join(HERE, "seams", "specs");
-const ARCHIVE = resolve(process.env.INDEPENDENT_TESTS_ARCHIVE ?? join(PACKAGE, "experiments"));
+const ARCHIVE = resolve(process.env.DUEDILIGENCE_ARCHIVE ?? join(PACKAGE, "experiments"));
 
 const lib = await import("../bin/lib.mjs");
 const { NATIVE, args, copy, count, discard, emitted, judge, listFiles, log, pool, prompt, readJson, specDir, stage, testsOf, toolchainOf, verdict, workdir, writeJson } = lib;
@@ -270,7 +270,7 @@ function leftovers(slug) {
 
 function selftest() {
   const home = SELFTEST_HOME;
-  const env = { INDEPENDENT_TESTS_HOME: home };
+  const env = { DUEDILIGENCE_HOME: home };
   const checks = [];
   const check = (name, ok, detail = {}) => {
     checks.push({ name, ok, ...detail });

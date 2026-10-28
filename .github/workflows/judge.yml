@@ -7,16 +7,16 @@
 #     seal-token or github.token;
 #   - a secret URL: the seal-url secret, with seal-auth as its
 #     Authorization header;
-# then runs action.yml: `independent-tests ci --seal … --repo . --ref <head>`,
+# then runs action.yml: `duediligence ci --seal … --repo . --ref <head>`,
 # which posts a check with the verdict, counts and failing scenario keys.
 #
 #   jobs:
 #     judge:
 #       permissions: { contents: read, checks: write, actions: read }
-#       uses: lunox-work/independent-tests/.github/workflows/judge.yml@main
+#       uses: lunox-work/duediligence/.github/workflows/judge.yml@main
 #       with: { seal-repository: you/seals, seal-path: seals/<slug>.seal.gz }
 #       secrets: { seal-token: ${{ secrets.SEALS_TOKEN }} }
-name: independent-tests judge
+name: duediligence judge
 on:
   workflow_call:
     inputs:
@@ -47,15 +47,15 @@ on:
       check-name:
         description: Name of the check run.
         type: string
-        default: independent-tests
+        default: duediligence
       ref:
         description: Commit to judge (default the pull request's head, else github.sha).
         type: string
         default: ""
       package-repository:
-        description: Where independent-tests itself comes from.
+        description: Where duediligence itself comes from.
         type: string
-        default: lunox-work/independent-tests
+        default: lunox-work/duediligence
       package-ref:
         description: Its branch, tag or SHA.
         type: string
@@ -92,12 +92,12 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Check out independent-tests
+      - name: Check out duediligence
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ inputs.package-repository }}
           ref: ${{ inputs.package-ref }}
-          path: .independent-tests
+          path: .duediligence
           persist-credentials: false
       - name: Fetch the seal from a private repository
         if: inputs.seal-repository != ''
@@ -106,7 +106,7 @@ jobs:
           repository: ${{ inputs.seal-repository }}
           ref: ${{ inputs.seal-repository-ref }}
           token: ${{ secrets.seal-token }}
-          path: .independent-tests-seal
+          path: .duediligence-seal
           sparse-checkout: ${{ inputs.seal-path }}
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -115,7 +115,7 @@ jobs:
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: ${{ inputs.seal-artifact }}
-          path: .independent-tests-seal
+          path: .duediligence-seal
           github-token: ${{ secrets.seal-token || github.token }}
           repository: ${{ inputs.seal-artifact-repository || github.repository }}
           run-id: ${{ inputs.seal-artifact-run-id || github.run_id }}
@@ -126,15 +126,15 @@ jobs:
           SEAL_PATH: ${{ inputs.seal-path }}
         run: |
           if [ -n "$SEAL_URL" ]; then echo "seal=$SEAL_URL" >> "$GITHUB_OUTPUT"
-          elif [ -n "$SEAL_PATH" ] && [ -f ".independent-tests-seal/$SEAL_PATH" ]; then echo "seal=$PWD/.independent-tests-seal/$SEAL_PATH" >> "$GITHUB_OUTPUT"
+          elif [ -n "$SEAL_PATH" ] && [ -f ".duediligence-seal/$SEAL_PATH" ]; then echo "seal=$PWD/.duediligence-seal/$SEAL_PATH" >> "$GITHUB_OUTPUT"
           else
-            found=$(find .independent-tests-seal -name '*.seal.gz' -type f 2>/dev/null | head -n 2)
+            found=$(find .duediligence-seal -name '*.seal.gz' -type f 2>/dev/null | head -n 2)
             if [ "$(printf '%s\n' "$found" | grep -c .)" != 1 ]; then echo "::error::no single seal found; set seal-path"; exit 1; fi
             echo "seal=$PWD/$found" >> "$GITHUB_OUTPUT"
           fi
       - name: Judge
         id: judge
-        uses: ./.independent-tests
+        uses: ./.duediligence
         with:
           seal: ${{ steps.seal.outputs.seal }}
           seal-auth: ${{ secrets.seal-auth }}

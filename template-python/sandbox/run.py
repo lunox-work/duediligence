@@ -64,15 +64,15 @@ def file_timeout(path):
 
 
 def run_file(path):
-    handle, report = tempfile.mkstemp(prefix="independent-tests-pytest-", suffix=".jsonl")
+    handle, report = tempfile.mkstemp(prefix="duediligence-pytest-", suffix=".jsonl")
     os.close(handle)
     timed_out = False
     code = None
     try:
         try:
             run = subprocess.run(
-                [PYTHON, "-m", "pytest", "-p", "independent_tests_reporter", "-q", "--no-header", path],
-                cwd=ROOT, env={**env, "INDEPENDENT_TESTS_REPORT": report},
+                [PYTHON, "-m", "pytest", "-p", "duediligence_reporter", "-q", "--no-header", path],
+                cwd=ROOT, env={**env, "DUEDILIGENCE_REPORT": report},
                 capture_output=True, text=True, timeout=file_timeout(path),
             )
             code = run.returncode

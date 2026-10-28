@@ -8,7 +8,7 @@
 # <task> holds prompt.md (the handout's BRIEF.md, spec path set to
 # /task/spec.md, the skill-session audit paragraph dropped) and spec.md.
 # Then: git add -A && git commit on a branch, and
-#   independent-tests ci --seal limit-jobs-confirmed.seal.gz --repo <checkout> --ref HEAD
+#   duediligence ci --seal limit-jobs-confirmed.seal.gz --repo <checkout> --ref HEAD
 set -e
 git config --global --add safe.directory '*'
 cd /work/repo

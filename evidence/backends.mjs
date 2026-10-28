@@ -30,7 +30,7 @@
 //   report                  evidence/backends.json and the RESULTS.md table:
 //                           --claude <home> --other <home> --backend <name>.
 //
-// Run with INDEPENDENT_TESTS_HOME set to a scratch folder (the claude arm)
+// Run with DUEDILIGENCE_HOME set to a scratch folder (the claude arm)
 // or to evidence/backends (the other backend's suites, kept as evidence);
 // evidence/backends/queue.sh runs the whole other-backend arm and resumes.
 

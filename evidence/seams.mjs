@@ -2,7 +2,7 @@
 // Black-box seams (RESULTS.md "Black-box seams"): a spec
 // checked through a command or an HTTP service instead of its exports,
 // first on material that exists, with no model. Home: evidence/seams/
-// (INDEPENDENT_TESTS_HOME, set here unless given).
+// (DUEDILIGENCE_HOME, set here unless given).
 //
 //   node evidence/seams.mjs selftest [--json <file>]
 //       bin/runners/boundary.mjs on a hand-made HTTP fixture in a scratch
@@ -48,8 +48,8 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PACKAGE = join(HERE, "..");
-process.env.INDEPENDENT_TESTS_HOME ??= join(HERE, "seams");
-const ARCHIVE = resolve(process.env.INDEPENDENT_TESTS_ARCHIVE ?? join(PACKAGE, "experiments"));
+process.env.DUEDILIGENCE_HOME ??= join(HERE, "seams");
+const ARCHIVE = resolve(process.env.DUEDILIGENCE_ARCHIVE ?? join(PACKAGE, "experiments"));
 const ORACLE = join(ARCHIVE, "runs", "git-oracle");
 const OUT = join(HERE, "seams");
 const SUMMARY = join(HERE, "seams.json");
@@ -117,7 +117,7 @@ function leftovers() {
 
 function selftest() {
   const home = mkdtempSync(join(tmpdir(), "seams-selftest-"));
-  const env = { INDEPENDENT_TESTS_HOME: home };
+  const env = { DUEDILIGENCE_HOME: home };
   const spec = join(home, "specs", "http-echo");
   const write = (path, text) => {
     mkdirSync(dirname(join(spec, path)), { recursive: true });
@@ -289,7 +289,7 @@ setTimeout(() => {
  */
 function repoSelftest() {
   const home = mkdtempSync(join(tmpdir(), "seams-repo-"));
-  const env = { INDEPENDENT_TESTS_HOME: home };
+  const env = { DUEDILIGENCE_HOME: home };
   const repo = join(home, "fixture");
   const put = (path, text) => {
     mkdirSync(dirname(join(repo, path)), { recursive: true });

@@ -36,7 +36,7 @@
 //
 // --seal <file> judges from a seal (bin/seal.mjs) instead of specs/: the
 // package and the seal are all a CI box needs. The seal is unpacked into a
-// temporary folder that INDEPENDENT_TESTS_SPECS points at before lib.mjs
+// temporary folder that DUEDILIGENCE_SPECS points at before lib.mjs
 // loads, checked file by file and against its hiddenSha256, and removed on
 // exit. A repository seal is judged against the checkout --repo names
 // (default the current folder), which must hold the base commit. Its
@@ -288,7 +288,7 @@ function writeRecord(fields) {
 }
 
 /**
- * Unpacks --seal before lib.mjs loads, pointing INDEPENDENT_TESTS_SPECS at
+ * Unpacks --seal before lib.mjs loads, pointing DUEDILIGENCE_SPECS at
  * it; a repository seal's toolchain.json gets `repo` = the checkout's top
  * folder. Null without --seal. Exits 1 on a seal that does not check out.
  */
@@ -310,7 +310,7 @@ function openSeal(argv) {
     process.exit(1);
   }
   process.on("exit", () => rmSync(opened.root, { recursive: true, force: true }));
-  process.env.INDEPENDENT_TESTS_SPECS = opened.specs;
+  process.env.DUEDILIGENCE_SPECS = opened.specs;
   const toolchainFile = join(opened.dir, "toolchain.json");
   const toolchain = JSON.parse(readFileSync(toolchainFile, "utf8"));
   if (toolchain.name === "repo") {

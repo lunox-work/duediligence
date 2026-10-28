@@ -12,7 +12,7 @@
 //   node evidence/implementers.mjs report                 the table, and evidence/implementers.json
 //   node evidence/implementers.mjs selftest               no model: fake agents on the exec backend
 //
-// Home: INDEPENDENT_TESTS_HOME=evidence/implementers (set here unless given):
+// Home: DUEDILIGENCE_HOME=evidence/implementers (set here unless given):
 // specs/ (imports, not kept), runs/, results.jsonl. queue.sh beside it
 // resumes the whole cell; a run with a run.json is skipped.
 //
@@ -27,11 +27,11 @@
 //   pinned install, its own CODEX_HOME, placed under sandbox-exec or bwrap
 //   over the handout folder). A usage limit or "out of credits" halts the
 //   batch with exit 2 and records nothing for the run it stopped.
-// - exec: any command (--command or INDEPENDENT_TESTS_EXEC), BRIEF.md on
+// - exec: any command (--command or DUEDILIGENCE_EXEC), BRIEF.md on
 //   stdin, placed the same way. The self test uses it with fake agents.
 // - aider, cursor: exec adapters for Aider (`aider`, its own model keys) and
 //   Cursor's agent (`cursor-agent`), when installed. Their install is made
-//   readable to the sandbox; INDEPENDENT_TESTS_EXEC_ENV names the API key
+//   readable to the sandbox; DUEDILIGENCE_EXEC_ENV names the API key
 //   variables to pass (e.g. OPENAI_API_KEY). Network stays on.
 //
 // The variant is the agent's name (or --variant): runs/<slug>/<variant>/<n>/.
@@ -43,7 +43,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-process.env.INDEPENDENT_TESTS_HOME ??= join(HERE, "implementers");
+process.env.DUEDILIGENCE_HOME ??= join(HERE, "implementers");
 const lib = await import("../bin/lib.mjs");
 const { HOME, RESULTS, ROOT, RUNS, WORK_ROOT, args, changes, copy, discard, emitted, log, manifest, peeks, pool, readJson, session, specDir, writeJson } = lib;
 
@@ -83,7 +83,7 @@ const which = (bin) => spawnSync("sh", ["-c", `command -v ${bin}`], { encoding: 
 function agentOf(name, options) {
   if (name === "codex-cli") return { backend: "codex-cli", model: options.model };
   const adapters = {
-    exec: { bin: null, command: options.command ?? process.env.INDEPENDENT_TESTS_EXEC },
+    exec: { bin: null, command: options.command ?? process.env.DUEDILIGENCE_EXEC },
     // Aider edits the named files and runs the tests itself (--auto-test).
     aider: {
       bin: "aider",
@@ -98,14 +98,14 @@ function agentOf(name, options) {
     if (found === "") return { error: `${adapter.bin} is not installed here` };
     // Its install (two folders above the real binary) must be readable inside the sandbox.
     const prefix = dirname(dirname(realpathSync(found)));
-    process.env.INDEPENDENT_TESTS_SANDBOX_READ = [process.env.INDEPENDENT_TESTS_SANDBOX_READ, prefix].filter(Boolean).join(":");
+    process.env.DUEDILIGENCE_SANDBOX_READ = [process.env.DUEDILIGENCE_SANDBOX_READ, prefix].filter(Boolean).join(":");
   }
-  if (typeof adapter.command !== "string" || adapter.command === "") return { error: "exec needs --command or INDEPENDENT_TESTS_EXEC" };
+  if (typeof adapter.command !== "string" || adapter.command === "") return { error: "exec needs --command or DUEDILIGENCE_EXEC" };
   return { backend: "exec", command: adapter.command };
 }
 
 const git = (dir, ...argv) =>
-  spawnSync("git", ["-c", "user.name=independent-tests", "-c", "user.email=independent-tests@localhost", ...argv], {
+  spawnSync("git", ["-c", "user.name=duediligence", "-c", "user.email=duediligence@localhost", ...argv], {
     cwd: dir,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
@@ -232,11 +232,11 @@ function report() {
 function selftest() {
   const slug = "keyed-queue";
   // A home of its own, beside WORK_ROOT (a home may not overlap it).
-  const home = mkdtempSync(join(realpathSync(tmpdir()), "independent-tests-selftest-"));
+  const home = mkdtempSync(join(realpathSync(tmpdir()), "duediligence-selftest-"));
   const fixtures = join(home, "fixtures");
   const overfit = readJson(join(ARCHIVE, "runs", "_redteam-classes.json"), []).find((item) => item.spec === "statement-import" && item.gamed === "hardcoded");
   copy(join(ARCHIVE, "specs", slug, "reference", "src"), join(fixtures, "reference"));
-  const env = { ...process.env, INDEPENDENT_TESTS_HOME: home, INDEPENDENT_TESTS_SPECS: join(home, "specs"), INDEPENDENT_TESTS_RESULTS: join(home, "results.jsonl"), INDEPENDENT_TESTS_SANDBOX_READ: fixtures };
+  const env = { ...process.env, DUEDILIGENCE_HOME: home, DUEDILIGENCE_SPECS: join(home, "specs"), DUEDILIGENCE_RESULTS: join(home, "results.jsonl"), DUEDILIGENCE_SANDBOX_READ: fixtures };
   const self = (...argv) => spawnSync(process.execPath, [fileURLToPath(import.meta.url), ...argv], { encoding: "utf8", env, maxBuffer: 64 * 1024 * 1024 });
   const imported = spawnSync(process.execPath, [join(ROOT, "bin", "import-archive.mjs"), slug, "statement-import"], { encoding: "utf8", env });
   if (imported.status !== 0) throw new Error(imported.stderr);

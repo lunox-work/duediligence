@@ -56,7 +56,7 @@ function walk(dir, prefix = "") {
  * Unpacks a seal into a fresh folder `<tmp>/specs/<slug>/` and checks it:
  * every file in seal.json's list, with its hash, and nothing else. Throws
  * on any mismatch. Imports nothing from lib.mjs, so a caller can point
- * INDEPENDENT_TESTS_SPECS at `specs` before lib.mjs is first loaded.
+ * DUEDILIGENCE_SPECS at `specs` before lib.mjs is first loaded.
  */
 export function unseal(file, base = tmpdir()) {
   let bundle;
@@ -71,7 +71,7 @@ export function unseal(file, base = tmpdir()) {
   const listed = Object.keys(seal.files ?? {}).sort();
   const held = Object.keys(bundle.files ?? {}).sort();
   if (JSON.stringify(listed) !== JSON.stringify(held)) throw new Error(`${file}: its files differ from seal.json's list`);
-  const root = mkdtempSync(join(realpathSync(base), "independent-tests-seal-"));
+  const root = mkdtempSync(join(realpathSync(base), "duediligence-seal-"));
   const dir = join(root, "specs", seal.slug);
   for (const path of held) {
     if (!safe(path)) throw new Error(`${file}: ${path} is not a sealed path`);

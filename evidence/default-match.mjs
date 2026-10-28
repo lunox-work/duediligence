@@ -49,7 +49,7 @@ if (argv[0] === "confirmations") {
   // A real confirmation: confirmed.json with a duration (`minutes`, from the
   // first listing of the decisions to --by), on a spec that is not a bundled
   // example (bundled.json beside the specs folder, and duration-parse).
-  const dirs = argv.slice(1).length > 0 ? argv.slice(1).map((dir) => resolve(dir)) : [join(process.env.INDEPENDENT_TESTS_HOME ?? join(homedir(), ".independent-tests"), "specs")];
+  const dirs = argv.slice(1).length > 0 ? argv.slice(1).map((dir) => resolve(dir)) : [join(process.env.DUEDILIGENCE_HOME ?? join(homedir(), ".duediligence"), "specs")];
   const rows = [];
   for (const dir of dirs) {
     if (!existsSync(dir)) continue;

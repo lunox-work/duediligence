@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // A suite on pytest, read through template-python/sandbox/
-// independent_tests_reporter.py (one JSON line per test), mapped onto the
+// duediligence_reporter.py (one JSON line per test), mapped onto the
 // result bin/runners/shared.mjs describes. Run in the tree's (or the
 // package's) folder:
 //
@@ -54,7 +54,7 @@ const env = {
 
 /** One pytest process over `targets`: its reported lines, exit code and output. */
 function pytest(targets, timeout, many = false) {
-  const scratch = mkdtempSync(join(realpathSync(tmpdir()), "independent-tests-pytest-"));
+  const scratch = mkdtempSync(join(realpathSync(tmpdir()), "duediligence-pytest-"));
   const report = join(scratch, "report.jsonl");
   try {
     // Under guard.mjs: an untrusted solution over the memory ceiling loses the file, as a timeout does.
@@ -64,7 +64,7 @@ function pytest(targets, timeout, many = false) {
         "-m",
         "pytest",
         "-p",
-        "independent_tests_reporter",
+        "duediligence_reporter",
         "-p",
         "no:cacheprovider",
         "-q",
@@ -77,7 +77,7 @@ function pytest(targets, timeout, many = false) {
       {
         cwd: root,
         encoding: "utf8",
-        env: { ...env, INDEPENDENT_TESTS_REPORT: report },
+        env: { ...env, DUEDILIGENCE_REPORT: report },
         timeout,
         maxBuffer: 64 * 1024 * 1024,
       },

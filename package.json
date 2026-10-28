@@ -1,8 +1,10 @@
 {
-  "name": "independent-tests",
+  "name": "duediligence",
   "version": "0.3.0",
-  "description": "Hidden, calibrated test suites for AI coding agents: a public suite the agent works against and a hidden suite it never sees that judges the result.",
+  "description": "Due diligence for AI coding agents: independent, hidden test suites written from the spec. The agent works against a public suite; a hidden suite it never sees judges the result.",
   "keywords": [
+    "due-diligence",
+    "independent-tests",
     "ai-agents",
     "coding-agents",
     "hidden-tests",
@@ -19,19 +21,19 @@
     "go",
     "rust"
   ],
-  "homepage": "https://github.com/lunox-work/independent-tests#readme",
+  "homepage": "https://github.com/lunox-work/duediligence#readme",
   "bugs": {
-    "url": "https://github.com/lunox-work/independent-tests/issues"
+    "url": "https://github.com/lunox-work/duediligence/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lunox-work/independent-tests.git"
+    "url": "git+https://github.com/lunox-work/duediligence.git"
   },
   "license": "MIT",
   "author": "Charlie Angriawan",
   "type": "module",
   "bin": {
-    "independent-tests": "bin/cli.mjs"
+    "duediligence": "bin/cli.mjs"
   },
   "files": [
     "bin/",

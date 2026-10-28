@@ -11,8 +11,8 @@
 set -u
 C=$1
 SET=$(dirname "$C")
-export INDEPENDENT_TESTS_MAX_SESSIONS=2
-export INDEPENDENT_TESTS_MIN_FREE=40
+export DUEDILIGENCE_MAX_SESSIONS=2
+export DUEDILIGENCE_MIN_FREE=40
 LOG=$SET/queue.log
 step() {
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] $*" >> "$LOG"

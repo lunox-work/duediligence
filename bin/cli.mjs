@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-// The `independent-tests` command: one entry point over the bin scripts,
+// The `duediligence` command: one entry point over the bin scripts,
 // which it runs unchanged, in the caller's folder, with their own exit
 // codes. Paths the scripts print as `node bin/<script>.mjs` are these
-// subcommands. Specs, runs and results live under INDEPENDENT_TESTS_HOME
-// (default ~/.independent-tests/, lib.mjs `HOME`); `where` prints them.
+// subcommands. Specs, runs and results live under DUEDILIGENCE_HOME
+// (default ~/.duediligence/, lib.mjs `HOME`); `where` prints them.
 //
-//   independent-tests <command> [args...]
-//   independent-tests where | help | --version
+//   duediligence <command> [args...]
+//   duediligence where | help | --version
 
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
@@ -46,13 +46,13 @@ if (!Object.hasOwn(COMMANDS, command ?? "")) {
   const width = Math.max(...Object.keys(COMMANDS).map((name) => name.length));
   console.error(
     [
-      "usage: independent-tests <command> [args...]",
+      "usage: duediligence <command> [args...]",
       "",
       ...Object.entries(COMMANDS).map(([name, what]) => `  ${name.padEnd(width)}  ${what}`),
       `  ${"where".padEnd(width)}  the folders it reads and writes`,
       "",
       "Each command prints its own usage when called without arguments.",
-      "Data: INDEPENDENT_TESTS_HOME (default ~/.independent-tests/).",
+      "Data: DUEDILIGENCE_HOME (default ~/.duediligence/).",
     ].join("\n"),
   );
   process.exit(command === undefined || command === "help" || command === "--help" ? 0 : 1);
