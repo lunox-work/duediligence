@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" width="100%" alt="Coding agents that report a task complete are wrong 71% of the time (75 of 105). Independent tests cut that to 9% (9 of 105).">
+  <img src="assets/hero.png" width="100%" alt="Coding agents that report a task complete are wrong 71% of the time (75 of 105). duediligence cuts that to 9% (9 of 105).">
 </p>
 
 <table>
