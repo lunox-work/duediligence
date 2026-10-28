@@ -1,0 +1,37 @@
+{
+  "name": "independent-test",
+  "version": "0.3.1",
+  "description": "Renamed to duediligence: hidden, calibrated test suites for AI coding agents. This package runs duediligence.",
+  "keywords": [
+    "duediligence",
+    "ai-agents",
+    "coding-agents",
+    "hidden-tests",
+    "test-generation",
+    "evaluation"
+  ],
+  "homepage": "https://github.com/lunox-work/duediligence#readme",
+  "bugs": {
+    "url": "https://github.com/lunox-work/duediligence/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunox-work/duediligence.git",
+    "directory": "aliases/independent-test"
+  },
+  "license": "MIT",
+  "author": "Charlie Angriawan",
+  "type": "module",
+  "bin": {
+    "independent-test": "bin/cli.mjs"
+  },
+  "files": [
+    "bin/"
+  ],
+  "dependencies": {
+    "duediligence": "^0.3.0"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.0.0"
+  }
+}
