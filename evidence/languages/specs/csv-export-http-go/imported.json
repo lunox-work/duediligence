@@ -1,0 +1,8 @@
+{
+  "from": "evidence/seams/specs/csv-export-http",
+  "at": "2026-10-28T02:22:42.077Z",
+  "heldOut": false,
+  "why": "A port of the TypeScript spec to Go by evidence/languages.mjs port: its suites are the TypeScript spec's, published with it.",
+  "commitment": null,
+  "commitmentNote": "No prepared.json, so no hiddenSha256 was recorded before any submission; judge prints the hash it computes and checks nothing."
+}

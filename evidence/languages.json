@@ -1,0 +1,1674 @@
+{
+  "selftest": {
+    "at": "2026-10-28T02:21:18.099Z",
+    "checks": [
+      {
+        "name": "add-command-py: scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "add-command-py: reference passed, nothing left running",
+        "ok": true,
+        "verdict": "passed",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 2,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-py: stub incomplete, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.3,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-py: overfit overfit, nothing left running",
+        "ok": true,
+        "verdict": "overfit",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.5,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-py: broken incomplete, not compiled, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": false,
+          "hidden": false
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-py: the tree's npm run build passes on the stub and npm test fails its test",
+        "ok": true,
+        "build": 0,
+        "test": 1
+      },
+      {
+        "name": "add-command-py: what the build left (0 file(s)) is never a change",
+        "ok": true,
+        "outputs": []
+      },
+      {
+        "name": "add-service-py: scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "add-service-py: reference passed, nothing left running",
+        "ok": true,
+        "verdict": "passed",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 2,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-py: stub incomplete, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 2,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-py: overfit overfit, nothing left running",
+        "ok": true,
+        "verdict": "overfit",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.9,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-py: broken incomplete, not compiled, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": false,
+          "hidden": false
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.4,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-py: the tree's npm run build passes on the stub and npm test fails its test",
+        "ok": true,
+        "build": 0,
+        "test": 1
+      },
+      {
+        "name": "add-service-py: what the build left (0 file(s)) is never a change",
+        "ok": true,
+        "outputs": []
+      },
+      {
+        "name": "add-command-go: scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "add-command-go: reference passed, nothing left running",
+        "ok": true,
+        "verdict": "passed",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 1.9,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-go: stub incomplete, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.9,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-go: overfit overfit, nothing left running",
+        "ok": true,
+        "verdict": "overfit",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.9,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-go: broken incomplete, not compiled, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": false,
+          "hidden": false
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 0.9,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-go: the tree's npm run build passes on the stub and npm test fails its test",
+        "ok": true,
+        "build": 0,
+        "test": 1
+      },
+      {
+        "name": "add-command-go: what the build left (1 file(s)) is never a change",
+        "ok": true,
+        "outputs": [
+          ".bin/task"
+        ]
+      },
+      {
+        "name": "add-service-go: scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "add-service-go: reference passed, nothing left running",
+        "ok": true,
+        "verdict": "passed",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 3.3,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-go: stub incomplete, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 4.3,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-go: overfit overfit, nothing left running",
+        "ok": true,
+        "verdict": "overfit",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 3.3,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-go: broken incomplete, not compiled, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": false,
+          "hidden": false
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 2.4,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-go: the tree's npm run build passes on the stub and npm test fails its test",
+        "ok": true,
+        "build": 0,
+        "test": 1
+      },
+      {
+        "name": "add-service-go: what the build left (1 file(s)) is never a change",
+        "ok": true,
+        "outputs": [
+          ".bin/task"
+        ]
+      },
+      {
+        "name": "add-command-rs: scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "add-command-rs: reference passed, nothing left running",
+        "ok": true,
+        "verdict": "passed",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 2.1,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-rs: stub incomplete, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 2.4,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-rs: overfit overfit, nothing left running",
+        "ok": true,
+        "verdict": "overfit",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 2.5,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-rs: broken incomplete, not compiled, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": false,
+          "hidden": false
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1,
+        "leftover": 0
+      },
+      {
+        "name": "add-command-rs: the tree's npm run build passes on the stub and npm test fails its test",
+        "ok": true,
+        "build": 0,
+        "test": 1
+      },
+      {
+        "name": "add-command-rs: what the build left (30 file(s)) is never a change",
+        "ok": true,
+        "outputs": [
+          "Cargo.lock",
+          "target/.rustc_info.json",
+          "target/CACHEDIR.TAG",
+          "target/debug/.cargo-artifact-lock",
+          "target/debug/.cargo-build-lock"
+        ]
+      },
+      {
+        "name": "add-service-rs: scripted calibration keeps both hidden tests",
+        "ok": true,
+        "kept": 2
+      },
+      {
+        "name": "add-service-rs: reference passed, nothing left running",
+        "ok": true,
+        "verdict": "passed",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 2,
+          "total": 2
+        },
+        "seconds": 2.8,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-rs: stub incomplete, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 2.6,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-rs: overfit overfit, nothing left running",
+        "ok": true,
+        "verdict": "overfit",
+        "compiled": {
+          "public": true,
+          "hidden": true
+        },
+        "public": {
+          "passed": 1,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 2.6,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-rs: broken incomplete, not compiled, nothing left running",
+        "ok": true,
+        "verdict": "incomplete",
+        "compiled": {
+          "public": false,
+          "hidden": false
+        },
+        "public": {
+          "passed": 0,
+          "total": 1
+        },
+        "hidden": {
+          "passed": 0,
+          "total": 2
+        },
+        "seconds": 1.5,
+        "leftover": 0
+      },
+      {
+        "name": "add-service-rs: the tree's npm run build passes on the stub and npm test fails its test",
+        "ok": true,
+        "build": 0,
+        "test": 1
+      },
+      {
+        "name": "add-service-rs: what the build left (142 file(s)) is never a change",
+        "ok": true,
+        "outputs": [
+          "Cargo.lock",
+          "target/.rustc_info.json",
+          "target/CACHEDIR.TAG",
+          "target/debug/.cargo-artifact-lock",
+          "target/debug/.cargo-build-lock"
+        ]
+      },
+      {
+        "name": "every brief renders, names its entry and no TypeScript contract",
+        "ok": true,
+        "wrong": []
+      }
+    ],
+    "wrong": 0
+  },
+  "report": {
+    "at": "2026-10-28T04:36:54.451Z",
+    "specs": {
+      "duration-parse-go": {
+        "toolchain": {
+          "name": "go"
+        },
+        "public": 65,
+        "hiddenKept": 159,
+        "hiddenWritten": 159,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 1.42,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 65,
+              "total": 65
+            },
+            "hidden": {
+              "passed": 159,
+              "total": 159
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.019505300000000003,
+            "minutes": 1.6
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 65,
+              "total": 65
+            },
+            "hidden": {
+              "passed": 159,
+              "total": 159
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.02021536,
+            "minutes": 1.6
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 65,
+              "total": 65
+            },
+            "hidden": {
+              "passed": 159,
+              "total": 159
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.017499880000000002,
+            "minutes": 1.5
+          }
+        ]
+      },
+      "duration-parse-rs": {
+        "toolchain": {
+          "name": "rust"
+        },
+        "public": 45,
+        "hiddenKept": 110,
+        "hiddenWritten": 110,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 1.28,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 45,
+              "total": 45
+            },
+            "hidden": {
+              "passed": 110,
+              "total": 110
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.01675254,
+            "minutes": 1.3
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 45,
+              "total": 45
+            },
+            "hidden": {
+              "passed": 110,
+              "total": 110
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.012443740000000002,
+            "minutes": 1
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 45,
+              "total": 45
+            },
+            "hidden": {
+              "passed": 110,
+              "total": 110
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.012800610000000002,
+            "minutes": 1.1
+          }
+        ]
+      },
+      "csv-export-http-py": {
+        "toolchain": {
+          "name": "exec",
+          "boundary": {
+            "language": "python",
+            "service": {
+              "start": [
+                "python3",
+                "src/server.py"
+              ],
+              "healthcheck": "/"
+            }
+          }
+        },
+        "public": 36,
+        "hiddenKept": 48,
+        "hiddenWritten": 48,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 0.41,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.05481773999999998,
+            "minutes": 3.6
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.03927653000000001,
+            "minutes": 2.9
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.04225509,
+            "minutes": 3.2
+          }
+        ]
+      },
+      "csv-export-http-go": {
+        "toolchain": {
+          "name": "exec",
+          "boundary": {
+            "language": "go",
+            "service": {
+              "start": [
+                ".bin/task"
+              ],
+              "healthcheck": "/"
+            }
+          }
+        },
+        "public": 36,
+        "hiddenKept": 48,
+        "hiddenWritten": 48,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 0.75,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.03669965999999999,
+            "minutes": 2.8
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.043454200000000005,
+            "minutes": 3.1
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "overfit",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 47,
+              "total": 48
+            },
+            "failedScenarios": [
+              "unhappy-2"
+            ],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.04591948999999999,
+            "minutes": 3.7
+          }
+        ]
+      },
+      "csv-export-http-rs": {
+        "toolchain": {
+          "name": "exec",
+          "boundary": {
+            "language": "rust",
+            "service": {
+              "start": [
+                "target/debug/task"
+              ],
+              "healthcheck": "/"
+            }
+          }
+        },
+        "public": 36,
+        "hiddenKept": 48,
+        "hiddenWritten": 48,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 0.86,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.13796893,
+            "minutes": 5.5
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 48,
+              "total": 48
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.19370937,
+            "minutes": 5.7
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "overfit",
+            "public": {
+              "passed": 36,
+              "total": 36
+            },
+            "hidden": {
+              "passed": 47,
+              "total": 48
+            },
+            "failedScenarios": [
+              "happy-1"
+            ],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.09082487000000002,
+            "minutes": 4.4
+          }
+        ]
+      },
+      "patch-apply-cli-py": {
+        "toolchain": {
+          "name": "exec",
+          "boundary": {
+            "language": "python",
+            "command": [
+              "python3",
+              "src/cli.py"
+            ]
+          }
+        },
+        "public": 30,
+        "hiddenKept": 79,
+        "hiddenWritten": 79,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 0.83,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.05093661,
+            "minutes": 4.1
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.05390965999999999,
+            "minutes": 4.4
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.08456583999999999,
+            "minutes": 5.1
+          }
+        ]
+      },
+      "patch-apply-cli-go": {
+        "toolchain": {
+          "name": "exec",
+          "boundary": {
+            "language": "go",
+            "command": [
+              ".bin/task"
+            ]
+          }
+        },
+        "public": 30,
+        "hiddenKept": 79,
+        "hiddenWritten": 79,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 0.99,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.09830148999999999,
+            "minutes": 5.3
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.11238594,
+            "minutes": 5.6
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.26895342999999994,
+            "minutes": 6.9
+          }
+        ]
+      },
+      "patch-apply-cli-rs": {
+        "toolchain": {
+          "name": "exec",
+          "boundary": {
+            "language": "rust",
+            "command": [
+              "target/debug/task"
+            ]
+          }
+        },
+        "public": 30,
+        "hiddenKept": 79,
+        "hiddenWritten": 79,
+        "dropped": [],
+        "publicFailingOnReference": [],
+        "sessionsUsd": 1.13,
+        "runs": [
+          {
+            "run": 1,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.13148242999999998,
+            "minutes": 5.6
+          },
+          {
+            "run": 2,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.057661460000000005,
+            "minutes": 4.6
+          },
+          {
+            "run": 3,
+            "variant": "haiku",
+            "verdict": "passed",
+            "public": {
+              "passed": 30,
+              "total": 30
+            },
+            "hidden": {
+              "passed": 79,
+              "total": 79
+            },
+            "failedScenarios": [],
+            "refused": [],
+            "peekAttempts": 0,
+            "costUsd": 0.11235975000000001,
+            "minutes": 6.2
+          }
+        ]
+      }
+    }
+  },
+  "mutants": {
+    "at": "2026-10-28T02:39:44.289Z",
+    "max": 30,
+    "duration-parse-go": {
+      "language": "go",
+      "sites": 76,
+      "sampled": 40,
+      "built": 40,
+      "killedByPublic": 39,
+      "killedByHiddenOnly": 0,
+      "survivedBoth": 1,
+      "hiddenKills": 37,
+      "survivors": [
+        "task.go:13 9007199254740991 -> 9007199254740992 (the public suite killed it)",
+        "task.go:58 1 -> 2",
+        "task.go:89 < -> <= (the public suite killed it)"
+      ]
+    },
+    "duration-parse-rs": {
+      "language": "rust",
+      "sites": 44,
+      "sampled": 40,
+      "built": 38,
+      "killedByPublic": 38,
+      "killedByHiddenOnly": 0,
+      "survivedBoth": 0,
+      "hiddenKills": 37,
+      "survivors": [
+        "lib.rs:116 > -> >= (the public suite killed it)"
+      ]
+    },
+    "csv-export-http-py": {
+      "language": "python",
+      "sites": 248,
+      "sampled": 30,
+      "built": 30,
+      "killedByPublic": 21,
+      "killedByHiddenOnly": 5,
+      "survivedBoth": 4,
+      "hiddenKills": 24,
+      "survivors": [
+        "server.py:29 4 -> 5 (the public suite killed it)",
+        "server.py:35 4 -> 3 (the public suite killed it)",
+        "server.py:52 146096 -> 146095",
+        "server.py:76 > -> >=",
+        "server.py:167 0 -> 1",
+        "server.py:175 > -> >="
+      ]
+    },
+    "csv-export-http-go": {
+      "language": "go",
+      "sites": 394,
+      "sampled": 30,
+      "built": 29,
+      "killedByPublic": 19,
+      "killedByHiddenOnly": 5,
+      "survivedBoth": 5,
+      "hiddenKills": 22,
+      "survivors": [
+        "main.go:11 == -> !=",
+        "requisition.go:58 1 -> 2",
+        "requisition.go:138 && -> || (the public suite killed it)",
+        "requisition.go:160 > -> >=",
+        "requisition.go:196 0 -> 1",
+        "requisition.go:250 < -> <= (the public suite killed it)",
+        "requisition.go:268 0 -> 1"
+      ]
+    },
+    "csv-export-http-rs": {
+      "language": "rust",
+      "sites": 341,
+      "sampled": 30,
+      "built": 30,
+      "killedByPublic": 22,
+      "killedByHiddenOnly": 4,
+      "survivedBoth": 4,
+      "hiddenKills": 24,
+      "survivors": [
+        "json.rs:71 1 -> 2 (the public suite killed it)",
+        "json.rs:183 1 -> 2",
+        "json.rs:246 10 -> 9",
+        "main.rs:73 + -> -",
+        "time.rs:48 4 -> 5 (the public suite killed it)",
+        "time.rs:110 59 -> 60"
+      ]
+    },
+    "patch-apply-cli-py": {
+      "language": "python",
+      "sites": 194,
+      "sampled": 30,
+      "built": 30,
+      "killedByPublic": 21,
+      "killedByHiddenOnly": 0,
+      "survivedBoth": 9,
+      "hiddenKills": 21,
+      "survivors": [
+        "cli.py:6 0 -> 1",
+        "patch.py:43 or -> and",
+        "patch.py:77 1 -> 2",
+        "patch.py:91 3 -> 4",
+        "patch.py:95 2 -> 1",
+        "patch.py:120 or -> and",
+        "patch.py:126 and -> or",
+        "patch.py:215 + -> -",
+        "patch.py:265 + -> -"
+      ]
+    },
+    "patch-apply-cli-go": {
+      "language": "go",
+      "sites": 271,
+      "sampled": 30,
+      "built": 30,
+      "killedByPublic": 15,
+      "killedByHiddenOnly": 0,
+      "survivedBoth": 15,
+      "hiddenKills": 15,
+      "survivors": [
+        "apply.go:95 1 -> 0",
+        "apply.go:216 0 -> 1",
+        "main.go:42 1 -> 2",
+        "parse.go:62 0 -> 1",
+        "parse.go:66 == -> !=",
+        "parse.go:72 1 -> 2",
+        "parse.go:75 0 -> 1",
+        "parse.go:130 0 -> 1",
+        "parse.go:165 0 -> 1",
+        "parse.go:223 > -> >=",
+        "parse.go:230 && -> ||",
+        "parse.go:231 5 -> 4",
+        "parse.go:232 3 -> 2",
+        "parse.go:233 2 -> 1",
+        "parse.go:256 2 -> 3"
+      ]
+    },
+    "patch-apply-cli-rs": {
+      "language": "rust",
+      "sites": 193,
+      "sampled": 30,
+      "built": 30,
+      "killedByPublic": 18,
+      "killedByHiddenOnly": 0,
+      "survivedBoth": 12,
+      "hiddenKills": 18,
+      "survivors": [
+        "json.rs:49 != -> ==",
+        "json.rs:119 0 -> 1",
+        "json.rs:146 + -> -",
+        "json.rs:152 + -> -",
+        "json.rs:169 1 -> 0",
+        "patch.rs:129 1 -> 0",
+        "patch.rs:132 + -> -",
+        "patch.rs:186 && -> ||",
+        "patch.rs:186 + -> -",
+        "patch.rs:210 1 -> 0",
+        "patch.rs:370 1 -> 2",
+        "patch.rs:439 1 -> 0"
+      ]
+    }
+  },
+  "oracle": {
+    "at": "2026-10-28T03:39:55.506Z",
+    "concurrency": 4,
+    "patch-apply-cli-py": {
+      "cases": 8842,
+      "gitJudgedSet": {
+        "agreed": 7533,
+        "of": 7533
+      },
+      "gitAllCases": {
+        "agreed": 8789,
+        "of": 8842
+      },
+      "sameAsTypeScriptCommand": {
+        "same": 8842,
+        "of": 8842,
+        "differing": {},
+        "firstDiffering": []
+      },
+      "minutes": 0.7,
+      "file": "evidence/languages/oracle/patch-apply-cli-py.jsonl"
+    },
+    "patch-apply-cli-go": {
+      "cases": 8842,
+      "gitJudgedSet": {
+        "agreed": 7533,
+        "of": 7533
+      },
+      "gitAllCases": {
+        "agreed": 8789,
+        "of": 8842
+      },
+      "sameAsTypeScriptCommand": {
+        "same": 8842,
+        "of": 8842,
+        "differing": {},
+        "firstDiffering": []
+      },
+      "minutes": 0.1,
+      "file": "evidence/languages/oracle/patch-apply-cli-go.jsonl"
+    },
+    "patch-apply-cli-rs": {
+      "cases": 8842,
+      "gitJudgedSet": {
+        "agreed": 7533,
+        "of": 7533
+      },
+      "gitAllCases": {
+        "agreed": 8789,
+        "of": 8842
+      },
+      "sameAsTypeScriptCommand": {
+        "same": 8842,
+        "of": 8842,
+        "differing": {},
+        "firstDiffering": []
+      },
+      "minutes": 0.2,
+      "file": "evidence/languages/oracle/patch-apply-cli-rs.jsonl"
+    }
+  },
+  "oracleSurvivors": {
+    "at": "2026-10-28T04:36:35.271Z",
+    "patch-apply-cli-py": {
+      "survivors": 9,
+      "differOnRealHistory": 1,
+      "rows": [
+        {
+          "path": "cli.py",
+          "line": 6,
+          "label": "0 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 43,
+          "label": "or -> and",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 77,
+          "label": "1 -> 2",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 91,
+          "label": "3 -> 4",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 95,
+          "label": "2 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 120,
+          "label": "or -> and",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 126,
+          "label": "and -> or",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 215,
+          "label": "+ -> -",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.py",
+          "line": 265,
+          "label": "+ -> -",
+          "casesDiffering": 52,
+          "firstDiffering": [
+            330,
+            426,
+            434
+          ]
+        }
+      ]
+    },
+    "patch-apply-cli-go": {
+      "survivors": 15,
+      "differOnRealHistory": 1,
+      "rows": [
+        {
+          "path": "apply.go",
+          "line": 95,
+          "label": "1 -> 0",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "apply.go",
+          "line": 216,
+          "label": "0 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "main.go",
+          "line": 42,
+          "label": "1 -> 2",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 62,
+          "label": "0 -> 1",
+          "casesDiffering": 4,
+          "firstDiffering": [
+            6123,
+            6124,
+            6125
+          ]
+        },
+        {
+          "path": "parse.go",
+          "line": 66,
+          "label": "== -> !=",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 72,
+          "label": "1 -> 2",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 75,
+          "label": "0 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 130,
+          "label": "0 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 165,
+          "label": "0 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 223,
+          "label": "> -> >=",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 230,
+          "label": "&& -> ||",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 231,
+          "label": "5 -> 4",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 232,
+          "label": "3 -> 2",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 233,
+          "label": "2 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "parse.go",
+          "line": 256,
+          "label": "2 -> 3",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        }
+      ]
+    },
+    "patch-apply-cli-rs": {
+      "survivors": 12,
+      "differOnRealHistory": 0,
+      "rows": [
+        {
+          "path": "json.rs",
+          "line": 49,
+          "label": "!= -> ==",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "json.rs",
+          "line": 119,
+          "label": "0 -> 1",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "json.rs",
+          "line": 146,
+          "label": "+ -> -",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "json.rs",
+          "line": 152,
+          "label": "+ -> -",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "json.rs",
+          "line": 169,
+          "label": "1 -> 0",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 129,
+          "label": "1 -> 0",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 132,
+          "label": "+ -> -",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 186,
+          "label": "&& -> ||",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 186,
+          "label": "+ -> -",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 210,
+          "label": "1 -> 0",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 370,
+          "label": "1 -> 2",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        },
+        {
+          "path": "patch.rs",
+          "line": 439,
+          "label": "1 -> 0",
+          "casesDiffering": 0,
+          "firstDiffering": []
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "language": "go",
+  "sites": 271,
+  "sampled": 30,
+  "built": 30,
+  "killedByPublic": 15,
+  "killedByHiddenOnly": 0,
+  "survivedBoth": 15,
+  "hiddenKills": 15,
+  "survivors": [
+    "apply.go:95 1 -> 0",
+    "apply.go:216 0 -> 1",
+    "main.go:42 1 -> 2",
+    "parse.go:62 0 -> 1",
+    "parse.go:66 == -> !=",
+    "parse.go:72 1 -> 2",
+    "parse.go:75 0 -> 1",
+    "parse.go:130 0 -> 1",
+    "parse.go:165 0 -> 1",
+    "parse.go:223 > -> >=",
+    "parse.go:230 && -> ||",
+    "parse.go:231 5 -> 4",
+    "parse.go:232 3 -> 2",
+    "parse.go:233 2 -> 1",
+    "parse.go:256 2 -> 3"
+  ],
+  "rows": [
+    {
+      "path": "apply.go",
+      "line": 42,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "apply.go",
+      "line": 95,
+      "label": "1 -> 0",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "apply.go",
+      "line": 143,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "apply.go",
+      "line": 157,
+      "label": "- -> +",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "apply.go",
+      "line": 192,
+      "label": "- -> +",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "apply.go",
+      "line": 206,
+      "label": "<= -> <",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "apply.go",
+      "line": 216,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "main.go",
+      "line": 16,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "main.go",
+      "line": 23,
+      "label": "2 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "main.go",
+      "line": 31,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "main.go",
+      "line": 42,
+      "label": "1 -> 2",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 46,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 62,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 66,
+      "label": "== -> !=",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 72,
+      "label": "1 -> 2",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 75,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 101,
+      "label": "- -> +",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 130,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 139,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 141,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 165,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 172,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 185,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 200,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "parse.go",
+      "line": 223,
+      "label": "> -> >=",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 230,
+      "label": "&& -> ||",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 231,
+      "label": "5 -> 4",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 232,
+      "label": "3 -> 2",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 233,
+      "label": "2 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "parse.go",
+      "line": 256,
+      "label": "2 -> 3",
+      "public": "survived",
+      "hidden": "survived"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[02:34:50] csv-export-http-py/haiku/1 passed public 36/36, hidden 48/48 
+[02:34:52] csv-export-http-py/haiku/2 passed public 36/36, hidden 48/48 
+[02:34:55] csv-export-http-py/haiku/3 passed public 36/36, hidden 48/48 
+[02:34:58] duration-parse-rs/haiku/1 passed public 45/45, hidden 110/110 
+[02:34:59] duration-parse-rs/haiku/2 passed public 45/45, hidden 110/110 
+[02:35:01] duration-parse-rs/haiku/3 passed public 45/45, hidden 110/110 
+9 result(s) in results.jsonl
+[03:37:19] csv-export-http-go/haiku/1 passed public 36/36, hidden 48/48 
+[03:37:23] csv-export-http-go/haiku/2 passed public 36/36, hidden 48/48 
+[03:37:27] csv-export-http-go/haiku/3 overfit public 36/36, hidden 47/48 scenarios unhappy-2
+[03:37:31] csv-export-http-rs/haiku/1 passed public 36/36, hidden 48/48 
+[03:37:35] csv-export-http-rs/haiku/2 passed public 36/36, hidden 48/48 
+[03:37:39] csv-export-http-rs/haiku/3 overfit public 36/36, hidden 47/48 scenarios happy-1
+[03:37:42] patch-apply-cli-go/haiku/1 passed public 30/30, hidden 79/79 
+[03:37:45] patch-apply-cli-go/haiku/2 passed public 30/30, hidden 79/79 
+[03:37:47] patch-apply-cli-go/haiku/3 passed public 30/30, hidden 79/79 
+[03:37:51] patch-apply-cli-py/haiku/1 passed public 30/30, hidden 79/79 
+[03:37:54] patch-apply-cli-py/haiku/2 passed public 30/30, hidden 79/79 
+[03:37:58] patch-apply-cli-py/haiku/3 passed public 30/30, hidden 79/79 
+[03:38:02] patch-apply-cli-rs/haiku/1 passed public 30/30, hidden 79/79 
+[03:38:05] patch-apply-cli-rs/haiku/2 passed public 30/30, hidden 79/79 
+[03:38:08] patch-apply-cli-rs/haiku/3 passed public 30/30, hidden 79/79 
+24 result(s) in results.jsonl

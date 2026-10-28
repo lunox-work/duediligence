@@ -1,0 +1,35 @@
+{
+  "sha256": "41f624fad8a750b8c8652240a56634be97a6d8a72ba899f40bdc2a1cb6200b84",
+  "by": "phase-7 agent (not a person)",
+  "at": "2026-10-28T02:14:39.666Z",
+  "startedAt": "2026-10-28T02:14:39.621Z",
+  "minutes": 0,
+  "decided": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`; only ASCII digits count.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above 2^53 - 1 ms is rejected at parse time, never clamped; a u64 overflow is an Err, never a panic or a wrap.",
+    "Failures are an Err whose Display text names \"duration\" (parsing) or \"milliseconds\" (formatting).",
+    "`format_duration(0)` is `\"0ms\"`; every other result omits zero components."
+  ],
+  "drafted": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`; only ASCII digits count.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above 2^53 - 1 ms is rejected at parse time, never clamped; a u64 overflow is an Err, never a panic or a wrap.",
+    "Failures are an Err whose Display text names \"duration\" (parsing) or \"milliseconds\" (formatting).",
+    "`format_duration(0)` is `\"0ms\"`; every other result omits zero components."
+  ],
+  "changes": {
+    "kept": 9,
+    "edited": [],
+    "added": [],
+    "removed": []
+  }
+}

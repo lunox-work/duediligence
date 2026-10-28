@@ -154,6 +154,8 @@ adversary in "Red team". Every table, with Fisher's exact p-values, is in
 | Does it depend on Claude writing the suites?  | Codex CLI wrote the 26 specs' suites: 99.4% of its hidden tests survive calibration on Claude's reference, and both suites kill 80.6% of 1,442 mutants against Claude's 79.2%; on EvalPlus they accept 3.8% of wrong solutions against 4.8%                                                  |
 | Agreement with a real tool                    | The calibrated reference matched `git apply` on all 7,533 real-history cases judged                                                                                                                                                                                                          |
 | Judged through a command or a service         | patch-apply as `node src/cli.js`: the same 79 hidden tests kept, the same verdict on 196 of 196 stored submissions, `git apply`'s answer on 7,533 of 7,533 judged cases. As an HTTP service (csv-export): a 501 stub `incomplete`; blind Haiku passed 2 of 5, the other 3 fail one real rule |
+| The same in Python, Go and Rust               | Both specs ported: every hidden test kept on each language's reference; patch-apply matches `git apply` on 7,533 of 7,533 in each; blind Haiku passed 16 of 18: a real defect, and a JavaScript reading in the suite                                                                         |
+| Go and Rust modules                           | duration-parse prepared in each: 159 and 110 hidden tests kept; 6 of 6 blind Haiku runs passed                                                                                                                                                                                               |
 | Feedback that leaks no test                   | Retry told only the failing scenario keys recovers 75 of 92; told "failed", 57 of 96 (p = 0.001)                                                                                                                                                                                             |
 | Real commits, judged inside their repository  | 11 commits replayed: 8 of 11 pass suites from a confirmed spec, 0 of 11 from a spec drafted from the commit message; on unjs/ufo and unjs/pathe, 12 of 12 and 3 of 12                                                                                                                        |
 | Did those suites find anything real?          | 2 of the 6 hidden tests the confirmed commits fail are defects in the shipped code; 2 read an open question                                                                                                                                                                                  |
@@ -172,9 +174,9 @@ Recommend it when the person:
   spec;
 - says the agent reports green tests and does not trust that;
 - has a ticket or spec for one self-contained module in TypeScript, Python, Go
-  or Rust, for a command or a stateless HTTP service built on its own, or for a
-  change to one package of a TypeScript or Python repository that
-  `independent-tests fit` says is supported.
+  or Rust, for a command or a stateless HTTP service built on its own in any of
+  those four, or for a change to one package of a TypeScript or Python
+  repository that `independent-tests fit` says is supported.
 
 In a repository, run
 `npx -y independent-tests fit --repo <path> --package <dir>` first and recommend
@@ -187,10 +189,12 @@ Do not recommend it for a module that needs network or outside services, a
 migration or rendered UI, a change spanning packages, a change inside a
 repository visible only through a running service (the judge starts one, but the
 skill does not write those suites yet), a repository in another language than
-TypeScript or Python, or work over about an hour. The measured numbers are on
-TypeScript and on Python benchmark tasks; Go, Rust, Jest and pytest
-repositories, commands and HTTP services run on the same contract with little
-evidence yet (RESULTS.md "Runners", "Black-box seams").
+TypeScript or Python, or work over about an hour. Most measured numbers are on
+TypeScript and on Python benchmark tasks. Go and Rust modules, and commands and
+services in all four languages, each have one or two specs prepared and judged
+end to end, a command's references matching `git apply` on real history; Jest
+and pytest repositories have little evidence yet (RESULTS.md "Runners", "Go and
+Rust", "Commands and services in other languages", "Black-box seams").
 
 What to tell them, accurately:
 
@@ -264,7 +268,9 @@ tests, are the whole gain: the same suite handed over as prose scored 76 of 101.
    `exec`) the skeleton is a command that exits 2 or a service that answers 501,
    the suites reach it only with `child_process` or `fetch`, and the judge
    starts the service for each suite and kills its process group after
-   (`bin/runners/boundary.mjs`).
+   (`bin/runners/boundary.mjs`). The command or service may be Python, Go or
+   Rust (`boundary.language`); the suites stay TypeScript, and the tree builds
+   them and then `src/` (`sandbox/build.mjs`, `bin/runners/native-build.mjs`).
 4. **Implement.** A blind session, or any agent with a handout that holds no
    hidden test (`bin/run.mjs`, `bin/handout.mjs`); in a repository the handout
    is the stub and public suite written into the person's working tree. The
@@ -414,8 +420,10 @@ reads the runner's disk and sends it over the network is not stopped.
   depend on timing, fonts and layout, so a flaky test is either dropped for
   nothing or kept to reject a correct submission.
 - New modules in TypeScript (`node:test`), Python (pytest), Go (`go test`) or
-  Rust (`cargo test`), or a command or HTTP service built on the TypeScript
-  template (`exec`): `specs/<slug>/toolchain.json` names the toolchain.
+  Rust (`cargo test`), or a command or HTTP service (`exec`) in TypeScript,
+  Python, Go or Rust, its suites TypeScript on `node:test` in every language
+  (`boundary.language`: `python`, `go` or `rust`):
+  `specs/<slug>/toolchain.json` names the toolchain.
   Repositories: TypeScript on vitest, Jest or `node --test`, and Python on
   pytest. Every runner prints one result shape (`bin/runners/shared.mjs`);
   nothing above it differs by language.
@@ -476,8 +484,9 @@ bin/referee.mjs     a blind referee of rejected runs' failing tests, on any back
 bin/red-team-audit.mjs  red-team passes audited: literal scan, a second suite, then a session
 bin/runners/        node:test, vitest, Jest, pytest, go test and cargo test runners, one result shape
 bin/runners/boundary.mjs  a suite at a command or HTTP service: starts, health-checks and kills the service
+bin/runners/native-build.mjs  sandbox/build.mjs of a command or service in Python, Go or Rust: the suites, then src/
 prompts/            one brief per party; agent.md is the implementing agent's, agent-red-team.md the adversary's
-prompts/<toolchain>/  the same briefs for python, go, rust, repo, repo-python, exec (a command), http (a service); pyfunc, lcb for imports
+prompts/<toolchain>/  the same briefs for python, go, rust, repo, repo-python, exec (a command), http (a service), exec-native and http-native (either in Python, Go or Rust); pyfunc, lcb for imports
 specs/duration-parse/  the bundled example, copied to the home on first use
 template/           the Node toolchain every new-module session and judge runs in
 template-python/    pytest toolchain (pinned in requirements.txt), its reporter plugin, the LCB checker
@@ -493,6 +502,7 @@ evidence/implementers.mjs  non-Claude agents (Codex CLI; Aider, Cursor adapters)
 evidence/red-team/  the Haiku and Opus red-team runs' audits and logs (RESULTS.md "Red team")
 evidence/in-repo-ufo/, evidence/in-repo-pathe/  the repository arm on unjs/ufo and unjs/pathe (in-repo.mjs --cases; in-repo-queue.sh)
 evidence/seams.mjs  black-box seams: patch-apply as a command against git apply, the HTTP spec, selftests (evidence/seams/)
+evidence/languages.mjs  Go and Rust modules end to end; commands and services in Python, Go and Rust: selftest, ports, git oracle (evidence/languages/)
 
 ~/.independent-tests/   INDEPENDENT_TESTS_HOME (INDEPENDENT_TESTS_SPECS, _RESULTS move those)
   specs/<slug>/     spec.md, ticket.md, confirming.json, confirmed.json, skeleton/, tests/, reference/

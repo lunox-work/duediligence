@@ -1,0 +1,13 @@
+{
+  "name": "exec",
+  "boundary": {
+    "language": "python",
+    "service": {
+      "start": [
+        "python3",
+        "src/server.py"
+      ],
+      "healthcheck": "/"
+    }
+  }
+}

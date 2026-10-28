@@ -1,0 +1,3 @@
+[02:31:24] csv-export-http-go reference started
+[02:33:57] csv-export-http-go kept 48/48 hidden, dropped 0; reference public 36/36  
+csv-export-http-go: ok, kept 48/48 hidden, public failing on reference: 0

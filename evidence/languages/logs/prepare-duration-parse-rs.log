@@ -1,0 +1,16 @@
+[02:23:57] installing the rust toolchain into /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/languages/toolchains/rust-fe8baa919113 (once)
+[02:23:57] duration-parse-rs skeleton started
+[02:24:30] duration-parse-rs skeleton done $0.15
+[02:24:30] duration-parse-rs public started
+[02:25:24] duration-parse-rs public done $0.25
+[02:25:24] duration-parse-rs private started
+[02:27:53] duration-parse-rs private done $0.61
+generated duration-parse-rs
+[02:27:55] duration-parse-rs reference started
+[02:28:00] waiting for a session slot (2 max, 40% memory free)
+[02:31:24] duration-parse-rs kept 110/110 hidden, dropped 0; reference public 45/45  
+duration-parse-rs: ok, kept 110/110 hidden, public failing on reference: 0
+
+duration-parse-rs: ready. Public 45 tests; hidden 110 kept of 110 (none dropped).
+Hidden suite sha256 f0b6b90cc294d01d72ed71b0874b8a2339747f09a52073171db925836b0a02b2: the handout shows it, and the judge refuses once it changes.
+Next: node bin/run.mjs duration-parse-rs, or node bin/handout.mjs duration-parse-rs <dir>.

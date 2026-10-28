@@ -1,0 +1,233 @@
+{
+  "language": "python",
+  "sites": 194,
+  "sampled": 30,
+  "built": 30,
+  "killedByPublic": 21,
+  "killedByHiddenOnly": 0,
+  "survivedBoth": 9,
+  "hiddenKills": 21,
+  "survivors": [
+    "cli.py:6 0 -> 1",
+    "patch.py:43 or -> and",
+    "patch.py:77 1 -> 2",
+    "patch.py:91 3 -> 4",
+    "patch.py:95 2 -> 1",
+    "patch.py:120 or -> and",
+    "patch.py:126 and -> or",
+    "patch.py:215 + -> -",
+    "patch.py:265 + -> -"
+  ],
+  "rows": [
+    {
+      "path": "cli.py",
+      "line": 6,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "cli.py",
+      "line": 14,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "cli.py",
+      "line": 22,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 43,
+      "label": "or -> and",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 77,
+      "label": "1 -> 2",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 91,
+      "label": "3 -> 4",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 95,
+      "label": "2 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 100,
+      "label": "== -> !=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 120,
+      "label": "or -> and",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 126,
+      "label": "and -> or",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 148,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 159,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 165,
+      "label": "2 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 171,
+      "label": "== -> !=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 173,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 178,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 186,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 189,
+      "label": "2 -> 3",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 200,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 209,
+      "label": "and -> or",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 215,
+      "label": "+ -> -",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 221,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 229,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 234,
+      "label": "+ -> -",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 239,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 252,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 262,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 265,
+      "label": "+ -> -",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "patch.py",
+      "line": 273,
+      "label": "+ -> -",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "patch.py",
+      "line": 284,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    }
+  ]
+}

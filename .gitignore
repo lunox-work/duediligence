@@ -28,3 +28,7 @@ evidence/seams/specs/patch-apply-cli/
 evidence/seams/template/
 evidence/seams/toolchains/
 evidence/seams/bundled.json
+evidence/languages/specs/duration-parse/
+evidence/languages/template/
+evidence/languages/toolchains/
+evidence/languages/bundled.json

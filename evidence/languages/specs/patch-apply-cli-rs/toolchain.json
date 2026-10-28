@@ -1,0 +1,9 @@
+{
+  "name": "exec",
+  "boundary": {
+    "language": "rust",
+    "command": [
+      "target/debug/task"
+    ]
+  }
+}

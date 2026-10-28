@@ -1,0 +1,230 @@
+{
+  "language": "go",
+  "sites": 394,
+  "sampled": 30,
+  "built": 29,
+  "killedByPublic": 19,
+  "killedByHiddenOnly": 5,
+  "survivedBoth": 5,
+  "hiddenKills": 22,
+  "survivors": [
+    "main.go:11 == -> !=",
+    "requisition.go:58 1 -> 2",
+    "requisition.go:138 && -> || (the public suite killed it)",
+    "requisition.go:160 > -> >=",
+    "requisition.go:196 0 -> 1",
+    "requisition.go:250 < -> <= (the public suite killed it)",
+    "requisition.go:268 0 -> 1"
+  ],
+  "rows": [
+    {
+      "path": "main.go",
+      "line": 11,
+      "label": "== -> !=",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "requisition.go",
+      "line": 58,
+      "label": "1 -> 2",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "requisition.go",
+      "line": 76,
+      "label": "|| -> &&",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 85,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 108,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 130,
+      "label": "&& -> ||",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 135,
+      "label": "11 -> 12",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 138,
+      "label": "&& -> ||",
+      "public": "killed",
+      "hidden": "survived"
+    },
+    {
+      "path": "requisition.go",
+      "line": 139,
+      "label": "13 -> 12",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 156,
+      "label": "&& -> ||",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 158,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 160,
+      "label": "> -> >=",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "requisition.go",
+      "line": 170,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 171,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 174,
+      "label": "60 -> 59",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 183,
+      "label": "2 -> 3",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 184,
+      "label": "400 -> 399",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 188,
+      "label": "11 -> 12",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 196,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "requisition.go",
+      "line": 210,
+      "label": "12 -> 11",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 212,
+      "label": "+ -> -",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 217,
+      "label": "719468 -> 719469",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 220,
+      "label": "- -> +",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 222,
+      "label": "- -> +",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 224,
+      "label": "2 -> 3",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 227,
+      "label": "12 -> 13",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "requisition.go",
+      "line": 250,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "survived"
+    },
+    {
+      "path": "requisition.go",
+      "line": 268,
+      "label": "0 -> 1",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "server.go",
+      "line": 26,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "server.go",
+      "line": 85,
+      "label": "+ -> -",
+      "notBuilt": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "exec",
+  "boundary": {
+    "language": "go",
+    "service": {
+      "start": [
+        ".bin/task"
+      ],
+      "healthcheck": "/"
+    }
+  }
+}

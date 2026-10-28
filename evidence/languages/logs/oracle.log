@@ -1,0 +1,15 @@
+[03:39:03] oracle: patch-apply-cli-py 2000 cases
+[03:39:12] oracle: patch-apply-cli-py 4000 cases
+[03:39:22] oracle: patch-apply-cli-py 6000 cases
+[03:39:32] oracle: patch-apply-cli-py 8000 cases
+[03:39:36] oracle: patch-apply-cli-py {"cases":8842,"gitJudgedSet":{"agreed":7533,"of":7533},"gitAllCases":{"agreed":8789,"of":8842},"sameAsTypeScriptCommand":{"same":8842,"of":8842,"differing":{},"firstDiffering":[]},"minutes":0.7,"file":"evidence/languages/oracle/patch-apply-cli-py.jsonl"}
+[03:39:39] oracle: patch-apply-cli-go 2000 cases
+[03:39:40] oracle: patch-apply-cli-go 4000 cases
+[03:39:42] oracle: patch-apply-cli-go 6000 cases
+[03:39:43] oracle: patch-apply-cli-go 8000 cases
+[03:39:44] oracle: patch-apply-cli-go {"cases":8842,"gitJudgedSet":{"agreed":7533,"of":7533},"gitAllCases":{"agreed":8789,"of":8842},"sameAsTypeScriptCommand":{"same":8842,"of":8842,"differing":{},"firstDiffering":[]},"minutes":0.1,"file":"evidence/languages/oracle/patch-apply-cli-go.jsonl"}
+[03:39:48] oracle: patch-apply-cli-rs 2000 cases
+[03:39:50] oracle: patch-apply-cli-rs 4000 cases
+[03:39:52] oracle: patch-apply-cli-rs 6000 cases
+[03:39:54] oracle: patch-apply-cli-rs 8000 cases
+[03:39:55] oracle: patch-apply-cli-rs {"cases":8842,"gitJudgedSet":{"agreed":7533,"of":7533},"gitAllCases":{"agreed":8789,"of":8842},"sameAsTypeScriptCommand":{"same":8842,"of":8842,"differing":{},"firstDiffering":[]},"minutes":0.2,"file":"evidence/languages/oracle/patch-apply-cli-rs.jsonl"}

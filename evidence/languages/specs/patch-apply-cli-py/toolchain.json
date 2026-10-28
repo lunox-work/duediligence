@@ -1,0 +1,10 @@
+{
+  "name": "exec",
+  "boundary": {
+    "language": "python",
+    "command": [
+      "python3",
+      "src/cli.py"
+    ]
+  }
+}

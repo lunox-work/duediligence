@@ -1,0 +1,35 @@
+{
+  "sha256": "87f321301034bdf9d0edfa43d08cb8c571678649207079f71bfcdf9ed3071c1a",
+  "by": "phase-7 agent (not a person)",
+  "at": "2026-10-28T02:14:39.578Z",
+  "startedAt": "2026-10-28T02:14:39.533Z",
+  "minutes": 0,
+  "decided": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`; only ASCII digits count.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above 2^53 - 1 ms is rejected at parse time, never clamped, and an int64 overflow is rejected, never wrapped.",
+    "Failures return the zero value and an error whose message names \"duration\" (parsing) or \"milliseconds\" (formatting).",
+    "`FormatDuration(0)` is `\"0ms\"`; every other result omits zero components."
+  ],
+  "drafted": [
+    "Leading and trailing whitespace is trimmed; whitespace anywhere else is invalid.",
+    "Units are lowercase only: `3S`, `3MS` and `3Ms` are invalid.",
+    "Leading zeros are invalid, except the single digit `0`; only ASCII digits count.",
+    "A count may exceed the next unit's size (`90m` is valid); units must still appear in descending order, each at most once.",
+    "The empty string and a bare number without a unit are invalid.",
+    "No weeks, years or fractional components.",
+    "A total above 2^53 - 1 ms is rejected at parse time, never clamped, and an int64 overflow is rejected, never wrapped.",
+    "Failures return the zero value and an error whose message names \"duration\" (parsing) or \"milliseconds\" (formatting).",
+    "`FormatDuration(0)` is `\"0ms\"`; every other result omits zero components."
+  ],
+  "changes": {
+    "kept": 9,
+    "edited": [],
+    "added": [],
+    "removed": []
+  }
+}

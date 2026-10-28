@@ -1,0 +1,9 @@
+{
+  "name": "exec",
+  "boundary": {
+    "language": "go",
+    "command": [
+      ".bin/task"
+    ]
+  }
+}

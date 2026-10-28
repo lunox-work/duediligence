@@ -1,0 +1,15 @@
+[02:15:14] installing the go toolchain into /Users/charlieangriawan/Repositories/lunox-work/public/independent-tests/evidence/languages/toolchains/go-add58e229360 (once)
+[02:15:14] duration-parse-go skeleton started
+[02:15:32] duration-parse-go skeleton done $0.16
+[02:15:32] duration-parse-go public started
+[02:16:53] duration-parse-go public done $0.38
+[02:16:53] duration-parse-go private started
+[02:19:40] duration-parse-go private done $0.70
+generated duration-parse-go
+[02:20:01] duration-parse-go reference started
+[02:20:55] duration-parse-go kept 159/159 hidden, dropped 0; reference public 65/65  
+duration-parse-go: ok, kept 159/159 hidden, public failing on reference: 0
+
+duration-parse-go: ready. Public 65 tests; hidden 159 kept of 159 (none dropped).
+Hidden suite sha256 ff90497191eeac72bcb6b5b2f07ba772b56055616e84cb8d6652b1ca9febaa84: the handout shows it, and the judge refuses once it changes.
+Next: node bin/run.mjs duration-parse-go, or node bin/handout.mjs duration-parse-go <dir>.

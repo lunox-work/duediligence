@@ -14,7 +14,11 @@ referee ([Writer backends](#writer-backends)) and as implementer
 ([Red team](#red-team)), and 12 changes in two public repositories
 ([In repositories not written here](#in-repositories-not-written-here)). Run
 2026-10-27: specs checked through a command or an HTTP service
-([Black-box seams](#black-box-seams)). p-values are Fisher's exact test,
+([Black-box seams](#black-box-seams)). Run 2026-10-28: Go and Rust modules end
+to end ([Go and Rust](#go-and-rust)), and commands and services written in
+Python, Go and Rust
+([Commands and services in other languages](#commands-and-services-in-other-languages)).
+p-values are Fisher's exact test,
 two-sided.
 
 ## The agent's own green run is not an acceptance signal
@@ -693,6 +697,110 @@ hidden writer's one open question (whether an error body may hold keys beyond
   network, so an HTTP spec's suites cannot run inside it. UI through Playwright
   is out of scope.
 
+## Go and Rust
+
+The `go` and `rust` toolchains end to end, 2026-10-28, on the host (Go 1.27.3,
+Rust 1.99.1 from Homebrew): duration-parse ported by hand to each, confirmed by
+the phase's agent, not a person (`--by "phase-7 agent (not a person)"`),
+prepared on Opus 5.5, three blind Haiku 5.5 runs each
+(`evidence/languages/specs/`, `evidence/languages/results.jsonl`;
+[evidence/languages.mjs](evidence/languages.mjs),
+`evidence/languages/queue.sh modules`).
+
+| spec                                  | prepare (Opus 5.5) | public | hidden kept | Haiku 5.5 blind runs        |
+| ------------------------------------- | ------------------ | -----: | ----------: | --------------------------- |
+| `duration-parse-go`: `(int64, error)` | $1.42, about 6 min |     65 |  159 of 159 | 3 of 3 `passed`, $0.02      |
+| `duration-parse-rs`: `Result<u64, _>` | $1.28, about 7 min |     45 |  110 of 110 | 3 of 3 `passed`, $0.01–0.02 |
+
+- **Mutants, no model** (`languages.mjs mutants`): 40 one-token mutants of each
+  reference (an operator flipped, a literal moved by one, by text: mutation.mjs
+  reads TypeScript's syntax tree only), judged as submissions. Go: the public
+  suite killed 39 of 40, the one left is equivalent (`u := -1` to `-2`, a
+  sentinel nothing reads as a number). Rust: 38 built, the public suite killed
+  all 38. On this spec the public suite leaves the hidden one nothing to find.
+- Every session ran `go` or `cargo` inside Claude Code's sandbox with no change
+  to either toolchain. No run tried to read a hidden path.
+
+## Commands and services in other languages
+
+A command or service written in Python, Go or Rust (toolchain `exec` with
+`boundary.language`; lib.mjs `NATIVE`): the suites stay TypeScript on
+`node:test` and reach the code only through the boundary, the tree is the node
+template plus `go.mod` or `Cargo.toml`, and `sandbox/build.mjs`
+(`bin/runners/native-build.mjs`) builds the suites and then `src/` for
+`npm run build`, the judge's runner and a service's start alike. Briefs:
+`prompts/exec-native/`, `prompts/http-native/`. Checked 2026-10-28.
+
+**Selftest, no model** (`languages.mjs selftest`, 43 checks). A hand-made
+command and service in each language, its suites calibrated by script: the
+reference `passed`, the stub `incomplete`, a submission tuned to the public test
+`overfit`, one that does not build `incomplete` and not compiled; the staged
+tree's own `npm run build` passes on the stub and `npm test` fails; what the
+build leaves (`.bin/`, `target/`, `Cargo.lock`, `__pycache__`) is never a
+change; no service left running; every brief renders with no TypeScript
+contract in it. The TypeScript seams' selftest and the package's smoke test
+still pass.
+
+**The seams' two specs, ported** (`languages.mjs port`). csv-export-http (a
+service) and patch-apply-cli (a command) for each language: the same spec but
+the command line in its interface paragraph, the same public and hidden tests
+(csv-export-http's contract types moved from `src/server.ts` into
+`tests/*/contract.ts`), a stub written by script. Only the reference is new: an
+Opus 5.5 session per port writes it in the language and calibration runs on it
+(`calibrate.mjs`), then three Haiku runs each (`queue.sh seams`).
+
+| port                    | reference (Opus 5.5) | hidden kept | Haiku 5.5 blind runs                                     |
+| ----------------------- | -------------------- | ----------: | -------------------------------------------------------- |
+| csv-export-http, Python | $0.41, 1.2 min       |    48 of 48 | 3 of 3 `passed`, $0.04–0.05                              |
+| csv-export-http, Go     | $0.75, 2.5 min       |    48 of 48 | 2 `passed`, 1 `overfit` 47/48 on `unhappy-2`, $0.04–0.05 |
+| csv-export-http, Rust   | $0.86, 2.3 min       |    48 of 48 | 2 `passed`, 1 `overfit` 47/48 on `happy-1`, $0.09–0.19   |
+| patch-apply-cli, Python | $0.83, 2.8 min       |    79 of 79 | 3 of 3 `passed`, $0.05–0.08                              |
+| patch-apply-cli, Go     | $0.99, 3.5 min       |    79 of 79 | 3 of 3 `passed`, $0.10–0.27                              |
+| patch-apply-cli, Rust   | $1.13, 4.0 min       |    79 of 79 | 3 of 3 `passed`, $0.06–0.13                              |
+
+- **Every hidden test the TypeScript reference kept, each language's reference
+  passes**, and every one fails on each stub: 48 and 79 kept of 48 and 79, six
+  times. No suite file changed but csv-export-http's import line, beside its
+  added `contract.ts`.
+- **Against `git apply`** (`languages.mjs oracle`; the archive's corpus, 8,842
+  cases from real history): the Python, Go and Rust references agree with git
+  on 7,533 of 7,533 judged cases and on 8,789 of 8,842 in all, the same 53 off
+  as the TypeScript reference (a hunk matching at several places), and give the
+  TypeScript command's answer on 8,842 of 8,842, case by case. They are 360,
+  548 and 840 lines, and start no other process.
+- **The Rust overfit is a real defect.** It cuts creation times to whole
+  milliseconds ("as Date.parse cuts them", its comment says), so two
+  requisitions created 0.1 ms apart sort by id; the spec orders by creation
+  time and allows any fractional seconds.
+- **The Go overfit is a judge defect the port exposed.** A hidden test expects
+  `"openings": 1e400` to be refused as infinite, as JavaScript's `JSON.parse`
+  reads it. The spec says only "a whole number of at least 0"; the Go run reads
+  `1e400` exactly, as the integer 10^400, and accepts it. Written against a
+  TypeScript reference, the hidden suite carried a JavaScript reading of an
+  open question into every language; the three new references passed it, as
+  the reference session sees both suites. Counted as it is graded, 16 of 18 `passed`; with
+  that test left open, 17 of 18.
+- **Mutants, no model**, 30 per reference:
+
+  | port                    | built | public kills | hidden only | survive both |
+  | ----------------------- | ----: | -----------: | ----------: | -----------: |
+  | csv-export-http, Python |    30 |           21 |           5 |            4 |
+  | csv-export-http, Go     |    29 |           19 |           5 |            5 |
+  | csv-export-http, Rust   |    30 |           22 |           4 |            4 |
+  | patch-apply-cli, Python |    30 |           21 |           0 |            9 |
+  | patch-apply-cli, Go     |    30 |           15 |           0 |           15 |
+  | patch-apply-cli, Rust   |    30 |           18 |           0 |           12 |
+
+  On csv-export-http the hidden suite kills about half of what the public one
+  leaves: 5 of 9, 5 of 10, 4 of 8. On patch-apply it kills none, so
+  every mutant both suites passed was run on the git corpus
+  (`languages.mjs oracle-survivors`): 34 of the 36 answer all 8,842 real cases
+  as their reference does, so they never show on real history, most likely
+  equivalent (not checked one by one). Two are real misses:
+  in Python, `start + delta` turned to `start - delta` carries the wrong offset
+  into a file's later hunks (52 cases differ); in Go, a `new file mode` line
+  read only after the file's first hunk (4 cases). Both suites pass both.
+
 ## What it does not show
 
 - **That agents often overfit visible tests.** On precise specs every arm is at
@@ -716,13 +824,16 @@ hidden writer's one open question (whether an error body may hold keys beyond
 - **That other agents need it more or less than Haiku.** Codex passed 50 of 50
   on ten archive specs whose suites it could have seen, since they were
   published.
-- **Much about the other runners.** One prepared Python module and one Jest
-  repository spec, both passed by Haiku on every run, so neither separates
-  anything; pytest repositories, Go and Rust only on hand-made fixtures, never
-  prepared by a model.
-- **Much about black-box seams.** One archive spec converted to a command and
-  judged by script, which no agent has implemented at its command; one HTTP spec
-  with five Haiku runs.
+- **Much about the other runners.** One prepared module each in Python, Go and
+  Rust (the same spec, duration-parse) and one Jest repository spec, all passed
+  by Haiku on every run, so none separates anything; pytest repositories only
+  on hand-made fixtures, never prepared by a model.
+- **Much about black-box seams.** Two archive specs, a command and a service,
+  each run in four languages: one suite per spec, written once against a
+  TypeScript reference, so a suite written for Python, Go or Rust from the start
+  is untested, and that suite carried one JavaScript reading of an open
+  question into the others. 23 Haiku runs at a seam in all; Windows untested
+  for the Python, Go and Rust builds.
 - **Problems newer than the model.** LiveCodeBench v6 predates the cutoff and
   every arm solved all 37 sound problems; the ladder's L3 and L4 levels there
   measure what Opus remembers, not the spec.

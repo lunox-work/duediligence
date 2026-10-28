@@ -1,0 +1,230 @@
+{
+  "language": "rust",
+  "sites": 341,
+  "sampled": 30,
+  "built": 30,
+  "killedByPublic": 22,
+  "killedByHiddenOnly": 4,
+  "survivedBoth": 4,
+  "hiddenKills": 24,
+  "survivors": [
+    "json.rs:71 1 -> 2 (the public suite killed it)",
+    "json.rs:183 1 -> 2",
+    "json.rs:246 10 -> 9",
+    "main.rs:73 + -> -",
+    "time.rs:48 4 -> 5 (the public suite killed it)",
+    "time.rs:110 59 -> 60"
+  ],
+  "rows": [
+    {
+      "path": "export.rs",
+      "line": 73,
+      "label": "== -> !=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "export.rs",
+      "line": 115,
+      "label": "|| -> &&",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "json.rs",
+      "line": 71,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "survived"
+    },
+    {
+      "path": "json.rs",
+      "line": 108,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "json.rs",
+      "line": 135,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "json.rs",
+      "line": 164,
+      "label": "== -> !=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "json.rs",
+      "line": 183,
+      "label": "1 -> 2",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "json.rs",
+      "line": 206,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "json.rs",
+      "line": 224,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "json.rs",
+      "line": 246,
+      "label": "10 -> 9",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "main.rs",
+      "line": 43,
+      "label": "|| -> &&",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "main.rs",
+      "line": 73,
+      "label": "+ -> -",
+      "public": "survived",
+      "hidden": "survived"
+    },
+    {
+      "path": "time.rs",
+      "line": 37,
+      "label": "- -> +",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 41,
+      "label": "400 -> 401",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 48,
+      "label": "4 -> 5",
+      "public": "killed",
+      "hidden": "survived"
+    },
+    {
+      "path": "time.rs",
+      "line": 49,
+      "label": "31 -> 30",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 57,
+      "label": "400 -> 399",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 59,
+      "label": "5 -> 4",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 60,
+      "label": "100 -> 101",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 68,
+      "label": "- -> +",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 70,
+      "label": "5 -> 6",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 71,
+      "label": "2 -> 3",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 72,
+      "label": "3 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 73,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 80,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 80,
+      "label": "!= -> ==",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 94,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 103,
+      "label": "60 -> 61",
+      "public": "survived",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 107,
+      "label": "|| -> &&",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "time.rs",
+      "line": 110,
+      "label": "59 -> 60",
+      "public": "survived",
+      "hidden": "survived"
+    }
+  ]
+}

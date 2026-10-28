@@ -1,0 +1,293 @@
+{
+  "language": "rust",
+  "sites": 44,
+  "sampled": 40,
+  "built": 38,
+  "killedByPublic": 38,
+  "killedByHiddenOnly": 0,
+  "survivedBoth": 0,
+  "hiddenKills": 37,
+  "survivors": [
+    "lib.rs:116 > -> >= (the public suite killed it)"
+  ],
+  "rows": [
+    {
+      "path": "lib.rs",
+      "line": 6,
+      "label": "9007199254740991 -> 9007199254740992",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 6,
+      "label": "9007199254740991 -> 9007199254740990",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 9,
+      "label": "5 -> 6",
+      "notBuilt": true
+    },
+    {
+      "path": "lib.rs",
+      "line": 9,
+      "label": "5 -> 4",
+      "notBuilt": true
+    },
+    {
+      "path": "lib.rs",
+      "line": 14,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 14,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 63,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 64,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 66,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 67,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 70,
+      "label": "&& -> ||",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 71,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 71,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "|| -> &&",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "&& -> ||",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 74,
+      "label": "== -> !=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 80,
+      "label": "10 -> 11",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 80,
+      "label": "10 -> 9",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 81,
+      "label": "- -> +",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 88,
+      "label": "4 -> 5",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 88,
+      "label": "4 -> 3",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 91,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 92,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 92,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 93,
+      "label": "2 -> 3",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 93,
+      "label": "2 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 94,
+      "label": "3 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 98,
+      "label": "< -> <=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 101,
+      "label": "+ -> -",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 101,
+      "label": "1 -> 2",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 101,
+      "label": "1 -> 0",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 108,
+      "label": "<= -> <",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 116,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "survived"
+    },
+    {
+      "path": "lib.rs",
+      "line": 119,
+      "label": "== -> !=",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 119,
+      "label": "0 -> 1",
+      "public": "killed",
+      "hidden": "killed"
+    },
+    {
+      "path": "lib.rs",
+      "line": 127,
+      "label": "> -> >=",
+      "public": "killed",
+      "hidden": "killed"
+    }
+  ]
+}
