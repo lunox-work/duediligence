@@ -1,6 +1,6 @@
 {
   "name": "independent-tests",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Hidden, calibrated test suites for AI coding agents: a public suite the agent works against and a hidden suite it never sees that judges the result.",
   "keywords": [
     "ai-agents",
