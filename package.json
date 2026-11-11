@@ -19,7 +19,9 @@
     "pytest",
     "jest",
     "go",
-    "rust"
+    "rust",
+    "agent-skills",
+    "claude-code-plugin"
   ],
   "homepage": "https://github.com/lunox-work/duediligence#readme",
   "bugs": {
@@ -48,10 +50,14 @@
     "AGENTS.md",
     "README.md",
     "RESULTS.md",
-    "SKILL.md"
+    "skills/"
   ],
   "scripts": {
-    "test": "node test/smoke.mjs"
+    "test": "node scripts/skill.mjs check && node test/smoke.mjs",
+    "version": "node scripts/skill.mjs sync && git add skills .claude-plugin",
+    "skill:check": "node scripts/skill.mjs check",
+    "skill:sync": "node scripts/skill.mjs sync",
+    "skill:pack": "node scripts/skill.mjs pack"
   },
   "engines": {
     "node": "^20.19.0 || >=22.0.0"

@@ -1,0 +1,20 @@
+{
+  "name": "duediligence",
+  "owner": {
+    "name": "lunox-work",
+    "url": "https://github.com/lunox-work"
+  },
+  "metadata": {
+    "description": "duediligence: hidden, calibrated test suites that judge AI coding agents' work."
+  },
+  "plugins": [
+    {
+      "name": "duediligence",
+      "source": "./",
+      "description": "Independent, hidden test suites written from the spec for AI coding agents.",
+      "version": "0.3.0",
+      "category": "testing",
+      "license": "MIT"
+    }
+  ]
+}

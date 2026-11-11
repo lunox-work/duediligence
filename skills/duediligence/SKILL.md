@@ -8,6 +8,11 @@ description:
   any test is written. Use when someone wants agent-written code accepted by
   tests the agent never saw, wants to grade an agent's submission against a
   spec, or wants to stop trusting an agent's own green test run.
+license: MIT
+compatibility:
+  Node 20.19 or later. Runs the duediligence@0.3.0 CLI from npm, which starts
+  Claude Code, Codex or Anthropic API sessions and installs its test toolchain
+  under ~/.duediligence/ once (network).
 ---
 
 # duediligence
@@ -15,12 +20,14 @@ description:
 From one confirmed spec, generate a **public** suite the implementing agent
 works against and a **hidden** suite that judges the result.
 
-`duediligence <command>` below is the CLI: on PATH after
-`npm i -g duediligence`, otherwise `npx -y duediligence`, or
-`node bin/cli.mjs` from this skill's folder (the one holding this file). Run it
-from any folder. `specs/` and `runs/` below are in the home,
-`~/.duediligence/` (`DUEDILIGENCE_HOME`; `duediligence where`
-prints the folders), not in this skill's folder; `prompts/` is here.
+`duediligence <command>` below is the CLI, `duediligence@0.3.0`. When
+`duediligence --version` prints another version or nothing, ask the person
+before installing it: `npm i -g duediligence@0.3.0`, or put
+`npx duediligence@0.3.0` in place of `duediligence` in each command (in a clone
+of the repository, `node bin/cli.mjs`). Run it from any folder. `specs/` and
+`runs/` below are in the home, `~/.duediligence/` (`DUEDILIGENCE_HOME`);
+`prompts/` and `template*/` are in the CLI's package. `duediligence where`
+prints both (`home`, `package`): read a prompt at `<package>/prompts/...`.
 
 Two targets. **A new module** is built on its own, on a bundled toolchain:
 TypeScript on `node:test` (`template/`) unless `specs/<slug>/toolchain.json`
@@ -35,10 +42,10 @@ code may be Python, Go or Rust instead: add `"language": "python"`, `"go"` or
 `"rust"` to the boundary, whose command (or the service's `start`) is then
 `["python3", "src/cli.py"]` (`src/server.py` for a service), `[".bin/task"]` or
 `["target/debug/task"]`; the suites stay TypeScript, and the briefs are
-`prompts/exec-native/` and `prompts/http-native/`. **A
-change inside a repository** is built in the person's own checkout of one
-package, with its runner and its existing suite, which must keep passing; the
-steps marked _Repository_ below are for that target.
+`prompts/exec-native/` and `prompts/http-native/`. **A change inside a
+repository** is built in the person's own checkout of one package, with its
+runner and its existing suite, which must keep passing; the steps marked
+_Repository_ below are for that target.
 
 ## Before you start
 
@@ -51,17 +58,16 @@ steps marked _Repository_ below are for that target.
   a change inside a repository visible only through a running service: `fit`,
   `repo` and the judge take `--seam http`, but no brief writes its suites.
 - **Preconditions.** Node 20.19 or later, on macOS, Linux or Windows. One
-  account for the sessions, taken in this order unless
-  `DUEDILIGENCE_BACKEND` names one: `claude` signed in (`CLAUDE_BIN`, PATH
-  or the VS Code extension bundle), else their Codex login (`codex-cli`; Codex
-  0.164.0 installed into the home once), else `ANTHROPIC_API_KEY`
-  (`anthropic-api`); or `exec` with `DUEDILIGENCE_EXEC=<command>`. claude
-  sessions are held by Claude Code's sandbox and deny rules, the others by
-  `sandbox-exec` or `bwrap`. On Windows there is no OS sandbox: say so before
-  step 3, and that WSL2 gives one. The first command that needs the bundled
-  toolchain installs it with npm 10.9.2 into the home (network, once). Python:
-  `python3` (`python` on Windows; pytest is installed into the home once); Go
-  and Rust: `go` or `cargo` on PATH.
+  account for the sessions, taken in this order unless `DUEDILIGENCE_BACKEND`
+  names one: `claude` signed in (`CLAUDE_BIN`, PATH or the VS Code extension
+  bundle), else their Codex login (`codex-cli`; Codex 0.164.0 installed into the
+  home once), else `ANTHROPIC_API_KEY` (`anthropic-api`); or `exec` with
+  `DUEDILIGENCE_EXEC=<command>`. claude sessions are held by Claude Code's
+  sandbox and deny rules, the others by `sandbox-exec` or `bwrap`. On Windows
+  there is no OS sandbox: say so before step 3, and that WSL2 gives one. The
+  first command that needs the bundled toolchain installs it with npm 10.9.2
+  into the home (network, once). Python: `python3` (`python` on Windows; pytest
+  is installed into the home once); Go and Rust: `go` or `cargo` on PATH.
 - **Cost.** Step 3 starts four blind sessions, on Opus 5.5 with `claude`: about
   $1–4 and 10–25 minutes per spec. An agent run is a few cents on Haiku 5.5,
   about $0.30 on Opus. Say so before step 3. Step 2 costs the person's time:
@@ -106,8 +112,8 @@ Then write `specs/<slug>/spec.md`:
 - **The person has a precise spec:** copy it in as written.
 - **They have a ticket or a loose description:** save it as
   `specs/<slug>/ticket.md` (from a GitHub issue:
-  `duediligence confirm <slug> --from <issue url | owner/repo#n>`, through
-  `gh`; `--comments` adds its comments). From a Jira key: `--from <KEY>` uses
+  `duediligence confirm <slug> --from <issue url | owner/repo#n>`, through `gh`;
+  `--comments` adds its comments). From a Jira key: `--from <KEY>` uses
   `JIRA_BASE_URL`, `JIRA_EMAIL` and `JIRA_API_TOKEN` when set; otherwise fetch
   the issue with the Atlassian MCP (`getJiraIssue`), write its summary,
   description and any comments the person wants to a file, and pass it:
@@ -130,8 +136,8 @@ Then write `specs/<slug>/spec.md`:
 
 ## 2. Confirm, with the person
 
-This step is required. `duediligence prepare` refuses a spec that no one
-has confirmed as it stands. On a repository the seam and the allowed paths are
+This step is required. `duediligence prepare` refuses a spec that no one has
+confirmed as it stands. On a repository the seam and the allowed paths are
 listed with the decisions, and changing either voids the confirmation.
 
 1. `duediligence confirm <slug>` lists the `Decided:` items, each with the
@@ -143,8 +149,7 @@ listed with the decisions, and changing either voids the confirmation.
    decided, the conventional alternative. Ask with AskUserQuestion, one decision
    per question, up to four at a time. Edit `spec.md` with their answers. A spec
    they wrote themselves still gets one yes/no on the whole. For review in a
-   pull request instead:
-   `duediligence confirm <slug> --export decisions.md`.
+   pull request instead: `duediligence confirm <slug> --export decisions.md`.
 3. Only after the person has said yes to the spec as it now stands:
    `duediligence confirm <slug> --by "<their name>"`. It records in
    `confirmed.json` when the review started and ended, its minutes, and which
@@ -156,17 +161,17 @@ listed with the decisions, and changing either voids the confirmation.
 `duediligence prepare <slug>`. It generates the skeleton
 (`skeleton/src/index.ts`, `solution.py`, `task.go` or `lib.rs`; for `exec`,
 `src/cli.ts`, which exits 2, or `src/server.ts`, which answers 501, or with a
-`language` `src/cli.py`, `src/server.py`, `src/main.go` or `src/main.rs`), the public
-suite and the hidden suite in three blind sessions, then calibrates: every
-hidden test must fail on the skeleton, and a reference written in a fourth
+`language` `src/cli.py`, `src/server.py`, `src/main.go` or `src/main.rs`), the
+public suite and the hidden suite in three blind sessions, then calibrates:
+every hidden test must fail on the skeleton, and a reference written in a fourth
 session must pass both suites. Exit codes:
 
 - `0`: ready. Tell the person how many public and hidden tests were kept.
 - `3`: not confirmed, or `spec.md` changed since. Back to step 2.
 - `4`: the public suite asserts things the spec leaves open. Show the person the
   list. For each, they decide it in `spec.md` (back to step 2; the suites are
-  rewritten) or leave it open (`duediligence prepare <slug> --accept-open`;
-  the hidden suite then tests neither reading).
+  rewritten) or leave it open (`duediligence prepare <slug> --accept-open`; the
+  hidden suite then tests neither reading).
 - `1`: a step failed; its output says which. On a repository it also means the
   reference broke existing tests: the spec changes behaviour those tests pin, or
   the allowed paths are too narrow. The person decides which, in `spec.md` or
@@ -176,12 +181,12 @@ session must pass both suites. Exit codes:
 
 Pick with the person:
 
-- **A blind session:** `duediligence run <slug> [--model haiku]`. The
-  submission lands in `runs/<slug>/<variant>/1/submission/src/`, where
-  `<variant>` is the model's family: `opus` by default, `haiku` with
-  `--model haiku`. On a repository the session gets a copy of base plus stub
-  plus public suite, and `submission/` holds the files it changed at their
-  repository paths; grade it with `duediligence grade <slug>`.
+- **A blind session:** `duediligence run <slug> [--model haiku]`. The submission
+  lands in `runs/<slug>/<variant>/1/submission/src/`, where `<variant>` is the
+  model's family: `opus` by default, `haiku` with `--model haiku`. On a
+  repository the session gets a copy of base plus stub plus public suite, and
+  `submission/` holds the files it changed at their repository paths; grade it
+  with `duediligence grade <slug>`.
 - **Their own agent, anywhere:** `duediligence handout <slug> <dir>` with
   `<dir>` outside this folder and the home. It holds the template, `spec.md`,
   the skeleton, the public suite and `BRIEF.md`; give the agent `BRIEF.md`.
@@ -191,19 +196,18 @@ Pick with the person:
   (`runs/<slug>/handout/BRIEF.md`). It refuses if those paths are dirty or
   exist. Give the brief to their agent, or follow it in this session under the
   rule above. `--remove` takes the handout out again while it is unchanged.
-- _Repository, in CI (blind by placement):_ `duediligence seal <slug>`
-  writes one file holding the suites; the person stores it where the implementer
-  cannot read (a private repository, artifact or secret URL) and calls
+- _Repository, in CI (blind by placement):_ `duediligence seal <slug>` writes
+  one file holding the suites; the person stores it where the implementer cannot
+  read (a private repository, artifact or secret URL) and calls
   `.github/workflows/judge.yml` (or `action.yml`) on pull requests. Each pull
   request gets a check with the verdict, counts and failing scenario keys; no
   audit is needed.
 
 `BRIEF.md` is `prompts/agent.md` (`prompts/repo/agent.md` on a repository,
 `prompts/exec/` or `prompts/http/agent.md` at a command or a service, `-native/`
-in another language): pass the
-public suite and write one test of your own per scenario, with inputs unlike the
-public ones; on a repository, also keep the existing suite passing and stay
-inside the allowed paths.
+in another language): pass the public suite and write one test of your own per
+scenario, with inputs unlike the public ones; on a repository, also keep the
+existing suite passing and stay inside the allowed paths.
 
 ## 5. Judge
 
@@ -215,9 +219,9 @@ was committed it refuses (exit 1, `hidden suite changed since <at>`): tell the
 person, never judge around it.
 
 _Repository:_
-`duediligence judge <slug> --repo [<checkout>] [--ref <rev>] --audit`
-judges the working tree, or the commit `--ref`, against base plus stub plus
-public suite, with the existing suite too. Two more verdicts:
+`duediligence judge <slug> --repo [<checkout>] [--ref <rev>] --audit` judges the
+working tree, or the commit `--ref`, against base plus stub plus public suite,
+with the existing suite too. Two more verdicts:
 
 - **`regressed`**: a test of the existing suite that passed on base plus stub
   fails now. It is printed by name, since the repository's own tests are public;
@@ -237,13 +241,13 @@ regressed, 1 the rest.
   - `real`: the code misses what the spec says. One retry at most, giving the
     agent the failing scenario keys and nothing else: no test names, inputs or
     assertions. For a blind session:
-    `duediligence grade <slug> && duediligence retry <slug> <variant>`,
-    then judge `runs/<slug>/<variant>-retry-keyed/1/submission/src`.
+    `duediligence grade <slug> && duediligence retry <slug> <variant>`, then
+    judge `runs/<slug>/<variant>-retry-keyed/1/submission/src`.
   - `spec-gap`: the hidden test asserts a reading the spec left open. Decide it
     in `spec.md` and go back to step 2. Information moves hidden → spec →
     public, never hidden → agent.
 - **`passed`:** say what it means: the code passes tests it never saw, written
   from the confirmed spec. It does not cover what the spec does not say.
-  _Repository:_ offer `duediligence promote <slug>`, which copies the
-  hidden suite into the checkout beside the public one as the repository's own
+  _Repository:_ offer `duediligence promote <slug>`, which copies the hidden
+  suite into the checkout beside the public one as the repository's own
   regression tests (uncommitted); after it, the spec judges nothing.

@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/duediligence"><img src="https://img.shields.io/npm/v/duediligence?style=flat-square&label=npm" alt="npm version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT license"></a>
-  <a href="SKILL.md"><img src="https://img.shields.io/badge/Claude_Code-skill-D97757?style=flat-square" alt="Claude Code skill"></a>
+  <a href="skills/duediligence/SKILL.md"><img src="https://img.shields.io/badge/Claude_Code-skill-D97757?style=flat-square" alt="Claude Code skill"></a>
   <a href="#install"><img src="https://img.shields.io/badge/judges-any_coding_agent-555?style=flat-square" alt="Judges any coding agent"></a>
 </p>
 
@@ -295,18 +295,25 @@ workdir (`bin/backends.mjs`). Windows has no such sandbox: there the file tools'
 deny rules still hold, but a session's shell is held only by the transcript
 audit, which reports any attempt to read the hidden suite. Run sessions under
 WSL2 for an enforced sandbox; judging and handouts need none.
-[SKILL.md](SKILL.md) has the steps as the skill runs them.
+[SKILL.md](skills/duediligence/SKILL.md) has the steps as the skill runs them.
 
 ## Install in full
 
 ```sh
-npx skills add lunox-work/duediligence -g   # the skill, for Claude Code and other agents
-git clone https://github.com/lunox-work/duediligence ~/.claude/skills/duediligence  # or the whole repo
-npx -y duediligence --help                  # the CLI; nothing to clone
+npx skills add lunox-work/duediligence -g   # the skill, for Claude Code, Codex, Cursor and 20+ agents
+npm i -g duediligence                       # the CLI the skill runs
 ```
 
-Either install puts the skill (SKILL.md) in place; it calls the same CLI,
-through `npx` when only SKILL.md was copied. Needs Node 20.19 or later on macOS,
+In Claude Code, the repository is also a plugin marketplace:
+
+```
+/plugin marketplace add lunox-work/duediligence
+/plugin install duediligence@duediligence
+```
+
+The skill is the folder [`skills/duediligence/`](skills/duediligence/), which
+also installs by copying it into an agent's skills folder. It runs the CLI at
+the version it names, and asks before installing it when it is missing. Needs Node 20.19 or later on macOS,
 Linux or Windows, and one of: Claude Code signed in, a Codex login, or
 `ANTHROPIC_API_KEY`. The first command that needs the toolchain installs
 `template/`'s dependencies with npm 10.9.2 under `~/.duediligence/`, once.
@@ -458,7 +465,9 @@ reads the runner's disk and sends it over the network is not stopped.
 <summary>Every file and folder, in the repository and in <code>~/.duediligence/</code></summary>
 
 ```
-SKILL.md            the steps the skill runs
+skills/             the skill, duediligence/SKILL.md: the steps it runs
+.claude-plugin/     the Claude Code plugin and its one-plugin marketplace
+scripts/skill.mjs   check the skill, sync its version pins, pack it as a zip
 AGENTS.md           this README's section for coding agents, verbatim
 RESULTS.md          what the method was measured to do
 package.json        the npm package: `duediligence` → bin/cli.mjs
@@ -530,7 +539,7 @@ A development checkout keeps its own `specs/`, `runs/` and `results.jsonl` with
   <sub>
     <a href="RESULTS.md">RESULTS.md</a> ·
     <a href="AGENTS.md">AGENTS.md</a> ·
-    <a href="SKILL.md">SKILL.md</a> ·
+    <a href="skills/duediligence/SKILL.md">SKILL.md</a> ·
     <a href="https://github.com/lunox-work/duediligence/issues">Issues</a>
   </sub>
 </p>
