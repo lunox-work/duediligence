@@ -11,6 +11,7 @@
   "repository": "https://github.com/lunox-work/duediligence",
   "documentationUrl": "https://github.com/lunox-work/duediligence#readme",
   "supportUrl": "https://github.com/lunox-work/duediligence/issues",
+  "privacyPolicyUrl": "https://github.com/lunox-work/duediligence/blob/main/PRIVACY.md",
   "license": "MIT",
   "keywords": [
     "hidden-tests",
