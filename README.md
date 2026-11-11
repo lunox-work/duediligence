@@ -8,6 +8,7 @@
   <a href="https://www.npmjs.com/package/duediligence"><img src="https://img.shields.io/npm/v/duediligence?style=flat-square&label=npm" alt="npm version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT license"></a>
   <a href="skills/duediligence/SKILL.md"><img src="https://img.shields.io/badge/Claude_Code-skill-D97757?style=flat-square" alt="Claude Code skill"></a>
+  <a href="https://skills.sh/lunox-work/duediligence"><img src="https://img.shields.io/badge/skills.sh-npx_skills_add_lunox--work%2Fduediligence-111?style=flat-square" alt="skills.sh"></a>
   <a href="#install"><img src="https://img.shields.io/badge/judges-any_coding_agent-555?style=flat-square" alt="Judges any coding agent"></a>
 </p>
 
