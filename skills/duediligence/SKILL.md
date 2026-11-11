@@ -1,6 +1,6 @@
 ---
 name: duediligence
-description:
+description: >-
   Turn a ticket or spec for one module (TypeScript, Python, Go or Rust), or for
   a change to one package of an existing TypeScript or Python repository, into a
   public test suite for the implementing agent and a calibrated hidden suite
@@ -9,7 +9,7 @@ description:
   tests the agent never saw, wants to grade an agent's submission against a
   spec, or wants to stop trusting an agent's own green test run.
 license: MIT
-compatibility:
+compatibility: >-
   Node 20.19 or later. Runs the duediligence@0.3.0 CLI from npm, which starts
   Claude Code, Codex or Anthropic API sessions and installs its test toolchain
   under ~/.duediligence/ once (network).
