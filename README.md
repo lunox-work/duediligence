@@ -32,6 +32,12 @@ claude plugin install duediligence@duediligence
 - **Retention:** duediligence runs no service. What the model backends keep is
   governed by the person's own agreement with that provider.
 
+## Links
+
+- [Privacy](https://github.com/lunox-work/duediligence/blob/main/PRIVACY.md)
+- [Documentation](https://github.com/lunox-work/duediligence#readme)
+- [Support](https://github.com/lunox-work/duediligence/issues)
+
 ## Source
 
 This branch holds only the plugin's files. The CLI, its documentation and the
