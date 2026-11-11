@@ -18,6 +18,10 @@ Nothing here is needed to run the skill.
 
 ## Reading the data
 
+- Files over 5 MiB (the spec ladder's LiveCodeBench `tests/private/cases.json`
+  files and `brag-output/brag.mp4`) are in a
+  [GitHub release](https://github.com/lunox-work/duediligence/releases/tag/experiments-large-files-2026-11-11),
+  not in git. `sh experiments/fetch-large-files.sh` restores them.
 - `results.jsonl`: one line per graded run, verdict and counts only. 708
   of its 3,230 rows are sessions that never ran: the `claude` CLI lost its
   login on 2026-10-24 about 16:50 and every later session returned "Not
