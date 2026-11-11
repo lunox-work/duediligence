@@ -50,6 +50,7 @@ import {
   workdir,
   writeJson,
 } from "./lib.mjs";
+import { calibration } from "./rules.mjs";
 
 const failing = (result) => [
   ...result.files.filter((file) => file.crashed).map((file) => `${file.file} :: (file crashed)`),
@@ -72,9 +73,8 @@ async function calibrate(slug) {
     throw new Error(`${slug}: baseline.json is not the run on base plus stub; run generate first.`);
   for (const part of ["tests/public", "tests/private"])
     if (!existsSync(join(out, part))) throw new Error(`${slug}: no ${part}; run generate first.`);
-  const dropped = [];
 
-  // The skeleton: every hidden test fails, and fails inside its test.
+  // The skeleton: every hidden test fails, and fails inside its test (the rule: rules.mjs `calibration`).
   const skeletonDir = stage(workdir(`${slug}-calibrate`), slug, {
     skeleton: true,
     publicTests: true,
@@ -83,19 +83,10 @@ async function calibrate(slug) {
   const onSkeleton = runSuite(skeletonDir, "private", chain);
   const publicOnSkeleton = runSuite(skeletonDir, "public", chain);
   discard(skeletonDir);
-  if (!onSkeleton.compiled)
-    return {
-      slug,
-      status: "dropped",
-      reason: "The hidden suite does not compile against the skeleton.",
-      compileOutput: onSkeleton.compileOutput,
-    };
-  for (const file of onSkeleton.files)
-    if (file.crashed)
-      dropped.push({ id: `${file.file} :: *`, reason: "The file crashes on the skeleton instead of failing a test." });
-  for (const test of testsOf(onSkeleton))
-    if (test.ok || test.skipped)
-      dropped.push({ id: test.id, reason: test.skipped ? "Skipped." : "Passes on the skeleton." });
+  if (!onSkeleton.compiled) {
+    const { status, reason, compileOutput } = calibration({ skeleton: onSkeleton });
+    return { slug, status, reason, compileOutput };
+  }
 
   // The reference: a fourth session that sees both suites.
   const dir = stage(workdir(`${slug}-reference`), slug, {
@@ -160,37 +151,19 @@ async function calibrate(slug) {
   discard(snapshot);
   discard(dir);
 
-  const droppedIds = new Set(dropped.map((item) => item.id));
-  const droppedFiles = new Set(
-    dropped.filter((item) => item.id.endsWith(" :: *")).map((item) => item.id.slice(0, -5)),
-  );
-  const referenceTests = new Map(testsOf(judged.hidden).map((test) => [test.id, test]));
-  const hiddenIds = testsOf(onSkeleton).map((test) => test.id);
-  for (const id of hiddenIds) {
-    if (droppedIds.has(id)) continue;
-    const test = referenceTests.get(id);
-    if (test === undefined || !test.ok)
-      dropped.push({
-        id,
-        reason: `The reference cannot satisfy it: ${test?.error?.message.split("\n")[0] ?? "it did not run"}`,
-      });
-  }
-  const finalDropped = new Set(dropped.map((item) => item.id));
-  const kept = hiddenIds.filter(
-    (id) => !finalDropped.has(id) && !droppedFiles.has(id.split(" :: ")[0]),
-  );
+  const { status, reason, hiddenWritten, kept, dropped } = calibration({ skeleton: onSkeleton, reference: judged.hidden });
   const publicIds = testsOf(judged.public).map((test) => test.id);
   const publicFailing = failing(judged.public);
   const notes = sessions.at(-1).finalText.trim().split("\n").slice(-20).join("\n");
   const record = {
     slug,
-    status: kept.length > 0 ? "ok" : "dropped",
-    reason: kept.length > 0 ? null : "No hidden test survived calibration.",
+    status,
+    reason,
     publicIds,
     publicOnSkeleton: count(publicOnSkeleton, publicIds),
     publicFailingOnReference: publicFailing,
     ...(repo ? { referenceRegressions: regressions } : {}),
-    hiddenWritten: hiddenIds.length,
+    hiddenWritten,
     kept,
     dropped,
     reference: {
@@ -205,7 +178,7 @@ async function calibrate(slug) {
   };
   log(
     slug,
-    `kept ${kept.length}/${hiddenIds.length} hidden, dropped ${dropped.length}; reference public ${record.reference.public.passed}/${record.reference.public.total}`,
+    `kept ${kept.length}/${hiddenWritten} hidden, dropped ${dropped.length}; reference public ${record.reference.public.passed}/${record.reference.public.total}`,
     publicFailing.length > 0 ? `, ${publicFailing.length} PUBLIC FAILING ON REFERENCE` : "",
     regressions.length > 0 ? `, ${regressions.length} REFERENCE REGRESSION(S)` : "",
   );

@@ -53,6 +53,7 @@
 import { existsSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import { judgement } from "./rules.mjs";
 import { unseal } from "./seal.mjs";
 
 const sealed = openSeal(process.argv.slice(2));
@@ -62,21 +63,16 @@ const {
   args,
   audit,
   checkoutChanges,
-  count,
   discard,
   judge,
   newestTranscript,
   pathsOf,
   promotedOf,
   readJson,
-  regressionsOf,
-  scenarioOf,
   scopeOf,
   sha256,
   specDir,
-  testsOf,
   toolchainOf,
-  verdict,
   workdir,
   writeJson,
   writeSnapshot,
@@ -128,23 +124,17 @@ if (!entries.some((path) => existsSync(join(src, path)))) {
 }
 
 const judged = judge(slug, realpathSync(src));
-const publicCount = count(judged.public, calibration.publicIds);
-const hiddenCount = count(judged.hidden, calibration.kept);
-const reported = new Map(testsOf(judged.hidden).map((test) => [test.id, test]));
-const failures = calibration.kept
-  .filter((id) => reported.get(id)?.ok !== true)
-  .map((id) => ({ id, message: reported.get(id)?.error?.message ?? "did not run" }));
-const result = verdict({ publicCount, hiddenCount });
+// The rule itself: rules.mjs `judgement`, which bin/api.mjs exports as `verdict`.
+const outcome = judgement({ public: judged.public, hidden: judged.hidden, publicIds: calibration.publicIds, kept: calibration.kept });
+const { verdict: result, public: publicCount, hidden: hiddenCount, failures, failedScenarios: scenarios } = outcome;
 
 console.log(`${slug}: ${result}. Public ${publicCount.passed}/${publicCount.total}, hidden ${hiddenCount.passed}/${hiddenCount.total}.`);
 console.log(hashLine());
 const imported = readJson(join(specDir(slug), "imported.json"), null);
 if (imported !== null) console.log(`Imported from ${imported.from}: not held out (bin/import-archive.mjs).`);
 compileReport(judged);
-const scenarios = [...new Set(failures.map((item) => scenarioOf(item.id)).filter(Boolean))].sort();
 if (scenarios.length > 0) console.log(`Failing scenarios: ${scenarios.join(", ")}`);
-if (result === "incomplete")
-  for (const test of testsOf(judged.public).filter((item) => !item.ok)) console.log(`public: ${test.id}`);
+if (result === "incomplete") for (const id of outcome.publicFailing) console.log(`public: ${id}`);
 if (options.detail === true)
   for (const item of failures) console.log(`hidden: ${item.id}\n  ${item.message.split("\n")[0]}`);
 writeRecord({
@@ -170,7 +160,18 @@ function judgeRepo() {
   const found = checkoutChanges(chain, checkout, ref);
   const scope = scopeOf(chain, found.items, found.read);
   const strict = options["strict-scope"] === true;
-  const refused = [...scope.refused, ...(strict ? scope.outsideScope : [])];
+  // The rule (rules.mjs `judgement`) twice: on the scope alone, which says
+  // whether the tree is judged at all, then on the suites' results.
+  const facts = {
+    publicIds: calibration.publicIds,
+    kept: calibration.kept,
+    baseline,
+    refused: scope.refused,
+    changed: [...scope.allowed, ...scope.outsideScope],
+    allowedPaths: chain.allowedPaths ?? [],
+    strictScope: strict,
+  };
+  const { refused } = judgement(facts);
   const snapshot = workdir(`${slug}-snapshot`);
   let judged;
   try {
@@ -179,14 +180,8 @@ function judgeRepo() {
   } finally {
     discard(snapshot);
   }
-  const publicCount = judged === null ? { passed: 0, total: calibration.publicIds.length } : count(judged.public, calibration.publicIds);
-  const hiddenCount = judged === null ? { passed: 0, total: calibration.kept.length } : count(judged.hidden, calibration.kept);
-  const regressions = judged === null ? [] : regressionsOf(baseline, judged.existing);
-  const reported = new Map(judged === null ? [] : testsOf(judged.hidden).map((test) => [test.id, test]));
-  const failures = judged === null ? [] : calibration.kept
-    .filter((id) => reported.get(id)?.ok !== true)
-    .map((id) => ({ id, message: reported.get(id)?.error?.message ?? "did not run" }));
-  const result = verdict({ refused, publicCount, hiddenCount, regressions });
+  const outcome = judgement(judged === null ? facts : { ...facts, public: judged.public, hidden: judged.hidden, existing: judged.existing });
+  const { verdict: result, public: publicCount, hidden: hiddenCount, regressions, failures, failedScenarios: scenarios } = outcome;
   const handout = readJson(join(RUNS, slug, "handout", "handout.json"), null);
   let peeks = null;
   if (options.audit !== undefined) {
@@ -195,17 +190,15 @@ function judgeRepo() {
   }
 
   const where = ref === undefined ? `${found.root} (working tree)` : `${found.root} at ${ref}`;
-  console.log(`${slug}: ${result}. Public ${publicCount.passed}/${publicCount.total}, hidden ${hiddenCount.passed}/${hiddenCount.total}, existing ${judged === null ? "-" : `${count(judged.existing, baseline.passing).passed}/${baseline.passing.length}`}; ${where}.`);
+  console.log(`${slug}: ${result}. Public ${publicCount.passed}/${publicCount.total}, hidden ${hiddenCount.passed}/${hiddenCount.total}, existing ${judged === null ? "-" : `${outcome.existing.passed}/${baseline.passing.length}`}; ${where}.`);
   console.log(hashLine());
   if (refused.length > 0) console.log(`Refused:\n${pathsOf(refused).map((line) => `- ${line}`).join("\n")}`);
   if (judged !== null) compileReport(judged);
   if (regressions.length > 0) console.log(`Regressions (passed on base plus stub, fail now):\n${regressions.map((id) => `- ${id}`).join("\n")}`);
   if (!strict && scope.outsideScope.length > 0) console.log(`Outside the allowed paths:\n${pathsOf(scope.outsideScope).map((line) => `- ${line}`).join("\n")}`);
   if (scope.ownTests.length > 0) console.log(`Own tests (not judged): ${scope.ownTests.map((item) => item.path).join(", ")}`);
-  const scenarios = [...new Set(failures.map((item) => scenarioOf(item.id)).filter(Boolean))].sort();
   if (scenarios.length > 0) console.log(`Failing scenarios: ${scenarios.join(", ")}`);
-  if (result === "incomplete")
-    for (const test of testsOf(judged.public).filter((item) => !item.ok)) console.log(`public: ${test.id}`);
+  if (result === "incomplete") for (const id of outcome.publicFailing) console.log(`public: ${id}`);
   if (options.detail === true)
     for (const item of failures) console.log(`hidden: ${item.id}\n  ${item.message.split("\n")[0]}`);
   if (peeks !== null)
@@ -215,7 +208,7 @@ function judgeRepo() {
         : `Audit of ${peeks.transcript}${peeks.since ? ` since the handout (${peeks.since})` : ""}: ${peeks.attempts.length === 0 ? "no attempt to open the hidden suite" : `${peeks.attempts.length} attempt(s):\n${peeks.attempts.map((item) => `- ${item.at ?? ""} ${item.tool}: ${item.match}: ${item.input}`).join("\n")}`}`,
     );
 
-  const existingCount = judged === null ? null : count(judged.existing, baseline.passing);
+  const existingCount = judged === null ? null : outcome.existing;
   writeRecord({
     slug,
     verdict: result,

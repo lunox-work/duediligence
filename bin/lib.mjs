@@ -52,6 +52,10 @@ import {
   which,
 } from "./platform.mjs";
 import { withBins } from "./runners/shared.mjs";
+import { allowedIn, count, regressionsOf, scenarioOf, testsOf, verdict } from "./rules.mjs";
+
+// The suite-result rules live in bin/rules.mjs (pure, shared with bin/api.mjs).
+export { count, regressionsOf, scenarioOf, testsOf, verdict };
 
 /**
  * The package: bin/, prompts/, template/ and the bundled example spec. It
@@ -1296,12 +1300,6 @@ export function runSuite(dir, suite, chain = toolchainIn(dir)) {
   }
 }
 
-/** Each test of a suite result, named `file :: test`. */
-export const testsOf = (result) =>
-  result.files.flatMap((file) =>
-    file.tests.map((test) => ({ ...test, id: `${file.file} :: ${test.name}` })),
-  );
-
 /**
  * A `src/` judged as grading judges it: copied onto a fresh template with
  * the public suite, then onto another with the hidden suite, so code that
@@ -1351,41 +1349,7 @@ export function baselineOf(result, stage) {
   };
 }
 /** Whether a repository path is one the implementer may change: in a folder of `allowedPaths` (ending in `/`) or one of its files. */
-export const allowedPath = (chain, path) =>
-  (chain.allowedPaths ?? []).some((allowed) => (allowed.endsWith("/") ? path.startsWith(allowed) : path === allowed));
-/** Tests the baseline passed that `result` (the existing suite after a change) does not. */
-export function regressionsOf(baseline, result) {
-  const ok = new Set(testsOf(result).filter((test) => test.ok).map((test) => test.id));
-  return baseline.passing.filter((id) => !ok.has(id));
-}
-
-/** How many of `ids` passed in a suite result; a test that never reported failed. */
-export function count(result, ids) {
-  const ok = new Set(testsOf(result).filter((test) => test.ok && !test.skipped).map((test) => test.id));
-  return { passed: ids.filter((id) => ok.has(id)).length, total: ids.length };
-}
-
-/**
- * The spec scenario a test is keyed to, from the `[kind-n]` its name starts
- * with (prompts/public-tests.md, prompts/hidden-tests.md), or null.
- */
-export const scenarioOf = (id) =>
-  /^\[([a-z]+-\d+)\] /.exec(id.split(" :: ").at(-1))?.[1] ?? null;
-
-/**
- * The verdict: `refused` when the submission changed anything outside what
- * the agent may write, `incomplete` when a public test fails, `regressed`
- * when a test of the repository's existing suite that passed before the
- * change fails after it (never on the bundled template, which has no
- * existing suite), `passed` when every kept hidden test passes too,
- * `overfit` when one does not.
- */
-export function verdict({ refused = [], publicCount, hiddenCount, regressions = [] }) {
-  if (refused.length > 0) return "refused";
-  if (publicCount.passed !== publicCount.total) return "incomplete";
-  if (regressions.length > 0) return "regressed";
-  return hiddenCount.total > 0 && hiddenCount.passed === hiddenCount.total ? "passed" : "overfit";
-}
+export const allowedPath = (chain, path) => allowedIn(chain.allowedPaths, path);
 
 /**
  * The claude CLI, or null: CLAUDE_BIN, claude on PATH, the newest VS Code

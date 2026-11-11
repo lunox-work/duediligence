@@ -37,6 +37,11 @@
   "bin": {
     "duediligence": "bin/cli.mjs"
   },
+  "exports": {
+    ".": "./bin/cli.mjs",
+    "./api": "./bin/api.mjs",
+    "./package.json": "./package.json"
+  },
   "files": [
     "bin/",
     "prompts/",
@@ -53,7 +58,7 @@
     "skills/"
   ],
   "scripts": {
-    "test": "node scripts/skill.mjs check && node test/smoke.mjs",
+    "test": "node scripts/skill.mjs check && node test/api.mjs && node test/smoke.mjs",
     "version": "node scripts/skill.mjs sync && git add skills .claude-plugin",
     "skill:check": "node scripts/skill.mjs check",
     "skill:sync": "node scripts/skill.mjs sync",

@@ -471,7 +471,12 @@ skills/             the skill, duediligence/SKILL.md: the steps it runs
 scripts/skill.mjs   check the skill, sync its version pins, pack it as a zip
 AGENTS.md           this README's section for coding agents, verbatim
 RESULTS.md          what the method was measured to do
-package.json        the npm package: `duediligence` → bin/cli.mjs
+package.json        the npm package: `duediligence` → bin/cli.mjs; `duediligence/api` → bin/api.mjs
+bin/api.mjs         the library entry: decisionItems, scenarios, diffDecisions, hiddenManifest, hiddenSha256,
+                    calibrate({ skeleton, reference }), verdict(outcomes), promptPath(name); no process, home or
+                    network on import or call (test/api.mjs)
+bin/rules.mjs       the judge's verdict and calibration's filter over suite results, pure
+bin/hash.mjs        the commitment hash of a spec folder or a file map, reading nothing else
 bin/cli.mjs         `duediligence <command>`: runs bin/<command>.mjs; `where`
 evidence/           the experiment's write-ups behind RESULTS.md, vendored
 bin/fit.mjs         whether a repository's package can be a target

@@ -5,28 +5,9 @@
 // refuses on a mismatch, bin/promote.mjs prints it at reveal, and a seal
 // (bin/seal.mjs) carries it in seal.json.
 //
-// What is hashed, from a folder laid out as specs/<slug>/ (or an unpacked
-// seal): a manifest of lines in `sha256sum` format, `<hex>  <path>\n`,
-//   - one per file under tests/private/, every depth, `.DS_Store` skipped,
-//     sorted by the UTF-8 bytes of the path: the hex the sha256 of its
-//     bytes, the path `tests/private/<rel>` with `/` separators;
-//   - then one line for the kept test ids: the hex the sha256 of
-//     JSON.stringify(calibration.kept sorted) (UTF-8), the path
-//     `calibration.kept`;
-//   - only for a spec at a black-box seam, a last line for what the suites
-//     call (toolchain.json `boundary`: the command, or the service's start,
-//     healthcheck and build), since changing it changes what the hidden
-//     suite tests: the hex the sha256 of its JSON with keys sorted at every
-//     level, the path `toolchain.boundary`. A spec without one hashes as
-//     before.
-// hiddenSha256 is the sha256 of the manifest's UTF-8 bytes, lowercase hex.
-// By hand:
-//   (cd specs/<slug> && find tests/private -type f ! -name .DS_Store | LC_ALL=C sort | xargs shasum -a 256
-//    && printf '%s  calibration.kept\n' "$(jq -cj '.kept | sort' calibration.json | shasum -a 256 | cut -c1-64)"
-//    && printf '%s  toolchain.boundary\n' "$(jq -cjS '.boundary' toolchain.json | shasum -a 256 | cut -c1-64)") | shasum -a 256
-// (the last printf only when toolchain.json has a boundary)
-// (jq sorts by code point and JS by UTF-16 unit; the two agree unless an id
-// holds characters beyond the BMP.)
+// What is hashed, and how to compute it by hand: bin/hash.mjs, which
+// computes it from a folder or from files in memory and reads nothing else
+// (the library entry, bin/api.mjs, exports it).
 //
 // Specs prepared before the hash existed have no commitment in
 // prepared.json. Their first handout records one there (`hiddenRecordedBy:
@@ -35,35 +16,11 @@
 // without checking it. A repository handout's own handout.json is checked
 // too, so a change after the handout is refused even then.
 
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
-import { join, sep } from "node:path";
-import { listFiles, readJson, specDir, writeJson } from "./lib.mjs";
+import { join } from "node:path";
+import { hiddenSha256 } from "./hash.mjs";
+import { readJson, specDir, writeJson } from "./lib.mjs";
 
-const sha = (data) => createHash("sha256").update(data).digest("hex");
-const byBytes = (a, b) => Buffer.compare(Buffer.from(a.path), Buffer.from(b.path));
-/** A JSON value with every object's keys sorted, as `jq -S` writes it. */
-const sorted = (value) =>
-  Array.isArray(value)
-    ? value.map(sorted)
-    : value !== null && typeof value === "object"
-      ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, sorted(value[key])]))
-      : value;
-
-/** The manifest hiddenSha256 is the hash of (see above). */
-export function hiddenManifest(dir, kept = readJson(join(dir, "calibration.json"), {}).kept ?? []) {
-  const hidden = join(dir, "tests", "private");
-  const lines = listFiles(hidden, [])
-    .filter((rel) => rel.split(sep).at(-1) !== ".DS_Store")
-    .map((rel) => ({ path: `tests/private/${rel.split(sep).join("/")}`, hex: sha(readFileSync(join(hidden, rel))) }));
-  lines.sort(byBytes).push({ path: "calibration.kept", hex: sha(JSON.stringify([...kept].sort())) });
-  const boundary = readJson(join(dir, "toolchain.json"), {}).boundary;
-  if (boundary !== undefined) lines.push({ path: "toolchain.boundary", hex: sha(JSON.stringify(sorted(boundary))) });
-  return lines.map((line) => `${line.hex}  ${line.path}\n`).join("");
-}
-
-/** The commitment hash of the hidden suite in `dir` (specs/<slug>/ or an unpacked seal). */
-export const hiddenSha256 = (dir, kept) => sha(hiddenManifest(dir, kept));
+export { hiddenManifest, hiddenSha256 } from "./hash.mjs";
 
 /**
  * The spec's recorded commitment against its hidden suite now: `ok` false
