@@ -12,7 +12,7 @@
       "name": "duediligence",
       "source": "./",
       "description": "Independent, hidden test suites written from the spec for AI coding agents.",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "category": "testing",
       "license": "MIT"
     }

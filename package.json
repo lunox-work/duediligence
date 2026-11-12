@@ -1,6 +1,6 @@
 {
   "name": "duediligence",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Due diligence for AI coding agents: independent, hidden test suites written from the spec. The agent works against a public suite; a hidden suite it never sees judges the result.",
   "keywords": [
     "due-diligence",
