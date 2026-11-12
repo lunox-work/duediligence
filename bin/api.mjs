@@ -15,12 +15,13 @@
 //   calibrate({ skeleton, reference })      the hidden-test filter: { status, reason, hiddenWritten, kept, dropped }
 //   verdict(outcomes)                       passed | overfit | incomplete | regressed | refused, with counts and failing scenario keys
 //   promptPath(name)                        the absolute path of prompts/<name>.md; anything outside prompts/ refused
+//   renderPrompt(name, values)              prompts/<name>.md with each {{key}} filled from values, as the CLI fills repo/ briefs
 //
 // Suite results are what a runner prints (bin/runners/shared.mjs); the
 // rules' inputs and outputs are documented in bin/rules.mjs, the hash's in
 // bin/hash.mjs.
 
-import { existsSync, realpathSync, statSync } from "node:fs";
+import { existsSync, readFileSync, realpathSync, statSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -50,4 +51,23 @@ export function promptPath(name) {
   const within = relative(realpathSync(PROMPTS), realpathSync(path));
   if (within === "" || within.startsWith(`..${sep}`) || within === ".." || isAbsolute(within)) refuse("outside prompts/");
   return path;
+}
+
+/**
+ * The brief at prompts/`name` (as `promptPath` takes it) with each
+ * `{{key}}` replaced by `values[key]`, the way the CLI fills the repository
+ * briefs from a spec's toolchain.json (bin/lib.mjs `render`), for a
+ * platform that fills them from its own project. Throws when a placeholder
+ * has no value or a value is not a string, so a brief that gains a
+ * placeholder fails loudly at the version that adds it rather than reaching
+ * a model with `{{key}}` in it.
+ */
+export function renderPrompt(name, values) {
+  const path = promptPath(name);
+  if (values === null || typeof values !== "object") throw new Error(`renderPrompt(${JSON.stringify(name)}): values is an object`);
+  return readFileSync(path, "utf8").replace(/\{\{(\w+)\}\}/g, (_, key) => {
+    if (!Object.hasOwn(values, key)) throw new Error(`renderPrompt(${JSON.stringify(name)}): no value for {{${key}}}`);
+    if (typeof values[key] !== "string") throw new Error(`renderPrompt(${JSON.stringify(name)}): {{${key}}} is not a string`);
+    return values[key];
+  });
 }

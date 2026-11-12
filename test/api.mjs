@@ -103,7 +103,7 @@ try {
     assert.deepEqual(loaded, ["bin/api.mjs", "bin/decisions.mjs", "bin/hash.mjs", "bin/rules.mjs"]);
     assert.deepEqual(
       Object.keys(api).sort(),
-      ["calibrate", "decisionItems", "diffDecisions", "hiddenManifest", "hiddenSha256", "promptPath", "scenarios", "verdict"],
+      ["calibrate", "decisionItems", "diffDecisions", "hiddenManifest", "hiddenSha256", "promptPath", "renderPrompt", "scenarios", "verdict"],
     );
     // "." stays the CLI (resolved, not imported: importing it runs it).
     assert.equal(import.meta.resolve("duediligence"), new URL("../bin/cli.mjs", import.meta.url).href);
@@ -237,6 +237,30 @@ try {
     }
     for (const name of ["../package.json", "../README", "repo/../../bin/api.mjs", "/etc/passwd", "repo\\skeleton", "./skeleton", "repo//skeleton", "", "nope", "repo", "C:/x", "a\0b", 42])
       assert.throws(() => api.promptPath(name), /promptPath/, `accepted ${JSON.stringify(name)}`);
+  });
+
+  step("renderPrompt", () => {
+    const values = {
+      seam: "`src/a.ts`",
+      publicDir: "tests/public",
+      slug: "x",
+      hiddenDir: "tests/private",
+      allowedPaths: "`src/`",
+      testPublic: "npm run test:public",
+      testHidden: "npm run test:private",
+      test: "npm test",
+    };
+    const text = api.renderPrompt("repo/reference", values);
+    assert.doesNotMatch(text, /\{\{/);
+    assert.match(text, /The interface is at `src\/a\.ts`\./);
+    assert.match(text, /`tests\/public\/x\.\*` and `tests\/private\/`/);
+    // A brief with no placeholders comes back as it is.
+    assert.equal(api.renderPrompt("reference", {}), readFileSync(api.promptPath("reference"), "utf8"));
+    const { seam, ...missing } = values;
+    assert.throws(() => api.renderPrompt("repo/reference", missing), /no value for \{\{seam\}\}/);
+    assert.throws(() => api.renderPrompt("repo/reference", { ...values, seam: 1 }), /\{\{seam\}\} is not a string/);
+    assert.throws(() => api.renderPrompt("repo/reference", null), /values is an object/);
+    assert.throws(() => api.renderPrompt("../package.json", values), /promptPath/);
   });
 
   step("nothing spawned, connected, written, or read outside the package and this test's folder", () => {
