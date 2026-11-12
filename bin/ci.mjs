@@ -6,6 +6,8 @@
 //   node bin/ci.mjs --seal <file|https-url> [--repo <checkout>] [--ref <rev>]
 //                   [--name <check name>] [--out <payload.json>] [--record <file>]
 //                   [--no-post] [--exit-zero]
+//   node bin/ci.mjs --platform [<url>] --version <id> --workspace <id> [--base <rev>]
+//                   judged on the hosted platform instead (hosted.mjs)
 //
 // 1. A URL seal is fetched with DUEDILIGENCE_SEAL_AUTH as the
 //    Authorization header, if set, into a temporary file.
@@ -37,6 +39,17 @@ import { fileURLToPath } from "node:url";
 
 const BIN = dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
+
+// --platform: judged on the hosted platform instead of from a seal
+// (hosted.mjs `ciPlatform`). A bare --platform means the default platform.
+if (argv.includes("--platform") || argv.some((arg) => arg.startsWith("--platform="))) {
+  const { run } = await import("./hosted.mjs");
+  const { version } = JSON.parse(readFileSync(join(BIN, "..", "package.json"), "utf8"));
+  const given = argv.map((arg, index) =>
+    arg === "--platform" && (argv[index + 1] === undefined || argv[index + 1].startsWith("--")) ? "--platform=" : arg,
+  );
+  process.exit(await run("ci", given, { client: "duediligence", version }));
+}
 const options = {};
 for (let i = 0; i < argv.length; i += 1) {
   if (!argv[i].startsWith("--")) {

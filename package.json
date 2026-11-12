@@ -58,7 +58,7 @@
     "skills/"
   ],
   "scripts": {
-    "test": "node scripts/skill.mjs check && node test/api.mjs && node test/platform.mjs && node test/smoke.mjs",
+    "test": "node scripts/skill.mjs check && node test/api.mjs && node test/platform.mjs && node test/hosted.mjs && node test/smoke.mjs",
     "version": "node scripts/skill.mjs sync && git add skills .claude-plugin",
     "skill:check": "node scripts/skill.mjs check",
     "skill:sync": "node scripts/skill.mjs sync",
