@@ -84,15 +84,17 @@ _Repository_ below are for that target.
 ## Hosted mode
 
 When the `lunox` MCP tools are available and signed in (the Claude Code plugin
-bundles the server; `/mcp` signs in), they read the person's workspace on the
-Lunox platform: its workspaces, bounties, repositories, sandboxes and runs
-(tools such as `list_workspaces`, `list_bounties`, `list_repositories`,
-`list_sandboxes`, `get_run`). Use them when the person asks about those. Writes,
-decision confirmations and approvals happen in the platform's web app for now:
-point the person there and never act for them. Never ask for a token in the
-chat: the server signs in through `/mcp`, the CLI through `duediligence login`
-in the person's own terminal. Local mode, the steps below, is unchanged and the
-default, and needs no sign-in.
+bundles the server; `/mcp` signs in), they work on the person's workspace on
+the Lunox platform. Reads: `list_workspaces`, `list_bounties`, `get_bounty`,
+`get_proposal`, `get_run`, `get_usage`. Writes, only when the person asks for
+that one: `post_bounty`, `import_github_issue`, `import_jira_issue` (a new
+bounty) and `size_bounty` (price it; this starts a paid model run). Decision
+confirmations, approving a price and publishing happen in the platform's web
+app: point the person there and never act for them. Hidden tests are not
+prepared or judged through these tools yet; use local mode for that. Never ask
+for a token in the chat: the server signs in through `/mcp`, the CLI through
+`duediligence login` in the person's own terminal. Local mode, the steps below,
+is unchanged and the default, and needs no sign-in.
 
 ## 0. Fit (repository)
 
