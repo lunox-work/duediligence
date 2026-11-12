@@ -1,0 +1,72 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "9577d6a6-5e54-4336-b1bd-96e0db9447af",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2640347,
+        "turns": 7,
+        "durationMs": 37317,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.2640347,
+    "finalText": "I didn't need to change either seam file. The spec says no export's name or signature changes (\"No new export is added\"), and both files already export exactly what it lists:\n\n- **`apps/api/src/analysis/routes.ts`**: `AnalysisRouteOptions`, `REPOSITORY_PROPOSALS_MAX = 100`, and `mountAnalysisRoutes(app: Hono<{ Variables: AuthVariables }>, options: AnalysisRouteOptions): void`.\n- **`apps/api/src/pricing/profiler.ts`**: `PROFILE_SWEEP_MS = 30_000`, `BountyProfilerOptions` (with `runs: Pick<AnalysisRunStore, \"enqueue\" | \"get\">`), and `BountyProfiler` with `constructor`, `request`, `start`, `stop`, `kick` and `sweep`.\n\nEvery change in the spec is inside existing function bodies: the deadline default, the \"Build all\" list, and the profiler's `queued → scoping` step. Your rules say existing bodies stay unchanged and new bodies are only `throw new Error(\"not implemented\")`, so the current code is already the whole contract. The repository has no changes apart from the untracked `spec.md`.\n\n**Checks:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- The existing suite gives 882 passed and 2 failed out of 884. Both failures are in `test/deepseek-caller.test.ts` (\"the default client posts to /chat/completions…\" and \"…maps a non-2xx status…\"). They fail with `listen EPERM` because the sandbox blocks binding local ports, which has nothing to do with these files. To let them run, set `sandbox.network.allowLocalBinding: true` in your settings.\n\n**One thing the test writers need to know:** `CONTEXT_BUILDERS` is still `[\"graphify\", \"dependency_cruiser\", \"deepwiki\", \"abstractions\", \"data_model\"]` in `packages/core/src/analysis.ts:86`. The spec says it gets cut to three in the same change, but that's outside this seam, so I left it alone. Until that lands, the scenarios that expect `deepwiki`/`dependency_cruiser` to be rejected with 400, and \"Build all\" to queue three runs with a cap of 6, will fail against this tree.\n\nExported names added: none.",
+    "problem": null,
+    "sha256": "58e9b40f9e6ae5a36a0d2ae30e95dae7c069475550a59a9eaacf091d378d22c0"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "d019c881-76e3-4198-aae7-92dc3f92899b",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.8262709,
+        "turns": 26,
+        "durationMs": 306740,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.8262709,
+    "finalText": "I wrote 46 tests in two files under `apps/api/test/`. `npx tsc -p tsconfig.test.json` reports no errors.\n\n- **`sliced-fixtures.profiler.test.ts`** (32 tests): the `queued → scoping` step, the held-back cap, obsolete-log removal, and the three concurrency scenarios.\n- **`sliced-fixtures.routes.test.ts`** (14 tests): `POST .../runs`, `POST .../builds` and `POST .../scope`.\n\nEach of the 23 scenarios has two tests, both starting with the scenario's key (e.g. `[boundary-4]`): one for its happy path and one for a boundary case. For the Scenario Outlines, the two tests split the example rows between them. The fakes, the `fixture()` harness and the assertion style are copied from `pricing-profiler.test.ts`, `analysis.test.ts` and `agent-routes.test.ts`.\n\n**What happens when you run them:** in this copy, the two seam files still contain the old code; they don't throw `not implemented` as described. So 30 tests fail and 16 pass. The 16 that pass check things the spec says stay the same: the coalesced sweeps, the scope route naming `latestSucceeded` runs, the no-snapshot and failed-scope paths, and the cap refusal on Build all. The 30 failures are the new behaviour.\n\n**Check that the tests are correct:** I copied the compiled output to the scratchpad and patched in a rough implementation of the spec. All 46 passed against it. Nothing in the repository was changed apart from the two new test files.\n\n**Compatibility with the removal:** `sandbox-factory` and `@sandbox-factory/shared` still list `deepwiki` and `dependency_cruiser` here. The tests only use those names as strings inside JSON request bodies, so they will still compile once the two builders are removed.\n\n46 tests, in 2 files.",
+    "problem": null,
+    "files": [
+      "apps/api/test/sliced-fixtures.profiler.test.ts",
+      "apps/api/test/sliced-fixtures.routes.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "4758e835-e9d3-497f-b4d0-75c38b4fbb3e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.2922331000000002,
+        "turns": 29,
+        "durationMs": 449629,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.2922331000000002,
+    "finalText": "I wrote 37 hidden tests in two files under `apps/api/test/hidden-sliced-fixtures/`. They type-check, and all 37 fail against the code as it stands.\n\n**The interface isn't stubbed.** `routes.ts` and `profiler.ts` still hold the old, working code rather than bodies that throw `not implemented`. Because of that, 14 of the 46 public tests already pass today: happy-5, happy-7, unhappy-3, unhappy-4, unhappy-6, concurrency-2 and concurrency-3, plus one test each for boundary-2 and unhappy-1. For those scenarios, a hidden test can only fail on the old code if it also checks something the change introduces. Examples: the full list of enqueues, the map-reader keys in the scope params, or which tool a refused build stops at. Each such test still asserts its own scenario's outcome. Happy-7 is the clearest case: the scope route doesn't change at all. Its hidden test calls Build all first and then checks that the scope request adds only `graphify` and `scope`.\n\n**Checked against a reference implementation.** In a scratch copy outside the repo, I wrote a short version of the spec. It drops the two builders from `CONTEXT_BUILDERS`, gives every builder the graph deadline by default, and adds the map-reader wait to the profiler's queued step. Against it, all 83 tests pass (46 public, 37 hidden). The copy is at `/private/tmp/claude-501/-private-var-folders-9k-pldvsgmx3kz-k53f-53t5m900000gn-T-duediligence-work-sliced-fixtures-private-mQ5OLp/4758e835-e9d3-497f-b4d0-75c38b4fbb3e/scratchpad/ref`.\n\n**What the hidden tests add** (each one names the public test it extends in a comment):\n- **Different values:** other snapshots, caps (3, 5, 6, 7 and 10, plus 1 and the default where the scope enqueue is included), proposals, spec revisions and hashes.\n- **Different ids:** graph and map-reader runs the store finds under ids other than `arn_g`/`arn_a`/`arn_d`, which catches an implementation that hard-codes them.\n- **Wait combinations:** the seven unfinished pairs of map-reader statuses the public table leaves out, readers that finish in different sweeps, and readers that come back already finished from their own enqueue.\n- **Obsolete logs:** a separate key for each tool, and the scope's log removed in the same sweep.\n- **The cap:** a refusal stops three rows, the held row is retried on the next sweep, and another organization's rows are not held back.\n- **Several profiles:** three waiting rows on three snapshots, and a ready row behind a waiting one.\n- **Failures:** a map-reader refusal or a graph failure on a later sweep, and a failed scope that had named one reader.\n- **Concurrency:** three profiles sharing one run of each reader; four overlapping sweeps making two passes.\n- **Routes:**\n  - The `runs` deadline is checked for every entry in `CONTEXT_BUILDERS`, both by default and with an asked deadline.\n  - The removed builders are rejected with other bodies, and for an admin as well as an owner.\n  - Build all's caps are checked with a cap of 1 (`[1, 4, 4]`) and when the graph is found already built (`[3, 3, 6]`).\n  - A Build all refusal is checked when abstractions is the first run the set would create.\n\n37 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/api/test/hidden-sliced-fixtures/profiler.test.ts",
+      "apps/api/test/hidden-sliced-fixtures/routes.test.ts"
+    ],
+    "open": []
+  }
+}

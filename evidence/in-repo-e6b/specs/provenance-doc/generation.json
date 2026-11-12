@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "2ca56022-52fc-41ad-9e6f-b3b4e8abcfa7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2984696,
+        "turns": 5,
+        "durationMs": 35722,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.2984696,
+    "finalText": "I updated the two doc comments in `packages/shared/src/build-info.ts`, and that is the only file I changed. The spec says no export is added or removed, so the contract stays as it was.\n\n- **Doc comments:** the `imageDigest` field comment and the `verifyCommand` comment now describe `gh api repos/lunox-work/sandbox-factory/attestations/<digest>`. Both call it \"a lookup of recorded attestations by digest, not a signature check\". The `verifyCommand` comment also states the spec's rules: an empty digest counts as no digest, any non-empty digest is used verbatim without a format check, and only `imageDigest` decides the result.\n- **Code:** no export, signature or body changed, `verifyCommand`'s included. It isn't a new function, so the \"not implemented\" rule doesn't apply, and you said existing bodies stay unchanged. So it still prints the old `gh attestation verify --digest …` command. Switching it to the lookup is left to the implementation, which will also have to replace the old `--digest`/`--repo` test, as the spec says.\n- **Checks:** `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes (47 of 47). I deleted the `dist-test` build output afterwards.\n\nExported names added: none.",
+    "problem": null,
+    "sha256": "58c9b56f5215723f065b823b6f79c384bb8d39a31c7545b0ec993c63e0979412"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "0b2f25e4-0ee8-4db3-948e-cfb4ee35825d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3947831,
+        "turns": 6,
+        "durationMs": 70663,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.3947831,
+    "finalText": "I've written the test suite in `packages/shared/test/provenance-doc.test.ts`. It type-checks with `npx tsc -p tsconfig.test.json` and reports no errors.\n\nI ran it: 13 tests fail and 13 pass, not all failing as you expected. That's because `verifyCommand` in `packages/shared/src/build-info.ts` doesn't throw `not implemented`. It still has the old body, which returns `gh attestation verify --digest … --repo …`. The doc comments have already been updated in the working tree, but the function body hasn't.\n\n- **Failing (13):** every test that checks for the new command. These are the exact-string tests (`[happy-1]`, `[happy-2]`, `[boundary-3]`, `[boundary-4]`), the tests that the old command fragments are gone (`[unhappy-1]`), the empty-digest tests (`[boundary-1]`), and the frozen-record test (`[boundary-5]`).\n- **Passing (13):** tests whose behaviour the old code already has. These cover no digest or an explicitly undefined digest returning `undefined`, the unknown fallback record, the single-line output, the schema, the other functions being unchanged, and the plain no-modification check. They pass now and will keep passing once the change is made.\n\nEach scenario has one happy-path test and one boundary test, named with the scenario's key (`[happy-1]` … `[boundary-5]`). I used the same `node:test` / `node:assert/strict` style and the `identified` fixture from `build-info.test.ts`. Nothing outside the test file was changed.\n\n26 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/provenance-doc.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "22a4cd0c-3ee5-4f40-a9a5-3a439b6b8e8c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7758083000000001,
+        "turns": 14,
+        "durationMs": 179179,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.7758083000000001,
+    "finalText": "I wrote the hidden suite in two files under `packages/shared/test/hidden-provenance-doc/`:\n\n- `verify-command.test.ts` covers happy-1 to happy-3, unhappy-1 to unhappy-3, and boundary-1 to boundary-5.\n- `other-exports.test.ts` covers happy-4 and happy-5.\n\nEvery scenario has its own tests. A comment above each test names the public test it extends. Expected digests are computed with `node:crypto`; there is no clock, randomness, network or filesystem.\n\n**Results:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- **Against the seam as it stands:** all 31 hidden tests fail.\n- **Against a correct implementation:** I made a copy in the scratchpad, outside the repo. It returns `undefined` for an absent or empty digest and otherwise `gh api repos/lunox-work/sandbox-factory/attestations/<digest>`. All 31 hidden tests and all 26 public tests pass.\n- **Against shortcuts:** each one fails some hidden tests.\n  - Trimming the digest fails 5.\n  - Trimming the whole command fails 5.\n  - `encodeURI` on the digest fails 6.\n  - A format check written to pass the public suite fails 3, while passing the public suite completely.\n\n**The seam doesn't throw.** `verifyCommand` in the seam doesn't throw `not implemented`; it still returns the old `gh attestation verify --digest …` command. The other exports already behave as the spec requires. So tests for scenarios the current code already meets (happy-4, happy-5, unhappy-2, unhappy-3, boundary-2) would have passed against the seam. To make them fail, each of those tests also checks that `verifyCommand` returns the new lookup for the same record with a digest added. Every assertion still follows from the spec.\n\n31 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-provenance-doc/other-exports.test.ts",
+      "packages/shared/test/hidden-provenance-doc/verify-command.test.ts"
+    ],
+    "open": []
+  }
+}

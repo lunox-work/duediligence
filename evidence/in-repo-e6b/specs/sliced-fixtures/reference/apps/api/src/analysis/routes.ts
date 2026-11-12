@@ -1,0 +1,818 @@
+import type {
+  AnalysisRunStore,
+  ArtifactStore,
+  BountyProposalStore,
+  BountySpecStore,
+  GithubRepoStore,
+  JiraBoardStore,
+  ObjectStore,
+  RepoSnapshotStore,
+  StoredAnalysisRun,
+  StoredArtifact,
+} from "@sandbox-factory/db";
+import type {
+  RepositoryProposalDto,
+  StoredTree,
+} from "@sandbox-factory/shared";
+import {
+  readsGraph,
+  type AnalysisParams,
+  type AnalysisTool,
+  type ContextBuilder,
+} from "sandbox-factory";
+import {
+  analysisRunListSchema,
+  analysisRunResponseSchema,
+  ARTIFACT_TEXT_MAX_BYTES,
+  artifactContentSchema,
+  artifactListSchema,
+  buildAllSchema,
+  runLogContentSchema,
+  enqueueAnalysisSchema,
+  enqueueFixturesSchema,
+  enqueueScopeSchema,
+  enqueueSliceResponseSchema,
+  enqueueSliceSchema,
+  GRAPH_DEADLINE_MINUTES,
+  repositoryProposalListSchema,
+} from "@sandbox-factory/shared";
+import type { Context, Hono } from "hono";
+import { isAtLeastAdmin } from "../access.js";
+import type { AuthVariables } from "../http-context.js";
+import { textOf } from "../object-text.js";
+import { enqueueAnalysis } from "./enqueue.js";
+
+export interface AnalysisRouteOptions {
+  readonly runs: AnalysisRunStore;
+  readonly artifacts: ArtifactStore;
+  readonly repos: GithubRepoStore;
+  readonly snapshots: RepoSnapshotStore;
+  readonly objects: ObjectStore;
+  /** A snapshot's stored file list, so slice entry points are checked against it. */
+  readonly tree: (treeKey: string) => Promise<StoredTree | null>;
+  readonly ensureWorker: () => Promise<void>;
+  readonly maxActive?: number;
+  readonly onLaunchError?: () => void;
+  /** The proposals agent runs work for, and the repository each is about. */
+  readonly proposals: Pick<BountyProposalStore, "get" | "list">;
+  readonly specs: Pick<BountySpecStore, "get">;
+  /** For naming the board a proposal's bounty came through. */
+  readonly boards: Pick<JiraBoardStore, "list">;
+}
+/** Proposals one repository's picker lists, newest first. */
+export const REPOSITORY_PROPOSALS_MAX = 100;
+/** The proposal store's largest page. */
+const REPOSITORY_PROPOSALS_PAGE = 50;
+const publicArtifact = ({ objectKey: _key, ...dto }: StoredArtifact) => dto;
+/**
+ * Runs whose artifacts are a version's private sandbox: a build's hidden
+ * tests and the table its names were changed by are among them. They are
+ * read through the sandbox routes, owners and admins only, so here a member
+ * is not shown them, and asking for one by id is answered as for any run
+ * that is not there.
+ */
+const SANDBOX_TOOLS: ReadonlySet<AnalysisTool> = new Set([
+  "sandbox_build",
+  "sandbox_starter",
+]);
+const hiddenFrom = (role: string, run: StoredAnalysisRun) =>
+  SANDBOX_TOOLS.has(run.tool) && !isAtLeastAdmin(role);
+/**
+ * The context builders a repository is built with, in `CONTEXT_BUILDERS`
+ * order: graphify first, so its run is there for the map readers to wait
+ * on. `deepwiki` and `dependency_cruiser` are no longer run; a request
+ * naming either is invalid, as any unknown builder is.
+ */
+const BUILDERS = [
+  "graphify",
+  "abstractions",
+  "data_model",
+] as const satisfies readonly ContextBuilder[];
+type Builder = (typeof BUILDERS)[number];
+const isBuilder = (tool: ContextBuilder): tool is Builder =>
+  BUILDERS.some((builder) => builder === tool);
+/**
+ * A context builder's stored parameters: graphify's, plus its own name and,
+ * for a map reader, the graph run it reads. Every builder is deterministic
+ * and keeps the graph runs' deadline, which is part of the cache key the
+ * profiler's graph and map-reader runs share.
+ */
+function builderParams(
+  tool: Builder,
+  asked: number | undefined,
+  graphRunId: string | undefined,
+): AnalysisParams {
+  const deadlineMinutes = asked ?? GRAPH_DEADLINE_MINUTES;
+  if (tool === "graphify") return { deadlineMinutes };
+  if (!readsGraph(tool)) return { deadlineMinutes, builder: tool };
+  if (graphRunId === undefined)
+    throw new Error(`The ${tool} builder needs a graph run.`);
+  return { deadlineMinutes, builder: tool, graphRunId };
+}
+export function mountAnalysisRoutes(
+  app: Hono<{ Variables: AuthVariables }>,
+  options: AnalysisRouteOptions,
+): void {
+  const base = "/api/v1/orgs/:orgId/github";
+  const runLimit = (c: Context) =>
+    c.json(
+      {
+        error: "The active analysis limit has been reached.",
+        code: "run_limit",
+      },
+      409,
+    );
+
+  /**
+   * The snapshot's graphify run, enqueued or found: what a slice or a scope
+   * reads, and waits for in the queue. A response when there is none to use.
+   */
+  async function graphRunFor(
+    c: Context,
+    owner: string,
+    snapshotId: string,
+    deadlineMinutes: number,
+  ): Promise<{ run: StoredAnalysisRun } | { response: Response }> {
+    const graph = await enqueueAnalysis(
+      {
+        runs: options.runs,
+        removeObject: (key) => options.objects.remove(key),
+      },
+      owner,
+      snapshotId,
+      {
+        tool: "graphify",
+        params: { deadlineMinutes },
+        requestedBy: c.get("user").id,
+        maxActive: options.maxActive ?? 3,
+      },
+    );
+    if (!graph.ok)
+      return {
+        response:
+          graph.reason === "run_limit"
+            ? runLimit(c)
+            : c.json({ error: "Not found." }, 404),
+      };
+    if (graph.run.status === "failed")
+      return {
+        response: c.json(
+          {
+            error:
+              "The structure analysis for this snapshot failed. Retry it before slicing.",
+            code: "graph_failed",
+          },
+          409,
+        ),
+      };
+    return { run: graph.run };
+  }
+
+  /** A proposal's spec revision, owner-scoped; its current one when none is named. */
+  async function taskOf(
+    owner: string,
+    proposalId: string,
+    specRevision: number | undefined,
+  ) {
+    const proposal = await options.proposals.get(owner, proposalId);
+    if (proposal === null) return null;
+    const revision = specRevision ?? proposal.specRevision;
+    if (revision === null) return null;
+    const spec = await options.specs.get(owner, proposal.id, revision);
+    return spec === null
+      ? null
+      : {
+          proposalId: proposal.id,
+          specRevision: spec.revision,
+          specHash: spec.specHash,
+        };
+  }
+  const noSpec = (c: Context) =>
+    c.json(
+      {
+        error: "The proposal has no spec to work from.",
+        code: "spec_not_found",
+      },
+      404,
+    );
+  const graphMismatch = (c: Context) =>
+    c.json(
+      {
+        error: "The structure analysis does not describe this snapshot.",
+        code: "graph_mismatch",
+      },
+      409,
+    );
+  /**
+   * The snapshot's succeeded context runs an agent reads, named only when
+   * there is one, so an agent run with none keeps its cache key.
+   */
+  async function contextRunsOf(
+    owner: string,
+    snapshotId: string,
+    tools: readonly ("abstractions" | "data_model")[],
+  ): Promise<{ abstractionsRunId?: string; dataModelRunId?: string }> {
+    const found: { abstractionsRunId?: string; dataModelRunId?: string } = {};
+    for (const tool of tools) {
+      const run = await options.runs.latestSucceeded(owner, snapshotId, tool);
+      if (run === null) continue;
+      if (tool === "abstractions") found.abstractionsRunId = run.id;
+      else found.dataModelRunId = run.id;
+    }
+    return found;
+  }
+
+  /**
+   * One context builder on one snapshot. A builder that reads graphify's
+   * map (`abstractions`, `data_model`) names the snapshot's graph run, which
+   * is enqueued or found first, and waits for it in the queue.
+   */
+  app.post(`${base}/repositories/:id/runs`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can start analysis." },
+        403,
+      );
+    const owner = c.get("member").organizationId;
+    const repoId = c.req.param("id");
+    const repo = await options.repos.get(owner, repoId);
+    if (repo === null) return c.json({ error: "Not found." }, 404);
+    const body = enqueueAnalysisSchema.safeParse(
+      await c.req.json().catch(() => null),
+    );
+    if (!body.success || !isBuilder(body.data.tool))
+      return c.json({ error: "Invalid analysis request." }, 400);
+    const tool = body.data.tool;
+    const snapshot =
+      body.data.snapshotId === undefined
+        ? await options.snapshots.current(owner, repoId)
+        : await options.snapshots.get(owner, body.data.snapshotId);
+    if (snapshot === null || snapshot.repoId !== repoId)
+      return c.json({ error: "No source snapshot is available." }, 404);
+    let graphRunId: string | undefined;
+    let graphQueued = false;
+    if (readsGraph(tool)) {
+      // A builder that reads the map waits for the snapshot's graph run,
+      // enqueued or found first, as a slice does.
+      const graph = await graphRunFor(
+        c,
+        owner,
+        snapshot.id,
+        GRAPH_DEADLINE_MINUTES,
+      );
+      if ("response" in graph) return graph.response;
+      graphQueued = graph.run.status === "queued";
+      graphRunId = graph.run.id;
+    }
+    const params = builderParams(
+      tool,
+      body.data.params?.deadlineMinutes,
+      graphRunId,
+    );
+    const result = await enqueueAnalysis(
+      {
+        runs: options.runs,
+        removeObject: (key) => options.objects.remove(key),
+      },
+      owner,
+      snapshot.id,
+      {
+        tool,
+        params,
+        requestedBy: c.get("user").id,
+        maxActive: options.maxActive ?? 3,
+      },
+    );
+    if (!result.ok && graphQueued)
+      await options.ensureWorker().catch(() => options.onLaunchError?.());
+    if (!result.ok)
+      return result.reason === "run_limit"
+        ? runLimit(c)
+        : result.reason === "graph_mismatch"
+          ? graphMismatch(c)
+          : c.json({ error: "Not found." }, 404);
+    await options.ensureWorker().catch(() => options.onLaunchError?.());
+    return c.json(analysisRunResponseSchema.parse({ run: result.run }), 202);
+  });
+  /**
+   * Every context builder on one snapshot, in `BUILDERS` order, so
+   * graphify's run is there for the map readers to wait on. The first run
+   * the set creates is held to the active cap; the rest follow it in, so a
+   * set the cap admits is queued whole rather than refused halfway. A
+   * builder already built, queued or out of retries is answered as is.
+   * The snapshot becomes the repository's context, the one commit its
+   * builders are read at.
+   */
+  app.post(`${base}/repositories/:id/builds`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can start analysis." },
+        403,
+      );
+    const owner = c.get("member").organizationId;
+    const repoId = c.req.param("id");
+    const repo = await options.repos.get(owner, repoId);
+    if (repo === null) return c.json({ error: "Not found." }, 404);
+    const body = buildAllSchema.safeParse(await c.req.json().catch(() => ({})));
+    if (!body.success)
+      return c.json({ error: "Invalid analysis request." }, 400);
+    const snapshot =
+      body.data.snapshotId === undefined
+        ? await options.snapshots.current(owner, repoId)
+        : await options.snapshots.get(owner, body.data.snapshotId);
+    if (snapshot === null || snapshot.repoId !== repoId)
+      return c.json({ error: "No source snapshot is available." }, 404);
+    const maxActive = options.maxActive ?? 3;
+    const runs: StoredAnalysisRun[] = [];
+    let graph: StoredAnalysisRun | undefined;
+    let admitted = false;
+    let refused: Response | null = null;
+    for (const tool of BUILDERS) {
+      // A map reader has nothing to read once the graph is out of retries.
+      if (
+        readsGraph(tool) &&
+        (graph === undefined || graph.status === "failed")
+      )
+        continue;
+      const result = await enqueueAnalysis(
+        {
+          runs: options.runs,
+          removeObject: (key) => options.objects.remove(key),
+        },
+        owner,
+        snapshot.id,
+        {
+          tool,
+          params: builderParams(tool, undefined, graph?.id),
+          requestedBy: c.get("user").id,
+          maxActive: admitted ? maxActive + BUILDERS.length : maxActive,
+        },
+      );
+      if (!result.ok) {
+        refused =
+          result.reason === "run_limit"
+            ? runLimit(c)
+            : result.reason === "graph_mismatch"
+              ? graphMismatch(c)
+              : c.json({ error: "Not found." }, 404);
+        break;
+      }
+      if (result.created) admitted = true;
+      if (tool === "graphify") graph = result.run;
+      runs.push(result.run);
+    }
+    // The repository's context is one commit for every builder: a set that
+    // stands on this snapshot at all makes it the one the page reads.
+    if (runs.length > 0)
+      await options.repos.setContextSnapshot(owner, repoId, snapshot.id);
+    if (runs.some((run) => run.status === "queued"))
+      await options.ensureWorker().catch(() => options.onLaunchError?.());
+    return (
+      refused ??
+      c.json(
+        analysisRunListSchema.parse({
+          runs: runs.filter((run) => !hiddenFrom(c.get("member").role, run)),
+        }),
+        202,
+      )
+    );
+  });
+  /**
+   * A slice needs the snapshot's graph, so the graphify run is enqueued (or
+   * found) first and the slice waits for it in the queue. The entry points
+   * must name files or directories the snapshot lists.
+   */
+  app.post(`${base}/repositories/:id/slices`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can start a slice." },
+        403,
+      );
+    const owner = c.get("member").organizationId;
+    const repoId = c.req.param("id");
+    const repo = await options.repos.get(owner, repoId);
+    if (repo === null) return c.json({ error: "Not found." }, 404);
+    const body = enqueueSliceSchema.safeParse(
+      await c.req.json().catch(() => null),
+    );
+    if (!body.success) return c.json({ error: "Invalid slice request." }, 400);
+    const snapshot =
+      body.data.snapshotId === undefined
+        ? await options.snapshots.current(owner, repoId)
+        : await options.snapshots.get(owner, body.data.snapshotId);
+    if (snapshot === null || snapshot.repoId !== repoId)
+      return c.json({ error: "No source snapshot is available." }, 404);
+    const tree = await options.tree(snapshot.treeKey);
+    if (tree === null)
+      return c.json(
+        {
+          error: "The file list for this snapshot could not be read.",
+          code: "tree_unavailable",
+        },
+        502,
+      );
+    const entryPoints = [...new Set(body.data.entryPoints)].sort();
+    const paths = new Set(tree.entries.map((entry) => entry.path));
+    const unknown = entryPoints.filter(
+      (point) =>
+        !paths.has(point) &&
+        !tree.entries.some((entry) => entry.path.startsWith(`${point}/`)),
+    );
+    if (unknown.length > 0)
+      return c.json(
+        {
+          error: "Entry points must name files or directories in the snapshot.",
+          code: "unknown_entry_point",
+          entryPoints: unknown,
+        },
+        400,
+      );
+    const requestedBy = c.get("user").id;
+    const maxActive = options.maxActive ?? 3;
+    // The graph run is cached by its parameters, so it keeps the default
+    // deadline; the one asked for is the slice's own.
+    const graph = await graphRunFor(
+      c,
+      owner,
+      snapshot.id,
+      GRAPH_DEADLINE_MINUTES,
+    );
+    if ("response" in graph) return graph.response;
+    const result = await enqueueAnalysis(
+      {
+        runs: options.runs,
+        removeObject: (key) => options.objects.remove(key),
+      },
+      owner,
+      snapshot.id,
+      {
+        tool: "slice",
+        params: {
+          deadlineMinutes: body.data.deadlineMinutes,
+          graphRunId: graph.run.id,
+          entryPoints,
+          budget: body.data.budget,
+          includeInferred: body.data.includeInferred,
+        },
+        requestedBy,
+        maxActive,
+      },
+    );
+    if (!result.ok && graph.run.status === "queued")
+      await options.ensureWorker().catch(() => options.onLaunchError?.());
+    if (!result.ok)
+      return result.reason === "run_limit"
+        ? c.json(
+            {
+              error: "The active analysis limit has been reached.",
+              code: "run_limit",
+            },
+            409,
+          )
+        : result.reason === "graph_mismatch"
+          ? graphMismatch(c)
+          : c.json({ error: "Not found." }, 404);
+    await options.ensureWorker().catch(() => options.onLaunchError?.());
+    return c.json(
+      enqueueSliceResponseSchema.parse({
+        run: result.run,
+        graphRun: graph.run,
+      }),
+      202,
+    );
+  });
+  /**
+   * The scope agent proposes a slice for one bounty. Like a slice, it reads
+   * the snapshot's graph, so the graphify run goes first and the scope run
+   * waits for it.
+   */
+  app.post(`${base}/repositories/:id/scope`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can ask for a scope." },
+        403,
+      );
+    const owner = c.get("member").organizationId;
+    const repoId = c.req.param("id");
+    const repo = await options.repos.get(owner, repoId);
+    if (repo === null) return c.json({ error: "Not found." }, 404);
+    const body = enqueueScopeSchema.safeParse(
+      await c.req.json().catch(() => null),
+    );
+    if (!body.success) return c.json({ error: "Invalid scope request." }, 400);
+    const snapshot =
+      body.data.snapshotId === undefined
+        ? await options.snapshots.current(owner, repoId)
+        : await options.snapshots.get(owner, body.data.snapshotId);
+    if (snapshot === null || snapshot.repoId !== repoId)
+      return c.json({ error: "No source snapshot is available." }, 404);
+    const task = await taskOf(
+      owner,
+      body.data.proposalId,
+      body.data.specRevision,
+    );
+    if (task === null) return noSpec(c);
+    // The graph run is the console's own analysis of the snapshot, cached by
+    // its parameters, so it keeps the default deadline rather than the agent's.
+    const graph = await graphRunFor(
+      c,
+      owner,
+      snapshot.id,
+      GRAPH_DEADLINE_MINUTES,
+    );
+    if ("response" in graph) return graph.response;
+    const result = await enqueueAnalysis(
+      {
+        runs: options.runs,
+        removeObject: (key) => options.objects.remove(key),
+      },
+      owner,
+      snapshot.id,
+      {
+        tool: "scope",
+        params: {
+          deadlineMinutes: body.data.deadlineMinutes,
+          agent: "scope",
+          graphRunId: graph.run.id,
+          ...task,
+          ...(await contextRunsOf(owner, snapshot.id, [
+            "abstractions",
+            "data_model",
+          ])),
+        },
+        requestedBy: c.get("user").id,
+        maxActive: options.maxActive ?? 3,
+      },
+    );
+    if (!result.ok && graph.run.status === "queued")
+      await options.ensureWorker().catch(() => options.onLaunchError?.());
+    if (!result.ok)
+      return result.reason === "run_limit"
+        ? runLimit(c)
+        : result.reason === "graph_mismatch"
+          ? graphMismatch(c)
+          : c.json({ error: "Not found." }, 404);
+    await options.ensureWorker().catch(() => options.onLaunchError?.());
+    return c.json(
+      enqueueSliceResponseSchema.parse({
+        run: result.run,
+        graphRun: graph.run,
+      }),
+      202,
+    );
+  });
+  /** The fixtures agent writes behaviour for a succeeded slice's seams. */
+  app.post(`${base}/runs/:id/fixtures`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can ask for fixtures." },
+        403,
+      );
+    const owner = c.get("member").organizationId;
+    const slice = await options.runs.get(owner, c.req.param("id"));
+    if (slice === null || slice.tool !== "slice" || slice.snapshotId === null)
+      return c.json({ error: "Not found." }, 404);
+    if (slice.status !== "succeeded")
+      return c.json(
+        { error: "The slice has not succeeded.", code: "slice_not_ready" },
+        409,
+      );
+    const body = enqueueFixturesSchema.safeParse(
+      await c.req.json().catch(() => null),
+    );
+    if (!body.success)
+      return c.json({ error: "Invalid fixtures request." }, 400);
+    const task = await taskOf(
+      owner,
+      body.data.proposalId,
+      body.data.specRevision,
+    );
+    if (task === null) return noSpec(c);
+    const result = await enqueueAnalysis(
+      {
+        runs: options.runs,
+        removeObject: (key) => options.objects.remove(key),
+      },
+      owner,
+      slice.snapshotId,
+      {
+        tool: "fixtures",
+        params: {
+          deadlineMinutes: body.data.deadlineMinutes,
+          agent: "fixtures",
+          sliceRunId: slice.id,
+          ...task,
+          ...(await contextRunsOf(owner, slice.snapshotId, ["data_model"])),
+        },
+        requestedBy: c.get("user").id,
+        maxActive: options.maxActive ?? 3,
+      },
+    );
+    if (!result.ok)
+      return result.reason === "run_limit"
+        ? runLimit(c)
+        : result.reason === "slice_mismatch"
+          ? c.json(
+              {
+                error: "The slice has not succeeded.",
+                code: "slice_not_ready",
+              },
+              409,
+            )
+          : c.json({ error: "Not found." }, 404);
+    await options.ensureWorker().catch(() => options.onLaunchError?.());
+    return c.json(analysisRunResponseSchema.parse({ run: result.run }), 202);
+  });
+  /**
+   * Proposals with a spec that this repository's work may be cut for. A
+   * bounty names no repository, so any of the workspace's may: written
+   * here or imported, the same list.
+   */
+  app.get(`${base}/repositories/:id/proposals`, async (c) => {
+    const owner = c.get("member").organizationId;
+    const repoId = c.req.param("id");
+    if ((await options.repos.get(owner, repoId)) === null)
+      return c.json({ error: "Not found." }, 404);
+    const boardNames = new Map(
+      (await options.boards.list(owner)).map(({ id, name }) => [id, name]),
+    );
+    const proposals: RepositoryProposalDto[] = [];
+    // A page at a time, newest first, until the picker is full.
+    let cursor: { createdAt: string; id: string } | undefined;
+    for (;;) {
+      const page = await options.proposals.list(owner, {
+        limit: REPOSITORY_PROPOSALS_PAGE,
+        ...(cursor === undefined ? {} : { cursor }),
+      });
+      for (const proposal of page) {
+        if (proposal.specRevision === null) continue;
+        proposals.push({
+          id: proposal.id,
+          issueKey: proposal.issueKey,
+          title: proposal.title,
+          status: proposal.status,
+          specRevision: proposal.specRevision,
+          boardId: proposal.boardId,
+          boardName:
+            proposal.boardId === null
+              ? null
+              : (boardNames.get(proposal.boardId) ?? null),
+          createdAt: proposal.createdAt,
+        });
+      }
+      const last = page.at(-1);
+      if (
+        last === undefined ||
+        page.length < REPOSITORY_PROPOSALS_PAGE ||
+        proposals.length >= REPOSITORY_PROPOSALS_MAX
+      )
+        break;
+      cursor = { createdAt: last.createdAt, id: last.id };
+    }
+    return c.json(
+      repositoryProposalListSchema.parse({
+        proposals: proposals.slice(0, REPOSITORY_PROPOSALS_MAX),
+      }),
+    );
+  });
+  /**
+   * The run a member may see, or null: one of the owner's, and not a
+   * version's private sandbox unless the member is an owner or admin.
+   */
+  async function visibleRun(c: Context, id: string) {
+    const { organizationId, role } = c.get("member");
+    const run = await options.runs.get(organizationId, id);
+    return run === null || hiddenFrom(role, run) ? null : run;
+  }
+  /** The artifact a member may read, or null; its run decides, as above. */
+  async function visibleArtifact(c: Context, id: string) {
+    const { organizationId, role } = c.get("member");
+    const artifact = await options.artifacts.get(organizationId, id);
+    if (artifact === null || isAtLeastAdmin(role)) return artifact;
+    return (await visibleRun(c, artifact.runId)) === null ? null : artifact;
+  }
+  app.get(`${base}/repositories/:id/runs`, async (c) => {
+    const { organizationId: owner, role } = c.get("member");
+    const repoId = c.req.param("id");
+    if ((await options.repos.get(owner, repoId)) === null)
+      return c.json({ error: "Not found." }, 404);
+    return c.json(
+      analysisRunListSchema.parse({
+        // One snapshot's, when named: its builds, however many runs the
+        // repository's other snapshots have had since.
+        runs: (
+          await options.runs.list(
+            owner,
+            repoId,
+            c.req.query("snapshotId") === undefined ? undefined : 50,
+            c.req.query("snapshotId") || undefined,
+          )
+        ).filter((run) => !hiddenFrom(role, run)),
+      }),
+    );
+  });
+  app.get(`${base}/runs/:id`, async (c) => {
+    const run = await visibleRun(c, c.req.param("id"));
+    return run === null
+      ? c.json({ error: "Not found." }, 404)
+      : c.json(analysisRunResponseSchema.parse({ run }));
+  });
+  app.get(`${base}/runs/:id/artifacts`, async (c) => {
+    const owner = c.get("member").organizationId,
+      id = c.req.param("id");
+    if ((await visibleRun(c, id)) === null)
+      return c.json({ error: "Not found." }, 404);
+    return c.json(
+      artifactListSchema.parse({
+        artifacts: (await options.artifacts.list(owner, id)).map(
+          publicArtifact,
+        ),
+      }),
+    );
+  });
+  app.get(`${base}/artifacts/:id/url`, async (c) => {
+    const artifact = await visibleArtifact(c, c.req.param("id"));
+    if (artifact === null) return c.json({ error: "Not found." }, 404);
+    c.header("Cache-Control", "no-store");
+    return c.json({
+      url: await options.objects.signedUrl(artifact.objectKey, 900),
+    });
+  });
+  /**
+   * One artifact as text, for the viewer. Read through the API rather than
+   * the signed link, which the browser could not read across origins.
+   */
+  app.get(`${base}/artifacts/:id/content`, async (c) => {
+    const artifact = await visibleArtifact(c, c.req.param("id"));
+    if (artifact === null) return c.json({ error: "Not found." }, 404);
+    c.header("Cache-Control", "no-store");
+    const answer = (
+      text: string | null,
+      omitted: "binary" | "too_large" | null,
+    ) =>
+      c.json(
+        artifactContentSchema.parse({
+          path: artifact.path,
+          sizeBytes: artifact.sizeBytes,
+          text,
+          omitted,
+        }),
+      );
+    if (artifact.sizeBytes > ARTIFACT_TEXT_MAX_BYTES)
+      return answer(null, "too_large");
+    const bytes = await options.objects.get(artifact.objectKey);
+    if (bytes === undefined)
+      return c.json(
+        {
+          error: "The artifact could not be read.",
+          code: "artifacts_unavailable",
+        },
+        502,
+      );
+    const text = textOf(bytes);
+    return text === null ? answer(null, "binary") : answer(text, null);
+  });
+  app.get(`${base}/runs/:id/log/url`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can read analysis logs." },
+        403,
+      );
+    const key = await options.runs.logKey(
+      c.get("member").organizationId,
+      c.req.param("id"),
+    );
+    if (key === null) return c.json({ error: "No log is available." }, 404);
+    c.header("Cache-Control", "no-store");
+    return c.json({ url: await options.objects.signedUrl(key, 900) });
+  });
+  /** The log as text, for the console's log viewer; owners and admins only. */
+  app.get(`${base}/runs/:id/log/content`, async (c) => {
+    if (!isAtLeastAdmin(c.get("member").role))
+      return c.json(
+        { error: "Only owners and admins can read analysis logs." },
+        403,
+      );
+    const key = await options.runs.logKey(
+      c.get("member").organizationId,
+      c.req.param("id"),
+    );
+    if (key === null) return c.json({ error: "No log is available." }, 404);
+    const bytes = await options.objects.get(key);
+    if (bytes === undefined)
+      return c.json(
+        { error: "The log could not be read.", code: "artifacts_unavailable" },
+        502,
+      );
+    c.header("Cache-Control", "no-store");
+    const tooLarge = bytes.byteLength > ARTIFACT_TEXT_MAX_BYTES;
+    const text = tooLarge ? null : textOf(bytes);
+    return c.json(
+      runLogContentSchema.parse({
+        sizeBytes: bytes.byteLength,
+        text,
+        omitted: tooLarge ? "too_large" : text === null ? "binary" : null,
+      }),
+    );
+  });
+}

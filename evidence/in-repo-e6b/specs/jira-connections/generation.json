@@ -1,0 +1,73 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "e96dcd35-8ca8-47b2-8ce2-8d28bb24e86a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6355014999999999,
+        "turns": 14,
+        "durationMs": 94332,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.6355014999999999,
+    "finalText": "I've written the four seam files. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes all 153 tests. I loaded the new table with `getTableConfig` and it matches the spec's columns, nullability, defaults, unique constraint and cascading foreign key. It has no index, and `authSchema` does not include it.\n\n- **`src/cipher.ts`** (new): the cipher and its error class as the spec lists them, with each throwing case noted in the doc comments.\n- **`src/schema/jira.ts`** (new): the `jira_connection` table is fully defined, not stubbed, because the schema scenarios read it directly. It imports `organization` only inside the foreign-key thunk.\n- **`src/schema.ts`**: the barrel now re-exports the new table and its two row types, and the header comment lists `schema/jira.ts`. Nothing else changed. `index.ts` and `authSchema` are untouched.\n- **`src/jira-connections.ts`** (new): the four interfaces plus `createJiraConnectionStore(db: Database, cipher: TokenCipher)`.\n\nThings the other teams should know:\n\n- **The ticket isn't in the repo.** The spec says the store's interfaces are \"exactly as the ticket gives them\", but I couldn't find it. I rebuilt them from the lines the spec quotes from it and from the scenarios. In `JiraConnectionInput`, only `email` is optional (`string | null`); the tokens, `expiresAt` and `scopes` are required, with tokens and expiry allowing `null`. `scopes` is `readonly string[]` everywhere. Check this against the real ticket.\n- **`TokenCipherError`'s constructor** calls `super(message)` before `throw new Error(\"not implemented\")`. TypeScript won't compile a subclass constructor without the `super` call. Until it's implemented, constructing the error throws.\n- **Parameter names:** function parameters have a `_` prefix (e.g. `_key`). The repo's tsconfig rejects unused parameters and asks for this prefix. It doesn't affect callers.\n- **No constants added:** the spec gives the error messages and patterns as text but names no exported constants, so the contract has none.\n\nExported names added: `TokenCipherError`, `TokenCipher`, `createTokenCipher`, `sameKeyId`, `jiraConnection`, `JiraConnectionRow`, `NewJiraConnectionRow`, `JiraConnectionSummary`, `JiraConnectionTokens`, `JiraConnectionInput`, `JiraConnectionStore`, `createJiraConnectionStore`.",
+    "problem": null,
+    "sha256": "0f27bfcb2e0a172efd9bc6c4f06ec274c8ab6f30ffa27b0d2c013320e43cf044"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "eef66356-838b-4eaa-b7d3-f7cee0dfe1b0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.8660185999999999,
+        "turns": 21,
+        "durationMs": 406743,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.8660185999999999,
+    "finalText": "I wrote three test files in `packages/db/test/`. `npx tsc -p tsconfig.test.json` reports no errors. The run gives 96 tests: 88 fail because the bodies throw `not implemented`, and 8 pass.\n\nThe 8 that pass are the schema tests. `schema/jira.ts` and the `schema.ts` barrel came with the interface already written, so those tests have real code to check now.\n\n- **`jira-connections.cipher.test.ts`**: the key and key-id rules (and that the key is checked first), the layout of the stored token string, round trips, and `null` and `\"\"` handling. It also covers how `decrypt` rejects bad input: wrong format, a different key id, failed authentication, and checking them in that order. And it covers `sameKeyId`. Keys K1 and K2 are the fixed values from the spec.\n- **`jira-connections.schema.test.ts`**: the columns, nullability and defaults, the one unique constraint and no extra index, the cascading foreign key, and the barrel re-exports. It also checks there are ten tables and that `authSchema` has no `jiraConnection`.\n- **`jira-connections.store.test.ts`**: every store method, including input checks that run before any query, scoping to one organization, the overlapping-call scenarios and the conflict-set shape. It contains its own in-memory fake database, modelled on `fake-organization-db.ts`, because I was only allowed to write test files. The fake:\n  - records every call;\n  - applies an insert's conflict set when the same organization and site already exist;\n  - applies updates in the order their `where()` is called;\n  - writes ``sql`now()` `` as a fixed date, so nothing reads the clock.\n\nEach test name starts with its scenario key, e.g. `[unhappy-3]`. The spec's \"Comparing key ids\" scenario is tagged both `@happy` and `@boundary`. I keyed its `true` results to `[happy-7]` and its `false` results to `[boundary-4]`.\n\nTo check the tests themselves, I ran them against a quick reference implementation in a scratch copy outside the repo, and all 96 passed. Nothing in the repo changed apart from the three test files.\n\n96 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "packages/db/test/jira-connections.cipher.test.ts",
+      "packages/db/test/jira-connections.schema.test.ts",
+      "packages/db/test/jira-connections.store.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "07c3315d-f441-4769-ba5e-7ebdbba2e7b1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 3.0262862,
+        "turns": 24,
+        "durationMs": 661100,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 3.0262862,
+    "finalText": "I wrote 77 hidden tests in two files under `packages/db/test/hidden-jira-connections/`. All 77 fail against the current interface, and the compile command reports no errors.\n\n**Files**\n- `cipher.test.ts` (38 tests): `createTokenCipher`, `encrypt`/`decrypt` and `sameKeyId`. Where the spec defines a value by algorithm, the test computes it with `node:crypto`: the default key id is a SHA-256 prefix, and the ciphertext is AES-256-GCM with AAD `v1:<keyId>`. Ciphertexts are opened and sealed independently with fixed IVs, so an implementation can't pass by only reading its own output.\n- `store.test.ts` (39 tests): `JiraConnectionStore`. Every file in the folder has to match `*.test.ts`, so this file contains its own in-memory fake. Beyond the public fake, it:\n  - rejects any table other than `jiraConnection`;\n  - records the `where` and `limit` of each select;\n  - can return a chosen row from `returning()`;\n  - can hold inserts so the test decides the order they land in.\n\n  It also has a spy cipher that counts `decrypt` calls.\n\n**Checking the tests themselves.** I wrote a throwaway reference implementation in a scratchpad copy of the package, not in the repo. It passes all 96 public tests and all 77 hidden ones. I then tried 11 shortcut versions of it. Each fails at least one hidden test, and 8 of them pass the whole public suite. Those 8:\n- `sameKeyId` that doesn't check the key-id pattern;\n- a format check that lets `+` or `/` into the iv or tag;\n- an `expiresAt` check that accepts a lowercase `z` and similar near-misses;\n- `email || null`, which turns `\"\"` into `null`;\n- an upsert result built from the input instead of the returned row;\n- `list` calling `decrypt` and swallowing the error;\n- an IV made from a counter on each cipher;\n- de-duplicating scopes.\n\n**Not covered: `[happy-8]` to `[happy-11]`.** These are the table, unique-constraint, foreign-key and barrel scenarios. `schema/jira.ts` and the `schema.ts` barrel are already fully written in the fixed interface, so any test of those scenarios passes as it stands. That breaks the rule that every test must fail against the interface, so I wrote none. The public suite covers them and passes today.\n\n77 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/db/test/hidden-jira-connections/cipher.test.ts",
+      "packages/db/test/hidden-jira-connections/store.test.ts"
+    ],
+    "open": []
+  }
+}

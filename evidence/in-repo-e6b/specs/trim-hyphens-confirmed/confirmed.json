@@ -1,0 +1,26 @@
+{
+  "sha256": "49e04e6550e2b21edc4c45e53cc30e2dbd1c34871c8986e003e55424fbc97ff7",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T19:43:22.716Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The output stays exactly the same as the regex version for every input, including the `-user` padding of an empty stem.",
+    "Trimming still happens before truncation, and the truncated stem is not trimmed again, so a handle can end in `-`.",
+    "Only `-` is trimmed. `_` at either end is kept.",
+    "Interior runs of hyphens are kept as they are and not collapsed to one.",
+    "`toHandleBase` stays private. Tests reach it through `createProfileStore(createFakeEmailDb().db).suggest`.",
+    "The linear-time requirement is pinned by checking the output on 100,000-hyphen inputs, not by a timing assertion.",
+    "The regression input is 100,000 hyphens between two letters, the shape on which `-+$` fails at every offset.",
+    "The trim keeps no state between calls (no shared `/g` or `/y` regex with `lastIndex`), so overlapping and repeated calls are independent.",
+    "Lowercasing, replacing characters outside `[a-z0-9_-]`, splitting on the first `@`, and the counter and random-suffix collision handling all stay as they are.",
+    "Seam (the files the stub writes): packages/db/src/emails.ts",
+    "Allowed paths (what the implementer may change): packages/db/src/"
+  ],
+  "seam": [
+    "packages/db/src/emails.ts"
+  ],
+  "allowedPaths": [
+    "packages/db/src/"
+  ]
+}

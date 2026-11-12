@@ -1,0 +1,31 @@
+{
+  "sha256": "943e487d6241b21c33419bab1338a03f38c4ca700723354cd3d4f1d08f73b42d",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T18:32:28.082Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The helper is named `trimTrailingSlashes(value: string): string` and is exported from the shared package.",
+    "Only U+002F counts as a slash. Backslashes and trailing whitespace are kept, and `\"\"` and all-slash strings return `\"\"`.",
+    "The linear-time requirement is pinned at under 250 ms for 60,000 slashes (also tested at 1,000,000), including the case where non-slash text follows the slashes.",
+    "The contract has two families: permissive `*Response` schemas for what Atlassian sends, and strict `*Dto` schemas for what we hand on. There is no connection, connect-body or site-URL schema in shared.",
+    "Response schemas require only what Jira guarantees: `id` and `key` on an issue, numeric `id` and `name` on a board or sprint, `access_token` and `expires_in` on a token, `id`, `url` and `name` on an accessible resource. Everything else is optional or nullish.",
+    "Response objects keep unknown keys (`.loose()`) at every level. DTO objects strip them, so an issue `description` never reaches the wire.",
+    "Missing lists default to `[]`: `issues` on an issue page, `values` on board and sprint pages, `scopes` on an accessible resource.",
+    "`JIRA_STATUS_CATEGORIES` is `new`, `indeterminate`, `done` plus our own `unknown`. The schema refuses anything else (`To Do`, `Done`, Jira's `undefined`) and does not map it. The response schema keeps the category `key` as a free string.",
+    "Board and sprint ids are numbers and issue ids are strings, as Jira sends them, in both the response and DTO schemas.",
+    "The issue DTO has `id`, `key`, `summary`, `status`, `statusCategory`, `assignee`, `priority`, `issueType`, `labels`, `projectKey`, `parentKey`, `created`, `updated`, `dueDate` and `url`. Every key is required, and the optional-in-Jira ones are nullable rather than optional.",
+    "DTO strings are plain `z.string()`: no non-empty check, no issue-key pattern, no datetime or URL check. `assignee` is a display name and `url` may be `null`.",
+    "The issue page DTO carries `issues` plus optional `total`, `nextStartAt` and `nextPageToken`. The board, sprint and site DTOs are not wrapped in list schemas.",
+    "There are no `@concurrency` scenarios. Every export is a pure function or a stateless schema, so overlapping calls cannot interact.",
+    "Every existing export keeps its name, signature and behaviour. The change only adds exports.",
+    "Seam (the files the stub writes): packages/shared/src/index.ts",
+    "Allowed paths (what the implementer may change): packages/shared/src/"
+  ],
+  "seam": [
+    "packages/shared/src/index.ts"
+  ],
+  "allowedPaths": [
+    "packages/shared/src/"
+  ]
+}

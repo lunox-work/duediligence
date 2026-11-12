@@ -1,0 +1,122 @@
+{
+  "slug": "provenance-doc",
+  "status": "ok",
+  "reason": null,
+  "publicIds": [
+    "test/provenance-doc.test.ts :: [happy-1] a sha256 digest becomes a GitHub attestations API lookup",
+    "test/provenance-doc.test.ts :: [happy-1] an all-zero sha256 digest gives the lookup for exactly that digest",
+    "test/provenance-doc.test.ts :: [happy-2] the digest is inserted verbatim with the colon not URL-encoded",
+    "test/provenance-doc.test.ts :: [happy-2] a digest with several colons keeps every colon as is",
+    "test/provenance-doc.test.ts :: [happy-3] the command is a single line with no surrounding whitespace",
+    "test/provenance-doc.test.ts :: [happy-3] a one-character digest still gives a single trimmed line",
+    "test/provenance-doc.test.ts :: [happy-4] buildInfoSchema accepts a record with a digest and rejects an empty one",
+    "test/provenance-doc.test.ts :: [happy-4] buildInfoSchema accepts a one-character digest",
+    "test/provenance-doc.test.ts :: [happy-5] adding a digest changes no other function's result",
+    "test/provenance-doc.test.ts :: [happy-5] the other functions agree with and without a digest, in either sameBuild position",
+    "test/provenance-doc.test.ts :: [unhappy-1] the old, non-existent invocation is gone",
+    "test/provenance-doc.test.ts :: [unhappy-1] no old fragment appears for the unknown fallback with a malformed digest",
+    "test/provenance-doc.test.ts :: [unhappy-2] a record with no imageDigest property gives undefined",
+    "test/provenance-doc.test.ts :: [unhappy-2] a released, dirty record with no imageDigest property gives undefined",
+    "test/provenance-doc.test.ts :: [unhappy-3] imageDigest explicitly set to undefined gives undefined",
+    "test/provenance-doc.test.ts :: [unhappy-3] the unknown fallback with imageDigest explicitly undefined gives undefined",
+    "test/provenance-doc.test.ts :: [boundary-1] an empty imageDigest is treated as absent",
+    "test/provenance-doc.test.ts :: [boundary-1] an empty imageDigest on a released record is still treated as absent",
+    "test/provenance-doc.test.ts :: [boundary-2] the unknown fallback record has no digest",
+    "test/provenance-doc.test.ts :: [boundary-2] a dirty unknown fallback record has no digest either",
+    "test/provenance-doc.test.ts :: [boundary-3] non-sha256 and malformed digests pass through unchanged",
+    "test/provenance-doc.test.ts :: [boundary-3] a single-space digest is not empty and is appended as one space",
+    "test/provenance-doc.test.ts :: [boundary-4] the same digest gives the same command for identified and unknown records",
+    "test/provenance-doc.test.ts :: [boundary-4] the same digest gives the same command for dirty and released records",
+    "test/provenance-doc.test.ts :: [boundary-5] verifyCommand does not modify the record it is given",
+    "test/provenance-doc.test.ts :: [boundary-5] verifyCommand works on a frozen record, which it cannot modify"
+  ],
+  "publicOnSkeleton": {
+    "passed": 13,
+    "total": 26
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [
+    "test/build-info.test.ts :: verifyCommand takes the digest, which needs no registry access"
+  ],
+  "hiddenWritten": 31,
+  "kept": [
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-4] buildInfoSchema and versionResponseSchema accept records with varied digests unchanged",
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-4] buildInfoSchema rejects an empty digest on every record shape",
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-4] buildInfoSchema accepts a very long digest unchanged",
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-5] with a real sha256 digest the other functions give the spec's values",
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-5] the unknown fallback with a digest is still unidentified to the other functions",
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-5] dirty and released records with a digest give the same other results as without",
+    "test/hidden-provenance-doc/other-exports.test.ts :: [happy-5] sameBuild ignores the digest: same digest on different commits differs",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-1] several distinct real sha256 digests each give the lookup for exactly that digest",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-1] the lookup is the bare gh api path with the slug and no flags",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-1] repeated calls on the same record give the same lookup",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-2] characters that URL-encoding would change are inserted verbatim",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-2] a real sha256 digest on the unknown fallback keeps its colon unencoded",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-3] a very long digest still gives one trimmed line holding the whole digest",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [happy-3] real sha256 digests on varied records give single trimmed lines",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [unhappy-1] no old fragment appears for any digest or record shape",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [unhappy-1] the command names neither gh attestation nor a verify step",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [unhappy-2] records of every shape without an imageDigest property give undefined, and with one give the lookup",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [unhappy-2] a record whose imageDigest property was deleted gives undefined",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [unhappy-3] explicitly undefined imageDigest on dirty and released records gives undefined",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [unhappy-3] a digest later overwritten with undefined gives undefined",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-1] an empty imageDigest is absent on every record shape, while a one-character one is not",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-1] an empty imageDigest never yields a command ending in attestations/",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-2] the unknown fallback and its copies give undefined until a digest is added",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-3] digests in many malformed shapes are used verbatim",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-3] whitespace in a digest is kept, not trimmed or treated as absent",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-3] a malformed digest on the unknown fallback is used verbatim",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-4] the same digest gives the same command for every combination of the other fields",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-4] records with different shas and build times share a command for one digest",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-5] records with empty, undefined and missing digests are left exactly as given",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-5] frozen records with malformed, whitespace or empty digests are unchanged",
+    "test/hidden-provenance-doc/verify-command.test.ts :: [boundary-5] calls on records spread from unknownBuildInfo leave the shared fallback unchanged"
+  ],
+  "dropped": [],
+  "reference": {
+    "public": {
+      "passed": 26,
+      "total": 26
+    },
+    "hidden": {
+      "passed": 31,
+      "total": 31
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 46,
+      "total": 47
+    },
+    "notes": "I'm leaving the code as it is, because the spec doesn't support this test.\n\n- **What the test checks:** that the result contains `--digest <digest>` and `--repo lunox-work/sandbox-factory`.\n- **What the spec says:** `spec.md` states that it \"replaces those assertions\". The command must be exactly `gh api repos/lunox-work/sandbox-factory/attestations/<digest>`.\n- **Why both can't pass:** the rule \"The command never names the gh attestation verify --digest invocation that does not exist\" says the result must not contain `--digest` or `--repo`. The new tests in `test/provenance-doc.test.ts` check exactly that. Making this old test pass would break them and print the command the spec is removing.\n\nThe rest of the suite passed in my last run: 103 of 104 tests.\n\ntest/build-info.test.ts :: verifyCommand takes the digest, which needs no registry access :: the spec replaces its assertions; it expects `--digest <digest>` and `--repo …`, but the spec requires exactly `gh api repos/lunox-work/sandbox-factory/attestations/<digest>` with neither fragment present, which `provenance-doc.test.ts` also checks",
+    "sessions": [
+      {
+        "sessionId": "810251e6-4bd4-44dd-9515-69b3d9639fde",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2155096,
+        "turns": 7,
+        "durationMs": 27642,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      },
+      {
+        "sessionId": "810251e6-4bd4-44dd-9515-69b3d9639fde",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2356688,
+        "turns": 1,
+        "durationMs": 6614,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.4511784
+  }
+}

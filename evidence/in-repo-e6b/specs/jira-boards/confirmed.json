@@ -1,0 +1,43 @@
+{
+  "sha256": "6e684f2da8952c28e0e88f42a652964af77171b921a8a28a224119c1cceca625",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-11-03T17:22:46.470Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "What happens when a board is registered against a connection the organization does not own.",
+    "What error type a missing connection raises, and its message.",
+    "Registering the same Jira board twice updates it in place on (connection_id, external_id).",
+    "On re-registration, selection changes only when given; writeback, id and createdAt are kept.",
+    "New boards start with write-back off.",
+    "Enabling write-back does not check the connection's scopes in the store.",
+    "`update`'s selection replaces the stored selection whole.",
+    "An empty update reads the board instead of writing, as `TodoStore.update` does.",
+    "Which selection values are rejected, and the limit of 1–100 for `maxTickets`.",
+    "`maxAgeDays` below `minAgeDays` is rejected; equal is allowed.",
+    "`maxAgeDays: null` is kept as null, distinct from an absent key.",
+    "An empty `issueTypes` list means no restriction and is stored as absent; entries are trimmed and de-duplicated case-sensitively.",
+    "Unknown selection keys are dropped on write and on read.",
+    "A stored selection that fails validation is sanitized on read rather than thrown.",
+    "A summary's selection holds only the stored keys and does not fill in defaults.",
+    "Input string normalization: trim externalId and name and reject them when empty; a blank boardType becomes \"unknown\"; a blank projectKey becomes null.",
+    "No length cap on name, externalId or boardType.",
+    "Errors are thrown by type (`InvalidJiraBoardError` with a `field`) before any database call.",
+    "`list` order is newest createdAt first, ties broken by id ascending, sorted in the store.",
+    "`forRun` returns the board even when its connection is unhealthy.",
+    "`forRun` is one joined query with the row shape `{ board, cloudId, siteUrl }`.",
+    "Deleting a connection or an organization cascades to its boards.",
+    "A board is unique per connection, not per organization.",
+    "The table lives in `schema/jira.ts` and is re-exported by the `schema.ts` barrel; `index.ts` re-exports the new store.",
+    "What happens when overlapping calls race: update never reads first, and register relies on the conflict target.",
+    "Seam (the files the stub writes): packages/db/src/jira-boards.ts, packages/db/src/schema.ts",
+    "Allowed paths (what the implementer may change): packages/db/src/"
+  ],
+  "seam": [
+    "packages/db/src/jira-boards.ts",
+    "packages/db/src/schema.ts"
+  ],
+  "allowedPaths": [
+    "packages/db/src/"
+  ]
+}

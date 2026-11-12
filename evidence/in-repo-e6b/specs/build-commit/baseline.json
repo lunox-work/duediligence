@@ -1,0 +1,38 @@
+{
+  "base": "a353cb6afee6a6b7fc4fe8932d292d7410602f05",
+  "stage": "stub",
+  "at": "2026-11-03T19:34:45.812Z",
+  "compiled": true,
+  "passing": [
+    "test/schemas.test.ts :: todoSchema accepts a well-formed todo",
+    "test/schemas.test.ts :: todoSchema rejects a non-boolean done",
+    "test/schemas.test.ts :: todoSchema rejects a non-ISO createdAt",
+    "test/schemas.test.ts :: createTodoSchema trims the title",
+    "test/schemas.test.ts :: createTodoSchema rejects empty and whitespace-only titles",
+    "test/schemas.test.ts :: createTodoSchema rejects an overlong title",
+    "test/schemas.test.ts :: updateTodoSchema accepts either field alone, or both",
+    "test/schemas.test.ts :: updateTodoSchema rejects an empty body",
+    "test/schemas.test.ts :: updateTodoSchema rejects an invalid title"
+  ],
+  "failing": [],
+  "crashed": [],
+  "onBase": {
+    "base": "a353cb6afee6a6b7fc4fe8932d292d7410602f05",
+    "seconds": 1,
+    "at": "2026-11-03T19:32:05.729Z",
+    "compiled": true,
+    "passing": [
+      "test/schemas.test.ts :: todoSchema accepts a well-formed todo",
+      "test/schemas.test.ts :: todoSchema rejects a non-boolean done",
+      "test/schemas.test.ts :: todoSchema rejects a non-ISO createdAt",
+      "test/schemas.test.ts :: createTodoSchema trims the title",
+      "test/schemas.test.ts :: createTodoSchema rejects empty and whitespace-only titles",
+      "test/schemas.test.ts :: createTodoSchema rejects an overlong title",
+      "test/schemas.test.ts :: updateTodoSchema accepts either field alone, or both",
+      "test/schemas.test.ts :: updateTodoSchema rejects an empty body",
+      "test/schemas.test.ts :: updateTodoSchema rejects an invalid title"
+    ],
+    "failing": [],
+    "crashed": []
+  }
+}

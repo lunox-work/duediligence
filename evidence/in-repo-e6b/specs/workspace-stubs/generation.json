@@ -1,0 +1,78 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "ef82678f-91d9-4b91-9c4d-20a7a74b2837",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4049992,
+        "turns": 14,
+        "durationMs": 79825,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.4049992,
+    "finalText": "I've written the seam in three of the four files. `packages/core/src/analysis.ts` is unchanged, and the two version constants still have their old values. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes (326 of 326).\n\n**Version bump not applied (`analysis.ts`).** The spec sets `SLICE_TOOL_VERSION` to `\"slice@4\"` and `SANDBOX_BUILD_RUN_VERSION` to `\"sandbox_build@9\"`. But an existing test asserts the old value, `assert.equal(toolVersionOf(\"slice\"), \"slice@3\")` at `test/slice.test.ts:589`, so bumping it would make the suite fail. Your two rules conflict here: put the spec's value on the constant, but keep existing bodies unchanged and the old suite passing. I kept the existing values, so the file still says `\"slice@3\"` and `\"sandbox_build@8\"`. The new tests' version checks will fail against the stub, like their other behaviour checks. Whoever implements the spec bumps both constants and updates that one old assertion. If you'd rather the contract carry the new values now, it's a two-line change, and that one existing test will fail until then.\n\nWhat's in the other three files:\n\n- **`sandbox/project.ts`**\n  - **`NODE_GLOBAL_DECLARATIONS`** is exported with the spec's 16 entries, in order and not frozen.\n  - **`ambientDeclarations`** now has the public signature `(packages, modules?, installed?: ReadonlySet<string>): string`, written as a declaration line above the function. The function itself still has the old two parameters and its old body. I did it this way because the repo's `noUnusedParameters` rule rejects a parameter the old body never reads. The defaults the spec gives (`{ specifiers: [], text: \"\" }` and an empty set) are in the doc comment.\n  - `generateProject` and the module's other exports are untouched.\n- **`sandbox/provenance.ts`**\n  - **`isRegistryVersion(version: string): boolean`** is added, using the same declaration-line approach for the same reason. Its body is `throw new Error(\"not implemented\");`.\n  - `resolveScope` and the private `REGISTRY_RANGE` are untouched.\n- **`slice/manifest.ts`**: `CompilationResult` gains the optional `untypedPackageErrors` and `typedPackages` fields. I also replaced the `shimmedPackages` doc comment with the spec's wording.\n\nAll new names are also available from the package's index files.\n\nExported names added: `NODE_GLOBAL_DECLARATIONS`, `isRegistryVersion`, `CompilationResult.untypedPackageErrors`, `CompilationResult.typedPackages` (plus the new `installed` parameter of `ambientDeclarations`).",
+    "problem": null,
+    "sha256": "ea48b204d135f70a6ebfbfcbb6726056283cd5604084da28a2c3a6f97580e46c"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "01588a78-d62a-4afd-895c-d9627824b9d2",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.4433480999999997,
+        "turns": 25,
+        "durationMs": 247015,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.4433480999999997,
+    "finalText": "I've written the test suite in five files under `packages/core/test/`. There are two tests for each of the spec's 25 scenarios: one for the scenario as written and one boundary case.\n\n- `workspace-stubs.versions.test.ts`: the tool versions and `toolVersionOf` (happy-1), and `NODE_GLOBAL_DECLARATIONS` (happy-2), including an exact-text check and that the list is not frozen.\n- `workspace-stubs.ambient.test.ts`: `ambientDeclarations` (happy-3 to happy-5, boundary-1 to boundary-7). Results are compared as whole texts, built from the two header texts and the Node lines written out in the test.\n- `workspace-stubs.project.test.ts`: `generateProject` (happy-6, boundary-8 to boundary-10). One boundary test checks that `typedPackages` changes only the `sandbox/ambient.d.ts` file. Every other file, the blockers, the rewrites and the descriptor stay the same.\n- `workspace-stubs.registry.test.ts`: `isRegistryVersion` (happy-7, unhappy-1, boundary-11) and `resolveScope` (unhappy-2, happy-8). The `resolveScope` boundary cases use the empty pin `\"\"` (refused) and the single-space pin `\" \"` (approved).\n- `workspace-stubs.compilation.test.ts`: the `CompilationResult` type (happy-9, happy-10), including a `@ts-expect-error` for a typed package with no version. It also shows that `renderBoundaryMarkdown`, `renderPublicSurfaceMarkdown`, `boundarySummary` and `sliceReadiness` ignore the new fields (boundary-12, boundary-13).\n\n`npx tsc -p tsconfig.test.json` reports no errors. Running the suite gives 50 tests: 20 fail and 30 pass. The failures are the expected ones: `isRegistryVersion` throws `not implemented`, the version constants are still `slice@3` and `sandbox_build@8`, and nothing yet uses `installed` or `typedPackages`. The 30 that pass cover behaviour the spec says must not change: the untyped output, the views ignoring the new fields, and `resolveScope`'s current results. They are there to catch regressions while the change is implemented.\n\nI added only these five files. The interface, the other tests and all config are untouched.\n\n50 tests, in 5 files.",
+    "problem": null,
+    "files": [
+      "packages/core/test/workspace-stubs.ambient.test.ts",
+      "packages/core/test/workspace-stubs.compilation.test.ts",
+      "packages/core/test/workspace-stubs.project.test.ts",
+      "packages/core/test/workspace-stubs.registry.test.ts",
+      "packages/core/test/workspace-stubs.versions.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "a0094e64-f07a-49a0-8dd4-0de9e4b441ba",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.4082006000000002,
+        "turns": 31,
+        "durationMs": 535910,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.4082006000000002,
+    "finalText": "I wrote 53 hidden tests in 5 files under `packages/core/test/hidden-workspace-stubs/`: `ambient`, `versions`, `registry`, `compilation` and `project` (each `.test.ts`). `tsc -p tsconfig.test.json` reports no errors, and all 53 tests fail against the current stubs.\n\n**Checking the tests are correct:** in a scratch copy of the package I wrote a reference implementation of the spec. There the 53 hidden tests and the 50 public ones all pass. I also tried five shortcut implementations. Three of them pass the whole public suite and are caught only by the hidden one:\n- a case-insensitive Unicode regex (`/…/iu`) in `isRegistryVersion`, which lets in the Kelvin sign `K` and the long `ſ`;\n- matching `installed` names by prefix, which wrongly skips `zod-mini` when `zod` is installed;\n- matching `typedPackages` names without regard to case.\n\nTwo more are caught by both suites: a multi-line regex (`/…/m`), and caching `ambientDeclarations` results in a way that ignores what the `installed` set contains.\n\n**Two compromises you should know about:**\n- **Unchanged behaviour:** several scenarios describe behaviour the stub already has, because `ambientDeclarations` and `resolveScope` still contain the old code. A test of those alone would pass on the stub. So each test for them also checks something only the new code does. For example, the same packages are run with a name installed, or `isRegistryVersion` must agree with what `resolveScope` decides. This applies to happy-2/3/4/8/9, boundary-1/2/3/8/9 and unhappy-2.\n- **Markdown views (boundary-12 and boundary-13):** the rendering code doesn't change at all, so a direct test can't fail on the stub. These tests build their contracts with `toolVersion: SLICE_TOOL_VERSION` and first check that it is `\"slice@4\"`. Without that check, these four tests would pass on the stub.\n\n**What else is covered:**\n- **Every scenario and every kind:** all 10 happy, 13 boundary and 2 unhappy scenarios. Every public test has at least one hidden test extending it, named in a comment above it.\n- **Sorting and text handling:** names beyond ASCII sorted by UTF-16 code unit, a name containing a quote written without escaping, and modules text with `\\r\\n` or no final newline appended exactly as given.\n- **Purity:** an `installed` set that throws if changed, and a set the caller changes between calls.\n- **`isRegistryVersion` rejects:** every ASCII character outside the allowed set, Unicode look-alikes, and every whitespace character except the plain space.\n- **`resolveScope`:** a pin that isn't a registry version is refused only when the package would be installed, not when it is mocked.\n- **`generateProject`:** `typedPackages` entries that name mocks, Node's bare modules, other cases or subpaths count as installed only when they exactly name an approved package with a version.\n\n53 tests, in 5 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/core/test/hidden-workspace-stubs/ambient.test.ts",
+      "packages/core/test/hidden-workspace-stubs/compilation.test.ts",
+      "packages/core/test/hidden-workspace-stubs/project.test.ts",
+      "packages/core/test/hidden-workspace-stubs/registry.test.ts",
+      "packages/core/test/hidden-workspace-stubs/versions.test.ts"
+    ],
+    "open": []
+  }
+}

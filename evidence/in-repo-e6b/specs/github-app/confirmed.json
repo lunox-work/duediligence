@@ -1,0 +1,38 @@
+{
+  "sha256": "205689cb7b1b1c30528ade22f5f190a8e8305cd42fec41beab296039166dd5f0",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-11-03T16:47:00.354Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "What \"repository pointer\" means: a tracked reference to a repository, keyed by GitHub's permanent numeric id, with the full name last seen.",
+    "Which exports the change adds: schemas, constants and types only, with no mapping functions. GitHub-to-DTO mapping belongs to the integration package, as Jira's does.",
+    "Where the exports live: importable from `index.ts`, optionally through a `github.ts` that `index.ts` re-exports.",
+    "Existing exports: unchanged in name, signature and behaviour.",
+    "How strict the GitHub response schemas are: `.loose()`. Only `id` (plus `full_name` on a repository) is required, and `repository_selection` and `account.type` are free strings.",
+    "The id type for GitHub ids sent by GitHub: a safe integer ≥ 1, and the string `\"42\"` is refused.",
+    "The type of `externalId` in our DTOs and bodies: a canonical decimal string, not a number, matching Jira's `externalId`.",
+    "Which id strings are accepted: `^[1-9][0-9]*$` up to `Number.MAX_SAFE_INTEGER`. Leading zeros, signs, whitespace, decimals and exponents are refused, with the message `Must be a positive whole number.`",
+    "The full-name format: owner of 1–39 `[A-Za-z0-9-]` with no edge hyphens, and name of 1–100 `[A-Za-z0-9._-]` that is not `.` or `..`. Failures carry the message `Must be owner/name.`",
+    "Full-name casing and whitespace: case is kept and nothing is trimmed, so surrounding whitespace is refused.",
+    "Account type values: lowercase `user` and `organization`, and GitHub's `User` is refused in a DTO.",
+    "How the setup callback is shaped: snake_case input becomes camelCase output, and `installation_id` becomes a number.",
+    "A setup callback without `installation_id`: refused for `install` and `update` with a fixed message at path `[\"installation_id\"]`, and allowed for `request` with a null id.",
+    "A `request` callback that carries an id: the id is ignored and the output is null.",
+    "Whether the setup callback needs `state`: a non-empty string is required, since it is the CSRF guard the Jira flow also uses.",
+    "Unknown keys in DTOs, bodies and the callback: stripped, not refused.",
+    "Which installation the track body names: our installation row id as a string, not GitHub's numeric installation id.",
+    "Defaults and nullability in DTOs: none. Every field is required, and `defaultBranch` must be non-empty.",
+    "The key in the pointer list: `pointers`, kept apart from the reachable-repository list's `repositories`.",
+    "List ordering: arrays keep their input order, and the schemas neither sort nor deduplicate.",
+    "Concurrency: none applies. All exports are stateless schemas, so the spec has no `@concurrency` scenarios.",
+    "Seam (the files the stub writes): packages/shared/src/index.ts",
+    "Allowed paths (what the implementer may change): packages/shared/src/"
+  ],
+  "seam": [
+    "packages/shared/src/index.ts"
+  ],
+  "allowedPaths": [
+    "packages/shared/src/"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "0159cc37-ac97-4e7b-bd4e-990e53f9f70a",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.243643,
+        "turns": 7,
+        "durationMs": 40533,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.243643,
+    "finalText": "I've created the seam file `packages/shared/src/build-info.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (9 tests, 0 failures). It's the only file I wrote.\n\n- **Real values, not stubs:** `buildInfoSchema`, `versionResponseSchema` and `unknownBuildInfo` are written out exactly as the spec defines them. Tests import them, so leaving them empty would make every test file that imports them fail to load. The schemas accept `\"unknown\"` or the known form for each field. `unknownBuildInfo` is a frozen object with every field set to `\"unknown\"`.\n- **Function bodies:** all five functions throw `\"not implemented\"`. The doc comment on `buildBanner` says it throws `TypeError(\"A build banner needs a name.\")` when the name is empty after trimming.\n- **No extra exports:** the spec says \"No other exports are added\", so I left out a type for the version endpoint's response body.\n- **`index.ts` not changed:** the spec wants `src/index.ts` to re-export everything from the new module. Your brief limited me to the seam file, so I didn't add that line. Whoever writes the implementation needs to add `export * from \"./build-info.js\";`. Until then, tests that import from `../src/index.js` won't find these exports; tests that import from `../src/build-info.js` will work.\n\nAdded: `UNKNOWN_BUILD`, `buildInfoSchema`, `BuildInfoDto`, `versionResponseSchema`, `unknownBuildInfo`, `formatVersion`, `isIdentified`, `commitUrl`, `sameBuild`, `buildBanner`",
+    "problem": null,
+    "sha256": "4ef6baa08ef7cfcc78a4916b246eaa4fc2103df926dcb73ffe984bb26e639645"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "1d2ab2ef-fbe8-4763-8578-1faf3a3d2e6f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7829439,
+        "turns": 7,
+        "durationMs": 163405,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.7829439,
+    "finalText": "I wrote the test suite in `packages/shared/test/build-commit.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and running the files gives 22 passing and 38 failing tests.\n\n**Why 22 already pass:** the interface file already contains working code for the constants and schemas: `UNKNOWN_BUILD`, `buildInfoSchema`, `versionResponseSchema` and the frozen `unknownBuildInfo`. Only the five functions throw `not implemented`. So every test for the schemas and the frozen object passes now, and every test that calls `formatVersion`, `isIdentified`, `commitUrl`, `sameBuild` or `buildBanner` fails, as expected.\n\n**Coverage:** each of the 30 scenarios (11 happy, 7 unhappy, 12 boundary) has exactly two tests: one for the happy path, which runs through all of a Scenario Outline's examples, and one boundary case. Every boundary case either restates the spec or follows directly from it. Some examples:\n- a version with surrounding spaces is kept as given, since values aren't trimmed;\n- a 64-character SHA-256 commit is rejected;\n- `repo.git.git` loses only one `.git` in `commitUrl`;\n- `sameBuild` is false even when the same object with an unknown commit is passed twice;\n- the banner still shows the build time when both version and commit are unknown.\n\n**Conventions:** the file follows `schemas.test.ts`: `node:test` `test` and `node:assert/strict`, with flat top-level tests and no `describe`. Every test name starts with its scenario key, such as `[boundary-6]`. There is no clock, randomness, network or filesystem use. Only that one file was added; nothing else was changed.\n\n60 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/build-commit.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "499ce962-449f-44fe-a2de-5d48a2fa9282",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.274186,
+        "turns": 15,
+        "durationMs": 302020,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.274186,
+    "finalText": "The hidden suite is in `packages/shared/test/hidden-build-commit/`: `schema.test.ts` and `functions.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors. Run against the code as it stands, all 51 tests fail. Run against a reference implementation I built in the scratchpad, all 51 pass, along with the public suite and `schemas.test.ts`. Nothing in the repository outside that folder was changed.\n\n**One choice to check:** the seam already fully implements `UNKNOWN_BUILD`, `unknownBuildInfo`, `buildInfoSchema` and `versionResponseSchema`. Tests that imported them straight from `build-info.js` would pass now, which breaks the rule that every test must fail first. So the tests for the constant and schema scenarios (`happy-1` to `happy-5`, `boundary-1`, `boundary-2`, `unhappy-1` to `unhappy-4`) read those exports through `../../src/index.js`. Each one first checks that it is the same object `build-info.js` exports. The spec requires `index.ts` to re-export the module, and the public suite never checks that. The catch is that an implementation that leaves out the re-export fails 20 tests under schema keys, even though the schemas themselves are correct. The function tests import from `../../src/build-info.js` directly.\n\n**Shortcuts I checked:** each of these passed the public suite and failed the hidden one:\n- removing `.git` anywhere in the repository URL, not just at the end (`boundary-6`);\n- removing trailing slashes again after `.git` (`boundary-6`);\n- removing at most two trailing slashes (`boundary-6`);\n- trimming only spaces from the banner name, not tabs or newlines (`happy-11`, `boundary-10`, `unhappy-7`);\n- treating commits as equal when they match on part of the SHA (`happy-10`);\n- not re-exporting from `index.ts` (20 tests).\n\nOne partial-match shortcut, comparing only the first 7 characters and the last one, at first passed both suites. I added a commit that differs from SHA by one character in the middle, and the hidden suite now catches it.\n\n**Spec reading to be aware of:** one `boundary-6` test expects `https://example.com/team/repo/.git` to become `…/repo//commit/<sha>`, with a double slash. That follows from the spec's order: trailing slashes are removed first, then one `.git`, and slashes are not removed again.\n\n51 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-build-commit/functions.test.ts",
+      "packages/shared/test/hidden-build-commit/schema.test.ts"
+    ],
+    "open": []
+  }
+}

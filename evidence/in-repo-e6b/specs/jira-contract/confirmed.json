@@ -1,0 +1,36 @@
+{
+  "sha256": "19527b2e84f34e9c1b5e5d7eac4dc24697e1be078d07ae528ed2fe3bcabf5246",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-11-03T18:17:34.970Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The helper is named `trimTrailingSlashes(value: string): string` and is exported from the shared package.",
+    "Only U+002F counts as a slash. Backslashes and trailing whitespace are kept, and `\"\"` and all-slash strings return `\"\"`.",
+    "The linear-time requirement is pinned at under 250 ms for 60,000 slashes (also tested at 1,000,000), including the case where non-slash text follows the slashes.",
+    "Site URLs have no length cap, so a URL ending in 60,000 slashes is accepted and normalised.",
+    "Site URLs must be `https`. A URL containing `?` or `#` anywhere is refused, even when the query or fragment is empty. Every refusal uses `JIRA_SITE_URL_MESSAGE`.",
+    "Leading and trailing whitespace is trimmed from a site URL before validation, following `titleSchema`.",
+    "The parsed site URL is the trimmed input string. It is not `new URL(...).href`, so casing and paths are kept as written.",
+    "`jiraSiteUrlSchema` also normalises on the way out, so a stored row with trailing slashes serialises without them.",
+    "The connection, board and issue fields and the list wrappers (`connections`, `boards`, `issues`) are as in the table above.",
+    "Ids are `z.string().min(1)` without a prefix check, following the existing schemas, even though the db uses `jrc_`/`jrb_`/`jri_`.",
+    "Unknown keys are stripped (zod's default), so a leaked `apiToken` or `email` never reaches the wire.",
+    "`authMethod` is one of `oauth` or `api_token`.",
+    "The API-token connect body is `{ siteUrl, email, apiToken }`. The token is trimmed and must not be blank (`\"Provide the API token.\"`). `email` is `z.email()` and is not trimmed, matching `inviteMemberSchema`.",
+    "Issue keys must match `/^[A-Z][A-Z0-9_]*-[0-9]+$/` (uppercase only, no trimming, number `0` allowed) and use `JIRA_ISSUE_KEY_MESSAGE`.",
+    "`statusCategory` is limited to Jira's `new`, `indeterminate` and `done`, and Jira's `undefined` category is refused. `status` is free text.",
+    "`assignee` is a display name, or `null` when the issue is unassigned. The key is required, not optional.",
+    "Timestamps use `z.iso.datetime()`, which accepts `Z` only and no offsets, the same as `todoSchema.createdAt`.",
+    "There are no `@concurrency` scenarios. Every export is a pure function or a stateless schema, so overlapping calls cannot interact.",
+    "Every existing export keeps its name, signature and behaviour. The change only adds exports.",
+    "Seam (the files the stub writes): packages/shared/src/index.ts",
+    "Allowed paths (what the implementer may change): packages/shared/src/"
+  ],
+  "seam": [
+    "packages/shared/src/index.ts"
+  ],
+  "allowedPaths": [
+    "packages/shared/src/"
+  ]
+}

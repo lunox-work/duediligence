@@ -1,0 +1,35 @@
+{
+  "sha256": "75c4a1884a4ae49cd0b68ee77e5e09a86ab84e37140f44bb19ea8017df6629ae",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-11-03T16:36:40.079Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The `stage` of an `ok: false` check is the first stage that refused it. A check never reports more than one stage.",
+    "Workspace-name leaks count as the `project` stage, together with generation blockers.",
+    "The log text is a header \"`<tool>` refused the starter at the `<stage>` stage (`<n>` problem(s)).\", then the shown problems one per line, then \"`<h>` problem(s) in hidden tests, not shown.\", joined with \"\\n\".",
+    "A problem is a hidden test's when it contains \"tests/private/\" anywhere, not only when it starts with that path.",
+    "`<n>` counts every problem passed in, hidden ones included, and the hidden line appears only when `<h>` > 0.",
+    "refusedCheckLog does not cut, cap or deduplicate problems. checkStarter's existing cap of 40 is the only limit.",
+    "run_starter and submit_starter write the refusal log and the stage step line too, under their own tool names.",
+    "The step phrases are: rules \"it breaks the starter's rules\", names \"its pseudonyms do not apply\", project \"its project is refused\", types \"it does not compile yet\".",
+    "Schema-invalid calls, and check_starter calls after the limit, get a null step line and no log line, where today they get \"does not compile yet\" or \"does not build yet\".",
+    "Tool content sent to the agent does not change: hidden-test problems are still shown to the agent, which wrote them.",
+    "descriptorTestSummary returns the whole testSummary (the \"public\" and \"scenarios\" entries) in the descriptor's order, not only the \"public\" entry.",
+    "descriptorTestSummary reads only the first entry at exactly \"project/sandbox-task.json\", and checks only testSummary, not the rest of the descriptor.",
+    "descriptorTestSummary never throws. A missing, unreadable, non-JSON or malformed descriptor gives undefined.",
+    "Entries keep only label and count. Counts must be integers, and negative integers are allowed, as the shared schema allows them.",
+    "A build records the summary only when it is ready, because committed records nothing for a build that is not ready. A starter records it whether or not it is ready, as a top-level key outside `build`.",
+    "When there is no summary, the `testSummary` key is left out of the recorded output, not set to undefined or [].",
+    "Seam (the files the stub writes): apps/worker/src/tools/sandbox-build.ts, apps/worker/src/tools/starter-check.ts, apps/worker/src/tools/starter.ts",
+    "Allowed paths (what the implementer may change): apps/worker/src/tools/"
+  ],
+  "seam": [
+    "apps/worker/src/tools/sandbox-build.ts",
+    "apps/worker/src/tools/starter-check.ts",
+    "apps/worker/src/tools/starter.ts"
+  ],
+  "allowedPaths": [
+    "apps/worker/src/tools/"
+  ]
+}

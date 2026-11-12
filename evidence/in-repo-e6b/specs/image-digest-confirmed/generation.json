@@ -1,0 +1,73 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "4db38f4e-f862-4a0a-892b-d4a03b2a2878",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.18326920000000002,
+        "turns": 5,
+        "durationMs": 21127,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.18326920000000002,
+    "finalText": "I created the seam at `apps/api/src/image-digest.ts`. It has one export, `resolveImageDigest(env: NodeJS.ProcessEnv = process.env): Promise<string | undefined>`, declared `async` with the signature exactly as the spec gives it. Its body is only `throw new Error(\"not implemented\");`. The doc comment says it resolves to `undefined` and never throws or rejects, as the spec says.\n\n`npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes: 129 tests, 0 failures. The seam is the only file I wrote.\n\nI didn't export `DIGEST_A`, `DIGEST_B`, `URI_A` or `URI_B`. They are test fixtures, and the spec says the module \"exports nothing else.\" For the same reason, the timeout and the digest pattern aren't exported either, as the spec decides.\n\nExported names added: `resolveImageDigest`",
+    "problem": null,
+    "sha256": "6139a88b06271cef2161ff792c39193e4d435085388ff0da28160a60bfbdb100"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "5c1117f9-d92e-4e33-ae85-21cd08a879ef",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.8134061000000001,
+        "turns": 11,
+        "durationMs": 178898,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.8134061000000001,
+    "finalText": "I wrote the test suite in `apps/api/test/image-digest-confirmed.test.ts`. It compiles with no errors under `npx tsc -p tsconfig.test.json`. Against the current seam, the 57 tests that call `resolveImageDigest` fail with `not implemented`, as expected. The other 6 already pass, because they test `parseEnv` and `GET /version`, which the spec says stay unchanged.\n\nTo check that the tests can be passed, I ran them against two throwaway implementations. One handles the timeout with `AbortSignal.timeout(1000)`, the other with `setTimeout` and an `AbortController`. All 63 tests passed on both. Those implementations only ever existed in the compiled `dist-test` output, which I rebuilt afterwards, so it is back to the throwing version. Git shows only the new test file added.\n\n**How the tests work:**\n- **No real network:** each test replaces the global `fetch` with a fake that serves `URI_A` and `URI_B` from a route table and records every request (URL and method). Any URL not in the table gets a \"connection refused\" error. The fake builds a real `Request`, so `\"not a url\"` is rejected with the same error real `fetch` gives.\n- **No real clock:** the timeout tests use node:test's mocked `setTimeout`. Node's mock timers don't cover `AbortSignal.timeout`, so the tests also swap it for a version driven by the mocked clock. Either way of writing the timeout fires when the test moves the clock to 1000 ms. The tests check the call is still pending at 999 ms and has resolved to `undefined` by 2000 ms.\n- **Coverage:** every spec scenario has a test for its main case plus one edge case. Every example row of the three scenario outlines (the \"endpoint cannot be used\" table and both digest-format tables) gets its own test. A few edge cases go slightly beyond the scenario text but follow from the spec's rules:\n  - an `env` wrapper that records which keys are read, to check that only `ECS_CONTAINER_METADATA_URI_V4` is read;\n  - an `ImageID` with more than one `@`;\n  - status 300;\n  - the older `ECS_CONTAINER_METADATA_URI` variable being ignored;\n  - a check that nothing is written to the console when the endpoint can't be used.\n- **`process.env`:** the two `[happy-6]` tests set and delete `process.env.ECS_CONTAINER_METADATA_URI_V4`, then restore its original value in a `finally` block.\n\n63 tests in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/api/test/image-digest-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "a3c95d50-65fa-4c61-88a1-c1bd3d9b27e1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.9663465999999996,
+        "turns": 20,
+        "durationMs": 490141,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.9663465999999996,
+    "finalText": "I wrote 184 hidden tests in 4 files under `apps/api/test/hidden-image-digest-confirmed/`. All of them fail against the current stub, and all of them pass against a correct reference implementation.\n\n**Files:**\n- **`happy.test.ts`**: happy-1 to happy-10.\n- **`unhappy.test.ts`**: unhappy-1 to unhappy-6.\n- **`boundary.test.ts`**: boundary-1.\n- **`concurrency.test.ts`**: concurrency-1 to concurrency-4.\n\nEach file starts with the same fake-`fetch` setup the public suite uses, plus a third endpoint and two digests computed with `node:crypto` that the public suite never uses, so a hard-coded answer can't pass. The timeout tests run on a mocked clock. Each test that extends a public test names it in a comment above it.\n\n**Checks:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the stub, all 184 fail with `not implemented`.\n- Against a reference implementation, all 184 pass, and so does the public suite. The reference lives only in the scratchpad and is swapped in with a module hook; I wrote nothing outside the test folder.\n- I also ran 14 shortcut implementations. The 13 that are wrong each fail at least one hidden test; 8 of those pass the whole public suite:\n  - accepting only status 200, not any 2xx\n  - a 1500 ms timeout\n  - falling back to `IMAGE_DIGEST`\n  - reading the env key twice\n  - turning a non-string `ImageID` into a string\n  - searching the string for a digest instead of matching it exactly\n  - scanning the raw body text instead of parsing the JSON\n  - a regex that matches line by line\n\n  The other five (case-folding and trimming, splitting at the first `@`, caching, retrying, copying the env) already fail the public suite too. The 14th uses its own timer instead of `AbortSignal.timeout`, which the spec allows, and it passes everything as it should.\n\n**What the hidden tests add, by area:**\n- **Successful responses:** 2xx statuses other than 200; digests made of a single repeated hex character; an `ImageID` written with JSON escapes; nothing written to the console on success.\n- **Reading `env`:** checks that `env` is never listed, copied or written to, a frozen `env`, and an explicit `undefined` argument falling back to `process.env`. Also that the key is read exactly once, during the call, including a key whose value changes on every read.\n- **Image references:** two valid digests joined by `@` (only the last-`@` rule picks the right one), and a reference whose part after the last `@` is not a digest (`…@DIGEST@unknown`).\n- **Failed requests:**\n  - 13 more non-2xx statuses, each making exactly one request (no retries).\n  - Bodies that are the bare digest as plain text, cut-off JSON, or JSON followed by extra text, plus a body that fails part way through.\n  - `ImageID` given as `[digest]`, a near-miss key such as `imageId`, or nested deeper in the body.\n  - More strings that are not URLs, and DNS-failure and connection-reset errors.\n  - `IMAGE_DIGEST` never used as a fallback.\n- **Timeout:** the call has settled at exactly 1000 ms, and a response at 999 ms is still used.\n- **Digest format:** about 50 more invalid values: whitespace that `trim()` would remove (BOM, no-break space, U+2028), CR/CRLF, two-line values, Unicode look-alike characters, other lengths and algorithms, and broken references.\n- **Concurrency:** answers arriving out of order; 40 concurrent calls; each call using its own response; a cached failure or timeout not sticking once the endpoint recovers.\n- **Tests that don't call the resolver otherwise** (happy-8 to happy-10 only check `parseEnv` and `GET /version`): they now build the `/version` record the way the server does at boot, with `buildInfo(parseEnv(env))` plus `imageDigest: await resolveImageDigest(env)`. Without that they would pass against the stub.\n\n184 tests in 4 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/api/test/hidden-image-digest-confirmed/boundary.test.ts",
+      "apps/api/test/hidden-image-digest-confirmed/concurrency.test.ts",
+      "apps/api/test/hidden-image-digest-confirmed/happy.test.ts",
+      "apps/api/test/hidden-image-digest-confirmed/unhappy.test.ts"
+    ],
+    "open": []
+  }
+}

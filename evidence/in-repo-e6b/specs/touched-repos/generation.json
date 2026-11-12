@@ -1,0 +1,74 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "ace99d1a-c95d-49cc-8672-9a805f5e3e27",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.44401729999999995,
+        "turns": 9,
+        "durationMs": 86174,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.44401729999999995,
+    "finalText": "I've written the three seam files. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (224 tests, 0 failures). Only those three files changed; I also cleared `dist-test` (build output) before compiling.\n\n- **`starter-check.ts`**: a refused `StarterCheck` now carries a `stage` field (`rules`, `names`, `project` or `types`). This clashed with keeping the existing `checkStarter` body unchanged, because that body returns refusals with no `stage` and would no longer compile. So the exported signature is a single overload, exactly as the spec gives it. The unchanged body sits under a wider implementation signature that also allows the old result shape. Callers and tests only see the spec's signature. The implementer just needs to add `stage` to each refusal.\n- **`starter.ts`**: adds `HIDDEN_TEST_MARK = \"tests/private/\"`, since the spec names it with its value, and a stub for `refusedCheckLog`.\n- **`sandbox-build.ts`**: adds a stub for `descriptorTestSummary`, typed with `TaskDescriptorDto[\"testSummary\"]` from `@sandbox-factory/shared`. Its doc comment says it never throws.\n- **Parameter names**: the stub parameters have an underscore prefix (`_tool`, `_files` and so on) because `noUnusedParameters` rejects unused ones. This doesn't change how they are called.\n\n**Still missing:** the spec says `BuildOutput` and `StarterOutput` in `@sandbox-factory/db` each gain an optional `testSummary` field. That package is outside the seam, so I didn't touch it. Until someone adds the field, the `committed` change won't type-check against `recordBuildOutput` and `recordStarterOutput`.\n\nAdded: `StarterCheckStage`, `HIDDEN_TEST_MARK`, `refusedCheckLog`, `descriptorTestSummary` (changed: `StarterCheck`, `checkStarter`)",
+    "problem": null,
+    "sha256": "8f157949918b1c96151e69a4277aae2be772332a9622650a33bddc043532c26f"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "f2e4442a-405d-43c1-9c60-5e7795cf8b52",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.3471912,
+        "turns": 30,
+        "durationMs": 472151,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.3471912,
+    "finalText": "I've written the test suite in three files in `apps/worker/test/`. `npx tsc -p tsconfig.test.json` reports no errors. Running them gives 69 tests: 61 fail and 8 pass.\n\nI checked that the failures are for the right reasons. They either hit `not implemented`, or the assertion is missing only the new behaviour: no `stage` on a refused check, the old step lines, no refusal line in the run log, or no `testSummary` in what's recorded. The rest of each recorded output already matches today's.\n\nThe 8 that pass check behaviour the spec keeps as it is:\n- a passing check has no `stage` key;\n- a build that isn't ready records nothing;\n- with no descriptor, or one with a bad summary, the `testSummary` key is left out.\n\n| File | Covers |\n|---|---|\n| `touched-repos.check.test.ts` | `checkStarter` stages and `refusedCheckLog` |\n| `touched-repos.starter.test.ts` | starter tool step lines, run-log lines, and what the starter's `committed` records |\n| `touched-repos.build.test.ts` | `descriptorTestSummary` and what the build's `committed` records |\n\nEvery scenario has at least two tests, each Examples row has its own test, and every test name starts with its scenario key.\n\nTwo inputs in the spec don't do what it says through the agent tools, so I changed them:\n\n1. **`[unhappy-4]` row 1 and `[concurrency-1]`:** the spec uses `files [{ path \"lib/cart.ts\" }]` to trigger a rules refusal. The tools' input schema rejects that path before the check runs (\"Source files live under src/.\"). By the spec's own rule, a call that fails the schema gets no step line, so it can't produce \"it breaks the starter's rules\". I used `src/cart.ts` given twice instead, which the schema accepts and the rules refuse. Direct `checkStarter` calls still use `lib/cart.ts` as written.\n2. **`[concurrency-1]` types call:** with the cart's names set, replacing `src/cart.ts` leaves `AcmeLine` nowhere in the starter, so the check stops at names, not types. I added the type error in a new `src/a.ts` next to the cart file instead.\n\nYou may want to fix these two scenarios in `spec.md`.\n\n**Filesystem:** `descriptorTestSummary` reads from `absolutePath`, and the interface has no way to pass in a reader. So those tests, and the commit tests that need a real starter or build run, use temporary directories the way the existing tests do, and delete them afterwards. The `checkStarter`, `refusedCheckLog` and refused-run tests use fixed paths and touch no files.\n\n69 tests, in 3 files.",
+    "problem": null,
+    "files": [
+      "apps/worker/test/touched-repos.build.test.ts",
+      "apps/worker/test/touched-repos.check.test.ts",
+      "apps/worker/test/touched-repos.starter.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "74fa2d49-3ffe-4404-8156-b4779106ab80",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.664295899999999,
+        "turns": 30,
+        "durationMs": 576849,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.664295899999999,
+    "finalText": "I wrote the hidden suite in `apps/worker/test/hidden-touched-repos/`, in three files: `check.test.ts`, `starter.test.ts` and `build.test.ts`. The type check (`npx tsc -p tsconfig.test.json`) reports no errors.\n\n**How I checked it:**\n- **Against the interface as it stands:** all 118 tests fail. The `checkStarter` tests fail because no `stage` comes back, not because of a thrown error. The tests that ask for \"not recorded\" or \"no key\" each also check the case where the summary is recorded, so they fail today too.\n- **Against a working version:** I wrote a working implementation in a throwaway copy of `apps/worker` in the scratchpad, never in the repo. The public suite and this suite together pass on it, 187 of 187.\n- **Nothing else changed:** `git status` shows only the new folder. `dist-test/` is build output that git ignores.\n\n**What it covers:** every scenario key from `[happy-1]` to `[happy-7]`, `[unhappy-1]` to `[unhappy-8]`, `[boundary-1]` to `[boundary-8]`, `[concurrency-1]` and `[concurrency-2]`. Each test extends a public test, named in a comment above it. The shortcuts it targets:\n- **Stage order:** a refusal stops at the earlier stage when a later one would also fail (rules before names, names before project, project before types). Hidden-test and public-test type errors still count as `types`.\n- **The 40-problem cap:** it holds at the names and types stages too, and exactly 39 or 40 problems are kept whole.\n- **The hidden-test mark:** `tests/private/` counts at the end of a string or inside a longer path. `tests/private` without the slash, other letter case and backslashes do not count.\n- **Step lines:** every tool and stage combination the public suite skips. Refused runs use up no run. A schema-invalid call right after a refused one gets no step line, which catches an implementation that remembers the last stage.\n- **Calls in one turn:** three calls in order, a passing check between two refused ones, and check, run and submit mixed in one turn.\n- **The descriptor path:** only exactly `project/sandbox-task.json` counts. Tested near misses include `out/…`, `./…`, `xproject/…`, a trailing space, `//` and other letter case. A first matching entry that is missing or malformed is not skipped in favour of a valid second one.\n- **Descriptor contents:** a wide range of bad and good inputs: empty file, JSON cut short, `1e400`, a count written `2.0`, null and boolean fields, entries that are not objects, and `testSummary` nested under another key.\n- **Committed outputs:** the counts are read from the descriptor file, not worked out again. The descriptor is found wherever it sits in the file list. The transform is recorded alongside the counts. With no usable descriptor, the output is the same as with one, minus `testSummary`.\n\n**Two deviations from the brief:**\n- **Real files:** the tests use temporary directories, as the public suite does. `descriptorTestSummary` reads `absolutePath` from disk and both adapters write their outputs there, so the spec's scenarios can't be tested without files. Every directory is removed afterwards.\n- **One spec example is avoided:** in the step-line outline, the row with `check_starter` and `lib/cart.ts` fails the tool's input schema, and the spec says schema-invalid calls get no step line. So the adapter tests use a source file given twice for that row, as the public suite does. `checkStarter` itself is still tested with `lib/cart.ts`.\n\n118 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/worker/test/hidden-touched-repos/build.test.ts",
+      "apps/worker/test/hidden-touched-repos/check.test.ts",
+      "apps/worker/test/hidden-touched-repos/starter.test.ts"
+    ],
+    "open": []
+  }
+}

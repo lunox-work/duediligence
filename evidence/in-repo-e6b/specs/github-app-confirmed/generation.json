@@ -1,0 +1,78 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "89c49c72-2213-4432-b1be-09f8ee5e06e1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5455897,
+        "turns": 9,
+        "durationMs": 83524,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.5455897,
+    "finalText": "I added the GitHub contract to `packages/shared/src/index.ts`, after the existing exports. Nothing that was already there changed. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes, 126 of 126.\n\n- **The file goes against the spec.** The spec wants these exports in a new `src/github.ts`, re-exported from `index.ts` with `export * from \"./github.js\";`. It lists putting them inline in `index.ts` as the rejected option. You said to write only the seam file, so I put everything in `index.ts`. Every name still imports from `index.ts`, so tests won't be affected. Whoever implements this can move the block into `github.ts` and add the re-export line to match the spec.\n- **The schemas are real zod schemas, not stubs.** Their types are inferred from their shapes, so they can't be declared or left to throw. Each one is written exactly as the spec's shapes table says. A quick check confirmed three behaviours:\n  - a bad id is refused with `Expected a GitHub id.`\n  - an unknown key on a DTO is refused with `Unrecognized key: \"token\"`\n  - the GitHub response schemas keep unknown fields.\n- **The two helpers are stubs.** `githubTimestamp` and `githubInstallationSettingsUrl` only throw `not implemented`. The compiler rejects unused parameters, so I renamed theirs with a leading underscore (`_value`, `_accountType`, and so on). Callers don't see parameter names, so the signatures are the same as in the spec.\n- **No extra schema for installation statuses.** The spec names no schema for `GITHUB_INSTALLATION_STATUSES`, so I didn't export one; the available-installation DTO uses `z.enum(GITHUB_INSTALLATION_STATUSES)` directly.\n\nAdded: githubInstallationResponseSchema, githubInstallationPageResponseSchema, githubRepositoryResponseSchema, githubRepositoryPageResponseSchema, githubUserResponseSchema, githubRefResponseSchema, githubInstallationTokenResponseSchema, githubOAuthTokenResponseSchema, githubWebhookEnvelopeSchema, githubInstallationEventSchema, githubInstallationRepositoriesEventSchema, githubPushEventSchema, githubRepositoryEventSchema, GITHUB_WEBHOOK_HEADERS, githubTimestamp, GITHUB_REPO_ROLES, githubRepoRoleSchema, GITHUB_SYNC_STATUSES, githubSyncStatusSchema, GITHUB_INSTALLATION_STATUSES, GITHUB_CONNECT_OUTCOMES, githubConnectOutcomeSchema, githubConnectionDtoSchema, githubGrantDtoSchema, githubAvailableInstallationDtoSchema, githubInstallationRepositoryDtoSchema, githubRepoDtoSchema, registerRepoRequestSchema, linkInstallationRequestSchema, githubInstallationSettingsUrl, GithubInstallationResponse, GithubRepositoryResponse, GithubUserResponse, GithubInstallationEvent, GithubInstallationRepositoriesEvent, GithubPushEvent, GithubRepositoryEvent, GithubRepoRole, GithubSyncStatus, GithubConnectionDto, GithubGrantDto, GithubAvailableInstallationDto, GithubInstallationRepositoryDto, GithubRepoDto, RegisterRepoRequest, LinkInstallationRequest, GithubConnectOutcome",
+    "problem": null,
+    "sha256": "dfb4cac63a5d194c0d802130502185e517ab1e766a1c65325401bc85a1f8322c"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "6f762f79-3fde-477d-afbe-244bb574bb02",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.9590338000000002,
+        "turns": 14,
+        "durationMs": 177955,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.9590338000000002,
+    "finalText": "I've written the test suite: 36 scenarios in the spec, two tests each. `npx tsc -p tsconfig.test.json` reports no errors. Of the 72 tests, 68 already pass and 4 fail with `not implemented`.\n\nThe 4 failures are expected. Only two functions in `src/index.ts` still throw: `githubTimestamp` (`[happy-12]`, 2 tests) and `githubInstallationSettingsUrl` (`[happy-19]`, 2 tests). All the schemas in that file already have real bodies, which is why every schema test passes now.\n\nEach scenario has one test for its spec examples and one boundary test. The boundary tests only check things the spec states or that follow directly from it, for example:\n- **GitHub id text:** `\"12\\n\"` is refused, and `\"1000000000000000000\"` (the smallest 19-digit id) is accepted.\n- **Nullable fields:** a DTO field that is nullable but set to `undefined` is refused, because nullable doesn't mean optional.\n- **Repository pages:** duplicates are kept rather than removed, and `repositories: null` is refused rather than defaulted to `[]`.\n- **Unchanged exports:** `registerBoardSchema` still accepts `\"0123\"`, so it wasn't narrowed to the GitHub id rule.\n- **`githubTimestamp`:** `githubTimestamp(0)` returns the epoch and `githubTimestamp(\"\")` returns `null`.\n\nThe files, all in `packages/shared/test/`:\n- `github-app-confirmed.vocabulary.test.ts`: the constants and enums, plus the free-string account type and repository selection\n- `github-app-confirmed.requests.test.ts`: GitHub id text, the register and link bodies\n- `github-app-confirmed.responses.test.ts`: GitHub's payloads, repository pages and `githubTimestamp`\n- `github-app-confirmed.dtos.test.ts`: the strict DTOs\n- `github-app-confirmed.contract.test.ts`: the settings URL and the existing exports\n\n72 tests, in 5 files.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/github-app-confirmed.contract.test.ts",
+      "packages/shared/test/github-app-confirmed.dtos.test.ts",
+      "packages/shared/test/github-app-confirmed.requests.test.ts",
+      "packages/shared/test/github-app-confirmed.responses.test.ts",
+      "packages/shared/test/github-app-confirmed.vocabulary.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "6118e1b5-2f9a-47e9-b253-fc7c868101e0",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.6742013,
+        "turns": 23,
+        "durationMs": 346016,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.6742013,
+    "finalText": "I wrote the hidden suite: 59 tests in `packages/shared/test/hidden-github-app-confirmed/`. It covers all 36 scenarios (20 happy, 12 unhappy, 4 boundary), and each test names the public test it extends.\n\n**One rule can't be met: 53 of the 59 tests pass against the seam as it stands.** The seam in `packages/shared/src/index.ts` already fully implements every schema and constant in the spec. Only `githubTimestamp` and `githubInstallationSettingsUrl` throw `not implemented`. A correct test of a correct schema can't fail, so only the 6 helper tests (`[happy-12]` and `[happy-19]`) fail on the seam. The other 53 still catch an implementation that rewrites the schemas wrongly, for example while moving them into `src/github.ts`, or that takes a shortcut.\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the seam: 53 pass and 6 fail. All 6 failures are the `not implemented` throw.\n- I temporarily patched the compiled `dist-test/src/index.js` with a minimal correct version of the two helpers. All 131 tests (hidden plus public) passed. Rebuilding then put the throwing bodies back, and nothing in `src` was touched.\n\n**Shortcuts the suite catches:**\n- **Request ids:** reading the id through `Number()` and capping at the safe-integer limit; regexes missing an anchor or matching non-ASCII digits (`\"１２\"`, `\"١٢\"`); trimming whitespace or tabs; accepting `0x`, `_`, `,` or exponent spellings. Every refused id is also checked for the message `Expected a GitHub id.`, on both request bodies.\n- **The link body:** the public suite checks its error message only for 20 digits; here it is checked for every bad string.\n- **GitHub payloads:**\n  - installation ids capped at 32 bits;\n  - closed lists for account type (`Bot`, `Mannequin`);\n  - unknown fields dropped from nested objects, from pages, from the webhook envelope and from push and repository events;\n  - `pushed_at` converted instead of kept as sent;\n  - pages that sort by id or name, or default a missing array.\n- **`githubTimestamp`:** reading numbers as milliseconds instead of seconds; turning `Z` into `.000Z` by text replacement instead of converting offsets such as `+02:00`; impossible dates that should give `null`.\n- **Settings URL:** a hard-coded `octo-org` login; matching `Organization` without its exact casing or with padding.\n- **DTOs:** an unknown key refused by name on all five DTOs, not only `token` and `contents`; every field of the repo DTO removed in turn; mistyped values on every field.\n\n59 tests, in 5 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-github-app-confirmed/contract.test.ts",
+      "packages/shared/test/hidden-github-app-confirmed/dtos.test.ts",
+      "packages/shared/test/hidden-github-app-confirmed/requests.test.ts",
+      "packages/shared/test/hidden-github-app-confirmed/responses.test.ts",
+      "packages/shared/test/hidden-github-app-confirmed/vocabulary.test.ts"
+    ],
+    "open": []
+  }
+}

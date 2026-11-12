@@ -1,0 +1,73 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "2f3a49a2-a71c-4b5c-9ae9-2e8f87f5caf4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3834403,
+        "turns": 9,
+        "durationMs": 64526,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.3834403,
+    "finalText": "I wrote the contract in the two seam files. It compiles with no errors and the existing suite still passes (189 tests, 0 failures).\n\n**One conflict to resolve:** the spec puts the `jiraBoard` table in `packages/db/src/schema/jira.ts`, with `schema.ts` only re-exporting it. I was told to write nothing but the seam files, so I declared the table directly in `schema.ts` instead, with every column, both foreign keys, the unique constraint and the index the spec lists. A comment there says the implementation should move it to `schema/jira.ts` unchanged. Until someone does that, the spec's scenario that checks `schema.ts` and `schema/jira.ts` export the same `jiraBoard` object will fail. So will any test that imports `jiraBoard` from `schema/jira.ts`, which won't even compile yet. If the contract is allowed to touch `schema/jira.ts`, the table should go there now and `schema.ts` should go back to being only a barrel.\n\n- **`packages/db/src/jira-boards.ts`** (new): the five interfaces exactly as the spec gives them, and `createJiraBoardStore(_db: Database)`, whose body is only the \"not implemented\" throw. The parameter has a leading underscore because the compiler rejects an unused parameter named `db`; the type and position are the same. The doc comment on `register` says it throws `Error(\"Failed to register the Jira board.\")` when the upsert returns no row and passes database errors through unchanged. As the spec says, there are no other exports: no error classes, constants or validation.\n- **`packages/db/src/schema.ts`**: all existing exports are unchanged. I appended the `jira_board` table, using `jsonb` for `selection` with a default of `{}`, plus the two row types.\n\nI didn't touch `index.ts`, because it's outside the seam. The spec says it should re-export the new store and its five types, so that's for the implementation to add.\n\nAdded: `StoredBoardSelection`, `JiraBoardSummary`, `RegisterBoardInput`, `UpdateBoardInput`, `JiraBoardStore`, `createJiraBoardStore`, `jiraBoard`, `JiraBoardRow`, `NewJiraBoardRow`",
+    "problem": null,
+    "sha256": "1e19adcba32589a240fe5a9446db476532080666f7e94833d06e71b7dea7db7a"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "69b92b4b-21e8-48f1-b20e-6622e82852b5",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.2680131000000001,
+        "turns": 15,
+        "durationMs": 257841,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.2680131000000001,
+    "finalText": "I've written the test suite in `packages/db/test/jira-boards-confirmed.test.ts`. It compiles cleanly with `npx tsc -p tsconfig.test.json`.\n\n**Current run:** 6 tests pass and 69 fail.\n- **Passing:** the six `[happy-10]`–`[happy-12]` table tests, because the seam already declares the table.\n- **Failing on `not implemented`:** every store test.\n- **Failing on the table's location:** the two `[happy-9]` tests. The spec puts `jiraBoard` in `schema/jira.ts`, but the seam still declares it in `schema.ts`.\n\n**Check against a throwaway implementation:** in a scratch copy of the package (outside the repo), I wrote a quick store and moved `jiraBoard` into `schema/jira.ts` as the spec says. All 75 tests passed, and so did the existing `schema-modules.test.ts`. So the tests can be satisfied, and the fake doesn't cause failures of its own.\n\n**How the tests are set up:**\n- **Own database fake:** the shared `fake-db.ts` returns the same rows to every query and doesn't record conflict settings or joins, so the file defines its own. It follows `fake-db.ts`'s chain-and-thenable design, returns rows (or an error) per statement in call order, and records:\n  - the kind of each call\n  - its values\n  - the `onConflictDoUpdate` target and `set`\n  - whether `where`, `orderBy` and `innerJoin` were used\n- **Queues per statement type:** results are queued separately for selects, inserts, updates and deletes. That keeps the \"update overlapping a remove\" test deterministic however the two calls interleave.\n- **Coverage:** every scenario has a main test and at least one boundary test. The three Scenario Outline scenarios (`[boundary-2]`, `[boundary-5]`, `[boundary-9]`) and the multi-input `[unhappy-4]` miss scenario get one flat test per example row. All test names are unique and start with their scenario key.\n- **What the schema tests check:** they use `getTableConfig`, as the existing schema tests do. The two `[happy-9]` tests read `jiraBoard` from `schema/jira.ts` through a namespace import, so they compile now and pass once the table is moved there.\n\nNothing else in the repo was changed.\n\n75 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/db/test/jira-boards-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "3a55ba92-4379-4d56-ba93-7877b4002c2e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.9664009000000002,
+        "turns": 23,
+        "durationMs": 407986,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.9664009000000002,
+    "finalText": "I wrote 63 hidden tests in two files under `packages/db/test/hidden-jira-boards-confirmed/`:\n\n- **`store.test.ts`** (57 tests) covers every store scenario.\n- **`schema.test.ts`** (6 tests) covers the table scenarios.\n\n**Results:**\n- **Against the stub:** `npx tsc -p tsconfig.test.json` reports no errors, and all 63 tests fail. The store tests fail on `not implemented`. The schema tests fail because they read `jiraBoard` from `schema/jira.ts`, which doesn't export it yet.\n- **Against a reference implementation:** I wrote one in a scratch copy outside the repo. The hidden suite, the public suite and `schema-modules.test.ts` all pass on it (143/143).\n- **Against shortcuts:** I ran seven shortcuts that each pass the whole public suite. The hidden suite catches every one:\n  - `get` filtering on the board id alone\n  - `remove` filtering on the board id alone\n  - `projectKey || null`, which turns `\"\"` into null\n  - `forRun` taking `connectionId` from the board row instead of the joined connection\n  - `update` building its result from the selected row instead of the row the UPDATE returned\n  - `list` ordering ascending\n  - `update` dropping unknown selection keys\n- **Repo:** nothing outside the hidden folder changed. `dist-test/` is build output and gitignored.\n\nThe main thing the public fake can't check is what each query filters on. The public fake only records that a `where` was applied. My fake also keeps the arguments to `where`, `orderBy` and `innerJoin`, and renders them with Drizzle's `PgDialect`. That lets the tests check:\n- both the organization and the board id are bound, against `jira_board`'s own columns, joined by `and`;\n- `list` orders by `\"jira_board\".\"created_at\" desc`;\n- `forRun` inner-joins `jira_connection` on `connection_id = id`.\n\nBeyond that, the tests cover:\n- **Re-registration:** the conflict update sets exactly the eight overwritten fields.\n- **`register`:** it resolves to the id the database returned, not the one it generated.\n- **`forRun`:** it returns only the four keys even when the joined connection row includes the token columns, and it still returns the board when the connection is unhealthy.\n- **Values stored as given:** strings over 255 characters, tabs and newlines, and selection values the HTTP edge would reject, both on read and on write.\n- **Merges:** a null `maxAgeDays` over a stored number, and the reverse.\n- **Schema:** each column's SQL type and the column each foreign key references.\n\n63 tests, in 2 files.\n\nOpen in the spec:\n- `[boundary-8] a re-registration with an explicitly undefined selection resets it to {}`: the spec only says an *absent* selection is stored as `{}`. It doesn't say whether `register` treats `selection: undefined` as absent. Only `update`'s examples use an explicit `undefined`.",
+    "problem": null,
+    "files": [
+      "packages/db/test/hidden-jira-boards-confirmed/schema.test.ts",
+      "packages/db/test/hidden-jira-boards-confirmed/store.test.ts"
+    ],
+    "open": [
+      "`[boundary-8] a re-registration with an explicitly undefined selection resets it to {}`: the spec only says an *absent* selection is stored as `{}`. It doesn't say whether `register` treats `selection: undefined` as absent. Only `update`'s examples use an explicit `undefined`."
+    ]
+  }
+}

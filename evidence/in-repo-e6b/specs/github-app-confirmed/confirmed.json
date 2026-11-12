@@ -1,0 +1,36 @@
+{
+  "sha256": "78bd76dc7a87d401252a6b70b661e5cd03a300980168184d05b301323f76c0f6",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T17:06:10.945Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "What \"repository pointer\" means: a registered repository row (`githubRepoDtoSchema`) keyed by GitHub's permanent numeric id, with the full name, default branch and head commit SHA last read, and a sync status. It never holds contents.",
+    "Which exports the change adds: schemas, constants and types, plus two pure helpers. `githubTimestamp(1700000000)` returns `\"2023-11-14T22:13:20.000Z\"`, `githubTimestamp(\"nope\")` returns `null`, and `githubInstallationSettingsUrl(\"Organization\", \"octo-org\", \"42\")` returns `\"https://github.com/organizations/octo-org/settings/installations/42\"`. Any other account type gives `https://github.com/settings/installations/<id>`. GitHub-to-DTO mapping belongs to the integration package, as Jira's does.",
+    "Where the exports live: in a new `src/github.ts` that `index.ts` re-exports with `export * from \"./github.js\";`.",
+    "Existing exports: unchanged in name, signature and behaviour.",
+    "How strict the GitHub response and event schemas are: `.loose()`. Only `id` is required on an installation, `id` and `full_name` on a repository, and `login` on an account when one is given. `repository_selection` and `account.type` are free strings.",
+    "The id type for GitHub ids sent by GitHub: `z.number().int()`, which takes any safe integer, including `0` and `-1`. `1.5`, `9007199254740992` and the string `\"42\"` are refused.",
+    "How a repository page without `repositories` is treated: it is refused. There is no default to `[]`.",
+    "The type of ids in our DTOs and bodies: strings, never numbers, matching Jira's `externalId`. This covers GitHub's installation id (`installationId: \"42\"`) as well as repository ids.",
+    "Which id strings a request body accepts: `^[1-9][0-9]{0,18}$`, so 1 to 19 digits with no safe-integer cap. `\"9007199254740992\"` and `\"9999999999999999999\"` are accepted, and `\"10000000000000000000\"` is refused. Leading zeros, signs, whitespace, decimals and exponents are refused with the message `Expected a GitHub id.` DTO id fields are not checked.",
+    "The full-name format: not checked. `fullName` and `full_name` are any string, case kept, nothing trimmed.",
+    "Account type and repository selection values: free strings in GitHub's casing (`Organization`, `User`, `Enterprise`, `all`, `selected`) in both responses and DTOs, with no closed vocabulary exported.",
+    "The setup callback: not part of the shared contract, and no setup-action vocabulary or callback schema is exported. How the connect callback ends is the closed vocabulary `GITHUB_CONNECT_OUTCOMES`.",
+    "Unknown keys: refused in DTOs (`z.strictObject`, with message `Unrecognized key: \"<key>\"`), stripped in request bodies, and kept in GitHub responses and events.",
+    "What the register body names: GitHub's repository id and a `role`, which must be `\"source\"`. The connection is our row id in the path (`POST .../github/connections/:id/repositories`), not a body field. The link body names GitHub's installation id as text.",
+    "Repository roles: only `source`, so `sandbox` is refused until the sandbox phase widens `GITHUB_REPO_ROLES`.",
+    "Defaults and nullability in DTOs: no defaults, and every field is required. These fields are nullable: `suspendedAt`, `uninstalledAt`, `registeredId`, `sizeKb`, `headSha`, `pushedAt`, `lastSyncedAt` and `syncError`. Strings carry no length or format check, so `defaultBranch: \"\"` and `createdAt: \"yesterday\"` are accepted.",
+    "List wrappers: none exported. The shared package has no `{ installations }`, `{ repositories }` or `{ pointers }` DTO list schemas.",
+    "List ordering: arrays keep their input order, and the schemas neither sort nor deduplicate.",
+    "Concurrency: none applies. All exports are stateless schemas and pure functions, so the spec has no `@concurrency` scenarios.",
+    "Seam (the files the stub writes): packages/shared/src/index.ts",
+    "Allowed paths (what the implementer may change): packages/shared/src/"
+  ],
+  "seam": [
+    "packages/shared/src/index.ts"
+  ],
+  "allowedPaths": [
+    "packages/shared/src/"
+  ]
+}

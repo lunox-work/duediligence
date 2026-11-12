@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "600aa9c3-facf-462e-9956-894b5ac242a5",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.21593679999999998,
+        "turns": 4,
+        "durationMs": 32820,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.21593679999999998,
+    "finalText": "I added nothing to `packages/shared/src/build-info.ts`, because the spec says the export list stays exactly as it is. The existing file already has every export the spec names, with the right signatures.\n\n- **Code:** I left every export's body as it was, including `verifyCommand`. It still returns the old `gh attestation verify --digest …` string. Replacing that is the implementer's job, and keeping it means the existing suite still passes.\n- **Doc comments:** I rewrote the two comments the spec names, the `imageDigest` field comment and the `verifyCommand` comment. Both now describe `gh api /repos/lunox-work/sandbox-factory/attestations/<digest>` as a lookup of recorded attestations by digest, not a signature check. The `verifyCommand` comment also states the spec's rules for the result:\n  - the digest is inserted verbatim, with no URL-encoding and no format check;\n  - it returns undefined only when `imageDigest` is absent or undefined;\n  - an empty string still gives a command;\n  - no other field affects the result.\n- **Checks:** `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes (47 of 47). The only file changed is the seam.\n\nThe comments now describe the new behaviour, but the code still does the old one. So tests written against the spec will fail on `verifyCommand` until it's implemented. The existing test `verifyCommand takes the digest, which needs no registry access` checks for the old flags and needs replacing, as the spec says.\n\nExported names added: none.",
+    "problem": null,
+    "sha256": "d40777b54b578b57f1e9ec1974aacebf5a08c456838a63f4abaa1d80411a8185"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "0c0b8466-3ea8-43b2-9a27-dd815998b922",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4676213,
+        "turns": 8,
+        "durationMs": 88030,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.4676213,
+    "finalText": "I wrote the test file `packages/shared/test/provenance-doc-confirmed.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors. The run gives 39 tests: 19 fail and 20 pass.\n\nYou said the new bodies throw `not implemented`, but `verifyCommand` in `build-info.ts` doesn't. It still returns the old `gh attestation verify --digest … --repo …` string, even though its doc comments are already updated. So the failures are the tests that check the new command text: the exact output, no URL-encoding, odd and empty digests passing through, and the old fragments being gone. The 20 that pass check things the old body already does right:\n- returning `undefined` when there is no digest or it is `undefined`\n- returning one line with no surrounding whitespace\n- containing no `oci://`\n- not changing the record it's given\n- `buildInfoSchema` and the other exports behaving as before (`[happy-4]`, `[happy-5]`)\n\nThese are meant to keep passing once `verifyCommand` is implemented.\n\n**How it's laid out:**\n- It follows the style of `build-info.test.ts`: `node:test` `test`, `node:assert/strict`, and the same `identified` record. All tests are flat with no `describe`.\n- Each test name starts with its scenario key. In spec order these are `happy-1`–`3`, `unhappy-1`–`3`, `boundary-1`–`5`, then `happy-4` and `happy-5`.\n- Every scenario has its happy-path test plus one boundary case. For example, a digest with several colons for `[happy-2]`, a digest with leading and trailing spaces for `[boundary-2]`, and a released build with a digest still getting its release URL for `[happy-5]`.\n- Each row of a scenario outline is its own test.\n\nNo clock, randomness, network or filesystem is used, and no other files were changed.\n\n39 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/provenance-doc-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "9ac66490-5292-45b5-9df6-96ef26df0ce4",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7547733999999999,
+        "turns": 12,
+        "durationMs": 158481,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.7547733999999999,
+    "finalText": "I wrote the hidden suite in `packages/shared/test/hidden-provenance-doc-confirmed/`. `npx tsc -p tsconfig.test.json` reports no errors. Against the seam as it stands, 62 of the 75 tests fail and 13 pass.\n\n**Why 13 pass.** The seam's `verifyCommand` doesn't throw `not implemented`. It still has its old body, which prints `gh attestation verify --digest … --repo …`, and the other exports have their real bodies. So:\n- **The 13 passing tests** are the `[happy-4]` and `[happy-5]` checks that `buildInfoSchema`, `formatVersion`, `isIdentified`, `commitUrl`, `releaseUrl`, `sameBuild` and `buildBanner` behave as they do now. The spec says those must not change, so no correct test of them can fail against code that already behaves that way. I kept them because they catch an implementation that breaks those functions.\n- **The tests that expect `undefined`** (`[unhappy-2]`, `[unhappy-3]`, `[boundary-1]`) would also pass against the old body. Each one now also checks the spec's \"undefined *only* when absent or undefined\": the same record with a digest must give the lookup. That makes them fail against the old body.\n\n**Against a correct implementation:** I patched a copy of the compiled output in the scratchpad so it prints `gh api /repos/lunox-work/sandbox-factory/attestations/${digest}`. All 114 tests pass there (the hidden suite plus the public one). Nothing outside the hidden folder was changed.\n\n**Shortcuts the suite catches:**\n- **Answers tuned to the visible digest:** mixed-hex and other digests, and repeated calls with different digests.\n- **URL-encoding:** digests containing `/`, `+`, `@`, `?#`, `&`, a space and `é`.\n- **Checking the digest's format:** `sha384:`, upper case, 63 or 65 hex characters, a bare `sha256:`, `:`, tabs, several spaces, a literal `%3A`, and a 10,000-character string.\n- **Leaking old flags:** none of the old fragments appear for the unknown record, an empty digest or a released build.\n- **Gating on the other fields:** unknown sha, dirty, released, a different commit, and a record with its fields in a different order.\n- **Changing or caching the record:** a frozen record, unchanged keys, and the shared `unknownBuildInfo` left untouched.\n- **Other exports leaking the digest:** a dirty record or the unknown record with a digest, and `buildBanner` never printing the digest.\n\n75 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-provenance-doc-confirmed/other-exports.test.ts",
+      "packages/shared/test/hidden-provenance-doc-confirmed/verify-command.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "9b23a69d-0e32-47cb-ae9b-1e0c1bf5b9d5",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.20988459999999998,
+        "turns": 5,
+        "durationMs": 30854,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.20988459999999998,
+    "finalText": "I've written the contract into `packages/db/src/jira-boards.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes: 181 tests, 0 failures.\n\n- **`SyncBoardInput`**: exported as `Omit<RegisterBoardInput, \"selection\">`, with the spec's doc comment.\n- **`JiraBoardStore.sync(organizationId, input)`**: added to the interface, returning `Promise<JiraBoardSummary>`. Its doc comment says it throws `Error(\"Failed to sync the Jira board.\")` when the upsert returns no row, and that a database error comes through unchanged.\n- **`createJiraBoardStore`**: the object it returns needs a `sync` method or it won't compile, so I added a stub whose body is only `throw new Error(\"not implemented\");`. All other exports and method bodies are unchanged.\n\n**Not done:** the spec also says `SyncBoardInput` should be re-exported from `packages/db/src/index.ts`, beside `RegisterBoardInput`. I didn't touch that file, because only the seam file was to be written. Whoever writes the implementation will need to add that re-export, and any test that imports `SyncBoardInput` from the package index will fail until then.\n\nAdded: `SyncBoardInput`, `JiraBoardStore.sync`",
+    "problem": null,
+    "sha256": "029e002a5f11c676b65212150c3d2d5f03b4426b65a48802559669696b9d047f"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "c3a05497-014c-43b5-9ab2-fb620c1675ab",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7367642,
+        "turns": 10,
+        "durationMs": 133106,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.7367642,
+    "finalText": "I've written the test suite in `packages/db/test/jira-pages.test.ts`. It type-checks with no errors under `npx tsc -p tsconfig.test.json`.\n\n**Results in this repository:** the 29 tests that call `sync` fail with `not implemented`, as expected. The 4 tests for the `register` scenarios (`[happy-4]` and `[boundary-4]`) already pass, because `register` keeps its current behaviour.\n\n**Checked against a working version:** I copied the package to a scratch folder and wrote a `sync` there that follows the spec. All 33 tests passed against it, so each test can actually be met. The repository itself is unchanged apart from the new test file.\n\n**How the tests are organised:**\n- **Coverage:** each of the 15 scenarios has a happy-path test plus one variant that pushes on its edges. The two table-driven scenarios get one test per example row: three for `[boundary-2]` and four for `[boundary-3]`.\n- **Fake database:** the test file has its own copy of the fake from `fake-db.ts`. The copy also records the argument passed to `onConflictDoUpdate`, as the spec allows, and can make the insert fail on purpose. The shared `fake-db.ts` is unchanged.\n- **Fixed clock:** the store reads the current time itself and takes no clock argument. So each test fixes `Date` with Node's built-in timer mock, which makes the `updatedAt` checks repeatable.\n- **Organization guard check:** the test for the guard on the conflict update (`[unhappy-3]`) converts it to SQL with Drizzle's `PgDialect`. It then compares that with the SQL for `eq(jiraBoard.organizationId, \"org_2\")`.\n\n33 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/db/test/jira-pages.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "5f55096b-7d19-46b4-91ca-04ad0e40c1f1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0045038000000002,
+        "turns": 16,
+        "durationMs": 215754,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.0045038000000002,
+    "finalText": "The hidden suite is written: `packages/db/test/hidden-jira-pages/sync.test.ts`. It compiles cleanly with `npx tsc -p tsconfig.test.json`. Against the seam as it stands, all 46 tests fail with `not implemented`.\n\n**Checks I ran:**\n- **A correct implementation passes everything.** I wrote one in a scratchpad copy of the compiled output, not the repo. It passed all 79 tests, hidden and public together.\n- **Each shortcut I tried got through the public suite but failed here.** Each was a single change to that correct implementation:\n  - writing `projectKey: input.projectKey || null` instead of `?? null`;\n  - using the last returned row instead of the first;\n  - spreading the input into the insert, with `selection` forced back to `{}`.\n\n**What the suite covers:**\n- **All 14 scenarios have tests:** `happy-1`…`4`, `boundary-1`…`4`, `unhappy-1`…`5` and `concurrency-1`…`2`. Each test is named after the public test it extends.\n- **Gaps the public suite leaves:**\n  - `updatedAt` is taken during the call, not when the store is created (checked by moving the mocked clock forward).\n  - An empty-string `projectKey` is kept as `\"\"`, not turned into null.\n  - The summary comes from the first of several returned rows.\n  - The `setWhere` guard uses each call's own organization, never a cached one.\n  - Smuggled `id`, `organizationId`, `createdAt` and `updatedAt` don't override the store's own values.\n  - Error subclasses come through as the same instance.\n  - The no-row error doesn't replace a real database error.\n  - Five overlapping syncs get distinct ids, and syncs from two organizations each get their own guard.\n  - More unusual names, board types and ids are stored as given.\n- **The two `register` scenarios (`happy-4`, `boundary-4`):** `register` already works, so a test of it alone would pass against the seam. Each of these tests also calls `sync` on the same store. That makes them fail now, and lets them show the difference the spec describes (\"unlike sync\").\n- **Not tested:** the spec's re-export of `SyncBoardInput` from `src/index.ts` is a type-only change. A test importing it would break the required clean `tsc` run until someone adds the export, so I left it out.\n\n46 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/db/test/hidden-jira-pages/sync.test.ts"
+    ],
+    "open": []
+  }
+}

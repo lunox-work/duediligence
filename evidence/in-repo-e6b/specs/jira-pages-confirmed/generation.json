@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "c7b6c8b4-180f-4904-ad71-0de18e701e44",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.19708379999999998,
+        "turns": 6,
+        "durationMs": 34269,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.19708379999999998,
+    "finalText": "I've added the `sync` contract to `packages/db/src/jira-boards.ts`, and nothing else changed. `npx tsc -p tsconfig.test.json` reports no errors and the existing suite still passes (181 of 181).\n\nWhat I added:\n- **`SyncBoardInput`**: a new type, `Omit<RegisterBoardInput, \"selection\">`, exactly as the spec defines it. Its doc comment is the spec's own sentence.\n- **`sync` on `JiraBoardStore`**: `sync(organizationId: string, input: SyncBoardInput): Promise<JiraBoardSummary>`, placed between `register` and `update`. Its doc comment says it rejects with `Error(\"Failed to record the Jira board.\")` when no row comes back, and that a database error comes through unwrapped.\n- **A stub `sync` in the object `createJiraBoardStore` returns**: `async sync(_organizationId, _input) { throw new Error(\"not implemented\"); }`. The code wouldn't compile without it once the interface has the method. Every other export and method body is unchanged.\n\n**Decision for you:** the spec also says `SyncBoardInput` should be re-exported as a type from `packages/db/src/index.ts`, beside `RegisterBoardInput`. I didn't do that because you asked for changes to the seam file only. So whoever writes the implementation needs to add that line, unless you'd like me to add it now. Until then, tests need to import the type from `./jira-boards.js` directly.\n\nExported names added: `SyncBoardInput`, `JiraBoardStore.sync`",
+    "problem": null,
+    "sha256": "38a93181f6c9cd64b863311a75a0d61a914552344c98b47826b2342a56acbc55"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "f5adad40-a49c-4550-9b7a-6acdee376ec1",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7598472,
+        "turns": 10,
+        "durationMs": 172695,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.7598472,
+    "finalText": "I wrote the test suite in `packages/db/test/jira-pages-confirmed.test.ts`. It type-checks cleanly with `npx tsc -p tsconfig.test.json`. Against the stub, 32 of 35 tests fail with `not implemented`, as expected. The other three only exercise `register`, which is unchanged, so they already pass.\n\nTo check that the tests themselves are right, I temporarily patched the compiled output (not the source) with a sync written to the spec. All 35 passed, and I then rebuilt so the compiled output matches the source again.\n\n**Coverage.** Every one of the 15 scenarios has a test for its main case plus one boundary test. Each test name starts with its scenario key (e.g. `[happy-1]`, `[unhappy-5]`), and all tests are flat top-level `test(...)` calls.\n- The two outline scenarios have one test per example row. For `[boundary-2]` the extra case is an empty-string `projectKey`, which must be stored as `\"\"`, not `null`. For `[boundary-3]` it's whitespace and odd values in `connectionId`, `externalId` and `projectKey`, which must pass through unchanged.\n- Other boundary tests include:\n  - `updatedAt` is taken when `sync` is called, not when the store is created.\n  - The conflict `set` holds the same values as the insert.\n  - The summary from `sync` equals what `get` returns for the same row.\n  - A database error that is an `Error` subclass with a `code` field comes back as the same object.\n  - Two overlapping syncs of different boards each insert their own board.\n  - A sync that starts before a selection-only update leaves the settings to the update.\n  - `register` and `sync` use the same conflict target.\n\n**Test setup.** The shared `fake-db.ts` doesn't record the argument passed to `onConflictDoUpdate`, and I wasn't allowed to change it. So the file has its own copy that records that argument and can be told to make the insert fail. It works the same way as `fake-db.ts` otherwise.\n\n**Determinism.** Every test fixes the clock using Node's built-in date mocking, so `new Date()` returns 2026-10-01T12:00Z. It also replaces `crypto.randomUUID` with a counter, so the generated `jrb_` ids are predictable too.\n\n35 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/db/test/jira-pages-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "6b20ba02-014b-4e00-ad82-f9520a36842d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.0497587000000002,
+        "turns": 14,
+        "durationMs": 227211,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.0497587000000002,
+    "finalText": "I wrote the hidden suite in `packages/db/test/hidden-jira-pages-confirmed/sync.test.ts`. The type-check runs clean, and all 38 tests fail against the stub, each on `not implemented`.\n\n**How I checked it:** in the scratchpad I copied the compiled output and added a correct `sync` to that copy. All 38 hidden tests and all 35 public tests passed against it. I then tried a shortcut there: stripping `selection` and `writebackEnabled` from the input and spreading the rest into the insert. It passes the public suite but fails `[happy-1] smuggled id, organizationId and timestamps do not reach the insert`. I deleted the scratch copy afterwards and wrote nothing else in the repository.\n\n**What it covers:**\n- **Every scenario, by key:**\n  - happy-1 to happy-4\n  - boundary-1 to boundary-4\n  - unhappy-1 to unhappy-5\n  - concurrency-1 and concurrency-2\n- **One extension per public test, named in a comment above it.** These use:\n  - other organizations, ids and Jira facts;\n  - a returned row that differs from the input, so a summary built from the input fails;\n  - several returned rows, where the first must win;\n  - more project-key values, including an explicit `undefined`;\n  - long, non-ASCII, blank and empty names and board types;\n  - selections smuggled as `null`, `{}` or a full object;\n  - non-boolean or `undefined` values smuggled as `writebackEnabled`.\n- **Errors:**\n  - an empty result after a successful sync, so a store that reuses an earlier row fails;\n  - a rejection that isn't an `Error` instance;\n  - an error raised while the statement is being built;\n  - a database error whose message matches the store's own.\n- **Concurrency:**\n  - five syncs started together, which catches de-duplication and read-first approaches;\n  - one board synced by two organizations at once;\n  - two syncs running alongside one update.\n- **`register` scenarios:** these call `sync` first and then assert `register`'s outcome. Otherwise they would pass against the current code, since `register` is already implemented.\n- **Two choices beyond the public suite:**\n  - The suite uses a test-local copy of the fake that records the `onConflictDoUpdate` argument and can queue a different outcome for each statement.\n  - Besides `setWhere`, it also asserts there is no deprecated `where` guard. That follows from the spec's \"no conflict guard\".\n\n**Not tested:** the spec says `SyncBoardInput` is re-exported from `packages/db/src/index.ts`. That's a type-only export and the file doesn't contain it yet, so a test importing it would break the type-check.\n\n38 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/db/test/hidden-jira-pages-confirmed/sync.test.ts"
+    ],
+    "open": []
+  }
+}

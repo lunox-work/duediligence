@@ -1,0 +1,72 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "41913bd9-dc84-439a-bd18-afdc5f6db983",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.4921021,
+        "turns": 8,
+        "durationMs": 75110,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.4921021,
+    "finalText": "I've written the contract in `packages/db/src/jira-boards.ts` (new) and `packages/db/src/schema.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes: 189 tests, 0 failures.\n\n**One conflict between your instructions and the spec.** The spec puts the `jiraBoard` table in `schema/jira.ts` and has `schema.ts` re-export it. But you said to write only the two seam files, and `schema/jira.ts` isn't one of them. So I declared `jiraBoard`, `JiraBoardRow` and `NewJiraBoardRow` directly in `schema.ts`. The columns, defaults, foreign keys, the unique constraint and the index all match the spec's table. This has two effects:\n- The spec's check that `jiraBoard` is \"the same object `schema/jira.ts` exports\" can't be met. A test that imports `jiraBoard` from `../src/schema/jira.js` won't compile against this contract.\n- It goes against the \"keep it a barrel\" note at the top of `schema.ts`.\n\nThe fix is to move the table into `schema/jira.ts` and replace it in `schema.ts` with the spec's re-export line. I'll do that if you allow me to edit `schema/jira.ts`.\n\n**Other things to know:**\n- **Error class constructors:** TypeScript requires a subclass constructor to call `super()`, so the bodies of `InvalidJiraBoardError` and `JiraConnectionNotFoundError` are `super(); throw new Error(\"not implemented\");` rather than only the `throw`. The required `name` and `message` values are in their doc comments.\n- **Parameter names:** the package's compiler settings reject unused parameters, so the stub parameters have a `_` prefix (`_db`, `_selection`, and so on). The types and positions are unchanged.\n- **`index.ts`:** the spec says `index.ts` re-exports the new names. I left it alone because it isn't a seam file.\n\nAdded: `StoredBoardSelection`, `JiraBoardSummary`, `RegisterBoardInput`, `UpdateBoardInput`, `JiraBoardStore`, `createJiraBoardStore`, `BOARD_MAX_TICKETS_LIMIT`, `InvalidJiraBoardField`, `InvalidJiraBoardError`, `JiraConnectionNotFoundError`, `normalizeBoardSelection`, `jiraBoard`, `JiraBoardRow`, `NewJiraBoardRow`",
+    "problem": null,
+    "sha256": "f8aa59b4d956396d3f292bc3ac7d7330c7911597738f81d762d0f38c7b0f9c4c"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "299b005b-ed96-43a5-9b09-7b734c51dfe8",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.5542620999999999,
+        "turns": 19,
+        "durationMs": 344714,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.5542620999999999,
+    "finalText": "I wrote the test suite in `packages/db/test/jira-boards.test.ts`. It type-checks with no errors. Run against the current stubs, 112 tests fail on `not implemented`, as expected. The 8 schema tests already pass, because the table in `schema.ts` is fully defined.\n\n**How it's built**\n- Every scenario has a test for its main path plus one boundary test keyed to the same scenario. For Scenario Outlines, each Examples row becomes its own flat top-level test with a unique name.\n- Test keys follow spec order: `happy-1…13`, `boundary-1…12`, `unhappy-1…12` and `concurrency-1…2`.\n- The file has its own database fake instead of `createFakeDb` from `fake-db.ts`, because that fake can't handle what these scenarios need:\n  - it has no `innerJoin`, which `forRun` uses;\n  - it has no `limit`;\n  - it doesn't record the `onConflictDoUpdate` target or `set`, or the table a query targets;\n  - it can't give the connection select and the upsert different results.\n\n  Mine keeps the same recorded shape (kind, values, whether a where was applied) and adds those. No clock, randomness or I/O is involved; generated ids are only matched against `^jrb_`.\n\n**Checking the tests themselves**\nIn a scratch copy outside the repo, I wrote a throwaway implementation of the spec. All 120 tests passed against it, and so did the existing `schema-modules` tests. Nothing in the repo was changed except the new test file.\n\n**One test fails until the table is moved**\n`[happy-10]` asserts that `schema/jira.ts` exports the same `jiraBoard` that `schema.ts` exports. The spec says the table is declared in `schema/jira.ts` and the barrel re-exports it, but the seam currently declares it directly in `schema.ts`. So this test fails until the implementer moves the table. `schema.ts` still exports the same names, so the interface doesn't change. In the scratch copy, moving it made the test pass.\n\n**Not covered**\nThe spec says `register` \"passes database errors through unchanged\", but no scenario covers it, so there's no test for it.\n\n120 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/db/test/jira-boards.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "127951db-8063-4233-ab31-1271c82ccebc",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.5442748,
+        "turns": 26,
+        "durationMs": 527863,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.5442748,
+    "finalText": "I wrote 183 hidden tests in three files under `packages/db/test/hidden-jira-boards/`:\n\n- **`selection.test.ts`** covers `normalizeBoardSelection` and the two error classes.\n- **`store.test.ts`** covers every store method, using a database fake modelled on the public one.\n- **`schema.test.ts`** covers the `jira_board` table.\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the current stubs, all 183 tests fail and no two tests share a name.\n- In the scratchpad, outside the repo, I wrote a reference implementation that follows the spec and moved the table into `schema/jira.js` there. My 183 tests and the 120 public tests all passed against it (303/303).\n- I then tried five shortcut versions of that implementation. The hidden suite caught every one, including two that pass the whole public suite: checking integers with `Number.isInteger` instead of `Number.isSafeInteger`, and having `get` filter on the board id alone.\n\n**What the hidden tests add:**\n- **Owner scoping:** the fake also records each `where` condition, and Drizzle's `PgDialect` renders it, so tests check that the query binds both the organization id and the board or connection id. The public suite only checks that some `where` was applied.\n- **Rows unlike B1:** every field differs from the background row, so a summary built from the input or with fixed values fails. For example, the database can return a row with write-back on.\n- **Sorting:** five shuffled boards whose ids follow neither date order nor its reverse, plus interleaved groups of equal timestamps.\n- **Read-time cleanup:** many more stored values, including an invalid `issueTypes` that must be dropped whole rather than filtered.\n- **Validation order:** every adjacent pair of selection keys, given in reverse order.\n- **More cases elsewhere:** more accepted and rejected values for every key, and database errors from `register` that must come through unchanged.\n- **Concurrency:** three overlapping registrations of one board, and two different boards registered at once.\n- **Schema:** each column's type and property name, and each foreign key paired with its own target table. A version that swapped the two foreign keys would pass the public test.\n\n**Two things to know:**\n- **Schema tests read the table from `schema/jira.ts`.** The spec says the table is declared there, but the current `schema.ts` declares `jiraBoard` itself. Reading it from `schema.ts` would make those tests pass against the stubs, which the rules forbid.\n- **One file added to the repo:** running `tsc` created `packages/db/dist-test/`, which is gitignored. Nothing else outside the hidden folder changed.\n\n183 tests, in 3 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/db/test/hidden-jira-boards/schema.test.ts",
+      "packages/db/test/hidden-jira-boards/selection.test.ts",
+      "packages/db/test/hidden-jira-boards/store.test.ts"
+    ],
+    "open": []
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "slug": "trim-hyphens-confirmed",
+  "status": "dropped",
+  "reason": "No hidden test survived calibration.",
+  "publicIds": [
+    "test/trim-hyphens-confirmed.test.ts :: [happy-1] hyphens at either end of the local part are removed",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-1] a stem trimmed to exactly USERNAME_MIN_LENGTH is not padded",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-2] characters replaced by a hyphen at either end are removed with it",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-2] a mix of replaced characters and hyphens at either end is removed",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-3] the collision counter is appended to the trimmed stem",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-3] the last counter value is appended to the trimmed stem",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-4] the random fallback uses the trimmed stem",
+    "test/trim-hyphens-confirmed.test.ts :: [happy-4] the random fallback shortens a full-length trimmed stem",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-1] a leading space becomes a hyphen and is trimmed",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-1] whitespace at both ends becomes hyphens and is trimmed",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-2] interior doubled hyphens are kept",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-2] interior hyphens next to a replaced character are not collapsed",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-3] underscores at either end are kept",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-3] hyphens around an underscore are trimmed and the short stem padded",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-4] an all-hyphen or all-replaced local part becomes -user",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-4] an empty local part or empty input becomes -user",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-5] a two-letter stem shortened by trimming is padded",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-5] a one-letter stem and a stem one short of the minimum are padded",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-6] input without @ is used whole",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-6] input without @ is trimmed, and only text before the first @ is used",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-7] leading hyphens do not use up the length budget",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-7] leading hyphens longer than the whole budget are all trimmed",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-8] trailing hyphens past the limit are dropped",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-8] trailing hyphens straddling the limit are trimmed before truncation",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-9] truncation can leave a trailing hyphen",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-9] truncation after trimming leading hyphens can leave a trailing hyphen",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-10] repeating a call gives the same result",
+    "test/trim-hyphens-confirmed.test.ts :: [boundary-10] repeated calls interleaved with other inputs give the same result",
+    "test/trim-hyphens-confirmed.test.ts :: [unhappy-1] a long interior hyphen run keeps the hyphens up to the limit",
+    "test/trim-hyphens-confirmed.test.ts :: [unhappy-1] a long hyphen run followed by an underscore keeps the hyphens up to the limit",
+    "test/trim-hyphens-confirmed.test.ts :: [unhappy-2] long hyphen runs on both sides of the name are trimmed",
+    "test/trim-hyphens-confirmed.test.ts :: [unhappy-2] long runs mixing hyphens and replaced characters on both sides are trimmed",
+    "test/trim-hyphens-confirmed.test.ts :: [unhappy-3] a long all-hyphen local part becomes -user",
+    "test/trim-hyphens-confirmed.test.ts :: [unhappy-3] a long all-hyphen input without @ becomes -user",
+    "test/trim-hyphens-confirmed.test.ts :: [concurrency-1] overlapping suggest calls each get their own result",
+    "test/trim-hyphens-confirmed.test.ts :: [concurrency-1] overlapping calls including a long hyphen run each get their own result"
+  ],
+  "publicOnSkeleton": {
+    "passed": 36,
+    "total": 36
+  },
+  "publicFailingOnReference": [],
+  "referenceRegressions": [],
+  "hiddenWritten": 60,
+  "kept": [],
+  "dropped": [
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-1] other leading whitespace becomes a hyphen and is trimmed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-1] a leading space on a short or uppercase name is trimmed before padding",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-2] longer and repeated interior hyphen runs are kept as they are",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-2] replaced characters beside interior hyphens add a hyphen each run",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-2] every short local part with interior hyphens gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-3] underscore runs at either end are kept while hyphens beyond them go",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-3] short underscore stems left by trimming are padded",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-3] every short local part of hyphens, underscores and letters gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-4] other all-hyphen and all-replaced local parts become -user",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-4] other inputs with an empty local part become -user",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-5] other two-character stems shortened by trimming are padded",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-5] one-character stems shortened by trimming are padded",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-5] padding depends on the length after trimming, not before",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-6] other inputs without @ are used whole",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-6] only the text before the first @ is trimmed and used",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-6] every short input mixing @, hyphens and letters gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-7] other counts of leading hyphens before a long name do not use up the budget",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-7] a short stem after more leading hyphens than the budget is kept and padded",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-7] every count of leading hyphens before every name length gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-8] other counts of trailing hyphens past the limit are dropped",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-8] trailing hyphens straddling the limit after shorter names are all trimmed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-8] every name length before every count of trailing hyphens gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-9] truncation inside an interior hyphen run keeps the hyphens it reaches",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-9] truncation after trimming both ends can leave a trailing hyphen",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-9] every interior hyphen run near the limit gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-10] many repeated calls on several inputs each give the same result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-10] repeated calls interleaved with long and truncated inputs give the same result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/boundary.test.ts :: [boundary-10] a sequence of calls gives the same results in reverse order",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/concurrency.test.ts :: [concurrency-1] overlapping calls in other orders each get their own result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/concurrency.test.ts :: [concurrency-1] many overlapping calls of different shapes each get their own result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/concurrency.test.ts :: [concurrency-1] overlapping calls reversed and repeated with long runs each get their own result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/concurrency.test.ts :: [concurrency-1] overlapping calls across separate stores each get their own result",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] unequal and longer hyphen runs at either end are removed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] every hyphen of a run is stripped, not only the outermost one",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] end hyphens are removed while interior hyphens in the same stem stay",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] mixed-case names with hyphens at either end are lowercased and trimmed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] lowercasing runs before replacement, so a character lowercasing into [a-z] is kept",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] a stem of exactly three characters after trimming either side is not padded",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-1] every short local part of hyphens and letters gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-2] other replaced characters and runs of them at either end are removed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-2] alternating replaced characters and hyphens at either end are removed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-2] replaced characters at the ends are removed and those inside become hyphens",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-2] every short local part of hyphens, replaced characters and letters gives the regex version's stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-3] the counter keeps counting past several taken values on the trimmed stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-3] the counter is appended to a stem padded after trimming",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-3] the counter is appended to the -user stem of an all-hyphen local part",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-3] a taken untrimmed form does not count as a collision",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-3] the counter on a 29-character trimmed stem fills the 30th character",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-3] the lowest free counter is used on the trimmed stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-4] the random fallback uses the trimmed stem of a longer name",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-4] the random fallback uses a padded stem left by trimming",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-4] the random fallback shortens a truncated stem that ends in a hyphen",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/happy.test.ts :: [happy-4] the random fallback keeps interior hyphens of the trimmed stem",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-1] a long interior run before other characters keeps the hyphens up to the limit",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-1] a long interior run between long end runs keeps the hyphens up to the limit",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-1] a long interior run after a name near the limit is cut by truncation",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-2] a long hyphen run on one side only is trimmed",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-2] other names between long hyphen runs are trimmed, padded and truncated as usual",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-3] other long all-hyphen and all-replaced local parts become -user",
+      "reason": "Passes on the skeleton."
+    },
+    {
+      "id": "test/hidden-trim-hyphens-confirmed/unhappy.test.ts :: [unhappy-3] long all-hyphen inputs around replaced characters become -user",
+      "reason": "Passes on the skeleton."
+    }
+  ],
+  "reference": {
+    "public": {
+      "passed": 36,
+      "total": 36
+    },
+    "hidden": {
+      "passed": 0,
+      "total": 0
+    },
+    "touchedOutsideSrc": [],
+    "removed": [],
+    "existing": {
+      "passed": 105,
+      "total": 105
+    },
+    "notes": "I've replaced the regex that strips hyphens from handle stems with a version that runs in linear time, and the package's whole suite passes (201 of 201). That run includes `trim-hyphens-confirmed.test.ts` and everything in `hidden-trim-hyphens-confirmed/`.\n\nThe change is only in `packages/db/src/emails.ts`:\n- **New helper:** a private `trimHyphens(value)` moves a start index forward past leading `-` and an end index backward past trailing `-`, then returns `slice(start, end)`. It uses no regex and keeps nothing between calls.\n- **`toHandleBase`:** it now calls `trimHyphens` where `.replace(/^-+|-+$/g, \"\")` used to be. The other steps are unchanged: splitting on `@`, `toLowerCase()`, replacing characters outside `[a-z0-9_-]`, truncating to `USERNAME_MAX_LENGTH`, and adding `-user` to short stems. Trimming still happens before truncation, so a handle can still end in `-`.\n- **Exports:** no export or signature changed, and `toHandleBase` is still private. The file had no `not implemented` bodies, so the strip was the only thing to replace.\n\nI also ran 200,000 random strings through both the old regex and the new helper as a separate check, and every output matched.\n\nTests left failing: none",
+    "sessions": [
+      {
+        "sessionId": "69832f49-abaf-450e-80fc-bfe94663aca7",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.1934927,
+        "turns": 5,
+        "durationMs": 28345,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.1934927
+  }
+}

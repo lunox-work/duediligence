@@ -1,0 +1,71 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "f3727610-131c-4d4e-9f6b-4e1c99182cbe",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.2017098,
+        "turns": 5,
+        "durationMs": 28717,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.2017098,
+    "finalText": "I've written the contract at `packages/shared/src/build-info.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (9 of 9). I deleted the generated `dist-test/` afterwards, since it wasn't there before I started.\n\n- **Exact values from the spec:** `UNKNOWN_BUILD`, `buildInfoSchema`, `versionResponseSchema` and `unknownBuildInfo` are exported with the values the spec gives them, not declared. That means the schema is six required fields: the five strings must be non-empty and `dirty` is a boolean. `versionResponseSchema` is the same object as `buildInfoSchema`.\n- **The five functions:** `formatVersion`, `isIdentified`, `commitUrl`, `sameBuild` and `buildBanner` each have their full signature, a doc comment in the spec's words, and the body `throw new Error(\"not implemented\");`.\n- **`BuildInfoDto`** is `z.infer<typeof buildInfoSchema>`, named to match the package's other DTO types.\n\n**Still needed:** the spec says `src/index.ts` should re-export this module with `export * from \"./build-info.js\";`. You told me to write only the seam file, so I didn't add that line. Until whoever writes the implementation adds it, tests importing from `../src/index.js` won't find these exports. Tests importing from `../src/build-info.js` work now.\n\nExported names added: UNKNOWN_BUILD, buildInfoSchema, versionResponseSchema, BuildInfoDto, unknownBuildInfo, formatVersion, isIdentified, commitUrl, sameBuild, buildBanner",
+    "problem": null,
+    "sha256": "314030612b3af0199b15bd3f76e67a3e5f7add8e680e5cfb09e355d892a8b86f"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "6fe4107e-0bd2-4483-87be-af527b35d329",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.5174377,
+        "turns": 6,
+        "durationMs": 108645,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.5174377,
+    "finalText": "I wrote the test suite in `packages/shared/test/build-commit-confirmed.test.ts`. It type-checks with `npx tsc -p tsconfig.test.json`, and running it gives 62 tests: 24 pass and 38 fail.\n\nThe 24 that pass already are the schema and constant tests (happy-1 to 7, boundary-1 and 2, unhappy-1 to 3). The seam already has working bodies for `UNKNOWN_BUILD`, `buildInfoSchema`, `versionResponseSchema` and `unknownBuildInfo`, so these already show the right behaviour. All 38 failures are tests that call the five functions (`formatVersion`, `isIdentified`, `commitUrl`, `sameBuild`, `buildBanner`), which still throw `not implemented`. That is expected.\n\nHow the suite is laid out:\n- **Two tests per scenario**, one for the happy path and one boundary case, across all 31 scenarios (13 `@happy`, 14 `@boundary`, 4 `@unhappy`). Each name starts with its key, from `[happy-1]` to `[unhappy-4]`. For Scenario Outlines, the first test runs every row of the spec's Examples table and the second adds one more edge case.\n- **Same style as `schemas.test.ts`**: `node:test` `test` with `node:assert/strict`, flat top-level tests and no `describe`. The fixtures are fixed constants (`known`, `SHA`, `OTHER_SHA`, `REPO`), with no clock, randomness, network or filesystem.\n- **Extra boundary cases only use rules the spec states.** For example: values are kept unpadded and in their original case, `isIdentified` is case-sensitive, `commitUrl` reads `gitSha` and not `gitShortSha`, `sameBuild` ignores `gitShortSha`, `gitRef` never appears in the banner, and the empty name is used as given on an identified build.\n\nI didn't change anything else in the repository.\n\n62 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/build-commit-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "887e71e9-d3fc-4262-8991-267658cb260c",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1245767,
+        "turns": 13,
+        "durationMs": 248531,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.1245767,
+    "finalText": "The hidden suite is in `packages/shared/test/hidden-build-commit-confirmed/`, split into `schema.test.ts` and `functions.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and all 66 tests fail against the interface as it stands.\n\n**Checks I ran in a scratch copy outside the repo:**\n- **Reference implementation:** with the five bodies written to the spec and the re-export line added to `index.ts`, all 66 hidden tests and the public suite pass (137 tests).\n- **Shortcut implementations:** each of these passes the public suite and fails at least one hidden test:\n  - `isIdentified` requiring a gitSha of at least 7 characters;\n  - `sameBuild` matching on prefix or ignoring case;\n  - `formatVersion` treating `\"Unknown\"` in `gitShortSha` as unknown;\n  - the banner keying on gitSha length;\n  - a missing re-export from `index.ts` (25 hidden tests fail).\n\n**One design choice you should know about:** the seam already contains the finished schema, `versionResponseSchema` and `unknownBuildInfo`. Only the five function bodies throw. So a test that only parses with the schema imported from `build-info.js` would pass now, which the rules forbid.\n\nTo get around that, the schema-scenario tests get the exports through `../../src/index.js`, the package entry point. The spec says `index.ts` re-exports everything from `build-info.ts`, but it doesn't do that yet. Each of these tests first asserts that the entry point's export is the same object as the one in `build-info.ts`, then checks the scenario. They also catch a developer who forgets the re-export, since the public suite never imports `index.js`.\n\n**Coverage:**\n- Every scenario key (`happy-1` to `happy-13`, `boundary-1` to `boundary-14`, `unhappy-1` to `unhappy-4`) has at least two tests.\n- Each test has a comment naming the public test it extends.\n- The tests aimed at shortcuts include:\n  - `\"Unknown\"` and `\"UNKNOWN\"` treated as real values;\n  - prefix and padded SHAs counted as different commits;\n  - `gitShortSha` read directly rather than sliced from `gitSha`;\n  - a version other than `\"0.0.0\"` on an unknown build;\n  - every argument pair checked in both orders;\n  - frozen arguments, so any mutation throws;\n  - whitespace-only and very long field values;\n  - every string field checked against every wrong type.\n\n66 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-build-commit-confirmed/functions.test.ts",
+      "packages/shared/test/hidden-build-commit-confirmed/schema.test.ts"
+    ],
+    "open": []
+  }
+}

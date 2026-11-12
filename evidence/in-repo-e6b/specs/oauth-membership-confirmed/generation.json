@@ -1,0 +1,70 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "cd9ca923-18e4-49b1-8539-741ce45f937f",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.22786449999999997,
+        "turns": 7,
+        "durationMs": 29031,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.22786449999999997,
+    "finalText": "I changed one line in `apps/api/src/routes.ts`. The type of `AppOptions.jira` went from `JiraRouteOptions` to `Omit<JiraRouteOptions, \"roleOf\">`, and its doc comment now says that `createApp` supplies `roleOf` from `organizations.roleOf`. That is the only change the spec asks for in this file. Every existing export is still there with its body untouched, including `createApp`, `rankAtLeast` and `AuthVariables`, and the spec says nothing new is exported.\n\n`npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes: 234 of 234 tests.\n\n**Not done:** the spec also gives `JiraRouteOptions` a new required member, `roleOf: (userId: string, organizationId: string) => Promise<string | undefined>`. That type lives in `apps/api/src/jira/routes.ts`, which isn't the seam file, so I left it alone. Until it's added there, the `Omit` has nothing to remove and the type checker treats it the same as the old type. Whoever writes the implementation needs to add the member, and then make `createApp` pass `{ ...jira, roleOf: (u, o) => organizations.roleOf(u, o) }` when calling `mountJiraRoutes`.\n\nExported names added: none (only the type of `AppOptions.jira` changed).",
+    "problem": null,
+    "sha256": "2e7938873f41764a5bfe36fba9c678a9438e9779d709bb41e383b738e459d24f"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "d8351deb-99e0-4e75-a228-263673ff9e3d",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1273465999999999,
+        "turns": 14,
+        "durationMs": 208699,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.1273465999999999,
+    "finalText": "I wrote the test suite in `apps/api/test/oauth-membership-confirmed.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors. Running the file gives 27 passing tests and 39 failing.\n\nUnlike the brief said, the bodies in this checkout don't throw `not implemented`: `createApp` still runs the old callback, which never calls `roleOf`. So the 39 tests for the new behaviour fail, and the 27 that describe behaviour the spec keeps as it is already pass. For example, the first `[happy-1]` test fails because no `roleOf` call was recorded (`[]` instead of `[[\"user_1\",\"org_1\"]]`). That is the missing feature, not a bug in the test.\n\n- **Passing now:** `[happy-3]`, `[boundary-4]`, `[boundary-5]`, `[happy-4]`, `[unhappy-6]`, `[unhappy-7]` and `[boundary-8]`. These cover owners and admins finishing the flow, Atlassian errors, refused states, connect and disconnect, the 401 without a session, and the 404 when a store is missing.\n- **Failing until the re-check exists:** every other scenario key.\n\n**How the file is set up**\n- It follows `jira-routes.test.ts` and `organizations.test.ts`: `node:test` with `assert/strict`, the same fake auth, connections store and Atlassian. The organization store answers from a role table and records every `roleOf` call.\n- It's deterministic: every state is signed at a fixed time with a fixed nonce, and `jira.now` returns that same time. The fake Atlassian records every request, so tests can assert that nothing was sent.\n- For each of the 22 scenarios there is a main test, plus one extra edge-case test with the same key. In scenarios with an examples table, each example is its own top-level test. Examples of the extra tests:\n  - `\" admin \"` with spaces around it is trimmed and allowed; `\"owner admin\"` (no comma) is one entry and refused.\n  - A state issued 1 ms more than ten minutes ago is refused without asking the store.\n  - When the store's `roleOf` rejects and the code is also missing, the answer is still a 500.\n  - A demotion that lands while the sites are being listed doesn't stop the flow.\n  - Two parallel redemptions of the same state by a non-member are each refused.\n\nI wrote nothing else; `git status` shows only the new test file besides the files that were already there.\n\n66 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "apps/api/test/oauth-membership-confirmed.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "af79f821-dce3-47e0-a89d-2bdaaf3b67ec",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.1338683000000005,
+        "turns": 24,
+        "durationMs": 468285,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.1338683000000005,
+    "finalText": "I wrote the hidden suite as one file: `apps/api/test/hidden-oauth-membership-confirmed/callback-recheck.test.ts`. `npx tsc -p tsconfig.test.json` reports no errors.\n\n**Results:**\n- **Against the code as it stands:** all 139 hidden tests fail.\n- **Against a reference implementation:** I built one in a scratch copy, outside the repo. All 139 hidden tests and the 66 public ones pass.\n- **Against shortcut implementations:** I also ran both suites against 12 deliberately wrong variants of the reference. The hidden suite catches all 12.\n  - The public suite misses two of them entirely: checking with `rankAtLeast`, and cleaning each role entry before matching it.\n  - It catches four more with only one or two tests each: case-insensitive matching, a word-boundary regex, trimming only the start of each entry, and swallowing a `roleOf` rejection.\n\n**Regression scenarios.** Four scenarios only say an existing route still behaves as today: `[happy-4]`, `[unhappy-6]`, `[unhappy-7]` and `[boundary-8]`. The same goes for the \"asks nothing\" assertions in `[boundary-4]` and `[boundary-5]`. On their own, those tests would pass against today's code. To make each one fail now, I ended it with a short control that only the new behaviour satisfies. Usually that's a valid callback that must make exactly one `roleOf` call, or must end in `forbidden`. This also shows the \"no call\" assertions aren't trivially true. One side effect: a broken re-check also fails these keys, not only its own scenario's.\n\n**Gaps the hidden tests cover, beyond the public suite:**\n- **Role matching:** names that would come back from `Object.prototype` if roles were looked up in a plain object (`toString,owner` must connect, `constructor` must be refused). Also substring and word-boundary near-misses (`co-owner`, `owner:read`, `superadmin`), other separators (`member;owner`, `owner|admin`), empty entries (`member,,admin`, `,owner`), and spaces before a comma (`admin ,member`).\n- **Order:** the store is asked before Atlassian is contacted, even when the flow succeeds. The `no-sites`, `partial-scopes` and `denied` outcomes each follow exactly one lookup.\n- **Flows started by connect:** the state comes from a real connect redirect, then the caller is removed or demoted, or a `returnTo` was chosen at connect.\n- **Concurrency:** store answers are held back and released out of order. Three callbacks overlap. The same state is redeemed twice in a row with a removal or promotion in between, which catches a cached answer. Two parallel redemptions see different roles.\n- **Lookup failures and timing:** other kinds of rejection, a rejection several ticks late, a rejection for one organization only, and a slow store that must be awaited.\n- **Other cases:** other refused states (a garbage value, a swapped payload, a state issued in the future, exactly ten minutes old versus one millisecond past). Other `error` values (including an empty one) never use the signed `returnTo`. A `roleOf` smuggled onto the `jira` options is never called, not even by connect.\n\n139 tests, in 1 file.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/api/test/hidden-oauth-membership-confirmed/callback-recheck.test.ts"
+    ],
+    "open": []
+  }
+}

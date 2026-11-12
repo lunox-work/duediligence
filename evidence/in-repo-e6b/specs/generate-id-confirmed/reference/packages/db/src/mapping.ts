@@ -1,0 +1,58 @@
+/**
+ * Row <-> domain mapping. Pure and separate from the store, so timestamp
+ * conversion and id generation are testable without Postgres.
+ */
+
+import { normalizeTitle, type Todo } from "sandbox-factory";
+
+import type { NewTodoRow, TodoRow } from "./schema.js";
+
+/** Turns a database row into the domain `Todo`. */
+export function rowToTodo(row: TodoRow): Todo {
+  return {
+    id: row.id,
+    title: row.title,
+    done: row.done,
+    createdAt: row.createdAt.toISOString(),
+  };
+}
+
+/**
+ * Builds the row for a new todo. Normalizes the title here as well as at the
+ * HTTP edge, so a direct store caller cannot write an invalid one.
+ */
+export function newTodoRow(
+  userId: string,
+  title: string,
+  id: string = generateId(),
+): NewTodoRow {
+  return { id, userId, title: normalizeTitle(title), done: false };
+}
+
+/**
+ * The closed, ordered list of id prefixes `generateId` accepts. Exported as
+ * declared, not frozen.
+ */
+export const ID_PREFIXES = [
+  "todo",
+  "jrc",
+  "jrb",
+  "jri",
+  "brn",
+  "bpr",
+] as const;
+
+/** One entry of `ID_PREFIXES`; the only guard on `generateId`'s prefix. */
+export type IdPrefix = (typeof ID_PREFIXES)[number];
+
+/**
+ * Generated in the application, not by a sequence: `create` stays one round
+ * trip and ids stay collision-free across replicas.
+ *
+ * Returns `<prefix>_<lowercase uuid v4>`. `undefined` or no argument uses
+ * `"todo"`. The prefix is not checked or normalised at runtime: a value cast
+ * past `IdPrefix` is stringified into the id as given, and nothing throws.
+ */
+export function generateId(prefix: IdPrefix = "todo"): string {
+  return `${prefix}_${crypto.randomUUID()}`;
+}

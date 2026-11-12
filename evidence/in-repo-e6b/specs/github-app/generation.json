@@ -1,0 +1,89 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "8528667c-703c-4304-b147-007aca7b3e53",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.49199879999999996,
+        "turns": 9,
+        "durationMs": 112719,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.49199879999999996,
+    "finalText": "I've written the seam in `packages/shared/src/index.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite still passes (126 of 126). Every existing export and its body is untouched; the GitHub section is added at the end of the file, and nothing else in the repo was changed.\n\nHow the contract is laid out:\n- **Constants given in the spec:** the three `GITHUB_*` constants and their `z.enum(...)` schemas are exported with the spec's exact values, so they already work.\n- **The other schemas:** each has its full parsed type written out. The `*ResponseSchema` types include `[k: string]: unknown`, so tests can read unknown fields like `somethingNew` and `topics`. The input type is spelled out too: GitHub's snake_case query keys for the setup callback, and an optional `repositories` on the repository-page response. Each `z.infer` type alias reads off those types, as the spec defines them.\n- **Stub behaviour:** each of those schemas is a `z.custom(() => { throw new Error(\"not implemented\"); })` stub. Importing the package therefore works, and the existing tests still load. Any `parse` or `safeParse` on a stub throws \"not implemented\" instead of returning a result.\n- **Casts:** two stubs (`githubInstallationRepositoriesResponseSchema` and `githubSetupCallbackSchema`) are cast with `as never`, because their input and output types differ.\n- **Placement:** everything is in `index.ts`, not a new `github.ts`, because I was told to write only the seam file. The implementer can still move the definitions into `github.ts` and re-export them, as the spec allows.\n\nBecause the stubs are typed as `z.ZodType<Out, In>` rather than a `ZodObject`, tests can't use object-only methods like `.shape` or `.extend`. The spec never asks for them.\n\nAdded: GITHUB_ACCOUNT_TYPES, githubAccountTypeSchema, GITHUB_REPOSITORY_SELECTIONS, githubRepositorySelectionSchema, GITHUB_SETUP_ACTIONS, githubSetupActionSchema, githubRepositoryFullNameSchema, githubInstallationResponseSchema, githubRepositoryResponseSchema, githubInstallationRepositoriesResponseSchema, githubSetupCallbackSchema, githubInstallationDtoSchema, githubInstallationListSchema, githubRepositoryDtoSchema, githubRepositoryListSchema, githubRepositoryPointerDtoSchema, githubRepositoryPointerListSchema, trackRepositorySchema, GithubAccountType, GithubRepositorySelection, GithubSetupAction, GithubInstallationResponse, GithubRepositoryResponse, GithubInstallationRepositoriesResponse, GithubSetupCallback, GithubInstallationDto, GithubInstallationListDto, GithubRepositoryDto, GithubRepositoryListDto, GithubRepositoryPointerDto, GithubRepositoryPointerListDto, TrackRepositoryInput",
+    "problem": null,
+    "sha256": "62cc944a90e492dafa2c6fa65b0f6726ac5033741f32ece510f6fea53819a375"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "335cce0d-2091-4985-bad2-d40d5ff7431e",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.7999423,
+        "turns": 10,
+        "durationMs": 157779,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.7999423,
+    "finalText": "I wrote the test suite in `packages/shared/test/github-app.test.ts`. It covers all 35 scenarios in the spec with two tests each: one for the main case and one for a boundary case.\n\n`npx tsc -p tsconfig.test.json` reports no errors. Running `node --test dist-test/test/github-app.*.js` gives 70 tests: 62 fail with `not implemented`, as expected, and 8 already pass. Those 8 pass because the code they test is already real: the enum constants and schemas, which the interface defines with an actual `z.enum` (`happy-1`, `happy-2`, `unhappy-1`), and the existing exports (`happy-18`).\n\nHow the tests are built:\n- **Naming:** keys follow spec order within each kind: 18 `@happy`, 5 `@boundary` and 12 `@unhappy` scenarios. For scenarios with several examples, the main test runs most of them and the boundary test takes the edge example, such as `9007199254740991`, `\"a/b\"`, the empty id, or the update action after install.\n- **Message checks:** where the spec names an error message and path, a test passes if any reported problem has that message at that path, not only the first one. A value like `\"\"` can break more than one rule at once, so a fixed order would be fragile.\n- **Shared data:** the installation, repository and pointer test objects are copied from the spec's examples.\n- **Extra boundary checks:** a few boundary tests check things the spec's decisions imply but its scenarios don't test directly:\n  - lists are not deduplicated;\n  - a pointer list keyed `repositories` is refused;\n  - `account.type` is a free string in GitHub's payload;\n  - `registerBoardSchema` still accepts `\"0123\"`, so the new GitHub id rule hasn't spread to the Jira schema.\n\nI changed no other files.\n\n70 tests, in 1 file.",
+    "problem": null,
+    "files": [
+      "packages/shared/test/github-app.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "29f7fd1b-b445-4b8c-9469-add61e095603",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.6636992000000002,
+        "turns": 23,
+        "durationMs": 385067,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      },
+      {
+        "sessionId": "29f7fd1b-b445-4b8c-9469-add61e095603",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.9762220000000001,
+        "turns": 6,
+        "durationMs": 55762,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 3.6399212000000003,
+    "finalText": "I deleted `helpers.ts`. Each test file now has its own private copy of the helpers it uses (the error messages, the failure assertions and the DTO fixtures), so `packages/shared/test/hidden-github-app/` now holds only the six `*.test.ts` files. The tests themselves are unchanged.\n\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the interface as it stands, all 68 hidden tests fail.\n- Against my throwaway reference implementation in the scratchpad, the 68 hidden tests and the 70 public tests all pass.\n- Nothing else in the repository changed: `git status` shows only the files that were already modified plus the new test folder.\n\n68 tests in 6 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "packages/shared/test/hidden-github-app/dtos.test.ts",
+      "packages/shared/test/hidden-github-app/full-name.test.ts",
+      "packages/shared/test/hidden-github-app/github-id-text.test.ts",
+      "packages/shared/test/hidden-github-app/github-responses.test.ts",
+      "packages/shared/test/hidden-github-app/setup-callback.test.ts",
+      "packages/shared/test/hidden-github-app/track-and-existing.test.ts",
+      "packages/shared/test/hidden-github-app/vocabularies.test.ts"
+    ],
+    "open": []
+  }
+}

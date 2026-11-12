@@ -1,0 +1,53 @@
+{
+  "sha256": "8d64cf8b2514586cd862cf470472602f4679daa37e2bdbcb685c32e166a5e4b7",
+  "by": "in-repo evidence arm: drafted, no person",
+  "at": "2026-11-03T16:48:37.111Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "What `sync` writes as the settings of a board it inserts for the first time.",
+    "Ticket: \"Every board on a site is registered when the site is connected\"",
+    "Instead: leave `selection` out of the insert and rely on the column default `{}`.",
+    "Which columns the conflict update of `sync` sets, exactly.",
+    "Ticket: \"a sync refreshes only what is Jira's to state — the name, the type, the project — and leaves `selection` and `writebackEnabled` alone\"",
+    "Instead: also re-set `organizationId`, `connectionId` and `externalId`, as `register`'s `set` does.",
+    "What an omitted or null `projectKey` does to a stored project key.",
+    "Ticket: silent.",
+    "Instead: an omitted `projectKey` leaves the stored key as it was.",
+    "Whether `sync` validates or normalises its input (empty name, unknown board type, whitespace).",
+    "Ticket: silent.",
+    "Instead: reject an empty name or a board type outside `scrum`/`kanban`/`unknown` with an error.",
+    "What happens to `selection` or `writebackEnabled` passed to `sync` despite the type.",
+    "Ticket: silent.",
+    "Instead: spread the input into the statement, so any extra field is written.",
+    "Whether `sync` may refresh a board row owned by another organization that shares the connection and board id.",
+    "Ticket: silent.",
+    "Instead: no guard, as `register` has none, and the conflicting row is refreshed whoever owns it.",
+    "What `sync` does when the upsert returns no row (including the guarded miss).",
+    "Ticket: silent.",
+    "Instead: resolve to `null` (which would change the interface's return type).",
+    "The error message for that case.",
+    "Ticket: silent.",
+    "Instead: reuse \"Failed to register the Jira board.\"",
+    "Whether database errors are wrapped.",
+    "Ticket: silent.",
+    "Instead: wrap them in a store-specific error.",
+    "How overlapping syncs, and a sync overlapping an update, are kept from duplicating rows or losing settings.",
+    "Ticket: \"re-read whenever the site's page opens\"",
+    "Instead: read the existing row first and insert or update, which would need a transaction or lock to be safe.",
+    "Whether `sync` takes one board or a site's whole board list.",
+    "Ticket: \"The store grows `sync` beside `register` for this.\"",
+    "Instead: `sync(organizationId, connectionId, boards[])` that also removes boards Jira no longer lists.",
+    "Whether `register` changes.",
+    "Ticket: \"`register` overwrites the selection because a caller passing one is asking for it.\"",
+    "Instead: make `register` keep the stored selection when none is passed.",
+    "Seam (the files the stub writes): packages/db/src/jira-boards.ts",
+    "Allowed paths (what the implementer may change): packages/db/src/"
+  ],
+  "seam": [
+    "packages/db/src/jira-boards.ts"
+  ],
+  "allowedPaths": [
+    "packages/db/src/"
+  ]
+}

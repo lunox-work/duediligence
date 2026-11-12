@@ -1,0 +1,76 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "189e2744-e9ea-48f8-87d8-cf3f7f42ccd3",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.6104801000000001,
+        "turns": 20,
+        "durationMs": 122993,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.6104801000000001,
+    "finalText": "The contract is written in the three seam files. `npx tsc -p tsconfig.test.json` reports no errors, the existing suite passes (224 tests, 0 failures), and Prettier is clean. The only changed files are `sandbox-build.ts`, `starter-check.ts` and `starter.ts`.\n\nThree things don't follow the brief exactly:\n\n- **`checkStarter`'s body had to change.** The spec makes `stage` required when `ok` is false, and the old body returned `{ ok: false, problems }`, which no longer compiles. I added only a `stage` value to each of its four existing returns: `rules`, `names` (when `aliasStarter` refuses), `project` and `types`. The problems and their order are unchanged, so the existing tests still pass. The spec's rule that workspace-name leaks alone stop at `names` is not implemented: such leaks are still reported under `project` for now, and that is left to the implementation.\n- **Parameter names have a leading `_`.** The worker's config fails the build on unused parameters, and the bodies must be exactly the `throw`. So the new functions' parameters are `_tool`, `_stage`, `_problems` and `_files`. The types match the spec exactly.\n- **`BuildOutput` and `StarterOutput` in `@sandbox-factory/db` still lack the optional `testSummary` field.** The spec adds it, but `packages/db` is outside the seam, so I didn't touch it. Until someone adds it, an implementation that passes `testSummary` to `recordBuildOutput` or `recordStarterOutput` won't type-check.\n\n`HIDDEN_TEST_MARK` is exported from `starter.ts` as `` `${PRIVATE_TESTS_DIR}/` ``, which is `\"tests/private/\"`.\n\nAdded exports: `StarterCheckStage` (starter-check.ts), `HIDDEN_TEST_MARK`, `refusedCheckLog` (starter.ts), `descriptorTestSummary` (sandbox-build.ts).",
+    "problem": null,
+    "sha256": "87ca0025625bc6e7268301ebce1c5a555c86d1cf290bd7b8ce66fcf0999fa240"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "750ea95d-1e54-497a-b41a-c80a73624499",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.7414731,
+        "turns": 25,
+        "durationMs": 364715,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.7414731,
+    "finalText": "I wrote the test suite in two files under `apps/worker/test/`. `npx tsc -p tsconfig.test.json` reports no errors. Running the files gives 35 tests: 24 fail and 11 pass.\n\n- **`touched-repos-confirmed.starter.test.ts`** covers the `checkStarter` stages, `refusedCheckLog`, the step lines and run-log entries of `check_starter`, `run_starter` and `submit_starter`, and the starter's `committed`.\n- **`touched-repos-confirmed.build.test.ts`** covers `descriptorTestSummary` and the sandbox build's `committed`, using the same slice fixture and draft as `sandbox-build.test.ts`.\n\n**Why 11 tests already pass.** Each failing test fails at the new behaviour itself: the `not implemented` error, the old step line, a missing log entry or a missing `testSummary`. None fails on a broken fixture. The 11 that pass check things that already work:\n- The seam's `checkStarter` already returns `stage`, so `[happy-1]`, the five `[unhappy-1]` rows and `[boundary-1]` pass. `[unhappy-2]` still fails, because a workspace-name leak with no other problem still comes back as `project` instead of `names`.\n- `[unhappy-8]`, both `[boundary-11]` tests and `[boundary-8]` assert that existing behaviour stays the same, so they pass today.\n\n**Things to know:**\n- **Spec inconsistency in `[concurrency-1]`.** With the cart's full aliases set, the second call as written (`files [src/cart.ts \"export const acmeTotal: number = 'no';\\n\"]`) stops at `names`, not `types`. The check says \"Name 1: AcmeLine does not occur in the starter\", because replacing `src/cart.ts` removes `AcmeLine`. I kept the Given and used the spec's own types change from the `submit_starter` row of `[unhappy-4]` (adding `src/a.ts`), with a comment in the test. The spec text should probably be fixed to match.\n- **Temp files.** The tests are not filesystem-free. `descriptorTestSummary` reads `absolutePath`, and both adapters write their output to `outDir`, so the tests use `mkdtemp` directories that are deleted afterwards, as the existing tests do. Every clock is fixed, and there is no network or randomness.\n- **Outline scenarios** with several rows are either one test that loops over the rows or one test per row. Tests that share a key still have unique names.\n- **Formatting.** I ran prettier on the two new files. Nothing else in the repository was changed.\n\n35 tests, in 2 files.",
+    "problem": null,
+    "files": [
+      "apps/worker/test/touched-repos-confirmed.build.test.ts",
+      "apps/worker/test/touched-repos-confirmed.starter.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "c4ca50d9-fef4-41e0-8b04-3ce45065acb6",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 3.3401920000000005,
+        "turns": 46,
+        "durationMs": 914427,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 3.3401920000000005,
+    "finalText": "I wrote the hidden suite in `apps/worker/test/hidden-touched-repos-confirmed/`, in three files:\n\n- **`check-and-log.test.ts`** covers which stage `checkStarter` stops at, and `refusedCheckLog`.\n- **`starter-tools.test.ts`** covers the step lines and log entries for `check_starter`, `run_starter` and `submit_starter`, plus the starter's `committed`.\n- **`descriptor.test.ts`** covers `descriptorTestSummary` and the build's `committed`.\n\n`npx tsc -p tsconfig.test.json` reports no errors. Against the code as it stands, all 81 tests fail. I also wrote a reference implementation of the spec in a scratch copy of the worker (the repository is untouched) and all 81 pass against it.\n\nTo check the suite catches shortcuts, I made 19 one-line changes to that reference, one at a time. Examples: hiding any problem that merely *contains* `tests/private/`, rejecting negative counts, returning only the `public` entry, reading the last matching descriptor entry, putting the starter's counts inside `build`, and logging `run_starter` refusals under `check_starter`. The hidden suite catches all 19. The public suite misses two of them: rejecting negative counts, and applying the 40-problem cap to the leaks but not to the blockers in front of them.\n\nThings you should know:\n\n- **The spec contradicts itself.** The tool's input schema rejects source files outside `src/`, so a `check_starter` call with `lib/cart.ts` is a schema-invalid call. The spec's own rule gives such a call the line \"Checked the starter: it was refused\" and no log entry. But the `[unhappy-4]` check_starter row and `[concurrency-1]` say it stops at `rules`. So the reference fails those two public tests, and I believe any correct implementation would. For `rules` through the tools I used inputs the schema accepts instead: a repeated file, no hidden test expected to fail, a hidden test at a wrong path, and no pseudonyms set yet.\n- **Some scenarios already pass in today's code.** `checkStarter` already reports the `rules`, `names` (for unused pseudonyms), `project` and `types` stages, and a passing check already has no stage. So those tests also assert the log entry or step line that goes with the stage. Otherwise they could not fail against the code as it stands.\n- **Some tests use temp files.** `descriptorTestSummary` reads files from disk, and the adapters write them, so these tests use temp directories the same way the public tests do. Everything else is fixed: the clock is pinned, and the agent model and job provider are scripted fakes.\n\n81 tests, in 3 files.\n\nOpen in the spec:\n- `[unhappy-4] a check_starter refused at rules says so in its step line and log, and starts no job`: it expects a `lib/cart.ts` input to stop at `rules`. The schema rejects that input first, and the spec's schema-invalid rule then gives \"it was refused\" and no log entry. Which outcome is intended?\n- `[concurrency-1] two checks in one turn each name their own stage, in call order`: it has the same conflict for its first call, which uses `lib/cart.ts`.",
+    "problem": null,
+    "files": [
+      "apps/worker/test/hidden-touched-repos-confirmed/check-and-log.test.ts",
+      "apps/worker/test/hidden-touched-repos-confirmed/descriptor.test.ts",
+      "apps/worker/test/hidden-touched-repos-confirmed/starter-tools.test.ts"
+    ],
+    "open": [
+      "`[unhappy-4] a check_starter refused at rules says so in its step line and log, and starts no job`: it expects a `lib/cart.ts` input to stop at `rules`. The schema rejects that input first, and the spec's schema-invalid rule then gives \"it was refused\" and no log entry. Which outcome is intended?",
+      "`[concurrency-1] two checks in one turn each name their own stage, in call order`: it has the same conflict for its first call, which uses `lib/cart.ts`."
+    ]
+  }
+}

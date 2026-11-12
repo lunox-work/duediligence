@@ -1,0 +1,35 @@
+{
+  "sha256": "f9ba30d01c647c0699ed62f16d555f76b3d1f681114e8ccc5f66a02cab157179",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T20:04:19.824Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The `stage` of an `ok: false` check is the first stage that refused it. A check never reports more than one stage.",
+    "Workspace-name leaks alone stop at the `names` stage; when the project also has a generation blocker, the stage is `project` and its problems hold the blockers, then the leaks.",
+    "The log text is a header \"`<tool>` refused (`<stage>`): `<n>` problem.\" (\"problems.\" when `<n>` is not 1), then the shown problems one per line, each prefixed by two spaces, then \"  and `<m>` more\" when shown problems were left out, then \"  and `<h>` in hidden tests, not shown\", joined with \"\\n\".",
+    "A problem is a hidden test's only when it starts with \"tests/private/\"; one that names that path elsewhere is shown.",
+    "`<n>` counts every problem passed in, hidden ones included, and the hidden line appears only when `<h>` > 0.",
+    "refusedCheckLog shows at most 10 problems, then \"  and `<m>` more\", and cuts a problem longer than 300 characters to its first 300 followed by \"…\". It does not deduplicate.",
+    "run_starter and submit_starter write the refusal log and the stage step line too, under their own tool names.",
+    "The step phrases are: rules \"its files break the starter's rules\", names \"its names need fixing\", project \"its project does not generate yet\", types \"it does not compile yet\".",
+    "A schema-invalid check_starter call gets \"Checked the starter: it was refused\", a check_starter call after the limit gets a null step line, and a schema-invalid run_starter or submit_starter keeps \"<verb> the starter: it does not build yet\"; none of them writes a log line.",
+    "Tool content sent to the agent does not change: hidden-test problems are still shown to the agent, which wrote them.",
+    "descriptorTestSummary returns the whole testSummary (the \"public\" and \"scenarios\" entries) in the descriptor's order, not only the \"public\" entry.",
+    "descriptorTestSummary reads only the first entry at exactly \"project/sandbox-task.json\", and checks only testSummary, not the rest of the descriptor.",
+    "descriptorTestSummary never throws. A missing, unreadable, non-JSON or malformed descriptor gives undefined.",
+    "Entries keep only label and count. Counts must be integers, and negative integers are allowed, as the shared schema allows them.",
+    "A build records the summary only when it is ready, because committed records nothing for a build that is not ready. A starter records it whether or not it is ready, as a top-level key outside `build`.",
+    "When there is no summary, the `testSummary` key is left out of the recorded output, not set to undefined or [].",
+    "Seam (the files the stub writes): apps/worker/src/tools/sandbox-build.ts, apps/worker/src/tools/starter-check.ts, apps/worker/src/tools/starter.ts",
+    "Allowed paths (what the implementer may change): apps/worker/src/tools/"
+  ],
+  "seam": [
+    "apps/worker/src/tools/sandbox-build.ts",
+    "apps/worker/src/tools/starter-check.ts",
+    "apps/worker/src/tools/starter.ts"
+  ],
+  "allowedPaths": [
+    "apps/worker/src/tools/"
+  ]
+}

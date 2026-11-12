@@ -1,0 +1,72 @@
+{
+  "skeleton": {
+    "sessions": [
+      {
+        "sessionId": "4e3afd9d-7f82-40d1-bfb9-b5c3b4b9fdf2",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 0.3452915,
+        "turns": 10,
+        "durationMs": 58123,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 0.3452915,
+    "finalText": "I've written the contract in `apps/api/src/env.ts` and the new `apps/api/src/jira/state.ts`. `npx tsc -p tsconfig.test.json` reports no errors, and the existing suite passes: 186 tests, 0 failures.\n\n**`env.ts`**\n- I added `JIRA_CLIENT_ID` and `JIRA_CLIENT_SECRET` to the `Env` type, not to the zod schema. Putting them in the schema now would add them to `envKeys`. The pinned list in `test/env-surface.test.ts` would then fail, and I wasn't allowed to change that test. So the implementer has to add both keys to the schema, update that test and update the table in `docs/versioning.md`, as the spec requires.\n- The two fields are written as `JIRA_CLIENT_ID?: string | undefined`, which is the type zod's `.optional()` produces. Reading them gives `string | undefined`, as the spec says. `Env` still comes from `z.infer<typeof envSchema>`; this is the only change I made to an existing export.\n- `jiraOAuthConfig(env)` is a stub with the spec's signature. All other existing exports are unchanged.\n\n**`jira/state.ts`**\n- It exports only what the spec lists: `JiraOAuthState`, `StateFailure`, `StateResult`, `signState` and `verifyState`. Their signatures match the spec, including the default `now = Date.now()`.\n- The 600 000 ms lifetime, 60 000 ms skew and 9-byte nonce are not exported, because the spec says they are internal and the module has no other exports.\n- Neither doc comment says the function throws, because the spec says neither function does.\n\n**Parameter names:** the repo's TypeScript settings reject unused parameters, so the stub parameters start with `_` (for example `_secret`, `_now`). Callers and the types are unaffected, and the implementer can rename them.\n\nAdded: `jiraOAuthConfig`, `Env.JIRA_CLIENT_ID`, `Env.JIRA_CLIENT_SECRET`, `JiraOAuthState`, `StateFailure`, `StateResult`, `signState`, `verifyState`",
+    "problem": null,
+    "sha256": "d2e110b297a555a89626792cf13fd7a7ffce1c8cbd978a35573e12eba228b672"
+  },
+  "public": {
+    "sessions": [
+      {
+        "sessionId": "0b84bdc2-ddc6-47e6-9749-e5da09e1fa01",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 1.1142918,
+        "turns": 13,
+        "durationMs": 233830,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 1.1142918,
+    "finalText": "I wrote the test suite in two files in `apps/api/test/`. `npx tsc -p tsconfig.test.json` reports no errors.\n\n- **`second-atlassian-confirmed.env.test.ts`** (18 tests) covers the env scenarios: `parseEnv` and `jiraOAuthConfig` for both variables set, neither set, half set, empty values, values kept untrimmed, no fallback to the sign-in app, the sign-in app unaffected and still required, and `envKeys` gaining exactly the two new keys.\n- **`second-atlassian-confirmed.state.test.ts`** (51 tests) covers `signState` and `verifyState`. That includes the spec's two known test values, every edge of the validity window, each failure reason, and the order the checks run in.\n\nEvery scenario has a happy-path test and at least one boundary test. Names start with the scenario key (`[happy-1]` to `[happy-11]`, `[boundary-1]` to `[boundary-12]`, `[unhappy-1]` to `[unhappy-10]`). The tests are flat top-level `test` calls using `node:assert/strict`, with the same `required` fixture as `env.test.ts`.\n\n**Results:**\n- **Against the current stubs:** 66 fail and 3 pass, as expected. The 3 that pass check behaviour that already works and must stay that way: the two `[unhappy-1]` tests (the sign-in credentials are still required) and the first `[happy-3]` test (the sign-in pair is unchanged).\n- **Against a reference implementation:** I wrote a throwaway one in the scratchpad, outside the repo, and all 69 tests pass. So the tests agree with each other and with the spec's example values.\n\n**Clock and randomness:**\n- **Clock:** for the two scenarios where the time defaults to `Date.now()` (`[happy-9]`, `[happy-11]`), the tests replace `Date.now` with a fixed value through `t.mock.method`.\n- **Random nonce:** `[happy-8]` can't avoid real randomness, because the generated nonce is the behaviour under test. It checks that two generated nonces differ; with 72 random bits, a collision is effectively impossible.\n\nI changed nothing except the two test files.\n\n69 tests, in 2 files.",
+    "problem": null,
+    "files": [
+      "apps/api/test/second-atlassian-confirmed.env.test.ts",
+      "apps/api/test/second-atlassian-confirmed.state.test.ts"
+    ]
+  },
+  "private": {
+    "sessions": [
+      {
+        "sessionId": "db909fe8-27e6-427c-88a3-46b2e36b9e70",
+        "model": "claude-opus-5-5",
+        "ok": true,
+        "exitCode": 0,
+        "timedOut": false,
+        "costUsd": 2.1040285,
+        "turns": 22,
+        "durationMs": 488710,
+        "subtype": "success",
+        "apiError": null,
+        "sandboxed": true
+      }
+    ],
+    "costUsd": 2.1040285,
+    "finalText": "I wrote the hidden suite in two files under `apps/api/test/hidden-second-atlassian-confirmed/`: `env.test.ts` (17 tests) and `state.test.ts` (44 tests).\n\n**Checks run:**\n- `npx tsc -p tsconfig.test.json` reports no errors.\n- Against the interface as it stands, all 61 tests fail.\n- I also wrote a reference implementation in a scratch copy of the compiled output, outside the repo. All 61 hidden tests and the 69 public tests pass against it.\n- I then broke that implementation in ten common ways. Each broken version still passes the public state suite, apart from the decoded-bytes version noted below, and fails at least one hidden test:\n\n| Shortcut | Hidden tests that catch it |\n|---|---|\n| Comparing the decoded signature bytes instead of the signature text | `[unhappy-6]` (also fails one public test) |\n| Splitting at the first `.` | `[unhappy-2]`, `[unhappy-3]` |\n| Treating any value that starts with `.` as malformed (e.g. `..`, `.a.b`) | `[unhappy-2]` |\n| Checking string length, then `timingSafeEqual`, which throws on non-ASCII | `[unhappy-2]` |\n| Accepting `1e400` (Infinity) because only `typeof` is checked | `[unhappy-3]` |\n| Turning the secret into bytes as latin1, or cutting it short | `[happy-7]`, `[unhappy-4]` |\n| A JSON key-list replacer over the spread input (lets `toJSON` take over) | `[boundary-5]` |\n| `Math.floor(now)` | `[boundary-10]` |\n| Reading the clock once instead of at each call | `[happy-9]` |\n\n**What the suite covers beyond the public tests:**\n- Payloads of every padding length, payloads that need `-` and `_`, and JSON escapes.\n- Very long values (a 100,001-character `returnTo`).\n- All 63 other last characters of the signature, a change at every position, and other base64 spellings of the same signature or payload.\n- Window edges for other `issuedAt` values, fractions of a millisecond and infinite clocks.\n- Each payload field missing in turn, or given each wrong type.\n- Near-miss users, including Unicode lookalikes.\n- For env: missing (not just empty) sign-in variables, empty halves, and that the parsed env has no field outside `envKeys`.\n\nEvery hidden test calls the new code, so none passes against the stubs. Some tests ask for the `parseEnv` error, which already works today; those tests also make a control call to `jiraOAuthConfig` or `env.JIRA_*`.\n\n61 tests, in 2 files.\n\nOpen in the spec: none",
+    "problem": null,
+    "files": [
+      "apps/api/test/hidden-second-atlassian-confirmed/env.test.ts",
+      "apps/api/test/hidden-second-atlassian-confirmed/state.test.ts"
+    ],
+    "open": []
+  }
+}

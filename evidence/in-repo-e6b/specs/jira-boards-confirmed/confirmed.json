@@ -1,0 +1,41 @@
+{
+  "sha256": "609b3d295e4b9c89ff89a10b785e5e2849793d43194e6ab7c12395bda0f8b698",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T17:43:54.883Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "Registering a board against a connection the organization does not own is not checked: the store makes no read of `jira_connection` and inserts the row; only the foreign key on `connection_id` applies.",
+    "Registering the same Jira board twice updates it in place on (connection_id, external_id).",
+    "On re-registration, organizationId, connectionId, externalId, name, boardType, projectKey, selection and updatedAt are overwritten, and an absent selection resets it to `{}`; writeback, id and createdAt are kept.",
+    "New boards start with write-back off, from the column default; register never writes `writebackEnabled`.",
+    "Enabling write-back does not check the connection's scopes in the store.",
+    "`update`'s selection is merged key by key over the stored selection; `{}` or an absent selection leaves it as it was.",
+    "An empty update still writes: it reads the board, then sets the unchanged selection and a new updatedAt.",
+    "The store does not validate selection values: no range for `maxTickets`, no integer checks, no `maxAgeDays ≥ minAgeDays` check, no `issueTypes` checks. Validation is left to the HTTP edge.",
+    "`maxAgeDays: null` is kept as null, distinct from an absent key.",
+    "`issueTypes` is stored as given: an empty list stays `[]`, and entries are not trimmed or de-duplicated.",
+    "Unknown selection keys are kept on write and on read.",
+    "A stored selection is read back as stored, with no checks; only a null selection reads as `{}`.",
+    "A summary's selection holds only the stored keys and does not fill in defaults.",
+    "Input strings are stored exactly as given, with no trimming and no rejection of empty values; an absent or null projectKey is stored as null.",
+    "No length cap on name, externalId or boardType.",
+    "The only error the store raises itself is a plain `Error(\"Failed to register the Jira board.\")` when the upsert returns no row; database errors pass through unchanged.",
+    "`list` order comes from the query (`createdAt` descending) with no tie-breaker; the store returns rows in the order the database gives them.",
+    "`forRun` returns the board even when its connection is unhealthy.",
+    "`forRun` is one joined query with the row shape `{ jira_board, jira_connection }`, and its connectionId comes from the joined connection row.",
+    "Deleting a connection or an organization cascades to its boards.",
+    "A board is unique per connection, not per organization.",
+    "The table lives in `schema/jira.ts` and is re-exported by the `schema.ts` barrel; `index.ts` re-exports the new store and its five types.",
+    "What happens when overlapping calls race: update reads then writes, and returns null when the board is gone by the write; register relies on the conflict target.",
+    "Seam (the files the stub writes): packages/db/src/jira-boards.ts, packages/db/src/schema.ts",
+    "Allowed paths (what the implementer may change): packages/db/src/"
+  ],
+  "seam": [
+    "packages/db/src/jira-boards.ts",
+    "packages/db/src/schema.ts"
+  ],
+  "allowedPaths": [
+    "packages/db/src/"
+  ]
+}

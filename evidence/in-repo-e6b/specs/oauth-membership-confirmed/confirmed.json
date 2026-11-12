@@ -1,0 +1,53 @@
+{
+  "sha256": "cf7fb64806619c29fdfef41b8f1543d7d38718adb7f194713a35dfa1717d7dbd",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T17:25:06.676Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "The callback refuses the same roles that `connect` refuses: only owner or admin passes, not any member.",
+    "Ticket: \"fix(jira): re-check membership when the OAuth callback lands (#34)\"",
+    "Instead: accept any member (`roleOf` returns anything other than undefined), checking presence only.",
+    "A refused re-check ends in a 302 to the web app with `jira=forbidden`, not a 404 or 403 response.",
+    "Ticket: silent.",
+    "Instead: answer 404 JSON, as the membership guard does for a non-member.",
+    "A removed member and a demoted member get the same `jira=forbidden` value.",
+    "Ticket: silent.",
+    "Instead: separate values, e.g. `jira=not-member` and `jira=forbidden`.",
+    "The forbidden redirect uses the signed `returnTo` path, like every other outcome after verification.",
+    "Ticket: silent.",
+    "Instead: always use `/settings/jira`, as the state-failure redirect does.",
+    "The re-check runs after the `error` parameter and state checks, and before the code check. A non-member with no code gets `forbidden`, not `error`.",
+    "Ticket: silent.",
+    "Instead: check the code first, then membership just before the exchange.",
+    "`roleOf` is called with the session's user id and the verified state's organization id.",
+    "Ticket: silent.",
+    "Instead: use `state.userId` (equal after verification, but taken from the payload).",
+    "`createApp` always supplies `roleOf` from `organizations`, overriding any `roleOf` smuggled onto `jira`.",
+    "Ticket: \"jira?: Omit<JiraRouteOptions, \\\"roleOf\\\"> | undefined;\"",
+    "Instead: spread `jira` last, so a caller-supplied `roleOf` wins.",
+    "`JiraRouteOptions.roleOf` is required, not optional.",
+    "Ticket: silent.",
+    "Instead: make it optional and skip the re-check when it is absent.",
+    "When `roleOf` rejects, the callback answers 500 through `errorHandler`, and no request reaches Atlassian.",
+    "Ticket: silent.",
+    "Instead: treat a failed lookup as a refusal and redirect with `jira=forbidden` or `jira=error`.",
+    "Membership is checked once per callback before the exchange. It is not checked again per site or before each upsert, so a revocation during the exchange does not stop the flow.",
+    "Ticket: silent.",
+    "Instead: re-check before every `connections.upsert`.",
+    "Overlapping callbacks, including two that redeem the same state, each make their own check. No lock is taken and the state is not made single-use.",
+    "Ticket: silent.",
+    "Instead: record the state's nonce and refuse a second redemption.",
+    "The role match is case-sensitive and works per trimmed comma-separated entry. An empty or unknown role is refused.",
+    "Ticket: silent.",
+    "Instead: match case-insensitively, or use `rankAtLeast(role, \"admin\")`.",
+    "Seam (the files the stub writes): apps/api/src/routes.ts",
+    "Allowed paths (what the implementer may change): apps/api/src/"
+  ],
+  "seam": [
+    "apps/api/src/routes.ts"
+  ],
+  "allowedPaths": [
+    "apps/api/src/"
+  ]
+}

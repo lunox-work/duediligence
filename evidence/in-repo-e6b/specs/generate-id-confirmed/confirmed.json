@@ -1,0 +1,34 @@
+{
+  "sha256": "a505806f6870e12efc5103dd87b37f4057f18e8c6ba9de425e8907fdc2153685",
+  "by": "in-repo evidence arm: the commit's developer, simulated",
+  "at": "2026-11-03T18:56:58.178Z",
+  "startedAt": null,
+  "minutes": null,
+  "decided": [
+    "What `generateId` produces: the prefix, one `_`, then a lowercase UUID v4 from `crypto.randomUUID()`. The separator is unchanged from today's ids.",
+    "What happens with a prefix outside `ID_PREFIXES` at runtime: nothing checks it. The `IdPrefix` type is the only guard; a value cast past it is stringified into the id as-is (`\"user\"` → `user_<uuid>`, `\"\"` → `_<uuid>`, `42` → `42_<uuid>`) and no error is thrown.",
+    "How prefixes are normalised: they are not. No lower-casing or trimming, so `\"TODO\"` gives `TODO_<uuid>` and `\" todo\"` gives ` todo_<uuid>`.",
+    "What `generateId(undefined)` and `generateId(null)` do: `undefined` uses `\"todo\"`, the normal default-parameter behaviour. `null` does not trigger the default and gives `null_<uuid>`.",
+    "Whether `ID_PREFIXES` is frozen: no. It is exported exactly as declared (`as const`, not frozen), and mutating it is outside the contract.",
+    "What happens to `src/schema.ts`: it stays as a barrel that re-exports exactly the same nine values and thirteen types, with identical object identity, so importers and `drizzle.config.ts` are untouched.",
+    "What each module exports: only its own tables and row types. Modules do not re-export each other's tables.",
+    "How the `session` → `organization` reference crosses modules: a direct import cycle between `auth.ts` and `organizations.ts`, kept safe by Drizzle's lazy reference callbacks. It works whichever module loads first.",
+    "Whether `src/index.ts` exports `ID_PREFIXES` and `IdPrefix`: yes. Both are re-exported from the package root next to `generateId`, and the root's `ID_PREFIXES` is the same object as `mapping.ts`'s.",
+    "Whether `newTodoRow` or `emails.ts` id generation changes: neither does. `newTodoRow`'s default id stays `todo_…`, and `emails.ts` keeps its own `email_…` generator.",
+    "How overlapping calls behave: `generateId` is synchronous and keeps no state, so calls from interleaved async tasks each get a distinct id.",
+    "Whether the database changes: no. Table names, columns, defaults, indexes, constraints and delete actions are moved verbatim, and no migration is generated.",
+    "Seam (the files the stub writes): packages/db/src/mapping.ts, packages/db/src/schema.ts, packages/db/src/schema/auth.ts, packages/db/src/schema/organizations.ts, packages/db/src/schema/todos.ts",
+    "Allowed paths (what the implementer may change): packages/db/src/, packages/db/src/schema/"
+  ],
+  "seam": [
+    "packages/db/src/mapping.ts",
+    "packages/db/src/schema.ts",
+    "packages/db/src/schema/auth.ts",
+    "packages/db/src/schema/organizations.ts",
+    "packages/db/src/schema/todos.ts"
+  ],
+  "allowedPaths": [
+    "packages/db/src/",
+    "packages/db/src/schema/"
+  ]
+}
