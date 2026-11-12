@@ -30,6 +30,9 @@ const COMMANDS = {
   ci: "judge a commit from a seal and report it as a check (GitHub Actions or anywhere)",
   referee: "a blind referee of rejected runs' failing tests, on any backend (--backend)",
   "red-team-audit": "red-team passes (run --brief red-team) audited: literals, a second suite, a session",
+  login: "sign in to the Lunox platform (device code in the browser); --org, --platform, --open",
+  whoami: "the account, workspace and token expiry signed in with",
+  logout: "delete the saved platform token",
 };
 
 const [command, ...rest] = process.argv.slice(2);
@@ -53,6 +56,8 @@ if (!Object.hasOwn(COMMANDS, command ?? "")) {
       "",
       "Each command prints its own usage when called without arguments.",
       "Data: DUEDILIGENCE_HOME (default ~/.duediligence/).",
+      "Platform sign-in (optional; every other command is local): ~/.lunox/credentials (LUNOX_CREDENTIALS),",
+      "against https://platform.lunox.work (LUNOX_PLATFORM_URL).",
     ].join("\n"),
   );
   process.exit(command === undefined || command === "help" || command === "--help" ? 0 : 1);

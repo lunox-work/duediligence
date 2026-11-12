@@ -327,6 +327,28 @@ Specs, runs and results live in `~/.duediligence/`
 in the package. Every writer and agent session is denied that folder: it holds
 the hidden suites at rest.
 
+## Sign in to the Lunox platform (optional)
+
+Everything above runs on your machine and needs no account. The CLI can also
+sign in to Lunox's hosted platform, where a workspace keeps bounties,
+repositories, sandboxes and runs:
+
+```sh
+duediligence login     # prints a code; approve it in the browser (--open opens it)
+duediligence whoami    # the account, workspace and token expiry
+duediligence logout    # deletes the saved token
+```
+
+`login` uses the device flow: it prints a code, waits while you approve it at
+platform.lunox.work/device, and saves a 90-day workspace token in
+`~/.lunox/credentials` (mode 600; `LUNOX_CREDENTIALS` moves it), a file
+carveout shares. Only a workspace's owners and admins can sign a CLI in to it;
+`--org <handle>` picks the workspace when you have several, and
+`--platform <url>` or `LUNOX_PLATFORM_URL` another deployment. `logout`
+deletes the token here only: the platform has no route for a token to revoke
+itself, so revoke it in the platform's web app to stop it before it expires.
+No other command talks to the platform.
+
 ## Try it in five minutes
 
 `duration-parse` is a prepared example, copied into
@@ -478,6 +500,8 @@ bin/api.mjs         the library entry: decisionItems, scenarios, diffDecisions, 
 bin/rules.mjs       the judge's verdict and calibration's filter over suite results, pure
 bin/hash.mjs        the commitment hash of a spec folder or a file map, reading nothing else
 bin/cli.mjs         `duediligence <command>`: runs bin/<command>.mjs; `where`
+bin/platform-client.mjs  the hosted platform: its URL, ~/.lunox/credentials, one fetch-based request with the CLI version
+bin/account.mjs     login (device flow), whoami, logout; bin/login.mjs, whoami.mjs and logout.mjs run them
 evidence/           the experiment's write-ups behind RESULTS.md, vendored
 bin/fit.mjs         whether a repository's package can be a target
 bin/repo.mjs        point a spec at a package: seam, allowed paths, base tree, baseline
@@ -530,6 +554,8 @@ evidence/languages.mjs  Go and Rust modules end to end; commands and services in
   results.jsonl     one line per graded run
   template/<hash>/  template/ with its dependencies, installed on first use
   toolchains/       python-<hash>/ (with .venv), go-<hash>/, rust-<hash>/, built on first use
+
+~/.lunox/credentials  platform tokens after `login`, per platform URL and CLI (shared with carveout; LUNOX_CREDENTIALS)
 ```
 
 A development checkout keeps its own `specs/`, `runs/` and `results.jsonl` with
