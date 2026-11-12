@@ -81,6 +81,19 @@ _Repository_ below are for that target.
   paths and reports it with the verdict. A blind session or another agent is the
   only enforced blindness.
 
+## Hosted mode
+
+When the `lunox` MCP tools are available and signed in (the Claude Code plugin
+bundles the server; `/mcp` signs in), they read the person's workspace on the
+Lunox platform: its workspaces, bounties, repositories, sandboxes and runs
+(tools such as `list_workspaces`, `list_bounties`, `list_repositories`,
+`list_sandboxes`, `get_run`). Use them when the person asks about those. Writes,
+decision confirmations and approvals happen in the platform's web app for now:
+point the person there and never act for them. Never ask for a token in the
+chat: the server signs in through `/mcp`, the CLI through `duediligence login`
+in the person's own terminal. Local mode, the steps below, is unchanged and the
+default, and needs no sign-in.
+
 ## 0. Fit (repository)
 
 `duediligence fit --repo <path> --package <dir>` reads the repository at a
