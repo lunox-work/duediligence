@@ -1,8 +1,9 @@
 # Privacy
 
-duediligence is a command-line tool and agent skill that runs on your machine. Its
-authors run no service for it: there is no account, no server and no
-telemetry, and nothing it handles reaches the authors.
+duediligence is a command-line tool and agent skill that runs on your machine. It
+needs no account and sends no telemetry, and nothing it handles reaches its
+authors unless you sign in to Lunox's hosted platform, which is optional
+(below).
 
 - **Sent off the machine:** the spec, the ticket it came from and the code
   being judged go to the model backend the person chooses, on their own
@@ -12,10 +13,21 @@ telemetry, and nothing it handles reaches the authors.
   person's own GitHub or Jira. The first run installs the test toolchain from
   npm, and from pip for Python; Go and Rust use the toolchains already
   installed. There is no telemetry.
+- **Lunox platform, only after sign-in:** without an account the CLI is
+  unchanged and local. `duediligence login` signs in to Lunox's hosted service
+  at platform.lunox.work with a code approved in the browser, and stores a
+  workspace API token in `~/.lunox/credentials` on the same machine (mode 600,
+  shared with carveout); `logout` deletes it. `login`, `whoami` and `logout`
+  are the only commands that talk to the platform, and for now they only read
+  the account and the workspace, sending the token, the CLI's name and version,
+  and, once at sign-in, the machine's host name to label the token. No spec,
+  ticket, suite or code is uploaded. The platform's privacy policy is at
+  https://platform.lunox.work/privacy.
 - **Personal data:** a ticket can name people; it is stored with the spec
   under `~/.duediligence/specs/` on the same machine.
-- **Retention:** duediligence runs no service. What the model backends keep is
-  governed by the person's own agreement with that provider.
+- **Retention:** duediligence itself runs no service. What the model backends
+  keep is governed by the person's own agreement with that provider, and what
+  the platform keeps after sign-in by its privacy policy.
 
 Questions about this policy: open an issue at
 https://github.com/lunox-work/duediligence/issues.
