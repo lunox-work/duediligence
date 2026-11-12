@@ -10,7 +10,7 @@ description: >-
   spec, or wants to stop trusting an agent's own green test run.
 license: MIT
 compatibility: >-
-  Node 20.19 or later. Runs the duediligence@0.3.0 CLI from npm, which starts
+  Node 20.19 or later. Runs the duediligence@0.3.1 CLI from npm, which starts
   Claude Code, Codex or Anthropic API sessions and installs its test toolchain
   under ~/.duediligence/ once (network).
 ---
@@ -20,10 +20,10 @@ compatibility: >-
 From one confirmed spec, generate a **public** suite the implementing agent
 works against and a **hidden** suite that judges the result.
 
-`duediligence <command>` below is the CLI, `duediligence@0.3.0`. When
+`duediligence <command>` below is the CLI, `duediligence@0.3.1`. When
 `duediligence --version` prints another version or nothing, ask the person
-before installing it: `npm i -g duediligence@0.3.0`, or put
-`npx duediligence@0.3.0` in place of `duediligence` in each command (in a clone
+before installing it: `npm i -g duediligence@0.3.1`, or put
+`npx duediligence@0.3.1` in place of `duediligence` in each command (in a clone
 of the repository, `node bin/cli.mjs`). Run it from any folder. `specs/` and
 `runs/` below are in the home, `~/.duediligence/` (`DUEDILIGENCE_HOME`);
 `prompts/` and `template*/` are in the CLI's package. `duediligence where`
