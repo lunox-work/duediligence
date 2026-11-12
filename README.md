@@ -15,7 +15,7 @@ claude plugin install duediligence@duediligence
 
 ## Requirements
 
-- **duediligence**: Node 20.19 or later. Runs the duediligence@0.4.0 CLI from npm, which starts Claude Code, Codex or Anthropic API sessions and installs its test toolchain under ~/.duediligence/ once (network).
+- **duediligence**: Node 20.19 or later. Runs the duediligence@0.5.0 CLI from npm, which starts Claude Code, Codex or Anthropic API sessions and installs its test toolchain under ~/.duediligence/ once (network).
 
 ## Hosted mode
 
