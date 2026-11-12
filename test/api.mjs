@@ -230,7 +230,7 @@ try {
   });
 
   step("promptPath", () => {
-    for (const name of ["spec-from-ticket.md", "skeleton", "public-tests.md", "hidden-tests", "reference.md", "repo/skeleton", "repo/hidden-tests.md"]) {
+    for (const name of ["spec-from-ticket.md", "skeleton", "public-tests.md", "hidden-tests", "reference.md", "repo/skeleton", "repo/hidden-tests.md", "sandbox/hidden-tests"]) {
       const path = api.promptPath(name);
       assert.ok(path.startsWith(join(ROOT, "prompts") + sep), path);
       assert.ok(readFileSync(path, "utf8").length > 0);
@@ -261,6 +261,19 @@ try {
     assert.throws(() => api.renderPrompt("repo/reference", { ...values, seam: 1 }), /\{\{seam\}\} is not a string/);
     assert.throws(() => api.renderPrompt("repo/reference", null), /values is an object/);
     assert.throws(() => api.renderPrompt("../package.json", values), /promptPath/);
+    // The sandbox brief: a platform's generated project with recording mocks.
+    const sandbox = api.renderPrompt("sandbox/hidden-tests", {
+      hiddenDir: "tests/private",
+      testPattern: "*.test.ts",
+      build: "npm run build",
+      importExample: "../../src/feature.js",
+      mockModule: "../../sandbox/mock.js",
+      toolchain: "Node 22, TypeScript 5.9, ES modules; tests use `node:test`.",
+    });
+    assert.doesNotMatch(sandbox, /\{\{/);
+    assert.match(sandbox, /under `tests\/private\/` as a `\*\.test\.ts` file/);
+    assert.match(sandbox, /from `\.\.\/\.\.\/sandbox\/mock\.js`/);
+    assert.match(sandbox, /what shortcut passes the visible cases/);
   });
 
   step("nothing spawned, connected, written, or read outside the package and this test's folder", () => {

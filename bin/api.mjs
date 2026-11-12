@@ -17,6 +17,9 @@
 //   promptPath(name)                        the absolute path of prompts/<name>.md; anything outside prompts/ refused
 //   renderPrompt(name, values)              prompts/<name>.md with each {{key}} filled from values, as the CLI fills repo/ briefs
 //
+// prompts/sandbox/ holds briefs only a platform renders: hidden tests for a
+// generated project whose cut modules are recording mocks (sandbox-factory).
+//
 // Suite results are what a runner prints (bin/runners/shared.mjs); the
 // rules' inputs and outputs are documented in bin/rules.mjs, the hash's in
 // bin/hash.mjs.
