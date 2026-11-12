@@ -88,9 +88,12 @@ bundles the server; `/mcp` signs in), they work on the person's workspace on
 the Lunox platform. Reads: `list_workspaces`, `list_bounties`, `get_bounty`,
 `get_proposal`, `get_run`, `get_usage`. Writes, only when the person asks for
 that one: `post_bounty`, `import_github_issue`, `import_jira_issue` (a new
-bounty) and `size_bounty` (price it; this starts a paid model run). Decision
+bounty) and `size_bounty` (price it; this starts a paid model run).
+`get_decisions` reads what a priced spec decided where the ticket was silent
+(its `Decided:` items) and whether a person confirmed them; `confirm_link`
+gives the page where the person confirms them. Hand them that link: decision
 confirmations, approving a price and publishing happen in the platform's web
-app: point the person there and never act for them. Hidden tests are not
+app, and you never act for them. Hidden tests are not
 prepared or judged through these tools yet; use local mode for that. Never ask
 for a token in the chat: the server signs in through `/mcp`, the CLI through
 `duediligence login` in the person's own terminal. Local mode, the steps below,
