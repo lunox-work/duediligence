@@ -12,7 +12,7 @@
 //                     POST /api/judge with the run's GitHub OIDC token (no
 //                     secret on either side; the platform checks the token
 //                     names the repository the version was sliced from),
-//                     then GET /api/judge/:id until a verdict. The job's own
+//                     then GET /api/judge/:id?workspace= until a verdict. The job's own
 //                     pass or fail is the check.
 //
 // Each takes its argv and the outside world as `deps` (account.mjs's, plus
@@ -215,7 +215,9 @@ export async function ciPlatform(argv, { client, version }, deps) {
   while (submission.status === "queued" || submission.status === "running") {
     if (deps.now() - started > POLL_LIMIT_MS) throw new PlatformError(`No verdict for ${submission.id} after ${POLL_LIMIT_MS / 60_000} minutes.`);
     await deps.sleep(POLL_MS);
-    ({ submission } = await call({ path: `/api/judge/${encodeURIComponent(submission.id)}` }));
+    ({ submission } = await call({
+      path: `/api/judge/${encodeURIComponent(submission.id)}?workspace=${encodeURIComponent(values.workspace)}`,
+    }));
   }
   const verdict = submission.status === "errored" ? "errored" : (submission.verdict ?? submission.status);
   const counts =

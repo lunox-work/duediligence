@@ -64,7 +64,7 @@ async function fakePlatform({ verdicts = ["running", "passed"] } = {}) {
     if (req.headers.authorization !== `Bearer ${OIDC}` && url.pathname.startsWith("/api/judge"))
       return send(401, { error: "A GitHub OIDC token is needed.", code: "oidc_required" });
     if (route === "POST /api/judge") return send(202, { submission: submission("queued") });
-    if (route === "GET /api/judge/sbm_1") return send(200, { submission: submission(state.verdicts.shift() ?? "passed") });
+    if (route === "GET /api/judge/sbm_1" && url.searchParams.get("workspace") === "org_acme") return send(200, { submission: submission(state.verdicts.shift() ?? "passed") });
     return send(404, { error: "Not found" });
   });
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
