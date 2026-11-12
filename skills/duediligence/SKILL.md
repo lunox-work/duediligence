@@ -10,7 +10,7 @@ description: >-
   spec, or wants to stop trusting an agent's own green test run.
 license: MIT
 compatibility: >-
-  Node 20.19 or later. Runs the duediligence@0.3.0 CLI from npm, which starts
+  Node 20.19 or later. Runs the duediligence@0.4.0 CLI from npm, which starts
   Claude Code, Codex or Anthropic API sessions and installs its test toolchain
   under ~/.duediligence/ once (network).
 ---
@@ -20,10 +20,10 @@ compatibility: >-
 From one confirmed spec, generate a **public** suite the implementing agent
 works against and a **hidden** suite that judges the result.
 
-`duediligence <command>` below is the CLI, `duediligence@0.3.0`. When
+`duediligence <command>` below is the CLI, `duediligence@0.4.0`. When
 `duediligence --version` prints another version or nothing, ask the person
-before installing it: `npm i -g duediligence@0.3.0`, or put
-`npx duediligence@0.3.0` in place of `duediligence` in each command (in a clone
+before installing it: `npm i -g duediligence@0.4.0`, or put
+`npx duediligence@0.4.0` in place of `duediligence` in each command (in a clone
 of the repository, `node bin/cli.mjs`). Run it from any folder. `specs/` and
 `runs/` below are in the home, `~/.duediligence/` (`DUEDILIGENCE_HOME`);
 `prompts/` and `template*/` are in the CLI's package. `duediligence where`
@@ -80,6 +80,29 @@ _Repository_ below are for that target.
   `judge --audit` scans this session's transcript for any attempt to open those
   paths and reports it with the verdict. A blind session or another agent is the
   only enforced blindness.
+
+## Hosted mode
+
+When the `lunox` MCP tools are available and signed in (the Claude Code plugin
+bundles the server; `/mcp` signs in), they work on the person's workspace on
+the Lunox platform. Reads: `list_workspaces`, `list_bounties`, `get_bounty`,
+`get_proposal`, `get_run`, `get_usage`. Writes, only when the person asks for
+that one: `post_bounty`, `import_github_issue`, `import_jira_issue` (a new
+bounty) and `size_bounty` (price it; this starts a paid model run).
+`get_decisions` reads what a priced spec decided where the ticket was silent
+(its `Decided:` items) and whether a person confirmed them; `confirm_link`
+gives the page where the person confirms them. Hand them that link: decision
+confirmations, approving a price and publishing happen in the platform's web
+app, and you never act for them. Once the decisions are confirmed and the
+person asks: `start_sandbox` and `prepare` (build a sandbox version; the
+platform writes hidden tests from the confirmed spec and calibrates them
+against a reference, as `prepare` does locally), then `get_handout` for the
+public files and the hidden suite's commitment hash. You never see the hidden
+tests in hosted mode: they stay on the platform. Judging a submission is not
+hosted yet; use local mode for that. Never ask
+for a token in the chat: the server signs in through `/mcp`, the CLI through
+`duediligence login` in the person's own terminal. Local mode, the steps below,
+is unchanged and the default, and needs no sign-in.
 
 ## 0. Fit (repository)
 

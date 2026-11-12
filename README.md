@@ -15,7 +15,14 @@ claude plugin install duediligence@duediligence
 
 ## Requirements
 
-- **duediligence**: Node 20.19 or later. Runs the duediligence@0.3.0 CLI from npm, which starts Claude Code, Codex or Anthropic API sessions and installs its test toolchain under ~/.duediligence/ once (network).
+- **duediligence**: Node 20.19 or later. Runs the duediligence@0.4.0 CLI from npm, which starts Claude Code, Codex or Anthropic API sessions and installs its test toolchain under ~/.duediligence/ once (network).
+
+## Hosted mode
+
+The plugin bundles the `lunox` MCP server, Lunox's hosted platform at https://platform.lunox.work/mcp/duediligence.
+Claude Code signs in to it on first use (`/mcp`); signed out, the skill runs locally as before.
+Without the plugin: `claude mcp add --transport http lunox https://platform.lunox.work/mcp/duediligence`; other MCP clients take the
+same URL as a remote HTTP server.
 
 ## Data
 
@@ -27,10 +34,23 @@ claude plugin install duediligence@duediligence
   person's own GitHub or Jira. The first run installs the test toolchain from
   npm, and from pip for Python; Go and Rust use the toolchains already
   installed. There is no telemetry.
+- **Lunox platform, only after sign-in:** without an account the CLI is
+  unchanged and local. `duediligence login` signs in to Lunox's hosted service
+  at platform.lunox.work with a code approved in the browser, and stores a
+  workspace API token in `~/.lunox/credentials` on the same machine (mode 600,
+  shared with carveout); `logout` deletes it. `login`, `whoami` and `logout`
+  are the only commands that talk to the platform; in Claude Code, so does the
+  plugin's bundled `lunox` MCP server, once the person signs in to it through
+  `/mcp`. For now both only read the account and the workspace, with its
+  bounties, repositories, sandboxes and runs. The CLI sends the token, its
+  name and version, and, once at sign-in, the machine's host name to label
+  the token. No spec, ticket, suite or code is uploaded. The platform's
+  privacy policy is at https://platform.lunox.work/privacy.
 - **Personal data:** a ticket can name people; it is stored with the spec
   under `~/.duediligence/specs/` on the same machine.
-- **Retention:** duediligence runs no service. What the model backends keep is
-  governed by the person's own agreement with that provider.
+- **Retention:** duediligence itself runs no service. What the model backends
+  keep is governed by the person's own agreement with that provider, and what
+  the platform keeps after sign-in by its privacy policy.
 
 ## Links
 
