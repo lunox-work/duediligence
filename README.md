@@ -312,6 +312,10 @@ In Claude Code, the repository is also a plugin marketplace:
 /plugin install duediligence@duediligence
 ```
 
+The plugin also bundles the `lunox` MCP server, Lunox's hosted platform
+([below](#sign-in-to-the-lunox-platform-optional)): Claude Code asks you to
+sign in on first use (`/mcp`), and signed out the skill runs locally as before.
+
 The skill is the folder [`skills/duediligence/`](skills/duediligence/), which
 also installs by copying it into an agent's skills folder. It runs the CLI at
 the version it names, and asks before installing it when it is missing. Needs Node 20.19 or later on macOS,
@@ -347,7 +351,8 @@ carveout shares. Only a workspace's owners and admins can sign a CLI in to it;
 `--platform <url>` or `LUNOX_PLATFORM_URL` another deployment. `logout`
 deletes the token here only: the platform has no route for a token to revoke
 itself, so revoke it in the platform's web app to stop it before it expires.
-No other command talks to the platform.
+No other command talks to the platform. In Claude Code, the plugin's `lunox`
+MCP server (`.mcp.json`) signs in on its own, through `/mcp`.
 
 ## Try it in five minutes
 
@@ -490,6 +495,7 @@ reads the runner's disk and sends it over the network is not stopped.
 ```
 skills/             the skill, duediligence/SKILL.md: the steps it runs
 .claude-plugin/     the Claude Code plugin and its one-plugin marketplace
+.mcp.json           the plugin's MCP server: lunox, the hosted platform (https://platform.lunox.work/mcp/duediligence)
 scripts/skill.mjs   check the skill, sync its version pins, pack it as a zip
 AGENTS.md           this README's section for coding agents, verbatim
 RESULTS.md          what the method was measured to do
