@@ -93,8 +93,13 @@ bounty) and `size_bounty` (price it; this starts a paid model run).
 (its `Decided:` items) and whether a person confirmed them; `confirm_link`
 gives the page where the person confirms them. Hand them that link: decision
 confirmations, approving a price and publishing happen in the platform's web
-app, and you never act for them. Hidden tests are not
-prepared or judged through these tools yet; use local mode for that. Never ask
+app, and you never act for them. Once the decisions are confirmed and the
+person asks: `start_sandbox` and `prepare` (build a sandbox version; the
+platform writes hidden tests from the confirmed spec and calibrates them
+against a reference, as `prepare` does locally), then `get_handout` for the
+public files and the hidden suite's commitment hash. You never see the hidden
+tests in hosted mode: they stay on the platform. Judging a submission is not
+hosted yet; use local mode for that. Never ask
 for a token in the chat: the server signs in through `/mcp`, the CLI through
 `duediligence login` in the person's own terminal. Local mode, the steps below,
 is unchanged and the default, and needs no sign-in.
