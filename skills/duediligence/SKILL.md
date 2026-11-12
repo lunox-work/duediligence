@@ -86,7 +86,7 @@ _Repository_ below are for that target.
 When the `lunox` MCP tools are available and signed in (the Claude Code plugin
 bundles the server; `/mcp` signs in), they work on the person's workspace on
 the Lunox platform. Reads: `list_workspaces`, `list_bounties`, `get_bounty`,
-`get_proposal`, `get_run`, `get_usage`. Writes, only when the person asks for
+`get_proposal`, `get_run`, `get_usage`, `list_sandboxes`, `get_sandbox`. Writes, only when the person asks for
 that one: `post_bounty`, `import_github_issue`, `import_jira_issue` (a new
 bounty) and `size_bounty` (price it; this starts a paid model run).
 `get_decisions` reads what a priced spec decided where the ticket was silent
@@ -106,7 +106,9 @@ confirmed here as a bounty, and `duediligence ci --platform --version <id>
 --workspace <id>` (or `action.yml` with `version` and `workspace`, job
 permission `id-token: write`) judges a pull request on the platform. Never ask
 for a token in the chat: the server signs in through `/mcp`, the CLI through
-`duediligence login` in the person's own terminal. Local mode, the steps below,
+`duediligence login` in the person's own terminal. A tool error with code
+`insufficient_scope` means the sign-in predates a scope: ask the person to
+sign in again through `/mcp`. Local mode, the steps below,
 is unchanged and the default, and needs no sign-in.
 
 ## 0. Fit (repository)
