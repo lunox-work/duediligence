@@ -102,7 +102,14 @@ tests in hosted mode: they stay on the platform. On a published version,
 `judge` submits an implementation's changed files and `get_verdict` reads the
 verdict (counts and failing scenario keys only); `retry` is a failed one's
 single retry. From a terminal, `duediligence push <slug>` posts a spec
-confirmed here as a bounty, and `duediligence ci --platform --version <id>
+confirmed here as a bounty; with no terminal, `post_bounty` does the same with
+`ticket.md`'s heading as `title` and `spec.md`'s text as `description`. The
+platform builds every sandbox as a Node 22 + TypeScript project, so hosted
+mode fits TypeScript work; Python, Go and Rust stay local. A run that calls
+a model (`size_bounty`, `prepare`, `retry`) counts against the workspace's
+monthly model-token limit; `get_usage` shows it, and an error with code
+`quota_exceeded` says when it resets: tell the person, never retry before
+then. `duediligence ci --platform --version <id>
 --workspace <id>` (or `action.yml` with `version` and `workspace`, job
 permission `id-token: write`) judges a pull request on the platform. Never ask
 for a token in the chat: the server signs in through `/mcp`, the CLI through
