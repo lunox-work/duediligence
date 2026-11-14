@@ -4,7 +4,9 @@
 //
 //   node scripts/skill.mjs check            the rules below; exit 1 on any
 //   node scripts/skill.mjs sync             write package.json's version into
-//                                           the pins (npm `version` hook)
+//                                           the pins and copy the spec
+//                                           prompts into the skill
+//                                           (npm `version` hook)
 //   node scripts/skill.mjs pack [--offline] one zip per skill in dist-skills/
 //   node scripts/skill.mjs plugin-branch [--push]
 //                                           commit the plugin's files to the
@@ -45,6 +47,44 @@ const PIN = new RegExp(`\\b${PKG.name}@(\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?)`
 const MANIFESTS = [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json"];
 /** The plugin's one MCP server (plugin-root .mcp.json, as Claude Code plugins declare them). */
 const MCP_URL = `https://platform.lunox.work/mcp/${PKG.name}`;
+/**
+ * The prompts this session reads itself (the spec-drafting rules), mirrored
+ * into the skill's folder so the plugin carries every instruction it gives
+ * Claude: prompts/<path>/spec-from-ticket.md is copied to
+ * skills/duediligence/references/prompts/<path>/spec-from-ticket.md by
+ * `sync`, and `check` fails when a copy differs or is missing. The other
+ * prompts brief the sessions the CLI starts, and stay in the package only.
+ */
+const PROMPTS = join(ROOT, "prompts");
+const BUNDLED_PROMPT = "spec-from-ticket.md";
+const BUNDLED_INTO = join(SKILLS, PKG.name, "references", "prompts");
+
+/** [source, copy] for each prompt the skill carries. */
+function bundledPrompts() {
+  if (!existsSync(PROMPTS)) return [];
+  return walk(PROMPTS)
+    .filter((path) => path.endsWith(`/${BUNDLED_PROMPT}`))
+    .sort()
+    .map((path) => [path, join(BUNDLED_INTO, relative(PROMPTS, path))]);
+}
+
+function checkBundledPrompts() {
+  const problems = [];
+  const want = new Set();
+  for (const [source, copy] of bundledPrompts()) {
+    want.add(copy);
+    if (!existsSync(copy)) problems.push(`${relative(ROOT, copy)}: missing (npm run skill:sync)`);
+    else if (readFileSync(copy, "utf8") !== readFileSync(source, "utf8")) {
+      problems.push(`${relative(ROOT, copy)}: differs from ${relative(ROOT, source)} (npm run skill:sync)`);
+    }
+  }
+  if (existsSync(BUNDLED_INTO)) {
+    for (const copy of walk(BUNDLED_INTO)) {
+      if (!want.has(copy)) problems.push(`${relative(ROOT, copy)}: no prompt in prompts/ (remove it)`);
+    }
+  }
+  return problems;
+}
 
 /** Top-level YAML keys of the frontmatter, folded the way YAML folds plain and `>` scalars. */
 function frontmatter(text) {
@@ -120,6 +160,7 @@ function check() {
   if (!listed) problems.push(`${MANIFESTS[1]}: no plugin named ${PKG.name}`);
   else if (listed.version !== undefined && listed.version !== PKG.version) problems.push(`${MANIFESTS[1]}: version is not package.json's`);
   problems.push(...checkMcp());
+  problems.push(...checkBundledPrompts());
   return problems;
 }
 
@@ -148,6 +189,11 @@ function readJson(path) {
 }
 
 function sync() {
+  if (existsSync(BUNDLED_INTO)) rmSync(BUNDLED_INTO, { recursive: true });
+  for (const [source, copy] of bundledPrompts()) {
+    mkdirSync(dirname(copy), { recursive: true });
+    writeFileSync(copy, readFileSync(source));
+  }
   for (const name of skills()) {
     const path = join(SKILLS, name, "SKILL.md");
     const text = readFileSync(path, "utf8");
