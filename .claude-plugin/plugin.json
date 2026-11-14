@@ -1,8 +1,8 @@
 {
   "name": "duediligence",
   "displayName": "duediligence",
-  "version": "0.5.0",
-  "description": "Independent, hidden test suites written from the spec for AI coding agents: the agent works against a public suite, a calibrated hidden suite it never sees judges the result.",
+  "version": "0.5.1",
+  "description": "Independent, hidden test suites written from the spec for AI coding agents: the agent works against a public suite, a calibrated hidden suite it never sees judges the result. Optional hosted mode: after sign-in, a bundled MCP server works with the person's workspace on the Lunox platform (platform.lunox.work).",
   "author": {
     "name": "Charlie Angriawan",
     "url": "https://github.com/lunox-work"
